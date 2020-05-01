@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "b4l-lender-web"
+    }
+  },
+  "defaultProject": "b4l-lender-web",
+  "cli": {
+    "analytics": false
+  }
 }

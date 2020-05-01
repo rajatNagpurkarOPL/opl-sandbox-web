@@ -1,0 +1,229 @@
+@import '~@angular/material/theming';
+@import '../Scss/variables';
+
+
+
+
+// width scss 
+.w-10 {
+  width: $w-10;
+}
+
+.w-20 {
+  width: $w-20;
+}
+
+.w-30 {
+  width: $w-30;
+}
+
+.w-40 {
+  width: $w-40;
+}
+
+.w-50 {
+  width: $w-50;
+}
+
+.w-60 {
+  width: $w-60;
+}
+
+.w-70 {
+  width: $w-70;
+}
+
+.w-80 {
+  width: $w-80;
+}
+
+.w-90 {
+  width: $w-90;
+}
+
+.w-100 {
+  width: $w-100;
+}
+
+// height scss
+.hv-10 {
+  height: $hv-10;
+}
+
+.hv-25 {
+  height: $hv-25;
+}
+
+.hv-50 {
+  height: $hv-50;
+}
+
+.hv-60 {
+  height: $hv-60;
+}
+
+.hv-70 {
+  height: $hv-70;
+}
+
+.hv-80 {
+  height: $hv-80;
+}
+
+
+
+.hv-90 {
+  height: $hv-90;
+}
+
+.hv-100 {
+  height: $hv-100;
+}
+
+.h-100 {
+  height: $h-100;
+}
+
+.mat-toolbar-row.hpx-35,
+.mat-toolbar-multiple-rows.hpx-35 {
+  height: 35px;
+  min-height: 35px;
+}
+
+// float  SCSS
+
+.float-left {
+  float: $fl;
+}
+
+.float-right {
+  float: $fr;
+}
+
+.float-none {
+  float: $fnone;
+}
+
+// display flex
+.d-flex {
+  display: $d-flex;
+}
+
+
+// justify-content scss 
+.jc-center {
+  justify-content: $jc-center;
+}
+
+.jc-space-around {
+  justify-content: $jc-space-around;
+}
+
+.jc-space-between {
+  justify-content: $jc-space-between;
+}
+
+.jc-space-evenly {
+  justify-content: $jc-space-evenly;
+}
+
+.jc-flex-end {
+  justify-content: $jc-flex-end;
+}
+
+.jc-flex-start {
+  justify-content: $jc-flex-start;
+}
+
+.jc-end {
+  justify-content: $jc-end;
+}
+
+.jc-start {
+  justify-content: $jc-start;
+}
+
+.jc-left {
+  justify-content: $jc-left;
+}
+
+.jc-right {
+  justify-content: $jc-right;
+}
+
+// tostr scss 
+
+.error-snackbar {
+  background: $psberror;
+}
+
+.success-snackbar {
+  background: $psbsuccess;
+}
+
+.info-snackbar {
+  background: $psbinfo;
+}
+
+.warning-snackbar {
+  background: $psbwarning;
+}
+
+
+.error-snackbar-outline {
+  background: #eb1818;
+}
+
+.success-snackbar-outline {
+  background: #43a047;
+}
+
+.info-snackbar-outline {
+  background: #38a7ff;
+}
+
+.warning-snackbar-outline {
+  background: #ffa000;
+}
+
+.btnbackground {
+  background: $psblightgray;
+}
+
+.psb-b-blue {
+  border-color: $psbblue;
+}
+
+// font-size css and class
+
+.fs-14 {
+  font-size: $fs-14;
+}
+
+.fs-16 {
+  font-size: $fs-16;
+}
+
+.fs-18 {
+  font-size: $fs-18;
+}
+
+.fs-20 {
+  font-size: $fs-20;
+}
+
+.fs-22 {
+  font-size: $fs-22;
+}
+
+.fs-24 {
+  font-size: $fs-24;
+}
+
+.fs-30 {
+  font-size: $fs-30;
+}
+
+.fs-32 {
+  font-size: $fs-32;
+}

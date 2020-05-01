@@ -1,0 +1,74 @@
+
+<!-- Header -->
+<header id="header" >
+    <div class="main-header">
+        <mat-toolbar color="psbprimary">
+        <mat-toolbar-row>
+            <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+            <mat-icon>menu</mat-icon>
+            </button>
+            <a class="header-img">logo</a>
+            <div fxShow="true" fxHide.lt-md>
+            <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+            <a  mat-button>Menu Item 1</a>
+            <a  mat-button>Menu Item 2</a>
+            <a  mat-button>Menu Item 3</a>
+            <a  mat-button>Menu Item 4</a>
+            <a  mat-button>Menu Item 5</a>
+            <a  mat-button>Menu Item 6</a>
+            <a  mat-button>Menu Item 7</a>
+            </div>
+            <span class="menu-spacer"></span>
+            <span>User Name</span>
+        </mat-toolbar-row>
+        </mat-toolbar>
+  
+        <mat-sidenav-container fxFlexFill>
+        <mat-sidenav #sidenav>
+            <mat-nav-list>
+            <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+            <a href="#" mat-list-item>Menu Item 1</a>
+            <a href="#" mat-list-item>Menu Item 2</a>
+            <a href="#" mat-list-item>Menu Item 3</a>
+            <a href="#" mat-list-item>Menu Item 4</a>
+            <a href="#" mat-list-item>Menu Item 5</a>
+            <a href="#" mat-list-item>Menu Item 6</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill>
+            <div class="psb-sm-12 psb-md-12 psb-lg-12 psb-xl-12 w-100 p-0 float-left mhv-80">
+            <router-outlet></router-outlet>
+            </div>
+            
+        </mat-sidenav-content>
+        </mat-sidenav-container>
+  </div>
+</header>
+
+<mat-toolbar class="footer-height">
+    <mat-toolbar-row class="footer-height ">
+        <div class="psb-sm-12 psb-md-5 psb-xl-4 psb-d-flex psb-jc-between">
+            <a class="pad" href="https://www.sitelock.com/verify.php?site=psbloansin59minutes.com"><img
+                    class="footer-img" src="//shield.sitelock.com/shield/psbloansin59minutes.com"></a>
+            <a class="pad" href="https://secure.trust-guard.com/certified/13899"><img class="footer-img"
+                    src="//secure.trust-guard.com/seals/certified/13899-large.gif"></a>
+            <a class="pad" href="https://secure.trust-guard.com/security/13899"><img class="footer-img"
+                    src="//secure.trust-guard.com/seals/security/13899-large.gif"></a>
+            <a class="pad" href="https://secure.trust-guard.com/privacy/13899"><img class="footer-img"
+                    src="//secure.trust-guard.com/seals/privacy/13899-large.gif"></a>
+            <a class="pad" href="https://secure.trust-guard.com/business/13899"><img class="footer-img"
+                    src="//secure.trust-guard.com/seals/business/13899-large.gif"></a>
+        </div>
+        <div class="psb-sm-12 psb-md-5 psb-xl-3 p-0">
+            <div class="psb-sm-12 psb-md-12 psb-xl-12 psb-d-flex psb-jc-between">
+                <a class="footer-link" href="tel:079-41055999">079-41055999 </a>  
+            </div>
+            <div class="psb-sm-12 psb-md-12 psb-xl-12 psb-d-flex psb-jc-between">
+                <a class="footer-link" href="#">Privacy Policy</a>
+                <a class="footer-link" href="#">Terms And Conditions</a>
+                <a class="footer-link" href="#">Disclaimer</a>
+            </div>
+
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

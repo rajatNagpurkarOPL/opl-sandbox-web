@@ -1,0 +1,112 @@
+@import 'src/assets/_theming.scss';
+//Here we importing _custom.scss file but we don't need to include underscore.
+// variable scss
+
+$psbblue:#2D3079;
+$psbgrey:#D2D2D2;
+$psbred:#F22828;
+$psbwhite:#ffffff;
+$psbblack:#000000;
+$psbmainlyblue:#f6f9ff;
+$psbskyblue:#0833AA;
+$psbdarkgrey:#999999;
+$psbpink:#FFF2F2;
+$psborange:#FF9900;
+$psbdarkblue:#25386C;
+$psblightblue:#EDEDE7;
+$psbSilver:#F6F6FA;
+$psblightgreen:#14BE46;
+$psbwarning:#ffa000;
+$psbinfo:#38a7ff;
+$psberror:#eb1818;
+$psbsuccess:#43a047;
+$psbborder:#F6F6FA;
+$psbcyanblue:#ECF3FF;
+$psblightgray:#F0F0F0;
+
+// Width variable 
+
+$w-10:10%;
+$w-20:20%;
+$w-30:30%;
+$w-40:40%;
+$w-50:50%;
+$w-60:60%;
+$w-70:70%;
+$w-80:80%;
+$w-90:90%;
+$w-100:100%;
+
+// height SCSS
+
+$h-auto:auto;
+$h-10:10%;
+$h-25:25%;
+$h-50:50%;
+$h-60:60%;
+$h-70:70%;
+$h-80:80%;
+$h-90:90%;
+$h-100:100%;
+
+$hv-auto:auto;
+$hv-10:10vh;
+$hv-25:25vh;
+$hv-50:50vh;
+$hv-60:60vh;
+$hv-70:70vh;
+$hv-80:80vh;
+$hv-90:90vh;
+$hv-100:100vh;
+
+// float SCSS
+
+$fl:left;
+$fr:right;
+$fnone :none;
+
+// display flex
+$d-flex:flex;
+$d-block:block;
+$d-none:none;
+
+
+// justify-content  scss
+$jc-center: center;
+$jc-space-around: space-around;
+$jc-space-between: space-between;
+$jc-space-evenly: space-evenly;
+$jc-flex-end: flex-end;
+$jc-flex-start: flex-start;
+$jc-left: left;
+$jc-right: right;
+$jc-end: end;
+$jc-start: start;
+
+// position SCSS
+
+$p-fixed:fixed;
+$p-relative:relative;
+$p-absolute:absolute;
+$p-static:static;
+$p-sticky:sticky;
+
+//font-weight
+$f-w300:300;
+$f-w400:400;
+$f-w500:500;
+$f-w600:600;
+$f-w700:700;
+$f-w800:800;
+
+
+// font-size 
+$fs-14:14px;
+$fs-16:16px;
+$fs-18:18px;
+$fs-20:20px;
+$fs-22:22px;
+$fs-24:24px;
+$fs-26:26px;
+$fs-30:30px;
+$fs-32:32px;
