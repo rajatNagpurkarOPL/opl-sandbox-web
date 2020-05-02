@@ -1,76 +1,101 @@
-.footer-img {
-    width: 100%;
+#header {
+  background: #2D3079;
+  padding: 1em 0 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   }
-  
-  .pad {
-    width: 18%;
-    float: left;
+  .header-right {
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: flex-end;
   }
-  
-  .mat-toolbar-multiple-rows.footer-height {
-    height: 90px;
-  }
-  
-  .mat-toolbar-row,
-  .mat-toolbar-single-row.footer-height {
-    height: 100px;
-    padding: 15px 16px;
-    justify-content: space-between;
-  }
-  
-  .mat-toolbar,
-  .mat-toolbar h1,
-  .mat-toolbar h2,
-  .mat-toolbar h3,
-  .mat-toolbar h4,
-  .mat-toolbar h5,
-  .mat-toolbar h6 {
-    font: 500 14px/25px Roboto, sans-serif;
-    text-align: right;
-  }
-  
-  .footer-link {
-    color: #2d3079;
+  .header-right p {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 1em;
     display: flex;
-    align-content: center;
-    padding-right: .5em;
+  align-items: center;
+  }
+  .header-right p img {
+      float: left;
+      width: 25px;
+        height: 25px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin-right: 0.5em;
+  }
+  .header-right .down-arrow {
+    font-size: 18px;
+    color: #ffffff;
+    width: 18px;
+  }
+
+
+  .topnav {
+    overflow: hidden;
+        padding: 0 5em;
+   
   }
   
-  .footer-link img {
-    padding-right: .5em;
+  .topnav a {
+    float: left;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
   }
   
-  @media(max-width:1200px) {
-    .footer-link {
-      font-size: 12px;
-    }
+  .topnav a:hover {
+    border-bottom: 3px solid #ffffff;
   }
   
-  @media(max-width:515px) {
+  .topnav a.active {
+    border-bottom: 3px solid #ffffff;
+  }
+
   
-    .mat-toolbar-row,
-    .mat-toolbar-single-row.footer-height {
-      height: 150px;
-    }
-  
-    .mat-toolbar-multiple-rows.footer-height {
-      height: 130px;
-    }
-  
-    .mat-toolbar,
-    .mat-toolbar h1,
-    .mat-toolbar h2,
-    .mat-toolbar h3,
-    .mat-toolbar h4,
-    .mat-toolbar h5,
-    .mat-toolbar h6 {
-      font: 500 12px/30px Roboto, sans-serif;
-      text-align: right;
-    }
-  
-    .footer-height {
-      flex-direction: column-reverse;
-    }
+  #footer {
+    background: #F4F4F4;
+    padding: 2em 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
   
   }
-  
+
+   .footer-left p {
+     color: #000000;
+     opacity: 0.4;
+     font-size: 16px;
+     font-weight: 500;
+     margin-bottom: 0;
+
+   }
+  .footer-right {
+  float: right;
+  }
+  .footer-right ul {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  }
+  .footer-right ul li {
+    list-style: none;
+    margin: 0 1em;
+    display: flex;
+    align-items: center;
+  }
+  .footer-right ul li a {
+  color: #000000;
+  opacity: 0.4;
+  text-decoration: none;
+  font-size: 16px;
+  }
