@@ -1,13 +1,138 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 import { SnackbarService } from './SnackbarService';
-import { LoaderService } from './LoaderService';
+import { Constant } from '../Constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  constructor(private snackbar: SnackbarService) {
+  data: any;
+  constructor(private snackbar: SnackbarService, private router: Router) { }
+
+  setData(data: any) {
+    this.data = data;
   }
+
+  getData() {
+    return this.data;
+  }
+
+  /**
+   * For check null,empty and undefined
+   */
+  isObjectNullOrEmpty(data: any) {
+    return (data == null || data === undefined || data === '' || data === 'null' || data === 'undefined' ||
+      data === '' || data === [] || data === {});
+  }
+
+  isObjectIsEmpty(data: any) {
+    return data && Object.keys(data).length <= 0;
+  }
+
+  /**
+   * for convert value(encrypt)
+   */
+  toBTOA(value: string) {
+    try {
+      return btoa(value);
+    } catch (err) {
+      console.log('error while btoa convert');
+    }
+  }
+
+  /**
+   * Decrypt value
+   */
+  toATOB(value: string) {
+    try {
+      return atob(value);
+    } catch (err) {
+      console.log('error while atob convert');
+    }
+  }
+
+  /**
+   * Get value from storage
+   */
+  getStorage(key: string, decrypt: boolean) {
+    const data = localStorage.getItem(key);
+    if (this.isObjectNullOrEmpty(data)) {
+      return data;
+    }
+    if (decrypt) {
+      const decryptdata = this.toATOB(data);
+      return this.isObjectIsEmpty(decryptdata) ? null : decryptdata;
+    }
+    return data;
+  }
+
+  /**
+   * set value in storage
+   */
+  setStorage(key: any, value: string) {
+    localStorage.setItem(key, this.toBTOA(value));
+  }
+
+  /**
+   * Remove value from storage
+   */
+  removeStorage(key: any) {
+    localStorage.removeItem(key);
+  }
+
+  /**
+   * for set Header for cookies
+   */
+  setSessionAndHttpAttr(email: any, response: { access_token: any; refresh_token: any; }, loginToken: any) {
+    this.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
+    // set cookies object
+    const cookies = {};
+    const config = { secure: true };
+    cookies[Constant.httpAndCookies.USNM] = email;
+    cookies[Constant.httpAndCookies.ACTK] = response.access_token;
+    cookies[Constant.httpAndCookies.RFTK] = response.refresh_token;
+    cookies[Constant.httpAndCookies.LGTK] = loginToken;
+    this.setStorage(Constant.httpAndCookies.COOKIES_OBJ, JSON.stringify(cookies));
+  }
+
+  /**
+   * Open PopUp
+   */
+  // openPopUp(obj: any, popUpName: any, isYesNo: any, objClass?: any) {
+  //   // and use the reference from the component itself
+
+  //   const modalRef = this.modalService.open(popUpName, objClass);
+  //   modalRef.componentInstance.popUpObj = obj;
+  //   modalRef.componentInstance.isYesNo = isYesNo; // if isYesNo true than display both buttons
+  //   return modalRef.result;
+  // }
+
+  /**
+   * For handle error and display error msg
+   */
+  errorHandle(error: any) {
+    let errMsg = '';
+    if (error.status === 401) {
+      this.router.navigate(['udaan/login']);
+      localStorage.clear();
+      errMsg = 'You are not authorised';
+    } else if (error.status === 404) {
+      errMsg = 'Method Not found';
+    } else if (error.status === 400) {
+      errMsg = 'Bad Request';
+    } else {
+      if (error.message != null) {
+        errMsg = error.message;
+      } else {
+        errMsg = 'Something went wrong';
+      }
+    }
+    this.errorSnackBar(errMsg);
+    return throwError(errMsg);
+  }
+
   /**
    * For display Toaster msg in right,center,bottom,left,top side
    * @param message

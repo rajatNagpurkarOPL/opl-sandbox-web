@@ -11,6 +11,11 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { TostrComponent } from './common-utils/Common-Component/tostr/tostr.component';
 import { MaterialModule } from './common-utils/common-services/merterial.module';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './common-utils/common-services/http.service';
+import { LoaderService } from './common-utils/common-services/LoaderService';
+import { AuthGuard } from './common-utils/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,9 +31,11 @@ import { NavbarComponent } from './component/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpService, LoaderService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
