@@ -10,7 +10,7 @@ import { CanonicalService } from 'src/app/common-utils/common-services/canonical
 })
 export class LoginComponent implements OnInit {
 
-  isLoginPage = true;
+  loginDetail: any = {};
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService) { }
 

@@ -1,19 +1,13 @@
 <div class="signin-content">
     <mat-card>
       <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form name="loginForm">
           <p>Please login to continue</p>
           <mat-form-field class="full-width-input">
-            <input matInput placeholder="User" formControlName="userName" required>
-            <mat-error *ngIf="isFieldInvalid('userName')">
-              Please inform your user name
-            </mat-error>
+            <input matInput placeholder="User" type="text" required>
           </mat-form-field>
           <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" formControlName="password" required>
-            <mat-error *ngIf="isFieldInvalid('userName')">
-              Please inform your password
-            </mat-error>
+            <input matInput type="password" placeholder="Password" required>
           </mat-form-field>
           <button mat-raised-button color="primary"  routerLink="/dashboard">Login</button>
         </form>
