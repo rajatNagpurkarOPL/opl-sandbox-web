@@ -1,10 +1,13 @@
 #header {
-  background: #2D3079;
-  padding: 1em 0 0;
+
+  padding: 0;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+  }
+  .header {
+    background: #2D3079;
   }
   .header-right {
   display: flex;
@@ -54,10 +57,12 @@
   
   .topnav a:hover {
     border-bottom: 3px solid #ffffff;
+   
   }
   
   .topnav a.active {
     border-bottom: 3px solid #ffffff;
+    background-color: rgba(255, 255, 255, 0.4);
   }
 
   
