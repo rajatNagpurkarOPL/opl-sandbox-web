@@ -7,10 +7,12 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { AuthGuard } from './common-utils/auth/auth.guard';
 import { ProductComponent } from './component/products/product/product/product.component';
+import { SignupComponent } from './component/signup/signup.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent},
   { path: '', component: NavbarComponent , children : [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},

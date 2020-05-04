@@ -42,25 +42,25 @@ export class AuthGuard implements CanActivate {
     }
   }
 
-  // logoutUser() {
-  //   this.lenderService.logoutUser().subscribe(res => {
-  //     if (res.status === 200) {
-  //       this.commonService.successSnackBar(res.message);
-  //     } else {
-  //       this.commonService.errorSnackBar(res.message);
-  //     }
-  //   }, error => {
-  //     this.commonService.errorSnackBar(error);
-  //   });
-
-  //   this.commonService.removeStorage(Constant.httpAndCookies.USERTYPE);
-  //   this.commonService.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
-  //   this.commonService.removeStorage(Constant.httpAndCookies.ORGID);
-  //   this.commonService.removeStorage(Constant.httpAndCookies.ROLEID);
-  //   this.commonService.removeStorage(Constant.httpAndCookies.BUSINESS_TYPE_ID);
-  //   this.commonService.removeStorage(Constant.httpAndCookies.REST_URL);
-  //   this.router.navigate([Constant.ROUTE_URL.LOGIN]);
-  // }
+  logoutUser() {
+    this.lenderService.logout().subscribe(res => {
+      if (res.status === 200) {
+        this.commonService.successSnackBar(res.message);
+      } else {
+        this.commonService.errorSnackBar(res.message);
+      }
+    }, error => {
+      this.commonService.errorSnackBar(error);
+    });
+    // Remove localstorage
+    this.commonService.removeStorage(Constant.httpAndCookies.USERTYPE);
+    this.commonService.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
+    this.commonService.removeStorage(Constant.httpAndCookies.ORGID);
+    this.commonService.removeStorage(Constant.httpAndCookies.ROLEID);
+    // Remove cookies
+    this.commonService.deleteAuthCookie();
+    this.router.navigate([Constant.ROUTE_URL.LOGIN]);
+  }
 
   // startIntervalForGetNewAccessKey(seconds) {
   //   // this is for get access token every 28 min

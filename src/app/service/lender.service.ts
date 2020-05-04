@@ -19,6 +19,15 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.LOGIN, data);
   }
 
+  //  For Logout User
+  logout(): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.LOG_OUT, false);
+  }
+
+  signUp(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SIGN_UP, data);
+  }
+
   // getAccessToken(): Observable<any> {
   //   return this.http.get(AppSettings.USER_URL + RestURL.ACCESS_TOKEN, false, false);
   // }
