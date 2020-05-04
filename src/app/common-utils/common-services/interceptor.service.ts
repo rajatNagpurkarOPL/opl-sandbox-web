@@ -5,6 +5,7 @@ import { catchError, finalize, map } from 'rxjs/operators';
 import { CommonService } from './common.service';
 import { LoaderService } from './LoaderService';
 import { Constant } from '../Constant';
+import { CookieService } from './cookie.service';
 
 /**
  *  Note intercepter for filter web service Like header add skip URl from Headers etc.
@@ -12,7 +13,7 @@ import { Constant } from '../Constant';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
-  constructor(private loaderService: LoaderService, private commonService: CommonService) { }
+  constructor(private loaderService: LoaderService, private commonService: CommonService, private cookieService: CookieService) { }
 
   // Handle request for loader spin
   removeRequest(req: HttpRequest<any>) {
@@ -26,12 +27,18 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = req.headers;
     if (!this.isHeaderSkipUrls(req.url)) {// for skip URL
-      const cookiesObj = JSON.parse(this.commonService.getStorage(Constant.httpAndCookies.COOKIES_OBJ, true));
-      if (cookiesObj != null && cookiesObj !== undefined) {
-        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.USNM, cookiesObj[Constant.httpAndCookies.USNM]) });
-        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.ACTK, cookiesObj[Constant.httpAndCookies.ACTK]) });
-        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.LGTK, cookiesObj[Constant.httpAndCookies.LGTK]) });
-        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.RFTK, cookiesObj[Constant.httpAndCookies.RFTK]) });
+      if (!this.commonService.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ))) {
+        const cookies = {};
+        cookies[Constant.httpAndCookies.RFTK] = this.cookieService.getCookie(Constant.httpAndCookies.RFTK);
+        cookies[Constant.httpAndCookies.USNM] = this.cookieService.getCookie(Constant.httpAndCookies.USNM);
+        cookies[Constant.httpAndCookies.ACTK] = this.cookieService.getCookie(Constant.httpAndCookies.ACTK);
+        cookies[Constant.httpAndCookies.LGTK] = this.cookieService.getCookie(Constant.httpAndCookies.LGTK);
+
+        // Set cookies
+        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.USNM, cookies[Constant.httpAndCookies.USNM]) });
+        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.ACTK, cookies[Constant.httpAndCookies.ACTK]) });
+        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.LGTK, cookies[Constant.httpAndCookies.LGTK]) });
+        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.RFTK, cookies[Constant.httpAndCookies.RFTK]) });
         // req = req.clone({ headers: req.headers.set('req_auth', 'true') });
       } else {
         this.hideLoader();

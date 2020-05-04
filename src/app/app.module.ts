@@ -17,6 +17,7 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { LoaderService } from './common-utils/common-services/LoaderService';
 import { InterceptorService } from './common-utils/common-services/interceptor.service';
 import { LoaderComponent } from './common-utils/common-component/loader/loader.component';
+import { CookieService } from './common-utils/common-services/cookie.service';
 
 
 @NgModule({
@@ -38,7 +39,11 @@ import { LoaderComponent } from './common-utils/common-component/loader/loader.c
     FormsModule,
     HttpClientModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }, LoaderService, HttpService, AuthGuard],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+              LoaderService,
+              HttpService,
+              AuthGuard,
+              CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

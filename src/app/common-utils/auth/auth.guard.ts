@@ -5,6 +5,7 @@ import { LoaderService } from '../common-services/LoaderService';
 import { interval } from 'rxjs';
 import { LenderService } from 'src/app/service/lender.service';
 import { Constant } from '../Constant';
+import { CookieService } from '../common-services/cookie.service';
 
 /**
  *  Note : This class is implement for check and verify token, email and get data on load of page
@@ -14,12 +15,23 @@ export class AuthGuard implements CanActivate {
   currentStageData: any = {};
   applicationId: any;
   constructor(private router: Router, private commonService: CommonService, private loaderService: LoaderService,
-              private lenderService: LenderService) { }
+              private lenderService: LenderService , private cookieService: CookieService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.commonService.getStorage(Constant.httpAndCookies.COOKIES_OBJ, true) != null) {
+  /* based on localstorage
+     if (this.commonService.getStorage(Constant.httpAndCookies.COOKIES_OBJ, true) != null) {
       // logged in so return true
       // this.startIntervalForGetNewAccessKey(1800000);
+      return true;
+    } else {
+      // not logged in so redirect to login page with the return url
+      this.loaderService.hide();
+      this.commonService.warningSnackBar('You are not Authorized');
+      this.router.navigate([Constant.ROUTE_URL.LOGIN]);
+      return false;
+    } */
+    if (!this.commonService.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ)) ) {
+      // logged in so return true
       return true;
     } else {
       // not logged in so redirect to login page with the return url

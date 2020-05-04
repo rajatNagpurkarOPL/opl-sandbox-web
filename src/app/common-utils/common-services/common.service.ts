@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { SnackbarService } from './SnackbarService';
 import { Constant } from '../Constant';
+import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   data: any;
-  constructor(private snackbar: SnackbarService, private router: Router) { }
+  constructor(private snackbar: SnackbarService, private router: Router, private cookieservice: CookieService) { }
 
   setData(data: any) {
     this.data = data;
@@ -95,6 +96,24 @@ export class CommonService {
     cookies[Constant.httpAndCookies.RFTK] = response.refresh_token;
     cookies[Constant.httpAndCookies.LGTK] = loginToken;
     this.setStorage(Constant.httpAndCookies.COOKIES_OBJ, JSON.stringify(cookies));
+  }
+
+
+/**
+ * Set login token cookies
+ */
+  setAuthCookie(params: any){
+    const cookies = {};
+    cookies[Constant.httpAndCookies.USNM] = params.userName;
+    cookies[Constant.httpAndCookies.ACTK] = params.access_token;
+    cookies[Constant.httpAndCookies.RFTK] = params.refresh_token;
+    cookies[Constant.httpAndCookies.LGTK] = params.loginToken;
+    this.cookieservice.setCookie({name : Constant.httpAndCookies.COOKIES_OBJ, value :  this.toBTOA(JSON.stringify(cookies)) });
+
+    this.cookieservice.setCookie({name : Constant.httpAndCookies.USNM, value : params.userName});
+    this.cookieservice.setCookie({name : Constant.httpAndCookies.ACTK, value : params.access_token});
+    this.cookieservice.setCookie({name : Constant.httpAndCookies.RFTK, value : params.refresh_token});
+    this.cookieservice.setCookie({name : Constant.httpAndCookies.LGTK, value : params.loginToken});
   }
 
   /**

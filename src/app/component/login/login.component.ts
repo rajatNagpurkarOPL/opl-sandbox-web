@@ -7,6 +7,7 @@ import { Constant } from 'src/app/common-utils/Constant';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
+import { CookieService } from 'src/app/common-utils/common-services/cookie.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   userResponse: any = {};
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
-              private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard) { }
+              private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
+              private cookieservice: CookieService) { }
 
   onSubmit() {
     console.log(this.user);
@@ -31,13 +33,16 @@ export class LoginComponent implements OnInit {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
         this.userResponse = res;
-        this.commonService.removeStorage(Constant.httpAndCookies.USERTYPE);
-        this.commonService.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
-        this.commonService.setStorage(Constant.httpAndCookies.USERTYPE, this.userResponse.userType);
-        this.commonService.setStorage(Constant.httpAndCookies.ORGID, this.userResponse.userOrgId);
-        // save data in Localstorage
-        this.commonService.setSessionAndHttpAttr(btoa(this.userResponse.userName), this.userResponse, this.userResponse.loginToken);
-        this.commonService.setStorage(Constant.httpAndCookies.ROLEID, this.userResponse.userRoleId);
+        if (!this.commonService.isObjectNullOrEmpty(this.userResponse) && !this.commonService.isObjectNullOrEmpty(this.userResponse.data)){
+          // save data in local storage
+          this.commonService.setStorage(Constant.httpAndCookies.USNM, this.userResponse.data.userName);
+          this.commonService.setStorage(Constant.httpAndCookies.USERTYPE, this.userResponse.data.userType);
+          this.commonService.setStorage(Constant.httpAndCookies.ORGID, this.userResponse.data.userOrgId);
+          this.commonService.setStorage(Constant.httpAndCookies.ROLEID, this.userResponse.userRoleId);
+          // Set cookies
+          this.commonService.setAuthCookie(this.userResponse.data);
+        }
+
         // if (this.userResponse.userType === 1) {
         //   this.commonService.warningSnackBar('You are not authorised user.');
         //   this.commonMethod.logoutUser();
