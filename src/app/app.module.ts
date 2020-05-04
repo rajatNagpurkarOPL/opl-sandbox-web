@@ -1,21 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './component/login/login.component';
+import { AuthGuard } from './common-utils/auth/auth.guard';
+import { TostrComponent } from './common-utils/Common-Component/tostr/tostr.component';
+import { HttpService } from './common-utils/common-services/http.service';
+import { MaterialModule } from './common-utils/common-services/merterial.module';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { LoginComponent } from './component/login/login.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 import { ProductsComponent } from './component/products/products.component';
 import { SettingsComponent } from './component/settings/settings.component';
-import { TostrComponent } from './common-utils/Common-Component/tostr/tostr.component';
-import { MaterialModule } from './common-utils/common-services/merterial.module';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './common-utils/common-services/http.service';
 import { LoaderService } from './common-utils/common-services/LoaderService';
-import { AuthGuard } from './common-utils/auth/auth.guard';
+import { InterceptorService } from './common-utils/common-services/interceptor.service';
+import { LoaderComponent } from './common-utils/common-component/loader/loader.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AuthGuard } from './common-utils/auth/auth.guard';
     ProductsComponent,
     SettingsComponent,
     TostrComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { AuthGuard } from './common-utils/auth/auth.guard';
     FormsModule,
     HttpClientModule
   ],
-  providers: [HttpService, LoaderService, AuthGuard],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }, LoaderService, HttpService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
