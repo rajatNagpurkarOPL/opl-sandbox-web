@@ -12,12 +12,13 @@ import { MaterialModule } from './common-utils/common-services/merterial.module'
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { LoginComponent } from './component/login/login.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { ProductsComponent } from './component/products/products.component';
+import { ProductsComponent } from './component/products/product-list/products.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { LoaderService } from './common-utils/common-services/LoaderService';
 import { InterceptorService } from './common-utils/common-services/interceptor.service';
 import { LoaderComponent } from './common-utils/common-component/loader/loader.component';
 import { CookieService } from './common-utils/common-services/cookie.service';
+import { ProductComponent } from './component/products/product/product/product.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { CookieService } from './common-utils/common-services/cookie.service';
     TostrComponent,
     NavbarComponent,
     LoaderComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

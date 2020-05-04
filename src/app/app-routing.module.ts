@@ -1,11 +1,12 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './component/login/login.component';
-import { ProductsComponent } from './component/products/products.component';
+import { ProductsComponent } from './component/products/product-list/products.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { AuthGuard } from './common-utils/auth/auth.guard';
+import { ProductComponent } from './component/products/product/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', component: NavbarComponent , children : [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
    ]
   }
