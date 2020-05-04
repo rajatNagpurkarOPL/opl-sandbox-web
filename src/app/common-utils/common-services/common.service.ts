@@ -116,6 +116,17 @@ export class CommonService {
     this.cookieservice.setCookie({name : Constant.httpAndCookies.LGTK, value : params.loginToken});
   }
 
+/**
+ * Delete cookies
+ */
+   deleteAuthCookie(){
+    this.cookieservice.deleteCookie(Constant.httpAndCookies.COOKIES_OBJ);
+    this.cookieservice.deleteCookie(Constant.httpAndCookies.USNM);
+    this.cookieservice.setCookie(Constant.httpAndCookies.ACTK);
+    this.cookieservice.setCookie(Constant.httpAndCookies.RFTK);
+    this.cookieservice.setCookie(Constant.httpAndCookies.LGTK);
+}
+
   /**
    * Open PopUp
    */

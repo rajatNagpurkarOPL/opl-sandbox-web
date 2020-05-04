@@ -16,7 +16,7 @@ import { CookieService } from 'src/app/common-utils/common-services/cookie.servi
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {};
+  user: any = {userName : "rohit" , password : "admin@123"};
   userResponse: any = {};
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,

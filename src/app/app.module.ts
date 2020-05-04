@@ -19,6 +19,7 @@ import { InterceptorService } from './common-utils/common-services/interceptor.s
 import { LoaderComponent } from './common-utils/common-component/loader/loader.component';
 import { CookieService } from './common-utils/common-services/cookie.service';
 import { ProductComponent } from './component/products/product/product/product.component';
+import { SignupComponent } from './component/signup/signup.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ProductComponent } from './component/products/product/product/product.c
     NavbarComponent,
     LoaderComponent,
     ProductComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

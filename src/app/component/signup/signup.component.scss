@@ -1,0 +1,97 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  .full-width-input {
+    width: 100%;
+  }
+
+ #b4l-login {
+padding: 10em 0 0;
+
+ }
+  .b4l-login {
+ height: 100%;
+ background-repeat: no-repeat;
+
+  }
+
+  .login-text {
+ font-size: 34px;
+ font-weight: 300;
+ text-align: center;
+ color: #FFFFFF;
+
+  }
+  .login-box {
+    background-color: #FFFFFF;
+    padding: 4em 2em 0;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    margin: 8em auto;
+    justify-content: center;
+    border-radius: 5px;
+    flex-direction: column;
+
+  }
+
+  .login-box p {
+
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2em 0;
+  }
+  fieldset {
+    border: medium none !important;
+    margin: 0;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+    height: 4.2em;
+}
+
+ input[type="date"],  
+  input[type="tel"],
+  input[type="password"],
+  input[type="text"], 
+   input[type="number"],
+   input[type="email"],
+   input[type="url"], 
+     textarea,
+    select {
+  width: 100%;
+  border: 1px solid #DEDEDE !important;
+  background: transparent !important;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  border-style: none;
+}
+input {
+  overflow: visible;
+}
+form {
+width: 85%;
+
+}
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: #2D3079;
+  width: 100%;
+  padding: 0.3em;
+}
+
+.login-forgot-psd {
+
+color: #2D3079;
+text-align: center;
+font-size: 16px;
+font-weight: 500;
+margin: 2em 0;
+}

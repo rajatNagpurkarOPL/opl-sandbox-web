@@ -5,5 +5,7 @@ const locationUrl = window.location.protocol + '//' + window.location.host;
  *  This is costants of Rest URL which can be hit on backend server
  */
 export const RestURL = {
-    LOGIN: '/auth/login'
+    LOGIN: '/auth/login',
+    LOG_OUT: '/auth/logout',
+    SIGN_UP: '/user/signup'
 };
