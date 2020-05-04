@@ -13,3 +13,9 @@ export class ProductsComponent implements OnInit {
   }
 
 }
+
+export class TooltipOverviewExample {
+
+
+}
+
