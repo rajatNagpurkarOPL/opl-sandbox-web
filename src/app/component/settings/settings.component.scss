@@ -1,14 +1,7 @@
-#b4l-content {
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 20px #0000000F;
-    border: 1px solid #DEDEDE;
-    border-radius: 8px;
-    opacity: 1;
-    margin: 2em auto;
-    min-height: 750px;
-    width: 100%;
-}
 
+#b4l-content {
+  min-height: 750px;
+}
 
 .sidebar {
     min-height: 750px;
@@ -70,17 +63,6 @@ font-weight: bold;
 
   }
 
-  .sidebar-main-title a {
-background-color: #2D3079;
-padding: 1em 2em;
-color: #FFFFFF;
-border-radius: 5px;  
-}
-
-  .sidebar-main-title img {
-margin-right: 0.5em;
-
-  }
 
 .setting-text {
 
