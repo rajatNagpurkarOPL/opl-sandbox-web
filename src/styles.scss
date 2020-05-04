@@ -29,5 +29,22 @@ $b4l-lender-web-theme: mat-light-theme($b4l-lender-web-primary, $b4l-lender-web-
 
 /* You can add global styles to this file, and also import other style files */
 
+.error-snackbar {
+    background: #d32f2f;
+  }
+  
+  .success-snackbar {
+    background: #43a047;
+  }
+  
+  .info-snackbar {
+    background: #38a7ff;
+  }
+  
+  .warning-snackbar {
+    background: #ffa000;
+  }
+  
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

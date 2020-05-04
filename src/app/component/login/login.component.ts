@@ -15,7 +15,7 @@ import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {};
+  user: any = {userName : 'rohit' , password : 'admin@123'};
   userResponse: any = {};
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
