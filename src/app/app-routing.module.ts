@@ -5,14 +5,15 @@ import { ProductsComponent } from './component/products/products.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { AuthGuard } from './common-utils/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: '', component: NavbarComponent , children : [
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'products', component: ProductsComponent},
-    { path: 'settings', component: SettingsComponent},
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
    ]
   }
 ];
