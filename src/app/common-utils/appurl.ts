@@ -2,7 +2,8 @@ import { Injector } from '@angular/core';
 
 export class AppURL {
 
-    static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
+    // static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
+    static RULE_ENGINE = 'https://qa-sidbi.capitaworld.com/b4l/ruleengine';
 
     // public static getUrl() {
     //     const commonserlvice = AppURL.injector.get(CommonService);
