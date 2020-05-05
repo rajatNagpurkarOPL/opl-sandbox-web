@@ -6,6 +6,6 @@ const locationUrl = window.location.protocol + '//' + window.location.host;
  */
 export const RestURL = {
     LOGIN: '/auth/login',
-    LOG_OUT: '/auth/logout',
+    LOG_OUT: '/auth/logoutUser',
     SIGN_UP: '/user/signup'
 };
