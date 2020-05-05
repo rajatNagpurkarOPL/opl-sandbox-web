@@ -2,7 +2,11 @@ const mainPath = '/';
 export const Constant = {
     ROUTE_URL: {
         LOGIN: mainPath + 'login',
-        DASHBOARD: mainPath + 'dashboard'
+        SIGN_UP: mainPath + 'signup',
+        DASHBOARD: mainPath + 'dashboard',
+        SETTINGS: mainPath + 'settings',
+        PRODUCTS: mainPath + 'products',
+        PRODUCT: mainPath + 'product'
     },
     httpAndCookies: {
         ACTK: 'tk_ac',

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
-import { SeoService } from 'src/app/common-utils/common-services/seo.service';
-import { CanonicalService } from 'src/app/common-utils/common-services/canonical.service';
-import { LenderService } from 'src/app/service/lender.service';
-import { Constant } from 'src/app/common-utils/Constant';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
+import { CanonicalService } from 'src/app/common-utils/common-services/canonical.service';
+import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { CookieService } from 'src/app/common-utils/common-services/cookie.service';
+import { SeoService } from 'src/app/common-utils/common-services/seo.service';
+import { Constant } from 'src/app/common-utils/Constant';
+import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   user: any = {};
   userResponse: any = {};
+  routeURL: any = {};
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
               private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
@@ -69,9 +69,9 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-     this.canonicalService.setCanonicalURL();
-     this.canonicalService.setCanonicalURLalternet();
-     this.psbSeo.genrateTags({
+    this.canonicalService.setCanonicalURL();
+    this.canonicalService.setCanonicalURLalternet();
+    this.psbSeo.genrateTags({
       title: 'PSB Loans in 59 Minutes - Login Page',
       description: 'PSB Loans in 59 Minutes login Page',
       slug: 'login'
