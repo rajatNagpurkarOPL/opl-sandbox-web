@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
-import { LenderService } from 'src/app/service/lender.service';
-import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
 import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
+import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
+import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
 
   user: any = {};
   userResponse: any = {};
+  routeURL: any = {};
   constructor(private commonService: CommonService, private lenderService: LenderService,
               private router: Router, private commonMethod: AuthGuard) { }
 

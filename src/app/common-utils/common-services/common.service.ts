@@ -145,7 +145,7 @@ export class CommonService {
   errorHandle(error: any) {
     let errMsg = '';
     if (error.status === 401) {
-      this.router.navigate(['udaan/login']);
+      this.router.navigate(['/login']);
       localStorage.clear();
       errMsg = 'You are not authorised';
     } else if (error.status === 404) {

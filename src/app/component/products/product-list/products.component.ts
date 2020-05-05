@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Constant } from 'src/app/common-utils/Constant';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
+  routeURL: any = {};
   constructor() { }
 
   ngOnInit(): void {
+    this.routeURL = Constant.ROUTE_URL;
   }
 
 }
