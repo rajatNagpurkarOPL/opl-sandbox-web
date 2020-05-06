@@ -10,7 +10,8 @@ import { CommonService } from 'src/app/common-utils/common-services/common.servi
 })
 export class EblrpopupComponent implements OnInit {
 
-  eblr: any = {};
+  eblr: any = {effectiveFrom: new Date()};
+  eblrList = [];
   constructor(public dialogRef: MatDialogRef<EblrpopupComponent>, public lenderService: LenderService, 
               public commonService: CommonService) { }
 
@@ -38,6 +39,7 @@ export class EblrpopupComponent implements OnInit {
         this.commonService.errorSnackBar(error);
       });
     }
+
 
   ngOnInit(): void {
   }
