@@ -1,62 +1,65 @@
 <div id="b4l-pop-up">
-<h4>Change EBLR Value</h4>
-<div class="hr"></div>
-<div class="pop-up-content">
-<p>New EBLR value</p>
+  <h4>Change EBLR Value</h4>
+  <div class="hr"></div>
+  <div class="pop-up-content">
+    <p>New EBLR value</p>
 
 
-<div class="buttin-b4l-opacity opl2">
-    <div class="text-with-presnt person-text-width">
-        <input placeholder="12.3" type="text" tabindex="3" required="" maxlength="6">
+    <div class="buttin-b4l-opacity opl2">
+      <div class="text-with-presnt person-text-width">
+        <input placeholder="12.3" [(ngModel)]="eblr.plr" type="text" tabindex="3" required="" maxlength="2">
         <p class="perstage-text-n-d">%</p>
-      </div>  
-</div>
+      </div>
+    </div>
 
-</div>
-<div class="hr"></div>
+  </div>
+  <div class="hr"></div>
 
 
-<div class="pop-up-radio-group">
+  <div class="pop-up-radio-group">
 
     <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>
-        <mat-radio-button value="2">Update Immediately after approval</mat-radio-button>
-      </mat-radio-group>
+      <!-- <mat-radio-button value="1">Update at specific time</mat-radio-button> -->
+      Update at specific time
+     
+      <!-- <mat-radio-button value="2">Update Immediately after approval</mat-radio-button> -->
+    </mat-radio-group>
 
-<div class="popup-input">
-    <div class="buttin-b4l-opacity buttin-b4l-opacity1 opl2">
+    <div class="popup-input">
+      <div class="buttin-b4l-opacity buttin-b4l-opacity1 opl2">
         <div class="text-with-presnt person-text-width">
-            <input placeholder="Date" type="text" tabindex="3" required="" maxlength="6">
-            <p class="perstage-text-n-d"><img src="assets/img/edit-icon.svg"/></p>
-          </div>  
+          <!-- <input placeholder="Date" type="text" tabindex="3" required="" maxlength="6"> -->
+          
+          <!-- <p class="perstage-text-n-d"><img src="assets/img/edit-icon.svg" /></p> -->
+        </div>
+      </div>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input [min]="minDate" matInput [matDatepicker]="picker" [(ngModel)]="eblr.effectiveFrom">
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <!-- <div class="buttin-b4l-opacity opl2">
+        <div class="text-with-presnt person-text-width">
+          <input placeholder="time" type="text" tabindex="3" required="" maxlength="6">
+
+          
+          <p class="perstage-text-n-d"><img src="assets/img/edit-icon.svg" /></p>
+        </div>
+      </div> -->
+
     </div>
 
+  </div>
 
-      <div class="buttin-b4l-opacity opl2">
-        <div class="text-with-presnt person-text-width">
-            <input placeholder="time" type="text" tabindex="3" required="" maxlength="6">
-            <p class="perstage-text-n-d"><img src="assets/img/edit-icon.svg"/></p>
-          </div>  
-    </div>
-    
-</div>
+  <div class="hr"></div>
 
-</div>
+  <p>New EBLR Value will take effect from 23 May 2020 at 10:30 Am. All new proposals will be calculated accordingly after that.</p>
 
-
-<div class="hr"></div>
-
-
-<p>New EBLR Value will take effect from 23 May 2020 at 10:30 Am. All new proposals will be calculated accordingly after that.</p>
-
-
-
-<div class="btn-pop-up">
-
-<a href="#" class="product-btn4">Cancel</a>
-<a href="#" class="product-btn3"><img src="assets/img/schedule.svg"/>Schedule for Updation</a>
-
-
-
-
-</div>
+  <div class="btn-pop-up">
+    <a href="javaScript:void(0);" (click)="close()" class="product-btn4">Cancel</a>
+    <a href="javaScript:void(0);" (click)="save()" class="product-btn3"><img src="assets/img/schedule.svg" />Schedule
+      for Updation</a>
+  </div>

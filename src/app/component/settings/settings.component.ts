@@ -17,39 +17,8 @@ export class SettingsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(EblrpopupComponent, dialogConfig);
   }
-
-  save(){
-
-    let eblr = {
-      plrType: {
-          id: 1
-      },
-      plrProdType: {
-          id: 3
-      },
-      plrStatus: {
-          id: 8
-      },
-      actionStatus: {
-          id: 5
-      },
-      plr: 10,
-      isCurrentEffective: true,
-      effectiveFrom: '2020-05-05T11:44:04.592Z'
-    };
-    this.lenderService.saveEBLR(eblr).subscribe(res => {
-        if (res.status === 200) {
-          this.commonService.successSnackBar(res.message);
-        } else {
-          this.commonService.warningSnackBar(res.message);
-        }
-      }, (error: any) => {
-        this.commonService.errorSnackBar(error);
-      });
-    }
-
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
 
 
 }
