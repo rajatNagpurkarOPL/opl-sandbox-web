@@ -43,7 +43,7 @@
                   
                 </ul>             
 
-                    <a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg"/> Import matches parameter</a>
+                    <a (click)="importParameterPopup();"  href="javaScript:void(0);"  class="product-btn1"><img src="assets/img/import.svg"/> Import matches parameter</a>
                     </div>
 
 <div class="matches-parameter">
@@ -53,9 +53,9 @@
 <p>You can either import parameters from existing product or set new parameters from scratch</p>
 
 <div class="matches-parameter-data">
-<a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg"/> Import matches parameter</a>
+<a (click)="importParameterPopup();"  href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg"/> Import matches parameter</a>
 <p>or</p>
-<a href="#" routerLink="/product" class="product-btn1">+ Add New Parameters</a>
+<a (click)="addParameterPopup();"  href="javaScript:void(0);" class="product-btn1">+ Add New Parameters</a>
 </div>
 </div>
 

@@ -9,7 +9,7 @@
 
     <div class="topnav">
         <a [ngClass]="(router.url == constant.DASHBOARD ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="#">Dashboard & Analytic</a>
-        <a [ngClass]="(router.url == constant.PRODUCTS ? 'active' : '')" routerLink="{{constant.PRODUCTS}}" href="#">Products list </a>
+        <a [ngClass]="(router.url.includes(constant.PRODUCTS) ? 'active' : '')" routerLink="{{constant.SAVED_PRODUCTS}}" href="#">Products list </a>
         <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}" href="#">Settings</a>
     </div>
     <!-- <a href="#" (click)="logoutUser()">Logout</a> -->

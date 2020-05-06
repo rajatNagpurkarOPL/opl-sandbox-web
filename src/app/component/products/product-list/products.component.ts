@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/common-utils/Constant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -9,10 +10,12 @@ import { Constant } from 'src/app/common-utils/Constant';
 export class ProductsComponent implements OnInit {
 
   routeURL: any = {};
-  constructor() { }
+  constructor(public route: Router) { }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
+    console.log("router =====>" , this.route.url );
+    console.log("routeURL =====>" , this.routeURL);
   }
 
 }
