@@ -32,12 +32,12 @@ export class InterceptorService implements HttpInterceptor {
         cookies[Constant.httpAndCookies.RFTK] = this.cookieService.getCookie(Constant.httpAndCookies.RFTK);
         cookies[Constant.httpAndCookies.USNM] = this.cookieService.getCookie(Constant.httpAndCookies.USNM);
         cookies[Constant.httpAndCookies.ACTK] = this.cookieService.getCookie(Constant.httpAndCookies.ACTK);
-        cookies[Constant.httpAndCookies.LGTK] = this.cookieService.getCookie(Constant.httpAndCookies.LGTK);
+        // cookies[Constant.httpAndCookies.LGTK] = this.cookieService.getCookie(Constant.httpAndCookies.LGTK);
 
         // Set cookies
         req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.USNM, cookies[Constant.httpAndCookies.USNM]) });
         req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.ACTK, cookies[Constant.httpAndCookies.ACTK]) });
-        req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.LGTK, cookies[Constant.httpAndCookies.LGTK]) });
+        // req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.LGTK, cookies[Constant.httpAndCookies.LGTK]) });
         req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.RFTK, cookies[Constant.httpAndCookies.RFTK]) });
         // req = req.clone({ headers: req.headers.set('req_auth', 'true') });
       } else {
@@ -110,6 +110,9 @@ export class InterceptorService implements HttpInterceptor {
 
   private logDetails(msg: string) {
     console.log(msg);
+  }
+  private showLoader(): void {
+    this.loaderService.show();
   }
   private hideLoader(): void {
     this.loaderService.hide();

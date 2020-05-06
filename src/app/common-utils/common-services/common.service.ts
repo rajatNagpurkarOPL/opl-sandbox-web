@@ -107,13 +107,13 @@ export class CommonService {
     cookies[Constant.httpAndCookies.USNM] = params.userName;
     cookies[Constant.httpAndCookies.ACTK] = params.access_token;
     cookies[Constant.httpAndCookies.RFTK] = params.refresh_token;
-    cookies[Constant.httpAndCookies.LGTK] = params.loginToken;
+    // cookies[Constant.httpAndCookies.LGTK] = params.loginToken;
     this.cookieservice.setCookie({name : Constant.httpAndCookies.COOKIES_OBJ, value :  this.toBTOA(JSON.stringify(cookies)) });
 
     this.cookieservice.setCookie({name : Constant.httpAndCookies.USNM, value : params.userName});
     this.cookieservice.setCookie({name : Constant.httpAndCookies.ACTK, value : params.access_token});
     this.cookieservice.setCookie({name : Constant.httpAndCookies.RFTK, value : params.refresh_token});
-    this.cookieservice.setCookie({name : Constant.httpAndCookies.LGTK, value : params.loginToken});
+    // this.cookieservice.setCookie({name : Constant.httpAndCookies.LGTK, value : params.loginToken});
   }
 
 /**
@@ -122,9 +122,9 @@ export class CommonService {
    deleteAuthCookie(){
     this.cookieservice.deleteCookie(Constant.httpAndCookies.COOKIES_OBJ);
     this.cookieservice.deleteCookie(Constant.httpAndCookies.USNM);
-    this.cookieservice.setCookie(Constant.httpAndCookies.ACTK);
-    this.cookieservice.setCookie(Constant.httpAndCookies.RFTK);
-    this.cookieservice.setCookie(Constant.httpAndCookies.LGTK);
+    this.cookieservice.deleteCookie(Constant.httpAndCookies.ACTK);
+    this.cookieservice.deleteCookie(Constant.httpAndCookies.RFTK);
+    this.cookieservice.deleteCookie(Constant.httpAndCookies.LGTK);
 }
 
   /**
