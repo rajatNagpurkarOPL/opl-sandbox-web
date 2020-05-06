@@ -10,14 +10,34 @@ import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+
+  eblrList = [];
+  dialogRef = null;
   constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog) { }
 
 
   openDialog(): void {
     const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(EblrpopupComponent, dialogConfig);
+    const dialogRef = this.matDialog.open(EblrpopupComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {this.listPLRByType()});
   }
-  ngOnInit(): void {
+
+
+listPLRByType(){
+    this.lenderService.listPLRByType(1).subscribe(res => {
+        if (res.status === 200) {
+          this.eblrList = res.data;
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
+
+
+ngOnInit(): void {
+    this.listPLRByType();
   }
 
 

@@ -31,6 +31,9 @@ export class LenderService {
   saveEBLR(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SAVE_EBLR, data);
   }
+  listPLRByType(id): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.LIST_PLR  + '/' + id, false);
+  }
 
   // getAccessToken(): Observable<any> {
   //   return this.http.get(AppSettings.USER_URL + RestURL.ACCESS_TOKEN, false, false);

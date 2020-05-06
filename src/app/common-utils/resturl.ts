@@ -8,5 +8,6 @@ export const RestURL = {
     LOGIN: '/auth/login',
     LOG_OUT: '/auth/logoutUser',
     SIGN_UP: '/user/signup',
-    SAVE_EBLR: '/plr/save'
+    SAVE_EBLR: '/plr/save',
+    LIST_PLR: '/plr/list',
 };
