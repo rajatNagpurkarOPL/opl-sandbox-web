@@ -20,6 +20,7 @@ import { LoaderComponent } from './common-utils/common-component/loader/loader.c
 import { CookieService } from './common-utils/common-services/cookie.service';
 import { ProductComponent } from './component/products/product/product/product.component';
 import { SignupComponent } from './component/signup/signup.component';
+import { EblrpopupComponent } from './component/settings/eblrpopup/eblrpopup.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SignupComponent } from './component/signup/signup.component';
     LoaderComponent,
     ProductComponent,
     SignupComponent,
+    EblrpopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { SignupComponent } from './component/signup/signup.component';
               HttpService,
               AuthGuard,
               CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EblrpopupComponent]
 })
 export class AppModule { }

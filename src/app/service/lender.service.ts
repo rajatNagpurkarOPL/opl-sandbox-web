@@ -28,6 +28,10 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SIGN_UP, data);
   }
 
+  saveEBLR(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SAVE_EBLR, data);
+  }
+
   // getAccessToken(): Observable<any> {
   //   return this.http.get(AppSettings.USER_URL + RestURL.ACCESS_TOKEN, false, false);
   // }

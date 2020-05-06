@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
     this.commonService.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
     this.commonService.removeStorage(Constant.httpAndCookies.ORGID);
     this.commonService.removeStorage(Constant.httpAndCookies.ROLEID);
+    this.commonService.removeStorage(Constant.httpAndCookies.USNM);
     // Remove cookies
     this.commonService.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);

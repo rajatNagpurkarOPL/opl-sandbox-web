@@ -12,7 +12,7 @@
         <a [ngClass]="(router.url == constant.PRODUCTS ? 'active' : '')" routerLink="{{constant.PRODUCTS}}" href="#">Products list </a>
         <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}" href="#">Settings</a>
     </div>
-    <!-- <a href="#" (click)="logoutUser()">Logout</a> -->
+    <a href="#" (click)="logoutUser()">Logout</a>
 
     <div class="header-right">
         <img  class="down-arrow" src="assets/img/alert.svg"/>
