@@ -18,3 +18,5 @@ export class EblrpopupComponent implements OnInit {
   }
 
 }
+
+export class RadioOverviewExample {}
