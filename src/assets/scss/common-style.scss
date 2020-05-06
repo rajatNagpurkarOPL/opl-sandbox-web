@@ -163,18 +163,50 @@ border-bottom: 3px solid #2D3079;
     opacity: 0.4;
 }
 
+#b4l-pop-up {
+padding: 2em;
 
+}
 
+#b4l-pop-up h4 {
+font-size: 20px;
+font-weight: bold;
+color: #2D3079;
+}
 
+#b4l-pop-up .hr {
+    width: 100%;
+    height: 1px;
+    background-color: #D8D8D8;
+    margin: 2em 0;
+}
 
+.mat-radio-label {
+    margin: 1.5em 0 !important;
+}
 
+.mat-dialog-container {    
+    width: 50em !important; 
+}
 
-
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #2D3079 !important; 
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #2D3079 !important; 
+}
 
 .mat-raised-button {  
     min-width: 50px !important;    
 }
-
+.mat-radio-checked .mat-radio-label-content {   
+    color: #2D3079  !important;
+  
+}
+.mat-radio-label-content {   
+    color: #000000 !important;
+    font-weight: bold !important;
+}
 .buttin-b4l-opacity {
     opacity: 1 !important;
 }
@@ -249,11 +281,12 @@ bottom: 8px !important;
     position: relative;
     flex: auto;
     min-width: 0;
-    width: 372px !important;
-     border: 1px solid #DEDEDE !important; 
+    width: auto !important;
+    
      padding: 1em !important;
      border-radius: 4px;
 }
+
 
 
 .btn2-b4l:hover {
