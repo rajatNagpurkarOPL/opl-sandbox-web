@@ -6,6 +6,11 @@ export const Constant = {
         DASHBOARD: mainPath + 'dashboard',
         SETTINGS: mainPath + 'settings',
         PRODUCTS: mainPath + 'products',
+        SAVED_PRODUCTS:  mainPath + 'products/save',
+        SENT_PRODUCTS:  mainPath + 'products/sent',
+        SENT_BACK_PRODUCTS:  mainPath + 'products/sent-back',
+        ACTIVE_PRODUCTS:  mainPath + 'products/active',
+        INACTIVE_PRODUCTS:  mainPath + 'products/inactive',
         PRODUCT: mainPath + 'product'
     },
     httpAndCookies: {

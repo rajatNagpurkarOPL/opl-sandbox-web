@@ -10,15 +10,15 @@ export class SnackbarService {
 
   constructor(private snackBar: MatSnackBar) { }
   /**
-   * 
-   * @param message 
-   * @param action 
-   * @param snackType 
+   *
+   * @param message
+   * @param action
+   * @param snackType
    */
   public openSnackBar(message: string, action: string, snackType: any) {
     const sType = snackType !== undefined ? snackType : '';
     this.snackBar.openFromComponent(TostrComponent, {
-      duration: 50000,
+      duration: 2000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: [sType + '-snackbar'],

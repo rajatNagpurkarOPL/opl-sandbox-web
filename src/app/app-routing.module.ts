@@ -14,8 +14,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: '', component: NavbarComponent , children : [
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'products/save', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'products/sent', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'products/sent-back', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'products/active', component: ProductsComponent, canActivate: [AuthGuard]},
+    { path: 'products/inactive', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
    ]
