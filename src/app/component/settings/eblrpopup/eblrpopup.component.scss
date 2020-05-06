@@ -78,26 +78,27 @@ input[type=text] {
 .btn-pop-up a img {
     margin-right: 0.3em ;
 }
-
-
+#b4l-pop-up {
+    padding: 3em !important;
+} 
 .btn-pop-up .product-btn3 {
-    border: 2px solid #2D3079;
+    border: 1px solid #2D3079;
     border-radius: 8px;
     opacity: 1;
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 3em;
+    padding: 1em 6em;
     background: #2D3079;
 }
 
 .btn-pop-up .product-btn4 {
-    border: 2px solid #BEBEBE;
+    border: 1px solid #BEBEBE;
     border-radius: 8px;
     opacity: 1;
     color: #5C5C5C;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 7em;
+    padding: 1em 10em;
     background: #F7F7F7;
 }
