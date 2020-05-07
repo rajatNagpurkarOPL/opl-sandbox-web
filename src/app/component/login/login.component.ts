@@ -34,11 +34,6 @@ export class LoginComponent implements OnInit {
         this.commonService.successSnackBar(res.message);
         this.userResponse = res;
         if (!this.commonService.isObjectNullOrEmpty(this.userResponse) && !this.commonService.isObjectNullOrEmpty(this.userResponse.data)){
-          // save data in local storage
-          this.commonService.setStorage(Constant.httpAndCookies.USNM, this.userResponse.data.userName);
-          this.commonService.setStorage(Constant.httpAndCookies.USERTYPE, this.userResponse.data.userType);
-          this.commonService.setStorage(Constant.httpAndCookies.ORGID, this.userResponse.data.userOrgId);
-          this.commonService.setStorage(Constant.httpAndCookies.ROLEID, this.userResponse.userRoleId);
           // Set cookies
           this.commonService.setAuthCookie(this.userResponse.data);
         }

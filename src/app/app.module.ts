@@ -24,6 +24,8 @@ import { EblrpopupComponent } from './component/settings/eblrpopup/eblrpopup.com
 import { SettingsComponent } from './component/settings/settings.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
+import { Globals } from './Globals';
+import { ConfirmationPopupComponent } from './component/products/product/confirmation-popup/confirmation-popup.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { ProductViewComponent } from './component/products/product/product-view/
     ImportParameterPopupComponent,
     AddParameterPopupComponent,
     ProductViewComponent,
+    ConfirmationPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { ProductViewComponent } from './component/products/product/product-view/
               LoaderService,
               HttpService,
               AuthGuard,
-              CookieService],
+              CookieService,
+              Globals],
   bootstrap: [AppComponent],
   entryComponents: [EblrpopupComponent, ImportParameterPopupComponent, AddParameterPopupComponent]
 })

@@ -26,12 +26,14 @@ export const Constant = {
         BUSINESS_TYPE_ID: 'ln_business_type_id',
         REST_URL: 'ln_rs_url'
     },
-
+    STORAGE : {
+        USER: 'user'
+    },
     MASTER_TYPE : {
         EBLR : {id : 1},
         MCLR : {id : 2},
         GST_INVOICE_BASE : {id : 3},
-        SENT_TO_CHECKER : {id : 5},
+        SENT_TO_CHECKER : {id : 5, butttonName: 'Send For approve'},
         APPROVED : {id : 6},
         SEND_BACK : {id : 7},
         SAVED : {id : 8},
