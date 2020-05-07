@@ -10,6 +10,7 @@ export const RestURL = {
     SIGN_UP: '/user/signup',
     USER_DETAILS: '/user/getUserDetails',
     SAVE_EBLR: '/plr/save',
+    UPDATE_EBLR_ACTION: '/plr/updateActionStatus',
     LIST_PLR: '/plr/list',
     LIST_PRODUCTS: '/parameter/products'
 };
