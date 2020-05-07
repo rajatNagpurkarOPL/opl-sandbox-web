@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constant } from 'src/app/common-utils/Constant';
-import { LenderService } from 'src/app/service/lender.service';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Constant } from 'src/app/common-utils/Constant';
+import { Globals } from 'src/app/Globals';
+import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ import { CommonService } from 'src/app/common-utils/common-services/common.servi
 export class NavbarComponent implements OnInit {
 
   constant: any = {};
-  constructor(public router: Router, private lenderService: LenderService, private commonService: CommonService) { }
+  constructor(public router: Router, private globals: Globals, private lenderService: LenderService,
+              private commonService: CommonService) { }
 
   logoutUser() {
     this.lenderService.logout().subscribe(res => {
@@ -25,20 +27,19 @@ export class NavbarComponent implements OnInit {
       this.commonService.errorSnackBar(error);
     });
     // Remove localstorage
-    this.commonService.removeStorage(Constant.httpAndCookies.USERTYPE);
-    this.commonService.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
-    this.commonService.removeStorage(Constant.httpAndCookies.ORGID);
-    this.commonService.removeStorage(Constant.httpAndCookies.ROLEID);
-    this.commonService.removeStorage(Constant.httpAndCookies.USNM);
+    this.commonService.removeStorage(Constant.STORAGE.USER);
     // Remove cookies
     this.commonService.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);
   }
 
   getUserDetails() {
+    this.globals.USER  = [1, 2];
     this.lenderService.getLoggedInUserDetails().subscribe(res => {
       if (res.status === 200) {
-        
+        if (res.data){
+          this.commonService.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
+        }
       } else {
         this.commonService.errorSnackBar(res.message);
       }

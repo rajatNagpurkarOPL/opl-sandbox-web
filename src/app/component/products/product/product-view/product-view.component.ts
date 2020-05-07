@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
 
 @Component({
   selector: 'app-product-view',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
+
+  confirmationPopUp(): void {
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(ConfirmationPopupComponent, dialogConfig);
+  }
 
   ngOnInit(): void {
   }
