@@ -5,6 +5,8 @@ import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/Globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
+import { SendBackModelComponent } from 'src/app/common-utils/common-component/send-back-model/send-back-model.component';
+import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
 
 @Component({
   selector: 'app-settings',
@@ -17,7 +19,7 @@ export class SettingsComponent implements OnInit {
   dialogRef = null;
   user: any = {};
   constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,
-              private global: Globals) {
+              private global: Globals, public sendBackService: SendBackModelService) {
   }
 
 
@@ -27,6 +29,22 @@ export class SettingsComponent implements OnInit {
   updatePlrActionStatus(eblr, type) {
     const eblrReq: any = {id : eblr.id};
     eblrReq.actionStatus = type === 1 ? eblr.approve : eblr.reject;
+
+    if (eblrReq.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id){
+      const modelData = {title : 'Send back EBLR'};
+      this.sendBackService.openDialog(modelData).subscribe(data => {
+        console.log(data);
+        if (data && data.event === 'save' ){
+          eblrReq.comments = data.data.comments;
+          this.updatePLRStatus(eblrReq);
+        }
+      });
+    }else {
+    this.updatePLRStatus(eblrReq);
+    }
+  }
+
+  updatePLRStatus(eblrReq){
     this.lenderService.updateEblrActionStatus(eblrReq).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);

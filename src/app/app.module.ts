@@ -26,6 +26,8 @@ import { SignupComponent } from './component/signup/signup.component';
 import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
 import { Globals } from './Globals';
 import { ConfirmationPopupComponent } from './component/products/product/confirmation-popup/confirmation-popup.component';
+import { SendBackModelComponent } from './common-utils/common-component/send-back-model/send-back-model.component';
+import { SendBackModelService } from './common-utils/common-services/SendBackModelService';
 
 
 @NgModule({
@@ -45,6 +47,7 @@ import { ConfirmationPopupComponent } from './component/products/product/confirm
     AddParameterPopupComponent,
     ProductViewComponent,
     ConfirmationPopupComponent,
+    SendBackModelComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { ConfirmationPopupComponent } from './component/products/product/confirm
               HttpService,
               AuthGuard,
               CookieService,
+              SendBackModelService,
               Globals],
   bootstrap: [AppComponent],
   entryComponents: [EblrpopupComponent, ImportParameterPopupComponent, AddParameterPopupComponent]
