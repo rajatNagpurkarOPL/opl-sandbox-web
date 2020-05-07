@@ -8,13 +8,12 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { AuthGuard } from './common-utils/auth/auth.guard';
 import { ProductComponent } from './component/products/product/product/product.component';
 import { SignupComponent } from './component/signup/signup.component';
+import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: '', component: NavbarComponent , children : [
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'products/save', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'products/sent', component: ProductsComponent, canActivate: [AuthGuard]},
@@ -22,9 +21,14 @@ const routes: Routes = [
     { path: 'products/active', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'products/inactive', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
+    { path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuard]},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-   ]
-  }
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  ]
+},
+{ path: '', redirectTo: 'login', pathMatch: 'full' },
+{ path: '**', redirectTo : 'dashboard' },
+
 ];
 
 @NgModule({

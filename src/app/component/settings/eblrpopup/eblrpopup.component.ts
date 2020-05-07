@@ -12,7 +12,7 @@ export class EblrpopupComponent implements OnInit {
 
   eblr: any = {effectiveFrom: new Date()};
   eblrList = [];
-  constructor(public dialogRef: MatDialogRef<EblrpopupComponent>, public lenderService: LenderService, 
+  constructor(public dialogRef: MatDialogRef<EblrpopupComponent>, public lenderService: LenderService,
               public commonService: CommonService) { }
 
   minDate = new Date();
@@ -26,8 +26,7 @@ export class EblrpopupComponent implements OnInit {
     this.eblr.plrType  = { id: 1 };
     this.eblr.plrProdType  = { id: 3 };
     this.eblr.plrStatus  = { id: 8 };
-    this.eblr.actionStatus  = { id: 5 };
-    this.eblr.isCurrentEffective  = true;
+    this.eblr.actionStatus  = { id: 8 };
     this.lenderService.saveEBLR(this.eblr).subscribe(res => {
         if (res.status === 200) {
           this.commonService.successSnackBar(res.message);

@@ -35,8 +35,21 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);
   }
 
+  getUserDetails() {
+    this.lenderService.getLoggedInUserDetails().subscribe(res => {
+      if (res.status === 200) {
+        
+      } else {
+        this.commonService.errorSnackBar(res.message);
+      }
+    }, error => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
+
   ngOnInit(): void {
     this.constant = Constant.ROUTE_URL;
+    this.getUserDetails();
   }
 
 }

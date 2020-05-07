@@ -23,6 +23,7 @@ import { ProductComponent } from './component/products/product/product/product.c
 import { EblrpopupComponent } from './component/settings/eblrpopup/eblrpopup.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { SignupComponent } from './component/signup/signup.component';
+import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { SignupComponent } from './component/signup/signup.component';
     EblrpopupComponent,
     ImportParameterPopupComponent,
     AddParameterPopupComponent,
+    ProductViewComponent,
   ],
   imports: [
     BrowserModule,
