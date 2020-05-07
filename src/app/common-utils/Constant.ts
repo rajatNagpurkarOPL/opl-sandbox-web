@@ -33,12 +33,18 @@ export const Constant = {
         EBLR : {id : 1},
         MCLR : {id : 2},
         GST_INVOICE_BASE : {id : 3},
-        SENT_TO_CHECKER : {id : 5, butttonName: 'Send For approve'},
-        APPROVED : {id : 6},
-        SEND_BACK : {id : 7},
-        SAVED : {id : 8},
-        EDIT_MODE : {id : 9},
-        PENDING : {id : 10}
+        SENT_TO_CHECKER : {id : 5, buttonName: 'Send for approve', name : 'Sent for approve'},
+        APPROVED : {id : 6, buttonName: 'Approve',  name : 'Approved'},
+        SEND_BACK : {id : 7, buttonName: 'Send back',  name : 'Reverted'},
+        SAVED : {id : 8, name : 'Saved'},
+        EDIT_MODE : {id : 9, name : 'Edited'},
+        PENDING : {id : 10, name : 'Pending'}
+    },
+    ROLES: {
+        ADMIN : {id : 1 , name : 'ADMIN'},
+        MAKER : {id : 2 , name : 'MAKER'},
+        CHECKER : {id : 3 , name : 'CHECKER'},
     }
+
 
 };

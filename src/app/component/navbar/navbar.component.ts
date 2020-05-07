@@ -34,10 +34,10 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserDetails() {
-    this.globals.USER  = [1, 2];
     this.lenderService.getLoggedInUserDetails().subscribe(res => {
       if (res.status === 200) {
         if (res.data){
+          this.globals.USER = res.data;
           this.commonService.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
         }
       } else {

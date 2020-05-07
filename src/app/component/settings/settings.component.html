@@ -12,65 +12,26 @@
             <div class="main">
                 <div class="sidebar-main-title">
                     <p>EBLR Value</p>
-                    <a (click)="openDialog();" href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR
+                    <a (click)="openDialog(null);" href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR
                         Value</a>
                 </div>
                 <!-- <a href="javaScript:void(0);" (click)="save()" ><img src="assets/img/update.svg" />save</a> -->
 
 
-                
-    <div class="setting-text">
-        <div class="setting-text-data" *ngFor="let item of eblrList">
-            <p> {{item.plr}}% <ng-container *ngIf="item.isCurrentEffective" > (Currently Active) </ng-container> </p>
-            <span> From {{ item.effectiveFrom | date:'dd MMM yyyy' }}  {{ item.effectiveFrom | date:'shortTime' }}  </span>
-            <button mat-button *ngIf="item.approve" >{{item.approve.name}}</button>
-            <button mat-button *ngIf="item.reject" >{{item.reject.name}}</button>
-        </div>
-    </div>
 
-                <!-- <div class="setting-text">
-
-    <div class="setting-text-data">
-    <p>12.1% (Secheduled)</p>
-    <span>From 22 May 2020 06:00 AM</span>
-    </div>
-
-
-    <div class="setting-text-data">
-        <p>12.1% (Currently Active)</p>
-        <span>From 18 April 2020 02:03 PM</span>
-        </div>
-
-
-        <div class="setting-text-data">
-            <p>11.9%</p>
-            <span>From 18 April 2020 02:03 PM</span>
-            </div>
-
-
-            <div class="setting-text-data">
-                <p>11.4%</p>
-                <span>From 18 April 2020 02:03 PM</span>
-                </div>
-
-
-                <div class="setting-text-data">
-                    <p>12.1% </p>
-                    <span>From 22 May 2020 06:00 AM</span>
+                <div class="setting-text">
+                    <div class="setting-text-data" *ngFor="let item of eblrList">
+                        <p> {{item.plr}}% <ng-container *ngIf="item.isCurrentEffective"> (Currently Active)
+                            </ng-container>
+                        </p>
+                        <span> From {{ item.effectiveFrom | date:'dd MMM yyyy' }}
+                            {{ item.effectiveFrom | date:'shortTime' }} </span>
+                        <button mat-button (click)="updatePlrActionStatus(item, 1)" *ngIf="item.approve">{{item.approve.buttonName}}</button>
+                        <button mat-button (click)="updatePlrActionStatus(item, 2)" *ngIf="item.reject">{{item.reject.buttonName}}</button>
+                        <span> {{item.status}}</span>
+                        <span (click)="editEBLR(item)" *ngIf="item.isEdit"> <img src="assets/img/edit-icon.svg" /></span>
                     </div>
-
-
-                    <div class="setting-text-data">
-                        <p>12.1% </p>
-                        <span>From 22 May 2020 06:00 AM</span>
-                        </div>
-
-
-                        <div class="setting-text-data">
-                            <p>12.1% </p>
-                            <span>From 22 May 2020 06:00 AM</span>
-                            </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
