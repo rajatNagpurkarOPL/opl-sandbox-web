@@ -9,10 +9,7 @@
 
             </div>
 
-
             <div class="main">
-
-
                 <div class="sidebar-main-title">
                     <p>EBLR Value</p>
                     <a (click)="openDialog();" href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR
@@ -26,6 +23,8 @@
         <div class="setting-text-data" *ngFor="let item of eblrList">
             <p> {{item.plr}}% <ng-container *ngIf="item.isCurrentEffective" > (Currently Active) </ng-container> </p>
             <span> From {{ item.effectiveFrom | date:'dd MMM yyyy' }}  {{ item.effectiveFrom | date:'shortTime' }}  </span>
+            <button mat-button *ngIf="item.approve" >{{item.approve.name}}</button>
+            <button mat-button *ngIf="item.reject" >{{item.reject.name}}</button>
         </div>
     </div>
 

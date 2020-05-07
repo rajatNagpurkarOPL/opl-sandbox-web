@@ -27,6 +27,17 @@ listPLRByType(){
     this.lenderService.listPLRByType(1).subscribe(res => {
         if (res.status === 200) {
           this.eblrList = res.data;
+          if (this.eblrList.length > 0){
+            this.eblrList.forEach(element => {
+              if (element.plrStatus.id === 8) {
+                element.approve = {id : 1, name : 'Approve'};
+                element.reject = {id : 1, name : 'Reject'};
+              }
+              if (element.plrStatus.id === 5) {
+                element.approve = {id : 1, name : 'Approve'};
+              }
+            });
+          }
         } else {
           this.commonService.warningSnackBar(res.message);
         }

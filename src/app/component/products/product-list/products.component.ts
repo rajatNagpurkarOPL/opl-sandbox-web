@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
   selector: 'app-products',
@@ -10,18 +12,30 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
 
   routeURL: any = {};
-  constructor(public route: Router) { }
+  productList = [];
+  productStatus = 1;
+  constructor(public route: Router, public lenderService: LenderService, public commonService: CommonService) { }
+
+  listPLRByType(){
+    this.lenderService.listProducts(this.productStatus).subscribe(res => {
+        if (res.status === 200) {
+          this.productList = res.data;
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
-    console.log("router =====>" , this.route.url );
-    console.log("routeURL =====>" , this.routeURL);
+    this.listPLRByType();
   }
 
 }
 
 export class TooltipOverviewExample {
-
 
 }
 

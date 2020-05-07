@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
     } else {
       // not logged in so redirect to login page with the return url
       this.loaderService.hide();
-      this.commonService.warningSnackBar('You are not Authorized');
+      // this.commonService.warningSnackBar('You are not Authorized');
       this.router.navigate([Constant.ROUTE_URL.LOGIN]);
       return false;
     }
