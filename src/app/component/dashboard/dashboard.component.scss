@@ -25,3 +25,9 @@ margin:3em 1em 1em;
     color: #000000;
     font-weight: 500;
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    // stroke: #2D3079 !important; 
+    stroke: #88888847 !important;
+    
+}
