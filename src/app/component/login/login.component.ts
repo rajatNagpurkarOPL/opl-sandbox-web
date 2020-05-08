@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
               private cookieservice: CookieService) { }
 
   onSubmit() {
-    console.log(this.user);
     if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
       this.commonService.warningSnackBar('Please enter your username.');
       return false;
