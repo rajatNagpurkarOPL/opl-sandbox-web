@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   user: any = {};
   userResponse: any = {};
   routeURL: any = {};
+  isForgotPasss = false;
 
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
               private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,

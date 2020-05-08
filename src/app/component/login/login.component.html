@@ -1,4 +1,4 @@
-<div class="b4l-login" style="background-image: url(../assets/img/background.png);">
+<div class="b4l-login" style="background-image: url(../assets/img/background.png);" *ngIf="!isForgotPasss">
 
   <div id="b4l-login">
 
@@ -19,25 +19,16 @@
                 </fieldset>
                 <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()">Login</button>
               </form>
-              <a href="#" class="login-forgot-psd">Forgot Password ?</a>
+              <a href="javascrip:void(0)" class="login-forgot-psd" (click)="isForgotPasss=!isForgotPasss">Forgot Password ?</a>
               <a href="#" class="login-forgot-psd" routerLink="/signup">Sign up </a>
           </div>
         </div>
       </div>
     </div>
-
-
-
   </div>
 </div>
-
-
-
-
-
     <!--Reset your Password -->
-
-    <div class="b4l-login" style="background-image: url(../assets/img/background.png);">
+    <div class="b4l-login" style="background-image: url(../assets/img/background.png);" *ngIf="isForgotPasss">
 
       <div id="b4l-login">
     
@@ -87,7 +78,7 @@
 
     <!--Reset your Password -->
 
-    <div class="b4l-login" style="background-image: url(../assets/img/background.png);">
+    <div class="b4l-login" style="background-image: url(../assets/img/background.png);" *ngIf="!isForgotPasss">
 
       <div id="b4l-login">
     
