@@ -271,7 +271,7 @@ width: 100%;
 padding: 0 2em;
 
 }
-.mat-progress-spinner svg {
+.psb1 .mat-progress-spinner svg {
     position: absolute;
     transform: rotate(-90deg);
     top: 0;
@@ -279,17 +279,21 @@ padding: 0 2em;
     transform-origin: center;
     overflow: visible;
 }
-.mat-progress-spinner circle {
+.psb1 .mat-progress-spinner circle {
     fill: transparent;
     transform-origin: center;
     transition: stroke-dashoffset 225ms linear;
     stroke-width: 5% !important;
 }
+.psb1 .mat-progress-spinner circle, .mat-spinner circle {
+    // stroke: #2D3079 !important; 
+    stroke: #88888847 !important;
+    
+}
 
 
 
-
-.progress-spinner-ex {
+.psb1 .progress-spinner-ex {
 position: relative;
 }
 
