@@ -171,6 +171,61 @@ border-bottom: 3px solid #2D3079;
     min-height: inherit;
     max-height: inherit;
 }
+
+
+table.mat-table {
+    border-spacing: 0;
+    width: 100%;
+    margin: 2em 0;
+    background: #FCFCFC 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+}
+th.mat-header-cell:first-of-type {
+    font-weight: bold !important;
+    font-size: 18px;
+    padding: 1.5em;
+    color: #000000;
+    padding-left: 24px;
+}
+ td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+   
+    font-weight: 500;
+    font-size: 18px;
+    padding: 1.5em;
+    color: #000000;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 1.2em 3em !important;
+    border-bottom-width: 1px;
+    font-size: 18px;
+    border-bottom-style: solid;
+}
+
+td.mat-cell, td.mat-footer-cell {
+    padding: 0;
+    border-bottom-width: 1px;
+    font-size: 18px;
+    border-bottom-style: solid;
+    color: #000000;
+    text-align: right;
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+   
+    text-align: left;
+}
+
+th.mat-header-cell:first-of-type {
+    text-align: left !important;
+}
+th.mat-header-cell {
+    text-align: right !important;
+}
+
+.mat-elevation-z8 {
+    box-shadow: 0px 2px 20px #0000000F !important;
+    border-radius: 8px !important;
+}
 .opacity-light {
     opacity: 0.4;
 }
@@ -191,6 +246,30 @@ color: #2D3079;
     height: 1px;
     background-color: #D8D8D8;
     margin: 2em 0;
+}
+.reset-psd-text {
+    font-size: 16px !important;
+    font-weight: 500;
+    color: #000000; 
+    padding: 1em 2em 0;
+}
+.reset-pswd a {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2D3079; 
+    margin-right: 3em;
+}
+.btn-rest-pswd {
+    margin-top: 1em !important;
+}
+
+.reset-pswd {
+display: flex;
+align-items: center;
+
+width: 100%;
+padding: 0 2em;
+
 }
 
 .mat-radio-label {
@@ -317,12 +396,11 @@ bottom: 8px !important;
     position: relative;
     flex: auto;
     min-width: 0;
-    width: auto !important;
+    // width: auto !important;
     
      padding: 1em !important;
      border-radius: 4px;
 }
-
 
 
 .btn2-b4l:hover {

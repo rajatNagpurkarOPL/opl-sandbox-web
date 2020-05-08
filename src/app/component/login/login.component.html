@@ -35,6 +35,45 @@
 
 
 
+    <!--Reset your Password -->
+
+    <div class="b4l-login" style="background-image: url(../assets/img/background.png);">
+
+      <div id="b4l-login">
+    
+        <div class="container">
+          <div class="row">
+            <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+    
+              <p class="login-text">Welcome to BHIM for Lending Dashboard</p>
+              <div class="login-box">
+                <img src="assets/img/sbi.png" />
+                <div class="reset-pswd">
+<a href="#"><img src="assets/img/arrow-right.svg"/> Back</a>
+                  <p>Reset Your password</p>
+                </div>
+               
+                  <form  name="loginForm" #fs="ngForm" autocomplete="off" novalidate> 
+                    <fieldset>
+                      <input placeholder="Email Id" type="email" tabindex="1" required="" [(ngModel)]="user.userName" name="userName"  id="myText">
+                    </fieldset>
+                    <!-- <fieldset>
+                      <input placeholder="Password" type="password" tabindex="1" required="" [(ngModel)]="user.password" name="password" id="myText">
+                    </fieldset> -->
+                    <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()" class="btn-rest-pswd">Email Reset Link</button>
+                  </form>
+                  <p class="reset-psd-text">We will send you a link to reset your password on your email ID.</p>
+                  <!-- <a href="#" class="login-forgot-psd" routerLink="/signup">Sign up </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+    
+      </div>
+    </div>
+<!--Reset your Password end -->
 
 
 
@@ -46,20 +85,34 @@
 
 
 
+    <!--Reset your Password -->
 
-<!-- <div class="signin-content">
-    <mat-card>
-      <mat-card-content>
-        <form name="loginForm">
-          <p>Please login to continue</p>
-          <mat-form-field class="full-width-input">
-            <input matInput placeholder="User" type="text" required>
-          </mat-form-field>
-          <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" required>
-          </mat-form-field>
-          <button mat-raised-button color="primary"  routerLink="/dashboard">Login</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div> -->
+    <div class="b4l-login" style="background-image: url(../assets/img/background.png);">
+
+      <div id="b4l-login">
+    
+        <div class="container">
+          <div class="row">
+            <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+    
+              <p class="login-text">Welcome to BHIM for Lending Dashboard</p>
+              <div class="login-box">
+                <img src="assets/img/sbi.png" />
+                <div class="reset-pswd">
+<a href="#"><img src="assets/img/arrow-right.svg"/> Back</a>
+                  <p>Reset Your password</p>
+                </div>
+               
+                <img src="assets/img/reset-pwd.svg"/>
+                  <p class="reset-psd-text">We have send you a link to reset your password on your email ID “mani.sharma@sbi.com”.</p>
+                  <!-- <a href="#" class="login-forgot-psd" routerLink="/signup">Sign up </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+    
+      </div>
+    </div>
+<!--Reset your Password end -->
