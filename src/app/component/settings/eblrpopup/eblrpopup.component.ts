@@ -15,7 +15,7 @@ export class EblrpopupComponent implements OnInit {
 
   eblr: any = { effectiveFrom: new Date() };
   eblrList = [];
-  time: any = { ampm: 'AM', hours: 12, minutes: 0 };
+  time: any = { ampm: 'AM', hours: null, minutes: null };
   registerForm: FormGroup;
   constructor(public dialogRef: MatDialogRef<EblrpopupComponent>, public lenderService: LenderService,
               public commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -90,7 +90,7 @@ export class EblrpopupComponent implements OnInit {
     const m = eblrDate.getMinutes();
     this.time.ampm = h >= 12 ? 'PM' : 'AM';
     this.time.hours = h % 12;
-    this.time.hours = h ? h : 12;
+    // this.time.hours = h ? h : 12;
     this.time.minutes = m < 10 ? '0' + m : m;
     this.setHoursMinutes();
   }
