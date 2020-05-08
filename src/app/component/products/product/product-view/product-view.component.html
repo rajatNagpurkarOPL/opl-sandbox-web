@@ -25,7 +25,14 @@
             <p><span _ngcontent-ruf-c76="" class="dot">• </span> Active Product</p>
         
             <div class="product-details-btn">
-                <select _ngcontent-ffc-c118="" id="exampleFormControlSelect1" class="form-control"><option _ngcontent-ffc-c118="">v3.0 (Current version)</option><option _ngcontent-ffc-c118="">Select</option><option _ngcontent-ffc-c118="">Select</option><option _ngcontent-ffc-c118="">Select</option><option _ngcontent-ffc-c118="">Select</option></select>
+                <mat-form-field>
+                    <mat-label>v3.0 (Current version)</mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 <a href="javaScript:void(0);" (click)="confirmationPopUp()" class="product-btn1"><img src="assets/img/lock-blue.svg"/> Deactivate</a>
                 <a href="#" class="product-btn3"><img src="assets/img/edit-white.svg"/> Edit</a>
             </div>

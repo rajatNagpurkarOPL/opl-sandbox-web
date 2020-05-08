@@ -8,6 +8,11 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
   styleUrls: ['./product-view.component.scss']
 })
 export class ProductViewComponent implements OnInit {
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
 
   constructor(private matDialog: MatDialog) { }
 
@@ -19,4 +24,9 @@ export class ProductViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+}
+
+interface Food {
+  value: string;
+  viewValue: string;
 }
