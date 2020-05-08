@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { Globals } from 'src/app/Globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
 import { SendBackModelComponent } from 'src/app/common-utils/common-component/send-back-model/send-back-model.component';
 import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-settings',

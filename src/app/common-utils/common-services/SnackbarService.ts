@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TostrComponent } from '../Common-Component/tostr/tostr.component';
+import { TostrComponent } from '../common-component/tostr/tostr.component';
 
 
 @Injectable({
