@@ -1,1 +1,160 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="row">
+        <div class="b4l-dashboard">
+<p>Analysis on Number of Applications</p>
+<select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
+    <option _ngcontent-njf-c118="">Today</option> 
+</select>
+            </div>
+<div class="row">
+
+<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+  <mat-card class="example-card">
+    <div class="progress-spinner-ex"><mat-progress-spinner value="75" mode="determinate" [diameter]="250" ></mat-progress-spinner>
+
+<div class="text-spinner">
+<p>2,425</p>
+<span>Total</span>
+
+</div>
+
+    </div>
+
+
+<div class="card-text">
+<div class="card-txt-left">
+<p class="active">1,800</p>
+<span>Matched</span>
+
+</div>
+<div class="card-txt-left">
+<p>625</p>
+<span>Not matched</span>
+</div>
+
+</div>
+
+
+    
+    </mat-card>
+
+</div>
+<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+    <mat-card class="example-card">
+      <div class="progress-spinner-ex"><mat-progress-spinner value="60" mode="determinate" [diameter]="250" ></mat-progress-spinner>
+
+<div class="text-spinner">
+<p>1,475</p>
+<span>Total</span>
+
+</div>
+
+      </div>
+
+
+<div class="card-text">
+<div class="card-txt-left">
+<p class="active">403</p>
+<span>Loan Disbursed</span>
+
+</div>
+<div class="card-txt-left">
+  <p>1,072</p>
+  <span>Loan not availed</span>
+</div>
+
+</div>
+
+
+      
+      </mat-card>
+
+</div>
+
+
+<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+  <mat-card class="example-card">
+    <div class="progress-spinner-ex"><mat-progress-spinner value="95" mode="determinate" [diameter]="250" ></mat-progress-spinner>
+
+<div class="text-spinner">
+<p>325</p>
+<span>Total</span>
+
+</div>
+
+    </div>
+
+
+<div class="card-text">
+<div class="card-txt-left">
+<p class="active">292</p>
+<span>Pending</span>
+
+</div>
+<div class="card-txt-left">
+<p>33</p>
+<span>Failed</span>
+</div>
+
+</div>
+
+
+    
+    </mat-card>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Product wise analysis </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Matched </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Loan Disbursed </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Loan not availed </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
