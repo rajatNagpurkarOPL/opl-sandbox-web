@@ -93,6 +93,9 @@ export class EblrpopupComponent implements OnInit {
     const m = eblrDate.getMinutes();
     this.time.ampm = h >= 12 ? 'PM' : 'AM';
     this.time.hours = h % 12;
+    if (this.time.hours === 0){
+      this.time.hours = 12;
+    }
     // this.time.hours = h ? h : 12;
     this.time.minutes = m < 10 ? '0' + m : m;
     this.setHoursMinutes();
