@@ -27,7 +27,7 @@ import { ConfirmationPopupComponent } from './component/products/product/confirm
 import { SendBackModelComponent } from './common-utils/common-component/send-back-model/send-back-model.component';
 import { SendBackModelService } from './common-utils/common-services/SendBackModelService';
 import { TostrComponent } from './common-utils/common-component/tostr/tostr.component';
-import { Globals } from 'src/app/globals';
+import { Globals } from 'src/app/common-utils/globals';
 
 
 @NgModule({

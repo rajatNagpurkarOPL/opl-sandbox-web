@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { Globals } from 'src/app/Globals';
+import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 
 @Component({

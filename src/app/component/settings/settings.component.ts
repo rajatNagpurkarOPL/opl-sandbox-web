@@ -6,7 +6,7 @@ import { LenderService } from 'src/app/service/lender.service';
 import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
 import { SendBackModelComponent } from 'src/app/common-utils/common-component/send-back-model/send-back-model.component';
 import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
-import { Globals } from 'src/app/globals';
+import { Globals } from 'src/app/common-utils/globals';
 
 @Component({
   selector: 'app-settings',
