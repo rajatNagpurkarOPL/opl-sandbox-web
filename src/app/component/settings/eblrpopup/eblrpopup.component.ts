@@ -13,15 +13,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class EblrpopupComponent implements OnInit {
 
-  eblr: any = { effectiveFrom: new Date() };
+  eblr: any = { effectiveFrom: null };
   eblrList = [];
   time: any = { ampm: 'AM', hours: null, minutes: null };
+  minDate = new Date();
   registerForm: FormGroup;
   constructor(public dialogRef: MatDialogRef<EblrpopupComponent>, public lenderService: LenderService,
               public commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any,
               private formBuilder: FormBuilder) { }
 
-  minDate = new Date();
+
+
+
   // close pop up
   close() {
     this.dialogRef.close();
@@ -96,9 +99,12 @@ export class EblrpopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.minDate.setDate(this.minDate.getDate() + 1);
     if (this.data) {
       this.eblr = this.data;
       this.eblr.effectiveFrom =  new Date(this.eblr.effectiveFrom);
+    } else{
+      this.eblr.effectiveFrom =  this.minDate;
     }
     this.setTime();
     this.registerForm = this.formBuilder.group({
