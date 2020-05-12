@@ -9,9 +9,10 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
 })
 export class ProductViewComponent implements OnInit {
   foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+    {value: 'steak-0', viewValue: 'v4.0 Beta (Approval pending)'},
+    {value: 'pizza-1', viewValue: 'v3.0 (Current version)'},
+    {value: 'tacos-2', viewValue: 'v2.0'},
+    {value: 'tacos-2', viewValue: 'v1.0'}
   ];
 
   constructor(private matDialog: MatDialog) { }
