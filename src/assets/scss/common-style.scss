@@ -343,8 +343,6 @@ position: relative;
 }
 
 
-
-
 .card-txt-left p.active{
     color: #2D3079 !important;
     opacity: 1 !important;
@@ -627,7 +625,9 @@ font-weight: 500;
 line-height: 36px;
 }
 
-
+.mat-raised-button {
+    box-shadow: none !important;
+}
 
         @media (min-width:1200px) {
             .container {
