@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, enableProdMode } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { LoaderService } from './common-utils/common-services/LoaderService';
 import { Title } from '@angular/platform-browser';
 
+enableProdMode();
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

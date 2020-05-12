@@ -14,9 +14,9 @@ import { ConfirmationPopupComponent } from '../product/confirmation-popup/confir
 })
 export class ProductsComponent implements OnInit {
 
-  routeURL: any = {};
+  public routeURL: any = {};
   productList = [];
-  productStatus = 1;
+  productStatus = Constant.MASTER_TYPE.SAVED.id;
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog) { }
 
@@ -34,9 +34,19 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
+    if (this.route.url === this.routeURL.SAVED_PRODUCTS){
+      this.productStatus  = Constant.MASTER_TYPE.SAVED.id;
+    } else if (this.route.url === this.routeURL.SENT_PRODUCTS){
+      this.productStatus  = Constant.MASTER_TYPE.SENT_TO_CHECKER.id;
+    } else if (this.route.url === this.routeURL.SENT_BACK_PRODUCTS){
+      this.productStatus  = Constant.MASTER_TYPE.SEND_BACK.id;
+    } else if (this.route.url === this.routeURL.ACTIVE_PRODUCTS){
+      this.productStatus  = Constant.MASTER_TYPE.APPROVED.id;
+    } else if (this.route.url === this.routeURL.INACTIVE_PRODUCTS){
+      this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
+    }
     this.listProducts();
   }
-
 }
 
 export class TooltipOverviewExample {

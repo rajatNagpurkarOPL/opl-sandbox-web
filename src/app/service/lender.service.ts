@@ -14,35 +14,42 @@ export class LenderService {
   // getUrl(): Observable<any> {
   //   return this.http.get(RestUrl.GET_URL, false);
   // };
-
   login(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.LOGIN, data);
   }
-
   //  For Logout User
   logout(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LOG_OUT, false);
   }
-
   signUp(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SIGN_UP, data);
   }
-
   getLoggedInUserDetails(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.USER_DETAILS, false);
   }
-
   saveEBLR(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SAVE_EBLR, data);
   }
   updateEblrActionStatus(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.UPDATE_EBLR_ACTION, data);
   }
+  updateProductActionStatus(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.UPDATE_PRODUCT_ACTION, data);
+  }
   listPLRByType(id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LIST_PLR  + '/' + id, false);
   }
   listProducts(id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LIST_PRODUCTS  + '/' + id, false);
+  }
+  listActiveParameter(data: any): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.ACTIVE_PARAMETER_LIST + '/' + data, false);
+  }
+  saveProduct(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SAVE_PRODUCT + '/' + data.pStatus, data);
+  }
+  getProductDetails(status, id): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.PRODUCT_DETAILS + '/' + status + '/' + id, false);
   }
 
   // getAccessToken(): Observable<any> {

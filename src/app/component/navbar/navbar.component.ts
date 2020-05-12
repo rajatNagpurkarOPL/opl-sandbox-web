@@ -13,7 +13,7 @@ import { LenderService } from 'src/app/service/lender.service';
 export class NavbarComponent implements OnInit {
 
   constant: any = {};
-  constructor(public router: Router, private globals: Globals, private lenderService: LenderService,
+  constructor(public router: Router, public globals: Globals, private lenderService: LenderService,
               private commonService: CommonService) { }
 
   logoutUser() {

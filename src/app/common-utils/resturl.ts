@@ -12,5 +12,9 @@ export const RestURL = {
     SAVE_EBLR: '/plr/save',
     UPDATE_EBLR_ACTION: '/plr/updateActionStatus',
     LIST_PLR: '/plr/list',
-    LIST_PRODUCTS: '/parameter/products'
+    LIST_PRODUCTS: '/parameter/products',
+    ACTIVE_PARAMETER_LIST: '/parameter/activeParameterList',
+    SAVE_PRODUCT: '/parameter/createOrUpdate',
+    UPDATE_PRODUCT_ACTION: '/parameter/updateActionStatus',
+    PRODUCT_DETAILS: '/parameter/productDetails'
 };
