@@ -33,17 +33,23 @@ export const Constant = {
         EBLR : {id : 1},
         MCLR : {id : 2},
         GST_INVOICE_BASE : {id : 3},
-        SENT_TO_CHECKER : {id : 5, buttonName: 'Send for approve', name : 'Sent for approve'},
-        APPROVED : {id : 6, buttonName: 'Approve',  name : 'Approved'},
-        SEND_BACK : {id : 7, buttonName: 'Send back',  name : 'Reverted'},
+        PENDING : {id : 4, name : 'Pending'},
+        APPROVED : {id : 5, buttonName: 'Approve',  name : 'Approved'},
+        SEND_BACK : {id : 6, buttonName: 'Send back',  name : 'Reverted'},
+        SENT_TO_CHECKER : {id : 7, buttonName: 'Send for checker', name : 'Sent for checker'},
         SAVED : {id : 8, name : 'Saved'},
         EDIT_MODE : {id : 9, name : 'Edited'},
-        PENDING : {id : 10, name : 'Pending'}
+        RANGE : {id : 10, name : 'Range', value : 'RANGE'},
+        YES_NO : {id : 11, name : 'Yes/No', value : 'YES_NO'},
+        DROPDOWN : {id : 12, name : 'Dropdown', value : 'DROPDOWN'},
+        CHECKBOX : {id : 13, name : 'Checkbox', value : 'CHECKBOX'},
+        RADIO : {id : 14, name : 'Radio', value : 'RADIO'},
+        INACTIVE  : {id : 15, name : 'Inactive', value : 'Inactive'}
     },
     ROLES: {
         ADMIN : {id : 1 , name : 'ADMIN'},
         MAKER : {id : 2 , name : 'MAKER'},
-        CHECKER : {id : 3 , name : 'CHECKER'},
+        CHECKER : {id : 3 , name : 'CHECKER'}
     }
 
 

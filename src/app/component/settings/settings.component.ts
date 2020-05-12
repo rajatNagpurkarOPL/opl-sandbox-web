@@ -33,7 +33,6 @@ export class SettingsComponent implements OnInit {
     if (eblrReq.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id){
       const modelData = {title : 'Send back EBLR'};
       this.sendBackService.openDialog(modelData).subscribe(data => {
-        console.log(data);
         if (data && data.event === 'save' ){
           eblrReq.comments = data.data.comments;
           this.updatePLRStatus(eblrReq);
