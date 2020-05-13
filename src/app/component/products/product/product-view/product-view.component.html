@@ -25,13 +25,21 @@
             <p><span _ngcontent-ruf-c76="" class="dot">• </span> Active Product</p>
         
             <div class="product-details-btn">
-                <mat-form-field>
-                    <mat-label>v3.0 (Current version)</mat-label>
+                <mat-form-field class="fix-select">
+                    <!-- <mat-label>v3.0 (Current version)</mat-label> -->
                     <mat-select>
-                      <mat-option *ngFor="let food of foods" [value]="food.value">
+                      <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
                         {{food.viewValue}}
-                      </mat-option>
-                    </mat-select>
+                      </mat-option> -->
+
+                     
+                      <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020 02:03 PM</span></mat-option>
+                      <mat-option value="option1"><span class="option-txt">v3.0 (Current version)</span><br><span class="option-txt-inner">From 18 April 2020 02:03 PM</span></mat-option>
+                      <mat-option value="option2"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
+                      <mat-option value="option3"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
+
+
+                    </mat-select >
                   </mat-form-field>
                 <a href="javaScript:void(0);" (click)="confirmationPopUp()" class="product-btn1"><img src="assets/img/lock-blue.svg"/> Deactivate</a>
                 <a href="#" class="product-btn3"><img src="assets/img/edit-white.svg"/> Edit</a>
