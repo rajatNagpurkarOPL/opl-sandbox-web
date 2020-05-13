@@ -25,15 +25,15 @@ constructor(private matDialog: MatDialog, public route: ActivatedRoute, public l
 
   // get product info by product id
   getProductDetails() {
-      this.lenderService.getProductDetails(Constant.MASTER_TYPE.PENDING.id, this.product.productId).subscribe(res => {
+      this.lenderService.getProductDetails(this.product.status, this.product.productId).subscribe(res => {
         if (res.status === 200) {
           this.product = res.data;
           // set answer and other values
           this.product.parameters.forEach(element => {
             element.lovs = JSON.parse(element.lovs);
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
-              element.answer = {min: null, max: null};
-            }
+            // if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
+            //   element.answer = {min: null, max: null};
+            // }
             if (!this.commonService.isObjectNullOrEmpty(element.answer)){
               element.answer = JSON.parse(element.answer);
               if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
@@ -120,6 +120,7 @@ constructor(private matDialog: MatDialog, public route: ActivatedRoute, public l
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.product.productId = this.route.snapshot.paramMap.get('id');
+    this.product.status = this.route.snapshot.paramMap.get('status');
     if (this.product.productId){
       this.getProductDetails();
     }

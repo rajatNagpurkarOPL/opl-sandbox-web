@@ -47,7 +47,7 @@
                                 <button [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" /> 
                                 </button>
-                                <button routerLink="{{routeURL.PRODUCT_VIEW}}" mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
+                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
                             </p>
@@ -71,8 +71,7 @@
                             <p>Version 2.0</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p class="buttin-b4l-opacity">
-                                <button mat-raised-button class="btn3-b4l" matTooltip="view" matTooltipPosition="above"
-                                    aria-label="View">
+                                <button mat-raised-button class="btn3-b4l" matTooltip="view" matTooltipPosition="above" (click)="viewProduct(item.productStatus.id, item.productsTempId)" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
                             </p>
@@ -93,13 +92,14 @@
                         <p>{{item.name}}</p>
                         <div class="b4l-product-list-right">
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
-                            <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
-                                    matTooltipPosition="above" aria-label="Edit">
+                            <p class="buttin-b4l-opacity">
+                                <button [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" />
-                                </button><button mat-raised-button class="btn2-b4l" matTooltip="view"
-                                    matTooltipPosition="above" aria-label="View">
+                                </button>
+                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="view"  matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
-                                </button></p>
+                                </button>
+                            </p>
                         </div>
 
                     </div>
@@ -125,8 +125,7 @@
                                     matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" />
                                 </button>
-                                <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
-                                    aria-label="View">
+                                <button (click)="viewProduct(item.productStatus.id, item.productsId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
                                 <button mat-raised-button class="btn2-b4l" matTooltip="Deactive"
@@ -157,8 +156,7 @@
                                     matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" />
                                 </button>
-                                <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
-                                    aria-label="View">
+                                <button (click)="viewProduct(item.productStatus.id, item.productsId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
                                 <button mat-raised-button class="btn2-b4l" matTooltip="Deactive"

@@ -38,6 +38,13 @@ export class ProductsComponent implements OnInit {
       });
     }
 
+    viewProduct(status, id) {
+      this.route.navigate([Constant.ROUTE_URL.PRODUCT_VIEW + '/' + status + '/' + id]);
+      // var s = this.commonService.toBTOA(JSON.stringify({id, status}));
+      // console.log("storage-----", s);
+      // console.log("storage-----1", this.commonService.toATOB(s));
+    }
+
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.roles = Constant.ROLES;
