@@ -16,7 +16,7 @@
                     <input placeholder="Password" type="password" tabindex="1" required="" [(ngModel)]="user.password" name="password" >
                   </fieldset>
                   <fieldset>
-                    <select name="userRole" id="userRole" [(ngModel)]="user.role">
+                    <select name="userRole" id="userRole" [(ngModel)]="user.roleId">
                       <option *ngFor="let role of roles" [ngValue]="role.id" >{{role.name}}</option>
                     </select>
                   </fieldset>
