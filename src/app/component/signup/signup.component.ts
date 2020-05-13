@@ -23,7 +23,8 @@ export class SignupComponent implements OnInit {
    * Sign up
    */
   onSubmit() {
-    if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
+    if (this.commonService.isObjectNullOrEmpty(this.user.userName) || this.commonService.isObjectNullOrEmpty(this.user.password)
+      || this.commonService.isObjectNullOrEmpty(this.user.roleId) || this.user.roleId === 0 ){
       this.commonService.warningSnackBar('Please fill required details');
       return false;
     }
@@ -44,7 +45,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.roles.push({name : 'Select Role', id : 0 }, Constant.ROLES.ADMIN , Constant.ROLES.MAKER, Constant.ROLES.CHECKER);
-    this.user.role = this.roles[0].id;
+    this.user.roleId = this.roles[0].id;
   }
 
 }
