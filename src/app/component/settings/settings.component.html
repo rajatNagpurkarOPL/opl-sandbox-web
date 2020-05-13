@@ -12,8 +12,7 @@
             <div class="main">
                 <div class="sidebar-main-title">
                     <p>EBLR Value</p>
-                    <a (click)="openDialog(null);" href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR
-                        Value</a>
+                    <a *ngIf="isShowAddEBLR" (click)="openDialog(null);"  href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR Value</a>
                 </div>
                 <!-- <a href="javaScript:void(0);" (click)="save()" ><img src="assets/img/update.svg" />save</a> -->
 

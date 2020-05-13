@@ -36,7 +36,7 @@ export const Constant = {
         PENDING : {id : 4, name : 'Pending'},
         APPROVED : {id : 5, buttonName: 'Approve',  name : 'Approved'},
         SEND_BACK : {id : 6, buttonName: 'Send back',  name : 'Reverted'},
-        SENT_TO_CHECKER : {id : 7, buttonName: 'Send for checker', name : 'Sent for checker'},
+        SENT_TO_CHECKER : {id : 7, buttonName: 'Send to checker', name : 'Sent to checker'},
         SAVED : {id : 8, name : 'Saved'},
         EDIT_MODE : {id : 9, name : 'Edited'},
         RANGE : {id : 10, name : 'Range', value : 'RANGE'},

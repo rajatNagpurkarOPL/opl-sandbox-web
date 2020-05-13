@@ -15,6 +15,11 @@
                   <fieldset>
                     <input placeholder="Password" type="password" tabindex="1" required="" [(ngModel)]="user.password" name="password" >
                   </fieldset>
+                  <fieldset>
+                    <select name="userRole" id="userRole" [(ngModel)]="user.role">
+                      <option *ngFor="let role of roles" [ngValue]="role.id" >{{role.name}}</option>
+                    </select>
+                  </fieldset>
                   <button mat-raised-button color="primary" type="submit"  (click)="onSubmit()">Sign up</button>
                 </form>
                 <a href="#" class="login-forgot-psd" routerLink="/login">Login</a>

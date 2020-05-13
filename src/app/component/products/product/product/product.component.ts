@@ -25,8 +25,13 @@ export class ProductComponent implements OnInit {
               private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
   // Save product details
-  saveProduct(type) {
+  saveProduct(type, form) {
 
+    // validating form
+    if (form.form.status === 'INVALID'){
+      this.commonService.warningSnackBar('Pleaser fill required details');
+      return 0 ;
+    }
     if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
         this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1){
       return 0 ;
@@ -79,7 +84,12 @@ export class ProductComponent implements OnInit {
         if (response && response.data) {
           this.product.parameters = response.data.parametes;
           this.product.parameters.forEach(element => {
-            element.answer = { min: null, max: null };
+            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+              element.answer = { min: null, max: null };
+            }
+            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id){
+              element.answer = true;
+            }
             element.lovs = JSON.parse(element.lovs);
           });
         }

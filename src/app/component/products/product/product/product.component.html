@@ -1,110 +1,111 @@
 <div class="container">
     <div class="row">
-        <div class="product-back-button">
-            <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back</p>
-            <p>Add new product</p>
-        </div>
 
-        <div id="b4l-content">
-            <div class="product-name">
-                <p>Product Name</p>
+        <form  #productForm="ngForm" class="row">
+            <div class="product-back-button">
+                <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back</p>
+                <p>Add new product</p>
+            </div>
 
-                <div class="product-name-details">
-                    <input type="text" id="fname" name="fname" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”">
+       
+            <div id="b4l-content">
+                <div class="product-name">
+                    <p>Product Name</p>
+                    <div class="product-name-details">
+                        <input type="text" id="productName" name="productName" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" required>
 
-                    <div class="product-details-btn">
-                        <a (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
-                        <button [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1)" href="javascript:void(0)">
-                            <img src="assets/img/send-to-checker.svg"/> Send to checker
-                        </button>
+                        <div class="product-details-btn">
+                            <a (click)="saveProduct(0, productForm)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
+                            <button [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1, productForm)" href="javascript:void(0)">
+                                <img src="assets/img/send-to-checker.svg"/> Send to checker
+                            </button>
+                        </div>
                     </div>
+                    <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be
+                        matched with this product</p>
                 </div>
-                <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be
-                    matched with this product</p>
-            </div>
-        </div>
-
-        <!-- Matches Parameter start -->
-        <div id="b4l-content">
-
-
-            <div class="b4l-product-title">
-                <ul class="product">
-                    <li><a href="#" class="active">
-                            <p>Matches Parameter</p>
-                        </a></li>
-                    <li><a href="#">
-                            <p>Eligibility Calculation</p>
-                        </a></li>
-
-                </ul>
-
-                <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
-                        src="assets/img/import.svg" /> Import matches parameter</a>
             </div>
 
-            <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
-                <img class="img-match" src="assets/img/matches-parameter.svg" />
-                <p>We are ready to set eligibility parameters for the product.</p>
-                <p>You can either import parameters from existing product or set new parameters from scratch</p>
+            <!-- Matches Parameter start -->
+            <div id="b4l-content">
+                <div class="b4l-product-title">
+                    <ul class="product">
+                        <li><a href="#" class="active">
+                                <p>Matches Parameter</p>
+                            </a></li>
+                        <li><a href="#">
+                                <p>Eligibility Calculation</p>
+                            </a></li>
 
-                <div class="matches-parameter-data">
+                    </ul>
+
                     <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
                             src="assets/img/import.svg" /> Import matches parameter</a>
-                    <p>or</p>
-                    <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New Parameters</a>
                 </div>
-            </div>
-            <ng-container *ngIf="product.parameters.length > 0">
-                <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
-                    <div class="b4l-product-list-left">
-                        <p>{{i+1}}.</p>
-                        <p> {{item.lable}}</p>
+
+                <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
+                    <img class="img-match" src="assets/img/matches-parameter.svg" />
+                    <p>We are ready to set eligibility parameters for the product.</p>
+                    <p>You can either import parameters from existing product or set new parameters from scratch</p>
+
+                    <div class="matches-parameter-data">
+                        <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
+                                src="assets/img/import.svg" /> Import matches parameter</a>
+                        <p>or</p>
+                        <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New Parameters</a>
                     </div>
-                    <ng-container [ngSwitch]="item.inputType.id">
-                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
-                            <p class="buttin-b4l-opacity">
-                                <mat-button-toggle-group name="fontStyle" [(ngModel)]="item.answer">
-                                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                                    <mat-button-toggle [value]="false">No</mat-button-toggle>
-                                </mat-button-toggle-group>
-                                <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                            </p>
-                        </div>
-                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
-                            <p class="buttin-b4l-opacity">
-                                <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                    <option *ngFor="let option of item.lovs" [ngValue]="option" >{{option.value}}</option>
-                                </select>
-                                <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                            </p>
-                        </div>
-                        <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
-                            <div class="text-with-presnt person-text-width">
-                                <input placeholder="0" [(ngModel)]="item.answer.min" type="tel" id="min_{{item.parameterId}}"  name="min_{{item.parameterId}}" required="" maxlength="6">
-                                <p class="perstage-text-n-d">Days</p>
-                            </div>
-    
-                            <p>to</p>
-    
-                            <div class="text-with-presnt person-text-width">
-                                <input placeholder="0" [(ngModel)]="item.answer.max" name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="tel" required="" maxlength="6">
-                                <p class="perstage-text-n-d">Days</p>
-                            </div>
-    
-                            <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                        </div>
-                    </ng-container>
                 </div>
-            </ng-container>
-            <div class="b4l-product-list back">
-                <div class="b4l-product-list-right b4l-product-list-right1">
-                    <p class="buttin-b4l-opacity">
-                        <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add Parameters</a>
-                    </p>
+                <ng-container *ngIf="product.parameters.length > 0">
+                    <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
+                        <div class="b4l-product-list-left">
+                            <p>{{i+1}}.</p>
+                            <p> {{item.lable}}</p>
+                        </div>
+                        <ng-container [ngSwitch]="item.inputType.id">
+                            <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
+                                <p class="buttin-b4l-opacity">
+                                    <mat-button-toggle-group required name="yesNo_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                                        <mat-button-toggle [value]="false">No</mat-button-toggle>
+                                    </mat-button-toggle-group>
+                                    <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                </p>
+                            </div>
+                            <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
+                                <p class="buttin-b4l-opacity">
+                                    <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                        <option *ngFor="let option of item.lovs" [ngValue]="option" >{{option.value}}</option>
+                                    </select>
+                                    <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                </p>
+                            </div>
+                            <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
+                                <div class="text-with-presnt person-text-width">
+                                    <input placeholder="0" [(ngModel)]="item.answer.min" type="tel" id="min_{{item.parameterId}}"  name="min_{{item.parameterId}}" required="" maxlength="6">
+                                    <p class="perstage-text-n-d">Days</p>
+                                </div>
+        
+                                <p>to</p>
+        
+                                <div class="text-with-presnt person-text-width">
+                                    <input placeholder="0" [(ngModel)]="item.answer.max" name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="tel" required="" maxlength="6">
+                                    <p class="perstage-text-n-d">Days</p>
+                                </div>
+        
+                                <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <div class="b4l-product-list back">
+                    <div class="b4l-product-list-right b4l-product-list-right1">
+                        <p class="buttin-b4l-opacity">
+                            <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add Parameters</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
 
 

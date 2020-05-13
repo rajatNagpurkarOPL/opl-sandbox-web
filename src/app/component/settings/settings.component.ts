@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
 import { Constant } from 'src/app/common-utils/Constant';
+import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
-import { SendBackModelComponent } from 'src/app/common-utils/common-component/send-back-model/send-back-model.component';
-import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
-import { Globals } from 'src/app/common-utils/globals';
 
 @Component({
   selector: 'app-settings',
@@ -18,6 +17,8 @@ export class SettingsComponent implements OnInit {
   eblrList = [];
   dialogRef = null;
   user: any = {};
+  isShowAddEBLR = false;
+  isEBLRApproved = false;
   constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,
               private global: Globals, public sendBackService: SendBackModelService) {
   }
@@ -81,7 +82,15 @@ export class SettingsComponent implements OnInit {
                 this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){
               element.isEdit = true;
             }
+            if (element.actionStatus.id === Constant.MASTER_TYPE.APPROVED.id && !this.isEBLRApproved){
+              this.isEBLRApproved = true;
+            }
           });
+          if (this.isEBLRApproved && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
+            this.isShowAddEBLR = true;
+          }
+        } else {
+          this.isShowAddEBLR = true;
         }
       } else {
         this.commonService.warningSnackBar(res.message);
@@ -118,6 +127,5 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.listPLRByType();
   }
-
 
 }

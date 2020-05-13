@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   user: any = {};
   userResponse: any = {};
   routeURL: any = {};
+  roles = [];
   constructor(private commonService: CommonService, private lenderService: LenderService,
               private router: Router, private commonMethod: AuthGuard) { }
 
@@ -41,9 +42,9 @@ export class SignupComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit(): void {
+    this.roles.push({name : 'Select Role', id : 0 }, Constant.ROLES.ADMIN , Constant.ROLES.MAKER, Constant.ROLES.CHECKER);
+    this.user.role = this.roles[0].id;
   }
 
 }
