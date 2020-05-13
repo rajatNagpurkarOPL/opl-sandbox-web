@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
         this.userResponse = res;
         this.router.navigate([Constant.ROUTE_URL.LOGIN]);
       } else {
-        this.commonService.errorSnackBar(res.message);
+        this.commonService.warningSnackBar(res.message);
       }
     }, error => {
       this.commonService.errorSnackBar(error);
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.roles.push({name : 'Select Role', id : 0 }, Constant.ROLES.ADMIN , Constant.ROLES.MAKER, Constant.ROLES.CHECKER);
+    this.roles.push({name : 'Select Role', id : 0 }, Constant.ROLES.MAKER, Constant.ROLES.CHECKER);
     this.user.roleId = this.roles[0].id;
   }
 
