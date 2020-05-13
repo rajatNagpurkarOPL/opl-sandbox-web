@@ -29,7 +29,11 @@ export class ProductComponent implements OnInit {
 
     // validating form
     if (form.form.status === 'INVALID'){
-      this.commonService.warningSnackBar('Pleaser fill required details');
+      this.commonService.warningSnackBar('Please fill required details');
+      return 0 ;
+    }
+    if (this.product.parameters.length === 0){
+      this.commonService.warningSnackBar('Please add product parameters');
       return 0 ;
     }
     if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
