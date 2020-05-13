@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'products/inactive', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
     { path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard]},
-    { path: 'product-view', component: ProductViewComponent, canActivate: [AuthGuard]},
+    { path: 'product-view/:id', component: ProductViewComponent, canActivate: [AuthGuard]},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
