@@ -6,7 +6,8 @@ import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter
 import { LenderService } from 'src/app/service/lender.service';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import * as cloneDeep from 'lodash/cloneDeep';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Globals } from 'src/app/common-utils/globals';
 
 @Component({
   selector: 'app-product',
@@ -19,13 +20,15 @@ export class ProductComponent implements OnInit {
   inputType: any = {};
   product: any = { parameters: [] };
   approveBtn = null;
-  constructor(private matDialog: MatDialog, private lenderService: LenderService, private commonService: CommonService,
-              private route: ActivatedRoute) { }
+  isSave;
+  constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
+              private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
   // Save product details
   saveProduct(type) {
 
-    if (type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)){
+    if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
+        this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1){
       return 0 ;
     }
     this.product.pStatus = Constant.MASTER_TYPE.PENDING.id;
@@ -48,8 +51,11 @@ export class ProductComponent implements OnInit {
       if (res.status === 200) {
         if (type === 1){
           this.updateActionStatus();
-        } else{
+        } else {
           this.commonService.successSnackBar(res.message);
+          if (res.data && res.data.productsTempId){
+            this.router.navigate([Constant.ROUTE_URL.PRODUCT + '/' + res.data.productsTempId]);
+          }
         }
       } else {
         this.commonService.warningSnackBar(res.message);
@@ -86,6 +92,8 @@ export class ProductComponent implements OnInit {
     this.lenderService.updateProductActionStatus(statusReq).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
+        // this.getProductDetails();
+        this.router.navigate([Constant.ROUTE_URL.SENT_PRODUCTS]);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -116,8 +124,10 @@ export class ProductComponent implements OnInit {
           }
         });
         // set approve send to checker buttons
-        if (this.product.actionStatus.id === Constant.MASTER_TYPE.SAVED.id){
-          this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
+        if ((this.product.actionStatus.id === Constant.MASTER_TYPE.SAVED.id ||
+            this.product.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id) &&
+            this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+            this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
         }
         console.log(this.product);
       } else {
@@ -131,7 +141,6 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
-    console.log(this.route);
     this.product.productId = this.route.snapshot.paramMap.get('id');
     if (this.product.productId){
       this.getProductDetails();

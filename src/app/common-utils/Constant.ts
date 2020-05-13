@@ -44,7 +44,8 @@ export const Constant = {
         DROPDOWN : {id : 12, name : 'Dropdown', value : 'DROPDOWN'},
         CHECKBOX : {id : 13, name : 'Checkbox', value : 'CHECKBOX'},
         RADIO : {id : 14, name : 'Radio', value : 'RADIO'},
-        INACTIVE  : {id : 15, name : 'Inactive', value : 'Inactive'}
+        ACTIVE  : {id : 5, name : 'Approved', value : 'Approved', buttonName : 'Activate'},
+        INACTIVE  : {id : 15, name : 'Inactive', value : 'Inactive', buttonName : 'Deactivate'}
     },
     ROLES: {
         ADMIN : {id : 1 , name : 'ADMIN'},

@@ -1,175 +1,503 @@
-
 <div class="container">
     <div class="row">
+        <div id="b4l-content">
 
- 
-
-
-
-        
-
-
-<!-- Matches parameter clicked page start-->
-          <div class="product-back-button">
-            <p class="btn-back"><img src="assets/img/arrow-right.svg"/> Back</p>
-            <p>Product View</p>
-        </div>
-        
-                <div id="b4l-content">
-        <div class="product-name">
-            <p class="product-note-view">Contactless Invoice financing</p>
-          
-        
-        
-        <div class="product-name-details">
-            <p><span _ngcontent-ruf-c76="" class="dot">• </span> Active Product</p>
-        
-            <div class="product-details-btn">
-                <mat-form-field class="fix-select">
-                    <!-- <mat-label>v3.0 (Current version)</mat-label> -->
-                    <mat-select>
-                      <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-                        {{food.viewValue}}
-                      </mat-option> -->
-
-                     
-                      <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020 02:03 PM</span></mat-option>
-                      <mat-option value="option1"><span class="option-txt">v3.0 (Current version)</span><br><span class="option-txt-inner">From 18 April 2020 02:03 PM</span></mat-option>
-                      <mat-option value="option2"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
-                      <mat-option value="option3"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
-
-
-                    </mat-select >
-                  </mat-form-field>
-                <a href="javaScript:void(0);" (click)="confirmationPopUp()" class="product-btn1"><img src="assets/img/lock-blue.svg"/> Deactivate</a>
-                <a href="#" class="product-btn3"><img src="assets/img/edit-white.svg"/> Edit</a>
-            </div>
-        
-        </div>
-
-
-        <div class="product-view-error">
-
-<p><img src="assets/img/note-white.svg"/>Sent back by Checker for corrections</p>
-<p>Please check the eligibility calculation model there are some changes that needs to be done in changing The ROI of the user</p>
-
-
-        </div>
-        
-      
-        
-        
-        
+            <div class="b4l-product-title">
+                <ul>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}"
+                            [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
+                            <p>01</p><span>Saved</span>
+                        </a></li>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_PRODUCTS}}"
+                            [ngClass]="{'active': route.url === routeURL.SENT_PRODUCTS}">
+                            <p>02</p><span>Sent to checker</span>
+                        </a></li>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_BACK_PRODUCTS}}"
+                            [ngClass]="{'active': route.url === routeURL.SENT_BACK_PRODUCTS}">
+                            <p>02</p><span>Sent back by checker</span>
+                        </a></li>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.ACTIVE_PRODUCTS}}"
+                            [ngClass]="{'active': route.url === routeURL.ACTIVE_PRODUCTS}">
+                            <p>10</p><span>Active Products</span>
+                        </a></li>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.INACTIVE_PRODUCTS}}"
+                            [ngClass]="{'active': route.url === routeURL.INACTIVE_PRODUCTS}">
+                            <p>03</p><span>Inactive Products</span>
+                        </a></li>
+                </ul>
+                <div class="sidebar-main-title">
+                    <a href="javascript:void(0)" *ngIf="global.USER.roles.indexOf(roles.MAKER.name) > -1 " routerLink="{{routeURL.PRODUCT}}">+ Add new Product</a>
                 </div>
             </div>
 
+            <div [ngSwitch]="route.url">
+                <div *ngSwitchCase="routeURL.SAVED_PRODUCTS">
+                    <div class="b4l-product-list-title">
+                        <p>Product Name</p>
+                        <div class="b4l-product-list-right">
+                            <p>Last modified</p>
+                            <p>Action</p>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list" *ngFor="let item of productList">
+                        <p>{{item.name}}</p>
+                        <div class="b4l-product-list-right">
+                            <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }} </p>
+                            <p class="buttin-b4l-opacity">
+                                <button [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
+                                    <img src="assets/img/edit-icon.svg" /> 
+                                </button>
+                                <button [routerLink]="[routeURL.PRODUCT_VIEW, item.productsTempId]" mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
+                                    <img src="assets/img/view-icon.svg" />
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="routeURL.SENT_PRODUCTS">
+                    <div class="b4l-product-list-title-1">
+                        <p>Product Name</p>
+                        <div class="b4l-product-list-right-1">
+                            <p>Status</p>
+                            <p>Version</p>
+                            <p>Last modified</p>
+                            <p>Action</p>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list-1" *ngFor="let item of productList">
+                        <p>{{item.name}}</p>
+                        <div class="b4l-product-list-right-1">
+                            <p class="display"><span class="dot">&#8226; </span>Active</p>
+                            <p>{{item.version || '-' }}</p>
+                            <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
+                            <p class="buttin-b4l-opacity">
+                                <button [routerLink]="[routeURL.PRODUCT_VIEW, item.productsTempId]" mat-raised-button class="btn3-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
+                                    <img src="assets/img/view-icon.svg" />
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="routeURL.SENT_BACK_PRODUCTS">
+                    <div class="b4l-product-list-title">
+                        <p>Product Name</p>
+                        <div class="b4l-product-list-right">
+                            <p>Last modified</p>
+                            <p>Action</p>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list" *ngFor="let item of productList">
+                        <p>{{item.name}}</p>
+                        <div class="b4l-product-list-right">
+                            <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
+                            <p class="buttin-b4l-opacity">
+                                <button mat-raised-button [routerLink]="[routeURL.PRODUCT, item.productsTempId]" class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit"> <img src="assets/img/edit-icon.svg" /> </button>
+                                <button mat-raised-button [routerLink]="[routeURL.PRODUCT_VIEW, item.productsTempId]" class="btn2-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View"> <img src="assets/img/view-icon.svg" /> </button>
+                            </p>
+                        </div>
 
-            
+                    </div>
+                </div>
+                <div *ngSwitchCase="routeURL.ACTIVE_PRODUCTS">
+                    <div class="b4l-product-list-title-1">
+                        <p>Product Name</p>
+
+                        <div class="b4l-product-list-right-1">
+                            <p>Status</p>
+                            <p>Version</p>
+                            <p>Last modified</p>
+                            <p>Action</p>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list-1" *ngFor="let item of productList">
+                        <p>{{item.name}}</p>
+                        <div class="b4l-product-list-right-1">
+                            <p class="display"><span class="dot">&#8226; </span>Active</p>
+                            <p>Version 2.0</p>
+                            <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
+                            <p class="buttin-b4l-opacity">
+                                <button mat-raised-button class="btn1-b4l" matTooltip="edit" 
+                                    matTooltipPosition="above" aria-label="Edit">
+                                    <img src="assets/img/edit-icon.svg" />
+                                </button>
+                                <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                                [routerLink]="[routeURL.PRODUCT_VIEW, item.productsTempId]" aria-label="View">
+                                    <img src="assets/img/view-icon.svg" />
+                                </button>
+                                <button mat-raised-button class="btn2-b4l" matTooltip="Deactive"
+                                    matTooltipPosition="above" aria-label="Deactive">
+                                    <img src="assets/img/lock-icon.svg" />
+                                </button></p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="routeURL.INACTIVE_PRODUCTS">
+                    <div class="b4l-product-list-title-1">
+                        <p>Product Name</p>
+                        <div class="b4l-product-list-right-1">
+                            <p>Status</p>
+                            <p>Version</p>
+                            <p>Last modified</p>
+                            <p>Action</p>
+                        </div>
+                    </div>
+
+                    <div class="b4l-product-list-1" *ngFor="let item of productList">
+                        <p>{{item.name}}</p>
+                        <div class="b4l-product-list-right-1">
+                            <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                            <p>Version 2.0</p>
+                            <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
+                            <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                                    matTooltipPosition="above" aria-label="Edit">
+                                    <img src="assets/img/edit-icon.svg" />
+                                </button>
+                                <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                                    [routerLink]="[routeURL.PRODUCT_VIEW, item.productsTempId]"  aria-label="View">
+                                    <img src="assets/img/view-icon.svg" />
+                                </button>
+                                <button mat-raised-button class="btn2-b4l" matTooltip="Deactive"
+                                    matTooltipPosition="above" aria-label="Deactive">
+                                    <img src="assets/img/lock-icon.svg" />
+                                </button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
 
 
+        <!-- Send to checker start -->
 
 
-<!-- Eligibility Calculation start-->
+        <!-- <div id="b4l-content">
 
-<div id="b4l-content">
 
-           
-    <div class="b4l-product-title">
-        <ul class="product">
-            <li><a href="#"   class="active">
-                    <p>Matches Parameter</p>
-                </a></li>
-            <li><a href="#" >
-                    <p>Eligibility Calculation</p>
-                </a></li>
-          
-        </ul>             
 
-           
+            <div class="b4l-product-title">
+                <ul>
+                    <li><a href="#">
+                            <p>01</p><span>Saved</span>
+                        </a></li>
+                    <li><a href="#" class="active">
+                            <p>02</p><span>Sent to checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent back by checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>10</p><span>Active Products</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>03</p><span>Inactive Products</span>
+                        </a></li>
+                </ul>
+
+                <div class="sidebar-main-title">
+
+                    <a href="#">+ Add new Product</a>
+                </div>
+
+
             </div>
 
 
 
-        
+
+            <div class="b4l-product-list-title-1">
+                <p>Product Name</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p>Status</p>
+                    <p>Version</p>
+                    <p>Last modified</p>
+                    <p>Action</p>
+                </div>
+
+            </div>
+
+
+
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity">
+                        <button mat-raised-button class="btn3-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                    </p>
+                </div>
+
+            </div>
+
+
+
+
+        </div> -->
+
+        <!-- Send to checker end -->
+
+        <!-- Sent back by checker start -->
+        <!-- <div id="b4l-content">
+
+
+
+            <div class="b4l-product-title">
+                <ul>
+                    <li><a href="#">
+                            <p>01</p><span>Saved</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent to checker</span>
+                        </a></li>
+                    <li><a href="#" class="active">
+                            <p>02</p><span>Sent back by checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>10</p><span>Active Products</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>03</p><span>Inactive Products</span>
+                        </a></li>
+                </ul>
+
+                <div class="sidebar-main-title">
+
+                    <a href="#">+ Add new Product</a>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="b4l-product-list-title">
+                <p>Product Name</p>
+
+                <div class="b4l-product-list-right">
+                    <p>Last modified</p>
+                    <p>Action</p>
+                </div>
+
+            </div>
+
+
 
             <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>1</p>
-                <p>Whether the unit/ proprietor is Banking with SBI and has CIF and Account No. Match with our database</p>
-                </div>
+                <p>Contactless Invoice financing</p>
 
                 <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">              
-                            <p>Yes</p>          
-
-                       
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>2</p>
-                <p>Constitution </p>
-                </div>
-
-                <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">                        
-                            <p>120 Days</p>                        
-
-                       
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>3</p>
-                <p>Usance Period of Invoice</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">                      
-                         
-                            <p>0 Days</p>
-                            <p>to</p>
-                            <p>120 Days</p>
-                          
-
-                       
-                    </div>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button><button mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button></p>
                 </div>
 
             </div>
 
             <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>4</p>
-                <p>Whether the status of unit’s existing exposure is Standard and Regular i.e. not in SMA 1 & worse<br>
-                <span>Not Applicable in case of only Current Account Holders</span></p>
-                </div>
+                <p>Contactless Invoice financing</p>
 
                 <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">
-                     <p>Special Mention Account (SMA)</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button><button mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button></p>
+                </div>
 
-                       
-                    </div>
+            </div>
+        </div> -->
+
+
+
+
+        <!-- Sent back by checker end -->
+
+        <!-- Active Products start -->
+
+
+        <!-- <div id="b4l-content">
+
+
+
+            <div class="b4l-product-title">
+                <ul>
+                    <li><a href="#">
+                            <p>01</p><span>Saved</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent to checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent back by checker</span>
+                        </a></li>
+                    <li><a href="#" class="active">
+                            <p>10</p><span>Active Products</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>03</p><span>Inactive Products</span>
+                        </a></li>
+                </ul>
+
+                <div class="sidebar-main-title">
+
+                    <a href="#">+ Add new Product</a>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="b4l-product-list-title-1">
+                <p>Product Name</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p>Status</p>
+                    <p>Version</p>
+                    <p>Last modified</p>
+                    <p>Action</p>
+                </div>
+
+            </div>
+
+
+
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
+
+            </div>
+
+
+            <div class="b4l-product-list-1 back ">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
+
+            </div>
+
+
+
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
+
+            </div>
+
+
+
+            <div class="b4l-product-list-1 back ">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
+
+            </div>
+
+
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot">&#8226; </span>Active</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
                 </div>
 
             </div>
@@ -177,106 +505,183 @@
 
 
 
+        </div> -->
 
-            <div class="b4l-product-list">
+        <!-- Active Products end -->
 
-                <div class="b4l-product-list-left">
-                    <p>5</p>
-                <p>Invoice value</p>
+
+        <!-- Inactive Products start -->
+
+        <!-- <div id="b4l-content">
+
+
+
+            <div class="b4l-product-title">
+                <ul>
+                    <li><a href="#">
+                            <p>01</p><span>Saved</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent to checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>02</p><span>Sent back by checker</span>
+                        </a></li>
+                    <li><a href="#">
+                            <p>10</p><span>Active Products</span>
+                        </a></li>
+                    <li><a href="#" class="active">
+                            <p>03</p><span>Inactive Products</span>
+                        </a></li>
+                </ul>
+
+                <div class="sidebar-main-title">
+
+                    <a href="#">+ Add new Product</a>
                 </div>
 
-                <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">                      
-                         
-                        <p>0 Days</p>
-                        <p>to</p>
-                        <p>120 Days</p>
-                      
 
-                   
-                </div>
+            </div>
+
+
+
+
+            <div class="b4l-product-list-title-1">
+                <p>Product Name</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p>Status</p>
+                    <p>Version</p>
+                    <p>Last modified</p>
+                    <p>Action</p>
                 </div>
 
             </div>
 
 
 
-            <div class="b4l-product-list back">
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
 
-                <div class="b4l-product-list-left">
-                    <p>6</p>
-                <p>Whether Input Tax Credit (ITC) is claimed by the Buyer on the invoice proposed for discounting</p>
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
                 </div>
 
-                <div class="b4l-product-list-right">
-                  
-                    <div class="buttin-b4l-opacity opl2">
-                       <p>No</p>
-                       
-                    </div>
+            </div>
+
+
+            <div class="b4l-product-list-1 back ">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
                 </div>
 
             </div>
 
 
 
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
 
-</div>
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
 
-
-<!-- Eligibility Calculation end-->
-
-
-
-
-
-            
-<!-- Analyse now-->
-
-<div id="b4l-content">
-
-           
-   
-    <div class="matches-parameter">
-    
-    <img  class="img-match"  src="assets/img/Analyse-now.svg"/>
-    <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
-    <p class="opacity-light"> This will give you an idea how your matching will perform in real applications</p>
-    
-    <div class="matches-parameter-data">
-    
-    <a href="#" routerLink="" class="product-btn4">Analyse Now</a>
-    </div>
-    </div>
-    
-    </div>
-    
-    <!-- Analyse now end-->
-    
+            </div>
 
 
 
+            <div class="b4l-product-list-1 back ">
+                <p>Contactless Invoice financing</p>
+
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
+
+            </div>
 
 
+            <div class="b4l-product-list-1">
+                <p>Contactless Invoice financing</p>
 
+                <div class="b4l-product-list-right-1">
+                    <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
+                    <p>Version 2.0</p>
+                    <p>30 march 2020, 3:52 PM</p>
+                    <p class="buttin-b4l-opacity"><button mat-raised-button class="btn1-b4l" matTooltip="edit"
+                            matTooltipPosition="above" aria-label="Edit">
+                            <img src="assets/img/edit-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above"
+                            aria-label="View">
+                            <img src="assets/img/view-icon.svg" />
+                        </button>
+                        <button mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above"
+                            aria-label="Deactive">
+                            <img src="assets/img/lock-icon.svg" />
+                        </button></p>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </div>
+        </div> -->
+        <!-- Inactive Products end -->
 
     </div>
 </div>

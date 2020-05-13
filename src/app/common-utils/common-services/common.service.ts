@@ -4,13 +4,15 @@ import { throwError } from 'rxjs';
 import { SnackbarService } from './SnackbarService';
 import { Constant } from '../Constant';
 import { CookieService } from './cookie.service';
+import {Location} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
   data: any;
-  constructor(private snackbar: SnackbarService, private router: Router, private cookieservice: CookieService) { }
+  constructor(private snackbar: SnackbarService, private router: Router, private cookieservice: CookieService, 
+              private location: Location) { }
 
   setData(data: any) {
     this.data = data;
@@ -183,6 +185,12 @@ export class CommonService {
   }
   defaultSnackBar(message, action?) {
     this.snackbar.openSnackBar(message, action, '');
+  }
+  /**
+   * Goto the previous page
+   */
+  backClicked() {
+    this.location.back();
   }
 
 }

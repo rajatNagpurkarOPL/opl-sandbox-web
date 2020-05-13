@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="product-back-button">
-            <p class="btn-back"><img src="assets/img/arrow-right.svg" /> Back</p>
+            <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back</p>
             <p>Add new product</p>
         </div>
 
@@ -76,7 +76,7 @@
                                 <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
                                     <option *ngFor="let option of item.lovs" [ngValue]="option" >{{option.value}}</option>
                                 </select>
-                                <img src="assets/img/close-red.svg" />
+                                <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                             </p>
                         </div>
                         <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
@@ -92,7 +92,7 @@
                                 <p class="perstage-text-n-d">Days</p>
                             </div>
     
-                            <img class="opl" src="assets/img/close-red.svg" />
+                            <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                         </div>
                     </ng-container>
                 </div>
