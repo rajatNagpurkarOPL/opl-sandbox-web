@@ -21,7 +21,7 @@ export class ProductComponent implements OnInit {
   eblr: any = {};
   product: any = { parameters: [] };
   approveBtn = null;
-  isSave;
+  isAdd = false ;
   isMatchesTab = true;
   finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
@@ -164,6 +164,7 @@ export class ProductComponent implements OnInit {
             this.product.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id) &&
             this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
             this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
+            this.isAdd = true;
         }
         // Calc final ROI
         this.changeROI();
