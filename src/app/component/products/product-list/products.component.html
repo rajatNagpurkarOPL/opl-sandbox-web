@@ -5,22 +5,22 @@
             <div class="b4l-product-title">
                 <ul>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}" [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
-                            <p>{{productCount.saved}}</p><span>Saved</span> </a></li>
+                            <p>{{global.COUNT.saved || 0}}</p><span>Saved</span> </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.SENT_PRODUCTS}">
-                            <p>{{productCount.sent}}</p><span>Sent to checker</span>
+                            <p>{{global.COUNT.sent || 0}}</p><span>Sent to checker</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_BACK_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.SENT_BACK_PRODUCTS}">
-                            <p>{{productCount.sendBack}}</p><span>Sent back by checker</span>
+                            <p>{{global.COUNT.sendBack || 0}}</p><span>Sent back by checker</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.ACTIVE_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.ACTIVE_PRODUCTS}">
-                            <p>{{productCount.active}}</p><span>Active Products</span>
+                            <p>{{global.COUNT.active || 0}}</p><span>Active Products</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.INACTIVE_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.INACTIVE_PRODUCTS}">
-                            <p>{{productCount.inActive}}</p><span>Inactive Products</span>
+                            <p>{{global.COUNT.inActive|| 0}}</p><span>Inactive Products</span>
                         </a></li>
                 </ul>
                 <div class="sidebar-main-title">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   roles;
   isEdit = false;
   isAdd = false;
-  productCount: any = {};
+  @Input() productCount: any = {};
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals) { }
 
@@ -45,23 +45,6 @@ export class ProductsComponent implements OnInit {
       this.route.navigate([Constant.ROUTE_URL.PRODUCT_VIEW + '/' + status + '/' + id]);
     }
 
-
-    getProductsCounts(){
-      this.lenderService.productsCounts().subscribe(res => {
-          if (res.status === 200) {
-            this.productCount.saved = 10;
-            this.productCount.sent = 10;
-            this.productCount.sendBack = 10;
-            this.productCount.active = 10;
-            this.productCount.inActive = 10;
-          } else {
-            this.commonService.warningSnackBar(res.message);
-          }
-        }, (error: any) => {
-          this.commonService.errorSnackBar(error);
-        });
-      }
-
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.roles = Constant.ROLES;
@@ -76,8 +59,8 @@ export class ProductsComponent implements OnInit {
     } else if (this.route.url === this.routeURL.INACTIVE_PRODUCTS){
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
     }
+    console.log(this.global);
     this.listProducts();
-    this.getProductsCounts();
   }
 }
 

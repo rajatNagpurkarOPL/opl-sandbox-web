@@ -18,5 +18,6 @@ export const RestURL = {
     ACTIVE_PARAMETER_LIST: '/parameter/activeParameterList',
     SAVE_PRODUCT: '/parameter/createOrUpdate',
     UPDATE_PRODUCT_ACTION: '/parameter/updateActionStatus',
-    PRODUCT_DETAILS: '/parameter/productDetails'
+    PRODUCT_DETAILS: '/parameter/productDetails',
+    PRODUCT_COUNTS: '/parameter/productsCounts'
 };
