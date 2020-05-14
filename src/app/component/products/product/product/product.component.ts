@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   product: any = { parameters: [] };
   approveBtn = null;
   isSave;
+  isMatchesTab = true;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
               private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
