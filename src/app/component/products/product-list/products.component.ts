@@ -20,9 +20,11 @@ export class ProductsComponent implements OnInit {
   roles;
   isEdit = false;
   isAdd = false;
+  productCount: any = {};
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals) { }
 
+  // get products by status
   listProducts(){
     this.lenderService.listProducts(this.productStatus).subscribe(res => {
         if (res.status === 200) {
@@ -41,10 +43,24 @@ export class ProductsComponent implements OnInit {
 
     viewProduct(status, id) {
       this.route.navigate([Constant.ROUTE_URL.PRODUCT_VIEW + '/' + status + '/' + id]);
-      // var s = this.commonService.toBTOA(JSON.stringify({id, status}));
-      // console.log("storage-----", s);
-      // console.log("storage-----1", this.commonService.toATOB(s));
     }
+
+
+    getProductsCounts(){
+      this.lenderService.productsCounts().subscribe(res => {
+          if (res.status === 200) {
+            this.productCount.saved = 10;
+            this.productCount.sent = 10;
+            this.productCount.sendBack = 10;
+            this.productCount.active = 10;
+            this.productCount.inActive = 10;
+          } else {
+            this.commonService.warningSnackBar(res.message);
+          }
+        }, (error: any) => {
+          this.commonService.errorSnackBar(error);
+        });
+      }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
@@ -61,6 +77,7 @@ export class ProductsComponent implements OnInit {
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
     }
     this.listProducts();
+    this.getProductsCounts();
   }
 }
 

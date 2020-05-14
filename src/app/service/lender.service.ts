@@ -42,6 +42,9 @@ export class LenderService {
   listProducts(id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LIST_PRODUCTS  + '/' + id, false);
   }
+  productsCounts(): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.PRODUCT_COUNTS , false);
+  }
   approvedProducts(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.APPROVED_PRODUCTS,  false);
   }

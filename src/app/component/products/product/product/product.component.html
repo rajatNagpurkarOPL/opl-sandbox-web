@@ -13,15 +13,20 @@
                 <div class="product-name">
                     <p>Product Name</p>
                     <div class="product-name-details">
-                        <input type="text" id="productName" name="productName" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" required>
+                        <input type="text" id="productName" name="productName" [(ngModel)]="product.name"
+                            placeholder="Eg. “Contactless invoice financing”" required>
                         <div class="product-details-btn">
-                            <a *ngIf="isAdd" (click)="saveProduct(0, productForm)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
-                            <button *ngIf="isAdd" [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1, productForm)" href="javascript:void(0)">
+                            <a *ngIf="isAdd" (click)="saveProduct(0, productForm)" href="javascript:void(0)"
+                                class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
+                            <button *ngIf="isAdd" [disabled]="!approveBtn"
+                                [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')"
+                                (click)="saveProduct(1, productForm)" href="javascript:void(0)">
                                 <img src="assets/img/send-to-checker.svg" /> Send to checker
                             </button>
                         </div>
                     </div>
-                    <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be matched with this product</p>
+                    <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who
+                        will be matched with this product</p>
                 </div>
             </div>
 
@@ -33,12 +38,15 @@
                                 href="javascript:void(0)">
                                 <p>Matches Parameter</p>
                             </a></li>
-                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab" href="javascript:void(0)">
+                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                                href="javascript:void(0)">
                                 <p>Eligibility Calculation</p>
                             </a></li>
                     </ul>
-                    <a *ngIf="isMatchesTab" (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
-                    <a *ngIf="!isMatchesTab" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Eligibility model</a>
+                    <a *ngIf="isMatchesTab" (click)="importParameterPopup();" href="javaScript:void(0);"
+                        class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
+                    <a *ngIf="!isMatchesTab" href="javaScript:void(0);" class="product-btn1"><img
+                            src="assets/img/import.svg" /> Import Eligibility model</a>
                 </div>
                 <div [hidden]="!isMatchesTab">
                     <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
@@ -83,7 +91,9 @@
                                 </div>
                                 <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
                                     <div class="text-with-presnt person-text-width">
-                                        <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" name="min_{{item.parameterId}}" required="" maxlength="6">
+                                        <input placeholder="0" [(ngModel)]="item.answer.min" type="text"
+                                            id="min_{{item.parameterId}}" name="min_{{item.parameterId}}" required=""
+                                            maxlength="6">
                                         <p class="perstage-text-n-d">Days</p>
                                     </div>
 
@@ -109,8 +119,8 @@
                             </p>
                         </div>
                     </div>
-                    
-                   
+
+
                 </div>
 
                 <!-- Eligibility Calculation start-->
@@ -138,7 +148,9 @@
 
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.wcRequirement" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="wcReq" placeholder="Enter percentage" type="text" required="" maxlength="4">
+                                    <input [(ngModel)]="product.wcRequirement"
+                                        pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="wcReq"
+                                        placeholder="Enter percentage" type="text" required="" maxlength="4">
                                     <p class="perstage-text-n-d">%</p>
                                 </div>
                             </div>
@@ -152,7 +164,8 @@
                         <div class="b4l-product-list-right">
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.maxLoanAmtLimit" pattern="[0-9]+" name="maxLoanAmnt" placeholder="Enter amount" type="text" required="" maxlength="6">
+                                    <input [(ngModel)]="product.maxLoanAmtLimit" pattern="[0-9]+" name="maxLoanAmnt"
+                                        placeholder="Enter amount" type="text" required="" maxlength="6">
                                     <p class="perstage-text-n-d"><b>INR</b></p>
                                 </div>
                             </div>
@@ -166,7 +179,9 @@
                         <div class="b4l-product-list-right">
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.disPer" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="disPercentage" placeholder="Enter percentage" type="text"  required="" maxlength="4">
+                                    <input [(ngModel)]="product.disPer" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$"
+                                        name="disPercentage" placeholder="Enter percentage" type="text" required=""
+                                        maxlength="4">
                                     <p class="perstage-text-n-d">%</p>
                                 </div>
                             </div>
@@ -180,7 +195,8 @@
                         <div class="b4l-product-list-right">
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width">
-                                    <input placeholder="Enter months" pattern="[0-9]+" name="tenure" type="text" [(ngModel)]="product.tenure" required="" maxlength="3">
+                                    <input placeholder="Enter months" pattern="[0-9]+" name="tenure" type="text"
+                                        [(ngModel)]="product.tenure" required="" maxlength="3">
                                     <p class="perstage-text-n-d"><b>Months</b></p>
                                 </div>
                             </div>
@@ -197,7 +213,9 @@
                         <div class="b4l-product-list-right">
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width1">
-                                    <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="roi" placeholder="Spread" type="text"  required="" maxlength="4">
+                                    <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()"
+                                        pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="roi" placeholder="Spread"
+                                        type="text" required="" maxlength="4">
                                     <p class="perstage-text-n-d">%</p>
                                 </div>
                                 <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
@@ -212,49 +230,52 @@
                         <div class="b4l-product-list-right">
                             <div class="buttin-b4l-opacity opl2">
                                 <div class="text-with-presnt person-text-width">
-                                    <input placeholder="Enter Amount" type="text" pattern="[0-9]+" name="maxRepay" [(ngModel)]="product.maxRepayAmt" required="" maxlength="6">
+                                    <input placeholder="Enter Amount" type="text" pattern="[0-9]+" name="maxRepay"
+                                        [(ngModel)]="product.maxRepayAmt" required="" maxlength="6">
                                     <p class="perstage-text-n-d"><b>INR</b></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Eligibility Calculator-->
-                    <div id="b4l-content">
-                        <div class="matches-parameter">
-                            <img class="img-match" src="assets/img/EligibilityCalculator.svg" />
-                            <p class="opacity-light">Just to be on safe side you can run simulation on sample
-                                applications.</p>
-                            <p class="opacity-light"> This will give you an idea how your matching will perform in real
-                                applications
-                            </p>
-                            <div class="matches-parameter-data">
-                                <a href="#" routerLink="" class="product-btn4">Eligibility Calculator</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Eligibility Calculator end-->
+
                 </div>
 
 
 
 
             </div>
-
-             <!-- Analyse now-->
- <div id="b4l-content">
-    <div class="matches-parameter">
-        <img class="img-match" src="assets/img/Analyse-now.svg" />
-        <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
-        <p class="opacity-light"> This will give you an idea how your matching will perform in real applications
-        </p>
-        <div class="matches-parameter-data">
-            <a href="#" routerLink="" class="product-btn4">Analyse Now</a>
-        </div>
-    </div>
-</div>
-<!-- Analyse now end-->
-
         </form>
+
+        <!-- Analyse now-->
+        <div id="b4l-content" [hidden]="!isMatchesTab">
+            <div class="matches-parameter">
+                <img class="img-match" src="assets/img/Analyse-now.svg" />
+                <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
+                <p class="opacity-light"> This will give you an idea how your matching will perform in real applications
+                </p>
+                <div class="matches-parameter-data">
+                    <a href="#" routerLink="" class="product-btn4">Analyse Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Analyse now end-->
+
+        <!-- Eligibility Calculator-->
+        <div id="b4l-content" [hidden]="isMatchesTab">
+            <div class="matches-parameter">
+                <img class="img-match" src="assets/img/EligibilityCalculator.svg" />
+                <p class="opacity-light">Just to be on safe side you can run simulation on sample
+                    applications.</p>
+                <p class="opacity-light"> This will give you an idea how your matching will perform in real
+                    applications
+                </p>
+                <div class="matches-parameter-data">
+                    <a href="#" routerLink="" class="product-btn4">Eligibility Calculator</a>
+                </div>
+            </div>
+        </div>
+        <!-- Eligibility Calculator end-->
+
 
 
 
@@ -528,43 +549,6 @@
 
 
         </div> -->
-
-
-
-
-
-
-
-        <!-- Matches parameter end-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

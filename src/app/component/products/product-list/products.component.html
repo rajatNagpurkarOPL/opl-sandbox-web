@@ -4,25 +4,23 @@
 
             <div class="b4l-product-title">
                 <ul>
-                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}"
-                            [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
-                            <p>01</p><span>Saved</span>
-                        </a></li>
+                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}" [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
+                            <p>{{productCount.saved}}</p><span>Saved</span> </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.SENT_PRODUCTS}">
-                            <p>02</p><span>Sent to checker</span>
+                            <p>{{productCount.sent}}</p><span>Sent to checker</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_BACK_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.SENT_BACK_PRODUCTS}">
-                            <p>02</p><span>Sent back by checker</span>
+                            <p>{{productCount.sendBack}}</p><span>Sent back by checker</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.ACTIVE_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.ACTIVE_PRODUCTS}">
-                            <p>10</p><span>Active Products</span>
+                            <p>{{productCount.active}}</p><span>Active Products</span>
                         </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.INACTIVE_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.INACTIVE_PRODUCTS}">
-                            <p>03</p><span>Inactive Products</span>
+                            <p>{{productCount.inActive}}</p><span>Inactive Products</span>
                         </a></li>
                 </ul>
                 <div class="sidebar-main-title">

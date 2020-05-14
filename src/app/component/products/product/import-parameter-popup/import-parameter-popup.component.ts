@@ -27,9 +27,26 @@ export class ImportParameterPopupComponent implements OnInit {
       }, (error: any) => {
         this.commonService.errorSnackBar(error);
       });
-    }
-  save(){
-    this.close({product : this.product, event : 'save'});
+  }
+
+  // get parameters of selected product
+  getProductDetails() {
+    this.lenderService.getProductDetails(Constant.MASTER_TYPE.APPROVED, this.product.productId).subscribe(res => {
+      if (res.status === 200) {
+        this.product = res.data;
+        this.close({product : this.product, event : 'save'});
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
+
+  save() {
+    // get parameter on save
+    this.getProductDetails();
+    // this.close({product : this.product, event : 'save'});
   }
 
   close(data) {
