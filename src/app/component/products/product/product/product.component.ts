@@ -18,10 +18,12 @@ export class ProductComponent implements OnInit {
 
   routeURL: any = {};
   inputType: any = {};
+  eblr;
   product: any = { parameters: [] };
   approveBtn = null;
   isSave;
-  isMatchesTab = true;
+  isMatchesTab = false;
+  finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
               private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
@@ -30,7 +32,7 @@ export class ProductComponent implements OnInit {
 
     // validating form
     if (form.form.status === 'INVALID'){
-      this.commonService.warningSnackBar('Please fill required details');
+      this.commonService.warningSnackBar('Please fill required and valid details');
       return 0 ;
     }
     if (this.product.parameters.length === 0){
@@ -45,12 +47,13 @@ export class ProductComponent implements OnInit {
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
     this.product.productStatus = Constant.MASTER_TYPE.SAVED;
     this.product.actionStatus = Constant.MASTER_TYPE.SAVED;
-    this.product.disPer = 0;
-    this.product.maxLoanAmtLimit = 0;
-    this.product.maxRepayAmt = 0;
-    this.product.roi = 0;
-    this.product.tenure = 0;
-    this.product.wcRequirement = 0;
+    // this.product.roi = this.eblr.plr + this.product.roi;
+    // this.product.disPer = 0;
+    // this.product.maxLoanAmtLimit = 0;
+    // this.product.maxRepayAmt = 0;
+    // this.product.roi = 0;
+    // this.product.tenure = 0;
+    // this.product.wcRequirement = 0;
     const productReq = cloneDeep(this.product);
     productReq.parameters.forEach(element => {
       element.lovs = JSON.stringify(element.lovs);
@@ -144,6 +147,8 @@ export class ProductComponent implements OnInit {
             this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
             this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
         }
+        // Calc final ROI
+        this.changeROI();
         console.log(this.product);
       } else {
         this.commonService.warningSnackBar(res.message);
@@ -153,12 +158,35 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  // Get current effective EBLR
+  getCurrentEBLR(){
+    const eblrReq: any = {};
+    eblrReq.actionStatus = Constant.MASTER_TYPE.APPROVED;
+    eblrReq.plrType = Constant.MASTER_TYPE.EBLR;
+    eblrReq.plrProdType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
+    this.lenderService.geteffectivePLR(eblrReq).subscribe(res => {
+      if (res.status === 200) {
+        this.eblr = res.data;
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
+
+  changeROI(){
+    this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
+  }
+
+
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
     this.product.productId = this.route.snapshot.paramMap.get('id');
     if (this.product.productId){
       this.getProductDetails();
+      this.getCurrentEBLR();
     }
   }
 }
