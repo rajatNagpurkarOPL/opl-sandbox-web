@@ -14,6 +14,7 @@ export const RestURL = {
     LIST_PLR: '/plr/list',
     EFFECTIVE_PLR: '/plr/effectivePLR',
     LIST_PRODUCTS: '/parameter/products',
+    APPROVED_PRODUCTS: '/parameter/approvedProducts',
     ACTIVE_PARAMETER_LIST: '/parameter/activeParameterList',
     SAVE_PRODUCT: '/parameter/createOrUpdate',
     UPDATE_PRODUCT_ACTION: '/parameter/updateActionStatus',

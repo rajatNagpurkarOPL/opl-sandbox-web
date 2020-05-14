@@ -2,137 +2,129 @@
 
     <div class="import-matches">
         <div class="import-matches-left">
-<p>Import matches parameters</p>
-<span>Please select a product</span>       
-
+            <p>Import matches parameters</p>  <span>Please select a product</span>
         </div>
-
         <div class="input-group">
             <input id="search" type="text" class="form-control" name="search" placeholder="Search product">
             <span class="input-group-addon"><img src="assets/img/Search.svg"></span>
-          </div>
+        </div>
+    </div>
+    <div class="hr"></div>
+    <div class="pop-up-content">
+        <div class="pop-up-cl" *ngFor="let item of productList" >
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="product" name="projects">
+                <mat-radio-button  [value]="item">{{item.name}}</mat-radio-button>
+            </mat-radio-group>
+            <p>{{item.parameters.length}} parameters</p>
+        </div>
+        <div class="pop-up-cl"  *ngIf="productList.length === 0 || !productList" >
+            <p>No data found</p>
+        </div>
 
     </div>
 
-
-<div class="hr"></div>
-<div class="pop-up-content">
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>10 parameters</p>
-</div>
+    <!-- 
 
 
 
-
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">UContactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>18 parameters</p>
-</div>
-
-
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>10 parameters</p>
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">UContactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>18 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>12 parameters</p>
-</div>
+    <div class="pop-up-cl">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Update at specific time</mat-radio-button>
+        </mat-radio-group>
+        <p>10 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>2 parameters</p>
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>12 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">UContactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>18 parameters</p>
-</div>
+    <div class="pop-up-cl">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Update at specific time</mat-radio-button>
+        </mat-radio-group>
+        <p>2 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>10 parameters</p>
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">UContactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>18 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>12 parameters</p>
-</div>
+    <div class="pop-up-cl">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Update at specific time</mat-radio-button>
+        </mat-radio-group>
+        <p>10 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>2 parameters</p>
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>12 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>3 parameters</p>
-</div>
+    <div class="pop-up-cl">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Update at specific time</mat-radio-button>
+        </mat-radio-group>
+        <p>2 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Update at specific time</mat-radio-button>       
-      </mat-radio-group>
-<p>10 parameters</p>
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>3 parameters</p>
+    </div>
 
 
-<div class="pop-up-cl back">
-    <mat-radio-group aria-label="Select an option">
-        <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>       
-      </mat-radio-group>
-<p>10 parameters</p>
-</div>
+    <div class="pop-up-cl">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Update at specific time</mat-radio-button>
+        </mat-radio-group>
+        <p>10 parameters</p>
+    </div>
 
 
-
-</div>
+    <div class="pop-up-cl back">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Contactless invoice financing - for Utterpradesh only</mat-radio-button>
+        </mat-radio-group>
+        <p>10 parameters</p>
+    </div>
+ -->
 
 
 
 
 
+    <div class="btn-pop-up">
+
+        <a href="javascript:void(0)" class="product-btn4" (click)="close(null)">Cancel</a>
+        <a href="javascript:void(0)" class="product-btn3" (click)="save()" >Import matches parameters</a>
 
 
 
 
-
-<div class="btn-pop-up">
-
-<a href="#" class="product-btn4">Cancel</a>
-<a href="#" class="product-btn3">Import matches parameters</a>
-
-
-
-
-</div>
+    </div>

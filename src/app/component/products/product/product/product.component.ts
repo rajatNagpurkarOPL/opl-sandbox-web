@@ -18,11 +18,11 @@ export class ProductComponent implements OnInit {
 
   routeURL: any = {};
   inputType: any = {};
-  eblr;
+  eblr: any = {};
   product: any = { parameters: [] };
   approveBtn = null;
-  isSave;
-  isMatchesTab = false;
+  isAdd = false ;
+  isMatchesTab = true;
   finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
               private route: ActivatedRoute, private router: Router, public global: Globals) { }
@@ -81,7 +81,25 @@ export class ProductComponent implements OnInit {
   // Open import paramter popup
   importParameterPopup(): void {
     const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(ImportParameterPopupComponent, dialogConfig);
+    this.matDialog.open(ImportParameterPopupComponent, dialogConfig).afterClosed()
+      .subscribe(response => {
+        if (response && response.data && response.data.event  === 'save') {
+          this.product.parameters = response.data.product.parameters;
+          this.product.parameters.forEach(element => {
+            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+              element.answer = { min: null, max: null };
+            }
+            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id){
+              element.answer = true;
+            }
+            element.lovs = JSON.parse(element.lovs);
+          });
+          if (response.data.product.parameters.length > 0 ){
+            this.commonService.successSnackBar( response.data.product.parameters.length + ' parameters added successfully');
+          }
+        }
+      });
+
   }
 
   // Open paramter popup
@@ -146,6 +164,7 @@ export class ProductComponent implements OnInit {
             this.product.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id) &&
             this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
             this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
+            this.isAdd = true;
         }
         // Calc final ROI
         this.changeROI();

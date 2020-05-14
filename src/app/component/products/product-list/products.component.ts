@@ -18,6 +18,8 @@ export class ProductsComponent implements OnInit {
   productList = [];
   productStatus = Constant.MASTER_TYPE.SAVED.id;
   roles;
+  isEdit = false;
+  isAdd = false;
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals) { }
 
@@ -25,11 +27,10 @@ export class ProductsComponent implements OnInit {
     this.lenderService.listProducts(this.productStatus).subscribe(res => {
         if (res.status === 200) {
           this.productList = res.data;
-          this.productList.forEach(element => {
-            if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
-              element.isEdit = true;
-            }
-          });
+          if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
+            this.isEdit = true;
+            this.isAdd = true;
+          }
         } else {
           this.commonService.warningSnackBar(res.message);
         }

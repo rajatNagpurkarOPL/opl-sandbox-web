@@ -53,7 +53,8 @@ constructor(private matDialog: MatDialog, public route: ActivatedRoute, public l
               this.product.approve = Constant.MASTER_TYPE.APPROVED;
               this.product.reject = Constant.MASTER_TYPE.SEND_BACK;
           }
-          if (this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id){
+          if (this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id &&
+              this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){
               this.product.isEdit = true;
           }
           if (this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id){
@@ -62,6 +63,10 @@ constructor(private matDialog: MatDialog, public route: ActivatedRoute, public l
           if (this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id){
               this.product.actInact = Constant.MASTER_TYPE.ACTIVE;
           }
+          // if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
+          //   this.isEdit = true;
+          //   this.isAdd = true;
+          // }
         } else {
           this.commonService.warningSnackBar(res.message);
         }
