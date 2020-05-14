@@ -13,6 +13,7 @@ import { LenderService } from 'src/app/service/lender.service';
 export class NavbarComponent implements OnInit {
 
   constant: any = {};
+  productCount: any = {};
   constructor(public router: Router, public globals: Globals, private lenderService: LenderService,
               private commonService: CommonService) { }
 
@@ -48,9 +49,29 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  // Get products counts
+  getProductsCounts(){
+    this.lenderService.productsCounts().subscribe(res => {
+        if (res.status === 200) {
+          const counts = res.data;
+          this.productCount.saved = counts[Constant.MASTER_TYPE.SAVED.id];
+          this.productCount.sent = counts[Constant.MASTER_TYPE.SENT_TO_CHECKER.id];
+          this.productCount.sendBack = counts[Constant.MASTER_TYPE.SEND_BACK.id];
+          this.productCount.active = counts[Constant.MASTER_TYPE.APPROVED.id];
+          this.productCount.inActive = counts[Constant.MASTER_TYPE.INACTIVE.id];
+          this.globals.COUNT = this.productCount;
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
+
   ngOnInit(): void {
     this.constant = Constant.ROUTE_URL;
     this.getUserDetails();
+    this.getProductsCounts();
   }
 
 }

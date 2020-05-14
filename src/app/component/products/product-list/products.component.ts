@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
@@ -20,9 +20,11 @@ export class ProductsComponent implements OnInit {
   roles;
   isEdit = false;
   isAdd = false;
+  @Input() productCount: any = {};
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals) { }
 
+  // get products by status
   listProducts(){
     this.lenderService.listProducts(this.productStatus).subscribe(res => {
         if (res.status === 200) {
@@ -41,9 +43,6 @@ export class ProductsComponent implements OnInit {
 
     viewProduct(status, id) {
       this.route.navigate([Constant.ROUTE_URL.PRODUCT_VIEW + '/' + status + '/' + id]);
-      // var s = this.commonService.toBTOA(JSON.stringify({id, status}));
-      // console.log("storage-----", s);
-      // console.log("storage-----1", this.commonService.toATOB(s));
     }
 
   ngOnInit(): void {
@@ -60,6 +59,7 @@ export class ProductsComponent implements OnInit {
     } else if (this.route.url === this.routeURL.INACTIVE_PRODUCTS){
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
     }
+    console.log(this.global);
     this.listProducts();
   }
 }
