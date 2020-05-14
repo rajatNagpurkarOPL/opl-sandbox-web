@@ -1,28 +1,27 @@
 <div class="container">
     <div class="row">
 
-        <form  #productForm="ngForm" class="row">
+        <form #productForm="ngForm" class="row">
             <div class="product-back-button">
-                <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back</p>
+                <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back
+                </p>
                 <p>Add new product</p>
             </div>
 
-       
+
             <div id="b4l-content">
                 <div class="product-name">
                     <p>Product Name</p>
                     <div class="product-name-details">
                         <input type="text" id="productName" name="productName" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" required>
-
                         <div class="product-details-btn">
                             <a (click)="saveProduct(0, productForm)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
                             <button [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1, productForm)" href="javascript:void(0)">
-                                <img src="assets/img/send-to-checker.svg"/> Send to checker
+                                <img src="assets/img/send-to-checker.svg" /> Send to checker
                             </button>
                         </div>
                     </div>
-                    <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be
-                        matched with this product</p>
+                    <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be matched with this product</p>
                 </div>
             </div>
 
@@ -30,81 +29,224 @@
             <div id="b4l-content">
                 <div class="b4l-product-title">
                     <ul class="product">
-                        <li><a href="#" class="active">
+                        <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                                href="javascript:void(0)">
                                 <p>Matches Parameter</p>
                             </a></li>
-                        <li><a href="#">
+                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab" href="javascript:void(0)">
                                 <p>Eligibility Calculation</p>
                             </a></li>
-
                     </ul>
-
-                    <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
-                            src="assets/img/import.svg" /> Import matches parameter</a>
+                    <a *ngIf="isMatchesTab" (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
+                    <a *ngIf="!isMatchesTab" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Eligibility model</a>
                 </div>
+                <div *ngIf="isMatchesTab">
+                    <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
+                        <img class="img-match" src="assets/img/matches-parameter.svg" />
+                        <p>We are ready to set eligibility parameters for the product.</p>
+                        <p>You can either import parameters from existing product or set new parameters from scratch</p>
 
-                <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
-                    <img class="img-match" src="assets/img/matches-parameter.svg" />
-                    <p>We are ready to set eligibility parameters for the product.</p>
-                    <p>You can either import parameters from existing product or set new parameters from scratch</p>
-
-                    <div class="matches-parameter-data">
-                        <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
-                                src="assets/img/import.svg" /> Import matches parameter</a>
-                        <p>or</p>
-                        <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New Parameters</a>
-                    </div>
-                </div>
-                <ng-container *ngIf="product.parameters.length > 0">
-                    <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
-                        <div class="b4l-product-list-left">
-                            <p>{{i+1}}.</p>
-                            <p> {{item.lable}}</p>
+                        <div class="matches-parameter-data">
+                            <a (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img
+                                    src="assets/img/import.svg" /> Import matches parameter</a>
+                            <p>or</p>
+                            <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New
+                                Parameters</a>
                         </div>
-                        <ng-container [ngSwitch]="item.inputType.id">
-                            <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
-                                <p class="buttin-b4l-opacity">
-                                    <mat-button-toggle-group required name="yesNo_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                                        <mat-button-toggle [value]="false">No</mat-button-toggle>
-                                    </mat-button-toggle-group>
-                                    <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                </p>
-                            </div>
-                            <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
-                                <p class="buttin-b4l-opacity">
-                                    <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                        <option *ngFor="let option of item.lovs" [ngValue]="option" >{{option.value}}</option>
-                                    </select>
-                                    <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                </p>
-                            </div>
-                            <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
-                                <div class="text-with-presnt person-text-width">
-                                    <input placeholder="0" [(ngModel)]="item.answer.min" type="tel" id="min_{{item.parameterId}}"  name="min_{{item.parameterId}}" required="" maxlength="6">
-                                    <p class="perstage-text-n-d">Days</p>
-                                </div>
-        
-                                <p>to</p>
-        
-                                <div class="text-with-presnt person-text-width">
-                                    <input placeholder="0" [(ngModel)]="item.answer.max" name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="tel" required="" maxlength="6">
-                                    <p class="perstage-text-n-d">Days</p>
-                                </div>
-        
-                                <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                            </div>
-                        </ng-container>
                     </div>
-                </ng-container>
-                <div class="b4l-product-list back">
-                    <div class="b4l-product-list-right b4l-product-list-right1">
-                        <p class="buttin-b4l-opacity">
-                            <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add Parameters</a>
-                        </p>
+                    <ng-container *ngIf="product.parameters.length > 0">
+                        <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
+                            <div class="b4l-product-list-left">
+                                <p>{{i+1}}.</p>
+                                <p> {{item.lable}}</p>
+                            </div>
+                            <ng-container [ngSwitch]="item.inputType.id">
+                                <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
+                                    <p class="buttin-b4l-opacity">
+                                        <mat-button-toggle-group required name="yesNo_{{item.parameterId}}"
+                                            [(ngModel)]="item.answer">
+                                            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                                            <mat-button-toggle [value]="false">No</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                        <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                    </p>
+                                </div>
+                                <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
+                                    <p class="buttin-b4l-opacity">
+                                        <select class="form-control" id="dropdown_{{item.parameterId}}"
+                                            name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                            <option *ngFor="let option of item.lovs" [ngValue]="option">{{option.value}}
+                                            </option>
+                                        </select>
+                                        <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                    </p>
+                                </div>
+                                <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" name="min_{{item.parameterId}}" required="" maxlength="6">
+                                        <p class="perstage-text-n-d">Days</p>
+                                    </div>
+
+                                    <p>to</p>
+
+                                    <div class="text-with-presnt person-text-width">
+                                        <input placeholder="0" [(ngModel)]="item.answer.max"
+                                            name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text"
+                                            required="" maxlength="6">
+                                        <p class="perstage-text-n-d">Days</p>
+                                    </div>
+
+                                    <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <div class="b4l-product-list back">
+                        <div class="b4l-product-list-right b4l-product-list-right1">
+                            <p class="buttin-b4l-opacity">
+                                <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add
+                                    Parameters</a>
+                            </p>
+                        </div>
                     </div>
+                    <!-- Analyse now-->
+                    <div id="b4l-content">
+                        <div class="matches-parameter">
+                            <img class="img-match" src="assets/img/Analyse-now.svg" />
+                            <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
+                            <p class="opacity-light"> This will give you an idea how your matching will perform in real applications
+                            </p>
+                            <div class="matches-parameter-data">
+                                <a href="#" routerLink="" class="product-btn4">Analyse Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Analyse now end-->
+                </div>
+
+                <!-- Eligibility Calculation start-->
+                <div *ngIf="!isMatchesTab">
+                    <div class="b4l-product-list back">
+                        <div class="b4l-product-list-left b4l-product-list-left1">
+                            <p class="fnt-size-22">EBLR eligibility calculation method</p>
+                            <p><span>EBLR currently set at {{eblr.plr}}%</span></p>
+                        </div>
+                        <div class="b4l-product-list-right title-eli-all">
+                            <a href="javascript:void(0)" class="title-eli">Change eligibility model </a>
+                        </div>
+                    </div>
+
+
+                    <div class="b4l-product-list">
+
+                        <div class="b4l-product-list-left">
+                            <p>1</p>
+                            <p>Working Capital Requirement<br>
+                                <span>Mostly lies between 15% to 25%. Depending on different situations</span></p>
+                        </div>
+
+                        <div class="b4l-product-list-right">
+
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width">
+                                    <input [(ngModel)]="product.wcRequirement" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="wcReq" placeholder="Enter percentage" type="text" required="" maxlength="4">
+                                    <p class="perstage-text-n-d">%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list back">
+                        <div class="b4l-product-list-left">
+                            <p>2</p>
+                            <p>Max Loan amount as per limits</p>
+                        </div>
+                        <div class="b4l-product-list-right">
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width">
+                                    <input [(ngModel)]="product.maxLoanAmtLimit" pattern="[0-9]+" name="maxLoanAmnt" placeholder="Enter amount" type="text" required="" maxlength="6">
+                                    <p class="perstage-text-n-d"><b>INR</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list">
+                        <div class="b4l-product-list-left">
+                            <p>3</p>
+                            <p>Discounting Percentage</p>
+                        </div>
+                        <div class="b4l-product-list-right">
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width">
+                                    <input [(ngModel)]="product.disPer" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="disPercentage" placeholder="Enter percentage" type="text"  required="" maxlength="4">
+                                    <p class="perstage-text-n-d">%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list back">
+                        <div class="b4l-product-list-left">
+                            <p>4</p>
+                            <p>Tenure<br> <span>You need to specify tenure in months not year</span></p>
+                        </div>
+                        <div class="b4l-product-list-right">
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width">
+                                    <input placeholder="Enter months" pattern="[0-9]+" name="tenure" type="text" [(ngModel)]="product.tenure" required="" maxlength="3">
+                                    <p class="perstage-text-n-d"><b>Months</b></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="b4l-product-list">
+
+                        <div class="b4l-product-list-left">
+                            <p>5</p>
+                            <p>Rate of Interest</p>
+                        </div>
+                        <div class="b4l-product-list-right">
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width1">
+                                    <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="roi" placeholder="Spread" type="text"  required="" maxlength="4">
+                                    <p class="perstage-text-n-d">%</p>
+                                </div>
+                                <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="b4l-product-list back">
+                        <div class="b4l-product-list-left">
+                            <p>6</p>
+                            <p>Max Repayment Amount</p>
+                        </div>
+                        <div class="b4l-product-list-right">
+                            <div class="buttin-b4l-opacity opl2">
+                                <div class="text-with-presnt person-text-width">
+                                    <input placeholder="Enter Amount" type="text" pattern="[0-9]+" name="maxRepay" [(ngModel)]="product.maxRepayAmt" required="" maxlength="6">
+                                    <p class="perstage-text-n-d"><b>INR</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Eligibility Calculator-->
+                    <div id="b4l-content">
+                        <div class="matches-parameter">
+                            <img class="img-match" src="assets/img/EligibilityCalculator.svg" />
+                            <p class="opacity-light">Just to be on safe side you can run simulation on sample
+                                applications.</p>
+                            <p class="opacity-light"> This will give you an idea how your matching will perform in real
+                                applications
+                            </p>
+                            <div class="matches-parameter-data">
+                                <a href="#" routerLink="" class="product-btn4">Eligibility Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Eligibility Calculator end-->
                 </div>
             </div>
+
         </form>
 
 
@@ -112,7 +254,7 @@
         <!--  Matches Parameter end -->
 
         <!--  Eligibility Calculation start-->
-        <div id="b4l-content">
+        <!--  <div id="b4l-content">
 
 
             <div class="b4l-product-title">
@@ -144,18 +286,13 @@
                 </div>
             </div>
 
-
-
-
-
-
-        </div>
+        </div>-->
 
         <!-- Eligibility Calculation end -->
 
 
         <!-- Matches parameter clicked page start-->
-        <div class="product-back-button">
+        <!-- <div class="product-back-button">
             <p class="btn-back"><img src="assets/img/arrow-right.svg" /> Back</p>
             <p>Add new product</p>
         </div>
@@ -382,274 +519,23 @@
 
 
 
-        </div>
+        </div> -->
 
 
 
 
 
-        <!-- Analyse now-->
 
-        <div id="b4l-content">
-
-
-
-            <div class="matches-parameter">
-
-                <img class="img-match" src="assets/img/Analyse-now.svg" />
-                <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
-                <p class="opacity-light"> This will give you an idea how your matching will perform in real applications
-                </p>
-
-                <div class="matches-parameter-data">
-
-                    <a href="#" routerLink="" class="product-btn4">Analyse Now</a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Analyse now end-->
 
         <!-- Matches parameter end-->
 
 
-        <!-- Eligibility Calculation start-->
 
-        <div id="b4l-content">
 
 
-            <div class="b4l-product-title">
-                <ul class="product">
-                    <li><a href="#">
-                            <p>Matches Parameter</p>
-                        </a></li>
-                    <li><a href="#" class="active">
-                            <p>Eligibility Calculation</p>
-                        </a></li>
 
-                </ul>
 
-                <a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg" /> Import
-                    Eligibility Model</a>
-            </div>
 
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left b4l-product-list-left1">
-                    <p class="fnt-size-22">EBLR eligibility calculation method</p>
-                    <p><span>EBLR currently set at 11.5%</span></p>
-                </div>
-
-                <div class="b4l-product-list-right title-eli-all">
-
-                    <a href="#" class="title-eli">Change eligibility model </a>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>1</p>
-                    <p>Working Capital Requirement<br>
-                        <span>Mostly lies between 15% to 25%. Depending on different situations</span></p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="Enter percentage" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d">%</p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>2</p>
-                    <p>Max Loan amount as per limits</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="Enter percentage" type="text" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d"><b>INR</b></p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>3</p>
-                    <p>Discounting Percentage</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="Enter percentage" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d">%</p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>4</p>
-                    <p>Tenure<br>
-                        <span>You need to specify tenure in months not year</span></p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="Enter months" type="text" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d"><b>Months</b></p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>5</p>
-                    <p>Discounting Percentage</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width1">
-                            <input placeholder="Spread" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d">%</p>
-                        </div>
-                        <p class="text-input">+ 11.5% (EBLR) = 12.5%(Final ROI)</p>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>6</p>
-                    <p>Max Repayment Amount</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="Enter Amount" type="text" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d"><b>INR</b></p>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="b4l-product-list back">
-
-
-
-                <div class="b4l-product-list-right b4l-product-list-right1">
-
-                    <p class="buttin-b4l-opacity">
-                        <a href="#" class="product-btn3">+ Add Parameters</a>
-                    </p>
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-
-        <!-- Eligibility Calculation end-->
-
-
-
-
-        <!-- Eligibility Calculator-->
-
-        <div id="b4l-content">
-
-
-
-            <div class="matches-parameter">
-
-                <img class="img-match" src="assets/img/EligibilityCalculator.svg" />
-                <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
-                <p class="opacity-light"> This will give you an idea how your matching will perform in real applications
-                </p>
-
-                <div class="matches-parameter-data">
-
-                    <a href="#" routerLink="" class="product-btn4">Eligibility Calculator</a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Eligibility Calculator end-->
 
 
 
