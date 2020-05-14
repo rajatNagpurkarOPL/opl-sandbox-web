@@ -21,27 +21,27 @@ export class ProductComponent implements OnInit {
   eblr: any = {};
   product: any = { parameters: [] };
   approveBtn = null;
-  isAdd = false ;
+  isAdd = false;
   isMatchesTab = true;
   finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
-              private route: ActivatedRoute, private router: Router, public global: Globals) { }
+    private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
   // Save product details
   saveProduct(type, form) {
 
     // validating form
-    if (form.form.status === 'INVALID'){
+    if (form.form.status === 'INVALID') {
       this.commonService.warningSnackBar('Please fill required and valid details');
-      return 0 ;
+      return 0;
     }
-    if (this.product.parameters.length === 0){
+    if (this.product.parameters.length === 0) {
       this.commonService.warningSnackBar('Please add product parameters');
-      return 0 ;
+      return 0;
     }
     if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
-        this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1){
-      return 0 ;
+      this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1) {
+      return 0;
     }
     this.product.pStatus = Constant.MASTER_TYPE.PENDING.id;
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
@@ -62,11 +62,11 @@ export class ProductComponent implements OnInit {
     console.log(this.product);
     this.lenderService.saveProduct(productReq).subscribe(res => {
       if (res.status === 200) {
-        if (type === 1){
+        if (type === 1) {
           this.updateActionStatus();
         } else {
           this.commonService.successSnackBar(res.message);
-          if (res.data && res.data.productsTempId){
+          if (res.data && res.data.productsTempId) {
             this.router.navigate([Constant.ROUTE_URL.PRODUCT + '/' + res.data.productsTempId]);
           }
         }
@@ -83,19 +83,19 @@ export class ProductComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(ImportParameterPopupComponent, dialogConfig).afterClosed()
       .subscribe(response => {
-        if (response && response.data && response.data.event  === 'save') {
+        if (response && response.data && response.data.event === 'save') {
           this.product.parameters = response.data.product.parameters;
           this.product.parameters.forEach(element => {
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
               element.answer = { min: null, max: null };
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id){
+            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
               element.answer = true;
             }
             element.lovs = JSON.parse(element.lovs);
           });
-          if (response.data.product.parameters.length > 0 ){
-            this.commonService.successSnackBar( response.data.product.parameters.length + ' parameters added successfully');
+          if (response.data.product.parameters.length > 0) {
+            this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
           }
         }
       });
@@ -110,10 +110,10 @@ export class ProductComponent implements OnInit {
         if (response && response.data) {
           this.product.parameters = response.data.parametes;
           this.product.parameters.forEach(element => {
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
               element.answer = { min: null, max: null };
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id){
+            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
               element.answer = true;
             }
             element.lovs = JSON.parse(element.lovs);
@@ -124,7 +124,7 @@ export class ProductComponent implements OnInit {
 
   // update product status
   updateActionStatus() {
-    const statusReq = {actionStatus : this.approveBtn , productsTempId : this.product.productsTempId, productStatus : this.approveBtn};
+    const statusReq = { actionStatus: this.approveBtn, productsTempId: this.product.productsTempId, productStatus: this.approveBtn };
     this.lenderService.updateProductActionStatus(statusReq).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
@@ -153,18 +153,18 @@ export class ProductComponent implements OnInit {
         this.product.parameters.forEach(element => {
           element.lovs = JSON.parse(element.lovs);
           if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
-            element.answer = {min: null, max: null};
+            element.answer = { min: null, max: null };
           }
-          if (!this.commonService.isObjectNullOrEmpty(element.answer)){
+          if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
           }
         });
         // set approve send to checker buttons
         if ((this.product.actionStatus.id === Constant.MASTER_TYPE.SAVED.id ||
-            this.product.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id) &&
-            this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
-            this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
-            this.isAdd = true;
+          this.product.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id) &&
+          this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+          this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
+          this.isAdd = true;
         }
         // Calc final ROI
         this.changeROI();
@@ -178,7 +178,7 @@ export class ProductComponent implements OnInit {
   }
 
   // Get current effective EBLR
-  getCurrentEBLR(){
+  getCurrentEBLR() {
     const eblrReq: any = {};
     eblrReq.actionStatus = Constant.MASTER_TYPE.APPROVED;
     eblrReq.plrType = Constant.MASTER_TYPE.EBLR;
@@ -186,6 +186,11 @@ export class ProductComponent implements OnInit {
     this.lenderService.geteffectivePLR(eblrReq).subscribe(res => {
       if (res.status === 200) {
         this.eblr = res.data;
+        // set approve send to checker buttons
+        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+          this.isAdd = true;
+        }
+
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -194,7 +199,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  changeROI(){
+  changeROI() {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
 
@@ -203,9 +208,9 @@ export class ProductComponent implements OnInit {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
     this.product.productId = this.route.snapshot.paramMap.get('id');
-    if (this.product.productId){
+    if (this.product.productId) {
       this.getProductDetails();
-      this.getCurrentEBLR();
     }
+    this.getCurrentEBLR();
   }
 }

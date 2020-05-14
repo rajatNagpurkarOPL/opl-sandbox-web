@@ -31,7 +31,7 @@ export class ImportParameterPopupComponent implements OnInit {
 
   // get parameters of selected product
   getProductDetails() {
-    this.lenderService.getProductDetails(Constant.MASTER_TYPE.APPROVED, this.product.productId).subscribe(res => {
+    this.lenderService.getProductDetails(Constant.MASTER_TYPE.APPROVED.id, this.product.productsId).subscribe(res => {
       if (res.status === 200) {
         this.product = res.data;
         this.close({product : this.product, event : 'save'});
@@ -46,7 +46,6 @@ export class ImportParameterPopupComponent implements OnInit {
   save() {
     // get parameter on save
     this.getProductDetails();
-    // this.close({product : this.product, event : 'save'});
   }
 
   close(data) {

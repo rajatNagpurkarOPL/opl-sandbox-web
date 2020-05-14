@@ -15,7 +15,7 @@
             <mat-radio-group aria-label="Select an option" [(ngModel)]="product" name="projects">
                 <mat-radio-button  [value]="item">{{item.name}}</mat-radio-button>
             </mat-radio-group>
-            <p>{{item.parameters.length}} parameters</p>
+            <p>{{item.version}} parameters</p>
         </div>
         <div class="pop-up-cl"  *ngIf="productList.length === 0 || !productList" >
             <p>No data found</p>
