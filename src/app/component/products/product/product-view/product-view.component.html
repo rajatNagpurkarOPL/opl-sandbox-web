@@ -25,20 +25,30 @@
                         <mat-form-field class="fix-select">
                             <!-- <mat-label>v3.0 (Current version)</mat-label> -->
                             <mat-select>
-                              <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                                <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
                                 {{food.viewValue}}
                               </mat-option> -->
-                              <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020 02:03 PM</span></mat-option>
-                              <mat-option value="option1"><span class="option-txt">v3.0 (Current version)</span><br><span class="option-txt-inner">From 18 April 2020 02:03 PM</span></mat-option>
-                              <mat-option value="option2"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
-                              <mat-option value="option3"><span class="option-txt">v2.0</span><br><span class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
-        
-                            </mat-select >
-                          </mat-form-field>
-                        
-                        <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
-                        <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
-                        <a href="javaScript:void(0);" *ngIf="product.isEdit"  [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg" /> Edit</a> 
+                                <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval
+                                        pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020
+                                        02:03 PM</span></mat-option>
+                                <mat-option value="option1"><span class="option-txt">v3.0 (Current
+                                        version)</span><br><span class="option-txt-inner">From 18 April 2020 02:03
+                                        PM</span></mat-option>
+                                <mat-option value="option2"><span class="option-txt">v2.0</span><br><span
+                                        class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
+                                <mat-option value="option3"><span class="option-txt">v2.0</span><br><span
+                                        class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+
+                        <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)"
+                            class="product-btn1"> Send back</a>
+                        <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)"
+                            class="product-btn3"> Approve</a>
+                        <a href="javaScript:void(0);" *ngIf="product.isEdit"
+                            [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img
+                                src="assets/img/edit-white.svg" /> Edit</a>
                         <!-- <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.buttonName}}</a> -->
                     </div>
 
@@ -61,22 +71,99 @@
 
             <div class="b4l-product-title">
                 <ul class="product">
-                    <li><a href="javaScript:void(0);" class="active"> <p>Matches Parameter</p> </a></li>
-                    <li><a href="javaScript:void(0);"> <p>Eligibility Calculation</p> </a></li>
+                    <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                            href="javaScript:void(0);">
+                            <p>Matches Parameter</p>
+                        </a></li>
+                    <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                            href="javaScript:void(0);">
+                            <p>Eligibility Calculation</p>
+                        </a></li>
                 </ul>
             </div>
-
-            <div class="b4l-product-list" *ngFor="let param of product.parameters; index as i">
-                <div class="b4l-product-list-left">
-                    <p>{{i + 1}}.</p>
-                    <p>{{param.lable}}</p>
-                </div>
-                <div class="b4l-product-list-right">
-                    <div class="buttin-b4l-opacity opl2">
-                        <p>{{param.answerValue || '-'}}</p>
+            <ng-container *ngIf="isMatchesTab">
+                <div class="b4l-product-list" *ngFor="let param of product.parameters; index as i">
+                    <div class="b4l-product-list-left">
+                        <p>{{i + 1}}.</p>
+                        <p>{{param.lable}}</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{param.answerValue || '-'}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+            <ng-container *ngIf="!isMatchesTab">
+
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>1</p>
+                        <p>Working Capital Requirement<br> <span>Mostly lies between 15% to 25%. Depending on different
+                                situations</span></p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.wcRequirement || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>2</p>
+                        <p>Max Loan amount as per limits</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.maxLoanAmtLimit || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>3</p>
+                        <p>Discounting Percentage</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.disPer || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>4</p>
+                        <p>Tenure<br> <span>You need to specify tenure in months not year</span></p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.tenure || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>5</p>
+                        <p>Rate of Interest</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.roi || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>6</p>
+                        <p>Max Repayment Amount</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.maxRepayAmt || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
 
         </div>
 
