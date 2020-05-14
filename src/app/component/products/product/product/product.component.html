@@ -40,7 +40,7 @@
                     <a *ngIf="isMatchesTab" (click)="importParameterPopup();" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
                     <a *ngIf="!isMatchesTab" href="javaScript:void(0);" class="product-btn1"><img src="assets/img/import.svg" /> Import Eligibility model</a>
                 </div>
-                <div *ngIf="isMatchesTab">
+                <div [hidden]="!isMatchesTab">
                     <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
                         <img class="img-match" src="assets/img/matches-parameter.svg" />
                         <p>We are ready to set eligibility parameters for the product.</p>
@@ -125,7 +125,7 @@
                 </div>
 
                 <!-- Eligibility Calculation start-->
-                <div *ngIf="!isMatchesTab">
+                <div [hidden]="isMatchesTab">
                     <div class="b4l-product-list back">
                         <div class="b4l-product-list-left b4l-product-list-left1">
                             <p class="fnt-size-22">EBLR eligibility calculation method</p>
