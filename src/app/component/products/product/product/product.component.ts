@@ -75,25 +75,36 @@ export class ProductComponent implements OnInit {
   }
 
   // Open import paramter popup
-  importParameterPopup(): void {
+  importParameterPopup(type): void {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {type}; // using for both import parametres and eligibility calc
     this.matDialog.open(ImportParameterPopupComponent, dialogConfig).afterClosed()
       .subscribe(response => {
         if (response && response.data && response.data.event === 'save') {
-          this.product.parameters = response.data.product.parameters;
-          this.product.parameters.forEach(element => {
-            element.answer = JSON.parse(element.answer);
-            element.lovs = JSON.parse(element.lovs);
-            if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
-              element.answer = element.answer.id;
+          if (type === 'parameter'){  // copy parameters from approved selected product
+            this.product.parameters = response.data.product.parameters;
+            this.product.parameters.forEach(element => {
+              element.answer = JSON.parse(element.answer);
+              element.lovs = JSON.parse(element.lovs);
+              if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+                element.answer = element.answer.id;
+              }
+            });
+            if (response.data.product.parameters.length > 0) { // showing success snackbar
+              this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
             }
-          });
-          if (response.data.product.parameters.length > 0) {
-            this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
+          }
+          if (type === 'eligibility'){ // copy eligibility data from approved selected product
+            const p = response.data.product;
+            this.product.disPer = p.disPer;
+            this.product.maxLoanAmtLimit = p.maxLoanAmtLimit;
+            this.product.maxRepayAmt = p.maxRepayAmt;
+            this.product.roi = p.roi;
+            this.product.tenure = p.tenure;
+            this.product.wcRequirement = p.wcRequirement;
           }
         }
       });
-
   }
 
   // Open paramter popup

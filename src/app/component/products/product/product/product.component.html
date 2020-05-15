@@ -43,9 +43,9 @@
                                 <p>Eligibility Calculation</p>
                             </a></li>
                     </ul>
-                    <a *ngIf="isMatchesTab" (click)="importParameterPopup();" href="javaScript:void(0);"
+                    <a *ngIf="isMatchesTab" (click)="importParameterPopup('parameter');" href="javaScript:void(0);"
                         class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
-                    <a *ngIf="!isMatchesTab" href="javaScript:void(0);" class="product-btn1"><img
+                    <a *ngIf="!isMatchesTab" (click)="importParameterPopup('eligibility');" href="javaScript:void(0);" class="product-btn1"><img
                             src="assets/img/import.svg" /> Import Eligibility model</a>
                 </div>
                 <div [hidden]="!isMatchesTab">
@@ -92,7 +92,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="0" [(ngModel)]="item.answer.min" type="text"
                                             id="min_{{item.parameterId}}" name="min_{{item.parameterId}}" required=""
-                                            maxlength="6">
+                                            maxlength="6" min="{{item.minValue}}">
                                         <p class="perstage-text-n-d">Days</p>
                                     </div>
 
@@ -101,7 +101,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="0" [(ngModel)]="item.answer.max"
                                             name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text"
-                                            required="" maxlength="6">
+                                            required="" maxlength="6" min="{{item.maxValue}}">
                                         <p class="perstage-text-n-d">Days</p>
                                     </div>
 
