@@ -81,9 +81,8 @@
                                 </div>
                                 <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
                                     <p class="buttin-b4l-opacity">
-                                        <select class="form-control" id="dropdown_{{item.parameterId}}"
-                                            name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                            <option *ngFor="let option of item.lovs" [ngValue]="option">{{option.value}}
+                                        <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                            <option  *ngFor="let option of item.lovs" [selected]="option.id == item.answer.id" [ngValue]="option.id">{{option.value}}
                                             </option>
                                         </select>
                                         <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
