@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { LenderService } from 'src/app/service/lender.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
@@ -13,8 +13,8 @@ export class ImportParameterPopupComponent implements OnInit {
 
   productList  = [];
   product;
-  constructor(public dialogRef: MatDialogRef<ImportParameterPopupComponent>, public lenderService: LenderService,
-              public commonService: CommonService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<ImportParameterPopupComponent>,
+              public lenderService: LenderService, public commonService: CommonService) { }
 
   // Get all approved products
   listProducts(){
@@ -44,6 +44,9 @@ export class ImportParameterPopupComponent implements OnInit {
   }
 
   save() {
+    if (this.commonService.isObjectNullOrEmpty(this.product)){
+      this.commonService.warningSnackBar('Please selected product for continue.');
+    }
     // get parameter on save
     this.getProductDetails();
   }
