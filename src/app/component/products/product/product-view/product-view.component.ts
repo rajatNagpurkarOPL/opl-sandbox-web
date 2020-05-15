@@ -124,6 +124,16 @@ export class ProductViewComponent implements OnInit {
     });
   }
 
+  // switching between tabs
+  setTab(type){
+    if (type === 1){
+      this.isMatchesTab = true;
+    }else{
+      this.isMatchesTab = false;
+    }
+  }
+
+
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.product.productId = this.route.snapshot.paramMap.get('id');

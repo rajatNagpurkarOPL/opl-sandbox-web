@@ -67,11 +67,11 @@
 
             <div class="b4l-product-title">
                 <ul class="product">
-                    <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                    <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="setTab(1)"
                             href="javaScript:void(0);">
                             <p>Matches Parameter</p>
                         </a></li>
-                    <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="isMatchesTab = !isMatchesTab"
+                    <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="setTab(2)"
                             href="javaScript:void(0);">
                             <p>Eligibility Calculation</p>
                         </a></li>

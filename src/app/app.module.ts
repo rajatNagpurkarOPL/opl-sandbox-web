@@ -28,6 +28,7 @@ import { SendBackModelComponent } from './common-utils/common-component/send-bac
 import { SendBackModelService } from './common-utils/common-services/SendBackModelService';
 import { TostrComponent } from './common-utils/common-component/tostr/tostr.component';
 import { Globals } from 'src/app/common-utils/globals';
+import { PrintErrorComponent } from './common-utils/common-component/print-error/print-error.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { Globals } from 'src/app/common-utils/globals';
     ProductViewComponent,
     ConfirmationPopupComponent,
     SendBackModelComponent,
+    PrintErrorComponent,
   ],
   imports: [
     ReactiveFormsModule,
