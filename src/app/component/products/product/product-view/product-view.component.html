@@ -42,14 +42,10 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)"
-                            class="product-btn1"> Send back</a>
-                        <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)"
-                            class="product-btn3"> Approve</a>
-                        <a href="javaScript:void(0);" *ngIf="product.isEdit"
-                            [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img
-                                src="assets/img/edit-white.svg" /> Edit</a>
-                        <!-- <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.buttonName}}</a> -->
+                        <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
+                        <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
+                        <a href="javaScript:void(0);" *ngIf="product.isEdit" [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg" /> Edit</a>
+                        <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.buttonName}}</a>
                     </div>
 
                 </div>
@@ -98,9 +94,8 @@
 
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>1</p>
-                        <p>Working Capital Requirement<br> <span>Mostly lies between 15% to 25%. Depending on different
-                                situations</span></p>
+                        <p>1.</p>
+                        <p>Working Capital Requirement  <!-- <br> <span>Mostly lies between 15% to 25%. Depending on different situations</span> --> </p>
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
@@ -110,7 +105,7 @@
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>2</p>
+                        <p>2.</p>
                         <p>Max Loan amount as per limits</p>
                     </div>
                     <div class="b4l-product-list-right">
@@ -121,7 +116,7 @@
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>3</p>
+                        <p>3.</p>
                         <p>Discounting Percentage</p>
                     </div>
                     <div class="b4l-product-list-right">
@@ -132,8 +127,8 @@
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>4</p>
-                        <p>Tenure<br> <span>You need to specify tenure in months not year</span></p>
+                        <p>4.</p>
+                        <p>Tenure<!-- <br> <span>You need to specify tenure in months not year</span> --></p>
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
@@ -143,7 +138,7 @@
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>5</p>
+                        <p>5.</p>
                         <p>Rate of Interest</p>
                     </div>
                     <div class="b4l-product-list-right">
@@ -154,7 +149,7 @@
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
-                        <p>6</p>
+                        <p>6.</p>
                         <p>Max Repayment Amount</p>
                     </div>
                     <div class="b4l-product-list-right">

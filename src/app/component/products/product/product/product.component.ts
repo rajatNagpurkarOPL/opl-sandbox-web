@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
   isMatchesTab = true;
   finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
-    private route: ActivatedRoute, private router: Router, public global: Globals) { }
+              private route: ActivatedRoute, private router: Router, public global: Globals) { }
 
   // Save product details
   saveProduct(type, form) {
@@ -47,15 +47,11 @@ export class ProductComponent implements OnInit {
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
     this.product.productStatus = Constant.MASTER_TYPE.SAVED;
     this.product.actionStatus = Constant.MASTER_TYPE.SAVED;
-    // this.product.roi = this.eblr.plr + this.product.roi;
-    // this.product.disPer = 0;
-    // this.product.maxLoanAmtLimit = 0;
-    // this.product.maxRepayAmt = 0;
-    // this.product.roi = 0;
-    // this.product.tenure = 0;
-    // this.product.wcRequirement = 0;
     const productReq = cloneDeep(this.product);
     productReq.parameters.forEach(element => {
+      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){ //  Workaroud for set  ngModel for dropdown
+        element.answer = element.lovs.filter(e => e.id === element.answer)[0];
+      }
       element.lovs = JSON.stringify(element.lovs);
       element.answer = JSON.stringify(element.answer);
     });
@@ -86,13 +82,11 @@ export class ProductComponent implements OnInit {
         if (response && response.data && response.data.event === 'save') {
           this.product.parameters = response.data.product.parameters;
           this.product.parameters.forEach(element => {
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
-              element.answer = { min: null, max: null };
-            }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
-              element.answer = true;
-            }
+            element.answer = JSON.parse(element.answer);
             element.lovs = JSON.parse(element.lovs);
+            if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+              element.answer = element.answer.id;
+            }
           });
           if (response.data.product.parameters.length > 0) {
             this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
@@ -143,7 +137,6 @@ export class ProductComponent implements OnInit {
     this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
   }
 
-
   // get product info by product id
   getProductDetails() {
     this.lenderService.getProductDetails(Constant.MASTER_TYPE.PENDING.id, this.product.productId).subscribe(res => {
@@ -157,6 +150,9 @@ export class ProductComponent implements OnInit {
           }
           if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
+          }
+          if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+            element.answer = element.answer.id;
           }
         });
         // set approve send to checker buttons
@@ -190,7 +186,6 @@ export class ProductComponent implements OnInit {
         if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
           this.isAdd = true;
         }
-
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -202,8 +197,7 @@ export class ProductComponent implements OnInit {
   changeROI() {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
-
-
+  
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;

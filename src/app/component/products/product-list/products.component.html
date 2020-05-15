@@ -53,20 +53,20 @@
                     </div>
                 </div>
                 <div *ngSwitchCase="routeURL.SENT_PRODUCTS">
-                    <div class="b4l-product-list-title-1">
+                    <div class="b4l-product-list-title">
                         <p>Product Name</p>
-                        <div class="b4l-product-list-right-1">
-                            <p>Status</p>
-                            <p>Version</p>
+                        <div class="b4l-product-list-right">
+                            <!-- <p>Status</p> -->
+                            <!-- <p>Version</p> -->
                             <p>Last modified</p>
                             <p>Action</p>
                         </div>
                     </div>
-                    <div class="b4l-product-list-1" *ngFor="let item of productList">
+                    <div class="b4l-product-list" *ngFor="let item of productList">
                         <p>{{item.name}}</p>
-                        <div class="b4l-product-list-right-1">
-                            <p class="display"><span class="dot">&#8226; </span>Active</p>
-                            <p>Version 2.0</p>
+                        <div class="b4l-product-list-right">
+                            <!-- <p class="display"><span class="dot">&#8226; </span>Active</p>
+                            <p>Version 2.0</p> -->
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p class="buttin-b4l-opacity">
                                 <button mat-raised-button class="btn3-b4l" matTooltip="view" matTooltipPosition="above" (click)="viewProduct(item.productStatus.id, item.productsTempId)" aria-label="View">
