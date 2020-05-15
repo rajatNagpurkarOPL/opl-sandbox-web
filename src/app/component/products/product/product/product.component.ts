@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
   approveBtn = null;
   isAdd = false;
   isMatchesTab = true;
+  isEligibilityTab = false;
   finalROI;
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
               private route: ActivatedRoute, private router: Router, public global: Globals) { }
@@ -206,10 +207,20 @@ export class ProductComponent implements OnInit {
     });
   }
 
+
+  // switching between tabs
+  setTab(type){
+    if (type === 1){
+      this.isMatchesTab = true;
+    }else{
+      this.isMatchesTab = false;
+    }
+  }
+
+  // sum of total ROI
   changeROI() {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
-  
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
