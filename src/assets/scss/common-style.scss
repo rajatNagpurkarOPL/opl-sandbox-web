@@ -400,6 +400,18 @@ position: relative;
 .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0.6em 1em 1.3em !important;
 }
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    border: 1px solid #DEDEDE !important;
+    border-radius: 5px !important;
+}
+.mat-form-field-flex {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 1em !important;
+  
+}
 
 .card-txt-left p.active{
     color: #2D3079 !important;
@@ -424,8 +436,9 @@ position: relative;
 }
 
 .mat-dialog-container {    
-    width: 60em !important; 
+    width: 50em !important; 
 }
+
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
     border-color: #2D3079 !important; 
@@ -441,6 +454,15 @@ position: relative;
     color: #2D3079  !important;
   
 }
+
+.mat-checkbox-layout .mat-checkbox-label {
+    line-height: 24px;
+    white-space: nowrap !important;
+    width: 38em !important; 
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
 .mat-radio-label-content {   
     color: #000000 !important;
     font-weight: bold !important;

@@ -1,5 +1,5 @@
 <div id="b4l-pop-up">
-  <h4>EBLR Value</h4>
+  <h4>Change EBLR Value</h4>
   <div class="hr"></div>
   <form  autocomplete="off" novalidate [formGroup]="registerForm">
   <div class="pop-up-content">
@@ -18,11 +18,11 @@
   </div>
   <div class="hr"></div>
   <div class="pop-up-radio-group">
-    <mat-radio-group aria-label="Select an option">
+    <!-- <mat-radio-group aria-label="Select an option"> -->
       <!-- <mat-radio-button value="1">Update at specific time</mat-radio-button> -->
-      Update at specific time
+     <p class="eblr-text"> Update at specific time </p>
       <!-- <mat-radio-button value="2">Update Immediately after approval</mat-radio-button> -->
-    </mat-radio-group>
+    <!-- </mat-radio-group> -->
     <div class="popup-input">
       <div class="buttin-b4l-opacity buttin-b4l-opacity1 opl2">
         <div class="text-with-presnt person-text-width">
@@ -32,14 +32,14 @@
         </div>
       </div>
       <mat-form-field>
-        <mat-label>Choose a date</mat-label>
+      
         <input [min]="minDate" matInput [matDatepicker]="picker" tabindex="2" [(ngModel)]="eblr.effectiveFrom" formControlName="date" required>
         <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <div class="buttin-b4l-opacity opl2">
-        <div class="text-with-presnt person-text-width">
+        <div class="text-with-presnt person-text-width time-width">
           <input placeholder="Hour" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.hours" tabindex="3" formControlName="hours" max="12" required="" maxlength="2">
           <!-- <div *ngIf="f.submitted && f.form.controls.hours.status == 'INVALID'" > -->
                <!-- Invalid hours -->

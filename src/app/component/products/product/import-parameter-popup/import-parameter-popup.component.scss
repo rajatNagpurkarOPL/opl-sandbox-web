@@ -1,11 +1,14 @@
 .btn-pop-up {
     display: flex;
-    width: 44%;
+    position: absolute;
+    max-width: 50em;
+    background: #ffffff;
+    z-index: 1;
     align-items: center;
     justify-content: space-between;
     margin: 3em 0 0;
     padding: 2em;
-    position: fixed;
+    width: 100%;
     bottom: 9em;
     background: #ffffff;
     border-bottom-left-radius: 5px;
@@ -24,7 +27,9 @@
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 6em;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
     background: #2D3079;
 }
 
@@ -35,7 +40,9 @@
     color: #5C5C5C;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 10em;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
     background: #F7F7F7;
 }
 
@@ -120,10 +127,12 @@ opacity: 0.4;
 }
 
 
-.import-matches {position: fixed;
-width: 44%;
-background: #ffffff;
-z-index: 1;
+.import-matches {   
+     position: absolute;
+     max-width: 50em;
+     width: 100%;
+    background: #ffffff;
+    z-index: 1;
 }
 .pop-up-content {
     margin: 6em 0;
@@ -139,3 +148,36 @@ z-index: 1;
     border-top-right-radius: 5px;
     
     }
+
+
+    @media (max-width: 1440px)
+     {
+
+        .import-matches{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2em;
+            top: 7.5em;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+     }
+
+
+
+    @media (max-width: 1024px)
+     {
+
+        .import-matches{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2em;
+            top: 7.5em;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+     }

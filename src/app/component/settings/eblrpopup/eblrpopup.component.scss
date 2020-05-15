@@ -96,7 +96,9 @@ input[type=text] {
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 6em;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
     background: #2D3079;
 }
 
@@ -107,6 +109,38 @@ input[type=text] {
     color: #5C5C5C;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 10em;
     background: #F7F7F7;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
 }
+
+
+.eblr-text {
+    color: #2D3079;
+    font-size: 16px;
+    font-weight: bold;
+    width: 50%;
+}
+
+.time-width input {
+    width: 100%;
+    padding: 1.2em 1em;
+    border: 0;
+    border-right: 1px solid #DEDEDE;
+    border-radius: 5px;
+}
+
+
+.time-width {
+    width: 95% !important;
+}
+
+.buttin-b4l-opacity {
+    opacity: 1 !important;
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
