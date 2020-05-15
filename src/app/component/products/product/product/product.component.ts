@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Constant } from 'src/app/common-utils/Constant';
-import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
-import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
-import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
-import { LenderService } from 'src/app/service/lender.service';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
-import * as cloneDeep from 'lodash/cloneDeep';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as cloneDeep from 'lodash/cloneDeep';
+import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
+import { LenderService } from 'src/app/service/lender.service';
+import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
+import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,8 @@ import { Globals } from 'src/app/common-utils/globals';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
+              private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
 
   routeURL: any = {};
   inputType: any = {};
@@ -24,15 +27,31 @@ export class ProductComponent implements OnInit {
   isAdd = false;
   isMatchesTab = true;
   isEligibilityTab = false;
+  submitted = false;
   finalROI;
-  constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
-              private route: ActivatedRoute, private router: Router, public global: Globals) { }
+
+  // Product form validation
+  productForm: any  = this.fb.group({
+    name: ['', [Validators.required, Validators.maxLength(30)]],
+    elgbltForm: this.fb.group({
+      maxRepay: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
+      roi: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
+      tenure: ['', [Validators.required, Validators.max(36)]],
+      disPercentage: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
+      maxLoanAmnt: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
+      wcReq: ['', [Validators.required, Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25)]],
+    }),
+    paramForm : this.fb.group({})
+  });
+  // convenience getter for easy access to form fields
+  get f() { return this.productForm.controls; }
 
   // Save product details
-  saveProduct(type, form) {
-
+  saveProduct(type) {
+    this.submitted = true;
     // validating form
-    if (form.form.status === 'INVALID') {
+    console.log(this.productForm);
+    if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details');
       return 0;
     }
@@ -56,7 +75,6 @@ export class ProductComponent implements OnInit {
       element.lovs = JSON.stringify(element.lovs);
       element.answer = JSON.stringify(element.answer);
     });
-    console.log(this.product);
     this.lenderService.saveProduct(productReq).subscribe(res => {
       if (res.status === 200) {
         if (type === 1) {
@@ -83,8 +101,14 @@ export class ProductComponent implements OnInit {
       .subscribe(response => {
         if (response && response.data && response.data.event === 'save') {
           if (type === 'parameter'){  // copy parameters from approved selected product
+
+            // Remove all form field
+            this.productForm.removeControl('paramForm');
+            this.productForm.addControl('paramForm', this.fb.group({}));
+            // Set parameters
             this.product.parameters = response.data.product.parameters;
             this.product.parameters.forEach(element => {
+              this.addFormControl(element); // create form field
               element.answer = JSON.parse(element.answer);
               element.lovs = JSON.parse(element.lovs);
               if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
@@ -116,6 +140,7 @@ export class ProductComponent implements OnInit {
         if (response && response.data) {
           this.product.parameters = response.data.parametes;
           this.product.parameters.forEach(element => {
+            this.addFormControl(element); // create form field
             if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
               element.answer = { min: null, max: null };
             }
@@ -124,7 +149,6 @@ export class ProductComponent implements OnInit {
             }
             element.lovs = JSON.parse(element.lovs);
           });
-          console.log(this.product);
         }
       });
   }
@@ -145,11 +169,6 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  // remove parameter
-  removeParameter(param) {
-    this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
-  }
-
   // get product info by product id
   getProductDetails() {
     this.lenderService.getProductDetails(Constant.MASTER_TYPE.PENDING.id, this.product.productId).subscribe(res => {
@@ -157,6 +176,7 @@ export class ProductComponent implements OnInit {
         this.product = res.data;
         // set answer and other values
         this.product.parameters.forEach(element => {
+          this.addFormControl(element); // Create form field
           element.lovs = JSON.parse(element.lovs);
           if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = { min: null, max: null };
@@ -177,7 +197,6 @@ export class ProductComponent implements OnInit {
         }
         // Calc final ROI
         this.changeROI();
-        console.log(this.product);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -207,6 +226,41 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  // Create form field for added/imported parameters
+  addFormControl(param){
+    if (param.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+      // tslint:disable-next-line: max-line-length
+      this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
+      this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', [Validators.required]));
+    }
+    if (param.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+      this.productForm.get('paramForm').addControl('yesNo_' + param.parameterId, this.fb.control('', [Validators.required]));
+    }
+    if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+      this.productForm.get('paramForm').addControl('dropdown_' + param.parameterId, this.fb.control('', [Validators.required]));
+    }
+  }
+
+   // remove parameter
+   removeParameter(param) {
+    let paramName = null;
+    // Remove control from from grou
+    if (param.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+      paramName = 'yesNo_' + param.parameterId;
+    }
+    if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+      paramName = 'dropdown_' + param.parameterId;
+    }
+    if (param.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+      this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
+      this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
+    }
+    if (paramName) {
+      this.productForm.get('paramForm').removeControl(paramName);
+    }
+    this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
+  }
+
 
   // switching between tabs
   setTab(type){
@@ -221,13 +275,15 @@ export class ProductComponent implements OnInit {
   changeROI() {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
+
+
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
     this.product.productId = this.route.snapshot.paramMap.get('id');
-    if (this.product.productId) {
+    if (this.product.productId) { // get product info if product is found
       this.getProductDetails();
     }
-    this.getCurrentEBLR();
+    this.getCurrentEBLR(); // get current eblr
   }
 }

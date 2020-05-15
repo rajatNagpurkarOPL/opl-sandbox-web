@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
 
-        <form #productForm="ngForm" class="row">
+        <form [formGroup]="productForm" class="row" (ngSubmit)="saveProduct(0)">
             <div class="product-back-button">
                 <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back
                 </p>
@@ -13,14 +13,11 @@
                 <div class="product-name">
                     <p>Product Name</p>
                     <div class="product-name-details">
-                        <input type="text" id="productName" name="productName" [(ngModel)]="product.name"
-                            placeholder="Eg. “Contactless invoice financing”" required>
+                        <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off">
+                        <!-- <app-print-error [control]="f.name" [submitted]='submitted'></app-print-error> -->
                         <div class="product-details-btn">
-                            <a *ngIf="isAdd" (click)="saveProduct(0, productForm)" href="javascript:void(0)"
-                                class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
-                            <button *ngIf="isAdd" [disabled]="!approveBtn"
-                                [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')"
-                                (click)="saveProduct(1, productForm)" href="javascript:void(0)">
+                            <button type="submit" *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
+                            <button type="submit" *ngIf="isAdd" [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1)" href="javascript:void(0)">
                                 <img src="assets/img/send-to-checker.svg" /> Send to checker
                             </button>
                         </div>
@@ -34,13 +31,11 @@
             <div id="b4l-content">
                 <div class="b4l-product-title">
                     <ul class="product">
-                        <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="setTab(1)"
-                                href="javascript:void(0)">
+                        <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="setTab(1)" href="javascript:void(0)">
                                 <p>Matches Parameter</p>
                             </a></li>
-                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="setTab(2)"
-                                href="javascript:void(0)">
-                                <p>Eligibility Calculation</p>
+                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="setTab(2)" href="javascript:void(0)">
+                                <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm').invalid && productForm.submitted">•</span> </p>
                             </a></li>
                     </ul>
                     <a *ngIf="isMatchesTab" (click)="importParameterPopup('parameter');" href="javaScript:void(0);"
@@ -49,76 +44,73 @@
                             src="assets/img/import.svg" /> Import Eligibility model</a>
                 </div>
                 <div [hidden]="!isMatchesTab">
-                    <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
-                        <img class="img-match" src="assets/img/matches-parameter.svg" />
-                        <p>We are ready to set eligibility parameters for the product.</p>
-                        <p>You can either import parameters from existing product or set new parameters from scratch</p>
+                    <form formGroupName="paramForm">
+                        <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
+                            <img class="img-match" src="assets/img/matches-parameter.svg" />
+                            <p>We are ready to set eligibility parameters for the product.</p>
+                            <p>You can either import parameters from existing product or set new parameters from scratch</p>
 
-                        <div class="matches-parameter-data">
-                            <a (click)="importParameterPopup('parameter');" href="javaScript:void(0);" class="product-btn1"><img
-                                    src="assets/img/import.svg" /> Import matches parameter</a>
-                            <p>or</p>
-                            <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New
-                                Parameters</a>
-                        </div>
-                    </div>
-                    <ng-container *ngIf="product.parameters.length > 0">
-                        <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
-                            <div class="b4l-product-list-left">
-                                <p>{{i+1}}.</p>
-                                <p> {{item.lable}}</p>
-                            </div>
-                            <ng-container [ngSwitch]="item.inputType.id">
-                                <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
-                                    <p class="buttin-b4l-opacity">
-                                        <mat-button-toggle-group required name="yesNo_{{item.parameterId}}"
-                                            [(ngModel)]="item.answer">
-                                            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                                            <mat-button-toggle [value]="false">No</mat-button-toggle>
-                                        </mat-button-toggle-group>
-                                        <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                    </p>
-                                </div>
-                                <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
-                                    <p class="buttin-b4l-opacity">
-                                        <select class="form-control" id="dropdown_{{item.parameterId}}" name="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                            <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
-                                            </option>
-                                        </select>
-                                        <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                    </p>
-                                </div>
-                                <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
-                                    <div class="text-with-presnt person-text-width">
-                                        <input placeholder="0" [(ngModel)]="item.answer.min" type="text"
-                                            id="min_{{item.parameterId}}" name="min_{{item.parameterId}}" required=""
-                                            maxlength="6" min="{{item.minValue}}">
-                                        <p class="perstage-text-n-d">Days</p>
-                                    </div>
-
-                                    <p>to</p>
-
-                                    <div class="text-with-presnt person-text-width">
-                                        <input placeholder="0" [(ngModel)]="item.answer.max"
-                                            name="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text"
-                                            required="" maxlength="6" min="{{item.maxValue}}">
-                                        <p class="perstage-text-n-d">Days</p>
-                                    </div>
-
-                                    <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                </div>
-                            </ng-container>
-                        </div>
-                    </ng-container>
-                    <div class="b4l-product-list back">
-                        <div class="b4l-product-list-right b4l-product-list-right1">
-                            <p class="buttin-b4l-opacity">
-                                <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add
+                            <div class="matches-parameter-data">
+                                <a (click)="importParameterPopup('parameter');" href="javaScript:void(0);" class="product-btn1"><img
+                                        src="assets/img/import.svg" /> Import matches parameter</a>
+                                <p>or</p>
+                                <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New
                                     Parameters</a>
-                            </p>
+                            </div>
                         </div>
-                    </div>
+                        <ng-container *ngIf="product.parameters.length > 0">
+                            <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
+                                <div class="b4l-product-list-left">
+                                    <p>{{i+1}}.</p>
+                                    <p> {{item.lable}}</p>
+                                </div>
+                                <ng-container [ngSwitch]="item.inputType.id">
+                                    <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
+                                        <p class="buttin-b4l-opacity">
+                                            <mat-button-toggle-group  formControlName="yesNo_{{item.parameterId}}"
+                                                [(ngModel)]="item.answer">
+                                                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                                                <mat-button-toggle [value]="false">No</mat-button-toggle>
+                                            </mat-button-toggle-group>
+                                            <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                        </p>
+                                    </div>
+                                    <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
+                                        <p class="buttin-b4l-opacity">
+                                            <select class="form-control" id="dropdown_{{item.parameterId}}" formControlName="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                                <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
+                                                </option>
+                                            </select>
+                                            <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                        </p>
+                                    </div>
+                                    <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
+                                        <div class="text-with-presnt person-text-width">
+                                            <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" formControlName="min_{{item.parameterId}}" >
+                                            <p class="perstage-text-n-d">Days</p>
+                                        </div>
 
+                                        <p>to</p>
+
+                                        <div class="text-with-presnt person-text-width">
+                                            <input placeholder="0" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text">
+                                            <p class="perstage-text-n-d">Days</p>
+                                        </div>
+
+                                        <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-right b4l-product-list-right1">
+                                <p class="buttin-b4l-opacity">
+                                    <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add
+                                        Parameters</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
 
@@ -134,109 +126,99 @@
                         </div>
                     </div>
 
+                    <form action="" formGroupName="elgbltForm"> 
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>1</p>
+                                <p>Working Capital Requirement<br>
+                                    <span>Mostly lies between 15% to 25%. Depending on different situations</span></p>
+                            </div>
 
-                    <div class="b4l-product-list">
+                            <div class="b4l-product-list-right">
 
-                        <div class="b4l-product-list-left">
-                            <p>1</p>
-                            <p>Working Capital Requirement<br>
-                                <span>Mostly lies between 15% to 25%. Depending on different situations</span></p>
-                        </div>
-
-                        <div class="b4l-product-list-right">
-
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.wcRequirement"
-                                        pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="wcReq"
-                                        placeholder="Enter percentage" type="text" required="" maxlength="4">
-                                    <p class="perstage-text-n-d">%</p>
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input [(ngModel)]="product.wcRequirement"  formControlName="wcReq" placeholder="Enter percentage" type="text" >
+                                        <p class="perstage-text-n-d">%</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="b4l-product-list back">
-                        <div class="b4l-product-list-left">
-                            <p>2</p>
-                            <p>Max Loan amount as per limits</p>
-                        </div>
-                        <div class="b4l-product-list-right">
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.maxLoanAmtLimit" pattern="[0-9]+" name="maxLoanAmnt"
-                                        placeholder="Enter amount" type="text" required="" maxlength="6">
-                                    <p class="perstage-text-n-d"><b>INR</b></p>
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-left">
+                                <p>2</p>
+                                <p>Max Loan amount as per limits</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input [(ngModel)]="product.maxLoanAmtLimit"  formControlName="maxLoanAmnt" placeholder="Enter amount" type="text">
+                                        <p class="perstage-text-n-d"><b>INR</b></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="b4l-product-list">
-                        <div class="b4l-product-list-left">
-                            <p>3</p>
-                            <p>Discounting Percentage</p>
-                        </div>
-                        <div class="b4l-product-list-right">
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width">
-                                    <input [(ngModel)]="product.disPer" pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$"
-                                        name="disPercentage" placeholder="Enter percentage" type="text" required=""
-                                        maxlength="4">
-                                    <p class="perstage-text-n-d">%</p>
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>3</p>
+                                <p>Discounting Percentage</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input [(ngModel)]="product.disPer" formControlName="disPercentage" placeholder="Enter percentage" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="b4l-product-list back">
-                        <div class="b4l-product-list-left">
-                            <p>4</p>
-                            <p>Tenure<br> <span>You need to specify tenure in months not year</span></p>
-                        </div>
-                        <div class="b4l-product-list-right">
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width">
-                                    <input placeholder="Enter months" pattern="[0-9]+" name="tenure" type="text"
-                                        [(ngModel)]="product.tenure" required="" maxlength="3">
-                                    <p class="perstage-text-n-d"><b>Months</b></p>
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-left">
+                                <p>4</p>
+                                <p>Tenure<br> <span>You need to specify tenure in months not year</span></p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input placeholder="Enter months" formControlName="tenure" type="text" [(ngModel)]="product.tenure" >
+                                        <p class="perstage-text-n-d"><b>Months</b></p>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
-                    </div>
+                        <div class="b4l-product-list">
 
-                    <div class="b4l-product-list">
-
-                        <div class="b4l-product-list-left">
-                            <p>5</p>
-                            <p>Rate of Interest</p>
-                        </div>
-                        <div class="b4l-product-list-right">
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width1">
-                                    <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()"
-                                        pattern="^(([0-9]*)|(([0-9]*)\.([0-9]*)))$" name="roi" placeholder="Spread"
-                                        type="text" required="" maxlength="4">
-                                    <p class="perstage-text-n-d">%</p>
-                                </div>
-                                <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
+                            <div class="b4l-product-list-left">
+                                <p>5</p>
+                                <p>Rate of Interest</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="b4l-product-list back">
-                        <div class="b4l-product-list-left">
-                            <p>6</p>
-                            <p>Max Repayment Amount</p>
-                        </div>
-                        <div class="b4l-product-list-right">
-                            <div class="buttin-b4l-opacity opl2">
-                                <div class="text-with-presnt person-text-width">
-                                    <input placeholder="Enter Amount" type="text" pattern="[0-9]+" name="maxRepay"
-                                        [(ngModel)]="product.maxRepayAmt" required="" maxlength="6">
-                                    <p class="perstage-text-n-d"><b>INR</b></p>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width1">
+                                        <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                    </div>
+                                    <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-left">
+                                <p>6</p>
+                                <p>Max Repayment Amount</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <input placeholder="Enter Amount" type="text" formControlName="maxRepay" [(ngModel)]="product.maxRepayAmt">
+                                        <p class="perstage-text-n-d"><b>INR</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
 
