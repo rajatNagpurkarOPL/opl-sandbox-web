@@ -112,6 +112,7 @@ export class ProductComponent implements OnInit {
             }
             element.lovs = JSON.parse(element.lovs);
           });
+          console.log(this.product);
         }
       });
   }
