@@ -18,11 +18,14 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
 export class ProductViewComponent implements OnInit {
   product: any = {};
   routeURL: any = {};
+  status;
+  showStatus: any = {isShowStatus : false};
   constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService,
               public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
 
 
   isMatchesTab = true;
+  reqType;
   // get product info by product id
   getProductDetails() {
     this.lenderService.getProductDetails(this.product.status, this.product.productId).subscribe(res => {
@@ -48,25 +51,54 @@ export class ProductViewComponent implements OnInit {
           }
         });
         // set approve send to checker buttons
+        // Checker's Actions
         if (this.product.actionStatus.id === Constant.MASTER_TYPE.SENT_TO_CHECKER.id &&
           this.global.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1) {
-          this.product.approve = Constant.MASTER_TYPE.APPROVED;
-          this.product.reject = Constant.MASTER_TYPE.SEND_BACK;
-        }
-        if (this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id &&
-          this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+            // tslint:disable-next-line: max-line-length
+            if (this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_CREATION.id || this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ){
+              this.product.approve = {action : Constant.MASTER_TYPE.APPROVED, reqType : this.product.reqType};
+              this.product.reject = {action : Constant.MASTER_TYPE.SEND_BACK, reqType : this.product.reqType};
+            }
+            if (this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id) {
+              this.product.approve = {action : Constant.MASTER_TYPE.INACTIVE, reqType : this.product.reqType};
+              this.product.reject = {action : Constant.MASTER_TYPE.SEND_BACK, reqType : this.product.reqType};
+            }
+          }
+        // Maker's Actions
+        // tslint:disable-next-line: max-line-length
+        if (this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
           this.product.isEdit = true;
+          if (this.product.reqType && this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id){
+            this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_DEACTIVATION};
+          }
+          if (this.product.reqType && this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id){
+            this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_ACTIVATION};
+          }
         }
-        if (this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id) {
-          this.product.actInact = Constant.MASTER_TYPE.INACTIVE;
+        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 &&
+        this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id) {
+          this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_DEACTIVATION};
         }
-        if (this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
-          this.product.actInact = Constant.MASTER_TYPE.ACTIVE;
+        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 &&
+        this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
+          this.product.actInact = {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_ACTIVATION};
+        }
+        if (this.status == Constant.MASTER_TYPE.APPROVED.id || this.product.productsId){
+          this.product.isEdit = false;
         }
         // if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
-        //   this.isEdit = true;
-        //   this.isAdd = true;
-        // }
+          //   this.isEdit = true;
+          //   this.isAdd = true;
+          // }
+        if (this.product.reqType) {
+          this.getReqType(this.product.reqType.id);
+        }
+        // show status only if active or inactive product
+        // tslint:disable-next-line: max-line-length
+        if (this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id || this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
+          this.showStatus.isShowStatus = true;
+          this.showStatus.status = this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id ? 'Active' : 'Inactive';
+        }
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -77,7 +109,7 @@ export class ProductViewComponent implements OnInit {
 
   // update product status send back or aprove
   updateStatus(action) {
-    if (action.id === Constant.MASTER_TYPE.SEND_BACK.id) {
+    if (action.action.id === Constant.MASTER_TYPE.SEND_BACK.id) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.data = { title: 'Send back Product' };
       this.matDialog.open(SendBackModelComponent, dialogConfig).afterClosed().subscribe(response => {
@@ -95,8 +127,9 @@ export class ProductViewComponent implements OnInit {
   updateActionStatus(action) {
     const req = cloneDeep(this.product);
     delete req.parameters;
-    req.actionStatus = action;
-    req.productStatus = action;
+    req.actionStatus = action.action;
+    req.productStatus = action.action;
+    req.reqType = action.reqType;
     this.lenderService.updateProductActionStatus(req).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
@@ -109,14 +142,19 @@ export class ProductViewComponent implements OnInit {
     });
   }
 
+  // Product activation inactivation
   confirmationPopUp(action): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      title: 'Are you sure you want to ' + (action.id === Constant.MASTER_TYPE.ACTIVE.id ? 'activate' : 'diactivate')
-        + ' this product ?', btnName: (action.id === Constant.MASTER_TYPE.ACTIVE.id ? 'Activation' : 'Diactivation'),
-      txt: (action.id === Constant.MASTER_TYPE.ACTIVE.id ? 'activate' : 'diactivate'),
-      productName: this.product.name
-    };
+    const data: any = {};
+    // tslint:disable-next-line: max-line-length
+    data.title = 'Are you sure you want to ' + (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'activate' : 'deactivate') + ' this product ?'
+    data.txt = (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'activate' : 'diactivate');
+    data.productName = this.product.name;
+    data.btnName =  (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'Activation' : 'Deactivation');
+    if (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id){
+      data.msg = 'After ' + data.txt + ' new customers will not be matched to this product. But there will be no effect on customers which have already selected this loan. You can activate this product again with permission of Admin Checker.';
+    }
+    dialogConfig.data = data;
     this.matDialog.open(ConfirmationPopupComponent, dialogConfig).afterClosed().subscribe(response => {
       if (response && response.data && response.event === 'save') {
         this.updateActionStatus(action);
@@ -132,12 +170,25 @@ export class ProductViewComponent implements OnInit {
       this.isMatchesTab = false;
     }
   }
+  // Get reqType as text
+  getReqType(t){
+    if (t === Constant.MASTER_TYPE.PRODUCT_CREATION.id){
+      this.reqType = 'Product Creation';
+    }
+    if (t === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id){
+      this.reqType = 'Product Activation';
+    }
+    if (t === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id){
+      this.reqType = 'Product Dectivation';
+    }
+  }
 
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.product.productId = this.route.snapshot.paramMap.get('id');
     this.product.status = this.route.snapshot.paramMap.get('status');
+    this.status = this.route.snapshot.paramMap.get('status');
     if (this.product.productId) {
       this.getProductDetails();
     }
