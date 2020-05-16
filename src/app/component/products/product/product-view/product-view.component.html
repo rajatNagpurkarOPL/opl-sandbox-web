@@ -10,7 +10,11 @@
             <div class="product-name">
                 <p class="product-note-view">{{product.name}}</p>
                 <div class="product-name-details">
-                    <p><span _ngcontent-ruf-c76="" class="dot">• </span> Active Product</p>
+                    <p *ngIf="showStatus.isShowStatus">
+                        <span _ngcontent-ruf-c76=""  [ngClass]="(showStatus.status == 'Active' ? 'dot' : 'dot1')"  >• </span> 
+                        {{showStatus.status}} Product
+                    </p>
+                    <p *ngIf="reqType">Request for {{reqType}}</p>
 
                     <div class="product-details-btn">
                         <!-- <mat-form-field>
@@ -22,12 +26,12 @@
                             </mat-select>
                         </mat-form-field> -->
 
-                        <mat-form-field class="fix-select">
-                            <!-- <mat-label>v3.0 (Current version)</mat-label> -->
+                        <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option> -->
+                      <!-- <mat-label>v3.0 (Current version)</mat-label> -->
+                        <!-- <mat-form-field class="fix-select">
                             <mat-select>
-                                <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{food.viewValue}}
-                              </mat-option> -->
                                 <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval
                                         pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020
                                         02:03 PM</span></mat-option>
@@ -38,14 +42,13 @@
                                         class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
                                 <mat-option value="option3"><span class="option-txt">v2.0</span><br><span
                                         class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
-
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
 
                         <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
                         <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
                         <a href="javaScript:void(0);" *ngIf="product.isEdit" [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg" /> Edit</a>
-                        <!-- <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.buttonName}}</a> -->
+                        <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.reqType.buttonName}}</a>
                     </div>
 
                 </div>

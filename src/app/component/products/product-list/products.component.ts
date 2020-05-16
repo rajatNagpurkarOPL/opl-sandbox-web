@@ -44,7 +44,14 @@ export class ProductsComponent implements OnInit {
     viewProduct(status, id) {
       this.route.navigate([Constant.ROUTE_URL.PRODUCT_VIEW + '/' + status + '/' + id]);
     }
-
+    // redirect edit URL
+    redirectEditURL(product) {
+      if (product.productsId) {
+        this.viewProduct(product.status, product.productsTempId);
+      }else{
+        this.route.navigate([Constant.ROUTE_URL.PRODUCT + '/' + product.productsTempId]);
+      }
+    }
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.roles = Constant.ROLES;
@@ -59,8 +66,8 @@ export class ProductsComponent implements OnInit {
     } else if (this.route.url === this.routeURL.INACTIVE_PRODUCTS){
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
     }
-    console.log(this.global);
     this.listProducts();
+    this.navbar.getProductsCounts(); // get products counts
   }
 }
 

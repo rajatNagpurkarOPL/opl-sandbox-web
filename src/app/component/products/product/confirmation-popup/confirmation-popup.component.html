@@ -2,7 +2,7 @@
     <h4>{{data.title}}</h4>
   
    <p><b>“ {{data.productName}}”</b> will be {{data.txt}} after approval from checker.</p>
-   <p>After {{data.txt}} new customers will not be matched to this product. But there will be no effect on customers which have already selected this loan. You can activate this product again with permission of Admin Checker.</p>
+   <p *ngIf="data.msg">{{data.msg}}</p>
    
   
   

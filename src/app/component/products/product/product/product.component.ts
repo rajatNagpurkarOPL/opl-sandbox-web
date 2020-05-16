@@ -52,11 +52,15 @@ export class ProductComponent implements OnInit {
     // validating form
     console.log(this.productForm);
     if (this.productForm.invalid) {
-      this.commonService.warningSnackBar('Please fill required and valid details');
+      this.commonService.warningSnackBar('Please fill required and valid details.');
       return 0;
     }
     if (this.product.parameters.length === 0) {
-      this.commonService.warningSnackBar('Please add product parameters');
+      this.commonService.warningSnackBar('Please add product parameters.');
+      return 0;
+    }
+    if (!this.eblr.id || this.eblr.id == null){
+      this.commonService.warningSnackBar('Please Create EBLR Before Creating Product.');
       return 0;
     }
     if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
@@ -67,6 +71,7 @@ export class ProductComponent implements OnInit {
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
     this.product.productStatus = Constant.MASTER_TYPE.SAVED;
     this.product.actionStatus = Constant.MASTER_TYPE.SAVED;
+    this.product.reqType = Constant.MASTER_TYPE.PRODUCT_CREATION;
     const productReq = cloneDeep(this.product);
     productReq.parameters.forEach(element => {
       if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){ //  Workaroud for set  ngModel for dropdown
@@ -155,7 +160,8 @@ export class ProductComponent implements OnInit {
 
   // update product status
   updateActionStatus() {
-    const statusReq = { actionStatus: this.approveBtn, productsTempId: this.product.productsTempId, productStatus: this.approveBtn };
+    const statusReq: any = { actionStatus: this.approveBtn, productsTempId: this.product.productsTempId, productStatus: this.approveBtn };
+    statusReq.reqType = Constant.MASTER_TYPE.PRODUCT_CREATION;
     this.lenderService.updateProductActionStatus(statusReq).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
@@ -275,7 +281,6 @@ export class ProductComponent implements OnInit {
   changeROI() {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
-
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;

@@ -91,7 +91,7 @@
                         <div class="b4l-product-list-right">
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p class="buttin-b4l-opacity">
-                                <button [disabled]="!isEdit" [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
+                                <button [disabled]="!isEdit" (click)="redirectEditURL(item)" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" />
                                 </button>
                                 <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="view"  matTooltipPosition="above" aria-label="View">
