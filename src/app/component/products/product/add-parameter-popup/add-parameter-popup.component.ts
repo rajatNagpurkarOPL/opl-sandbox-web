@@ -12,6 +12,8 @@ import { CommonService } from 'src/app/common-utils/common-services/common.servi
 export class AddParameterPopupComponent implements OnInit {
 
   parameterList = [];
+  itemList = [];
+  paramTotal: number;
   selectedParameterList = [];
   constructor(public dialogRef: MatDialogRef<AddParameterPopupComponent>, public lenderService: LenderService,
               public commonService: CommonService) { }
@@ -22,6 +24,7 @@ export class AddParameterPopupComponent implements OnInit {
       if (res.status === 200) {
         if (res.data && res.data.length > 0) {
           this.parameterList = res.data;
+          this.itemList = res.data;
         }
       } else {
         this.commonService.warningSnackBar(res.message);
@@ -29,6 +32,18 @@ export class AddParameterPopupComponent implements OnInit {
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
+  }
+
+
+  /**
+   * Search params
+   * @param criteria
+   */
+  updateCriteria(criteria: string) {
+    criteria = criteria ? criteria.trim() : '';
+    if (this.parameterList.length > 0) {
+      this.itemList = this.parameterList.filter(obj => obj.lable.toLowerCase().includes(criteria.toLowerCase()));
+    }
   }
 
   // Add parameters to the products

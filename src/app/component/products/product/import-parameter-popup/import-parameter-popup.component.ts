@@ -13,6 +13,7 @@ export class ImportParameterPopupComponent implements OnInit {
 
   productList  = [];
   product;
+  itemList = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<ImportParameterPopupComponent>,
               public lenderService: LenderService, public commonService: CommonService) { }
 
@@ -21,6 +22,7 @@ export class ImportParameterPopupComponent implements OnInit {
     this.lenderService.approvedProducts().subscribe(res => {
         if (res.status === 200) {
           this.productList = res.data;
+          this.itemList = res.data;
         } else {
           this.commonService.warningSnackBar(res.message);
         }
@@ -41,6 +43,17 @@ export class ImportParameterPopupComponent implements OnInit {
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
+  }
+
+  /**
+   * Search params
+   * @param criteria
+   */
+  updateCriteria(criteria: string) {
+    criteria = criteria ? criteria.trim() : '';
+    if (this.productList.length > 0) {
+      this.itemList = this.productList.filter(obj => obj.name.toLowerCase().includes(criteria.toLowerCase()));
+    }
   }
 
   save() {

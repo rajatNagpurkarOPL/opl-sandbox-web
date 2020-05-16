@@ -6,7 +6,7 @@
             <span></span>
         </div>
         <div class="input-group">
-            <input id="search" type="text" class="form-control" name="search" placeholder="Search product">
+            <input id="search" #criteria (input)="updateCriteria(criteria.value)" type="text" class="form-control" name="search" placeholder="Search product">
             <span class="input-group-addon"><img src="assets/img/Search.svg"></span>
         </div>
     </div>
@@ -14,7 +14,7 @@
 
     <div class="hr"></div>
     <div class="pop-up-content">
-        <div class="pop-up-cl" *ngFor="let param of parameterList">
+        <div class="pop-up-cl" *ngFor="let param of itemList">
             <mat-checkbox [(ngModel)]="param.isSelected" > {{param.lable}} </mat-checkbox>
             <!-- <p class="padd-lt"> Account No. Match with our database</p> -->
         </div>
