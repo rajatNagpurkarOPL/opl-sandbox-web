@@ -50,7 +50,6 @@ export class ProductComponent implements OnInit {
   saveProduct(type) {
     this.submitted = true;
     // validating form
-    console.log(this.productForm);
     if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details.');
       return 0;
@@ -82,6 +81,7 @@ export class ProductComponent implements OnInit {
     });
     this.lenderService.saveProduct(productReq).subscribe(res => {
       if (res.status === 200) {
+        this.product.productsTempId = res.data.productsTempId;
         if (type === 1) {
           this.updateActionStatus();
         } else {
@@ -289,6 +289,7 @@ export class ProductComponent implements OnInit {
     if (this.product.productId) { // get product info if product is found
       this.getProductDetails();
     }
+    this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
     this.getCurrentEBLR(); // get current eblr
   }
 }

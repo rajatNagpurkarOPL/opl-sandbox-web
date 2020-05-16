@@ -17,7 +17,7 @@
                         <!-- <app-print-error [control]="f.name" [submitted]='submitted'></app-print-error> -->
                         <div class="product-details-btn">
                             <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
-                            <button *ngIf="isAdd" [disabled]="!approveBtn" [ngClass]="(approveBtn && approveBtn.id == inputType.SENT_TO_CHECKER.id ? 'product-btn1' : 'product-btn2')" (click)="saveProduct(1)" href="javascript:void(0)">
+                            <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn1">
                                 <img src="assets/img/send-to-checker.svg" /> Send to checker
                             </button>
                         </div>
