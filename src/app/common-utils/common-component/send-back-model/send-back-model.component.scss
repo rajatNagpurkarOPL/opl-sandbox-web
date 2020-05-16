@@ -81,25 +81,40 @@
     #b4l-pop-up {
         padding: 3em !important;
     } 
-    .btn-pop-up .product-btn3 {
-        border: 1px solid #2D3079;
-        border-radius: 8px;
-        opacity: 1;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 1em 6em;
-        background: #2D3079;
-    }
-    
-    .btn-pop-up .product-btn4 {
-        border: 1px solid #BEBEBE;
-        border-radius: 8px;
-        opacity: 1;
-        color: #5C5C5C;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 1em 10em;
-        background: #F7F7F7;
-    }
-    
+  
+.btn-pop-up .product-btn3 {
+    border: 1px solid #2D3079;
+    border-radius: 8px;
+    opacity: 1;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
+    background: #2D3079;
+}
+
+.btn-pop-up .product-btn4 {
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
+    opacity: 1;
+    color: #5C5C5C;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
+    background: #F7F7F7;
+}
+
+.opl2 {
+    width: 100% !important;
+    margin: 2em 0;
+}
+
+.opl2 textarea{
+   
+    width: 100% !important;
+    height: 200px;
+}
