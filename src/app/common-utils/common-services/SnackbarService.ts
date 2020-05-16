@@ -19,7 +19,7 @@ export class SnackbarService {
     const sType = snackType !== undefined ? snackType : '';
     this.snackBar.openFromComponent(TostrComponent, {
       duration: 2000,
-      horizontalPosition: 'center',
+      horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: [sType + '-snackbar'],
       data: { message, snackType: sType },
