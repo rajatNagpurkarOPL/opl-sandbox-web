@@ -117,7 +117,7 @@
                         <p>{{item.name}}</p>
                         <div class="b4l-product-list-right-1">
                             <p class="display"><span class="dot">&#8226; </span>Active</p>
-                            <p>Version 2.0</p>
+                            <p>{{item.version || '-'}}</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p  class="buttin-b4l-opacity"><button [disabled]="!isEdit" mat-raised-button class="btn1-b4l" matTooltip="edit"
                                     matTooltipPosition="above" aria-label="Edit">
@@ -148,7 +148,7 @@
                         <p>{{item.name}}</p>
                         <div class="b4l-product-list-right-1">
                             <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
-                            <p>Version 2.0</p>
+                            <p>{{item.version || '-'}}</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p  class="buttin-b4l-opacity"><button [disabled]="!isEdit" mat-raised-button class="btn1-b4l" matTooltip="edit"
                                     matTooltipPosition="above" aria-label="Edit">
