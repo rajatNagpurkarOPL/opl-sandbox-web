@@ -119,17 +119,17 @@
                             <p class="display"><span class="dot">&#8226; </span>Active</p>
                             <p>{{item.version || '-'}}</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
-                            <p  class="buttin-b4l-opacity"><button [disabled]="!isEdit" mat-raised-button class="btn1-b4l" matTooltip="edit"
-                                    matTooltipPosition="above" aria-label="Edit">
+                            <p class="buttin-b4l-opacity">
+                                <button [disabled]="!isEdit" [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit"  matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" />
                                 </button>
                                 <button (click)="viewProduct(item.productStatus.id, item.productsId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
-                                <button [disabled]="!isEdit" mat-raised-button class="btn2-b4l" matTooltip="Deactive"
-                                    matTooltipPosition="above" aria-label="Deactive">
+                                <button [disabled]="!isEdit" mat-raised-button class="btn2-b4l" matTooltip="Deactive" matTooltipPosition="above" aria-label="Deactive">
                                     <img src="assets/img/lock-icon.svg" />
-                                </button></p>
+                                </button>
+                            </p>
                         </div>
                     </div>
                 </div>
