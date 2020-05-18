@@ -150,20 +150,25 @@ opacity: 0.4;
     }
 
 
+
     @media (max-width: 1440px)
-     {
+    {
 
-        .import-matches{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2em;
-            top: 7.5em;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
+       .import-matches{
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           padding: 2em;
+           top: 6em;
+           border-top-left-radius: 5px;
+           border-top-right-radius: 5px;
+       }
 
-     }
+
+       .btn-pop-up {         
+        bottom: 6em ;         
+    }
+    }
 
 
 
