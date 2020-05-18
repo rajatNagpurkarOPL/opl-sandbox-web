@@ -8,13 +8,12 @@
                 <p>Add new product</p>
             </div>
 
-
             <div id="b4l-content">
                 <div class="product-name">
                     <p>Product Name</p>
                     <div class="product-name-details">
                         <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off">
-                        <!-- <app-print-error [control]="f.name" [submitted]='submitted'></app-print-error> -->
+                        <app-print-error [control]="f.name" [submitted]='submitted'></app-print-error>
                         <div class="product-details-btn">
                             <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
                             <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn3">
@@ -80,6 +79,7 @@
                                                 <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
                                                 </option>
                                             </select>
+                                            <app-print-error [control]="pf['dropdown_'+item.parameterId]" [submitted]='submitted'></app-print-error>
                                             <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                         </p>
                                     </div>
@@ -87,13 +87,13 @@
                                         <div class="text-with-presnt person-text-width">
                                             <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" formControlName="min_{{item.parameterId}}" >
                                             <p class="perstage-text-n-d">Days</p>
+                                            <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]='submitted'></app-print-error>
                                         </div>
-
                                         <p>to</p>
-
                                         <div class="text-with-presnt person-text-width">
                                             <input placeholder="0" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text">
                                             <p class="perstage-text-n-d">Days</p>
+                                            <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]='submitted'></app-print-error>
                                         </div>
 
                                         <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
@@ -139,6 +139,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.wcRequirement"  formControlName="wcReq" placeholder="Enter percentage" type="text" >
                                         <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="ef.wcReq" [submitted]='submitted'></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -153,6 +154,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.maxLoanAmtLimit"  formControlName="maxLoanAmnt" placeholder="Enter amount" type="text">
                                         <p class="perstage-text-n-d"><b>INR</b></p>
+                                        <app-print-error [control]="ef.maxLoanAmnt" [submitted]='submitted'></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +169,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.disPer" formControlName="disPercentage" placeholder="Enter percentage" type="text">
                                         <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="ef.disPercentage" [submitted]='submitted'></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -180,6 +183,7 @@
                                 <div class="buttin-b4l-opacity opl2">
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="Enter months" formControlName="tenure" type="text" [(ngModel)]="product.tenure" >
+                                        <app-print-error [control]="ef.tenure" [submitted]='submitted'></app-print-error>
                                         <p class="perstage-text-n-d"><b>Months</b></p>
                                     </div>
                                 </div>
@@ -198,6 +202,7 @@
                                     <div class="text-with-presnt person-text-width1">
                                         <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text">
                                         <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="ef.roi" [submitted]='submitted'></app-print-error>
                                     </div>
                                     <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
                                 </div>
@@ -213,16 +218,13 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="Enter Amount" type="text" formControlName="maxRepay" [(ngModel)]="product.maxRepayAmt">
                                         <p class="perstage-text-n-d"><b>INR</b></p>
+                                        <app-print-error [control]="ef.maxRepay" [submitted]='submitted'></app-print-error>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
-
-
-
             </div>
         </form>
 
@@ -255,284 +257,5 @@
             </div>
         </div>
         <!-- Eligibility Calculator end-->
-
-
-
-
-
-        <!--  Matches Parameter end -->
-
-        <!--  Eligibility Calculation start-->
-        <!--  <div id="b4l-content">
-
-
-            <div class="b4l-product-title">
-                <ul class="product">
-                    <li><a href="#">
-                            <p>Matches Parameter</p>
-                        </a></li>
-                    <li><a href="#" class="active">
-                            <p>Eligibility Calculation</p>
-                        </a></li>
-
-                </ul>
-
-                <a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg" /> Import
-                    Eligibility parameter</a>
-            </div>
-
-            <div class="matches-parameter">
-
-                <img class="img-match" src="assets/img/eligibility-calculation.svg" />
-                <p>We are ready to set eligibility parameters for the product.</p>
-                <p>You can either import parameters from existing product or set new parameters from scratch</p>
-
-                <div class="matches-parameter-data">
-                    <a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg" /> Import
-                        Eligibility parameter</a>
-                    <p>or</p>
-                    <a href="#" routerLink="/product" class="product-btn1">+ set manually from start</a>
-                </div>
-            </div>
-
-        </div>-->
-
-        <!-- Eligibility Calculation end -->
-
-
-        <!-- Matches parameter clicked page start-->
-        <!-- <div class="product-back-button">
-            <p class="btn-back"><img src="assets/img/arrow-right.svg" /> Back</p>
-            <p>Add new product</p>
-        </div>
-
-        <div id="b4l-content">
-            <div class="product-name">
-                <p>Product Name</p>
-
-                <div class="product-name-details">
-                    <input type="text" id="fname" name="fname" placeholder="Eg. “Contactless invoice financing”">
-
-                    <div class="product-details-btn">
-                        <a href="#" class="product-btn1"><img src="assets/img/save.svg" /> Save</a>
-                        <a href="#" class="product-btn3"><img src="assets/img/send-to-checker-white.svg" /> Send to
-                            checker</a>
-                    </div>
-
-                </div>
-
-                <p class="product-note"><img src="assets/img/note.svg" /> This name will be visible to users who will be
-                    matched with this product</p>
-
-
-
-
-            </div>
-        </div>
-
-
-        <div id="b4l-content">
-
-
-            <div class="b4l-product-title">
-                <ul class="product">
-                    <li><a href="#" class="active">
-                            <p>Matches Parameter</p>
-                        </a></li>
-                    <li><a href="#">
-                            <p>Eligibility Calculation</p>
-                        </a></li>
-
-                </ul>
-
-                <a href="#" routerLink="/product" class="product-btn1"><img src="assets/img/import.svg" /> Import
-                    matches parameter</a>
-            </div>
-
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>1</p>
-                    <p> Whether the unit/ proprietor is Banking with SBI and has CIF and Account No. Match with our
-                        database</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <p class="buttin-b4l-opacity">
-                        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                            <mat-button-toggle value="bold">Yes</mat-button-toggle>
-                            <mat-button-toggle value="italic">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                        <img src="assets/img/close-red.svg" />
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list back ">
-
-                <div class="b4l-product-list-left">
-                    <p>2</p>
-                    <p>Constitution </p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <p class="buttin-b4l-opacity">
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                        </select>
-
-                        <img src="assets/img/close-red.svg" />
-                    </p>
-                </div>
-
-            </div>
-
-
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>3</p>
-                    <p>Usance Period of Invoice</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="0" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d">Days</p>
-                        </div>
-
-                        <p>to</p>
-
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="0" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d">Days</p>
-                        </div>
-
-                        <img class="opl" src="assets/img/close-red.svg" />
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>4</p>
-                    <p>Whether the status of unit’s existing exposure is Standard and Regular i.e. not in SMA 1 &
-                        worse<br>
-                        <span>Not Applicable in case of only Current Account Holders</span></p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <p class="buttin-b4l-opacity">
-
-
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                            <option>Select</option>
-                        </select>
-
-
-                        <img src="assets/img/close-red.svg" />
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list">
-
-                <div class="b4l-product-list-left">
-                    <p>5</p>
-                    <p>Invoice value</p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <div class="buttin-b4l-opacity opl2">
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="₹ 0" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d"></p>
-                        </div>
-
-                        <p>to</p>
-
-                        <div class="text-with-presnt person-text-width">
-                            <input placeholder="₹ 10,00,000" type="tel" tabindex="3" required="" maxlength="6">
-                            <p class="perstage-text-n-d"></p>
-                        </div>
-
-                        <img class="opl" src="assets/img/close-red.svg" />
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="b4l-product-list back">
-
-                <div class="b4l-product-list-left">
-                    <p>6</p>
-                    <p> Whether Input Tax Credit (ITC) is claimed by the Buyer on the invoice proposed for discounting
-                    </p>
-                </div>
-
-                <div class="b4l-product-list-right">
-
-                    <p class="buttin-b4l-opacity">
-                        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                            <mat-button-toggle value="bold">Yes</mat-button-toggle>
-                            <mat-button-toggle value="italic">No</mat-button-toggle>
-                        </mat-button-toggle-group>
-                        <img src="assets/img/close-red.svg" />
-                    </p>
-                </div>
-
-            </div>
-
-
-
-            <div class="b4l-product-list back">
-
-
-
-                <div class="b4l-product-list-right b4l-product-list-right1">
-
-                    <p class="buttin-b4l-opacity">
-                        <a href="#" class="product-btn3">+ Add Parameters</a>
-                    </p>
-                </div>
-
-            </div>
-
-
-
-        </div> -->
-
-
-
-
-
     </div>
 </div>
