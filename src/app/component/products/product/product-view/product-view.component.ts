@@ -76,7 +76,7 @@ export class ProductViewComponent implements OnInit {
           this.product.actInact = {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_ACTIVATION};
         }
         // Show edit button
-        if ((this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id || this.product.productStatus.id === Constant.MASTER_TYPE.SAVED.id ||
+        if ((this.product.productStatus.id === Constant.MASTER_TYPE.ACTIVE.id || this.product.productStatus.id === Constant.MASTER_TYPE.SAVED.id ||
             this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id)  && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
           this.product.isEdit = true;
         }
