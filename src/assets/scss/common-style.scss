@@ -159,6 +159,11 @@ border-bottom: 3px solid #2D3079;
     margin-bottom: 0;
 }
 
+
+.cdk-overlay-pane {
+    position: relative !important;
+}
+
 .mat-dialog-container {
     display: block;
     padding: 0 !important;
