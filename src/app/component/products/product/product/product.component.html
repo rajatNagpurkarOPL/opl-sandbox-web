@@ -38,10 +38,10 @@
                                 <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm').invalid && productForm.submitted">•</span> </p>
                             </a></li>
                     </ul>
-                    <a *ngIf="isMatchesTab" (click)="importParameterPopup('parameter');" href="javaScript:void(0);"
+                    <a *ngIf="isMatchesTab" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
                         class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
                     <a *ngIf="!isMatchesTab" (click)="importParameterPopup('eligibility');" href="javaScript:void(0);" class="product-btn1"><img
-                            src="assets/img/import.svg" /> Import Eligibility model</a>
+                            src="assets/img/import.svg" /> Import Eligibility Parameter</a>
                 </div>
                 <div [hidden]="!isMatchesTab">
                     <form formGroupName="paramForm">
@@ -51,7 +51,7 @@
                             <p>You can either import parameters from existing product or set new parameters from scratch</p>
 
                             <div class="matches-parameter-data">
-                                <a (click)="importParameterPopup('parameter');" href="javaScript:void(0);" class="product-btn1"><img
+                                <a (click)="importParameterPopup('matches');" href="javaScript:void(0);" class="product-btn1"><img
                                         src="assets/img/import.svg" /> Import matches parameter</a>
                                 <p>or</p>
                                 <a (click)="addParameterPopup();" href="javaScript:void(0);" class="product-btn1">+ Add New
