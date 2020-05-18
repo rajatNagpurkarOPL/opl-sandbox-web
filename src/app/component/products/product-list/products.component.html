@@ -150,17 +150,14 @@
                             <p class="display"><span class="dot1">&#8226; </span>Inctive</p>
                             <p>{{item.version || '-'}}</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
-                            <p  class="buttin-b4l-opacity"><button [disabled]="!isEdit" mat-raised-button class="btn1-b4l" matTooltip="edit"
-                                    matTooltipPosition="above" aria-label="Edit">
-                                    <img src="assets/img/edit-icon.svg" />
-                                </button>
-                                <button (click)="viewProduct(item.productStatus.id, item.productsId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
+                            <p  class="buttin-b4l-opacity">
+                                <button (click)="viewProduct(item.productStatus.id, item.productsId)"  mat-raised-button class="btn1-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
-                                <button [disabled]="!isEdit" mat-raised-button class="btn2-b4l" matTooltip="Deactive"
-                                    matTooltipPosition="above" aria-label="Deactive">
+                                <button [disabled]="!isEdit" mat-raised-button class="btn2-b4l" matTooltip="Activate" matTooltipPosition="above" aria-label="Activate">
                                     <img src="assets/img/lock-icon.svg" />
-                                </button></p>
+                                </button>
+                            </p>
                         </div>
                     </div>
                     <div class="b4l-product-list-1" *ngIf="productList.length === 0 || !productList">
