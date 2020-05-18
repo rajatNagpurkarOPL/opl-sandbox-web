@@ -105,8 +105,7 @@ export class ProductComponent implements OnInit {
     this.matDialog.open(ImportParameterPopupComponent, dialogConfig).afterClosed()
       .subscribe(response => {
         if (response && response.data && response.data.event === 'save') {
-          if (type === 'parameter'){  // copy parameters from approved selected product
-
+          if (type === 'matches'){  // copy parameters from approved selected product
             // Remove all form field
             this.productForm.removeControl('paramForm');
             this.productForm.addControl('paramForm', this.fb.group({}));
