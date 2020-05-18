@@ -27,6 +27,7 @@ export class ProductViewComponent implements OnInit {
   isMatchesTab = true;
   reqType;
   // get product info by product id
+  // tslint:disable: max-line-length
   getProductDetails() {
     this.lenderService.getProductDetails(this.product.status, this.product.productId).subscribe(res => {
       if (res.status === 200) {
@@ -34,9 +35,6 @@ export class ProductViewComponent implements OnInit {
         // set answer and other values
         this.product.parameters.forEach(element => {
           element.lovs = JSON.parse(element.lovs);
-          // if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
-          //   element.answer = {min: null, max: null};
-          // }
           if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
             if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
@@ -50,11 +48,8 @@ export class ProductViewComponent implements OnInit {
             }
           }
         });
-        // set approve send to checker buttons
         // Checker's Actions
-        if (this.product.actionStatus.id === Constant.MASTER_TYPE.SENT_TO_CHECKER.id &&
-          this.global.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1) {
-            // tslint:disable-next-line: max-line-length
+        if (this.product.actionStatus.id === Constant.MASTER_TYPE.SENT_TO_CHECKER.id && this.global.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1) {
             if (this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_CREATION.id || this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ){
               this.product.approve = {action : Constant.MASTER_TYPE.APPROVED, reqType : this.product.reqType};
               this.product.reject = {action : Constant.MASTER_TYPE.SEND_BACK, reqType : this.product.reqType};
@@ -65,9 +60,7 @@ export class ProductViewComponent implements OnInit {
             }
           }
         // Maker's Actions
-        // tslint:disable-next-line: max-line-length
         if (this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
-          this.product.isEdit = true;
           if (this.product.reqType && this.product.reqType.id === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id){
             this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_DEACTIVATION};
           }
@@ -75,26 +68,23 @@ export class ProductViewComponent implements OnInit {
             this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_ACTIVATION};
           }
         }
-        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 &&
-        this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id) {
+        // Active inactive action for maker
+        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 && this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id) {
           this.product.actInact =  {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_DEACTIVATION};
         }
-        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 &&
-        this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
+        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 && this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
           this.product.actInact = {action : Constant.MASTER_TYPE.SENT_TO_CHECKER, reqType : Constant.MASTER_TYPE.PRODUCT_ACTIVATION};
         }
-        if (this.status == Constant.MASTER_TYPE.APPROVED.id || this.product.productsId){
-          this.product.isEdit = false;
+        // Show edit button
+        if ((this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id || this.product.productStatus.id === Constant.MASTER_TYPE.SAVED.id ||
+            this.product.productStatus.id === Constant.MASTER_TYPE.SEND_BACK.id)  && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+          this.product.isEdit = true;
         }
-        // if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
-          //   this.isEdit = true;
-          //   this.isAdd = true;
-          // }
+        // Show request type
         if (this.product.reqType) {
           this.getReqType(this.product.reqType.id);
         }
         // show status only if active or inactive product
-        // tslint:disable-next-line: max-line-length
         if (this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id || this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
           this.showStatus.isShowStatus = true;
           this.showStatus.status = this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id ? 'Active' : 'Inactive';

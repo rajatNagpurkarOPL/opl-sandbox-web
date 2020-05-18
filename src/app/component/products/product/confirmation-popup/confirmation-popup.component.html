@@ -1,13 +1,9 @@
 <div id="b4l-pop-up">
     <h4>{{data.title}}</h4>
-  
-   <p><b>“ {{data.productName}}”</b> will be {{data.txt}} after approval from checker.</p>
+     <p><b>“ {{data.productName}}”</b> will be {{data.txt}} after approval from checker.</p>
    <p *ngIf="data.msg">{{data.msg}}</p>
-   
-  
-  
-
     <div class="btn-pop-up">
       <a href="javaScript:void(0);" (click)="close()" class="product-btn4">Cancel</a>
       <a href="javaScript:void(0);" (click)="save()" class="product-btn3"><img src="assets/img/send-to-checker-white.svg" /> Send to checker for {{data.btnName}}</a>
     </div>
+  </div>
