@@ -149,7 +149,21 @@ opacity: 0.4;
     
     }
 
+    @media(max-width: 1440px) {
 
-    #cdk-overlay-1 {
-        position: relative !important;
-    }
+        .btn-pop-up .product-btn3 {        
+            padding: 1em 1em;             
+        }
+
+        .import-matches-left p{           
+            font-size: 18px ;            
+        }
+        .import-matches-left span {          
+            font-size: 14px;            
+        }
+        .pop-up-cl p {          
+            font-size: 14px;           
+        }
+
+       }
+

@@ -731,12 +731,14 @@ line-height: 36px;
 
 @media (max-width:1440px) {
 .mat-dialog-container {   
-    height: 550px !important;
-    min-height: inherit;
-    max-height: inherit;
+    height: 500px !important;
+
 }
 .mat-dialog-container {    
     width: 40em !important; 
+}
+.mat-radio-label {
+    margin: 1em 0 !important;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {   
