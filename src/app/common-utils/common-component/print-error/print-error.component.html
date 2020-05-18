@@ -1,5 +1,9 @@
-<div class="text-danger" *ngIf="submitted && control && control.errors && (control.dirty || control.touched)">
+<div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched)" >
     <div *ngIf="control.errors.required"><small>This field is required</small></div>
+    <div *ngIf="control.errors.maxlength"><small>The value for this field is too long</small></div>
+    <div *ngIf="control.errors.minlength"><small>The value for this field is too short</small></div>
+    <div *ngIf="control.errors.max"><small>Input exceeds maximum value</small></div>
+    <div *ngIf="control.errors.min"><small>Input valid minimum value</small></div>
     <div *ngIf="control.errors.unique"><small>{{control.errors.unique}}</small></div>
     <div *ngIf="control.errors.lessThen"><small>{{control.errors.lessThen}}</small></div>
     <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>

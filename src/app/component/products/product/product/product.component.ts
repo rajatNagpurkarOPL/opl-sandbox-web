@@ -32,23 +32,26 @@ export class ProductComponent implements OnInit {
 
   // Product form validation
   productForm: any  = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(30)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     elgbltForm: this.fb.group({
       maxRepay: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
       roi: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
       tenure: ['', [Validators.required, Validators.max(36)]],
-      disPercentage: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
+      disPercentage: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
       maxLoanAmnt: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
       wcReq: ['', [Validators.required, Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25)]],
     }),
     paramForm : this.fb.group({})
   });
   // convenience getter for easy access to form fields
-  get f() { return this.productForm.controls; }
+  get f() { return this.productForm.controls; } // return product form controls
+  get ef() { return this.productForm.get('elgbltForm').controls; } // return EBLR form controls
+  get pf() { return this.productForm.get('paramForm').controls; } // return parameters form controls
 
   // Save product details
   saveProduct(type) {
     this.submitted = true;
+    console.log(this.productForm);
     // validating form
     if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details.');
@@ -220,7 +223,7 @@ export class ProductComponent implements OnInit {
       if (res.status === 200) {
         this.eblr = res.data;
         // set approve send to checker buttons
-        if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+        if (this.global.USER && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
           this.isAdd = true;
         }
       } else {
@@ -233,10 +236,16 @@ export class ProductComponent implements OnInit {
 
   // Create form field for added/imported parameters
   addFormControl(param){
+    const validators = [Validators.required];
+    if (param.maxValue) {
+      validators.push(Validators.max(param.maxValue));
+    }
+    if (param.minValue) {
+      validators.push(Validators.min(param.minValue));
+    }
     if (param.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
-      // tslint:disable-next-line: max-line-length
-      this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
-      this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', [Validators.required]));
+      this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+      this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
     }
     if (param.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
       this.productForm.get('paramForm').addControl('yesNo_' + param.parameterId, this.fb.control('', [Validators.required]));
