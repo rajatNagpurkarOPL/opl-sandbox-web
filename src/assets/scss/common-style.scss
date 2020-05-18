@@ -726,6 +726,25 @@ line-height: 36px;
     box-shadow: none !important;
 }
 
+
+
+
+@media (max-width:1440px) {
+.mat-dialog-container {   
+    height: 550px !important;
+    min-height: inherit;
+    max-height: inherit;
+}
+.mat-dialog-container {    
+    width: 40em !important; 
+}
+
+.mat-checkbox-layout .mat-checkbox-label {   
+    width: 30em !important;  
+}
+
+}
+
         @media (min-width:1200px) {
             .container {
               max-width: 1200px !important;
