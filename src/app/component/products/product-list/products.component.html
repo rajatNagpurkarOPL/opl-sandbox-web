@@ -4,7 +4,7 @@
 
             <div class="b4l-product-title">
                 <ul>
-                    <li><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}" [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
+                    <li *ngIf="!isChecker"><a href="javaScript:void(0);" routerLink="{{routeURL.SAVED_PRODUCTS}}" [ngClass]="{'active': route.url === routeURL.SAVED_PRODUCTS}">
                             <p>{{global.COUNT.saved || 0}}</p><span>Saved</span> </a></li>
                     <li><a href="javaScript:void(0);" routerLink="{{routeURL.SENT_PRODUCTS}}"
                             [ngClass]="{'active': route.url === routeURL.SENT_PRODUCTS}">
