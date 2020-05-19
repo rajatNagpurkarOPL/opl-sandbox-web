@@ -9,6 +9,7 @@ import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
 import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-product',
@@ -139,23 +140,28 @@ export class ProductComponent implements OnInit {
       });
   }
 
+  // tslint:disable: max-line-length
   // Open paramter popup
   addParameterPopup(): void {
     const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(AddParameterPopupComponent, dialogConfig).afterClosed()
-      .subscribe(response => {
+    this.matDialog.open(AddParameterPopupComponent, dialogConfig).afterClosed().subscribe(response => {
         if (response && response.data) {
-          this.product.parameters = response.data.parametes;
-          this.product.parameters.forEach(element => {
-            this.addFormControl(element); // create form field
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
-              element.answer = { min: null, max: null };
-            }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
-              element.answer = true;
-            }
-            element.lovs = JSON.parse(element.lovs);
-          });
+          if (response.data.parametes && response.data.parametes.length > 0){
+            const params = response.data.parametes;
+            params.forEach(element => {
+              if (this.product.parameters.findIndex(p => p.parameterId === element.parameterId) === -1 ) { // push only if object is not present in the list
+                this.addFormControl(element); // create form field
+                if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+                  element.answer = { min: null, max: null };
+                }
+                if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+                  element.answer = true;
+                }
+                element.lovs = JSON.parse(element.lovs);
+                this.product.parameters.push(element);
+              }
+            });
+          }
         }
       });
   }
