@@ -7,9 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PrintErrorComponent implements OnInit {
 
-  // tslint:disable-next-line: no-input-rename
+  // tslint:disable: no-input-rename
   @Input('control')
   control: any;
+
+  @Input('submitted')
+  submitted: any;
 
   constructor() { }
 

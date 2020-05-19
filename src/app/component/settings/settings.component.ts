@@ -67,26 +67,26 @@ export class SettingsComponent implements OnInit {
             // if saved and user is maker then show send for approve
             if (element.actionStatus.id !== Constant.MASTER_TYPE.SENT_TO_CHECKER.id &&
               element.actionStatus.id !== Constant.MASTER_TYPE.APPROVED.id &&
-              element.plrStatus.id === Constant.MASTER_TYPE.SAVED.id && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
+              element.plrStatus.id === Constant.MASTER_TYPE.SAVED.id && this.user.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
               element.approve = Constant.MASTER_TYPE.SENT_TO_CHECKER;
             }
             // if saved and user is checker then show approve and reject
             if (element.actionStatus.id === Constant.MASTER_TYPE.SENT_TO_CHECKER.id &&
-              this.global.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1) {
+              this.user.roles.indexOf(Constant.ROLES.CHECKER.name) > -1) {
               element.approve = Constant.MASTER_TYPE.APPROVED;
               element.reject = Constant.MASTER_TYPE.SEND_BACK;
             }
             element.status = this.getStatusByActionId(element.actionStatus.id);
             if ((element.actionStatus.id === Constant.MASTER_TYPE.SEND_BACK.id ||
                 element.actionStatus.id === Constant.MASTER_TYPE.SAVED.id) &&
-                this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){
+                this.user.roles.indexOf(Constant.ROLES.MAKER.name) > -1){
               element.isEdit = true;
             }
             if (element.actionStatus.id === Constant.MASTER_TYPE.APPROVED.id && !this.isEBLRApproved){
               this.isEBLRApproved = true;
             }
           });
-          if (this.isEBLRApproved && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
+          if (this.isEBLRApproved && this.user.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
             this.isShowAddEBLR = true;
           }
         } else {
@@ -125,6 +125,11 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.commonService.isObjectIsEmpty(this.global.USER)){
+      this.user = JSON.parse(this.commonService.getStorage(Constant.STORAGE.USER, true));
+    } else {
+      this.user = this.global.USER;
+    }
     this.listPLRByType();
   }
 
