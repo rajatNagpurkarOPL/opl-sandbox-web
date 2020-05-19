@@ -13,7 +13,7 @@
                     <p>Product Name</p>
                     <div class="product-name-details">
                         <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off">
-                        <app-print-error [control]="f.name"  ></app-print-error>
+                        <app-print-error [control]="f.name" [submitted]="submitted"></app-print-error>
                         <div class="product-details-btn">
                             <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
                             <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn3">
@@ -79,7 +79,7 @@
                                                 <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
                                                 </option>
                                             </select>
-                                            <app-print-error [control]="pf['dropdown_'+item.parameterId]"  ></app-print-error>
+                                            <app-print-error [control]="pf['dropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                         </p>
                                     </div>
@@ -87,13 +87,13 @@
                                         <div class="text-with-presnt person-text-width">
                                             <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" formControlName="min_{{item.parameterId}}" >
                                             <p class="perstage-text-n-d">Days</p>
-                                            <app-print-error [control]="pf['min_'+item.parameterId]"  ></app-print-error>
+                                            <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                         </div>
                                         <p>to</p>
                                         <div class="text-with-presnt person-text-width">
                                             <input placeholder="0" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text">
                                             <p class="perstage-text-n-d">Days</p>
-                                            <app-print-error [control]="pf['max_'+item.parameterId]"  ></app-print-error>
+                                            <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                         </div>
 
                                         <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
@@ -139,7 +139,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.wcRequirement"  formControlName="wcReq" placeholder="Enter percentage" type="text" >
                                         <p class="perstage-text-n-d">%</p>
-                                        <app-print-error [control]="ef.wcReq"  ></app-print-error>
+                                        <app-print-error [control]="ef.wcReq" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.maxLoanAmtLimit"  formControlName="maxLoanAmnt" placeholder="Enter amount" type="text">
                                         <p class="perstage-text-n-d"><b>INR</b></p>
-                                        <app-print-error [control]="ef.maxLoanAmnt"  ></app-print-error>
+                                        <app-print-error [control]="ef.maxLoanAmnt" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input [(ngModel)]="product.disPer" formControlName="disPercentage" placeholder="Enter percentage" type="text">
                                         <p class="perstage-text-n-d">%</p>
-                                        <app-print-error [control]="ef.disPercentage"  ></app-print-error>
+                                        <app-print-error [control]="ef.disPercentage" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                                 <div class="buttin-b4l-opacity opl2">
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="Enter months" formControlName="tenure" type="text" [(ngModel)]="product.tenure" >
-                                        <app-print-error [control]="ef.tenure"  ></app-print-error>
+                                        <app-print-error [control]="ef.tenure" [submitted]="submitted" ></app-print-error>
                                         <p class="perstage-text-n-d"><b>Months</b></p>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                     <div class="text-with-presnt person-text-width1">
                                         <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text">
                                         <p class="perstage-text-n-d">%</p>
-                                        <app-print-error [control]="ef.roi"  ></app-print-error>
+                                        <app-print-error [control]="ef.roi" [submitted]="submitted" ></app-print-error>
                                     </div>
                                     <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p>
                                 </div>
@@ -218,7 +218,7 @@
                                     <div class="text-with-presnt person-text-width">
                                         <input placeholder="Enter Amount" type="text" formControlName="maxRepay" [(ngModel)]="product.maxRepayAmt">
                                         <p class="perstage-text-n-d"><b>INR</b></p>
-                                        <app-print-error [control]="ef.maxRepay"  ></app-print-error>
+                                        <app-print-error [control]="ef.maxRepay" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>

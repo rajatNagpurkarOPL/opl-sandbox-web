@@ -1,4 +1,4 @@
-<div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched)">
+<div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched || submitted)">
     <div *ngIf="control.errors.required">This field is required</div>
     <div *ngIf="control.errors.maxlength">The value for this field is too long</div>
     <div *ngIf="control.errors.minlength">The value for this field is too short</div>

@@ -32,7 +32,6 @@
         </div>
       </div>
       <mat-form-field>
-      
         <input [min]="minDate" matInput [matDatepicker]="picker" tabindex="2" [(ngModel)]="eblr.effectiveFrom" formControlName="date" required>
         <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
