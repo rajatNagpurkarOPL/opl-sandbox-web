@@ -71,7 +71,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.constant = Constant.ROUTE_URL;
     this.getUserDetails();
-    // this.getProductsCounts();
   }
 
 }

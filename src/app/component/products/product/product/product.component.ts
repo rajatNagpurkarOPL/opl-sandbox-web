@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
 
   // Product form validation
   productForm: any  = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     elgbltForm: this.fb.group({
       maxRepay: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
       roi: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
@@ -223,8 +223,9 @@ export class ProductComponent implements OnInit {
       if (res.status === 200) {
         this.eblr = res.data;
         // set approve send to checker buttons
-        if (this.global.USER && this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1) {
-          this.isAdd = true;
+        const user = JSON.parse(this.commonService.getStorage(Constant.STORAGE.USER, true));
+        if (user && user.roles.indexOf(Constant.ROLES.MAKER.name) > -1){
+            this.isAdd = true;
         }
       } else {
         this.commonService.warningSnackBar(res.message);
