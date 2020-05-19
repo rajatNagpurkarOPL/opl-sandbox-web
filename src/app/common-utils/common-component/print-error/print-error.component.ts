@@ -11,14 +11,9 @@ export class PrintErrorComponent implements OnInit {
   @Input('control')
   control: any;
 
-  // tslint:disable-next-line: no-input-rename
-  @Input('submitted')
-  submitted: any;
-
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.control);
   }
 
 }
