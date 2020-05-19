@@ -35,8 +35,26 @@
     font-size: 18px;
     color: #ffffff;
     width: 18px;
+    position: relative;
   }
-
+  .notify-badge{
+    position: absolute;
+    background: #EB5A47;
+    height: 10px;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    color: white;
+    border: 1px solid #2D3079;
+    z-index: 1;
+}
+.pos {
+  position: relative;
+}
 
   .topnav {
     overflow: hidden;
@@ -104,3 +122,19 @@
   text-decoration: none;
   font-size: 16px;
   }
+
+
+  .footer-right-login ul li a {
+    color: #ffffff;   
+    text-decoration: none;
+    font-size: 16px;
+    }
+
+
+    .footer-left-login p {
+      color: #ffffff;     
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 0;
+ 
+    }

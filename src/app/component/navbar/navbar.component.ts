@@ -10,6 +10,7 @@ import { LenderService } from 'src/app/service/lender.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
 
   constant: any = {};
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
     this.commonService.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);
   }
+
 
   getUserDetails() {
     this.lenderService.getLoggedInUserDetails().subscribe(res => {
