@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit {
   isEdit = false;
   isAdd = false;
   @Input() productCount: any = {};
+  isChecker: boolean;
+  user: any;
   constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
               private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals, public router: Router) { }
 
@@ -31,10 +33,8 @@ export class ProductsComponent implements OnInit {
     this.lenderService.listProducts(this.productStatus).subscribe(res => {
         if (res.status === 200) {
           this.productList = res.data;
-          if (this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
-            this.isEdit = true;
-            this.isAdd = true;
-          }
+          // Show edit and add button only if user is MAKER
+          
         } else {
           this.commonService.warningSnackBar(res.message);
         }
@@ -116,6 +116,20 @@ export class ProductsComponent implements OnInit {
       this.productStatus  = Constant.MASTER_TYPE.APPROVED.id;
     } else if (this.route.url === this.routeURL.INACTIVE_PRODUCTS){
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
+    }
+
+    if (this.commonService.isObjectIsEmpty(this.global.USER)){
+      this.user = JSON.parse(this.commonService.getStorage(Constant.STORAGE.USER, true));
+    } else {
+      this.user = this.global.USER;
+    }
+    if (this.user.roles.indexOf(Constant.ROLES.MAKER.name) > -1 ){
+      this.isEdit = true;
+      this.isAdd = true;
+    }
+    // Hide saved tab for CHECKER
+    if (this.user.roles.indexOf(Constant.ROLES.CHECKER.name) > -1 ){
+      this.isChecker = true;
     }
     this.listProducts();
     this.navbar.getProductsCounts(); // get products counts

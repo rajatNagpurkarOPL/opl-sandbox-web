@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   }
 
 
+  // Get user details
   getUserDetails() {
     this.lenderService.getLoggedInUserDetails().subscribe(res => {
       if (res.status === 200) {
@@ -69,6 +70,15 @@ export class NavbarComponent implements OnInit {
         this.commonService.errorSnackBar(error);
       });
     }
+  // Go to products user wise
+  goToProducts(){
+    if (this.globals.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){ // If maker then go to saved products
+      this.router.navigate([Constant.ROUTE_URL.SAVED_PRODUCTS]);
+    } else if (this.globals.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1){ // If maker then go to Sent products
+      this.router.navigate([Constant.ROUTE_URL.SENT_PRODUCTS]);
+    }
+  }
+
 
   ngOnInit(): void {
     this.constant = Constant.ROUTE_URL;

@@ -1,70 +1,56 @@
-
 <!-- Header -->
 <header>
     <div class="header">
-    <div class="container">
-    <div id="header">
-        
-    <img src="assets/img/sbi-logo.png"/>
+        <div class="container">
+            <div id="header">
 
-    <div class="topnav">
-        <a [ngClass]="(router.url == constant.DASHBOARD ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="#">Dashboard & Analytic</a>
-        <a [ngClass]="(router.url.includes(constant.PRODUCTS) ? 'active' : '')" routerLink="{{constant.SAVED_PRODUCTS}}" href="#">Products list </a>
-        <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}" href="#">Settings</a>
+                <img src="assets/img/sbi-logo.png" />
+
+                <div class="topnav">
+                    <a [ngClass]="(router.url == constant.DASHBOARD ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="javasript:void(0)">Dashboard & Analytic</a>
+                    <a [ngClass]="(router.url.includes(constant.PRODUCTS) ? 'active' : '')" (click)="goToProducts()" href="javasript:void(0)">Products list </a>
+                    <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}"
+                        href="#">Settings</a>
+                </div>
+
+                <div class="header-right">
+
+                    <a href="#" class="pos">
+                        <span class="notify-badge"></span>
+                        <img class="down-arrow" src="assets/img/alert.svg" />
+                    </a>
+
+                    <p><img src="assets/img/b4lDefault.png" /> Hi, {{globals.USER.userName}}</p>
+                    <img class="down-arrow" src="assets/img/down-arrow.svg" />
+                    <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- <a href="#" (click)="logoutUser()">Logout</a> -->
+</header>
 
-    <div class="header-right">
-        
-        <a href="#" class="pos">
-            <span class="notify-badge"></span>
-            <img  class="down-arrow" src="assets/img/alert.svg"/>
-        </a> 
-       
-        <p><img src="assets/img/b4lDefault.png"/> Hi, {{globals.USER.userName}}</p>
-        <img  class="down-arrow" src="assets/img/down-arrow.svg"/>
-        <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a>
-    </div>
-    </div>
-</div>
-</div>
-    </header>
-    
-
-
-<router-outlet ></router-outlet>
-
-
+<router-outlet></router-outlet>
 
 <footer>
     <div class="container">
-    <div id="footer">
-    <div class="footer-left">
-    <p>Copyright © 2020 All rights reserved. Powred by psbloansin59minutes.com</p>
+        <div id="footer">
+            <div class="footer-left">
+                <p>Copyright © 2020 All rights reserved. Powred by psbloansin59minutes.com</p>
+            </div>
+
+
+
+            <div class="footer-right">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Help & Support</a></li>
+
+
+
+                </ul>
+            </div>
+        </div>
+
     </div>
-    
-    
-    
-    <div class="footer-right">
-    <ul>
-    <li><a href="#">Privacy Policy</a></li>
-    <li><a href="#">Terms & Conditions</a></li>
-    <li><a href="#">Help & Support</a></li>
-   
-    
-    
-    </ul>
-    </div>
-</div>
-    
-    </div>
-    </footer>
-
-
-
-
-
-
-
-
-  
+</footer>
