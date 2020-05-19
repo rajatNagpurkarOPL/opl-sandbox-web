@@ -12,10 +12,12 @@ mat-card {
 
  #b4l-login {
 padding: 3em 0 0;
+min-height: 80vh;
 
  }
   .b4l-login {
  height: 100%;
+
  background-repeat: no-repeat;
 
   }
@@ -95,3 +97,48 @@ font-size: 16px;
 font-weight: 500;
 margin: 1em 0;
 }
+
+
+#footer {
+
+  padding: 2em 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+width: 100%;
+  bottom: 0;
+}
+
+
+.footer-right-login {
+  float: right;
+  }
+  .footer-right-login ul {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  }
+  .footer-right-login ul li {
+    list-style: none;
+    margin: 0 1em;
+    display: flex;
+    align-items: center;
+  }
+
+
+
+
+.footer-right-login ul li a {
+  color: #ffffff;   
+  text-decoration: none;
+  font-size: 16px;
+  }
+
+
+  .footer-left-login p {
+    color: #ffffff;     
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+
+  }
