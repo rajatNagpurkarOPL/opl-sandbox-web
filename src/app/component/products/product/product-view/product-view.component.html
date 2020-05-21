@@ -30,13 +30,21 @@
                         {{food.viewValue}}
                       </mat-option> -->
                       <!-- <mat-label>v3.0 (Current version)</mat-label> -->
-                        <mat-form-field class="fix-select" *ngIf="versions && versions.length">
-                            <mat-select [(ngModel)]="version">
+
+                        <!-- <mat-form-field class="fix-select" *ngIf="versions && versions.length">
+                            <mat-select [(ngModel)]="version" (ngModelChange)="getProductVersion(version)">
                                 <mat-option *ngFor="let v of versions"  [value]="v">
-                                    <span class="option-txt">V{{v.version}} </span><br><span class="option-txt-inner"> {{v.from}}</span>
+                                    <span class="option-txt">V{{v.ver}} </span><br><span class="option-txt-inner"> {{v.from}}</span>
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
+
+                        <select *ngIf="versions && versions.length" style="margin-left: 10px;" class="form-control" id="versionDropdown" name="versionDropdown" [(ngModel)]="version" (ngModelChange)="getProductVersion(version)">
+                            <option *ngFor="let v of versions"  [ngValue]="v">
+                                <span>V{{v.ver}} </span><br><span> From  {{ v.from | date:'dd MMM yyyy' }} at  {{ v.from | date:'shortTime' }}</span>
+                            </option>
+                        </select>
+                        <!-- [selected]="option.id == (item.answer ? item.answer.id : '')"  -->
 
                         <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
                         <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
