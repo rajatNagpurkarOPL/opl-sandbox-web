@@ -30,20 +30,13 @@
                         {{food.viewValue}}
                       </mat-option> -->
                       <!-- <mat-label>v3.0 (Current version)</mat-label> -->
-                        <!-- <mat-form-field class="fix-select">
-                            <mat-select>
-                                <mat-option value="option0"><span class="option-txt">v4.0 Beta (Approval
-                                        pending)</span><br><span class="option-txt-inner">Requested on 22 April 2020
-                                        02:03 PM</span></mat-option>
-                                <mat-option value="option1"><span class="option-txt">v3.0 (Current
-                                        version)</span><br><span class="option-txt-inner">From 18 April 2020 02:03
-                                        PM</span></mat-option>
-                                <mat-option value="option2"><span class="option-txt">v2.0</span><br><span
-                                        class="option-txt-inner">From 25 March 2020 02:03 PM</span></mat-option>
-                                <mat-option value="option3"><span class="option-txt">v2.0</span><br><span
-                                        class="option-txt-inner">From 22 March 2020 02:03 PM</span></mat-option>
+                        <mat-form-field class="fix-select" *ngIf="versions && versions.length">
+                            <mat-select [(ngModel)]="version">
+                                <mat-option *ngFor="let v of versions"  [value]="v">
+                                    <span class="option-txt">V{{v.version}} </span><br><span class="option-txt-inner"> {{v.from}}</span>
+                                </mat-option>
                             </mat-select>
-                        </mat-form-field> -->
+                        </mat-form-field>
 
                         <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
                         <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
