@@ -18,7 +18,7 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
 export class ProductViewComponent implements OnInit {
   product: any = {};
   routeURL: any = {};
-  status;
+  status; versions: any = []; version: any = {};
   showStatus: any = {isShowStatus : false};
   constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService,
               public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
@@ -89,12 +89,30 @@ export class ProductViewComponent implements OnInit {
           this.showStatus.isShowStatus = true;
           this.showStatus.status = this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id ? 'Active' : 'Inactive';
         }
+        // show version dropdown
+        this.showVersion(this.product.productsAudits);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
+  }
+
+  // Show Versions
+  showVersion(ver) {
+    const audits = cloneDeep(ver);
+    this.versions.push({version : this.product.version + ' (Current Version) ', from : ' From ' + new Date(this.product.createdDate)});
+    this.version = this.versions[0];
+    audits.forEach(v => {
+      const from = new Date(JSON.parse(v.createdDateAudit).oldValue);
+      this.versions.push({version : v.version, from });
+    });
+    console.log('version===>' , this.versions);
+  }
+
+  getProductVersion(ver){
+    
   }
 
   // update product status send back or aprove
@@ -123,7 +141,11 @@ export class ProductViewComponent implements OnInit {
     this.lenderService.updateProductActionStatus(req).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
-        this.router.navigate([Constant.ROUTE_URL.SAVED_PRODUCTS]);
+        if (this.global.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1 ){
+          this.router.navigate([Constant.ROUTE_URL.SENT_PRODUCTS]);
+        } else {
+          this.router.navigate([Constant.ROUTE_URL.SAVED_PRODUCTS]);
+        }
       } else {
         this.commonService.warningSnackBar(res.message);
       }
