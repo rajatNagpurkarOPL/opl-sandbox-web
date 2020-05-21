@@ -57,6 +57,9 @@ export class LenderService {
   getProductDetails(status, id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.PRODUCT_DETAILS + '/' + status + '/' + id, false);
   }
+  getAuditProductDetails(id, version): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.AUDIT_PRODUCT_DETAILS + '/' + id + '/' + version, false);
+  }
   geteffectivePLR(data): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.EFFECTIVE_PLR , data);
   }

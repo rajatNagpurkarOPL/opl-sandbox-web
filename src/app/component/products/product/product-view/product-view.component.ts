@@ -15,10 +15,12 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
   templateUrl: './product-view.component.html',
   styleUrls: ['./product-view.component.scss']
 })
+// tslint:disable: max-line-length
 export class ProductViewComponent implements OnInit {
   product: any = {};
   routeURL: any = {};
   status; versions: any = []; version: any = {};
+  productId;
   showStatus: any = {isShowStatus : false};
   constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService,
               public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
@@ -27,9 +29,8 @@ export class ProductViewComponent implements OnInit {
   isMatchesTab = true;
   reqType;
   // get product info by product id
-  // tslint:disable: max-line-length
   getProductDetails() {
-    this.lenderService.getProductDetails(this.product.status, this.product.productId).subscribe(res => {
+    this.lenderService.getProductDetails(this.status, this.productId).subscribe(res => {
       if (res.status === 200) {
         this.product = res.data;
         // set answer and other values
@@ -88,9 +89,9 @@ export class ProductViewComponent implements OnInit {
         if (this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id || this.product.productStatus.id === Constant.MASTER_TYPE.INACTIVE.id) {
           this.showStatus.isShowStatus = true;
           this.showStatus.status = this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id ? 'Active' : 'Inactive';
+          // show version dropdown
+          this.showVersion(this.product.productsAudits);
         }
-        // show version dropdown
-        this.showVersion(this.product.productsAudits);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -102,17 +103,55 @@ export class ProductViewComponent implements OnInit {
   // Show Versions
   showVersion(ver) {
     const audits = cloneDeep(ver);
-    this.versions.push({version : this.product.version + ' (Current Version) ', from : ' From ' + new Date(this.product.createdDate)});
+    this.versions = [];
+    this.versions.push({version : this.product.version, ver : this.product.version + ' (Current Version) ', isCurrentVer : true, from : new Date(this.product.createdDate)});
     this.version = this.versions[0];
     audits.forEach(v => {
-      const from = new Date(JSON.parse(v.createdDateAudit).oldValue);
-      this.versions.push({version : v.version, from });
+      const from = new Date(v.modifiedDate ? v.modifiedDate : this.product.createdDate);
+      this.versions.push({version : v.version, ver : v.version, from });
     });
     console.log('version===>' , this.versions);
   }
 
+  // Get product info by version
   getProductVersion(ver){
-    
+    if (ver.isCurrentVer){
+      this.getProductDetails();
+    } else {
+    this.lenderService.getAuditProductDetails(this.productId, ver.version).subscribe(res => {
+      if (res.status === 200) {
+        const productDetail = res.data;
+        if (!this.commonService.isObjectIsEmpty(productDetail)){
+          console.log(res.data);
+          this.product = productDetail;
+          // set answer and other values
+          this.product.parametersAudit.forEach(element => {
+            if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
+            element.answer = JSON.parse(element.answer);
+            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+              element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+            }
+            if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+              element.answerValue = element.answer.value;
+            }
+            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+              element.answerValue = element.answer ? 'Yes' : 'No';
+            }
+          }
+        });
+          this.product.parameters = this.product.parametersAudit;
+          // Show request type
+          if (this.product.reqType) {
+            this.getReqType(this.product.reqType.id);
+          }
+      }
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
   }
 
   // update product status send back or aprove
@@ -198,10 +237,9 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
-    this.product.productId = this.route.snapshot.paramMap.get('id');
-    this.product.status = this.route.snapshot.paramMap.get('status');
+    this.productId = this.route.snapshot.paramMap.get('id');
     this.status = this.route.snapshot.paramMap.get('status');
-    if (this.product.productId) {
+    if (this.productId && this.status) {
       this.getProductDetails();
     }
   }
