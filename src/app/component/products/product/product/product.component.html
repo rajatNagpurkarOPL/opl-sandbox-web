@@ -25,23 +25,24 @@
                 </div>
             </div>
 
-            <!-- Matches Parameter start -->
             <div id="b4l-content" class="b4l-height">
                 <div class="b4l-product-title">
                     <ul class="product">
-                        <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="setTab(1)" href="javascript:void(0)">
-                                <p>Matches Parameter</p>
-                            </a></li>
-                        <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="setTab(2)" href="javascript:void(0)">
-                                <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm').invalid && productForm.submitted">•</span> </p>
-                            </a></li>
-                    </ul>
-                    <a *ngIf="isMatchesTab" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
-                        class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
-                    <a *ngIf="!isMatchesTab" (click)="importParameterPopup('eligibility');" href="javaScript:void(0);" class="product-btn1"><img
-                            src="assets/img/import.svg" /> Import Eligibility Parameter</a>
+                        <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches')" href="javascript:void(0)"> <p>Matches Parameter</p> </a></li>
+                        <li><a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility')" href="javascript:void(0)">
+                            <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm').invalid && submitted">•</span> </p>
+                        </a>
+                    </li>
+                    <li><a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges')" href="javascript:void(0)"> <p>Charges & ROI</p> </a></li>
+                </ul>
+                    <a *ngIf="tab.matches" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
+                    class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
+                    <a *ngIf="tab.eligibility" (click)="importParameterPopup('eligibility');" href="javaScript:void(0);" class="product-btn1"><img
+                        src="assets/img/import.svg" /> Import Eligibility Parameter</a>
                 </div>
-                <div [hidden]="!isMatchesTab">
+                
+                <!-- Matches Parameter start -->
+                <div [hidden]="!tab.matches">
                     <form formGroupName="paramForm">
                         <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
                             <img class="img-match" src="assets/img/matches-parameter.svg" />
@@ -56,7 +57,7 @@
                                     Parameters</a>
                             </div>
                         </div>
-                        <ng-container *ngIf="product.parameters.length > 0">
+                        <ng-container *ngIf="product.parameters && product.parameters.length > 0">
                             <div class="b4l-product-list" *ngFor="let item of this.product.parameters; index as i">
                                 <div class="b4l-product-list-left">
                                     <p>{{i+1}}.</p>
@@ -112,9 +113,10 @@
                     </form>
 
                 </div>
+                <!-- Matches Parameter End -->
 
                 <!-- Eligibility Calculation start-->
-                <div [hidden]="isMatchesTab">
+                <div [hidden]="!tab.eligibility">
                     <div class="b4l-product-list back">
                         <div class="b4l-product-list-left b4l-product-list-left1">
                             <p class="fnt-size-22">EBLR eligibility calculation method</p>
@@ -225,11 +227,114 @@
                         </div>
                     </form>
                 </div>
+                <!-- Eligibility Calculation End-->
+                <!-- Charges & ROI Start -->
+
+                <div [hidden]="!tab.charges">
+                    <form formGroupName="chargesForm"> 
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>1.</p>
+                                <p>ROI</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <!-- <div class="text-with-presnt person-text-width1">
+                                        <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="ef.roi" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                    <p class="text-input">+ {{eblr.plr || '-'}}% (EBLR) = {{finalROI}}%(Final ROI)</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>2.</p>
+                                <p>Late payment charges</p>
+                            </div>
+                            
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <select class="form-control" formControlName="dropdown1" [(ngModel)]="product.charge.latePayment.chargeType" >
+                                        <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.latePayment.chargeType" [ngValue]="option.value" >{{option.name}} </option>
+                                    </select>
+                                    <div class="text-with-presnt person-text-width2">
+                                        <input [(ngModel)]="product.charge.latePayment.value"  (ngModelChange)="changeROI()" formControlName="latePay" type="text">
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.latePayment.chargeType == 'RATE_BASED'">%</p>
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.latePayment.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <app-print-error [control]="cf.latePay" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>3.</p>
+                                <p>Bounce charges</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <select class="form-control" formControlName="dropdown2" [(ngModel)]="product.charge.bounce.chargeType" >
+                                        <option *ngFor="let option of chargeTypes"  [selected]="option.value == product.charge.bounce.chargeType" [ngValue]="option.value" >{{option.name}} </option>
+                                    </select>
+                                    <div class="text-with-presnt person-text-width2">
+                                        <input [(ngModel)]="product.charge.bounce.value"  (ngModelChange)="changeROI()" formControlName="bounce" type="text">
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.bounce.chargeType == 'RATE_BASED'">%</p>
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.bounce.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <app-print-error [control]="cf.latePay" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>4.</p>
+                                <p>Processing charges</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <select class="form-control" formControlName="dropdown3" [(ngModel)]="product.charge.processing.chargeType" >
+                                        <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.processing.chargeType" [ngValue]="option.value" >{{option.name}} </option>
+                                    </select>
+                                    <div class="text-with-presnt person-text-width2">
+                                        <input [(ngModel)]="product.charge.processing.value" (ngModelChange)="changeROI()" formControlName="processing" type="text">
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.processing.chargeType == 'RATE_BASED'">%</p>
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.processing.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <app-print-error [control]="cf.latePay" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b4l-product-list">
+                            <div class="b4l-product-list-left">
+                                <p>5.</p>
+                                <p>Prepayment charges</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <select class="form-control" formControlName="dropdown4" [(ngModel)]="product.charge.prepayment.chargeType" >
+                                        <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.prepayment.chargeType" [ngValue]="option.value" >{{option.name}} </option>
+                                    </select>
+                                    <div class="text-with-presnt person-text-width2">
+                                        <input [(ngModel)]="product.charge.prepayment.value" (ngModelChange)="changeROI()" formControlName="prepayment" type="text">
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.prepayment.chargeType == 'RATE_BASED'">%</p>
+                                        <p class="perstage-text-n-d" *ngIf="product.charge.prepayment.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <app-print-error [control]="cf.latePay" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{product | json}}
+
+                    </form>
+                </div>
+                <!-- Charges & ROI End -->
             </div>
         </form>
 
         <!-- Analyse now-->
-        <div id="b4l-content" [hidden]="!isMatchesTab">
+        <div id="b4l-content" [hidden]="!tab.matches">
             <div class="matches-parameter">
                 <img class="img-match" src="assets/img/Analyse-now.svg" />
                 <p class="opacity-light">Just to be on safe side you can run simulation on sample applications.</p>
@@ -243,7 +348,7 @@
         <!-- Analyse now end-->
 
         <!-- Eligibility Calculator-->
-        <div id="b4l-content" [hidden]="isMatchesTab">
+        <div id="b4l-content" [hidden]="!tab.eligibility">
             <div class="matches-parameter">
                 <img class="img-match" src="assets/img/EligibilityCalculator.svg" />
                 <p class="opacity-light">Just to be on safe side you can run simulation on sample

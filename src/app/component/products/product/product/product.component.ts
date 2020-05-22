@@ -16,6 +16,7 @@ import _ from 'lodash';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
+// tslint:disable: max-line-length
 export class ProductComponent implements OnInit {
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
               private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
@@ -23,10 +24,12 @@ export class ProductComponent implements OnInit {
   routeURL: any = {};
   inputType: any = {};
   eblr: any = {};
-  product: any = { parameters: [] };
+  chargeTypes: any = [{id : 1 , name : 'Fixed Amount', value : 'FIXED_AMOUNT', i : 0}, {id : 2 , name : 'Set percentage', value: 'RATE_BASED', i : 1}];
+  chargeDetail = {chargeType: 0, value: null, chargesType : cloneDeep(this.chargeTypes)};
+  product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)} };
   approveBtn = null;
   isAdd = false;
-  isMatchesTab = true;
+  tab: any = {charges: true};
   isEligibilityTab = false;
   submitted = false;
   finalROI;
@@ -42,12 +45,21 @@ export class ProductComponent implements OnInit {
       maxLoanAmnt: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
       wcReq: ['', [Validators.required, Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25)]],
     }),
-    paramForm : this.fb.group({})
+    paramForm : this.fb.group({}),
+    chargesForm : this.fb.group({
+      dropdown1 : [''], dropdown2 : [''], dropdown3 : [''], dropdown4 : [''],
+      latePay : [''],
+      bounce : [''],
+      prepayment : [''],
+      latePayment : [''],
+      processing : [''],
+    })
   });
   // convenience getter for easy access to form fields
   get f() { return this.productForm.controls; } // return product form controls
   get ef() { return this.productForm.get('elgbltForm').controls; } // return EBLR form controls
   get pf() { return this.productForm.get('paramForm').controls; } // return parameters form controls
+  get cf() { return this.productForm.get('chargesForm').controls; } // return charges & roi form controls
 
   // Save product details
   saveProduct(type) {
@@ -285,11 +297,8 @@ export class ProductComponent implements OnInit {
 
   // switching between tabs
   setTab(type){
-    if (type === 1){
-      this.isMatchesTab = true;
-    }else{
-      this.isMatchesTab = false;
-    }
+    Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs
+    this.tab[type] = true;
   }
 
   // sum of total ROI
@@ -306,5 +315,6 @@ export class ProductComponent implements OnInit {
     }
     this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
     this.getCurrentEBLR(); // get current eblr
+    console.log(this.product);
   }
 }

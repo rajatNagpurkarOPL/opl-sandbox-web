@@ -71,17 +71,12 @@
 
             <div class="b4l-product-title">
                 <ul class="product">
-                    <li><a [ngClass]="(isMatchesTab ? 'active' : '')" (click)="setTab(1)"
-                            href="javaScript:void(0);">
-                            <p>Matches Parameter</p>
-                        </a></li>
-                    <li><a [ngClass]="(!isMatchesTab ? 'active' : '')" (click)="setTab(2)"
-                            href="javaScript:void(0);">
-                            <p>Eligibility Calculation</p>
-                        </a></li>
+                    <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches')" href="javaScript:void(0);"> <p>Matches Parameter</p> </a> </li>
+                    <li><a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility')" href="javaScript:void(0);"> <p>Eligibility Calculation</p> </a></li>
+                    <li><a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges')" href="javaScript:void(0);"> <p>Charges & ROI</p> </a></li>
                 </ul>
             </div>
-            <ng-container *ngIf="isMatchesTab">
+            <ng-container *ngIf="tab.matches">
                 <div class="b4l-product-list" *ngFor="let param of product.parameters; index as i">
                     <div class="b4l-product-list-left">
                         <p>{{i + 1}}.</p>
@@ -94,8 +89,7 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngIf="!isMatchesTab">
-
+            <ng-container *ngIf="tab.eligibility">
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>1.</p>
@@ -159,6 +153,63 @@
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
                             <p>{{product.maxRepayAmt || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="tab.charges">
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>1.</p>
+                        <p>ROI  </p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.roi || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>2.</p>
+                        <p>Late payment charges</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.charge.latePayment.value || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>3.</p>
+                        <p>Bounce charges</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.charge.bounce.value || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>4.</p>
+                        <p>Processing charges</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.charge.processing.value || '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>5.</p>
+                        <p>Prepayment charges</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.charge.prepayment.value  || '-'}}</p>
                         </div>
                     </div>
                 </div>
