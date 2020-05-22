@@ -19,14 +19,13 @@ import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-p
 export class ProductViewComponent implements OnInit {
   product: any = {};
   routeURL: any = {};
+  tab: any = {matches: true};
   status; versions: any = []; version: any = {};
   productId;
   showStatus: any = {isShowStatus : false};
   constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService,
               public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
 
-
-  isMatchesTab = true;
   reqType;
   // get product info by product id
   getProductDetails() {
@@ -106,11 +105,12 @@ export class ProductViewComponent implements OnInit {
     this.versions = [];
     this.versions.push({version : this.product.version, ver : this.product.version + ' (Current Version) ', isCurrentVer : true, from : new Date(this.product.createdDate)});
     this.version = this.versions[0];
-    audits.forEach(v => {
-      const from = new Date(v.modifiedDate ? v.modifiedDate : this.product.createdDate);
-      this.versions.push({version : v.version, ver : v.version, from });
-    });
-    console.log('version===>' , this.versions);
+    if (audits && audits.lenght > 0){
+      audits.forEach(v => {
+        const from = new Date(v.modifiedDate ? v.modifiedDate : this.product.createdDate);
+        this.versions.push({version : v.version, ver : v.version, from });
+      });
+    }
   }
 
   // Get product info by version
@@ -215,11 +215,9 @@ export class ProductViewComponent implements OnInit {
 
   // switching between tabs
   setTab(type){
-    if (type === 1){
-      this.isMatchesTab = true;
-    }else{
-      this.isMatchesTab = false;
-    }
+    Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs
+    this.tab[type] = true;
+    console.log(this.tab);
   }
   // Get reqType as text
   getReqType(t){
