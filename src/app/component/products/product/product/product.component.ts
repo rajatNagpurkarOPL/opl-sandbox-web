@@ -299,7 +299,6 @@ export class ProductComponent implements OnInit {
   setTab(type){
     Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs
     this.tab[type] = true;
-    console.log(this.tab);
   }
 
   // sum of total ROI
