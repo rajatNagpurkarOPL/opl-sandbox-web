@@ -165,7 +165,7 @@
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.roi || '-'}}</p>
+                            <p>{{product.roi || '-'}} % </p>
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,10 @@
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.charge.latePayment.value || '-'}}</p>
+                            <p>{{product.charge.latePayment.value || '-'}}
+                                <span *ngIf="product.charge.latePayment.chargeType == 'RATE_BASED'" >%</span>
+                                <span *ngIf="product.charge.latePayment.chargeType == 'FIXED_AMOUNT'" >INR</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -187,7 +190,10 @@
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.charge.bounce.value || '-'}}</p>
+                            <p>{{product.charge.bounce.value || '-'}}
+                                <span *ngIf="product.charge.bounce.chargeType == 'RATE_BASED'" >%</span>
+                                <span *ngIf="product.charge.bounce.chargeType == 'FIXED_AMOUNT'" >INR</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -198,7 +204,10 @@
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.charge.processing.value || '-'}}</p>
+                            <p>{{product.charge.processing.value || '-'}}
+                                <span *ngIf="product.charge.processing.chargeType == 'RATE_BASED'" >%</span>
+                                <span *ngIf="product.charge.processing.chargeType == 'FIXED_AMOUNT'" >INR</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -209,7 +218,10 @@
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.charge.prepayment.value  || '-'}}</p>
+                            <p>{{product.charge.prepayment.value  || '-'}}
+                                <span *ngIf="product.charge.prepayment.chargeType == 'RATE_BASED'" >%</span>
+                                <span *ngIf="product.charge.prepayment.chargeType == 'FIXED_AMOUNT'" >INR</span>
+                            </p>
                         </div>
                     </div>
                 </div>

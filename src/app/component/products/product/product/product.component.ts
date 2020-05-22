@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
   inputType: any = {};
   eblr: any = {};
   chargeTypes: any = [{id : 1 , name : 'Fixed Amount', value : 'FIXED_AMOUNT', i : 0}, {id : 2 , name : 'Set percentage', value: 'RATE_BASED', i : 1}];
-  chargeDetail = {chargeType: 0, value: null, chargesType : cloneDeep(this.chargeTypes)};
+  chargeDetail = {chargeType: 'FIXED_AMOUNT', value: null, chargesType : cloneDeep(this.chargeTypes)};
   product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)} };
   approveBtn = null;
   isAdd = false;
