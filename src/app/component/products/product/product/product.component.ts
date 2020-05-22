@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
   product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)} };
   approveBtn = null;
   isAdd = false;
-  tab: any = {charges: true};
+  tab: any = {matches: true};
   isEligibilityTab = false;
   submitted = false;
   finalROI;
