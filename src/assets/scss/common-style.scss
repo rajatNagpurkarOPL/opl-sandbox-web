@@ -160,9 +160,7 @@ border-bottom: 3px solid #2D3079;
 }
 
 
-.cdk-overlay-pane {
-    position: relative !important;
-}
+
 .mat-datepicker-popup {
     position: absolute !important;
 }
@@ -514,6 +512,7 @@ position: relative;
     color: #FFFFFF !important;
     width: auto;
     text-align: center;
+    z-index: 1 !important;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {

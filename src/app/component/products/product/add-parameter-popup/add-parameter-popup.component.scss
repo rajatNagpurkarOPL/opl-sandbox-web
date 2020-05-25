@@ -1,6 +1,6 @@
 .btn-pop-up {
     display: flex;
-    position: absolute;
+    position: sticky;
     max-width: 50em;
     background: #ffffff;
     z-index: 1;
@@ -147,17 +147,16 @@ opacity: 0.4;
     margin-bottom: 0;
 }
 
+
 .import-matches {   
-    position: absolute;
-   max-width: 50em;
-   width: 100%;
-   background: #ffffff;
-   z-index: 1;
+    position: sticky;
+     max-width: 50em;
+     width: 100%;
+    background: #ffffff;
+    z-index: 1;
+    border-bottom: 1px solid #D8D8D8;;
 }
-    .pop-up-content {
-        margin: 6em 0;
-    }
-    
+
     .import-matches {
         display: flex;
         align-items: center;
