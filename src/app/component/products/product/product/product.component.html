@@ -208,6 +208,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-left">
+                                <p>6.</p>
+                                <p>Repayment plan</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <select class="form-control" formControlName="repayPlan">
+                                            <option selected >One Time </option>
+                                        </select>
+                                        <!-- <app-print-error [control]="ef.maxRepay" [submitted]="submitted" ></app-print-error> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b4l-product-list back">
+                            <div class="b4l-product-list-left">
+                                <p>7.</p>
+                                <p>Disbursement plan</p>
+                            </div>
+                            <div class="b4l-product-list-right">
+                                <div class="buttin-b4l-opacity opl2">
+                                    <div class="text-with-presnt person-text-width">
+                                        <select class="form-control" formControlName="disbursePlan">
+                                            <option selected >One Time </option>
+                                        </select>
+                                        <!-- <app-print-error [control]="ef.maxRepay" [submitted]="submitted" ></app-print-error> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <!-- Eligibility Calculation End-->
@@ -241,11 +273,15 @@
                                     <select class="form-control" formControlName="dropdown1" [(ngModel)]="product.charge.latePayment.chargeType" (ngModelChange)="changeValidation(product.charge.latePayment.chargeType,'latePay')" >
                                         <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.latePayment.chargeType" [ngValue]="option.value" >{{option.name}} </option>
                                     </select>
-                                    <div class="text-with-presnt person-text-width2">
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.latePayment.chargeType == 'FIXED_AMOUNT'">
                                         <input [(ngModel)]="product.charge.latePayment.value" formControlName="latePay" type="text">
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.latePayment.chargeType == 'RATE_BASED'">%</p>
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.latePayment.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <p class="perstage-text-n-d">INR</p>
                                         <app-print-error [control]="cf.latePay" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.latePayment.chargeType == 'RATE_BASED'">
+                                        <input [(ngModel)]="product.charge.latePayment.value" formControlName="latePayRate" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="cf.latePayRate" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -257,14 +293,18 @@
                             </div>
                             <div class="b4l-product-list-right">
                                 <div class="buttin-b4l-opacity opl2">
-                                    <select class="form-control" formControlName="dropdown2" (ngModelChange)="changeValidation(product.charge.bounce.chargeType,'bounce')" [(ngModel)]="product.charge.bounce.chargeType" >
+                                    <select class="form-control" formControlName="dropdown2" [(ngModel)]="product.charge.bounce.chargeType" (ngModelChange)="changeValidation(product.charge.bounce.chargeType,'bounce')">
                                         <option *ngFor="let option of chargeTypes"  [selected]="option.value == product.charge.bounce.chargeType" [ngValue]="option.value" >{{option.name}} </option>
                                     </select>
-                                    <div class="text-with-presnt person-text-width2">
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.bounce.chargeType =='FIXED_AMOUNT'">
                                         <input [(ngModel)]="product.charge.bounce.value"  (ngModelChange)="changeROI()" formControlName="bounce" type="text">
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.bounce.chargeType == 'RATE_BASED'">%</p>
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.bounce.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <p class="perstage-text-n-d">INR</p>
                                         <app-print-error [control]="cf.bounce" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.bounce.chargeType == 'RATE_BASED'">
+                                        <input [(ngModel)]="product.charge.bounce.value"  (ngModelChange)="changeROI()" formControlName="bounceRate" type="text">
+                                        <p class="perstage-text-n-d" >%</p>
+                                        <app-print-error [control]="cf.bounceRate" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -276,14 +316,18 @@
                             </div>
                             <div class="b4l-product-list-right">
                                 <div class="buttin-b4l-opacity opl2">
-                                    <select class="form-control" formControlName="dropdown3" (ngModelChange)="changeValidation(product.charge.processing.chargeType,'processing')"  [(ngModel)]="product.charge.processing.chargeType" >
+                                    <select class="form-control" formControlName="dropdown3"  [(ngModel)]="product.charge.processing.chargeType" (ngModelChange)="changeValidation(product.charge.processing.chargeType,'processing')">
                                         <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.processing.chargeType" [ngValue]="option.value" >{{option.name}} </option>
                                     </select>
-                                    <div class="text-with-presnt person-text-width2">
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.processing.chargeType =='FIXED_AMOUNT'">
                                         <input [(ngModel)]="product.charge.processing.value" formControlName="processing" type="text">
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.processing.chargeType == 'RATE_BASED'">%</p>
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.processing.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <p class="perstage-text-n-d" >INR</p>
                                         <app-print-error [control]="cf.processing" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.processing.chargeType == 'RATE_BASED'">
+                                        <input [(ngModel)]="product.charge.processing.value" formControlName="processingRate" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="cf.processingRate" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>
@@ -295,14 +339,18 @@
                             </div>
                             <div class="b4l-product-list-right">
                                 <div class="buttin-b4l-opacity opl2">
-                                    <select class="form-control" formControlName="dropdown4" (ngModelChange)="changeValidation(product.charge.prepayment.chargeType,'prepayment')" [(ngModel)]="product.charge.prepayment.chargeType" >
+                                    <select class="form-control" formControlName="dropdown4" [(ngModel)]="product.charge.prepayment.chargeType" (ngModelChange)="changeValidation(product.charge.prepayment.chargeType,'prepayment')" >
                                         <option *ngFor="let option of chargeTypes" [selected]="option.value == product.charge.prepayment.chargeType" [ngValue]="option.value" >{{option.name}} </option>
                                     </select>
-                                    <div class="text-with-presnt person-text-width2">
+                                    <div class="text-with-presnt person-text-width2" *ngIf="product.charge.prepayment.chargeType == 'FIXED_AMOUNT'">
                                         <input [(ngModel)]="product.charge.prepayment.value" formControlName="prepayment" type="text">
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.prepayment.chargeType == 'RATE_BASED'">%</p>
-                                        <p class="perstage-text-n-d" *ngIf="product.charge.prepayment.chargeType =='FIXED_AMOUNT'">INR</p>
+                                        <p class="perstage-text-n-d">INR</p>
                                         <app-print-error [control]="cf.prepayment" [submitted]="submitted" ></app-print-error>
+                                    </div>
+                                    <div class="text-with-presnt person-text-width2"  *ngIf="product.charge.prepayment.chargeType =='RATE_BASED'">
+                                        <input [(ngModel)]="product.charge.prepayment.value" formControlName="prepaymentRate" type="text">
+                                        <p class="perstage-text-n-d">%</p>
+                                        <app-print-error [control]="cf.prepaymentRate" [submitted]="submitted" ></app-print-error>
                                     </div>
                                 </div>
                             </div>

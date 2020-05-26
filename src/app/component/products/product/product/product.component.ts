@@ -9,7 +9,6 @@ import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
 import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
-import _ from 'lodash';
 
 @Component({
   selector: 'app-product',
@@ -33,7 +32,7 @@ export class ProductComponent implements OnInit {
   chargeTypes: any = [{id : 1 , name : 'Fixed Amount', value : 'FIXED_AMOUNT', i : 0}, {id : 2 , name : 'Set percentage', value: 'RATE_BASED', i : 1}];
   chargeDetail = {chargeType: 'FIXED_AMOUNT', value: null, chargesType : cloneDeep(this.chargeTypes)};
   product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)}, repayments : [], disbursements: [] };
-  repayment: any = { automatic: false, scheduleType: 'ONE_TIME', frequency: '', payNowAllowed: false, editPlanAllowed: false, changeMethodAllowed: false, tenure: 0, tenureType: 'MONTH', title: '', noOfInstallments: '111', description: '', url: '', extensibleData: '', paymentUrl: '', penalty: 0, principal: 0, startDate: null, interestAmount: null, totalAmount: '20000', status: null};
+  repayment: any = { automatic: false, scheduleType: 'ONE_TIME', frequency: '', payNowAllowed: false, editPlanAllowed: false, changeMethodAllowed: false, tenure: 0, tenureType: 'MONTH', title: '', noOfInstallments: '111', description: '', url: '', extensibleData: '', paymentUrl: '', penalty: 0, principal: 0, startDate: null, interestAmount: 11, totalAmount: '20000', status: 'ACTIVE'};
   disburse: any = { automatic: false, scheduleType: 'ONE_TIME', noOfInstallments: '2', status: 'ACTIVE', totalAmount : '2000'};
 
   // Product form validation
@@ -45,6 +44,8 @@ export class ProductComponent implements OnInit {
       disPercentage: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
       maxLoanAmnt: ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
       wcReq: ['', [Validators.required, Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25)]],
+      repayPlan : ['One Time'],
+      disbursePlan : ['One Time'],
     }),
     paramForm : this.fb.group({}),
     chargesForm : this.fb.group({
@@ -65,6 +66,7 @@ export class ProductComponent implements OnInit {
   // Save product details
   saveProduct(type) {
     this.submitted = true;
+    console.log(this.product);
     console.log(this.productForm);
     if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details.');
@@ -82,8 +84,13 @@ export class ProductComponent implements OnInit {
       this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1) {
       return 0;
     }
-    this.product.repayments.push(this.repayment);
-    this.product.disbursements.push(this.disburse);
+    // As of now passing static repayment and disbursement deatils.
+    if (this.product.repayments.length === 0){
+      this.product.repayments.push(this.repayment);
+    }
+    if (this.product.disbursements.length === 0){
+      this.product.disbursements.push(this.disburse);
+    }
     this.product.pStatus = Constant.MASTER_TYPE.PENDING.id;
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
     this.product.productStatus = Constant.MASTER_TYPE.SAVED;
@@ -305,14 +312,16 @@ export class ProductComponent implements OnInit {
 
   // Change validation for charges form
   changeValidation(type, ctrl) {
-    // const validators = [Validators.required];
-    // if (type === 'RATE_BASED') {
-    //   validators.push(Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25));
-    // } else {
-    //   validators.push(Validators.pattern('^[0-9]*$'), Validators.maxLength(7));
-    // }
-    // this.productForm.get('chargesForm').removeControl(ctrl);
-    // this.productForm.get('chargesForm').addControl(ctrl, this.fb.control('', validators));
+    const validators = [Validators.required];
+    if (type === 'RATE_BASED') {
+      validators.push(Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25));
+      this.productForm.get('chargesForm').removeControl(ctrl);
+      this.productForm.get('chargesForm').addControl(ctrl + 'Rate', this.fb.control('', validators));
+    } else {
+      validators.push(Validators.pattern('^[0-9]*$'), Validators.maxLength(7));
+      this.productForm.get('chargesForm').removeControl(ctrl + 'Rate');
+      this.productForm.get('chargesForm').addControl(ctrl, this.fb.control('', validators));
+    }
   }
 
   // sum of total ROI
