@@ -105,7 +105,7 @@ export class ProductViewComponent implements OnInit {
     this.versions = [];
     this.versions.push({version : this.product.version, ver : this.product.version + ' (Current Version) ', isCurrentVer : true, from : new Date(this.product.createdDate)});
     this.version = this.versions[0];
-    if (audits && audits.lenght > 0){
+    if (audits && audits.length > 0){
       audits.forEach(v => {
         const from = new Date(v.modifiedDate ? v.modifiedDate : this.product.createdDate);
         this.versions.push({version : v.version, ver : v.version, from });
