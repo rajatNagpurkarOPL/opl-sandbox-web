@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   userResponse: any = {};
   routeURL: any = {};
   isForgotPasss = false;
-
+  isSentSuccess = false;
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
               private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
               private cookieservice: CookieService) { }
