@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tostr',
   templateUrl: './tostr.component.html',
-  styleUrls: ['./tostr.component.scss']
+  styleUrls: ['./tostr.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TostrComponent implements OnInit {
 
