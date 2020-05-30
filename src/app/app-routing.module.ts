@@ -9,10 +9,12 @@ import { AuthGuard } from './common-utils/auth/auth.guard';
 import { ProductComponent } from './component/products/product/product/product.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
+  { path: 'reset-password', component: ResetPasswordComponent},
   { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'products/save', component: ProductsComponent, canActivate: [AuthGuard]},
