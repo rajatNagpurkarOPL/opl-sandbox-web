@@ -8,7 +8,7 @@
 
           <p class="login-text">Welcome to BHIM for Lending Dashboard</p>
           
-          <div class="login-box" *ngIf="!isForgotPasss" >
+          <div class="login-box" *ngIf="!isForgotPasss && !isSentSuccess" >
             <img src="assets/img/sbi.png" />
             <p>Login to your Dashboard</p>
             <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
@@ -34,10 +34,9 @@
 
             <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
               <fieldset>
-                <input placeholder="Email Id" type="email" tabindex="1" required="" [(ngModel)]="user.userName"
-                  name="userName" id="myText">
+                <input placeholder="Email Id" type="email" tabindex="1" required="" [(ngModel)]="user.userName" name="userName">
               </fieldset>
-              <button mat-raised-button color="primary" type="submit" class="btn-rest-pswd">Email Reset Link</button>
+              <button mat-raised-button color="primary" type="submit" (click)="forgorPassword()" class="btn-rest-pswd">Email Reset Link</button>
             </form>
             <p class="reset-psd-text">We will send you a link to reset your password on your email ID.</p>
           </div>
@@ -49,7 +48,7 @@
               <p>Reset Your password</p>
             </div>
             <img src="assets/img/reset-pwd.svg" />
-            <p class="reset-psd-text">We have send you a link to reset your password on your email ID “mani.sharma@sbi.com”.</p>
+            <p class="reset-psd-text">We have send you a link to reset your password on your email ID “{{user.userName}}”.</p>
           </div>
           <!-- Reset password end-->
         </div>

@@ -29,6 +29,7 @@ import { SendBackModelService } from './common-utils/common-services/SendBackMod
 import { TostrComponent } from './common-utils/common-component/tostr/tostr.component';
 import { Globals } from 'src/app/common-utils/globals';
 import { PrintErrorComponent } from './common-utils/common-component/print-error/print-error.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { PrintErrorComponent } from './common-utils/common-component/print-error
     ConfirmationPopupComponent,
     SendBackModelComponent,
     PrintErrorComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     ReactiveFormsModule,

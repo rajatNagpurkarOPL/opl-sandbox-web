@@ -66,8 +66,6 @@ export class ProductComponent implements OnInit {
   // Save product details
   saveProduct(type) {
     this.submitted = true;
-    console.log(this.product);
-    console.log(this.productForm);
     if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details.');
       return 0;

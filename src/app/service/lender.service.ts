@@ -24,6 +24,12 @@ export class LenderService {
   signUp(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SIGN_UP, data);
   }
+  forgotPassword(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.FORGOT_PASSWORD, data);
+  }
+  resetPassword(data: any): Observable<any> {
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.RESET_PASSWORD, data);
+  }
   getLoggedInUserDetails(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.USER_DETAILS, false);
   }

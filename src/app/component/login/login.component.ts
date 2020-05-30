@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
               private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
               private cookieservice: CookieService) { }
 
+  /**
+   * Log in
+   */
   onSubmit() {
     if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
       this.commonService.warningSnackBar('Please enter your username.');
@@ -37,21 +40,6 @@ export class LoginComponent implements OnInit {
           // Set cookies
           this.commonService.setAuthCookie(this.userResponse.data);
         }
-
-        // if (this.userResponse.userType === 1) {
-        //   this.commonService.warningSnackBar('You are not authorised user.');
-        //   this.commonMethod.logoutUser();
-        //   return false;
-        // }
-
-        /* const expiresIn = Number(res.expires_in);
-        if (expiresIn > 120) {
-          const expireInMiliSecond = (expiresIn - 120) * 10;
-          this.commonMethod.startIntervalForGetNewAccessKey(Number(expireInMiliSecond));
-        } else {
-          this.commonMethod.startIntervalForGetNewAccessKey(1800000);
-        } */
-
         this.router.navigate([Constant.ROUTE_URL.DASHBOARD]);
       } else {
         this.commonService.errorSnackBar(res.message);
@@ -59,7 +47,27 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.commonService.errorSnackBar(error);
     });
+  }
 
+  /**
+   * Forgot password
+   */
+  forgorPassword() {
+    if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
+      this.commonService.warningSnackBar('Please enter your email.');
+      return false;
+    }
+    this.lenderService.forgotPassword(this.user).subscribe(res => {
+      if (res.status === 200) {
+        this.commonService.successSnackBar(res.message);
+        this.isSentSuccess = true;
+        this.isForgotPasss = false;
+      } else {
+        this.commonService.errorSnackBar(res.message);
+      }
+    }, error => {
+      this.commonService.errorSnackBar(error);
+    });
   }
 
 
