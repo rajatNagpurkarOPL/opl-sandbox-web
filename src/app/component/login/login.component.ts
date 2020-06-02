@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
 import { CanonicalService } from 'src/app/common-utils/common-services/canonical.service';
@@ -13,13 +13,15 @@ import { LenderService } from 'src/app/service/lender.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   user: any = {};
   userResponse: any = {};
   routeURL: any = {};
   isForgotPasss = false;
   isSentSuccess = false;
+  @ViewChild('name') nameElement: ElementRef; // autofocus while login
+  @ViewChild('email') emailElement: ElementRef; // autofocus while reset password
   constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
               private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
               private cookieservice: CookieService) { }
@@ -70,6 +72,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  showResetPassDiv(bool){
+    this.isForgotPasss = bool;
+    setTimeout(() => { // this will make the execution after the above boolean has changed
+      bool ? this.emailElement.nativeElement.focus() : this.nameElement.nativeElement.focus();
+    }, 0);
+  }
+
 
   ngOnInit(): void {
     this.canonicalService.setCanonicalURL();
@@ -79,5 +88,8 @@ export class LoginComponent implements OnInit {
       description: 'PSB Loans in 59 Minutes login Page',
       slug: 'login'
     });
+  }
+  ngAfterViewInit(): void {
+    this.nameElement.nativeElement.focus();
   }
 }
