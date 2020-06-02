@@ -74,6 +74,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   showResetPassDiv(bool){
     this.isForgotPasss = bool;
+    if (bool){
+      this.isSentSuccess = false;
+    }
     setTimeout(() => { // this will make the execution after the above boolean has changed
       bool ? this.emailElement.nativeElement.focus() : this.nameElement.nativeElement.focus();
     }, 0);
