@@ -22,5 +22,6 @@ export const RestURL = {
     UPDATE_PRODUCT_ACTION: '/parameter/updateActionStatus',
     PRODUCT_DETAILS: '/parameter/productDetails',
     AUDIT_PRODUCT_DETAILS: '/parameter/auditProductDetails',
-    PRODUCT_COUNTS: '/parameter/productsCounts'
+    PRODUCT_COUNTS: '/parameter/productsCounts',
+    STATUS_AUDITS: '/parameter/getStatusAudits/'
 };
