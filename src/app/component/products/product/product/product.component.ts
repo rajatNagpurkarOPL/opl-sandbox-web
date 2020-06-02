@@ -233,6 +233,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
         // Calc final ROI
         this.changeROI();
+         // Get version history
+        // this.getStatusAudits();
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -247,7 +249,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     eblrReq.actionStatus = Constant.MASTER_TYPE.APPROVED;
     eblrReq.plrType = Constant.MASTER_TYPE.EBLR;
     eblrReq.plrProdType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
-    this.lenderService.geteffectivePLR(eblrReq).subscribe(res => {
+    this.lenderService.getEffectivePLR(eblrReq).subscribe(res => {
       if (res.status === 200) {
         this.eblr = res.data;
         // set approve send to checker buttons
@@ -302,6 +304,18 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.productForm.get('paramForm').removeControl(paramName);
     }
     this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
+  }
+
+  getStatusAudits() {
+    this.lenderService.getProductStatusAudit(this.product.productsTempId).subscribe(res => {
+      if (res.status === 200) {
+
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
   }
 
 

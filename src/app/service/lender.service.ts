@@ -65,16 +65,10 @@ export class LenderService {
   getAuditProductDetails(id, version): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.AUDIT_PRODUCT_DETAILS + '/' + id + '/' + version, false);
   }
-  geteffectivePLR(data): Observable<any> {
+  getEffectivePLR(data): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.EFFECTIVE_PLR , data);
   }
-
-  // getAccessToken(): Observable<any> {
-  //   return this.http.get(AppSettings.USER_URL + RestURL.ACCESS_TOKEN, false, false);
-  // }
-
-  // getUserProfile(data: any): Observable<any> {
-  //   return this.http.post(AppSettings.USER_URL + RestURL.USER_PROFILE, data);
-  // }
-
+  getProductStatusAudit(id): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.STATUS_AUDITS + id, false);
+  }
 }
