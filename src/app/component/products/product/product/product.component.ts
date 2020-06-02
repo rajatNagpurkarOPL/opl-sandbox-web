@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,10 +16,13 @@ import { ImportParameterPopupComponent } from '../import-parameter-popup/import-
   styleUrls: ['./product.component.scss']
 })
 // tslint:disable: max-line-length
-export class ProductComponent implements OnInit {
-  constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService,
-              private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
+export class ProductComponent implements OnInit, AfterViewInit {
+  constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService, private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
 
+  // Element ref for autofocus
+  @ViewChild('name') nameRef: ElementRef;
+  @ViewChild('wcReq') wcReqRef: ElementRef;
+  @ViewChild('roi') roiRef: ElementRef;
   finalROI;
   isAdd = false;
   approveBtn = null;
@@ -165,8 +168,8 @@ export class ProductComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(AddParameterPopupComponent, dialogConfig).afterClosed().subscribe(response => {
         if (response && response.data) {
-          if (response.data.parametes && response.data.parametes.length > 0){
-            const params = response.data.parametes;
+          if (response.data.parameters && response.data.parameters.length > 0){
+            const params = response.data.parameters;
             params.forEach(element => {
               if (this.product.parameters.findIndex(p => p.parameterId === element.parameterId) === -1 ) { // push only if object is not present in the list
                 this.addFormControl(element); // create form field
@@ -303,9 +306,15 @@ export class ProductComponent implements OnInit {
 
 
   // switching between tabs
-  setTab(type){
+  setTab(type, ref){
     Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs
     this.tab[type] = true;
+    // Autofoucs element for appropriate div
+    setTimeout(() => {
+      if (ref) {
+        ref.nativeElement.focus();
+      }
+    }, 0);
   }
 
   // Change validation for charges form
@@ -337,5 +346,8 @@ export class ProductComponent implements OnInit {
     this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
     this.getCurrentEBLR(); // get current eblr
     console.log(this.product);
+  }
+  ngAfterViewInit(): void {
+    this.nameRef.nativeElement.focus();
   }
 }

@@ -10,7 +10,7 @@
               <p>Sign up</p>
                 <form  name="loginForm" #fs="ngForm" autocomplete="off" novalidate> 
                   <fieldset>
-                    <input placeholder="Username" type="text" tabindex="1" required="" [(ngModel)]="user.userName" name="userName">
+                    <input placeholder="Username" type="text" tabindex="1" required="" [(ngModel)]="user.userName" name="userName" #name>
                   </fieldset>
                   <fieldset>
                     <input placeholder="Password" type="password" tabindex="1" required="" [(ngModel)]="user.password" name="password" >

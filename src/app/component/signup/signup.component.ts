@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
@@ -10,15 +10,16 @@ import { LenderService } from 'src/app/service/lender.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterViewInit {
 
   user: any = {};
   userResponse: any = {};
   routeURL: any = {};
   roles = [];
+  @ViewChild('name') nameElement: ElementRef;
+
   constructor(private commonService: CommonService, private lenderService: LenderService,
               private router: Router, private commonMethod: AuthGuard) { }
-
   /**
    * Sign up
    */
@@ -46,6 +47,9 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.roles.push({name : 'Select Role', id : 0 }, Constant.ROLES.MAKER, Constant.ROLES.CHECKER);
     this.user.roleId = this.roles[0].id;
+  }
+  ngAfterViewInit(): void {
+    this.nameElement.nativeElement.focus();
   }
 
 }

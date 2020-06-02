@@ -12,7 +12,7 @@
                 <div class="product-name">
                     <p>Product Name</p>
                     <div class="product-name-details">
-                        <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off">
+                        <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off" #name>
                         <app-print-error [control]="f.name" [submitted]="submitted"></app-print-error>
                         <div class="product-details-btn">
                             <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
@@ -28,12 +28,18 @@
             <div id="b4l-content" class="b4l-height">
                 <div class="b4l-product-title">
                     <ul class="product">
-                        <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches')" href="javascript:void(0)"> <p>Matches Parameter</p> </a></li>
-                        <li><a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility')" href="javascript:void(0)">
-                            <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm').invalid && submitted">•</span> </p>
-                        </a>
-                    </li>
-                    <li><a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges')" href="javascript:void(0)"> <p>Charges & ROI</p> </a></li>
+                        <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches', null)" href="javascript:void(0)"> <p>Matches Parameter
+                            <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('paramForm', roiRef).invalid && submitted">•</span>
+                            </p> </a></li>
+                        <li> <a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility', wcReqRef)" href="javascript:void(0)">
+                                <p>Eligibility Calculation <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('elgbltForm', roiRef).invalid && submitted">•</span> </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges', roiRef)" href="javascript:void(0)"> <p>Charges & ROI
+                                <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('chargesForm', roiRef).invalid && submitted">•</span> </p> 
+                            </a>
+                        </li>
                 </ul>
                     <a *ngIf="tab.matches" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
                     class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
@@ -139,7 +145,7 @@
 
                                 <div class="buttin-b4l-opacity opl2">
                                     <div class="text-with-presnt person-text-width">
-                                        <input [(ngModel)]="product.wcRequirement"  formControlName="wcReq" placeholder="Enter percentage" type="text" >
+                                        <input [(ngModel)]="product.wcRequirement"  formControlName="wcReq" placeholder="Enter percentage" type="text" #wcReq >
                                         <p class="perstage-text-n-d">%</p>
                                         <app-print-error [control]="ef.wcReq" [submitted]="submitted" ></app-print-error>
                                     </div>
@@ -255,7 +261,7 @@
                             <div class="b4l-product-list-right">
                                 <div class="buttin-b4l-opacity opl2">
                                     <div class="text-with-presnt person-text-width1">
-                                        <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text">
+                                        <input [(ngModel)]="product.roi" (ngModelChange)="changeROI()" formControlName="roi" placeholder="Spread" type="text" #roi>
                                         <p class="perstage-text-n-d">%</p>
                                         <app-print-error [control]="cf.roi" [submitted]="submitted" ></app-print-error>
                                     </div>

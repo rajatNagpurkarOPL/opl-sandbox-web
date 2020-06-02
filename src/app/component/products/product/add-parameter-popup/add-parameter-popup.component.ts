@@ -37,7 +37,7 @@ export class AddParameterPopupComponent implements OnInit {
 
   /**
    * Search params
-   * @param criteria
+   * @param criteria search data using criteria
    */
   updateCriteria(criteria: string) {
     criteria = criteria ? criteria.trim() : '';
@@ -48,9 +48,12 @@ export class AddParameterPopupComponent implements OnInit {
 
   // Add parameters to the products
   save() {
-    console.log(this.parameterList);
     this.selectedParameterList = this.parameterList.filter(p => p.isSelected);
-    this.close({parametes : this.selectedParameterList});
+    if (!this.selectedParameterList || this.selectedParameterList.length === 0){
+        this.commonService.warningSnackBar('Please select parameters for continue.');
+        return false;
+    }
+    this.close({parameters : this.selectedParameterList});
   }
 
   // close parameters

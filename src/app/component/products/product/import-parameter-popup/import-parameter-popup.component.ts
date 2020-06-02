@@ -58,7 +58,7 @@ export class ImportParameterPopupComponent implements OnInit {
 
   save() {
     if (this.commonService.isObjectNullOrEmpty(this.product)){
-      this.commonService.warningSnackBar('Please selected product for continue.');
+      this.commonService.warningSnackBar('Please select product for continue.');
     }
     // get parameter on save
     this.getProductDetails();

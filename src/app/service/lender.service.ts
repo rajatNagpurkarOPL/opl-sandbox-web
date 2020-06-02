@@ -17,7 +17,6 @@ export class LenderService {
   login(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.LOGIN, data);
   }
-  //  For Logout User
   logout(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LOG_OUT, false);
   }
