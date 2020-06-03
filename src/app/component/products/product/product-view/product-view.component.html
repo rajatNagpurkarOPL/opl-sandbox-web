@@ -34,7 +34,7 @@
                        <mat-form-field class="fix-select" *ngIf="versions && versions.length">
                             <mat-select [(ngModel)]="version" (ngModelChange)="getProductVersion(version)" class="b4l-drop-position">
                                 <mat-option *ngFor="let v of versions"  [value]="v">
-                                    <span class="option-txt">V{{v.ver}} </span><br><span class="option-txt-inner"> {{v.from}}</span>
+                                    <span class="option-txt">V{{v.ver}} </span><br><span class="option-txt-inner"> From {{ v.from | date:'dd MMM yyyy' }} at  {{ v.from | date:'shortTime' }}</span>
                                 </mat-option>
                             </mat-select>
                         </mat-form-field> 
