@@ -2,7 +2,7 @@ const locationUrl = window.location.protocol + '//' + window.location.host;
 // const locationUrl = 'https://qa-sidbi.capitaworld.com'; // for QA(If you are in Local)
 
 /**
- *  This is costants of REST URL which can be hit on backend server
+ *  This is constants of REST URL which can be hit on backend server
  */
 export const RestURL = {
     LOGIN: '/auth/login',

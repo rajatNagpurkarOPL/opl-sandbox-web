@@ -23,10 +23,9 @@ export class ProductViewComponent implements OnInit {
   status; versions: any = []; version: any = {};
   productId;
   showStatus: any = {isShowStatus : false};
-  constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService,
-              public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
-
   reqType;
+  constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService, public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
+
   // get product info by product id
   getProductDetails() {
     this.lenderService.getProductDetails(this.status, this.productId).subscribe(res => {
@@ -103,11 +102,11 @@ export class ProductViewComponent implements OnInit {
   showVersion(ver) {
     const audits = cloneDeep(ver);
     this.versions = [];
-    this.versions.push({version : this.product.version, ver : this.product.version + ' (Current Version) ', isCurrentVer : true, from : new Date(this.product.createdDate)});
+    this.versions.push({version : this.product.version, ver : this.product.version + ' (Current Version) ', isCurrentVer : true, from : new Date(this.product.modifiedDate)});
     this.version = this.versions[0];
     if (audits && audits.length > 0){
       audits.reverse().forEach(v => {
-        const from = new Date(v.modifiedDate ? v.modifiedDate : this.product.createdDate);
+        const from = new Date(v.modifiedDate);
         this.versions.push({version : v.version, ver : v.version, from });
       });
     }
