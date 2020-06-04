@@ -9,6 +9,7 @@ import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
+import { AccountPriorityPopupComponent } from '../account-priority-popup/account-priority-popup.component';
 
 @Component({
   selector: 'app-product-view',
@@ -210,6 +211,16 @@ export class ProductViewComponent implements OnInit {
         this.updateActionStatus(action);
       }
     });
+  }
+
+
+  openAccountPriorityPopup(){
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(AccountPriorityPopupComponent, dialogConfig).afterClosed()
+      .subscribe(response => {
+        if (response && response.data && response.data.event === 'save') {
+        }
+      });
   }
 
   // switching between tabs
