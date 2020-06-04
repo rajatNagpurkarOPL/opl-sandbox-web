@@ -1,0 +1,142 @@
+.btn-pop-up {
+    display: flex;
+    position: sticky;
+    max-width: 50em;
+    background: #ffffff;
+    z-index: 1;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3em 0 0;
+    padding: 2em;
+    width: 100%;
+    bottom: 0;
+    background: #ffffff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn-pop-up a img {
+    margin-right: 0.3em ;
+}
+
+
+.btn-pop-up .product-btn3 {
+    border: 1px solid #2D3079;
+    border-radius: 8px;
+    opacity: 1;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
+    background: #2D3079;
+}
+
+.btn-pop-up .product-btn4 {
+    border: 1px solid #BEBEBE;
+    border-radius: 8px;
+    opacity: 1;
+    color: #5C5C5C;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 1em 2em;  
+    width: 48%;
+    text-align: center;
+    background: #F7F7F7;
+}
+
+
+
+::-webkit-input-placeholder {
+    margin-left: 1em;
+}
+
+.pop-side-left p {
+    opacity: 1 !important;
+    padding-right: 1em;
+}
+.import-matches-left {
+    display: flex;
+    flex-direction: column;  
+}
+
+.import-matches-left p {
+color: #000000;
+font-size: 20px;
+font-weight: bold;
+}
+
+.import-matches-left span {
+    color: #000000;
+font-size: 16px;
+font-weight: 500;
+opacity: 0.4;
+}
+.pop-up-cl {
+    padding: 0 2em;
+}
+
+.pop-up-cl p {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.4;
+    margin-bottom: 0;
+    padding: 0.5em 1em;
+}
+#b4l-pop-up {
+ padding: 0em !important;
+}
+
+
+.import-matches {   
+    position: sticky;
+     max-width: 50em;
+     width: 100%;
+    background: #ffffff;
+    z-index: 1;
+    border-bottom: 1px solid #D8D8D8;;
+}
+
+.import-matches {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+    padding: 2em;
+    top: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    }
+    .product-btn1 {
+        border: 2px solid #2D3079;
+        border-radius: 8px;
+        opacity: 1;
+        color: #2D3079;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 1em;
+        background: #ffffff;
+       
+    }
+    @media(max-width: 1440px) {
+
+        .btn-pop-up .product-btn3 {        
+            padding: 1em 1em;             
+        }
+
+        .import-matches-left p{           
+            font-size: 18px ;            
+        }
+        .import-matches-left span {          
+            font-size: 14px;            
+        }
+        .pop-up-cl p {          
+            font-size: 14px;           
+        }
+
+       }
+
+
+     
