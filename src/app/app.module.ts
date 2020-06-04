@@ -30,6 +30,7 @@ import { TostrComponent } from './common-utils/common-component/tostr/tostr.comp
 import { Globals } from 'src/app/common-utils/globals';
 import { PrintErrorComponent } from './common-utils/common-component/print-error/print-error.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { AccountPriorityPopupComponent } from './component/products/product/account-priority-popup/account-priority-popup.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
     SendBackModelComponent,
     PrintErrorComponent,
     ResetPasswordComponent,
+    AccountPriorityPopupComponent,
   ],
   imports: [
     ReactiveFormsModule,
