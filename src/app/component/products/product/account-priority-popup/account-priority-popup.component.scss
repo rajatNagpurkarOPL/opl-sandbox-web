@@ -45,8 +45,12 @@
     text-align: center;
     background: #F7F7F7;
 }
-
-
+.bold span {
+    margin-right: 1em;
+}
+.bold {
+    opacity: 1 !important;
+}
 
 ::-webkit-input-placeholder {
     margin-left: 1em;
