@@ -45,8 +45,11 @@
                                 <button [disabled]="!isEdit" [routerLink]="[routeURL.PRODUCT, item.productsTempId]" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
                                     <img src="assets/img/edit-icon.svg" /> 
                                 </button>
-                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
+                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
+                                </button>
+                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="delete" matTooltipPosition="above" aria-label="View">
+                                    <img src="assets/img/delete-icon.svg" />
                                 </button>
                             </p>
                         </div>
@@ -80,15 +83,18 @@
                     <div class="b4l-product-list-title">
                         <p>Product Name</p>
 
-                        <div class="b4l-product-list-right">
+                        <div class="b4l-product-list-right width-100">
+                            <p>Action by Checker</p>
                             <p>Last modified</p>
                             <p>Action</p>
                         </div>
 
                     </div>
                     <div class="b4l-product-list" *ngFor="let item of productList">
+                        
                         <p>{{item.name}}</p>
-                        <div class="b4l-product-list-right">
+                        <div class="b4l-product-list-right width-100">
+                            <p class="sent-ylw-checker"><img src="assets/img/send-yellow-checker.svg" /> Sent back for correction</p>
                             <p>{{item.modifiedDate  | date:'dd MMM yyyy' }} {{item.modifiedDate  | date:'shortTime' }}</p>
                             <p class="buttin-b4l-opacity">
                                 <button [disabled]="!isEdit" (click)="redirectEditURL(item)" mat-raised-button class="btn1-b4l" matTooltip="edit" matTooltipPosition="above" aria-label="Edit">
