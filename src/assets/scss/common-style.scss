@@ -41,6 +41,14 @@ margin-left: 1em;
     padding: 2em 2em 0;
   
 }
+.pop-up-cl:nth-child( odd ) {
+background-color: #fcfcfc;
+}
+.b4l-pop-up-span {
+    padding: 1em 2em 0;
+    color: #000000;
+    opacity: 0.4;
+}
 .table-tab-bt-0 {
 
     margin-bottom: 0 !important;
