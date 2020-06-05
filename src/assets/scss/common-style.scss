@@ -1,3 +1,56 @@
+
+
+
+tr.hide-table-padding td {
+    padding: 1em;
+   
+  }
+  .table-responsive {
+      background-color: #FFFFFF;
+  }
+  .expand-button {
+      position: relative;
+  }
+.failed {
+    color: #E36C6C;
+}
+.right {
+   text-align: right;
+}
+  .table-responsive .table td, .table th {
+    padding: 1.5em 2em !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 16px !important;
+}
+.dark {
+    opacity: 1 !important;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+.table-padding .table td, .table th {
+    padding: 1.5em 1em !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+ .table th {
+    padding: 1.5em 2em !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+  .accordion-toggle .expand-button:after
+  {
+    position: absolute;
+    left:.75rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    content: '-';
+  }
+  .accordion-toggle.collapsed .expand-button:after
+  {
+    content: '+';
+  }
+
 #b4l-content {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 20px #0000000F;
@@ -40,6 +93,20 @@ margin-left: 1em;
     list-style: none;
     padding: 2em 2em 0;
   
+}
+.dash-title-b4l-display {
+    display: flex;
+}
+.btn-back1 {
+display: flex;
+
+}
+.btn-back1 img {
+    margin-right: 0.5em;
+}
+.btn-back1  {
+    color: #2D3079 !important;
+    margin-right: 2em !important;
 }
 .last-flex p {
     font-size: 15px !important;
