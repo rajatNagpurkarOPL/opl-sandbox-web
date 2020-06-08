@@ -31,6 +31,7 @@ import { Globals } from 'src/app/common-utils/globals';
 import { PrintErrorComponent } from './common-utils/common-component/print-error/print-error.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { AccountPriorityPopupComponent } from './component/products/product/account-priority-popup/account-priority-popup.component';
+import { DeleteProductPopupComponent } from './component/products/product/delete-product-popup/delete-product-popup.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AccountPriorityPopupComponent } from './component/products/product/acco
     PrintErrorComponent,
     ResetPasswordComponent,
     AccountPriorityPopupComponent,
+    DeleteProductPopupComponent,
   ],
   imports: [
     ReactiveFormsModule,

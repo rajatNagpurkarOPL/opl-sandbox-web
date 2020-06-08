@@ -350,6 +350,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
 
+  //
+  openAccountPriorityPopup(){
+    
+  }
+
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;

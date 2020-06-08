@@ -41,6 +41,9 @@ export class LenderService {
   updateProductActionStatus(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.UPDATE_PRODUCT_ACTION, data);
   }
+  deleteProduct(id: number): Observable<any> {
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.DELETE_PRODUCT + '/' + id, false);
+  }
   listPLRByType(id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.LIST_PLR  + '/' + id, false);
   }

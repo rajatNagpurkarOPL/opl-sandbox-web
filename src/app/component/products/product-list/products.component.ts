@@ -8,6 +8,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { Globals } from 'src/app/common-utils/globals';
 import { ConfirmationPopupComponent } from '../product/confirmation-popup/confirmation-popup.component';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { DeleteProductPopupComponent } from '../product/delete-product-popup/delete-product-popup.component';
 
 @Component({
   selector: 'app-products',
@@ -101,7 +102,32 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  // delete saved product
+  openDeleteProductPopup(item){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {productName : item.name};
+    this.matDialog.open(DeleteProductPopupComponent, dialogConfig).afterClosed()
+      .subscribe(response => {
+        if (response && response.data && response.event === 'save') {
+          this.deleteProduct(item);
+        }
+      });
+  }
 
+  // Delete product
+  deleteProduct(item){
+    this.lenderService.deleteProduct(item.productsTempId).subscribe(res => {
+      if (res.status === 200) {
+        this.commonService.successSnackBar(res.message);
+        this.navbar.getProductsCounts();
+        this.listProducts();
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
