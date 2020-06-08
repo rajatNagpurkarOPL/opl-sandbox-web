@@ -9,7 +9,8 @@ import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
-import { AccountPriorityPopupComponent } from '../account-priority-popup/account-priority-popup.component';
+import _ from 'lodash';
+
 
 @Component({
   selector: 'app-product-view',
@@ -230,6 +231,9 @@ export class ProductViewComponent implements OnInit {
     if (t === Constant.MASTER_TYPE.PRODUCT_DEACTIVATION.id){
       this.reqType = 'Product Dectivation';
     }
+  }
+  getAccountOrderStr(){
+    return _.orderBy(this.product.accountOrder, ['accOrder']).map(a => a.account).join('>');
   }
 
 

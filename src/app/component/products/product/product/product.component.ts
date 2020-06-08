@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,10 +7,10 @@ import { CommonService } from 'src/app/common-utils/common-services/common.servi
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
+import { AccountPriorityPopupComponent } from '../account-priority-popup/account-priority-popup.component';
 import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
 import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
-import { AccountPriorityPopupComponent } from '../account-priority-popup/account-priority-popup.component';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-product',
@@ -39,9 +39,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
   routeURL: any = {};
   inputType: any = {};
   tab: any = {matches: true};
+  accountOrder = [
+    {accOrder : 1, account : 'Cash Credit Account'},
+    {accOrder : 2, account : 'Current Account'},
+    {accOrder : 3, account : 'Overdraft Account'},
+    {accOrder : 4, account : 'Savings Account'},
+    {accOrder : 5, account : 'Other Account'}
+  ];
   chargeTypes: any = [{id : 1 , name : 'Fixed Amount', value : 'FIXED_AMOUNT', i : 0}, {id : 2 , name : 'Set percentage', value: 'RATE_BASED', i : 1}];
   chargeDetail = {chargeType: 'FIXED_AMOUNT', value: null, chargesType : cloneDeep(this.chargeTypes)};
-  product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)}, repayments : [], disbursements: [] };
+  product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)}, repayments : [], disbursements: [], accountOrder : cloneDeep(this.accountOrder)};
   repayment: any = { automatic: false, scheduleType: 'ONE_TIME', frequency: '', payNowAllowed: false, editPlanAllowed: false, changeMethodAllowed: false, tenure: 0, tenureType: 'MONTH', title: '', noOfInstallments: '111', description: '', url: '', extensibleData: '', paymentUrl: '', penalty: 0, principal: 0, startDate: null, interestAmount: 11, totalAmount: '20000', status: 'ACTIVE'};
   disburse: any = { automatic: false, scheduleType: 'ONE_TIME', noOfInstallments: '2', status: 'ACTIVE', totalAmount : '2000'};
 
@@ -70,13 +77,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     })
   });
 
-  accounts = [
-    'Credit Account',
-    'Current Account',
-    'Overdraft Account',
-    'Savings Account',
-    'Other Account'
-  ];
 
   // Save product details
   saveProduct(type) {
@@ -371,21 +371,21 @@ export class ProductComponent implements OnInit, AfterViewInit {
       window.scrollTo({ top: 0, left: 0 });
     }
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {accountOrder : this.product.accountOrder};
     this.matDialog.open(AccountPriorityPopupComponent, dialogConfig).afterClosed()
       .subscribe(response => {
         if (top !== 0 || left !== 0) {
           window.scroll({ top, left, behavior: 'smooth'});
         }
-        if (response && response.data && response.data.event === 'save') {
+        if (response && response.data && response.event === 'save') {
+          this.product.accountOrder = response.data.accountOrder;
         }
       });
-  }
+    }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.accounts, event.previousIndex, event.currentIndex);
-  }
-
-
+    getAccountOrderStr(){
+      return _.orderBy(this.product.accountOrder, ['accOrder']).map(a => a.account).join('>');
+    }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
