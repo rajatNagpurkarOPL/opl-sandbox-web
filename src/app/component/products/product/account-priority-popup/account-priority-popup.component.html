@@ -5,61 +5,25 @@
         </div>
         <a  href="#" class="product-btn1">Reset Order</a>
     </div>
-   
-   
-
-
-
-
-
-    <table class="table">
-      
-        <tbody>
-          <tr class="pop-up-cl">
-         
-            <td><p class="bold"><span>1</span> Credit Account</p></td>
+  
+     <table class="table">
+        <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+          <tr class="pop-up-cl" *ngFor="let item of accounts; index as i; first as isFirst; last as isLast" cdkDrag>
+            <td><p class="bold"><span>{{i+1}}.</span> {{item}}</p></td>
             <td></td>
-            <td><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
+            <td *ngIf="isFirst || isLast"></td>
+            <td *ngIf="isFirst"><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
+            <td *ngIf="isLast"><p><img src="assets/img/Shiftup.svg" /> Shift up</p></td>
+            <td *ngIf="!isLast && !isFirst"><p><img src="assets/img/Shiftup.svg" /> Shift Up</p></td>
+            <td *ngIf="!isLast && !isFirst"><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
           </tr>
-
-
-          <tr class="pop-up-cl">
-          
-            <td width="50%"><p class="bold"><span>2</span> Current Account</p></td>
-            <td><p><img src="assets/img/Shiftup.svg" /> Shift Up</p></td>
-            <td><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
-          </tr>
-
-          <tr class="pop-up-cl">
-       
-            <td><p class="bold"><span>3</span> Overdraft Account</p></td>
-            <td><p><img src="assets/img/Shiftup.svg" /> Shift Up</p></td>
-            <td><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
-          </tr>
-
-          <tr class="pop-up-cl">
-         
-            <td><p class="bold"><span>4</span> Savings Account</p></td>
-            <td><p><img src="assets/img/Shiftup.svg" /> Shift Up</p></td>
-            <td><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
-          </tr>
-
-          <tr class="pop-up-cl">
-      
-            <td><p class="bold"><span>5</span> Other Account</p></td>
-            <td></td>
-            <td><p><img src="assets/img/Shiftdown.svg" /> Shift Down</p></td>
-          </tr>
-        
         </tbody>
-      </table>
-
-
+      </table> 
 
 
 
     <div class="btn-pop-up">
-        <a href="javascript:void(0)" class="product-btn4" (click)="close(null)">Cancel</a>
+        <a href="javascript:void(0)" class="product-btn4" (click)="close()">Cancel</a>
         <a href="javascript:void(0)" class="product-btn3" (click)="save()" >Save</a>
     </div>
 </div>
