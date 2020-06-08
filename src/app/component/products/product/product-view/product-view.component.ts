@@ -214,15 +214,6 @@ export class ProductViewComponent implements OnInit {
   }
 
 
-  openAccountPriorityPopup(){
-    const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(AccountPriorityPopupComponent, dialogConfig).afterClosed()
-      .subscribe(response => {
-        if (response && response.data && response.data.event === 'save') {
-        }
-      });
-  }
-
   // switching between tabs
   setTab(type){
     Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs

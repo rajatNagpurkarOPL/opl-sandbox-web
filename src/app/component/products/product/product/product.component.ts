@@ -9,6 +9,8 @@ import { Globals } from 'src/app/common-utils/globals';
 import { LenderService } from 'src/app/service/lender.service';
 import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
 import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
+import { AccountPriorityPopupComponent } from '../account-priority-popup/account-priority-popup.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-product',
@@ -18,6 +20,11 @@ import { ImportParameterPopupComponent } from '../import-parameter-popup/import-
 // tslint:disable: max-line-length
 export class ProductComponent implements OnInit, AfterViewInit {
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService, private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
+  // convenience getter for easy access to form fields
+  get f() { return this.productForm.controls; } // return product form controls
+  get ef() { return this.productForm.get('elgbltForm').controls; } // return EBLR form controls
+  get pf() { return this.productForm.get('paramForm').controls; } // return parameters form controls
+  get cf() { return this.productForm.get('chargesForm').controls; } // return charges & roi form controls
 
   // Element ref for autofocus
   @ViewChild('name') nameRef: ElementRef;
@@ -37,6 +44,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
   product: any = { parameters: [], charge : { bounce : cloneDeep(this.chargeDetail), prepayment : cloneDeep(this.chargeDetail), latePayment : cloneDeep(this.chargeDetail), processing: cloneDeep(this.chargeDetail)}, repayments : [], disbursements: [] };
   repayment: any = { automatic: false, scheduleType: 'ONE_TIME', frequency: '', payNowAllowed: false, editPlanAllowed: false, changeMethodAllowed: false, tenure: 0, tenureType: 'MONTH', title: '', noOfInstallments: '111', description: '', url: '', extensibleData: '', paymentUrl: '', penalty: 0, principal: 0, startDate: null, interestAmount: 11, totalAmount: '20000', status: 'ACTIVE'};
   disburse: any = { automatic: false, scheduleType: 'ONE_TIME', noOfInstallments: '2', status: 'ACTIVE', totalAmount : '2000'};
+
+  panelOpenState = false;
 
   // Product form validation
   productForm: any  = this.fb.group({
@@ -60,11 +69,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
       processing : ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
     })
   });
-  // convenience getter for easy access to form fields
-  get f() { return this.productForm.controls; } // return product form controls
-  get ef() { return this.productForm.get('elgbltForm').controls; } // return EBLR form controls
-  get pf() { return this.productForm.get('paramForm').controls; } // return parameters form controls
-  get cf() { return this.productForm.get('chargesForm').controls; } // return charges & roi form controls
+
+  accounts = [
+    'Credit Account',
+    'Current Account',
+    'Overdraft Account',
+    'Savings Account',
+    'Other Account'
+  ];
 
   // Save product details
   saveProduct(type) {
@@ -350,10 +362,30 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.finalROI = parseFloat((this.eblr.plr ? this.eblr.plr : 0)) + parseFloat((this.product.roi ? this.product.roi : 0));
   }
 
-  //
   openAccountPriorityPopup(){
-    
+    // Work around to make drag and drop work in mat-dialog
+    const doc = document.documentElement;
+    const left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+    const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+    if (top !== 0 || left !== 0) {
+      window.scrollTo({ top: 0, left: 0 });
+    }
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(AccountPriorityPopupComponent, dialogConfig).afterClosed()
+      .subscribe(response => {
+        if (top !== 0 || left !== 0) {
+          window.scroll({ top, left, behavior: 'smooth'});
+        }
+        if (response && response.data && response.data.event === 'save') {
+        }
+      });
   }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.accounts, event.previousIndex, event.currentIndex);
+  }
+
+
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
