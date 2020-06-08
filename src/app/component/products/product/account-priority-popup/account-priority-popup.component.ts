@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-account-priority-popup',
@@ -10,22 +10,28 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class AccountPriorityPopupComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<AccountPriorityPopupComponent>) { }
+  accountOrder = [];
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<AccountPriorityPopupComponent>) {
+    this.accountOrder = _.orderBy(this.data.accountOrder, ['accOrder']).map(a => a.account);
+    console.log(this.accountOrder);
 
-  accounts = [
-    'Credit Account',
-    'Current Account',
-    'Overdraft Account',
-    'Savings Account',
-    'Other Account'
-  ];
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.accounts, event.previousIndex, event.currentIndex);
   }
 
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.accountOrder, event.previousIndex, event.currentIndex);
+  }
+
+  resetOrder(){
+    this.accountOrder = this.data.accountOrder.map(a => a.account);
+  }
+
+  getId(o){
+    const acc = this.data.accountOrder.filter(a => (a.account === o));
+    return acc.length > 0  ? acc[0].id : null;
+  }
 
   save(){
+    this.data.accountOrder = this.accountOrder.map((obj, i) => ({ account : obj, accOrder: i + 1, id : this.getId(obj) }));
     this.dialogRef.close({event: 'save', data: this.data});
   }
 

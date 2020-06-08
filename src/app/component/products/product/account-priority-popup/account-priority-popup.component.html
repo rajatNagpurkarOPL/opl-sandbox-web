@@ -3,12 +3,12 @@
         <div class="import-matches-left">
             <p>Change Account Priority Order</p>  <span>Change order by dragging up and down or use shift arrows in right</span>
         </div>
-        <a  href="#" class="product-btn1">Reset Order</a>
+        <a  href="javascript:void(0)" class="product-btn1" (click)="resetOrder()">Reset Order</a>
     </div>
   
      <table class="table">
         <tbody cdkDropList (cdkDropListDropped)="drop($event)">
-          <tr class="pop-up-cl" *ngFor="let item of accounts; index as i; first as isFirst; last as isLast" cdkDrag>
+          <tr class="pop-up-cl" *ngFor="let item of accountOrder; index as i; first as isFirst; last as isLast" cdkDrag>
             <td><p class="bold"><span>{{i+1}}.</span> {{item}}</p></td>
             <td></td>
             <td *ngIf="isFirst || isLast"></td>
@@ -19,9 +19,7 @@
           </tr>
         </tbody>
       </table> 
-
-
-
+      
     <div class="btn-pop-up">
         <a href="javascript:void(0)" class="product-btn4" (click)="close()">Cancel</a>
         <a href="javascript:void(0)" class="product-btn3" (click)="save()" >Save</a>
