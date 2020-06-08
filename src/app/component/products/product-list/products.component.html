@@ -48,7 +48,7 @@
                                 <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn4-b4l" matTooltip="view" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/view-icon.svg" />
                                 </button>
-                                <button (click)="viewProduct(item.productStatus.id, item.productsTempId)"  mat-raised-button class="btn2-b4l" matTooltip="delete" matTooltipPosition="above" aria-label="View">
+                                <button (click)="openDeleteProductPopup(item)"  mat-raised-button class="btn2-b4l" matTooltip="delete" matTooltipPosition="above" aria-label="View">
                                     <img src="assets/img/delete-icon.svg" />
                                 </button>
                             </p>

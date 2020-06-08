@@ -11,6 +11,13 @@ export class AccountPriorityPopupComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<AccountPriorityPopupComponent>) { }
 
+  save(){
+
+  }
+  close(d){
+
+  }
+
   ngOnInit(): void {
   }
 
