@@ -7,7 +7,7 @@
                 <img src="assets/img/sbi-logo.png" />
 
                 <div class="topnav">
-                    <a [ngClass]="(router.url == constant.DASHBOARD ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="javasript:void(0)">Dashboard & Analytic</a>
+                    <a [ngClass]="(router.url == (constant.DASHBOARD || constant.BRIDGE_MATRIX) ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="javasript:void(0)">Dashboard & Analytic</a>
                     <a [ngClass]="(router.url.includes(constant.PRODUCTS) ? 'active' : '')" (click)="goToProducts()" href="javasript:void(0)">Products list </a>
                     <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}"
                         href="#">Settings</a>
