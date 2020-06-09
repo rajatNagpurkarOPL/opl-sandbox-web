@@ -195,7 +195,7 @@
             <tbody>
                 <ng-container *ngFor="let audit of audits">
                     <tr class="accordion-toggle collapsed" id="{{audit.id}}" data-toggle="collapse" [attr.href]="'#collapse_'+audit.id">
-                        <td *ngIf="audit.isError" class="failed"><b>{{audit.requestId}} - {{audit.id}} <img src="assets/img/failed-table.svg" /></b> </td>
+                        <td *ngIf="audit.isError" class="failed"><b>{{audit.requestId}} <img src="assets/img/failed-table.svg" /></b> </td>
                         <td *ngIf="!audit.isError" ><b>{{audit.requestId}}</b> </td>
                         <td>{{audit.orgId}}</td>
                         <td class="right" title="{{audit.createdDate}}" >{{audit.createdDate  | date:'dd MMM yyyy' }} {{audit.createdDate  | date:'shortTime' }} <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg" /> </td>
