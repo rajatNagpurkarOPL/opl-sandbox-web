@@ -10,6 +10,7 @@ import { ProductComponent } from './component/products/product/product/product.c
 import { SignupComponent } from './component/signup/signup.component';
 import { ProductViewComponent } from './component/products/product/product-view/product-view.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'bridge-matrix', component: LspBridgeMatrixComponent, canActivate: [AuthGuard] },
     { path: 'products/save', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'products/sent', component: ProductsComponent, canActivate: [AuthGuard]},
     { path: 'products/sent-back', component: ProductsComponent, canActivate: [AuthGuard]},

@@ -4,6 +4,7 @@ export const Constant = {
         LOGIN: mainPath + 'login',
         SIGN_UP: mainPath + 'signup',
         DASHBOARD: mainPath + 'dashboard',
+        BRIDGE_MATRIX: mainPath + 'bridge-matrix',
         SETTINGS: mainPath + 'settings',
         PRODUCTS: mainPath + 'products',
         SAVED_PRODUCTS:  mainPath + 'products/save',
@@ -54,7 +55,9 @@ export const Constant = {
         ADMIN : {id : 1 , name : 'ADMIN'},
         MAKER : {id : 2 , name : 'MAKER'},
         CHECKER : {id : 3 , name : 'CHECKER'}
-    }
+    },
+    PAGE_SIZE : 10
+
 
 
 };

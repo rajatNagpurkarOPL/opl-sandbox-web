@@ -1,347 +1,244 @@
-
-
-
 <div class="container">
-    <div class="row">
-        <div class="b4l-dashboard">
-<p>Analysis on Number of Applications</p>
-<select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
-    <option _ngcontent-njf-c118="">Today</option> 
-</select>
-            </div>
-<div class="row psb1">
-
-<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
-  <mat-card class="example-card">
-    <div class="progress-spinner-ex"><mat-progress-spinner value="75" mode="determinate" [diameter]="250" ></mat-progress-spinner>
-
-<div class="text-spinner">
-<p>2,425</p>
-<span>Total</span>
-
-</div>
-
+  <div class="row">
+    <div class="b4l-dashboard">
+      <p>Analysis on Number of Applications</p>
+      <select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
+        <option _ngcontent-njf-c118="">Today</option>
+      </select>
     </div>
+    <div class="row psb1">
+
+      <div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+        <mat-card class="example-card">
+          <div class="progress-spinner-ex">
+            <mat-progress-spinner value="75" mode="determinate" [diameter]="250"></mat-progress-spinner>
+
+            <div class="text-spinner">
+              <p>2,425</p>
+              <span>Total</span>
+
+            </div>
+
+          </div>
 
 
-<div class="card-text">
-<div class="card-txt-left">
-<p class="active">1,800</p>
-<span>Matched</span>
+          <div class="card-text">
+            <div class="card-txt-left">
+              <p class="active">1,800</p>
+              <span>Matched</span>
 
-</div>
-<div class="card-txt-left">
-<p>625</p>
-<span>Not matched</span>
-</div>
+            </div>
+            <div class="card-txt-left">
+              <p>625</p>
+              <span>Not matched</span>
+            </div>
 
-</div>
+          </div>
 
 
-    
-    </mat-card>
 
-</div>
-<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
-    <mat-card class="example-card">
-      <div class="progress-spinner-ex"><mat-progress-spinner value="60" mode="determinate" [diameter]="250" ></mat-progress-spinner>
+        </mat-card>
 
-<div class="text-spinner">
-<p>1,475</p>
-<span>Total</span>
+      </div>
+      <div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+        <mat-card class="example-card">
+          <div class="progress-spinner-ex">
+            <mat-progress-spinner value="60" mode="determinate" [diameter]="250"></mat-progress-spinner>
 
-</div>
+            <div class="text-spinner">
+              <p>1,475</p>
+              <span>Total</span>
+
+            </div>
+
+          </div>
+
+
+          <div class="card-text">
+            <div class="card-txt-left">
+              <p class="active">403</p>
+              <span>Loan Disbursed</span>
+
+            </div>
+            <div class="card-txt-left">
+              <p>1,072</p>
+              <span>Loan not availed</span>
+            </div>
+
+          </div>
+
+
+
+        </mat-card>
 
       </div>
 
 
-<div class="card-text">
-<div class="card-txt-left">
-<p class="active">403</p>
-<span>Loan Disbursed</span>
+      <div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
+        <mat-card class="example-card">
+          <div class="progress-spinner-ex">
+            <mat-progress-spinner value="95" mode="determinate" [diameter]="250"></mat-progress-spinner>
 
-</div>
-<div class="card-txt-left">
-  <p>1,072</p>
-  <span>Loan not availed</span>
-</div>
+            <div class="text-spinner">
+              <p>325</p>
+              <span>Total</span>
 
-</div>
+            </div>
 
-
-      
-      </mat-card>
-
-</div>
+          </div>
 
 
-<div class="psb-xl-4 psb-lg-4 psb-md-4 psb-sm-4">
-  <mat-card class="example-card">
-    <div class="progress-spinner-ex"><mat-progress-spinner value="95" mode="determinate" [diameter]="250" ></mat-progress-spinner>
+          <div class="card-text">
+            <div class="card-txt-left">
+              <p class="active">292</p>
+              <span>Pending</span>
 
-<div class="text-spinner">
-<p>325</p>
-<span>Total</span>
+            </div>
+            <div class="card-txt-left">
+              <p>33</p>
+              <span>Failed</span>
+            </div>
 
-</div>
+          </div>
+
+
+
+        </mat-card>
+
+      </div>
+
 
     </div>
 
 
-<div class="card-text">
-<div class="card-txt-left">
-<p class="active">292</p>
-<span>Pending</span>
-
-</div>
-<div class="card-txt-left">
-<p>33</p>
-<span>Failed</span>
-</div>
-
-</div>
-
-
-    
-    </mat-card>
-
-</div>
-
-
-</div>
 
 
 
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
+      <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> Product wise analysis </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Matched </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Loan Disbursed </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Loan not availed </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
 
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Product wise analysis </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
 
-  <div class="b4l-dashboard b4l-dashboard-dash-tb">
-    <p>LSP Bridge Matrix</p>
-                    </div>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Matched </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
 
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-tab-bt-0">
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Loan Disbursed </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
 
-                      <!--- Note that these columns can be defined in any order.
-                            The actual rendered columns are set as a property on the row definition" -->
-                    
-                      <!-- Position Column -->
-                      <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef> Recent Requests Log </th>
-                        <td mat-cell *matCellDef="let element">e8cc6822bd4bbb4eblb9elb4996fbff8acb </td>
-                      </ng-container>
-                    
-                      <!-- Name Column -->
-                      <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef class="b4l-bold-cr"> Org. ID </th>
-                        <td mat-cell *matCellDef="let element" > KJ 58 </td>
-                      </ng-container>
-                    
-                      <!-- Weight Column -->
-                      <ng-container matColumnDef="weight">
-                        <th mat-header-cell *matHeaderCellDef class="b4l-bold-cr"> Request Date Time </th>
-                        <td mat-cell *matCellDef="right element"> 15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/> </td>
-                      </ng-container>
-                    
-                      <!-- Symbol Column -->
-                      <ng-container matColumnDef="symbol">
-                        <th  *matHeaderCellDef> </th>
-                        <td  *matCellDef="right element"> </td>
-                      </ng-container>
-                     
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                      
-                    
-                    </table>
-<div class=" mat-card-table">
-                    <p>View all <img class="b4l-tab-arrow" src="assets/img/b4l-view-arrow.svg"/></p>
-                  </div>
-                   
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Loan not availed </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
 
-
-                  <div class="b4l-dashboard">
-
-                    <div class="dash-title-b4l-display">
-                    <p  class="btn-back btn-back1"><img  src="assets/img/arrow-right.svg"> Back </p>
-                    <p>Dashboard & Analytic / LSP Bridge Matrix</p>
-                    </div>
-                    <select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
-                        <option _ngcontent-njf-c118="">All Time</option> 
-                    </select>
-                                </div>
-                
-                                <div class="table-responsive">
-                                  <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col" >Request ID</th>
-                                        <th scope="col" >Org. ID</th>
-                                        <th scope="col" class="right">Request Date Time</th>
-                                       
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr class="accordion-toggle collapsed" id="accordion1" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
-                                <td class="failed"><b>e8cc681vdd4bbb4ehjsvb9elb4996fbff8acb <img  src="assets/img/failed-table.svg"/></b></td>
-                                <td>KJ 58</td>
-                                <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                          
-                                
-                                </tr>
-                                <tr class="hide-table-padding">
-                               
-                                <td colspan="4" style="padding: 0 !important;">
-                                <div id="collapseOne" class="collapse in p-3">
-                                  <table class="table table-bordered table-padding">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">Trace ID</th>
-                                        <th scope="col">Source</th>
-                                        <th scope="col">API Request Type</th>
-                                        <th scope="col">Acknowledgement Status</th>
-                                        <th scope="col">Ack Timestamp</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>                                      
-                                        <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                        <td>LSP</td>
-                                        <td>CreateLoanAppRequest</td>
-                                        <td>Success</td>
-                                        <td>06 may 2020 1:45 PM</td>
-                                      </tr>
-
-                                      <tr>                                      
-                                        <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                        <td>LSP</td>
-                                        <td>CreateLoanAppRequest</td>
-                                        <td>Success</td>
-                                        <td>06 may 2020 1:45 PM</td>
-                                      </tr>
-
-
-                                      <tr>                                      
-                                        <td class="failed"><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                        <td>LSP</td>
-                                        <td>CreateLoanAppRequest</td>
-                                        <td class="failed" data-toggle="tooltip" data-placement="top" title="Server Down"><img  src="assets/img/failed-table.svg"/> failed</td>
-                                        <td>06 may 2020 1:45 PM</td>
-                                      </tr>
-
-                                      <tr>                                      
-                                        <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                        <td>LSP</td>
-                                        <td>CreateLoanAppRequest</td>
-                                        <td>Success</td>
-                                        <td>06 may 2020 1:45 PM</td>
-                                      </tr>
-
-
-                                      <tr>                                      
-                                        <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                        <td>LSP</td>
-                                        <td>CreateLoanAppRequest</td>
-                                        <td>Success</td>
-                                        <td>06 may 2020 1:45 PM</td>
-                                      </tr>
-                                      
-                                    </tbody>
-                                  </table>
-                                </div></td>
-                                </tr>
-                                     
-
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-
-                                
-                                <tr>
-                                  <td><p class="dark">a8cc6822bd4bbb4eblb9elb…</p></td>
-                                  <td>KJ 93</td>
-                                  <td class="right">15 may 2020 12:12 PM <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg"/></td>
-                                </tr>
-                               
-                                    </tbody>
-                                  </table>
-                                </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
 
 
-        </div>
+    <div class="b4l-dashboard b4l-dashboard-dash-tb">
+      <p>LSP Bridge Matrix</p>
     </div>
+
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-tab-bt-0">
+    
+       
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Recent Requests Log </th>
+            <td mat-cell *matCellDef="let element">e8cc6822bd4bbb4eblb9elb4996fbff8acb </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="b4l-bold-cr"> Org. ID </th>
+            <td mat-cell *matCellDef="let element"> KJ 58 </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef class="b4l-bold-cr"> Request Date Time </th>
+            <td mat-cell *matCellDef="right element"> 15 may 2020 12:12 PM <img class="b4l-tab-arrow"
+                src="assets/img/b4l-down-arrow.svg" /> </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="symbol">
+            <th *matHeaderCellDef> </th>
+            <td *matCellDef="right element"> </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    
+        </table> -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Recent Requests Log</th>
+                    <th scope="col">Org. ID</th>
+                    <th scope="col" class="right">Request Date Time</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let audit of audits">
+                    <tr class="accordion-toggle collapsed" id="{{audit.id}}" data-toggle="collapse" [attr.href]="'#collapse_'+audit.id">
+                        <td *ngIf="audit.isError" class="failed"><b>{{audit.requestId}} - {{audit.id}} <img src="assets/img/failed-table.svg" /></b> </td>
+                        <td *ngIf="!audit.isError" ><b>{{audit.requestId}}</b> </td>
+                        <td>{{audit.orgId}}</td>
+                        <td class="right" title="{{audit.createdDate}}" >{{audit.createdDate  | date:'dd MMM yyyy' }} {{audit.createdDate  | date:'shortTime' }} <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg" /> </td>
+                    </tr>
+                    <tr class="hide-table-padding">
+                        <td colspan="4" style="padding: 0 !important;">
+                            <div id="collapse_{{audit.id}}" class="collapse in p-3">
+                                <table class="table table-bordered table-padding">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Trace ID</th>
+                                            <th scope="col">Source</th>
+                                            <th scope="col">API Request Type</th>
+                                            <th scope="col">Acknowledgement Status</th>
+                                            <th scope="col">Ack Timestamp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ack of audit.ackAudits">
+                                            <td> <p class="dark" [ngClass]="{failed : ack.error != '0'}">{{ack.requestId}}</p> </td>
+                                            <td>{{ack.entity}}</td>
+                                            <td>{{ack.type}}</td>
+                                            <td *ngIf="ack.error != '0'" class="failed" > <img mat-raised-button matTooltip="{{ack.error}}" matTooltipPosition="above" src="assets/img/failed-table.svg" /> Failed</td>
+                                            <td *ngIf="ack.error == '0'" >Success</td>
+                                            <td title="{{ack.createdDate}}">{{ack.createdDate  | date:'dd MMM yyyy' }} {{ack.createdDate  | date:'shortTime' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="audits.length === 0">
+                  <p class="text-center">No records found.</p>
+                </ng-container>
+            </tbody>
+        </table>
+      </div>
+    <div class=" mat-card-table">
+      <p style="cursor: pointer;" routerLink="{{routeURL.BRIDGE_MATRIX}}" >View all 
+        <a href="javascript:void(0)">  <img class="b4l-tab-arrow" src="assets/img/b4l-view-arrow.svg" /></a>
+      </p>
+    </div>
+
+  </div>
+</div>
