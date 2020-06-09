@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   constructor(private lenderService: LenderService, public commonService: CommonService) { }
 
   getAudits(pageNo) {
-    const req: any = { pageSize: Constant.PAGE_SIZE, pageNo : pageNo - 1};
+    const req: any = { pageSize: 5, pageNo : pageNo - 1};
     this.lenderService.getReqResAudits(req).subscribe(res => {
       if (res.status === 200) {
         if (res.data && res.data.audits){
