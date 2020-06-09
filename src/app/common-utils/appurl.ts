@@ -3,7 +3,9 @@ import { Injector } from '@angular/core';
 export class AppURL {
 
     // static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
+    // static LSP_BRIDGE = 'http://localhost:8084/b4l/bridge';
     static RULE_ENGINE = 'https://qa-sidbi.capitaworld.com/b4l/ruleengine';
+    static LSP_BRIDGE = 'https://qa-sidbi.capitaworld.com/b4l/bridge';
 
     // public static getUrl() {
     //     const commonserlvice = AppURL.injector.get(CommonService);
@@ -25,7 +27,7 @@ export class AppURL {
     //         AppURL.USER_URL = resp.user;
     //         AppURL.LOAN_URL = resp.loan;
     //         AppURL.ONE_FORM_URL = resp.oneform;
-    //         AppURL.SCORE_URL = resp.scoring;
+    //         AppURL.SCORE_URL = resp.scoring; 
     //         AppURL.MATCH_ENGINE_URL = resp.matchengine;
     //     }
     // }

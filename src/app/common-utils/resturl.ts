@@ -10,6 +10,7 @@ export const RestURL = {
     SIGN_UP: '/user/signup',
     FORGOT_PASSWORD: '/user/forgotPassword',
     RESET_PASSWORD: '/user/resetPassword',
+    REQ_RES_AUDITS: '/v3/dashboard/logs',
     USER_DETAILS: '/user/getUserDetails',
     SAVE_EBLR: '/plr/save',
     UPDATE_EBLR_ACTION: '/plr/updateActionStatus',

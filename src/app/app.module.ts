@@ -32,6 +32,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { EblrpopupComponent } from './component/settings/eblrpopup/eblrpopup.component';
 import { SettingsComponent } from './component/settings/settings.component';
 import { SignupComponent } from './component/signup/signup.component';
+import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { SignupComponent } from './component/signup/signup.component';
     ResetPasswordComponent,
     AccountPriorityPopupComponent,
     DeleteProductPopupComponent,
+    LspBridgeMatrixComponent,
   ],
   imports: [
     ReactiveFormsModule,

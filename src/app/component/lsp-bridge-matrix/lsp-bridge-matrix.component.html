@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="b4l-dashboard">
+
+            <br/>
+            <br/>
+            <div class="dash-title-b4l-display">
+                <p style="cursor: pointer;" class="btn-back btn-back1" (click)="commonService.backClicked()" ><img src="assets/img/arrow-right.svg"> Back </p>
+                <p>Dashboard & Analytic / LSP Bridge Matrix</p>
+            </div>
+            <br/>
+            <!-- <select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
+                <option _ngcontent-njf-c118="">All Time</option>
+            </select> -->
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Request ID</th>
+                        <th scope="col">Org. ID</th>
+                        <th scope="col" class="right">Request Date Time</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let audit of audits">
+                        <tr class="accordion-toggle collapsed" id="{{audit.id}}" data-toggle="collapse" [attr.href]="'#collapse_'+audit.id">
+                            <td *ngIf="audit.isError" class="failed"><b>{{audit.requestId}} - {{audit.id}} <img src="assets/img/failed-table.svg" /></b> </td>
+                            <td *ngIf="!audit.isError" ><b>{{audit.requestId}}</b> </td>
+                            <td>{{audit.orgId}}</td>
+                            <td class="right" title="{{audit.createdDate}}" >{{audit.createdDate  | date:'dd MMM yyyy' }} {{audit.createdDate  | date:'shortTime' }} <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg" /> </td>
+                        </tr>
+                        <tr class="hide-table-padding">
+                            <td colspan="4" style="padding: 0 !important;">
+                                <div id="collapse_{{audit.id}}" class="collapse in p-3">
+                                    <table class="table table-bordered table-padding">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Trace ID</th>
+                                                <th scope="col">Source</th>
+                                                <th scope="col">API Request Type</th>
+                                                <th scope="col">Acknowledgement Status</th>
+                                                <th scope="col">Ack Timestamp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let ack of audit.ackAudits">
+                                                <td> <p class="dark" [ngClass]="{failed : ack.error != '0'}">{{ack.requestId}}</p> </td>
+                                                <td>{{ack.entity}}</td>
+                                                <td>{{ack.type}}</td>
+                                                <td *ngIf="ack.error != '0'" class="failed" > <img mat-raised-button matTooltip="{{ack.error}}" matTooltipPosition="above" src="assets/img/failed-table.svg" /> Failed</td>
+                                                <td *ngIf="ack.error == '0'" >Success</td>
+                                                <td title="{{ack.createdDate}}">{{ack.createdDate  | date:'dd MMM yyyy' }} {{ack.createdDate  | date:'shortTime' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="mat-card-table">
+                <p>
+                    <a href="javascript:void(0)"  (click)="getAudits(previousPage)"><img src="assets/img/arrow-right.svg" />  &nbsp; Back &nbsp; </a>
+                        {{currentPage}} / {{totalPage}} 
+                    <a href="javascript:void(0)" (click)="getAudits(nextPage)" > &nbsp; Next &nbsp; <img src="assets/img/b4l-view-arrow.svg" /></a>
+                </p>
+              </div>
+        </div>
+    </div>
+</div>

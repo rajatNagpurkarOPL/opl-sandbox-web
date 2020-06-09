@@ -29,6 +29,9 @@ export class LenderService {
   resetPassword(data: any): Observable<any> {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.RESET_PASSWORD, data);
   }
+  getReqResAudits(data: any): Observable<any> {
+    return this.http.post(AppURL.LSP_BRIDGE + RestURL.REQ_RES_AUDITS, data);
+  }
   getLoggedInUserDetails(): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.USER_DETAILS, false);
   }
