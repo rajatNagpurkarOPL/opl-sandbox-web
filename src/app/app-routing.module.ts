@@ -28,11 +28,11 @@ const routes: Routes = [
     { path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard]},
     { path: 'product-view/:status/:id', component: ProductViewComponent, canActivate: [AuthGuard]},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-    { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },
 { path: '', redirectTo: 'login', pathMatch: 'full' },
-{ path: '**', redirectTo : '' },
+{ path: '**', redirectTo : 'dashboard' },
 
 ];
 
