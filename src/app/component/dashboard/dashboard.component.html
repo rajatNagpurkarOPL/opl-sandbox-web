@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="b4l-dashboard">
+
+    <!-- <div class="b4l-dashboard">
       <p>Number of Applications – Analytics Dashboard</p>
       <select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
         <option _ngcontent-njf-c118="">Today</option>
@@ -116,28 +117,22 @@
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef> Product Name </th>
         <td mat-cell *matCellDef="let element"> {{element.position}} </td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Matched </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
-      <!-- Weight Column -->
       <ng-container matColumnDef="weight">
         <th mat-header-cell *matHeaderCellDef> Loan Disbursed </th>
         <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
       </ng-container>
 
-      <!-- Symbol Column -->
       <ng-container matColumnDef="symbol">
         <th mat-header-cell *matHeaderCellDef> Loan not availed </th>
         <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
@@ -146,10 +141,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+ -->
 
 
-
-    <div class="b4l-dashboard b4l-dashboard-dash-tb">
+    <!-- <div class="b4l-dashboard b4l-dashboard-dash-tb"> -->
+    <div class="b4l-dashboard">
       <p>LSP Bridge Matrix</p>
     </div>
 
