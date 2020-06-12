@@ -14,7 +14,7 @@ export class LspBridgeMatrixComponent implements OnInit {
   currentPage = 0;
   previousPage = 0;
   nextPage = 1;
-  totalPage = 0;
+  totalPage;
 
   constructor(private lenderService: LenderService, public commonService: CommonService) { }
 
