@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
   goToProducts(){
     if (this.globals.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){ // If maker then go to saved products
       this.router.navigate([Constant.ROUTE_URL.SAVED_PRODUCTS]);
-    } else if (this.globals.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1){ // If maker then go to Sent products
+    } else if (this.globals.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1){ // If Cheker then go to Sent products
       this.router.navigate([Constant.ROUTE_URL.SENT_PRODUCTS]);
     }
   }

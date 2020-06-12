@@ -5,12 +5,12 @@
             <div class="product-back-button">
                 <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back
                 </p>
-                <p>Add new product</p>
+                <p>Add New Product</p>
             </div>
 
             <div id="b4l-content"  class="b4l-height">
                 <div class="product-name">
-                    <p>Product Name</p>
+                    <p>Product Name*</p>
                     <div class="product-name-details">
                         <input type="text" id="productName" formControlName="name" [(ngModel)]="product.name" placeholder="Eg. “Contactless invoice financing”" autocomplete="off" #name>
                         <app-print-error [control]="f.name" [submitted]="submitted"></app-print-error>

@@ -60,7 +60,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     elgbltForm: this.fb.group({
       maxRepay: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[0-9]*$')]],
       tenure: ['', [Validators.required, Validators.max(36)]],
-      disPercentage: ['', [Validators.required, Validators.max(20), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
+      disPercentage: ['', [Validators.required, Validators.max(95), Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))')]],
       maxLoanAmnt: ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
       wcReq: ['', [Validators.required, Validators.pattern('(([0-9]*)|(([0-9]*)\.([0-9]*)))'), Validators.max(25)]],
       repayPlan : ['One Time'],
