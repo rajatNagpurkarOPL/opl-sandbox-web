@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
         if (res.data && res.data.audits){
           this.audits = res.data.audits;
           this.audits.forEach(a => {
-            this.getIsError(a);
+            a.isError = (a.ackAudits.find(ack => ack.error !== '0')) ? true : false;
           });
         }
       } else {
@@ -31,12 +31,6 @@ export class DashboardComponent implements OnInit {
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
-  }
-  getIsError(a){
-    for (const ack of a.ackAudits) {
-      a.isError = ack.error !== '0' ;
-      break;
-    }
   }
 
   ngOnInit(): void {
@@ -65,7 +59,3 @@ const ELEMENT_DATA: PeriodicElement[] = [
     {position: 'Contactless loan eligibility through GST', name: 1200, weight: 435, symbol: 865},
     {position: 'Contactless loan eligibility through GST',  name: 1200, weight: 435, symbol: 865},
   ];
-  
- 
-  
- 
