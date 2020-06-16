@@ -31,7 +31,7 @@ export class LspBridgeMatrixComponent implements OnInit {
           this.previousPage = this.currentPage - 1;
           this.audits = res.data.audits;
           this.audits.forEach(a => {
-            this.getIsError(a);
+            a.isError = (a.ackAudits.find(ack => ack.error !== '0')) ? true : false;
           });
         }
         if (res.data && res.data.auditCount){
@@ -44,14 +44,6 @@ export class LspBridgeMatrixComponent implements OnInit {
       this.commonService.errorSnackBar(error);
     });
   }
-
-  getIsError(a){
-    for (const ack of a.ackAudits) {
-      a.isError = ack.error !== '0' ;
-      break;
-    }
-  }
-
 
   ngOnInit(): void {
     this.getAudits(this.nextPage);
