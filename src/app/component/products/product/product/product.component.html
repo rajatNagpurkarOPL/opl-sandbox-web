@@ -70,41 +70,59 @@
                                     <p>{{i+1}}.</p>
                                     <p> {{item.lable}}</p>
                                 </div>
-                                <ng-container [ngSwitch]="item.inputType.id">
-                                    <div class="b4l-product-list-right" *ngSwitchCase="inputType.YES_NO.id">
-                                        <p class="buttin-b4l-opacity">
-                                            <mat-button-toggle-group  formControlName="yesNo_{{item.parameterId}}"
-                                                [(ngModel)]="item.answer">
-                                                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                                                <mat-button-toggle [value]="false">No</mat-button-toggle>
-                                            </mat-button-toggle-group>
-                                            <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                        </p>
-                                    </div>
-                                    <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
-                                        <p class="buttin-b4l-opacity">
-                                            <select class="form-control" id="dropdown_{{item.parameterId}}" formControlName="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                                <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
-                                                </option>
-                                            </select>
-                                            <app-print-error [control]="pf['dropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
-                                            <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                        </p>
-                                    </div>
-                                    <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.RANGE.id">
-                                        <div class="text-with-presnt person-text-width">
-                                            <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" formControlName="min_{{item.parameterId}}" >
-                                            <p class="perstage-text-n-d">Days</p>
-                                            <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                <ng-container [ngSwitch]="item.paramType.id">
+
+                                    <!-- YES/NO -->
+                                    <ng-container *ngSwitchCase="inputType.YES_NO.id" [ngSwitch]="item.inputType.id">
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.TOGGLE.id">
+                                            <p class="buttin-b4l-opacity">
+                                                <mat-button-toggle-group  formControlName="toggle_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                                                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                                                </mat-button-toggle-group>
+                                                <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                            </p>
                                         </div>
-                                        <p>to</p>
-                                        <div class="text-with-presnt person-text-width">
-                                            <input placeholder="0" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text">
-                                            <p class="perstage-text-n-d">Days</p>
-                                            <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.RADIO.id">
+                                            <p class="buttin-b4l-opacity">
+                                                RADIO
+                                            </p>
+                                            <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                         </div>
-                                        <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                    </div>
+                                    </ng-container>
+
+                                    <!-- Dropdown -->
+                                    <ng-container *ngSwitchCase="inputType.DROPDOWN.id" [ngSwitch]="item.inputType.id">
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
+                                            <p class="buttin-b4l-opacity">
+                                                <select class="form-control" id="dropdown_{{item.parameterId}}" formControlName="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                                    <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
+                                                    </option>
+                                                </select>
+                                                <app-print-error [control]="pf['dropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                                <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                            </p>
+                                        </div>
+                                    </ng-container>
+
+                                    <!-- Range -->
+                                    <ng-container *ngSwitchCase="inputType.RANGE.id" [ngSwitch]="item.inputType.id">
+                                        <div class="buttin-b4l-opacity opl2" *ngSwitchCase="inputType.INPUT_TEXT.id">
+                                            <div class="text-with-presnt person-text-width">
+                                                <input placeholder="0" [(ngModel)]="item.answer.min" type="text" id="min_{{item.parameterId}}" formControlName="min_{{item.parameterId}}" >
+                                                <p class="perstage-text-n-d">Days</p>
+                                                <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            </div>
+                                            <p>to</p>
+                                            <div class="text-with-presnt person-text-width">
+                                                <input placeholder="0" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}" id="max_{{item.parameterId}}" type="text">
+                                                <p class="perstage-text-n-d">Days</p>
+                                                <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            </div>
+                                            <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                        </div>
+                                    </ng-container>
+
                                 </ng-container>
                             </div>
                         </ng-container>

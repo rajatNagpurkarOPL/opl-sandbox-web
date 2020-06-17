@@ -111,7 +111,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.product.reqType = Constant.MASTER_TYPE.PRODUCT_CREATION;
     const productReq = cloneDeep(this.product);
     productReq.parameters.forEach(element => {
-      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){ //  Workaroud for set  ngModel for dropdown
+      if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){ //  Workaroud for set  ngModel for dropdown
         element.answer = element.lovs.filter(e => e.id === element.answer)[0];
       }
       element.lovs = JSON.stringify(element.lovs);
@@ -188,7 +188,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
                   element.answer = { min: null, max: null };
                 }
-                if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+                if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
                   element.answer = true;
                 }
                 element.lovs = JSON.parse(element.lovs);
@@ -286,14 +286,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if (param.minValue) {
       validators.push(Validators.min(param.minValue));
     }
-    if (param.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id && param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
       this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
       this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
     }
-    if (param.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
-      this.productForm.get('paramForm').addControl('yesNo_' + param.parameterId, this.fb.control('', [Validators.required]));
+    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id && param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+      this.productForm.get('paramForm').addControl('toggle_' + param.parameterId, this.fb.control('', [Validators.required]));
     }
-    if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+    if (param.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
       this.productForm.get('paramForm').addControl('dropdown_' + param.parameterId, this.fb.control('', [Validators.required]));
     }
   }
@@ -302,13 +302,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
    removeParameter(param) {
     let paramName = null;
     // Remove control from from grou
-    if (param.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
-      paramName = 'yesNo_' + param.parameterId;
+    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id && param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+      paramName = 'toggle_' + param.parameterId;
     }
-    if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+    if (param.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
       paramName = 'dropdown_' + param.parameterId;
     }
-    if (param.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id && param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
       this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
       this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
     }

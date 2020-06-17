@@ -2,7 +2,7 @@ import { Injector } from '@angular/core';
 
 export class AppURL {
 
-   /*  static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
+    /* static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
     static LSP_BRIDGE = 'http://localhost:8084/b4l/bridge'; */
     static RULE_ENGINE = 'https://qa-sidbi.instantmseloans.in/b4l/ruleengine';
     static LSP_BRIDGE = 'https://qa-sidbi.instantmseloans.in/b4l/bridge';

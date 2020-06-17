@@ -38,13 +38,13 @@ export class ProductViewComponent implements OnInit {
           element.lovs = JSON.parse(element.lovs);
           if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id && element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
               element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
               element.answerValue = element.answer.value;
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id && element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
               element.answerValue = element.answer ? 'Yes' : 'No';
             }
           }
@@ -129,13 +129,13 @@ export class ProductViewComponent implements OnInit {
           this.product.parametersAudit.forEach(element => {
             if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
-            if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id && element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
               element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
               element.answerValue = element.answer.value;
             }
-            if (element.inputType.id === Constant.MASTER_TYPE.YES_NO.id) {
+            if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id && element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
               element.answerValue = element.answer ? 'Yes' : 'No';
             }
           }
