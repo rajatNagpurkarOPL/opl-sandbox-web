@@ -15,8 +15,12 @@ export class NavbarComponent implements OnInit {
 
   constant: any = {};
   productCount: any = {};
-  constructor(public router: Router, public globals: Globals, private lenderService: LenderService,
-              private commonService: CommonService) { }
+  user: any;
+  dashboardClass: boolean;
+  constructor(public router: Router, public globals: Globals, private lenderService: LenderService, private commonService: CommonService) {
+    this.globals.COUNT =  {}; // reset globle variable
+    this.globals.USER =  {}; // reset globle variable
+  }
 
   logoutUser() {
     this.lenderService.logout().subscribe(res => {
@@ -42,6 +46,7 @@ export class NavbarComponent implements OnInit {
       if (res.status === 200) {
         if (res.data){
           this.globals.USER = res.data;
+          this.user = res.data;
           this.commonService.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
         }
       } else {

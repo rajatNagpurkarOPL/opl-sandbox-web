@@ -20,7 +20,7 @@ import { SendBackModelService } from './common-utils/common-services/SendBackMod
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { LoginComponent } from './component/login/login.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { ProductsComponent } from './component/products/product-list/products.component';
+import { ProductsComponent } from './component/products/product-list/products/products.component';
 import { AccountPriorityPopupComponent } from './component/products/product/account-priority-popup/account-priority-popup.component';
 import { AddParameterPopupComponent } from './component/products/product/add-parameter-popup/add-parameter-popup.component';
 import { ConfirmationPopupComponent } from './component/products/product/confirmation-popup/confirmation-popup.component';
@@ -33,6 +33,7 @@ import { EblrpopupComponent } from './component/settings/eblrpopup/eblrpopup.com
 import { SettingsComponent } from './component/settings/settings.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
+import { ProductListComponent } from './component/products/product-list/product-list.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-brid
     AccountPriorityPopupComponent,
     DeleteProductPopupComponent,
     LspBridgeMatrixComponent,
+    ProductListComponent,
   ],
   imports: [
     ReactiveFormsModule,

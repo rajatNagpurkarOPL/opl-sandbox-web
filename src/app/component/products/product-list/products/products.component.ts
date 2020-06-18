@@ -4,18 +4,21 @@ import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { LenderService } from 'src/app/service/lender.service';
-import { NavbarComponent } from '../../navbar/navbar.component';
+import { NavbarComponent } from '../../../navbar/navbar.component';
 import { Globals } from 'src/app/common-utils/globals';
-import { ConfirmationPopupComponent } from '../product/confirmation-popup/confirmation-popup.component';
+import { ConfirmationPopupComponent } from '../../product/confirmation-popup/confirmation-popup.component';
 import * as cloneDeep from 'lodash/cloneDeep';
-import { DeleteProductPopupComponent } from '../product/delete-product-popup/delete-product-popup.component';
+import { DeleteProductPopupComponent } from '../../product/delete-product-popup/delete-product-popup.component';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
+// tslint:disable: max-line-length
 export class ProductsComponent implements OnInit {
+
+  @Input() productCount: any = {};
 
   public routeURL: any = {};
   productList = [];
@@ -23,11 +26,9 @@ export class ProductsComponent implements OnInit {
   roles;
   isEdit = false;
   isAdd = false;
-  @Input() productCount: any = {};
   isChecker: boolean;
   user: any;
-  constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService,
-              private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals, public router: Router) { }
+  constructor(public route: Router, private lenderService: LenderService, private commonService: CommonService, private navbar: NavbarComponent, private matDialog: MatDialog, public global: Globals) { }
 
   // get products by status
   listProducts(){
@@ -35,7 +36,7 @@ export class ProductsComponent implements OnInit {
         if (res.status === 200) {
           this.productList = res.data;
           // Show edit and add button only if user is MAKER
-          
+
         } else {
           this.commonService.warningSnackBar(res.message);
         }
@@ -72,7 +73,7 @@ export class ProductsComponent implements OnInit {
     product.productStatus = action.action;
     product.reqType = action.reqType;
     // tslint:disable-next-line: max-line-length
-    data.title = 'Are you sure you want to ' + (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'activate' : 'deactivate') + ' this product ?'
+    data.title = 'Are you sure you want to ' + (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'activate' : 'deactivate') + ' this product ?';
     data.txt = (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'activate' : 'diactivate');
     data.productName = product.name;
     data.btnName =  (action.reqType.id === Constant.MASTER_TYPE.PRODUCT_ACTIVATION.id ? 'Activation' : 'Deactivation');
@@ -93,7 +94,7 @@ export class ProductsComponent implements OnInit {
     this.lenderService.updateProductActionStatus(product).subscribe(res => {
       if (res.status === 200) {
         this.commonService.successSnackBar(res.message);
-        this.router.navigate([this.router.url]);
+        this.route.navigate([this.route.url]);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -131,7 +132,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
-    this.roles = Constant.ROLES;
     if (this.route.url === this.routeURL.SAVED_PRODUCTS){
       this.productStatus  = Constant.MASTER_TYPE.SAVED.id;
     } else if (this.route.url === this.routeURL.SENT_PRODUCTS){
@@ -144,6 +144,7 @@ export class ProductsComponent implements OnInit {
       this.productStatus  = Constant.MASTER_TYPE.INACTIVE.id;
     }
 
+    this.roles = Constant.ROLES;
     if (this.commonService.isObjectIsEmpty(this.global.USER)){
       this.user = JSON.parse(this.commonService.getStorage(Constant.STORAGE.USER, true));
     } else {
