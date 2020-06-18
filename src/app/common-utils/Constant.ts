@@ -51,7 +51,8 @@ export const Constant = {
         PRODUCT_ACTIVATION : {id : 17, buttonName : 'Activate'},
         PRODUCT_DEACTIVATION : {id : 18, buttonName : 'Deactivate'},
         DELETE : {id : 19},
-        TOGGLE : {id : 20}
+        TOGGLE : {id : 20},
+        INPUT_TEXT : {id : 21}
     },
     ROLES: {
         ADMIN : {id : 1 , name : 'ADMIN'},
