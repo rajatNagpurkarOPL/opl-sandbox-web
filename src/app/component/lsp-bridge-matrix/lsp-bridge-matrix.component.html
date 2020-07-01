@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Request ID</th>
+                        <th scope="col">Source</th>
                         <th scope="col">Org. ID</th>
                         <th scope="col" class="right">Request Date Time</th>
 
@@ -27,6 +28,7 @@
                         <tr class="accordion-toggle collapsed" id="{{audit.id}}" data-toggle="collapse" [attr.href]="'#collapse_'+audit.id">
                             <td *ngIf="audit.isError" class="failed"><b>{{audit.requestId}}  <img src="assets/img/failed-table.svg" /></b> </td>
                             <td *ngIf="!audit.isError" ><b>{{audit.requestId}}</b> </td>
+                            <td>{{audit.entity}}</td>
                             <td>{{audit.orgId}}</td>
                             <td class="right" title="{{audit.createdDate}}" >{{audit.createdDate  | date:'dd MMM yyyy' }} {{audit.createdDate  | date:'shortTime' }} <img class="b4l-tab-arrow" src="assets/img/b4l-down-arrow.svg" /> </td>
                         </tr>
@@ -45,7 +47,7 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let ack of audit.ackAudits">
-                                                <td> <p class="dark" [ngClass]="{failed : ack.error != '0'}">{{ack.requestId}}</p> </td>
+                                                <td> <p class="dark" [ngClass]="{failed : ack.error != '0'}">{{ack.traceId}}</p> </td>
                                                 <td>{{ack.entity}}</td>
                                                 <td>{{ack.type}}</td>
                                                 <td *ngIf="ack.error != '0'" class="failed" > <img mat-raised-button matTooltip="{{ack.error}}" matTooltipPosition="above" src="assets/img/failed-table.svg" /> Failed</td>
