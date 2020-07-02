@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, ValidatorFn, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as cloneDeep from 'lodash/cloneDeep';
@@ -184,14 +184,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
             const params = response.data.parameters;
             params.forEach(element => {
               if (this.product.parameters.findIndex(p => p.parameterId === element.parameterId) === -1 ) { // push only if object is not present in the list
-                this.addFormControl(element); // create form field
                 if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
                   element.answer = { min: null, max: null };
                 }
-                if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+                if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
                   element.answer = true;
                 }
                 element.lovs = JSON.parse(element.lovs);
+                this.addFormControl(element); // create form field
                 this.product.parameters.push(element);
               }
             });
@@ -224,16 +224,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.product = res.data;
         // set answer and other values
         this.product.parameters.forEach(element => {
-          this.addFormControl(element); // Create form field
           element.lovs = JSON.parse(element.lovs);
+          this.addFormControl(element); // Create form field
           if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id && this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = { min: null, max: null };
           }
           if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
-          }
-          if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
-            element.answer = element.answer.id;
           }
         });
         // set approve send to checker buttons
@@ -286,13 +283,48 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if (param.minValue) {
       validators.push(Validators.min(param.minValue));
     }
-    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id && param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
-      this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
-      this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
+
+    // Input
+    if (param.paramType.id === Constant.MASTER_TYPE.INPUT.id ) {
+      // Radio
+      if (param.inputType.id === Constant.MASTER_TYPE.RADIO.id){
+        this.productForm.get('paramForm').addControl('inputRadio_' + param.parameterId, this.fb.control('', [Validators.required]));
+      }
+      // Checkbox TODO
+      /* if (param.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id){
+        this.productForm.get('paramForm').addControl('inputCheckbox_' + param.parameterId, new FormArray([], this.minSelectedCheckboxes(1)));
+        if (param.lovs && param.lovs.length > 0){
+          param.lovs.forEach((o, i) => {
+            (this.productForm.controls['inputCheckbox_' + param.parameterId] as FormArray).controls.push(new FormControl(i));
+          });
+        }
+      } */
+      // Input text
+      if (param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
+        this.productForm.get('paramForm').addControl('inputText_' + param.parameterId, this.fb.control('', [Validators.required]));
+      }
+      // Dropdown
+      if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
+        this.productForm.get('paramForm').addControl('inputDropdown_' + param.parameterId, this.fb.control('', [Validators.required]));
+      }
     }
-    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id && param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
-      this.productForm.get('paramForm').addControl('toggle_' + param.parameterId, this.fb.control('', [Validators.required]));
+    // Yes-No
+    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id ) {
+      if (param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id){
+        this.productForm.get('paramForm').addControl('toggle_' + param.parameterId, this.fb.control('', [Validators.required]));
+      }
+      if (param.inputType.id === Constant.MASTER_TYPE.RADIO.id){
+        this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
+      }
     }
+    // Range
+    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+      if (param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
+        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+        this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
+      }
+    }
+    // Dropdown
     if (param.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
       this.productForm.get('paramForm').addControl('dropdown_' + param.parameterId, this.fb.control('', [Validators.required]));
     }
@@ -300,22 +332,68 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
    // remove parameter
    removeParameter(param) {
+
     let paramName = null;
-    // Remove control from from grou
-    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id && param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
-      paramName = 'toggle_' + param.parameterId;
+    // Remove control from from group
+
+    // Input
+    if (param.paramType.id === Constant.MASTER_TYPE.INPUT.id) {
+      if (param.inputType.id === Constant.MASTER_TYPE.RADIO.id){ // Radio
+        paramName = 'inputRadio_' + param.parameterId;
+      }
+      if (param.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id){ // Checkbox
+        paramName = 'inputCheckbox_' + param.parameterId;
+      }
+      if (param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){ // Input text
+        paramName = 'inputText_' + param.parameterId;
+      }
+      if (param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){ // Dropdown
+        paramName = 'inputDropdown_' + param.parameterId;
+      }
     }
+
+    //  Yes-No
+    if (param.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+      if (param.inputType.id === Constant.MASTER_TYPE.TOGGLE.id){
+        paramName = 'toggle_' + param.parameterId;
+      }
+      if (param.inputType.id === Constant.MASTER_TYPE.RADIO.id){
+        paramName = 'radio_' + param.parameterId;
+      }
+    }
+    // Range
+    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id){
+      if (param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
+        this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
+      }
+    }
+    // Dropdown
     if (param.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && param.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id){
       paramName = 'dropdown_' + param.parameterId;
     }
-    if (param.paramType.id === Constant.MASTER_TYPE.RANGE.id && param.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
-      this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
-      this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
-    }
+
     if (paramName) {
       this.productForm.get('paramForm').removeControl(paramName);
     }
     this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
+  }
+
+  /**
+   * Using to validate checkbox
+   */
+  minSelectedCheckboxes(min = 1) {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      const totalSelected = formArray.controls
+        // get a list of checkbox values (boolean)
+        .map(control => control.value)
+        // total up the number of checked checkboxes
+        .reduce((prev, next) => next ? prev + next : prev, 0);
+
+      // if the total is not greater than the minimum, return the error message
+      return totalSelected >= min ? null : { required: true };
+    };
+    return validator;
   }
 
   getStatusAudits() {
