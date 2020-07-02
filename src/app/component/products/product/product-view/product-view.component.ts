@@ -38,15 +38,7 @@ export class ProductViewComponent implements OnInit {
           element.lovs = JSON.parse(element.lovs);
           if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
             element.answer = JSON.parse(element.answer);
-            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id && element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
-              element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
-            }
-            if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
-              element.answerValue = element.answer.value;
-            }
-            if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id && element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
-              element.answerValue = element.answer ? 'Yes' : 'No';
-            }
+            this.setAnswers(element);
           }
         });
         // Checker's Actions
@@ -116,43 +108,36 @@ export class ProductViewComponent implements OnInit {
 
   // Get product info by version
   getProductVersion(ver){
-    if (ver.isCurrentVer){
-      this.getProductDetails();
-    } else {
-    this.lenderService.getAuditProductDetails(this.productId, ver.version).subscribe(res => {
-      if (res.status === 200) {
-        const productDetail = res.data;
-        if (!this.commonService.isObjectIsEmpty(productDetail)){
-          console.log(res.data);
-          this.product = productDetail;
-          // set answer and other values
-          this.product.parametersAudit.forEach(element => {
-            if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
-            element.answer = JSON.parse(element.answer);
-            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id && element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
-              element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
-            }
-            if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
-              element.answerValue = element.answer.value;
-            }
-            if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id && element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
-              element.answerValue = element.answer ? 'Yes' : 'No';
-            }
-          }
-        });
-          this.product.parameters = this.product.parametersAudit;
-          // Show request type
-          if (this.product.reqType) {
-            this.getReqType(this.product.reqType.id);
-          }
-      }
+      if (ver.isCurrentVer){
+        this.getProductDetails();
       } else {
-        this.commonService.warningSnackBar(res.message);
-      }
-    }, (error: any) => {
-      this.commonService.errorSnackBar(error);
-    });
-  }
+       this.lenderService.getAuditProductDetails(this.productId, ver.version).subscribe(res => {
+        if (res.status === 200) {
+          const productDetail = res.data;
+          if (!this.commonService.isObjectIsEmpty(productDetail)){
+            console.log(res.data);
+            this.product = productDetail;
+            // set answer and other values
+            this.product.parametersAudit.forEach(element => {
+              element.lovs = JSON.parse(element.lovs);
+              if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
+                element.answer = JSON.parse(element.answer);
+                this.setAnswers(element);
+            }
+          });
+            this.product.parameters = this.product.parametersAudit;
+            // Show request type
+            if (this.product.reqType) {
+              this.getReqType(this.product.reqType.id);
+            }
+        }
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
   }
 
   // update product status send back or aprove
@@ -232,6 +217,47 @@ export class ProductViewComponent implements OnInit {
       this.reqType = 'Product Dectivation';
     }
   }
+
+  /**
+   * Parse answer from json
+   */
+  setAnswers(element) {
+    // Input
+    if (element.paramType.id === Constant.MASTER_TYPE.INPUT.id) {
+      if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) { // Input text
+        element.answerValue = element.answer;
+      }
+      if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) { // Radio
+        element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+      }
+      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) { // Dropdown
+        const ans = element.lovs.find(l => l.id === element.answer);
+        element.answerValue = ans ? ans.value : '-';
+      }
+    }
+    // Range
+    if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+      if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
+        element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+      }
+    }
+    // Dropdown
+    if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+        element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+      }
+    }
+    // Yes-No
+    if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+      if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+        element.answerValue = element.answer ? 'Yes' : 'No';
+      }
+      if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) {
+        element.answerValue = element.answer ? 'Yes' : 'No';
+      }
+    }
+  }
+
   getAccountOrderStr(){
     return _.orderBy(this.product.accountOrder, ['accOrder']).map(a => a.account).join('>');
   }

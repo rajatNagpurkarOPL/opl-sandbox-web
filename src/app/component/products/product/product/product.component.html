@@ -85,7 +85,10 @@
                                         </div>
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.RADIO.id">
                                             <p class="buttin-b4l-opacity">
-                                                RADIO
+                                                <mat-radio-group formControlName="radio_{{item.parameterId}}"  [(ngModel)]="item.answer">
+                                                    <mat-radio-button [value]="true"> Yes </mat-radio-button>
+                                                    <mat-radio-button [value]="false"> No </mat-radio-button>
+                                                </mat-radio-group>
                                             </p>
                                             <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                         </div>
@@ -96,7 +99,7 @@
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
                                             <p class="buttin-b4l-opacity">
                                                 <select class="form-control" id="dropdown_{{item.parameterId}}" formControlName="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
-                                                    <option  *ngFor="let option of item.lovs" [selected]="option.id == (item.answer ? item.answer.id : '')" [ngValue]="option.id">{{option.value}}
+                                                    <option  *ngFor="let option of item.lovs" [ngValue]="option.id">{{option.value}}
                                                     </option>
                                                 </select>
                                                 <app-print-error [control]="pf['dropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -123,14 +126,50 @@
                                         </div>
                                     </ng-container>
 
+                                    <!-- Input -->
+                                    <ng-container *ngSwitchCase="inputType.INPUT.id" [ngSwitch]="item.inputType.id">
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.INPUT_TEXT.id">
+                                            <div class="text-with-presnt person-text-width">
+                                                <input [(ngModel)]="item.answer" type="text" formControlName="inputText_{{item.parameterId}}" >
+                                                <app-print-error [control]="pf['inputText_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            </div>
+                                        </div>
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.RADIO.id">
+                                            <p class="buttin-b4l-opacity">
+                                                <mat-radio-group formControlName="inputRadio_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                                    <mat-radio-button *ngFor="let r of item.lovs" [value]="r.id"> {{r.value}} </mat-radio-button>
+                                                </mat-radio-group>
+                                            </p>
+                                            <app-print-error [control]="pf['inputRadio_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
+                                            <p class="buttin-b4l-opacity">
+                                                <select class="form-control" formControlName="inputDropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
+                                                    <option  *ngFor="let option of item.lovs" [ngValue]="option.id">{{option.value}}
+                                                    </option>
+                                                </select>
+                                                <app-print-error [control]="pf['inputDropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            </p>
+                                        </div>
+                                        <!-- <div class="b4l-product-list-right" *ngSwitchCase="inputType.CHECKBOX.id">
+                                            <p class="buttin-b4l-opacity">
+                                                <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs; let i = index">
+                                                    <input type="checkbox" [formControlName]="i" />
+                                                    {{c.label}}
+                                                </label>
+                                            </p>
+                                            <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div> -->
+                                        <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                    </ng-container>
+
                                 </ng-container>
                             </div>
                         </ng-container>
                         <div class="b4l-product-list back">
                             <div class="b4l-product-list-right b4l-product-list-right1">
                                 <p class="buttin-b4l-opacity">
-                                    <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add
-                                        Parameters</a>
+                                    <a href="javascript:void(0)" class="product-btn3" (click)="addParameterPopup()">+ Add Parameters</a>
                                 </p>
                             </div>
                         </div>
