@@ -94,8 +94,8 @@
                                         </div>
                                     </ng-container>
 
-                                    <!-- Dropdown -->
-                                    <ng-container *ngSwitchCase="inputType.DROPDOWN.id" [ngSwitch]="item.inputType.id">
+                                    <!-- Dropdown commented bcoz dropdown is now moved to input option -->
+                                    <!-- <ng-container *ngSwitchCase="inputType.DROPDOWN.id" [ngSwitch]="item.inputType.id">
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
                                             <p class="buttin-b4l-opacity">
                                                 <select class="form-control" id="dropdown_{{item.parameterId}}" formControlName="dropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
@@ -106,7 +106,7 @@
                                                 <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                             </p>
                                         </div>
-                                    </ng-container>
+                                    </ng-container> -->
 
                                     <!-- Range -->
                                     <ng-container *ngSwitchCase="inputType.RANGE.id" [ngSwitch]="item.inputType.id">
@@ -128,12 +128,14 @@
 
                                     <!-- Input -->
                                     <ng-container *ngSwitchCase="inputType.INPUT.id" [ngSwitch]="item.inputType.id">
+                                        <!-- Input Text -->
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.INPUT_TEXT.id">
                                             <div class="text-with-presnt person-text-width">
                                                 <input [(ngModel)]="item.answer" type="text" formControlName="inputText_{{item.parameterId}}" >
                                                 <app-print-error [control]="pf['inputText_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </div>
                                         </div>
+                                        <!-- Radio -->
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.RADIO.id">
                                             <p class="buttin-b4l-opacity">
                                                 <mat-radio-group formControlName="inputRadio_{{item.parameterId}}" [(ngModel)]="item.answer">
@@ -142,6 +144,7 @@
                                             </p>
                                             <app-print-error [control]="pf['inputRadio_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                         </div>
+                                        <!-- Dropdown -->
                                         <div class="b4l-product-list-right" *ngSwitchCase="inputType.DROPDOWN.id">
                                             <p class="buttin-b4l-opacity">
                                                 <select class="form-control" formControlName="inputDropdown_{{item.parameterId}}" [(ngModel)]="item.answer">
@@ -151,15 +154,15 @@
                                                 <app-print-error [control]="pf['inputDropdown_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </p>
                                         </div>
-                                        <!-- <div class="b4l-product-list-right" *ngSwitchCase="inputType.CHECKBOX.id">
+                                        <!-- Checkbox -->
+                                        <div class="b4l-product-list-right" *ngSwitchCase="inputType.CHECKBOX.id">
                                             <p class="buttin-b4l-opacity">
                                                 <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs; let i = index">
-                                                    <input type="checkbox" [formControlName]="i" />
-                                                    {{c.label}}
+                                                    <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect"  (ngModelChange)="setCheckboxAnswer(item)" /> {{c.value}}
                                                 </label>
                                             </p>
                                             <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
-                                        </div> -->
+                                        </div>
                                         <img src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                     </ng-container>
 

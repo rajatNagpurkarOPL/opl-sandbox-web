@@ -234,6 +234,9 @@ export class ProductViewComponent implements OnInit {
         const ans = element.lovs.find(l => l.id === element.answer);
         element.answerValue = ans ? ans.value : '-';
       }
+      if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) { // Checkbox
+        element.answerValue = element.answer.map(l => l.value).join(', ');
+      }
     }
     // Range
     if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
