@@ -12,8 +12,10 @@ import { ProductViewComponent } from './component/products/product/product-view/
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
 import { ProductListComponent } from './component/products/product-list/product-list.component';
+import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
 
 const routes: Routes = [
+  
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'reset-password', component: ResetPasswordComponent},
@@ -30,6 +32,7 @@ const routes: Routes = [
     { path: 'product/:id', component: ProductComponent },
     { path: 'product-view/:status/:id', component: ProductViewComponent },
     { path: 'settings', component: SettingsComponent},
+    { path: 'New-Product-Configuration', component: NewProductConfigurationComponent},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },

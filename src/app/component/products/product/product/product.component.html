@@ -25,6 +25,44 @@
                 </div>
             </div>
 
+
+<!--New B4l changes -->
+            <div id="b4l-content"  class="b4l-height">
+                <div class="product-name">
+                    <p>Contactless Invoice Fianance</p>
+                    <div class="product-name-details">
+                        <div class="d-flex al-center js-center">
+                            <span class="new-product-config-span mr-4">Created On - 29 Nov 2020</span>
+                            <span class="new-product-config-span">Last Modified On - 14 Dec 2020</span>
+                        </div>
+                        <div class="product-details-btn">
+                            <button href="javascript:void(0)" class="product-btn4"> Cancel</button>
+                            <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
+                            <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn3">
+                                <img src="assets/img/send-to-checker-white.svg" /> Send to Checker
+                            </button>
+                        </div>
+                    </div>
+                   <hr>
+
+<div class="b4l-content-txt-all">
+<div class="b4l-content-txt">
+<div class="loan-type-b4l">Demand Loan</div>
+<div class="loan-type-b4l">Bullet Repayment</div>
+<div class="loan-type-b4l">Digital Sanction</div>
+<div class="loan-type-b4l">Separate Loan Account</div>
+</div>
+
+<a href="#" class="edit-product">     <img src="assets/img/edit-icon.svg"  class="mr-2"/>Edit Product Configuration</a>
+
+</div>
+
+
+                </div>
+            </div>
+
+            <!--New B4l changes -->
+
             <!-- Matches, Eligibility, Charges Tabs -->
             <div id="b4l-content" class="b4l-height">
                 <div class="b4l-product-title">
@@ -472,6 +510,928 @@
                 </div>
             </div>
             <!-- Eligibility Calculator end-->
+
+            <div id="b4l-content" class="b4l-height">
+            
+            <div class="container">
+                <div class="row">
+
+       
+                <div class="matches-parameter1">
+                 <div class="matches-group-b4l">
+                    <p>1</p>
+<div class="matches-left">
+    <p>Bank’s Existing Customer Check Points</p>
+</div>
+                </div>
+<div class="matches-right">
+    <mat-checkbox class="example-margin">CIF</mat-checkbox>
+    <mat-checkbox class="example-margin" class="w-28">Account Number</mat-checkbox>
+    <a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+                </div>
+
+
+                <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>2</p>
+   <div class="matches-left">
+       <p>Maximum Financing Limit per Entity</p>
+       <span>Cap on Maximum Financing to be given to an entity in case of multiple invoice financing</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            INR
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Amount">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>3</p>
+   <div class="matches-left">
+       <p>Invoice Value</p>
+       <span>Check for each Invoice Value which should fall within a specific range</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group w-45">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            INR
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+      </div>
+
+<p class="mb-0">to</p>
+      <div class="input-group w-45">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            INR
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>4</p>
+   <div class="matches-left">
+       <p>Usance Period</p>
+       <span>Usance Period is the allowable credit period.</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            Days
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>5</p>
+   <div class="matches-left">
+       <p>Invoice Date Should Fall In Last "N" Days</p>
+       <span>To check the age of the Invoice.</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            Days
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>6</p>
+   <div class="matches-left">
+       <p>Constitution</p>
+       <span>Type of organization</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+ <p class="mb-0"><b>8 Constitutions Selected</b></p>
+  <a href="#" class="change-b4l">Change</a>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>7</p>
+   <div class="matches-left">
+       <p>Customer Concentration</p>
+       <span>Measure of how total revenue is distributed among your customer base</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            %
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>8</p>
+   <div class="matches-left">
+       <p>Geographical Market Focus</p>
+       <span>Select allowable states where entity is registered to</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+ <p class="mb-0"><b>4 States Selected</b></p>
+  <a href="#" class="change-b4l">Change</a>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>9</p>
+   <div class="matches-left">
+       <p>Maximum GST Turnover Limit</p>
+       <span>Check for Borrowers having a specified amount of GST Turnover</span>
+   </div>
+                   </div>
+                   <div class="fl-column">
+   <div class="matches-right">
+      
+    <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" class="mr-4">Check Till Date</mat-radio-button>
+        <mat-radio-button value="2">Check For Specific Time Period</mat-radio-button>
+      </mat-radio-group>
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+   <div class="matches-right w-75">
+   <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        Days
+      </div>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+  </div>
+</div>
+</div>
+                   </div>
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>10</p>
+   <div class="matches-left">
+       <p>Minimum Tenure for GST Data</p>
+       <span>Set minimum number of GST Data required</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            Months
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Month">
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>11</p>
+   <div class="matches-left">
+       <p>GSTIN Mismatch Check</p>
+       <span>Allow borrowers in case the number of GSTN of Borrower and number of GSTN linked with Account Aggregator are different</span>
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary1">Yes</button>
+        <button type="button" class="btn btn-secondary1">No</button>     
+      </div>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       <p>12</p>
+   <div class="matches-left">
+       <p>Credit Summation</p>
+       <span>Check for sum of credit of all accounts as a percentage of GST sales for available returns.</span>
+   </div>
+                   </div>
+                   <div class="fl-column w-70">
+   <div class="matches-right">
+      
+    <mat-checkbox class="example-margin" class="w-28">My Bank</mat-checkbox>
+    <mat-checkbox class="example-margin" class="w-28">Other Banks</mat-checkbox>
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+   <div class="matches-right w-75">
+   <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        Days
+      </div>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+  </div>
+</div>
+</div>
+                   </div>
+
+
+
+                   
+                   <div class="matches-parameter1">
+                       
+                    <div class="matches-group-b4l">
+                       <p>13</p>
+   <div class="matches-left">
+       <p>Bank Accounts Prioritization</p>
+       <span>Set priority of choosing Customer Account for disbursement of Loan</span>
+      
+   </div>
+                   </div>
+   <div class="matches-right">
+      
+ <p class="mb-0"><b>OD/CC Account > Current Account > Savings Account</b></p>
+  <a href="#" class="change-b4l">Change</a>
+
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+                   </div>
+
+
+
+                   <div class="matches-parameter1 btm-0">
+                    <div class="matches-group-b4l">
+                       <p>14</p>
+   <div class="matches-left">
+       <p>Number of Cheques Bounced</p>
+       <span>Check to cap number of cheques bounces in Customer Account (in numbers)</span>
+   </div>
+                   </div>
+                   <div class="fl-column">
+   <div class="matches-right">
+      
+    <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" class="mr-4">Check Till Date</mat-radio-button>
+        <mat-radio-button value="2">Check For Specific Time Period</mat-radio-button>
+      </mat-radio-group>
+       <a href="#">  <img src="assets/img/close-red.svg"/></a>
+   </div>
+
+
+   <div class="matches-right w-75">
+   <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        Months
+      </div>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Months">
+  </div>
+</div>
+</div>
+                   </div>
+
+
+                   <div class="matches-parameter1">
+                    <div class="matches-group-b4l">
+                       
+   <div class="matches-left">
+       <p class="blue-light-bck">Max. 130 Cheque Bounced in Last 20 months will be allowed</p>
+       
+   </div>
+                   </div>
+                  
+   <div class="matches-right">
+    <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+    </ng5-slider>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            No.
+          </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number">
+      </div>
+    
+  </div>
+
+
+</div>
+
+
+
+
+<div class="matches-parameter1 btm-0">
+    <div class="matches-group-b4l">
+       <p>15</p>
+<div class="matches-left">
+<p>Maximum % Allowed For Cheque Issue Bounced</p>
+<span>Check to cap number of cheques bounces in Customer Account (in percentage)</span>
+</div>
+   </div>
+   <div class="fl-column">
+<div class="matches-right">
+
+<mat-radio-group aria-label="Select an option">
+<mat-radio-button value="1" class="mr-4">Check Till Date</mat-radio-button>
+<mat-radio-button value="2">Check For Specific Time Period</mat-radio-button>
+</mat-radio-group>
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+
+
+</div>
+   </div>
+
+
+   <div class="matches-parameter1">
+    <div class="matches-group-b4l">
+       
+<div class="matches-left">
+<p class="blue-light-bck">Max. 70% of Cheque Issue Bounced will be allowed till date</p>
+
+</div>
+   </div>
+  
+<div class="matches-right">
+<ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">
+%
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>
+
+</div>
+
+
+</div>
+                 
+
+
+<div class="matches-parameter1  btm-0 ">
+                       
+    <div class="matches-group-b4l">
+       <p>16</p>
+<div class="matches-left">
+<p>Maximum permissible MSME Rank</p>
+<span>Please set permissible MSME rank for both bureau</span>
+
+</div>
+   </div>
+
+<div class="matches-right">
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <table class="table btm-0 pd-2 mar-5">
+  
+    <tbody>   
+      <tr>
+        <th scope="row">Bureau</th>
+        <td></td>
+        <td>Max Permissible Range</td>
+        </tr>
+
+        <tr>
+            <th scope="row">CIBIL</th>
+            <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+            </ng5-slider></td>
+            <td class="w-30"><input type="number" placeholder="Enter Number"></td>
+            </tr>
+
+
+            <tr>
+                <th scope="row">Experian</th>
+                <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                </ng5-slider></td>
+                <td class="w-30"><input type="number" placeholder="Enter Number"></td>
+                </tr>
+    </tbody>
+</table>
+
+
+
+
+
+<div class="matches-parameter1 btm-0">
+    <div class="matches-group-b4l">
+       <p>17</p>
+<div class="matches-left">
+<p>Minimum Bureau Score All Directors/ Partners/ Proprietors</p>
+<span>Please set minimum score required from both bureau</span>
+</div>
+   </div>
+
+<div class="matches-right">
+    <a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <div class="matches-parameter1 pd-1 mar-2 br-tp-1 ">
+    <div class="matches-group-b4l">
+       
+<div class="matches-left">
+<p>Bureau</p>
+</div>
+   </div>
+
+<div class="matches-right">
+    <p class="mb-0">Min Bureau Score</p>
+</div>
+   </div>
+
+
+   <div class="matches-parameter1 pd-1 mar-2 ">
+    <div class="matches-group-b4l">
+       
+<div class="matches-left">
+<p>CIBIL</p>
+</div>
+   </div>
+
+<div class="matches-right">
+    <div class="form-group input-number-cibil">
+        <div class="mandatory-input cibil-mr">
+          <div class="cibil-score-true btn-group btn-group-toggle">
+            <!--start box-active and number of cibil recored -->
+            <!-- <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+                <input type="checkbox" #cibilCheckbox [(ngModel)]="theCheckbox"
+                  formControlName="left" ngbButton> 5
+              </label>
+            </div>  -->
+
+            <div class="cibil-score-number">
+                 <span class="cibil-content-number">4</span>
+              </div>
+
+              <div class="cibil-score-number">
+                <span class="cibil-content-number">2</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">2</span>
+             </div>
+
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">1</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">2</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">1</span>
+             </div>
+                         <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              
+              <span class="cibil-content-number activate-input">4</span>
+            </div>
+            <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              <span class="cibil-content-number activate-input">3</span>
+            </div>
+         
+            <!--end box-active and number of cibil recored -->
+
+          </div>
+          <span class="mt-1 float-left d-flex al-center w-100">Lower is better <img src="assets/img/aerrow.svg" style="width: 2em;" /></span>
+        </div>
+      </div>
+</div>
+   </div>
+
+   
+   <div class="matches-parameter1 pd-1 mar-2  btm-0 ">
+    <div class="matches-group-b4l">
+       
+<div class="matches-left">
+<p>Experian</p>
+</div>
+   </div>
+
+<div class="matches-right">
+    <div class="form-group input-number-cibil">
+        <div class="mandatory-input cibil-mr">
+          <div class="cibil-score-true btn-group btn-group-toggle">
+            <!--start box-active and number of cibil recored -->
+            <!-- <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+                <input type="checkbox" #cibilCheckbox [(ngModel)]="theCheckbox"
+                  formControlName="left" ngbButton> 5
+              </label>
+            </div>  -->
+
+            <div class="cibil-score-number">
+                 <span class="cibil-content-number">0</span>
+              </div>
+
+              <div class="cibil-score-number">
+                <span class="cibil-content-number">1</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">2</span>
+             </div>
+
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">3</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">4</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">5</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">6</span>
+             </div>
+             <div class="cibil-score-number">
+                <span class="cibil-content-number">7</span>
+             </div>
+                         <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              
+              <span class="cibil-content-number activate-input">8</span>
+            </div>
+            <div class="cibil-score-number">
+              <div class="active-img">
+                <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+              </div>
+              <span class="cibil-content-number activate-input">9</span>
+            </div>
+         
+            <!--end box-active and number of cibil recored -->
+
+          </div>
+          <span class="mt-1 float-left d-flex w-100 al-center">Higher is better <img src="assets/img/aerrow.svg" style="width: 2em;" /></span>
+        </div>
+      </div>
+</div>
+   </div>
+
+
+   <div class="matches-parameter1">
+    <div class="matches-group-b4l">
+       
+<div class="matches-left">
+<p class="blue-light-bck">Max. 130 Cheque Bounced in Last 20 months will be allowed</p>
+
+</div>
+   </div>
+  
+<div class="matches-right">
+<ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">
+No.
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number">
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="matches-parameter1  btm-0 mr-2">
+                       
+    <div class="matches-group-b4l">
+       <p>18</p>
+<div class="matches-left">
+<p>Commercial Bureau - Maximum DPDs</p>
+<span>Please select account type you want to consider, other account types will not be checked</span>
+
+</div>
+   </div>
+
+<div class="matches-right">
+    <select id="selectbox1">
+        <option value="">Select an option&hellip;</option>
+        <option value="aye">Aye</option>
+        <option value="eh">Eh</option>
+        <option value="ooh">Ooh</option>
+        <option value="whoop">Whoop</option>
+    </select>
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <table class="table btm-0 pd-2 mar-5">
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Account Type</th>
+          <th>Bureau Type</th>
+          <th></th>
+          <th>Max DPDs Allowed</th>
+      </tr>
+  </thead>
+    <tbody>   
+      <tr>
+        <th scope="row">1</th>
+        <td>Working Capital Accounts</td>
+        <td>CIBIL</td>
+        <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+        </ng5-slider></td>
+        <td class="w-30"><div  class="input-group"><div  class="input-group-prepend"><div  class="input-group-text">
+            Days
+            </div></div><input  type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control"></div></td>
+        </tr>
+
+
+
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td>Experian</td>
+            <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+            </ng5-slider></td>
+            <td class="w-30"><div  class="input-group"><div  class="input-group-prepend"><div  class="input-group-text">
+                Days
+                </div></div><input  type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control"></div></td>
+            </tr>
+
+            <tr>
+                <th scope="row">2</th>
+                <td>Current Account</td>
+                <td>CIBIL</td>
+                <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                </ng5-slider></td>
+                <td class="w-30"><div  class="input-group"><div  class="input-group-prepend"><div  class="input-group-text">
+                    Days
+                    </div></div><input  type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control"></div></td>
+                </tr>
+        
+    
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td>Experian</td>
+                    <td class="w-30">  <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                    </ng5-slider></td>
+                    <td class="w-30"><div  class="input-group"><div  class="input-group-prepend"><div  class="input-group-text">
+                        Days
+                        </div></div><input  type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control"></div></td>
+                    </tr>
+       
+    </tbody>
+</table>
+             
+
+<div class="matches-parameter1">
+    <div class="matches-group-b4l">
+       <p>19</p>
+<div class="matches-left">
+<p>Other Bank Accounts Check</p>
+<span>Please select account type you want to consider, other account types will not be checked</span>
+</div>
+   </div>
+<div class="matches-right">
+<mat-checkbox class="example-margin">CC/OD</mat-checkbox>
+<mat-checkbox class="example-margin" class="w-28">Others</mat-checkbox>
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <div class="matches-parameter1  btm-0 mr-2">
+                       
+    <div class="matches-group-b4l">
+       <p>20</p>
+<div class="matches-left">
+<p>Primary Security Required</p>
+
+
+</div>
+   </div>
+  
+
+<div class="matches-right">
+    <select id="selectbox1">
+        <option value="">LOV Dropdown</option>
+        <option value="aye">Aye</option>
+        <option value="eh">Eh</option>
+        <option value="ooh">Ooh</option>
+        <option value="whoop">Whoop</option>
+    </select>
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <div class="matches-parameter1 js-flex-end">
+   
+<div class="matches-right">
+
+<ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group w-45">
+<div class="input-group-prepend">
+<div class="input-group-text">
+INR
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+
+<p class="mb-0">to</p>
+<div class="input-group w-45">
+<div class="input-group-prepend">
+<div class="input-group-text">
+INR
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <div class="matches-parameter1  btm-0 mr-2">
+                       
+    <div class="matches-group-b4l">
+       <p>21</p>
+<div class="matches-left">
+<p>Secondary Security Required</p>
+
+
+</div>
+   </div>
+  
+
+<div class="matches-right">
+    <select id="selectbox1">
+        <option value="">LOV Dropdown</option>
+        <option value="aye">Aye</option>
+        <option value="eh">Eh</option>
+        <option value="ooh">Ooh</option>
+        <option value="whoop">Whoop</option>
+    </select>
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+   <div class="matches-parameter1 js-flex-end">
+   
+<div class="matches-right">
+
+<ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+</ng5-slider>
+<div class="input-group w-45">
+<div class="input-group-prepend">
+<div class="input-group-text">
+INR
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+
+<p class="mb-0">to</p>
+<div class="input-group w-45">
+<div class="input-group-prepend">
+<div class="input-group-text">
+INR
+</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+
+<a href="#">  <img src="assets/img/close-red.svg"/></a>
+</div>
+   </div>
+
+
+
+            </div>
+
+            </div>
+        </div>
+          
+  
+
         </form>
     </div>
 </div>
+
+
+
