@@ -60,6 +60,7 @@ tr.hide-table-padding td {
     margin: 2em auto;
     min-height: 80vh;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .b4l-product-title {
@@ -532,8 +533,79 @@ position: relative;
     display: block;
     position: relative;
     padding: 16px;
-    width: 27.1em !important;
+    width: 27.1em;
     border-radius: 4px;
+}
+.w-100 {
+    width: 100% !important;
+}
+.pd-3 {
+    padding: 3rem !important;
+}
+.new-product-config-txt {
+    color: #000000 ;
+    font-size: 16px ;
+    font-weight: 500 ;
+    
+}
+.b4l-content-txt-all {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+.b4l-content-txt {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    .loan-type-b4l {
+        background: #EAF0F5;
+        padding: 1em 1.5em;
+        border-radius: 23px;
+        margin-left: -16px;
+        border: 3px solid #fff;
+    }
+}
+}
+.sidebar-main-title1 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    
+
+    .psb-submit {
+        background-color: #2D3079;
+        padding: 1.5em 3.5em;
+        color: #FFFFFF;
+        border-radius: 5px;
+        
+    }
+    .psb-bck {
+        background-color: #E8E8E8;
+        padding: 1.5em 3.5em;
+        color: #888888;
+        border-radius: 5px; 
+        margin-right: 0.5em; 
+    }
+}
+
+hr {
+    float: left;
+    width: 100% !important;
+    margin:1rem 0 !important;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.new-product-config-span {
+    color: #000000 ;
+    font-size: 16px ;
+    font-weight: 500 ;
+    opacity: 0.4;
+}
+.form-group select.form-control:not([size]):not([multiple]) {
+    height: calc(3.25rem + 2px);
+    margin: 1em 0;
 }
 
 .mat-select-panel {
@@ -569,7 +641,17 @@ position: relative;
     padding: 0 1em !important;
   
 }
+.mat-form-field-appearance-fill .mat-form-field-label {
+    top: 1.09375em;
+    margin-top: 0em !important;
+}
 
+.d-flex {
+    display: flex !important;
+}
+.al-center {
+    align-items: center !important;
+}
 .card-txt-left p.active{
     color: #2D3079 !important;
     opacity: 1 !important;
@@ -839,8 +921,111 @@ align-items: center;
 .back {
     background-color: #FCFCFC;
 }
+.ng5-slider .ng5-slider-pointer {    
+    background-color: #271E79 !important;
+   
+}
 
+.ng5-slider .ng5-slider-pointer:after {
+    content: "";
+    width: 12px !important;
+    height: 12px !important;
+    position: absolute;
+    top: 4px !important;
+    left: 4px !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+}
 
+.cibil-score-number .cibil-content-number {
+    float: left;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ced4da;
+    display: flex;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+}
+.cibil-score-number .activate-input {
+    border: 2px solid #2737AF;
+}
+
+.cibil-score-number {
+    float: left;
+    width: 100%;
+    margin: 0.5rem;
+}
+
+.cibil-score-number:first-of-type {
+    margin-left: 0;
+}
+.mandatory-input {
+    float: left;
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+    justify-content: flex-end;
+}
+.input-number-cibil {
+    float: left;
+ 
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+}
+.cibil-score-number .active-img {
+    position: absolute;
+    float: right;
+    margin-top: -0.5rem;
+    z-index: 9;
+    border: 3px solid #fff;
+    background: #ffffff;
+    border-radius: 78px;
+    display: flex;
+    align-items: center;
+    margin-left: 6%;
+}
+.cibil-mr {
+    margin-right: 3rem;
+    flex-direction: column;
+}
+.cibil-score-true {
+    display: flex;
+}
+.btn-secondary1 {
+    color: #2D3079;
+    background-color: #fff;
+    border-color: #2D3079;
+    padding: 0.6em 2em;
+    font-weight: bold;
+}
+
+.btn-secondary1:active  {
+    background-color: #2D3079;
+    color: #fff;
+}
+.btn-secondary1:focus  {
+    background-color: #2D3079;
+    color: #fff;
+}
+
+.ng5-slider .ng5-slider-pointer {
+    cursor: pointer;
+    width: 20px !important;
+    height: 20px !important;
+    top: -9px !important;
+    outline: none !important;
+    z-index: 3;
+    border-radius: 50% !important;
+}
+.ng5-slider .ng5-slider-selection {
+    background-color: #271E79 !important;
+}
+.ng5-slider.animate .ng5-slider-pointer:focus {
+    border: none !important;
+}
 
 .b4l-product-list-1 .b4l-product-list-right-1 p {
 text-align: right;
@@ -902,7 +1087,7 @@ line-height: 36px;
 
         @media (min-width:1200px) {
             .container {
-              max-width: 1200px !important;
+              max-width: 1560px !important;
             }
           }
           

@@ -34,6 +34,8 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
 import { ProductListComponent } from './component/products/product-list/product-list.component';
+import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 @NgModule({
@@ -60,6 +62,7 @@ import { ProductListComponent } from './component/products/product-list/product-
     DeleteProductPopupComponent,
     LspBridgeMatrixComponent,
     ProductListComponent,
+    NewProductConfigurationComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -69,6 +72,7 @@ import { ProductListComponent } from './component/products/product-list/product-
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    Ng5SliderModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

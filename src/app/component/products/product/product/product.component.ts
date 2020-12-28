@@ -11,14 +11,47 @@ import { AccountPriorityPopupComponent } from '../account-priority-popup/account
 import { AddParameterPopupComponent } from '../add-parameter-popup/add-parameter-popup.component';
 import { ImportParameterPopupComponent } from '../import-parameter-popup/import-parameter-popup.component';
 import _ from 'lodash';
+import { Options } from 'ng5-slider';
 
 // tslint:disable: max-line-length
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
+
+
+
 export class ProductComponent implements OnInit, AfterViewInit {
+
+// @kinjal added
+ foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
+
+  value: number = 100;
+  highValue: number = 60;
+  maxValue: 100;
+  options: Options = {
+    floor: 0,
+    ceil: 100,
+  }
+
+  marked = false;
+  theCheckbox = false;
+
+  toggleVisibility(e) {
+    this.marked = e.target.checked;
+  }
+// @kinjal added end
   constructor(private matDialog: MatDialog, private lenderService: LenderService, public commonService: CommonService, private route: ActivatedRoute, private router: Router, public global: Globals, private fb: FormBuilder) { }
   // convenience getter for easy access to form fields
   get f() { return this.productForm.controls; } // return product form controls

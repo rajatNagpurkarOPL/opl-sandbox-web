@@ -4,7 +4,197 @@
     justify-content: flex-start;
     margin: 2em 0 0;
     }
-    
+.change-b4l {
+text-decoration: underline;
+color: #271E79;
+font-size: 16px;
+font-weight: 500;
+}
+input[type=text] {
+    width: 100%;
+    border: 1px solid #ddd !important;
+    background: transparent;
+    padding: 12px;
+    border-radius: 3px;
+}
+
+.mar-2 {
+    margin: 0 5em;
+}
+input[type=number] {
+    width: 100%;
+    border: 1px solid #ddd !important;
+    background: transparent;
+    padding: 12px;
+    border-radius: 3px;
+}
+.w-30 {
+    width: 30% !important;
+}
+.w-70 {
+    width: 70% !important;
+}
+.btm-0 {
+    border-bottom: 0 !important;
+}
+.blue-light-bck {
+    background-color: #EBF1FF;
+    padding: 1em;
+}
+ .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 0;
+}
+.table td {
+    padding: 1.5em 2em !important;
+    vertical-align: top;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 0;
+    font-weight: bold;
+}
+
+.table {
+.input-group-prepend {
+    display: flex;
+    position: absolute;
+    right: 1px;
+}
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.8em 1em;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    border-radius: 0.25rem;
+}
+}
+ select {
+    text-transform: none;
+    padding: 1em;
+    border-radius: 5px;
+    width: 50%;
+    border: 1px solid #ddd;
+}
+.mar-5 {
+    margin: 0 5rem;
+}
+.js-flex-end {
+    justify-content: flex-end !important;
+}
+.fl-column {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.w-75 {
+    width: 75%;
+}
+    .edit-product {
+        color: #2D3079;
+        font-size: 16px;
+        margin-bottom: 0;
+        font-weight: 500; 
+        text-decoration: underline;  
+    }
+    .matches-parameter1 {
+        .w-45 {
+            width: 45% !important;
+        }
+        .input-group-append, .input-group-prepend {
+            display: flex;
+            position: absolute;
+            right: 1px;
+        }
+        .input-group {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            width: 100%;
+            margin: 0 1em;
+        }
+        .input-group-text {
+            display: flex;
+            align-items: center;
+            padding: 0.8em 1em;
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            text-align: center;
+            white-space: nowrap;
+            background: none;
+            border: none;
+            border-radius: 0.25rem;
+        }
+ 
+}
+    .matches-parameter1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 2em;
+        border-bottom: 1px solid #ddd;
+
+        .matches-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 50%;
+            .mat-checkbox {
+                width: 11%;
+            }
+            .w-28 {
+                width: 22% !important;
+            }
+
+            a {
+                margin-left: 1em;
+            }
+        }
+        
+        .matches-group-b4l {
+            display: flex;
+            align-items: flex-start;
+width: 50%;
+
+            p {
+                color: #000000;
+                font-size: 16px;
+                margin-bottom: 0.5rem;
+                font-weight: 500; 
+                margin-right: 0.5em;
+            }
+            span {
+                color: #888888;
+                font-size: 16px;             
+                font-weight: 500; 
+              
+            }
+        }
+    }
+
+    .br-tp-1 {
+        border-top: 1px solid #ddd;
+    }
+.pd-1 {
+padding: 1em 2em !important;
+}
+
     .product-back-button  p {
     color: #000000;
     font-size: 16px;
@@ -74,6 +264,17 @@
         font-weight: 500;
         padding: 1em;
         background: #2D3079;
+    }
+
+    .product-btn4 {
+        border: 2px solid #E8E8E8 !important;
+        border-radius: 8px;
+        opacity: 1;
+        color: #888888 !important;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 1em;
+        background:#E8E8E8 !important;
     }
     
     .product-name-details input {
