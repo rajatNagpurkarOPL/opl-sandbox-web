@@ -1,3 +1,59 @@
+.charges-roi {
+    padding: 2em 0;
+    select {
+        width: 100%;
+        color: #000;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 1em;
+    }
+
+
+    label {
+        color: #888888;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0.2em;
+    }
+}
+.blue {
+    color: #271E79;
+} 
+.mar-6 {
+    margin: 2em 5em;
+}
+.pd-new {
+    padding: 0.65rem 0.75rem !important;
+}
+ .input-group-prepend {
+    display: flex;
+    position: absolute;
+    right: 1px;
+}
+.warning-gst {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1em 2em;
+    background-color: #F1F1F1;
+    border-radius: 8px;
+    margin: 0 2em;
+img {
+    width: 4em;
+    margin-right: 0.3em;
+}
+p {
+    color: #888888;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;  
+}
+
+span {
+    color: #000000;
+}
+}
 .product-back-button {
     display: flex;
     align-items: center;
