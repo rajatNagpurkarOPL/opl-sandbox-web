@@ -11,4 +11,5 @@
     <div *ngIf="control.errors.email">{{control.errors.email}}</div>
     <div *ngIf="control.errors.mobile">{{control.errors.mobile}}</div>
     <div *ngIf="control.errors.passwordMismatch"> Password is not matched. </div>
+    <div *ngIf="control.errors.incorrect"> {{control.errors.errorMsg}}</div>
 </div>

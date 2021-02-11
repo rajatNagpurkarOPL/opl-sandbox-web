@@ -26,7 +26,10 @@ export class ProductViewComponent implements OnInit {
   productId;
   showStatus: any = {isShowStatus : false};
   reqType;
-  constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService, public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { }
+  isMultipleControl : any = [];
+  constructor(private matDialog: MatDialog, public route: ActivatedRoute, public lenderService: LenderService, public commonService: CommonService, public global: Globals, private location: Location, public router: Router) { 
+    this.isMultipleControl = Constant.IS_MULTILECONTROLS;
+  }
 
   // get product info by product id
   getProductDetails() {
@@ -222,43 +225,102 @@ export class ProductViewComponent implements OnInit {
    * Parse answer from json
    */
   setAnswers(element) {
-    // Input
+    if(this.isMultipleControl.includes(element.code)){
+      console.log("element :: " ,element);
+      switch(element.code){
+        case "GEO_MARKET_FOCUS":
+          let strList :any = [];
+          element.answer.geoSelectedList.filter(fil=>{strList.push(fil.value)});
+          element.answerValue = strList;
+          break;
+        case "GST_TURNOVER_LIMIT":
+          let str = element.lovs.find(l => l.id === element.answer.lovAns).value;
+          element.answerValue = element.answer.lovAns == 2 ?  str +  ' , Min Turnover : ' + element.answer.value : str;
+          break;
+        case "CREDIT_SUMMATION": 
+          let strCred :any = [];
+          element.answer.lovAns.filter(fil=>{strCred.push(fil.value)});
+          element.answerValue =  strCred + ' , ' + ' Credit Summation Range Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+          break;
+        case "BANK_ACC_PRIO":
+          element.answerValue = element.answer.prioSetStr;
+          break;
+        case "NO_OF_CHEQUES_BOUNCED_N_MONTHS": case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS": case "MIN_CREDIT_TRAN_ACC_PER_MONTH": case "MIN_DEBIT_TRAN_ACC_PER_MONTH": case "MIN_OVERALL_TRAN_ACC_PER_MONTH": //case "MAX_CASH_TRAN_ALL":
+          let strBank = element.lovs.find(l => l.id === element.answer.lovAns).value;
+          element.answerValue = element.answer.lovAns == 2 ? strBank + ' , Months : ' + element.answer.months + ', Value : ' + element.answer.value : strBank;
+          break;
+        case "MAX_CASH_TRAN_ALL":
+          let strLovSelected : any = [];
+          element.lovs.find(fil=>{strLovSelected.push(fil.value)});
+          element.answerValue = strLovSelected + ' Max Amount : ' + element.answer.maxAmount + ' Min Amount : ' + element.answer.minAmount + ' Max Amount Per: ' + element.answer.maxAmtPer + ' Min Amount Per: ' + element.answer.minAmtPer + ' Max Count : ' + element.answer.maxCount + ' Min Count : ' + element.answer.minCount + ' Max Count Per : ' + element.answer.maxCountPer + ' Min Count Per: ' + element.answer.minCountPer;
+          break;
+        case "MAX_PERMISSIBLE_MSME_RANK":
+          element.answerValue = ' Cibil Rank : ' + (element.answer.cibilRank || '-') + ' Experian Rank : ' + (element.answer.experianRank || '-');
+          break;
+        case "MIN_BUREAU_SCORE_ALL_DIR_PAR" :
+          element.answerValue = 'Cibil : ' + (element.answer.strCibil || '-') + ' Experian : ' + (element.answer.strExp || '-');
+          break;
+        case "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR": 
+          element.answerValue = 'Cibil DPDs : ' + (element.answer.cibilDpd || '-') + ' Experian DPDs: ' + (element.answer.experianDpd || '-');
+          break;
+        case "COMMERCIAL_DPD_MAX":
+          let strLovCom : any = [];
+          element.answer.lovAns.filter(fil=>{strLovCom.push(fil.value)});
+          element.answerValue = ' Selected Types : ' + (strLovCom.length > 0 ? strLovCom : '-') + ' Working Capital Account DPDs (Cibil) : ' + (element.answer.wcaCibilDpd || '-') + ' Working Capital Account DPDs (Experian) : ' + (element.answer.wcaExperianDpd || '-') + ' Current Account DPDs (Cibil) : ' + (element.answer.caCibilDpd || '-') + ' Current Account DPDs (Experian) : ' + (element.answer.caExperianDpd || '-') ;
+          break;
+        case "SECURITY":
+          element.answerValue = "Collateral  Security Range Min : " + element.answer.collateralMin + " Max : " + element.answer.collateralMax + " Primary Security Range Min : " + element.answer.primaryMin + " Max : " + element.answer.primaryMax;
+          break;
+         
+      }
+    }else{
+      // Input
     if (element.paramType.id === Constant.MASTER_TYPE.INPUT.id) {
-      if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) { // Input text
-        element.answerValue = element.answer;
+        if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) { // Input text
+          element.answerValue = element.answer;
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) { // Radio
+          element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) { // Dropdown
+          const ans = element.lovs.find(l => l.id === element.answer);
+          element.answerValue = ans ? ans.value : '-';
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) { // Checkbox
+          element.answerValue = element.answer.map(l => l.value).join(', ');
+        }
       }
-      if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) { // Radio
-        element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+      // Range
+      if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+        if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
+          element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+        }
+        if(element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+          element.answerValue = 'Min : ' + element.answer.min;
+        }
       }
-      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) { // Dropdown
-        const ans = element.lovs.find(l => l.id === element.answer);
-        element.answerValue = ans ? ans.value : '-';
+      // Dropdown
+      if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+        if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
+          element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+        }
       }
-      if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) { // Checkbox
-        element.answerValue = element.answer.map(l => l.value).join(', ');
+      // Yes-No
+      if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+        if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+          element.answerValue = element.answer ? 'Yes' : 'No';
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) {
+          element.answerValue = element.answer ? 'Yes' : 'No';
+        }
       }
     }
-    // Range
-    if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
-      if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
-        element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
-      }
-    }
-    // Dropdown
-    if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
-      if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) {
-        element.answerValue = element.lovs.find(l => l.id === element.answer).value;
-      }
-    }
-    // Yes-No
-    if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
-      if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
-        element.answerValue = element.answer ? 'Yes' : 'No';
-      }
-      if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) {
-        element.answerValue = element.answer ? 'Yes' : 'No';
-      }
-    }
+  }
+
+  getStrValueFromMaster(item){
+    console.log("item ::::: " , item);
+    console.log("value is :: " , item.lovs.find(l => l.id === item.answer.lovAns).value);
+    item.lovs.find(l => l.id === item.answer.lovAns).value;
   }
 
   getAccountOrderStr(){

@@ -1,0 +1,21 @@
+<div id="b4l-pop-up">
+  <div class="import-matches">
+      <div class="import-matches-left">
+          <p>Select States</p>  <!-- <span>Change order by dragging up and down or use shift arrows in right</span> -->
+      </div>
+      <mat-checkbox type="checkbox" [(ngModel)]="isSelectAll" (click)="selectAll(!isSelectAll)">Select All</mat-checkbox>
+  </div>
+
+   <table class="table">
+      <tbody>
+        <tr class="pop-up-cl" *ngFor="let item of stateList; index as i">
+          <td><mat-checkbox type="checkbox" [(ngModel)]="item.isSelect" (ngModelChange)="selectState()">{{i + 1}} .  {{item.value}}</mat-checkbox></td>
+        </tr>
+      </tbody>
+    </table> 
+    
+  <div class="btn-pop-up">
+      <a href="javascript:void(0)" class="product-btn4" (click)="close()">Cancel</a>
+      <a href="javascript:void(0)" class="product-btn3" (click)="save()" >Save</a>
+  </div>
+</div>

@@ -36,6 +36,16 @@ import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-brid
 import { ProductListComponent } from './component/products/product-list/product-list.component';
 import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { ButtonComponent } from './component/controls/button/button.component';
+import { CheckboxComponent } from './component/controls/checkbox/checkbox.component';
+import { DateComponent } from './component/controls/date/date.component';
+import { DynamicFieldDirective } from './component/controls/dynamic-field/dynamic-field.directive';
+import { DynamicFormComponent } from './component/controls/dynamic-form/dynamic-form.component';
+import { InputComponent } from './component/controls/input/input.component';
+import { RadiobuttonComponent } from './component/controls/radiobutton/radiobutton.component';
+import { SelectComponent } from './component/controls/select/select.component';
+import { ProductCreateComponent } from './component/product-create/product-create.component';
+import { GeographicalAreasPopupComponent } from './popup/geographical-areas-popup/geographical-areas-popup.component';
 
 
 @NgModule({
@@ -63,6 +73,16 @@ import { Ng5SliderModule } from 'ng5-slider';
     LspBridgeMatrixComponent,
     ProductListComponent,
     NewProductConfigurationComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    DateComponent,
+    DynamicFieldDirective,
+    DynamicFormComponent,
+    InputComponent,
+    RadiobuttonComponent,
+    SelectComponent,
+    ProductCreateComponent,
+    GeographicalAreasPopupComponent,
   ],
   imports: [
     ReactiveFormsModule,

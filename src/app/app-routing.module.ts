@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-bridge-matrix.component';
 import { ProductListComponent } from './component/products/product-list/product-list.component';
 import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
+import { ProductCreateComponent } from './component/product-create/product-create.component';
 
 const routes: Routes = [
   
@@ -33,6 +34,8 @@ const routes: Routes = [
     { path: 'product-view/:status/:id', component: ProductViewComponent },
     { path: 'settings', component: SettingsComponent},
     { path: 'New-Product-Configuration', component: NewProductConfigurationComponent},
+    { path: 'create-product', component: ProductCreateComponent},
+    { path: 'create-product/:id', component: ProductCreateComponent },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },

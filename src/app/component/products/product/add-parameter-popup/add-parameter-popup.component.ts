@@ -49,6 +49,12 @@ export class AddParameterPopupComponent implements OnInit {
   // Add parameters to the products
   save() {
     this.selectedParameterList = this.parameterList.filter(p => p.isSelected);
+    this.selectedParameterList.forEach(element => {
+      if(element.paramType.id != null && element.paramType.id == Constant.MASTER_TYPE.RANGE.id){
+        element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+      }
+    });
+    console.log("this.selectedParameterList :: " , this.selectedParameterList);
     if (!this.selectedParameterList || this.selectedParameterList.length === 0){
         this.commonService.warningSnackBar('Please select parameters for continue.');
         return false;

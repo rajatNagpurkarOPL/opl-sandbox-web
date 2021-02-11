@@ -10222,3 +10222,9 @@ a.text-dark:hover {
     margin-bottom: 1.5rem !important;
   }
 }
+.btn-group-toggle>.btn-group>.cibil-score-number>.btn input[type=checkbox],
+.btn-group-toggle>.cibil-score-number>.btn input[type=checkbox] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}

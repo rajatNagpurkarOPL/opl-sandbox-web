@@ -1,3 +1,7 @@
+.opl {
+    position: absolute;
+    right: 180px;
+}
 .charges-roi {
     padding: 2em 0;
     select {
@@ -155,7 +159,7 @@ input[type=number] {
 }
 
 .w-75 {
-    width: 75%;
+    width: 40% !important;
 }
     .edit-product {
         color: #2D3079;
@@ -200,17 +204,18 @@ input[type=number] {
 }
     .matches-parameter1 {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         width: 100%;
         padding: 2em;
         border-bottom: 1px solid #ddd;
+       
 
         .matches-right {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            width: 50%;
+            width: 40%;
             .mat-checkbox {
                 width: 11%;
             }
@@ -616,4 +621,8 @@ padding: 1em 2em !important;
     
     html.cdk-global-scrollblock body {
         position: fixed;
+    }
+
+    .fl-Col{
+        flex-direction: column;
     }

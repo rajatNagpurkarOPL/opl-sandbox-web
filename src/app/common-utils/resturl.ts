@@ -1,5 +1,5 @@
 const locationUrl = window.location.protocol + '//' + window.location.host;
-// const locationUrl = 'https://qa-sidbi.capitaworld.com'; // for QA(If you are in Local)
+// const locationUrl = 'https://qa-opl.instantmseloans.in'; // for QA(If you are in Local)
 
 /**
  *  This is constants of REST URL which can be hit on backend server
@@ -25,5 +25,10 @@ export const RestURL = {
     PRODUCT_DETAILS: '/parameter/productDetails',
     AUDIT_PRODUCT_DETAILS: '/parameter/auditProductDetails',
     PRODUCT_COUNTS: '/parameter/productsCounts',
-    STATUS_AUDITS: '/parameter/getStatusAudits/'
+    STATUS_AUDITS: '/parameter/getStatusAudits/',
+    GET_MASTER_DATA: '/master/get-master-data',
+    GET_MASTER_BASE_BY_TYPE : '/master/get-page-data',
+    GET_STATES : '/master/get-states',
+    GET_MASTERS_BY_FIELD_CODES : '/master/get-master',
+    GET_MATRIX_RANGE : '/master/get-range',
 };

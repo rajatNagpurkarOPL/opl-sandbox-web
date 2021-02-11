@@ -1,0 +1,9 @@
+<div class="d-flex fl-column js-start al-start mt-4 mb-4 mr-2">
+    <mat-label class="mb-2"><b>Product Name</b></mat-label>     
+        <mat-form-field class="demo-full-width" [formGroup]="group">
+            <input matInput [formControlName]="field.code" [placeholder]="field.label" [type]="field.inputType">
+            <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+                <mat-error *ngIf="group.get(field.code).hasError(validation.validationName)">{{validation.errorMsg}}</mat-error>
+            </ng-container>
+        </mat-form-field>
+    </div>

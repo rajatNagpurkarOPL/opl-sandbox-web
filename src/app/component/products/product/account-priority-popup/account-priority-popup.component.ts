@@ -12,6 +12,7 @@ export class AccountPriorityPopupComponent implements OnInit {
 
   accountOrder = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<AccountPriorityPopupComponent>) {
+    console.log("popData" ,data)
     if (this.data.accountOrder.length === 0){
       this.data.accountOrder = [
         {accOrder : 1, account : 'Cash Credit Account'},
@@ -21,7 +22,7 @@ export class AccountPriorityPopupComponent implements OnInit {
         {accOrder : 5, account : 'Other Account'}
       ];
     }
-    this.accountOrder = _.orderBy(this.data.accountOrder, ['accOrder']).map(a => a.account);
+    this.accountOrder = _.orderBy(this.data.accountOrder, ['id']).map(a => a.value);
     console.log(this.accountOrder);
 
 

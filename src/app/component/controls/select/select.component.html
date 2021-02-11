@@ -1,0 +1,12 @@
+<div class="d-flex fl-column js-start al-start mt-4 mb-4 mr-2">
+   <mat-label class="mb-2"><b>{{field.label}}</b></mat-label>     
+        <mat-form-field appearance="legacy" [formGroup]="group">
+               
+            <mat-select [placeholder]="field.label" [formControlName]="field.code">
+                <mat-option *ngFor="let item of field.values" [value]="item.id">{{item.value}}</mat-option>
+            </mat-select>
+            <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+                <mat-error *ngIf="group.get(field.code).hasError(validation.validationName)">{{validation.errorMsg}}</mat-error>
+            </ng-container>
+        </mat-form-field>
+    </div>

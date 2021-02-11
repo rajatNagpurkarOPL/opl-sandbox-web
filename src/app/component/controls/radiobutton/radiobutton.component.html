@@ -1,0 +1,6 @@
+<div class="demo-full-width margin-top" [formGroup]="group">
+    <label class="radio-label-padding">{{field.label}}:</label>
+    <mat-radio-group [formControlName]="field.code">
+        <mat-radio-button *ngFor="let item of field.values" [value]="item.id">{{item.value}}</mat-radio-button>
+    </mat-radio-group>
+</div>

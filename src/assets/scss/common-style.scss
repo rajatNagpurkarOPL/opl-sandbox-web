@@ -1,3 +1,44 @@
+.mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    min-width: 444px !important;
+}
+
+
+@media(max-width: 600px){
+    .mat-form-field-infix {
+        display: block;
+        position: relative;
+        flex: auto;
+        min-width: 0;
+        min-width: 300px !important;
+    }
+}
+
+
+@media(max-width: 450px){
+    .mat-form-field-infix {
+        display: block;
+        position: relative;
+        flex: auto;
+        min-width: 0;
+        min-width: 250px !important;
+    }
+}
+
+
+.js-start {
+    justify-content: flex-start;
+}
+.al-start {
+    align-items:  flex-start;
+}
+.fl-column {
+    flex-direction: column;
+}
+
 tr.hide-table-padding td {
     padding: 1em;   
   }
@@ -288,11 +329,15 @@ td,th {
       }
 
       &:nth-child(4) {
-        width: 52%;
+        width: 15%;
+      }
+
+      &:nth-child(5) {
+        width: 37%;
       }
 
 
-      &:nth-child(5) {
+      &:nth-child(6) {
         width: 5%;
       }
 

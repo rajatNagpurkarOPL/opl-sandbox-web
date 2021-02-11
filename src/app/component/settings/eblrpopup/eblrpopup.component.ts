@@ -32,7 +32,8 @@ export class EblrpopupComponent implements OnInit {
 
   // save eblr
   save() {
-
+    console.log("eblr form :: " , this.eblr);
+    console.log("form  : : " , this.registerForm);
     if (this.registerForm.invalid) {
       this.commonService.warningSnackBar('Required fields are missing');
       return false;

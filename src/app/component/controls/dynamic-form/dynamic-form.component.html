@@ -1,0 +1,9 @@
+<form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)" autocomplete="off" novalidate>
+    <ng-container *ngFor="let item of fields">
+        <ng-container *ngFor="let field of item.fields;" appDynamicField [field]="field" [group]="form">
+        </ng-container>
+        <hr>
+    </ng-container>
+    <!-- <ng-container *ngFor="let field of item.fields;" appDynamicField [field]="field" [group]="form">
+    </ng-container> -->
+</form>

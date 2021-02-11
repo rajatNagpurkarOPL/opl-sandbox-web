@@ -77,4 +77,19 @@ export class LenderService {
   getProductStatusAudit(id): Observable<any> {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.STATUS_AUDITS + id, false);
   }
+  getMasterData(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GET_MASTER_DATA,data);
+  }
+  getMasterBase(data): Observable<any>{
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_MASTER_BASE_BY_TYPE + '/' + data, false);
+  }
+  getStateList(data): Observable<any>{
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_STATES + '/' + data , false);
+  }
+  getMastersDataByFieldCodes(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GET_MASTERS_BY_FIELD_CODES, data);
+  }
+  getScalingRangeMastersData(): Observable<any>{
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_MATRIX_RANGE, false);
+  }
 }
