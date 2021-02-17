@@ -8,12 +8,25 @@
 
         <div id="b4l-content" class="b4l-height">
             <div class="product-name">
-                <p class="product-note-view">{{product.name}}</p>
+                <div class="d-flex al-center js-between w-100 border-btm mb-3 pb-4">
+                <p class="product-note-view border-btm-none">{{product.name}}</p>
+                <p *ngIf="showStatus.isShowStatus" class="d-flex al-center">
+                    <span _ngcontent-ruf-c76=""  [ngClass]="(showStatus.status == 'Active' ? 'dot' : 'dot1')"  >• </span> 
+                    {{showStatus.status}} Product
+                </p>
+            </div>
+
+
                 <div class="product-name-details">
-                    <p *ngIf="showStatus.isShowStatus">
-                        <span _ngcontent-ruf-c76=""  [ngClass]="(showStatus.status == 'Active' ? 'dot' : 'dot1')"  >• </span> 
-                        {{showStatus.status}} Product
-                    </p>
+                    <div class="b4l-content-txt-all">
+                    <div class="b4l-content-txt">
+                     
+                       <div class="loan-type-b4l">Demand Loan</div>
+                        <div class="loan-type-b4l">Bullet Repayment</div>
+                        <div class="loan-type-b4l">Digital Sanction</div>
+                        <div class="loan-type-b4l">Separate Loan Account</div> 
+                        </div>
+                    </div>
                     <p *ngIf="reqType">Request for {{reqType}}</p>
 
                     <div class="product-details-btn">
@@ -48,8 +61,8 @@
 
                         <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
                         <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
-                        <a href="javaScript:void(0);" *ngIf="product.isEdit" [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg" /> Edit</a>
-                        <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" /> {{product.actInact.reqType.buttonName}}</a>
+                        <a href="javaScript:void(0);" *ngIf="product.isEdit" [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg"  class="mr-1"/> Edit</a>
+                        <a href="javaScript:void(0);" *ngIf="product.actInact" (click)="confirmationPopUp(product.actInact)" class="product-btn1"><img src="assets/img/lock-blue.svg" class="mr-1"/> {{product.actInact.reqType.buttonName}}</a>
                     </div>
 
                 </div>
