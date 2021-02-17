@@ -1,10 +1,10 @@
-.mat-form-field-infix {
-    display: block;
-    position: relative;
-    flex: auto;
-    min-width: 0;
-    min-width: 444px !important;
-}
+// .mat-form-field-infix {
+//     display: block;
+//     position: relative;
+//     flex: auto;
+//     min-width: 0;
+//     min-width: 444px !important;
+// }
 
 
 @media(max-width: 600px){
@@ -788,6 +788,43 @@ hr {
     min-width: 100%;
     border-radius: 4px;
     margin-top: 4em !important;
+}
+.eblr-approval-by-checker-green {
+    border: 1px solid #0FAC37;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    background-color: #EFFFF3;
+
+img {
+    width: 1em;
+    margin-right: 0.5em;
+}
+
+.pop-up-radio-group {
+
+.mat-form-field-infix {
+       min-width: 100px !important;
+}
+}
+.cl-green {
+    color: #0FAC37;
+}
+    p {
+        color: #343A40;
+        font-weight: bold;
+        font-size: 14px;
+            }
+            span {
+                color: #898F95;
+                font-weight: bold;
+                font-size: 14px;
+                margin: 0 1em;
+                    }
 }
 .fix-select {
 

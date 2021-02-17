@@ -63,10 +63,11 @@ input[type=text] {
 .popup-input {
     display: flex;
     align-items: center;
+    width: 70% !important;
 }
 .pop-up-radio-group {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     justify-content: space-between;
 }
@@ -144,3 +145,8 @@ input[type=text] {
 }
 
 
+.person-text-width {
+    input {
+        width: 40px;
+    }
+}

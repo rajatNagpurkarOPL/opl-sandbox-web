@@ -33,11 +33,11 @@
       </div>
       <mat-form-field>
         <input [min]="minDate" matInput [matDatepicker]="picker" tabindex="2" [(ngModel)]="eblr.effectiveFrom" formControlName="date" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="picker"  class="w-20"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
       </mat-form-field>
 
-      <div class="buttin-b4l-opacity opl2">
+      <div class="buttin-b4l-opacity opl2 w-20  ml-3">
         <div class="text-with-presnt person-text-width">
           <input placeholder="Hour" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.hours" tabindex="3" formControlName="hours" max="12" required="" maxlength="2">
           <!-- <div *ngIf="f.submitted && f.form.controls.hours.status == 'INVALID'" > -->
