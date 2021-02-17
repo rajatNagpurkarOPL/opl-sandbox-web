@@ -89,6 +89,14 @@
                                 <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('scalingMaster', roiRef).invalid && submitted">•</span> </p> 
                             </a>
                         </li>
+
+                        <li>
+                          <a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges', roiRef)" href="javascript:void(0)"> <p>Terms & Conditions
+                              <span class="dot" style="color: red; font-size: large;" *ngIf="productForm.get('scalingMaster', roiRef).invalid && submitted">•</span> </p> 
+                          </a>
+                      </li>
+
+
                 </ul>
                     <a *ngIf="tab.matches" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
                     class="product-btn1"><img src="assets/img/import.svg" /> Import Matches Parameter</a>
