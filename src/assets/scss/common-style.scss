@@ -6,6 +6,147 @@
 //     min-width: 444px !important;
 // }
 
+// Version History Scss
+
+.step {
+    position: relative;
+    min-height: 1em;
+    color: gray;
+    margin: 3em;
+}
+.pd-31 {
+    padding: 3em 1em !important;
+}
+  .step + .step {
+    margin-top: 1.5em
+  }
+  .step > div:first-child {
+    position: static;
+    height: 0;
+  }
+  .step > div:not(:first-child) {
+    margin-left: 1.5em;
+    padding-left: 1em;
+  }
+  .step.step-active {
+    color: #4285f4
+  }
+  .step.step-active .circle {
+    background-color: #4285f4;
+  }
+  
+  /* Circle */
+  .circle-blue {
+    background: #2D3079;
+    position: relative;
+    width: 2em;
+    height: 2em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 0 3px #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle-grey {
+    background: #E8E8E8; 
+    position: relative;
+    width: 2em;
+    height: 2em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 0 3px #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle-green {
+    background: #25BF25; 
+    position: relative;
+    width: 2em;
+    height: 2em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 0 3px #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+  
+  /* Vertical Line */
+  .circle-blue:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    top: 3px;
+    right: 50%;
+    bottom: 1px;
+    left: 45%;
+    height: 100%;
+    width: 3px;
+    transform: scale(1, 2);
+    transform-origin: 50% -100%;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+ 
+  }
+  .circle-green:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    top: 3px;
+    right: 50%;
+    bottom: 1px;
+    left: 45%;
+    height: 100%;
+    width: 3px;
+    transform: scale(1, 2);
+    transform-origin: 50% -100%;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+ 
+  }
+
+  .circle-grey:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    top: 3px;
+    right: 50%;
+    bottom: 1px;
+    left: 45%;
+    height: 100%;
+    width: 3px;
+    transform: scale(1, 2);
+    transform-origin: 50% -100%;
+    background-color: rgba(0, 0, 0, 0.25) !important;
+ 
+  }
+ 
+
+  /* Stepper Titles */
+  .title {
+    line-height: 1.5em;
+    font-weight: 500;
+    color: #000;
+    font-size: 16px;
+   span {
+       opacity: 0.4;
+       font-size: 14px;
+   }
+  }
+  .caption {
+    font-size: 0.8em;
+  }
 
 @media(max-width: 600px){
     .mat-form-field-infix {
