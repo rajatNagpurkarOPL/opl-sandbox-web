@@ -1,37 +1,28 @@
 <div class="container">
     <div class="row">
         <div id="b4l-content">
-
             <div class="sidebar">
                 <a href="javascript:void(0)" class="active"> EBLR Value</a>
                 <a href="javascript:void(0)"> MCLR Value</a>
                 <a href="javascript:void(0)">Account Settings</a>
-
             </div>
-
             <div class="main">
                 <div class="sidebar-main-title">
                     <p>EBLR Value</p>
-                    <a *ngIf="isShowAddEBLR" (click)="openDialog(null);"  href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR Value</a>
+                    <a *ngIf="isShowAddEBLR" (click)="openDialog(null);" href="javaScript:void(0);"><img src="assets/img/update.svg" />Update EBLR Value</a>
                 </div>
                 <!-- <a href="javaScript:void(0);" (click)="save()" ><img src="assets/img/update.svg" />save</a> -->
-
-<div class="eblr-approval-by-checker-green">
-<p class="w-100 mb-0 cl-green"><img src="assets/img/Up.svg"/>Approved by Checker</p>
-<div class="d-flex al-center w-100">
-    <p class="mb-0"><span>Scheduled to go live</span> 10 July 2020 06:30 PM</p>
-    <p class="mb-0"><span>Scheduled EBLR Value</span> 10.23%</p>
-</div>
-
-</div>
-
+                <div class="eblr-approval-by-checker-green" *ngIf="nexteblr != null">
+                    <p class="w-100 mb-0 cl-green"><img src="assets/img/Up.svg" />Approved by Checker</p>
+                    <div class="d-flex al-center w-100">
+                        <p class="mb-0"><span>Scheduled to go live</span>{{nexteblr.effectiveFrom | date:'dd MMM yyyy h:mma'}}</p>
+                        <p class="mb-0"><span>Scheduled EBLR Value</span>{{nexteblr.plr}}%</p>
+                    </div>
+                </div>
                 <div class="setting-text">
                     <div class="setting-text-data" *ngFor="let item of eblrList">
-                        <p> {{item.plr}}% <ng-container *ngIf="item.isCurrentEffective"> (Currently Active)
-                            </ng-container>
-                        </p>
-                        <span> From {{ item.effectiveFrom | date:'dd MMM yyyy' }}
-                            {{ item.effectiveFrom | date:'shortTime' }} </span>
+                        <p> {{item.plr}}% <ng-container *ngIf="item.isCurrentEffective"> (Currently Active)</ng-container></p>
+                        <span> From {{ item.effectiveFrom | date:'dd MMM yyyy' }} {{ item.effectiveFrom | date:'shortTime' }} </span>
                         <button mat-button (click)="updatePlrActionStatus(item, 1)" *ngIf="item.approve">{{item.approve.buttonName}}</button>
                         <button mat-button (click)="updatePlrActionStatus(item, 2)" *ngIf="item.reject">{{item.reject.buttonName}}</button>
                         <span> {{item.status}}</span>
