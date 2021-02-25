@@ -88,7 +88,7 @@
                     <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches')" href="javaScript:void(0);"> <p>Matches Parameter</p> </a> </li>
                     <li><a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility')" href="javaScript:void(0);"> <p>Eligibility Calculation</p> </a></li>
                     <li><a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges')" href="javaScript:void(0);"> <p>Charges & ROI</p> </a></li>
-                    <li><a  href="#"> <p>Version History</p> </a></li>
+                    <!-- <li><a  href="#"> <p>Version History</p> </a></li> -->
                 </ul>
             </div>
             <ng-container *ngIf="tab.matches">
@@ -304,7 +304,7 @@
 
 <!-- Version History start -->
 
-<mat-card class="w-100 pd-31">
+<!-- <mat-card class="w-100 pd-31">
    
     <div class="step">
         <div>
@@ -392,7 +392,7 @@
         </div>
       </div>
       
-</mat-card>
+</mat-card> -->
 
 <!-- Version History end-->
 
