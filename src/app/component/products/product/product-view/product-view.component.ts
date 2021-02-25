@@ -86,6 +86,7 @@ export class ProductViewComponent implements OnInit {
           this.showStatus.status = this.product.productStatus.id === Constant.MASTER_TYPE.APPROVED.id ? 'Active' : 'Inactive';
           // show version dropdown
           this.showVersion(this.product.productsAudits);
+          console.log("this.product.productsAudits :: " , this.product.productsAudits);
         }
       } else {
         this.commonService.warningSnackBar(res.message);
@@ -115,6 +116,7 @@ export class ProductViewComponent implements OnInit {
         this.getProductDetails();
       } else {
        this.lenderService.getAuditProductDetails(this.productId, ver.version).subscribe(res => {
+         console.log("resp of version :: " , res)
         if (res.status === 200) {
           const productDetail = res.data;
           if (!this.commonService.isObjectIsEmpty(productDetail)){
@@ -224,7 +226,7 @@ export class ProductViewComponent implements OnInit {
   /**
    * Parse answer from json
    */
-  setAnswers(element) {
+  /* setAnswers(element) {
     if(this.isMultipleControl.includes(element.code)){
       console.log("element :: " ,element);
       switch(element.code){
@@ -235,7 +237,7 @@ export class ProductViewComponent implements OnInit {
           break;
         case "GST_TURNOVER_LIMIT":
           let str = element.lovs.find(l => l.id === element.answer.lovAns).value;
-          element.answerValue = element.answer.lovAns == 2 ?  str +  ' , Min Turnover : ' + element.answer.value : str;
+          element.answerValue = element.answer.lovAns == 2 ? 'For Time Period: ' + str +  ' , INR  ' + element.answer.value : str;
           break;
         case "CREDIT_SUMMATION": 
           let strCred :any = [];
@@ -247,7 +249,7 @@ export class ProductViewComponent implements OnInit {
           break;
         case "NO_OF_CHEQUES_BOUNCED_N_MONTHS": case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS": case "MIN_CREDIT_TRAN_ACC_PER_MONTH": case "MIN_DEBIT_TRAN_ACC_PER_MONTH": case "MIN_OVERALL_TRAN_ACC_PER_MONTH": //case "MAX_CASH_TRAN_ALL":
           let strBank = element.lovs.find(l => l.id === element.answer.lovAns).value;
-          element.answerValue = element.answer.lovAns == 2 ? strBank + ' , Months : ' + element.answer.months + ', Value : ' + element.answer.value : strBank;
+          element.answerValue = element.answer.lovAns == 2 ? 'For Time Period : ' + strBank + ' , ' + element.answer.months +' Months' + ', Value : ' + element.answer.value : strBank;
           break;
         case "MAX_CASH_TRAN_ALL":
           let strLovSelected : any = [];
@@ -255,7 +257,7 @@ export class ProductViewComponent implements OnInit {
           element.answerValue = strLovSelected + ' Max Amount : ' + element.answer.maxAmount + ' Min Amount : ' + element.answer.minAmount + ' Max Amount Per: ' + element.answer.maxAmtPer + ' Min Amount Per: ' + element.answer.minAmtPer + ' Max Count : ' + element.answer.maxCount + ' Min Count : ' + element.answer.minCount + ' Max Count Per : ' + element.answer.maxCountPer + ' Min Count Per: ' + element.answer.minCountPer;
           break;
         case "MAX_PERMISSIBLE_MSME_RANK":
-          element.answerValue = ' Cibil Rank : ' + (element.answer.cibilRank || '-') + ' Experian Rank : ' + (element.answer.experianRank || '-');
+          element.answerValue = 'Bureau : Cibil Rank : ' + (element.answer.cibilRank || '-') + ' Bureau : Experian Rank : ' + (element.answer.experianRank || '-');
           break;
         case "MIN_BUREAU_SCORE_ALL_DIR_PAR" :
           element.answerValue = 'Cibil : ' + (element.answer.strCibil || '-') + ' Experian : ' + (element.answer.strExp || '-');
@@ -271,7 +273,27 @@ export class ProductViewComponent implements OnInit {
         case "SECURITY":
           element.answerValue = "Collateral  Security Range Min : " + element.answer.collateralMin + " Max : " + element.answer.collateralMax + " Primary Security Range Min : " + element.answer.primaryMin + " Max : " + element.answer.primaryMax;
           break;
-         
+        case "MAX_FIN_PER_ENTITY":
+          element.answerValue = "Up-to INR " + element.answer.min;
+          break;
+        case "TENURE": case "USANCE_PERIOD":
+          element.answerValue = element.answer.min + ' Days';
+          break;
+        case "INVOICE_VALUE":
+          element.answerValue = 'INR ' + element.answer.min + ' to INR ' + element.answer.max;
+          break;
+        case "INVOICE_DATE_CHECK":
+          element.answerValue = element.answer.min + ' Days to ' + element.answer.max + ' Days';
+          break;
+        case "CUSTOMER_CONCENTRATION": case "UTILIZATION_PERCENTAGE":
+          element.answerValue = element.answer.min + ' % to ' + element.answer.max + ' %';
+          break;
+        case "MIN_TENURE_GST_DATA":
+          element.answerValue = element.answer.min + ' Months to ' + element.answer.max + ' Months';
+          break;
+        case "MIN_TENURE_BANK_ACC_DATA":
+          element.answerValue = element.answer.min + ' Months';
+          break;
       }
     }else{
       // Input
@@ -296,6 +318,7 @@ export class ProductViewComponent implements OnInit {
           element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
         }
         if(element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+
           element.answerValue = 'Min : ' + element.answer.min;
         }
       }
@@ -314,6 +337,111 @@ export class ProductViewComponent implements OnInit {
           element.answerValue = element.answer ? 'Yes' : 'No';
         }
       }
+    }
+  } */
+  setAnswers(element) {
+    switch(element.code){
+      case "GEO_MARKET_FOCUS":
+        let strList :any = [];
+        element.answer.geoSelectedList.filter(fil=>{strList.push(fil.value)});
+        element.answerValue = strList;
+        break;
+      case "GST_TURNOVER_LIMIT":
+        let str = element.lovs.find(l => l.id === element.answer.lovAns).value;
+        element.answerValue = element.answer.lovAns == 2 ? 'For Time Period: ' + str +  ' , INR  ' + element.answer.value : str;
+        break;
+      case "CREDIT_SUMMATION": 
+        let strCred :any = [];
+        element.answer.lovAns.filter(fil=>{strCred.push(fil.value)});
+        element.answerValue =  strCred + ' , ' + ' Credit Summation Range Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+        break;
+      case "BANK_ACC_PRIO":
+        element.answerValue = element.answer.prioSetStr;
+        break;
+      case "NO_OF_CHEQUES_BOUNCED_N_MONTHS": case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS": case "MIN_CREDIT_TRAN_ACC_PER_MONTH": case "MIN_DEBIT_TRAN_ACC_PER_MONTH": case "MIN_OVERALL_TRAN_ACC_PER_MONTH": //case "MAX_CASH_TRAN_ALL":
+        let strBank = element.lovs.find(l => l.id === element.answer.lovAns).value;
+        element.answerValue = element.answer.lovAns == 2 ? 'For Time Period : ' + strBank + ' , ' + element.answer.months +' Months' + ', Value : ' + element.answer.value : strBank;
+        break;
+      case "MAX_CASH_TRAN_ALL":
+        let strLovSelected : any = [];
+        element.lovs.find(fil=>{strLovSelected.push(fil.value)});
+        element.answerValue = strLovSelected + ' Max Amount : ' + element.answer.maxAmount + ' Min Amount : ' + element.answer.minAmount + ' Max Amount Per: ' + element.answer.maxAmtPer + ' Min Amount Per: ' + element.answer.minAmtPer + ' Max Count : ' + element.answer.maxCount + ' Min Count : ' + element.answer.minCount + ' Max Count Per : ' + element.answer.maxCountPer + ' Min Count Per: ' + element.answer.minCountPer;
+        break;
+      case "MAX_PERMISSIBLE_MSME_RANK":
+        element.answerValue = 'Bureau : Cibil Rank : ' + (element.answer.cibilRank || '-') + ' Bureau : Experian Rank : ' + (element.answer.experianRank || '-');
+        break;
+      case "MIN_BUREAU_SCORE_ALL_DIR_PAR" :
+        element.answerValue = 'Cibil : ' + (element.answer.strCibil || '-') + ' Experian : ' + (element.answer.strExp || '-');
+        break;
+      case "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR": 
+        element.answerValue = 'Cibil DPDs : ' + (element.answer.cibilDpd || '-') + ' Experian DPDs: ' + (element.answer.experianDpd || '-');
+        break;
+      case "COMMERCIAL_DPD_MAX":
+        let strLovCom : any = [];
+        element.answer.lovAns.filter(fil=>{strLovCom.push(fil.value)});
+        element.answerValue = ' Selected Types : ' + (strLovCom.length > 0 ? strLovCom : '-') + ' Working Capital Account DPDs (Cibil) : ' + (element.answer.wcaCibilDpd || '-') + ' Working Capital Account DPDs (Experian) : ' + (element.answer.wcaExperianDpd || '-') + ' Current Account DPDs (Cibil) : ' + (element.answer.caCibilDpd || '-') + ' Current Account DPDs (Experian) : ' + (element.answer.caExperianDpd || '-') ;
+        break;
+      case "SECURITY":
+        element.answerValue = "Collateral  Security Range Min : " + element.answer.collateralMin + " Max : " + element.answer.collateralMax + " Primary Security Range Min : " + element.answer.primaryMin + " Max : " + element.answer.primaryMax;
+        break;
+      case "MAX_FIN_PER_ENTITY":
+        element.answerValue = "Up-to INR " + element.answer.min;
+        break;
+      case "TENURE": case "USANCE_PERIOD":
+        element.answerValue = element.answer.min + ' Days';
+        break;
+      case "INVOICE_VALUE":
+        element.answerValue = 'INR ' + element.answer.min + ' to INR ' + element.answer.max;
+        break;
+      case "INVOICE_DATE_CHECK":
+        element.answerValue = element.answer.min + ' Days to ' + element.answer.max + ' Days';
+        break;
+      case "CUSTOMER_CONCENTRATION":
+        element.answerValue = element.answer.min + ' % ';
+        break;
+      case "UTILIZATION_PERCENTAGE":
+        element.answerValue = element.answer.min + ' % to ' + element.answer.max + ' %';
+        break;
+      case "MIN_TENURE_GST_DATA":
+        element.answerValue = element.answer.min + ' Months to ' + element.answer.max + ' Months';
+        break;
+      case "MIN_TENURE_BANK_ACC_DATA":
+        element.answerValue = element.answer.min + ' Months';
+        break;
+      default :
+      if (element.paramType.id === Constant.MASTER_TYPE.INPUT.id) {
+        if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) { // Input text
+          element.answerValue = element.answer;
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) { // Radio
+          element.answerValue = element.lovs.find(l => l.id === element.answer).value;
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) { // Dropdown
+          const ans = element.lovs.find(l => l.id === element.answer);
+          element.answerValue = ans ? ans.value : '-';
+        }
+        if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) { // Checkbox
+          element.answerValue = element.answer.map(l => l.value).join(', ');
+        }
+      }
+        if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+          if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id) {
+            element.answerValue = 'Min : ' + element.answer.min + ', Max : ' + element.answer.max;
+          }
+          if(element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+  
+            element.answerValue = 'Min : ' + element.answer.min;
+          }
+        }
+        if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+          if (element.inputType.id === Constant.MASTER_TYPE.TOGGLE.id) {
+            element.answerValue = element.answer ? 'Yes' : 'No';
+          }
+          if (element.inputType.id === Constant.MASTER_TYPE.RADIO.id) {
+            element.answerValue = element.answer ? 'Yes' : 'No';
+          }
+        }
+        break;
     }
   }
 

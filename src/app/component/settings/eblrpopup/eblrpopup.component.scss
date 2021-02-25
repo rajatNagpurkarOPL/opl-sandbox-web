@@ -145,8 +145,17 @@ input[type=text] {
 }
 
 
-.person-text-width {
+.person-text-width1 {
     input {
-        width: 40px;
+        width: 50px !important;
+        height: 3.5em;
+        border: none;
+        border-right: 1px solid #dedede !important;
+        border-radius: 8px;
+        padding: 16px;
+    }
+    .border-rad-0 {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
     }
 }

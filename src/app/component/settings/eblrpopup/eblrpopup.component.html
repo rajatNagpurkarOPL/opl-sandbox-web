@@ -37,13 +37,13 @@
         <mat-datepicker #picker ></mat-datepicker>
       </mat-form-field>
 
-      <div class="buttin-b4l-opacity opl2 w-20  ml-3">
-        <div class="text-with-presnt person-text-width">
-          <input placeholder="Hour" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.hours" tabindex="3" formControlName="hours" max="12" required="" maxlength="2">
+      <div class="buttin-b4l-opacity opl2 ml-3">
+        <div class="text-with-presnt person-text-width person-text-width1">
+          <input  class="border-rad-0" placeholder="Hour" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.hours" tabindex="3" formControlName="hours" max="12" required="" maxlength="2">
           <!-- <div *ngIf="f.submitted && f.form.controls.hours.status == 'INVALID'" > -->
                <!-- Invalid hours -->
           <!-- </div> -->
-          <input placeholder="Minutes" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.minutes" tabindex="4" formControlName="minutes" max="59" required="" maxlength="2">
+          <input class="border-rad-0" placeholder="Minutes" type="number" (ngModelChange)="setHoursMinutes()" [(ngModel)]="time.minutes" tabindex="4" formControlName="minutes" max="59" required="" maxlength="2">
           <!-- <div *ngIf="f.submitted && f.form.controls.hours.status == 'INVALID'" > -->
             <!-- Invalid minutes -->
           <!-- </div> -->

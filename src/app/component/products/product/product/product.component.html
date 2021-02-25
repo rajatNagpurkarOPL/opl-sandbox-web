@@ -173,14 +173,14 @@
                                           </ng5-slider>
                                           <div class="input-group">
                                             <div class="input-group-prepend">
-                                              <div class="input-group-text">Days</div>
+                                              <div class="input-group-text">%</div>
                                             </div>
                                             <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days" [(ngModel)]="item.answer.min" formControlName="min_{{item.parameterId}}">
                                           </div>
                                           <p class="mb-0">to</p>
                                               <div class="input-group w-45">
                                                 <div class="input-group-prepend">
-                                                  <div class="input-group-text">INR</div>
+                                                  <div class="input-group-text">%</div>
                                                 </div>
                                                 <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}">
                                                 <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -1046,11 +1046,10 @@
                                             </div> --> 
                                             <!-- <div class="matches-parameter1">
                                               <div class="matches-right"> -->
-                                                <ng5-slider [(value)]="item.answer.min" [options]="item.option">
-                                                </ng5-slider>
+                                                <ng5-slider [(value)]="item.answer.min" [options]="item.option"></ng5-slider>
                                                 <div class="input-group">
                                                   <div class="input-group-prepend">
-                                                    <div class="input-group-text">INR</div>
+                                                    <div class="input-group-text">{{item.denomination}}</div>
                                                   </div>
                                                   <input matInput type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Value" [(ngModel)]="item.answer.min" formControlName="min_{{item.parameterId}}">
                                                   <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -1087,7 +1086,7 @@
                                               </ng5-slider>
                                               <div class="input-group w-45">
                                                 <div class="input-group-prepend">
-                                                  <div class="input-group-text">INR</div>
+                                                  <div class="input-group-text">{{item.denomination}}</div>
                                                 </div>
                                                 <input matInput type="number" class="form-control" aria-label="Text input with checkbox" placeholder="Min"  [(ngModel)]="item.answer.min" formControlName="min_{{item.parameterId}}">
                                                 <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -1095,7 +1094,7 @@
                                               <p class="mb-0">to</p>
                                               <div class="input-group w-45">
                                                 <div class="input-group-prepend">
-                                                  <div class="input-group-text">INR</div>
+                                                  <div class="input-group-text">{{item.denomination}}</div>
                                                 </div>
                                                 <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max" [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}">
                                                 <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>

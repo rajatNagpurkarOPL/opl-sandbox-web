@@ -15,12 +15,14 @@ import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
 export class SettingsComponent implements OnInit {
 
   eblrList = [];
+  nexteblr : any = null;
   dialogRef = null;
   user: any = {};
   isShowAddEBLR = false;
   isEBLRApproved = false;
-  constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,
-              private global: Globals, public sendBackService: SendBackModelService) {
+
+  constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,private global: Globals, public sendBackService: SendBackModelService) {
+    
   }
 
 
@@ -63,6 +65,12 @@ export class SettingsComponent implements OnInit {
       if (res.status === 200) {
         this.eblrList = res.data;
         if (this.eblrList.length > 0) {
+          console.log("main Data :: ", res);
+          let filData = res.data.filter(filt=> !filt.isCurrentEffective && filt.effectiveFrom >  new Date() && filt.actionStatus.id == 5);
+          if(filData.length != 0){
+            this.nexteblr = filData[filData.length-1];
+            console.log("response:: ",this.nexteblr);
+          }
           this.eblrList.forEach(element => {
             // if saved and user is maker then show send for approve
             if (element.actionStatus.id !== Constant.MASTER_TYPE.SENT_TO_CHECKER.id &&
