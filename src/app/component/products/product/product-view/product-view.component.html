@@ -108,108 +108,157 @@
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>1.</p>
-                        <p>Working Capital Requirement  <!-- <br> <span>Mostly lies between 15% to 25%. Depending on different situations</span> --> </p>
+                        <p>Maximum Assessment Limit for GST Turnover</p>
+                    </div>
+                    <!-- <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.wcRequirement || '-'}} %</p>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>a.</p>
+                        <p>Assessment Limit for GST Turnover in %</p>
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.wcRequirement || '-'}} %</p>
+                            <p>{{product.assessmentLimitForGstTurnOverInPer || '-'}} %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="b4l-product-list">
+                    <div class="b4l-product-list-left">
+                        <p>b.</p>
+                        <p>GST Turnover to be calculated for last "N" months</p>
+                    </div>
+                    <div class="b4l-product-list-right">
+                        <div class="buttin-b4l-opacity opl2">
+                            <p>{{product.gstTurnOverToBeCalcOfNMonths || '-'}} Months </p>
                         </div>
                     </div>
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>2.</p>
-                        <p>Max Loan amount as per limits</p>
+                        <p>Maximum financing value for each Invoice</p>
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.maxLoanAmtLimit || '-'}} INR</p>
+                            <p>{{product.maxFinValueEachInv || '-'}} %</p>
                         </div>
                     </div>
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>3.</p>
-                        <p>Discounting Percentage</p>
+                        <p>Tenure Period</p>
                     </div>
                     <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.disPer || '-'}} % </p>
+                            <p>{{product.tenurePeriod || '-'}} Days</p>
                         </div>
                     </div>
                 </div>
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>4.</p>
-                        <p>Tenure<!-- <br> <span>You need to specify tenure in months not year</span> --></p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.tenure || '-'}} months</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>5.</p>
-                        <p>Max Repayment Amount</p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>{{product.maxRepayAmt || '-'}} INR</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>6.</p>
-                        <p>Repayment Plan</p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>One Time </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>7.</p>
-                        <p>Disbursement Plan</p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>One Time </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>8.</p>
-                        <p>Tenure <br> <span>You need to specify tenure in months not year</span></p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>One Time </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="b4l-product-list">
-                    <div class="b4l-product-list-left">
-                        <p>9.</p>
-                        <p>Set Disbursement Account Priority <br> <span>Amount will be disbursed in account available according to priority order</span></p>
-                    </div>
-                    <div class="b4l-product-list-right">
-                        <div class="buttin-b4l-opacity opl2">
-                            <p>{{getAccountOrderStr()}} </p>
-                        </div>
-                    </div>
-                </div>
-
             </ng-container>
             <ng-container *ngIf="tab.charges">
-                <div class="b4l-product-list">
+                <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">1. ROI</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Spread</th>
+                        <th scope="col">Effective ROI</th>
+                        <th scope="col">Min-Max RS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.roiRange; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.spread || '-'}}</td>
+                        <td>-</td>
+                        <td>{{data.minRs || '-'}} to {{data.maxRs || '-'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">2. Processing Fee</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.processingFee; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">3. Unified Charges</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.unifiedCharges; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">4. Penal Interest</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.penalInterest; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <!-- <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>1.</p>
                         <p>ROI  </p>
@@ -275,7 +324,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
             </ng-container>
 
