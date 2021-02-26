@@ -44,9 +44,7 @@
                         <div class="product-details-btn">
                             <button href="javascript:void(0)" class="product-btn4" routerLink="{{routeURL.SAVED_PRODUCTS}}"> Cancel</button>
                             <button *ngIf="isAdd" (click)="saveProduct(0)" href="javascript:void(0)" class="product-btn1"><img src="assets/img/save.svg" /> Save</button>
-                            <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn3">
-                                <img src="assets/img/send-to-checker-white.svg" /> Send to Checker
-                            </button>
+                            <button *ngIf="isAdd" (click)="saveProduct(1)" href="javascript:void(0)" class="product-btn3"><img src="assets/img/send-to-checker-white.svg" /> Send to Checker</button>
                         </div>
                     </div>
                    <hr>

@@ -1355,7 +1355,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         // Calc final ROI
         this.changeROI();
         // Get version history
-        // this.getStatusAudits();
+        //this.getStatusAudits();
       } else {
         this.commonService.warningSnackBar(res.message);
       }
@@ -1765,7 +1765,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   getStatusAudits() {
     this.lenderService.getProductStatusAudit(this.product.productsTempId).subscribe(res => {
       if (res.status === 200) {
-
+        console.log("status version data :: " , res);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
