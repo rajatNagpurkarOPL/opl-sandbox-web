@@ -88,6 +88,18 @@ export class ProductViewComponent implements OnInit {
           this.showVersion(this.product.productsAudits);
           console.log("this.product.productsAudits :: " , this.product.productsAudits);
         }
+
+        //console.log("Status Audit==>",this.product.statusAuditList);
+        this.product.statusAuditList.forEach(element => {
+          if(element.from.value === "SENT_TO_CHECKER"){
+            element.statusStr = Constant.MASTER_TYPE.SENT_TO_CHECKER.statusStr + ' - '+ element.actionFrom + ' to Admin Checker';
+          }else if(element.from.value === "APPROVED"){
+            element.statusStr = Constant.MASTER_TYPE.APPROVED.statusStr + ' - '+ element.actionFrom;
+          }else if(element.from.value === "SAVED"){
+            element.statusStr = Constant.MASTER_TYPE.SAVED.statusStr + ' - '+ element.actionFrom;
+          }
+        });
+        //console.log("Status Audit==>",this.product.statusAuditList);
       } else {
         this.commonService.warningSnackBar(res.message);
       }
