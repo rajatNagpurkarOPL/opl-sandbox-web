@@ -330,14 +330,14 @@
             <ng-container *ngIf="tab.verhistory">
               <div class="step" *ngFor="let data of product.statusAuditList;">
                 <div>
-                  <div class="circle-blue" *ngIf="data.from.value == 'SENT_TO_CHECKER'"><img src="assets/img/step-arrow.svg"/></div>
-                  <div class="circle-grey" *ngIf="data.from.value == 'SAVED'"><img src="assets/img/step-edit.svg"/></div>  
-                  <div class="circle-green" *ngIf="data.from.value == 'APPROVED'"><img src="assets/img/step-true.svg"/></div>
+                  <div class="circle-blue" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id"><img src="assets/img/step-arrow.svg"/></div>
+                  <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SAVED.id == data.to.id"><img src="assets/img/step-edit.svg"/></div>  
+                  <div class="circle-green" *ngIf="constants.MASTER_TYPE.APPROVED.id == data.to.id"><img src="assets/img/step-true.svg"/></div>
                 </div>
                 <div>
-                  <div class="title" *ngIf="data.from.value == 'SENT_TO_CHECKER'">{{constants.MASTER_TYPE.SENT_TO_CHECKER.statusStr}} - {{data.actionFrom}} to Admin Checker<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
-                  <div class="title" *ngIf="data.from.value == 'SAVED'">{{constants.MASTER_TYPE.SAVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
-                  <div class="title" *ngIf="data.from.value == 'APPROVED'">{{constants.MASTER_TYPE.APPROVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                  <div class="title" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id">{{constants.MASTER_TYPE.SENT_TO_CHECKER.statusStr}} - {{data.actionFrom}} to Admin Checker<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                  <div class="title" *ngIf="constants.MASTER_TYPE.SAVED.id == data.to.id">{{constants.MASTER_TYPE.SAVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                  <div class="title" *ngIf="constants.MASTER_TYPE.APPROVED.id ==  data.to.id">{{constants.MASTER_TYPE.APPROVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
                 </div>
               </div>
             </ng-container>
