@@ -143,14 +143,48 @@
                                           <app-print-error [control]="pf['radio_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                         </div>
                                         <div class="matches-right w-75" *ngIf="item.answer.lovAns == 2">
+                                          <ng5-slider [(value)]="item.answer.min" [(highValue)]="item.answer.max" [options]="item.option2"></ng5-slider>
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Days</div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days" [(ngModel)]="item.answer.min" formControlName="min_{{item.parameterId}}">
+                                          </div>
+                                          <p class="mb-0">to</p>
+                                              <div class="input-group w-45">
+                                                <div class="input-group-prepend">
+                                                  <div class="input-group-text">Days</div>
+                                                </div>
+                                                <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="item.answer.max" formControlName="max_{{item.parameterId}}">
+                                                <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              </div>
+                                        </div>
+                                        <!-- <div class="matches-right w-75" *ngIf="item.answer.lovAns == 1 || item.answer.lovAns == 2">
                                           <ng5-slider [(value)]="item.answer.value" [options]="item.option"></ng5-slider>
                                           <div class="input-group">
                                             <div class="input-group-prepend">
                                               <div class="input-group-text">INR</div>
                                             </div>
-                                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Turnover" [(ngModel)]="item.answer.value" formControlName="min_{{item.parameterId}}">
-                                            <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Turnover" [(ngModel)]="item.answer.value" formControlName="value_{{item.parameterId}}">
+                                            <app-print-error [control]="pf['value_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                           </div>
+                                        </div> -->
+                                        <div class="matches-right w-75" *ngIf="item.answer.lovAns == 1 || item.answer.lovAns == 2">
+                                          <ng5-slider [(value)]="item.answer.minRange" [(highValue)]="item.answer.maxRange" [options]="item.option"></ng5-slider>
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">INR</div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days" [(ngModel)]="item.answer.minRange" formControlName="minRange_{{item.parameterId}}">
+                                          </div>
+                                          <p class="mb-0">to</p>
+                                              <div class="input-group w-45">
+                                                <div class="input-group-prepend">
+                                                  <div class="input-group-text">INR</div>
+                                                </div>
+                                                <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="item.answer.maxRange" formControlName="maxRange_{{item.parameterId}}">
+                                                <app-print-error [control]="pf['max_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              </div>
                                         </div>
                                       </div>
                                       <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
@@ -190,7 +224,6 @@
                                   </ng-container>
                                   <ng-container *ngIf="item.code == 'NO_OF_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MIN_CREDIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_DEBIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_OVERALL_TRAN_ACC_PER_MONTH'">
                                     <!-- <div> -->
-
                                       <div class="fl-column">
                                         <div class="matches-right">
                                           <mat-radio-group aria-label="Select an option" [(ngModel)]="item.answer.lovAns" (ngModelChange)="addRemoveFromRadio(item)" formControlName="radio_{{item.parameterId}}">
@@ -221,7 +254,7 @@
                                         </div>
                                       </div>
                                     <!-- </div> -->
-                                    <div class="matches-parameter1" style="flex-direction: row;     padding: 2em 0; position: relative; border-bottom: 0;" *ngIf="item.answer.lovAns == 2">
+                                    <div class="matches-parameter1" style="flex-direction: row;padding: 2em 0; position: relative; border-bottom: 0;" *ngIf="item.answer.lovAns == 1 || item.answer.lovAns == 2">
                                       <div class="matches-group-b4l">
                                         <div class="matches-left">
                                           <p class="blue-light-bck">Max. 130 Cheque Bounced in Last 20 months will be allowed</p>

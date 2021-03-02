@@ -37,7 +37,7 @@ export const Constant = {
         GST_INVOICE_BASE : {id : 3},
         PENDING : {id : 4, name : 'Pending'},
         APPROVED : {id : 5, buttonName: 'Approve',  name : 'Approved', statusStr : 'Approved By Admin Checker'},
-        SEND_BACK : {id : 6, buttonName: 'Send back',  name : 'Reverted'},
+        SEND_BACK : {id : 6, buttonName: 'Send back',  name : 'Reverted', statusStr : 'Send Back By Admin Checker'},
         SENT_TO_CHECKER : {id : 7, buttonName: 'Send to Checker', name : 'Sent to Checker', statusStr : 'Send By Admin Maker'},
         SAVED : {id : 8, name : 'Saved', statusStr : 'Edited By Admin Maker'},
         EDIT_MODE : {id : 9, name : 'Edited'},

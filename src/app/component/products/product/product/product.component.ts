@@ -995,6 +995,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     console.log("form :: ",this.productForm);
     console.log("model json :: ",this.product);
     console.log("matrix:: " , this.scalingMatrix);
+    //return;
     /* if (this.productForm.invalid) {
       this.commonService.warningSnackBar('Please fill required and valid details.');
       return 0;
@@ -1111,7 +1112,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
               element.lovs = JSON.parse(element.lovs);
               if(this.isMultipleControl.includes(element.code)){
                 if(element.code == "GST_TURNOVER_LIMIT"){
-                  element.answer = { value: null , lovAns : null};
+                  element.answer = { value: null , lovAns : null , min : 1, max : 120 , minRange : element.minValue , maxRange : element.maxValue};
+                  element.option2 = {"floor" : 1 , "ceil" : 120};
                 }
                 if(element.code == "CREDIT_SUMMATION"){
                   element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
@@ -1256,6 +1258,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
             if(element.code == "GST_TURNOVER_LIMIT"){
               /* element.answer = { min: null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 120};
             }else if(element.code == "CREDIT_SUMMATION"){
               //element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
@@ -1398,8 +1401,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     if(this.isMultipleControl.includes(param.code)){
       if(param.code == "GST_TURNOVER_LIMIT"){
-        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+        //this.productForm.get('paramForm').addControl('value_' + param.parameterId, this.fb.control('', validators));
+        this.productForm.get('paramForm').addControl('minRange_' + param.parameterId, this.fb.control('', validators));
+        this.productForm.get('paramForm').addControl('maxRange_' + param.parameterId, this.fb.control('', validators));
         this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', validators));
+        /* this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+        this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators)); */
       }
       if(param.code == "CREDIT_SUMMATION"){
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
@@ -1414,8 +1421,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
       }
       if(param.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH" || param.code == "GST_TURNOVER_LIMIT"){
         this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
-        /* this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
-        this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
+        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+        /* this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
       }
       // if(param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
       //   this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
@@ -1564,7 +1571,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
     let paramName = null;
     if(this.isMultipleControl.includes(param.code)){
       if(param.code == "GST_TURNOVER_LIMIT"){
-        this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
+        //this.productForm.get('paramForm').removeControl('value_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('minRange_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('maxRange_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('radio_' + param.parameterId);
       }
       if(param.code == "CREDIT_SUMMATION"){
@@ -1876,16 +1885,21 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   addRemoveFromRadio(item){
+    console.log("called for :: " , item);
     if(item.answer.lovAns == 2){
       switch(item.code){
         case "NO_OF_CHEQUES_BOUNCED_N_MONTHS" : case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" : case "MIN_CREDIT_TRAN_ACC_PER_MONTH" : case "MIN_DEBIT_TRAN_ACC_PER_MONTH" : case "MIN_OVERALL_TRAN_ACC_PER_MONTH" : 
-        this.productForm.get('paramForm').addControl('min_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
+        //this.productForm.get('paramForm').addControl('min_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
         this.productForm.get('paramForm').addControl('min2_' + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)]));
         break;
         
         case "GST_TURNOVER_LIMIT" :
-          this.productForm.get('paramForm').addControl('min_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
-          break;
+        //item.answer.value = null;
+        item.answer.min = this.commonService.isObjectNullOrEmpty(item.answer.min) ? item.option2.floor : item.answer.min;
+        item.answer.max = this.commonService.isObjectNullOrEmpty(item.answer.max) ? item.option2.ceil : item.answer.max;  
+        this.productForm.get('paramForm').addControl('min_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
+        this.productForm.get('paramForm').addControl('max_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
+        break;
       }
       /* this.productForm.get('paramForm').addControl('min_' + item.parameterId, this.fb.control('', this.getCommonValidators(item)));
       this.productForm.get('paramForm').addControl('min2_' + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
@@ -1894,13 +1908,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
         case "NO_OF_CHEQUES_BOUNCED_N_MONTHS" : case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" : case "MIN_CREDIT_TRAN_ACC_PER_MONTH" : case "MIN_DEBIT_TRAN_ACC_PER_MONTH" : case "MIN_OVERALL_TRAN_ACC_PER_MONTH" : 
           item.answer.value = null;
           item.answer.months = null;
-          this.productForm.get('paramForm').removeControl('min_' + item.parameterId);
+          //this.productForm.get('paramForm').removeControl('min_' + item.parameterId);
           this.productForm.get('paramForm').removeControl('min2_' + item.parameterId);
         break;
         
         case "GST_TURNOVER_LIMIT" :
           item.answer.value = null;
+          item.answer.min = null;
+          item.answer.max = null;
           this.productForm.get('paramForm').removeControl('min_' + item.parameterId);
+          this.productForm.get('paramForm').removeControl('max_' + item.parameterId);
           break;
       }
       /* item.answer.value = null;
