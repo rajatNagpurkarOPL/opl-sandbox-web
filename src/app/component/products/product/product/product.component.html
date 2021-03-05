@@ -222,23 +222,15 @@
                                       </div>
                                     <!-- </div> -->
                                   </ng-container>
-                                  <ng-container *ngIf="item.code == 'NO_OF_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MIN_CREDIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_DEBIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_OVERALL_TRAN_ACC_PER_MONTH'">
-                                    <!-- <div> -->
+                                  <!-- <ng-container *ngIf="item.code == 'NO_OF_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MIN_CREDIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_DEBIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_OVERALL_TRAN_ACC_PER_MONTH'">
                                       <div class="fl-column">
                                         <div class="matches-right">
                                           <mat-radio-group aria-label="Select an option" [(ngModel)]="item.answer.lovAns" (ngModelChange)="addRemoveFromRadio(item)" formControlName="radio_{{item.parameterId}}">
                                             <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
-                                            <!-- <mat-radio-button value="1" class="mr-4">Check Till Date</mat-radio-button>
-                                            <mat-radio-button value="2">Check For Specific Time Period</mat-radio-button> -->
                                           </mat-radio-group>
                                           <app-print-error [control]="pf['radio_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                         </div>
                                        </div>
-                                      <!-- <mat-radio-group aria-label="Select an option" [(ngModel)]="item.answer.lovAns" (ngModelChange)="addRemoveFromRadio(item)" formControlName="radio_{{item.parameterId}}">
-                                        <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
-                                      </mat-radio-group> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="matches-parameter1 btm-0"> -->
                                       <div style="width: 100%;" *ngIf="item.answer.lovAns == 2">
                                         <div class="fl-column">
                                           <div class="matches-right w-75">
@@ -253,7 +245,6 @@
                                           </div>
                                         </div>
                                       </div>
-                                    <!-- </div> -->
                                     <div class="matches-parameter1" style="flex-direction: row;padding: 2em 0; position: relative; border-bottom: 0;" *ngIf="item.answer.lovAns == 1 || item.answer.lovAns == 2">
                                       <div class="matches-group-b4l">
                                         <div class="matches-left">
@@ -272,7 +263,53 @@
                                       </div>
                                       </div>
                                       <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                  </ng-container>
+                                  </ng-container> -->
+                                  <ng-container *ngIf="item.code == 'NO_OF_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MIN_CREDIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_DEBIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_OVERALL_TRAN_ACC_PER_MONTH'">
+                                    <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
+                                    <div *ngFor="let datas of item.answer; let i=index" class="fl-column">
+                                      <div class="fl-column">
+                                        <div class="matches-right">
+                                          <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns" (ngModelChange)="addRemoveInBS(datas,item)" (click)="setValNull(datas)" formControlName="radio_{{datas.seqNo}}{{item.parameterId}}">
+                                            <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
+                                          </mat-radio-group>
+                                          <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                       </div>
+                                      <div style="width: 100%;" *ngIf="datas.lovAns == 2">
+                                        <div class="fl-column">
+                                          <div class="matches-right w-75">
+                                            <ng5-slider [(value)]="datas.months" [options]="item.option2"></ng5-slider>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Months</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.months" formControlName="min2_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <div class="matches-parameter1" style="flex-direction: row;padding: 2em 0; position: relative; border-bottom: 0;" *ngIf="datas.lovAns == 1 || datas.lovAns == 2">
+                                      <div class="matches-group-b4l">
+                                        <div class="matches-left">
+                                          <p class="blue-light-bck">Max. 130 Cheque Bounced in Last 20 months will be allowed</p>
+                                        </div>
+                                      </div>
+                                      <div class="matches-right">
+                                        <ng5-slider [(value)]="datas.value" [options]="item.option"></ng5-slider>
+                                            <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                <div class="input-group-text">No.</div>
+                                              </div>
+                                              <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Months" [(ngModel)]="datas.value" formControlName="min_{{datas.seqNo}}{{item.parameterId}}">
+                                              <app-print-error [control]="pf['min_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            </div>
+                                      </div>
+                                      </div>
+                                      <button mat-raised-button color="primary" (click)="removeInParameter(datas,item)" *ngIf="item.answer.length != 1"> Remove </button>
+                                    </div>
+                                    <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                </ng-container>
                                   <!-- <ng-container *ngIf="item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS'">
                                     <div class="matches-parameter1 btm-0">
                                       <div class="fl-column">
@@ -418,7 +455,7 @@
                                       <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                   </ng-container> -->
                                   <ng-container *ngIf="item.code == 'MAX_CASH_TRAN_ALL'">
-                                    <div class="buttin-b4l-opacity opl2">
+                                    <!-- <div class="buttin-b4l-opacity opl2">
                                       <p>
                                         <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs; let i = index">
                                           <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect" (ngModelChange)="setCheckboxAnswerForCodeContainer(item)" /> {{c.value}}
@@ -500,9 +537,100 @@
                                         <app-print-error [control]="pf['max4_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                       </div>
                                     </div>
+                                    <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" /> -->
+                                    <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
+                                    <div class="fl-column" *ngFor="let datas of item.answer; let i=index">
+                                      <div class="matches-right">
+                                        <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns" (ngModelChange)="addRemoveInBS(datas,item)" formControlName="radio_{{datas.seqNo}}{{item.parameterId}}">
+                                          <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
+                                        </mat-radio-group>
+                                        <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                      </div>
+                                      <!-- <div class="buttin-b4l-opacity opl2">
+                                        <p>
+                                          <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs; let i = index">
+                                            <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect" (ngModelChange)="setCheckboxAnswerForCodeContainer(item)" /> {{c.value}}
+                                          </label>
+                                          <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted"></app-print-error>
+                                        </p>
+                                      </div> -->
+                                      <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 1">
+                                        <ng5-slider [(value)]="datas.minCount" [(highValue)]="datas.maxCount" [options]="item.option"></ng5-slider>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Counts</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Months" [(ngModel)]="datas.minCount" formControlName="min_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted"></app-print-error>
+                                        </div>
+                                        <p class="mb-0">to</p>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Counts</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max" [(ngModel)]="datas.maxCount" formControlName="max_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['max_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted"></app-print-error>
+                                        </div>
+                                      </div>
+                                      <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 3">
+                                        <ng5-slider [(value)]="datas.minAmount" [(highValue)]="datas.maxAmount" [options]="item.option2"></ng5-slider>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">INR</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minAmount" formControlName="min2_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                        <p class="mb-0">to</p>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">INR</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxAmount" formControlName="max2_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['max2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                      </div>
+                                      <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 2">
+                                        <ng5-slider [(value)]="datas.minCountPer" [(highValue)]="datas.maxCountPer" [options]="item.option3">
+                                        </ng5-slider>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">%</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minCountPer" formControlName="min3_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min3_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                        <p class="mb-0">to</p>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">%</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxCountPer" formControlName="max3_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['max3_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                      </div>
+                                      <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 4">
+                                        <ng5-slider [(value)]="datas.minAmtPer" [(highValue)]="datas.maxAmtPer" [options]="item.option4">
+                                        </ng5-slider>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">%</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minAmtPer" formControlName="min4_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min4_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                        <p class="mb-0">to</p>
+                                        <div class="input-group w-45">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">%</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxAmtPer" formControlName="max4_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['max4_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                      </div>
+                                      <button mat-raised-button color="primary" (click)="removeInParameter(datas,item)" *ngIf="item.answer.length != 1"> Remove </button>
+                                    </div>
                                     <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
-                                    
-                                    
                                     
                                     
                                     

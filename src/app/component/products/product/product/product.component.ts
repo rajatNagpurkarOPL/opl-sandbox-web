@@ -1118,12 +1118,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if(element.code == "CREDIT_SUMMATION"){
                   element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
                 }
-                if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS"){
-                  element.answer = { months: null , value : null , lovAns : null};
+                if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
+                  console.log("bs element is :: " , element);
+                  element.answer = [];
+                  this.addBSControls(element);
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option2 = {"floor" : 1 , "ceil" : 24};
+                  console.log("now element is :: ", element)
+                  console.log("form is :: ", this.productForm)
                 }
-                if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
+               /*  if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
                   element.answer = { months: null , value : null , lovAns : null};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option2 = {"floor" : 1 , "ceil" : 24};
@@ -1142,9 +1146,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
                   element.answer = { months: null , value : null , lovAns : null};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option2 = {"floor" : 1 , "ceil" : 24};
-                }
+                } */
                 if(element.code == "MAX_CASH_TRAN_ALL"){
-                  element.answer = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null};
+                  element.answer = [];
+                  this.addBSControls(element);
+                  //element.answer = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option2 = {"floor" : 1 , "ceil" : 100000000};
                   element.option3 = {"floor" : 0 , "ceil" : 100};
@@ -1209,6 +1215,63 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
+  generateSeqNo(element){ 
+    console.log("element in seq gen :: ", element);
+    if(element.seqNo != null && element.seqNo !=undefined){
+      return element.seqNo;
+    }else{
+      let num = (element.answer.length > 0 ?  (element.answer.reduce((data, obj) => data = data > obj.seqNo ? data : obj.seqNo, 0) + 1) : 1)
+      return num;
+    } 
+  }
+
+  addBSControls(element){
+    console.log("element data :: ",element);
+    console.log("element data :: ",this.generateSeqNo(element));
+    let data = null;
+    if(element.code != "MAX_CASH_TRAN_ALL"){
+      data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)} 
+    }else{
+      data = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null, seqNo : this.generateSeqNo(element)};
+    }
+    //{ minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}
+    
+    /* let dataList = [] ;
+    dataList.push(data); */
+    element.answer.push(data);
+    this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    if(element.code != "MAX_CASH_TRAN_ALL"){
+      //this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+      this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    }
+  }
+
+  generateMultipleControls(element){
+    element.answer.forEach(inData => {
+      console.log("in data :: " , inData);
+      let data = null;
+      if(element.code != "MAX_CASH_TRAN_ALL"){
+        data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
+      }else{
+        data = { minCount: inData.minCount != null ? inData.minCount : null , maxCount : inData.maxCount != null ? inData.maxCount : null, minAmount : inData.minAmount != null ? inData.minAmount : null, maxAmount : inData.maxAmount != null ? inData.maxAmount : null, minCountPer : inData.minCountPer != null ? inData.minCountPer : null, maxCountPer : inData.maxCountPer != null ? inData.maxCountPer : null, minAmtPer : inData.minAmtPer != null ? inData.minAmtPer : null, maxAmtPer : inData.maxAmtPer != null ? inData.maxAmtPer : null, lovAns : inData.lovAns != null ? inData.lovAns : null, seqNo : this.generateSeqNo(inData)};
+      }
+      console.log("out data :: " , data)
+      this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+      if(element.code != "MAX_CASH_TRAN_ALL"){
+        this.productForm.get('paramForm').addControl('min_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        if (inData.lovAns == 2) {
+          this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        }
+      }else{
+
+      } 
+    });
+    console.log("form gen :: " , this.productForm);
+    /* let data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)}
+    this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element))); */
+  }
+
   // update product status
   updateActionStatus() {
     const statusReq: any = { actionStatus: this.approveBtn, productsTempId: this.product.productsTempId, productStatus: this.approveBtn };
@@ -1262,32 +1325,32 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }else if(element.code == "CREDIT_SUMMATION"){
               //element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
-            }else if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS"){
-              /* element.answer = { months: null , checkBounced : null , lovAns : null}; */
+            }else if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 24};
-            }else if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
-              /* element.answer = { months: null , checkBounced : null , lovAns : null}; */
+              this.generateMultipleControls(element);
+//              element.answer.forEach(genControl => {this.addRemoveFromRadioForBS(genControl);});
+            }
+            /* else if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 24};
             }else if(element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH"){
-              /* element.answer = { months: null , checkBounced : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 24};
             }else if(element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH"){
-              /* element.answer = { months: null , checkBounced : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 24};
             }else if(element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
-              /* element.answer = { months: null , checkBounced : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 24};
-            }else if(element.code == "MAX_CASH_TRAN_ALL"){
+            } */
+            else if(element.code == "MAX_CASH_TRAN_ALL"){
               /* element.answer = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option2 = {"floor" : 1 , "ceil" : 100000000};
               element.option3 = {"floor" : 0 , "ceil" : 100};
               element.option4 = {"floor" : 1 , "ceil" : 100};
+              this.generateMultipleControls(element);
             }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
               /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
@@ -1389,6 +1452,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getValidators(param){
+    const validators = [Validators.required];
+    if (param.maxValue) {
+      validators.push(Validators.max(param.maxValue));
+    }
+    if (param.minValue) {
+      validators.push(Validators.min(param.minValue));
+    }
+    return validators;
+  }
   // Create form field for added/imported parameters
   addFormControl(param) {
     const validators = [Validators.required];
@@ -1420,8 +1493,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
       }
       if(param.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH" || param.code == "GST_TURNOVER_LIMIT"){
-        this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
-        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+       /*  this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
+        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators)); */
         /* this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
       }
       // if(param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
@@ -1445,21 +1518,23 @@ export class ProductComponent implements OnInit, AfterViewInit {
       //   this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
       // }
       if(param.code == "MAX_CASH_TRAN_ALL"){
-        this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
+        /* this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
         this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100000000) , Validators.min(1)]));
         this.productForm.get('paramForm').addControl('max2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100000000) , Validators.min(1)]));
         this.productForm.get('paramForm').addControl('min3_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('max3_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min4_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
-        this.productForm.get('paramForm').addControl('max4_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
-        if(param.lovs != null && param.lovs.length > 0){
+        this.productForm.get('paramForm').addControl('max4_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)])); */
+        //this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', validators));
+        
+        /* if(param.lovs != null && param.lovs.length > 0){
           const formArray = [];
           param.lovs.forEach((lov, i) => {
             formArray.push({i: new FormControl() });
           });
           this.productForm.get('paramForm').addControl('inputCheckbox_' + param.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
-        }
+        } */
       }
       if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
@@ -1588,8 +1663,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
       }
       if(param.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
-        this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
+        param.answer.forEach(element => {
+          this.productForm.get('paramForm').removeControl('min_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min2_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('radio_' + element.seqNo + param.parameterId);
+        });
+        param.answer=[];
+        /* this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('min2_' + param.parameterId); */
       }
       /* if(param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
         this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
@@ -1608,21 +1689,25 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
       } */
       if(param.code == "MAX_CASH_TRAN_ALL"){
-        this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('max2_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('min3_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('max3_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('min4_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('max4_' + param.parameterId);
-        if(param.lovs != null && param.lovs.length > 0){
+        param.answer.forEach(element => {
+          this.productForm.get('paramForm').removeControl('radio_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('max_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min2_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('max2_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min3_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('max3_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min4_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('max4_' + element.seqNo + param.parameterId);
+        });
+        param.answer=[];
+        /* if(param.lovs != null && param.lovs.length > 0){
           const formArray = [];
           param.lovs.forEach((lov, i) => {
             formArray.push({i: new FormControl() });
           });
           this.productForm.get('paramForm').removeControl('inputCheckbox_' + param.parameterId);
-        }
+        } */
       }
       if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
@@ -1705,6 +1790,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     }
     }
     this.product.parameters = this.product.parameters.filter(p => p.parameterId !== param.parameterId);
+    console.log("product Form :: " , this.productForm);
   }
 
 
@@ -1925,6 +2011,104 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.productForm.get('paramForm').removeControl('min_' + item.parameterId);
       this.productForm.get('paramForm').removeControl('min2_' + item.parameterId); */
     }
+  }
+  addRemoveFromRadioForBS(item){
+    console.log("items data :: " , item);
+    this.addBSControls(item);
+  }
+  addRemoveInBS(datas,item){
+    console.log(datas,item)
+    /* if(datas.lovAns != null && datas.lovAns != undefined){ */
+      if(item.code != "MAX_CASH_TRAN_ALL"){
+        if(datas.lovAns == 2){
+          this.productForm.get('paramForm').addControl('min2_'+ datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)]));
+        }else{
+         /*  datas.value = null;
+          datas.months = null; */
+          this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
+        }
+      }else{
+        let count = ['min2_','max2_','min3_','max3_','min4_','max4_'];
+        //let countStr = ['minAmount','maxAmount','minCountPer','maxCountPer','minAmtPer','maxAmtPer'];
+        let countPer = ['min2_','max2_','min_','max_','min4_','max4_'];
+        //let countPerStr = ['minCount','maxCount','minAmount','maxAmount','minAmtPer','maxAmtPer'];
+        let amt = ['min_','max_','min3_','max3_','min4_','max4_'];
+        //let amtStr = ['minCount','maxCount','minAmtPer','maxAmtPer','minCountPer','maxCountPer'];
+        let amtPer = ['min2_','max2_','min3_','max3_','min_','max_'];
+        //let amtPerStr = ['minCount','maxCount','minCountPer','maxCountPer','minAmount','maxAmount'];
+        switch(datas.lovAns){
+          case 1:
+            this.productForm.get('paramForm').addControl('min_' + datas.seqNo + item.parameterId, this.fb.control('',  this.getValidators(item)));
+            this.productForm.get('paramForm').addControl('max_' + datas.seqNo + item.parameterId, this.fb.control('', this.getValidators(item)));
+            count.forEach(element => { this.commonAddRemoveControls(null,(element + datas.seqNo + item.parameterId),"remove")});
+            //countStr.forEach(element => { item.answer[element]  = null; });
+            break;
+          case 2:
+            this.productForm.get('paramForm').addControl('min3_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
+            this.productForm.get('paramForm').addControl('max3_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
+            countPer.forEach(element => { this.commonAddRemoveControls(null,(element + datas.seqNo + item.parameterId),"remove")});
+            //countPerStr.forEach(element => { item.answer[element] = null; });
+            break;
+          case 3:
+            this.productForm.get('paramForm').addControl('min2_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100000000) , Validators.min(1)]));
+            this.productForm.get('paramForm').addControl('max2_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100000000) , Validators.min(1)]));
+            amt.forEach(element => { this.commonAddRemoveControls(null,(element + datas.seqNo + item.parameterId),"remove")});
+            //amtStr.forEach(element => { item.answer[element] = null; });
+            break;
+          case 4:
+            this.productForm.get('paramForm').addControl('min4_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
+            this.productForm.get('paramForm').addControl('max4_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(100) , Validators.min(0)]));
+            amtPer.forEach(element => { this.commonAddRemoveControls(null,(element + datas.seqNo + item.parameterId),"remove")});
+            //amtPerStr.forEach(element => { item.answer[element] = null; });
+            break;
+        }
+      }
+      console.log(this.productForm)
+    /* } */
+  }
+
+  commonAddRemoveControls(element,controlName,type , validators?){
+    switch(type){
+      case "add" : this.productForm.get('paramForm').addControl(controlName, this.fb.control('',  validators != null && validators != undefined ? validators : this.getValidators(element))); break;
+      case "remove" : this.productForm.get('paramForm').removeControl(controlName); break;
+    }
+  }
+
+  setValNull(datas){
+    datas.value = null;
+    datas.months = null;
+  }
+
+  removeInParameter(datas,item){
+    console.log("item :: " ,  item.answer.indexOf(datas));
+    console.log('min2_'+ datas.seqNo + item.parameterId);
+    console.log('min_'+ datas.seqNo + item.parameterId);
+    console.log('radio_'+ datas.seqNo + item.parameterId);
+    
+    this.productForm.get('paramForm').removeControl('radio_'+ datas.seqNo + item.parameterId);
+    if(item.code != "MAX_CASH_TRAN_ALL"){
+      this.productForm.get('paramForm').removeControl('min_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
+    }else{
+      this.productForm.get('paramForm').removeControl('min_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min4_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max4_' + datas.seqNo + item.parameterId);
+    }
+    /* console.log('min2_'+ (item.answer.length) + item.parameterId);
+    console.log('min_'+ (item.answer.length) + item.parameterId);
+    console.log('radio_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('min2_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('min_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('radio_'+ (item.answer.length) + item.parameterId); */
+    item.answer.splice(item.answer.indexOf(datas),1);
+    console.log("item form :: " ,  this.productForm);
   }
 
   addRemoveFromRadioForEl(){
