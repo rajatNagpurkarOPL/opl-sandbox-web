@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Constant } from 'src/app/common-utils/Constant';
 import { LenderService } from 'src/app/service/lender.service';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
@@ -15,8 +15,12 @@ export class AddParameterPopupComponent implements OnInit {
   itemList = [];
   paramTotal: number;
   selectedParameterList = [];
-  constructor(public dialogRef: MatDialogRef<AddParameterPopupComponent>, public lenderService: LenderService,
-              public commonService: CommonService) { }
+  exisitingParameterList = [];
+
+  constructor(public dialogRef: MatDialogRef<AddParameterPopupComponent>,@Inject(MAT_DIALOG_DATA) public data ,public lenderService: LenderService,
+              public commonService: CommonService) { 
+                this.exisitingParameterList = data;
+              }
 
   // Get active parameter list
   listActiveParameter() {
@@ -25,6 +29,15 @@ export class AddParameterPopupComponent implements OnInit {
         if (res.data && res.data.length > 0) {
           this.parameterList = res.data;
           this.itemList = res.data;
+        }
+        if(this.exisitingParameterList != null && this.exisitingParameterList.length > 0 && res.data != null && res.data.length > 0){
+          this.exisitingParameterList.forEach(element => {
+            this.itemList.forEach(elementData => {
+              if(element.parameterId === elementData.parameterId){
+                elementData.isParameterActive = false;
+              }
+            });
+          });
         }
       } else {
         this.commonService.warningSnackBar(res.message);
