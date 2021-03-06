@@ -1155,6 +1155,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                   element.option2 = {"floor" : 1 , "ceil" : 100000000};
                   element.option3 = {"floor" : 0 , "ceil" : 100};
                   element.option4 = {"floor" : 1 , "ceil" : 100};
+                  element.option5 = {"floor" : 1 , "ceil" : 24};
                 }
                 if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
                   element.answer = { cibilRank: null , experianRank : null , lovAns : null};
@@ -1232,7 +1233,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if(element.code != "MAX_CASH_TRAN_ALL"){
       data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)} 
     }else{
-      data = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null, seqNo : this.generateSeqNo(element)};
+      data = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null, lovAns2 : null , months : null, seqNo : this.generateSeqNo(element)};
     }
     //{ minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}
     
@@ -1243,6 +1244,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if(element.code != "MAX_CASH_TRAN_ALL"){
       //this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
       this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    }else{
+      this.productForm.get('paramForm').addControl('radio2_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
     }
   }
 
@@ -1253,7 +1256,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(element.code != "MAX_CASH_TRAN_ALL"){
         data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
       }else{
-        data = { minCount: inData.minCount != null ? inData.minCount : null , maxCount : inData.maxCount != null ? inData.maxCount : null, minAmount : inData.minAmount != null ? inData.minAmount : null, maxAmount : inData.maxAmount != null ? inData.maxAmount : null, minCountPer : inData.minCountPer != null ? inData.minCountPer : null, maxCountPer : inData.maxCountPer != null ? inData.maxCountPer : null, minAmtPer : inData.minAmtPer != null ? inData.minAmtPer : null, maxAmtPer : inData.maxAmtPer != null ? inData.maxAmtPer : null, lovAns : inData.lovAns != null ? inData.lovAns : null, seqNo : this.generateSeqNo(inData)};
+        data = { minCount: inData.minCount != null ? inData.minCount : null , maxCount : inData.maxCount != null ? inData.maxCount : null, minAmount : inData.minAmount != null ? inData.minAmount : null, maxAmount : inData.maxAmount != null ? inData.maxAmount : null, minCountPer : inData.minCountPer != null ? inData.minCountPer : null, maxCountPer : inData.maxCountPer != null ? inData.maxCountPer : null, minAmtPer : inData.minAmtPer != null ? inData.minAmtPer : null, maxAmtPer : inData.maxAmtPer != null ? inData.maxAmtPer : null, lovAns : inData.lovAns != null ? inData.lovAns : null, lovAns2 : inData.lovAns2 != null ? inData.lovAns2 : null,seqNo : this.generateSeqNo(inData)};
       }
       console.log("out data :: " , data)
       this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
@@ -1263,7 +1266,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
         }
       }else{
-
+        this.productForm.get('paramForm').addControl('radio2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+        if(inData.lovAns2 == 2){
+          this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        }
       } 
     });
     console.log("form gen :: " , this.productForm);
@@ -1350,6 +1356,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               element.option2 = {"floor" : 1 , "ceil" : 100000000};
               element.option3 = {"floor" : 0 , "ceil" : 100};
               element.option4 = {"floor" : 1 , "ceil" : 100};
+              element.option5 = {"floor" : 1 , "ceil" : 24};
               this.generateMultipleControls(element);
             }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
               /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
@@ -1691,6 +1698,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(param.code == "MAX_CASH_TRAN_ALL"){
         param.answer.forEach(element => {
           this.productForm.get('paramForm').removeControl('radio_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('radio2_'+ element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('max_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min2_' + element.seqNo + param.parameterId);
@@ -2016,7 +2024,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     console.log("items data :: " , item);
     this.addBSControls(item);
   }
-  addRemoveInBS(datas,item){
+  addRemoveInBS(datas,item, multipleLovCheckType ?){
     console.log(datas,item)
     /* if(datas.lovAns != null && datas.lovAns != undefined){ */
       if(item.code != "MAX_CASH_TRAN_ALL"){
@@ -2036,6 +2044,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
         //let amtStr = ['minCount','maxCount','minAmtPer','maxAmtPer','minCountPer','maxCountPer'];
         let amtPer = ['min2_','max2_','min3_','max3_','min_','max_'];
         //let amtPerStr = ['minCount','maxCount','minCountPer','maxCountPer','minAmount','maxAmount'];
+        if(multipleLovCheckType != null && multipleLovCheckType != undefined){
+          if(multipleLovCheckType !=1){
+            this.productForm.get('paramForm').addControl('min5_' + datas.seqNo + item.parameterId, this.fb.control('',  this.getValidators(item)));
+            //this.productForm.get('paramForm').addControl('max5_' + datas.seqNo + item.parameterId, this.fb.control('', this.getValidators(item)));
+          }else{
+            this.commonAddRemoveControls(null,('min5_' + datas.seqNo + item.parameterId),"remove");
+            //this.commonAddRemoveControls(null,('max5_' + datas.seqNo + item.parameterId),"remove");
+          }
+        }
+        
         switch(datas.lovAns){
           case 1:
             this.productForm.get('paramForm').addControl('min_' + datas.seqNo + item.parameterId, this.fb.control('',  this.getValidators(item)));
@@ -2090,6 +2108,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.productForm.get('paramForm').removeControl('min_'+ datas.seqNo + item.parameterId);
       this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
     }else{
+      this.productForm.get('paramForm').removeControl('radio2_'+ datas.seqNo + item.parameterId);
       this.productForm.get('paramForm').removeControl('min_' + datas.seqNo + item.parameterId);
       this.productForm.get('paramForm').removeControl('max_' + datas.seqNo + item.parameterId);
       this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
