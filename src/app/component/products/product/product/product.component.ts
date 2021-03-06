@@ -1102,6 +1102,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   // Open paramter popup
   addParameterPopup(): void {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.product.parameters;
     this.matDialog.open(AddParameterPopupComponent, dialogConfig).afterClosed().subscribe(response => {
       if (response && response.data) {
         if (response.data.parameters && response.data.parameters.length > 0) {
