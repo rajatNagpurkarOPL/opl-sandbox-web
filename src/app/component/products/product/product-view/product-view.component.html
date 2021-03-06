@@ -59,7 +59,6 @@
                             </option>
                         </select> -->
                         <!-- [selected]="option.id == (item.answer ? item.answer.id : '')"  -->
-
                         <a href="javaScript:void(0);" *ngIf="product.reject" (click)="updateStatus(product.reject)" class="product-btn1"> Send back</a>
                         <a href="javaScript:void(0);" *ngIf="product.approve" (click)="updateStatus(product.approve)" class="product-btn3"> Approve</a>
                         <a href="javaScript:void(0);" *ngIf="product.isEdit" [routerLink]="[routeURL.PRODUCT, product.productsTempId]" class="product-btn3"><img src="assets/img/edit-white.svg"  class="mr-1"/> Edit</a>
@@ -333,7 +332,7 @@
                   <div class="circle-blue" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id"><img src="assets/img/step-arrow.svg"/></div>
                   <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SAVED.id == data.to.id"><img src="assets/img/step-edit.svg"/></div>  
                   <div class="circle-green" *ngIf="constants.MASTER_TYPE.APPROVED.id == data.to.id"><img src="assets/img/step-true.svg"/></div>
-                  <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SEND_BACK.id == data.to.id"></div>
+                  <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SEND_BACK.id == data.to.id"><img src="assets/img/sendBackByBanker.svg"/></div>
                 </div>
                 <div>
                   <div class="title" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id">{{constants.MASTER_TYPE.SENT_TO_CHECKER.statusStr}} - {{data.actionFrom}} to Admin Checker<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>

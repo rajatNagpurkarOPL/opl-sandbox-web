@@ -540,9 +540,32 @@
                                     <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" /> -->
                                     <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
                                     <div class="fl-column" *ngFor="let datas of item.answer; let i=index">
+                                      
+                                      <div class="matches-right">
+                                        <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns2" (ngModelChange)="addRemoveInBS(datas,item,datas.lovAns2)" formControlName="radio2_{{datas.seqNo}}{{item.parameterId}}">
+                                          <mat-radio-button *ngFor="let data of item.lovs.firstLov" [value]="data.id">{{data.value}}</mat-radio-button>
+                                        </mat-radio-group>
+                                        <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                      </div>
+                                      
+                                      <div style="width: 100%;" *ngIf="datas.lovAns2 == 2">
+                                        <div class="fl-column">
+                                          <div class="matches-right w-75">
+                                            <ng5-slider [(value)]="datas.months" [options]="item.option5"></ng5-slider>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Months</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.months" formControlName="min5_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
                                       <div class="matches-right">
                                         <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns" (ngModelChange)="addRemoveInBS(datas,item)" formControlName="radio_{{datas.seqNo}}{{item.parameterId}}">
-                                          <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
+                                          <mat-radio-button *ngFor="let data of item.lovs.secondLov" [value]="data.id">{{data.value}}</mat-radio-button>
                                         </mat-radio-group>
                                         <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                       </div>

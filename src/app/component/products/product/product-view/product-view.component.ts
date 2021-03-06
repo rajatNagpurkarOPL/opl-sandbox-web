@@ -367,7 +367,7 @@ export class ProductViewComponent implements OnInit {
         break;
       case "MAX_CASH_TRAN_ALL":
         let strLovSelected : any = [];
-        element.lovs.find(fil=>{strLovSelected.push(fil.value)});
+        element.lovs.secondLov.find(fil=>{strLovSelected.push(fil.value)});
         element.answerValue = strLovSelected + ' Max Amount : ' + element.answer.maxAmount + ' Min Amount : ' + element.answer.minAmount + ' Max Amount Per: ' + element.answer.maxAmtPer + ' Min Amount Per: ' + element.answer.minAmtPer + ' Max Count : ' + element.answer.maxCount + ' Min Count : ' + element.answer.minCount + ' Max Count Per : ' + element.answer.maxCountPer + ' Min Count Per: ' + element.answer.minCountPer;
         break;
       case "MAX_PERMISSIBLE_MSME_RANK":
