@@ -36,6 +36,15 @@ export class ImportParameterPopupComponent implements OnInit {
     this.lenderService.getProductDetails(Constant.MASTER_TYPE.APPROVED.id, this.product.productsId).subscribe(res => {
       if (res.status === 200) {
         this.product = res.data;
+        this.product.parameters.forEach(element => {
+          if(element.paramType.id != null){
+            if(element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id || element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+            }else if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) {
+              element.lovs = JSON.parse(element.lovs);
+            }
+          }
+        });
         this.close({product : this.product, event : 'save'});
       } else {
         this.commonService.warningSnackBar(res.message);

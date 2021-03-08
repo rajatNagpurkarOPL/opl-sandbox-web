@@ -1080,13 +1080,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
             this.product.parameters.forEach(element => {
               this.addFormControl(element); // create form field
               element.answer = JSON.parse(element.answer);
-              element.lovs = JSON.parse(element.lovs);
+              if(element.code != "CONSTITUTION"){
+                element.lovs = JSON.parse(element.lovs);
+              }
             });
             if (response.data.product.parameters.length > 0) { // showing success snackbar
               this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
             }
           }
           if (type === 'eligibility') { // copy eligibility data from approved selected product
+            console.log("Eligibility Parmeters==>",response.data.product);
             const p = response.data.product;
             this.product.disPer = p.disPer;
             this.product.maxLoanAmtLimit = p.maxLoanAmtLimit;
@@ -1094,6 +1097,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
             this.product.roi = p.roi;
             this.product.tenure = p.tenure;
             this.product.wcRequirement = p.wcRequirement;
+
+            this.product.assessmentLimitForGstTurnOverInPer = p.assessmentLimitForGstTurnOverInPer;
+            this.product.gstTurnOverToBeCalcOfNMonths = p.gstTurnOverToBeCalcOfNMonths;
+            this.product.maxFinValueEachInv = p.maxFinValueEachInv;
+            this.product.tenurePeriod = p.tenurePeriod;
+            this.product.elGstTurnOverLov = p.elGstTurnOverLov;
+            
           }
         }
       });
@@ -1501,7 +1511,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
       }
       if(param.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || param.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || param.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH" || param.code == "GST_TURNOVER_LIMIT"){
-       /*  this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
+       /* this.productForm.get('paramForm').addControl('radio_' + param.parameterId, this.fb.control('', [Validators.required]));
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators)); */
         /* this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)])); */
       }
@@ -1609,6 +1619,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         if (param.lovs && param.lovs.length > 0) {
           const formArray = [];
           // Create multiple form control for checkbox
+         // param.lovs = Array.isArray(param.lovs) ? param.lovs : JSON.parse(param.lovs);
           param.lovs.forEach((lov, i) => {
             formArray.push({i: new FormControl() });
           });
