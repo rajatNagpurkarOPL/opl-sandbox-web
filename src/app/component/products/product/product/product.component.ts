@@ -43,6 +43,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
   processingFeeBasedOnMaster : any = [];
   unifiedChangesBasedOnMaster : any = [];
   penalInterestBasedOnMaster : any = [];
+  prePaymentBasedOnMaster : any = [];
+  bounceBasedOnMaster : any = [];
+  latePaymentBasedOnMaster : any = [];
 
   scalingMaster : FormGroup;
   rangeForm : FormGroup;
@@ -51,6 +54,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
   pfSelectedVal = null;
   ucSelectedVal = null;
   piSelectedVal = null;
+  ppSelectedVal = null;
+  bounceSelectedVal = null;
+  lateRepaySelectedVal = null;
 
 // @kinjal added
  foods: Food[] = [
@@ -178,11 +184,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
       processingFeeBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.processingFeeBasedOn) ? data.scalingMaster.processingFeeBasedOn : this.processingFeeBasedOnMaster[0].id) ,[Validators.required]],
       unifiedChargesBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.unifiedChargesBasedOn) ? data.scalingMaster.unifiedChargesBasedOn : this.unifiedChangesBasedOnMaster[0].id) ,[Validators.required]],
       penalIntBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.penalIntBasedOn) ? data.scalingMaster.penalIntBasedOn : this.penalInterestBasedOnMaster[0].id) ,[Validators.required]],
+
+      prePaymentBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.prePaymentBasedOn) ? data.scalingMaster.prePaymentBasedOn : this.prePaymentBasedOnMaster[0].id) ,[Validators.required]],
+      bounceBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.bounceBasedOn) ? data.scalingMaster.bounceBasedOn : this.bounceBasedOnMaster[0].id) ,[Validators.required]],
+      latePaymentBasedOn : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) && !this.commonService.isObjectNullOrEmpty(data.scalingMaster.latePaymentBasedOn) ? data.scalingMaster.latePaymentBasedOn : this.latePaymentBasedOnMaster[0].id) ,[Validators.required]],
+      
       effectiveRoiCalcMethod : [(!this.commonService.isObjectNullOrEmpty(data.scalingMaster) ? data.scalingMaster.effectiveRoiCalcMethod :''),[Validators.required]],
       roiRange : this.fb.array([]),
       processingFee : this.fb.array([]),
       unifiedCharges : this.fb.array([]),
-      penalInterest : this.fb.array([])
+      penalInterest : this.fb.array([]),
+      
+      prePayment : this.fb.array([]),
+      bounce : this.fb.array([]),
+      latePayment : this.fb.array([])
     }),
     chargesForm: this.fb.group({
       dropdown1: [''], dropdown2: [''], dropdown3: [''], dropdown4: [''],
@@ -309,6 +324,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.PF.value : return this.pfControls.push(this.createRangeForm(type,range,null));
       case Constant.UC.value : return this.ucControls.push(this.createRangeForm(type,range,null));
       case Constant.PI.value : return this.piControls.push(this.createRangeForm(type,range,null));
+      
+      case Constant.PP.value : return this.ppControls.push(this.createRangeForm(type,range,null));
+      case Constant.BOUNCE.value : return this.bounceControls.push(this.createRangeForm(type,range,null));
+      case Constant.LP.value : return this.lpControls.push(this.createRangeForm(type,range,null));
     }
   }
 
@@ -519,17 +538,24 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.PF.value : return this.pfControls.removeAt(index);
       case Constant.UC.value : return this.ucControls.removeAt(index);
       case Constant.PI.value : return this.piControls.removeAt(index);
+      case Constant.PP.value : return this.ppControls.removeAt(index);
+      case Constant.BOUNCE.value : return this.bounceControls.removeAt(index);
+      case Constant.LP.value : return this.lpControls.removeAt(index);
     }
   }
 
   removeReactRange(obj: FormGroup, form: any[],type){
-    if(form.length <= 1){
+    if(this.constants[type].isMandatory && form.length <= 1){
       return this.commonService.warningSnackBar('you have to fill atleast one entry.');
     }
     let range = this.getDynamicRange(type);
-    if(form.indexOf(obj) == 0){
+    if(!this.constants[type].isMandatory && form.length == 1){
+      this.removeFormByType(type,form.indexOf(obj));
+    } else if(form.indexOf(obj) == 0){
       return this.commonService.warningSnackBar('first element can not be removed.');
-    }else if(form.indexOf(obj) == (form.length-1)){
+    } /* else if(form.length == 1){
+      this.removeFormByType(type,form.indexOf(obj));
+    } */ else if(form.indexOf(obj) == (form.length-1)){
       let m1 : any = <FormGroup>this.returnFormControl(null, null, type,(form.indexOf(obj) - 1).toString());
       let cc : any = <FormGroup>this.returnFormControl(null, null, type, (form.indexOf(obj)).toString());
       // let m1 : any = <FormGroup>this.roiControls.get((form.indexOf(obj) - 1).toString());
@@ -727,6 +753,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
             case Constant.PF.value : code = this.processingFeeBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
             case Constant.UC.value : code = this.unifiedChangesBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
             case Constant.PI.value : code = this.penalInterestBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
+            
+            case Constant.PP.value : code = this.prePaymentBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
+            case Constant.BOUNCE.value : code = this.bounceBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
+            case Constant.LP.value : code = this.latePaymentBasedOnMaster.filter(fil=>fil.id == this.productForm.controls.scalingMaster.controls[this.getDropDownValueByType(type)].value)[0].value; break;
           }
         }
         /* console.log("this.matrixRangeMaster ::" , this.matrixRangeMaster)
@@ -738,7 +768,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.ROI.value : return Constant.ROI.dropDownValue; 
       case Constant.PF.value : return Constant.PF.dropDownValue; 
       case Constant.UC.value : return Constant.UC.dropDownValue; 
-      case Constant.PI.value : return Constant.PI.dropDownValue; 
+      case Constant.PI.value : return Constant.PI.dropDownValue;
+      
+      case Constant.PP.value : return Constant.PP.dropDownValue;
+      case Constant.BOUNCE.value : return Constant.BOUNCE.dropDownValue;
+      case Constant.LP.value : return Constant.LP.dropDownValue;
+
     }
   }
   
@@ -749,6 +784,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.PF.value : return fc = this.pfControls.get(index);
       case Constant.UC.value : return fc = this.ucControls.get(index);
       case Constant.PI.value : return fc = this.piControls.get(index);
+      case Constant.PP.value : return fc = this.ppControls.get(index);
+      case Constant.BOUNCE.value : return fc = this.bounceControls.get(index);
+      case Constant.LP.value : return fc = this.lpControls.get(index);
     }
   }
 
@@ -957,7 +995,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.ROI.value : return Constant.ROI.controlName; 
       case Constant.PF.value : return Constant.PF.controlName; 
       case Constant.UC.value : return Constant.UC.controlName; 
-      case Constant.PI.value : return Constant.PI.controlName; 
+      case Constant.PI.value : return Constant.PI.controlName;
+      case Constant.PP.value : return Constant.PP.controlName;
+      case Constant.BOUNCE.value : return Constant.BOUNCE.controlName;
+      case Constant.LP.value : return Constant.LP.controlName; 
     }
   }
 
@@ -967,6 +1008,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.PF.value : return Constant.PF.controlGroup; 
       case Constant.UC.value : return Constant.UC.controlGroup; 
       case Constant.PI.value : return Constant.PI.controlGroup;
+      case Constant.PP.value : return Constant.PP.controlGroup;
+      case Constant.BOUNCE.value : return Constant.BOUNCE.controlGroup;
+      case Constant.LP.value : return Constant.LP.controlGroup;
+
     }
   }
   
@@ -987,6 +1032,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
   get pfControls(){return this.productForm.controls.scalingMaster.controls.processingFee as FormArray}
   get ucControls(){return this.productForm.controls.scalingMaster.controls.unifiedCharges as FormArray}
   get piControls(){return this.productForm.controls.scalingMaster.controls.penalInterest as FormArray}
+  
+  get ppControls(){return this.productForm.controls.scalingMaster.controls.prePayment as FormArray}
+  get bounceControls(){return this.productForm.controls.scalingMaster.controls.bounce as FormArray}
+  get lpControls(){return this.productForm.controls.scalingMaster.controls.latePayment as FormArray}
 
   // Save product details
   saveProduct(type) {
@@ -2423,7 +2472,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   getMastersData(){
-    this.master =  ['roiBasedOn','processingFeeBasedOn','unifiedChargesBasedOn','penalIntBasedOn'];
+    this.master =  ['roiBasedOn','processingFeeBasedOn','unifiedChargesBasedOn','penalIntBasedOn','prePaymentBasedOn','bounceBasedOn','latePaymentBasedOn'];
     this.lenderService.getMastersDataByFieldCodes(this.master).subscribe(resp=>{
       //console.log("get response data ::: " , resp);
       if(resp.status == 200){
@@ -2433,6 +2482,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.processingFeeBasedOnMaster = resp.data.filter(filt=>filt.code === 'processingFeeBasedOn')[0].values;
         this.unifiedChangesBasedOnMaster = resp.data.filter(filt=>filt.code === 'unifiedChargesBasedOn')[0].values;
         this.penalInterestBasedOnMaster = resp.data.filter(filt=>filt.code === 'penalIntBasedOn')[0].values;
+        this.prePaymentBasedOnMaster = resp.data.filter(filt=>filt.code === 'prePaymentBasedOn')[0].values;
+        this.bounceBasedOnMaster = resp.data.filter(filt=>filt.code === 'bounceBasedOn')[0].values;
+        this.latePaymentBasedOnMaster = resp.data.filter(filt=>filt.code === 'latePaymentBasedOn')[0].values;
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'roiBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'processingFeeBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'unifiedChargesBasedOn')[0].values);
@@ -2476,6 +2528,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.PF.value: return this.pfSelectedVal = this.processingFeeBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.processingFeeBasedOn)[0].value;
       case Constant.UC.value: return this.ucSelectedVal = this.unifiedChangesBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.unifiedChargesBasedOn)[0].value;
       case Constant.PI.value: return this.piSelectedVal = this.penalInterestBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.penalIntBasedOn)[0].value;
+      case Constant.PP.value: return this.ppSelectedVal = this.prePaymentBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.prePaymentBasedOn)[0].value;
+      case Constant.BOUNCE.value: return this.bounceSelectedVal = this.bounceBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.bounceBasedOn)[0].value;
+      case Constant.LP.value: return this.lateRepaySelectedVal = this.latePaymentBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.latePaymentBasedOn)[0].value;
     }
   }
   clearRangeList(type){

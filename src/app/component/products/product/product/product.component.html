@@ -1807,6 +1807,28 @@
                                 <option *ngFor="let data of penalInterestBasedOnMaster" [value]="data.id">{{data.value}}</option>
                               </select>
                             </div>
+                            <!-- new charges addition -->
+                            <div class="psb-xl-3 psb-lg-3 psb-sm-6 psb-md-6 psb-xs-12">
+                              <label>Pre-Payment Based On</label>
+                              <select formControlName="prePaymentBasedOn" (ngModelChange)="changeSelectedValue(constants.PP.value);clearRangeList(constants.PP.value)">
+                                <!-- <option selected disabled>Select Penal Interest Based On</option> -->
+                                <option *ngFor="let data of prePaymentBasedOnMaster" [value]="data.id">{{data.value}}</option>
+                              </select>
+                            </div>
+                            <div class="psb-xl-3 psb-lg-3 psb-sm-6 psb-md-6 psb-xs-12">
+                              <label>Bounce Based On</label>
+                              <select formControlName="bounceBasedOn" (ngModelChange)="changeSelectedValue(constants.BOUNCE.value);clearRangeList(constants.BOUNCE.value)">
+                                <!-- <option selected disabled>Select Penal Interest Based On</option> -->
+                                <option *ngFor="let data of bounceBasedOnMaster" [value]="data.id">{{data.value}}</option>
+                              </select>
+                            </div>
+                            <div class="psb-xl-3 psb-lg-3 psb-sm-6 psb-md-6 psb-xs-12">
+                              <label>Late Payment Based On</label>
+                              <select formControlName="latePaymentBasedOn" (ngModelChange)="changeSelectedValue(constants.LP.value);clearRangeList(constants.LP.value)">
+                                <!-- <option selected disabled>Select Penal Interest Based On</option> -->
+                                <option *ngFor="let data of latePaymentBasedOnMaster" [value]="data.id">{{data.value}}</option>
+                              </select>
+                            </div>
                           </div>
                     
                           <hr>
@@ -2182,6 +2204,289 @@
                           </div>
                         </div>
                       </div>
+
+                      <!-- new charges added -->
+                      <div id="b4l-content" class="charges-roi" style="min-height: 60vh;">
+                        <div class="container">
+                          <div class="row">
+                            <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                              <h4 class="charges-roi-h4">Prepayment </h4>
+                            </div>
+                            <hr>
+                            <table class="table roi">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Score Range</th>
+                                  <th scope="col">Based On</th>
+                                  <th scope="col">Charge (% Or Rs.) </th>
+                                  <th scope="col">Min - Max (Rs.)</th>
+                                  <th scope="col">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.prePayment.controls.length != 0">
+                                <tr *ngFor="let data of productForm.controls.scalingMaster.controls.prePayment.controls; let i=index" [formGroup]="data">
+                                  <th scope="row">{{i+1}}</th>
+                                  <td>
+                                    <div class="d-flex al-center">
+                                      <input type="text" class="form-control" formControlName="min" readonly>
+                                      <app-print-error [control]="data.controls.min" [submitted]="submitted"></app-print-error>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <input type="text" class="form-control" formControlName="max" (focusout)="setMatrixRange(data,productForm.controls.scalingMaster.controls.prePayment.controls,constants.PP.value);checkValueValidation(data,'minMax',constants.PP.value)" [readonly]="i == (productForm.controls.scalingMaster.controls.prePayment.controls.length - 1)">
+                                      <app-print-error [control]="data.controls.max" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <select formControlName="basedOn" (ngModelChange)="addRemoveBasedOnControl(data,constants.PP.value)">
+                                      <option *ngFor="let data of chargeTypes" [value]="data.id">{{data.name}}</option>
+                                    </select>
+                                    <app-print-error [control]="data.controls.basedOn" [submitted]="submitted" ></app-print-error>
+                                  </td>
+                                  <td>
+                                    <div class="input-group"  *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text pd-new">%</div>
+                                      </div>
+                                      <input type="text" class="form-control" formControlName="basedOnPer">
+                                      <app-print-error [control]="data.controls.basedOnPer" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 47">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>                                    
+                                  </td>
+                                  <td>                                    
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="minRs">
+                                        <app-print-error [control]="data.controls.minRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs" (focusout)="checkValueValidation(data,'minMaxRs',constants.PP.value)">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td align="right">
+                                    <a (click)="removeReactRange(data,productForm.controls.scalingMaster.controls.prePayment.controls,constants.PP.value)"><img src="assets/img/close-red.svg"></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.prePayment.controls.length == 0">
+                                <tr>
+                                  <td colspan="6"><div class="d-flex al-center">Range Not Added Yet. </div></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="row  mar-6">
+                            <div class="psb-lg-12 psb-md-12 psb-sm-12 psb-lg-12 psb-xl-12">
+                              <a href="javascript:void(0)" class="product-btn3" (click)="addReactRange(productForm.controls.scalingMaster.controls.prePayment.controls.length,productForm.controls.scalingMaster.controls.prePayment.controls,constants.PP.value)">+ Add New Range</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div id="b4l-content" class="charges-roi" style="min-height: 60vh;">
+                        <div class="container">
+                          <div class="row">
+                            <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                              <h4 class="charges-roi-h4">Bounce </h4>
+                            </div>
+                            <hr>
+                            <table class="table roi">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Score Range</th>
+                                  <th scope="col">Based On</th>
+                                  <th scope="col">Charge (% Or Rs.) </th>
+                                  <th scope="col">Min - Max (Rs.)</th>
+                                  <th scope="col">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.bounce.controls.length != 0">
+                                <tr *ngFor="let data of productForm.controls.scalingMaster.controls.bounce.controls; let i=index" [formGroup]="data">
+                                  <th scope="row">{{i+1}}</th>
+                                  <td>
+                                    <div class="d-flex al-center">
+                                      <input type="text" class="form-control" formControlName="min" readonly>
+                                      <app-print-error [control]="data.controls.min" [submitted]="submitted"></app-print-error>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <input type="text" class="form-control" formControlName="max" (focusout)="setMatrixRange(data,productForm.controls.scalingMaster.controls.bounce.controls,constants.BOUNCE.value);checkValueValidation(data,'minMax',constants.BOUNCE.value)" [readonly]="i == (productForm.controls.scalingMaster.controls.bounce.controls.length - 1)">
+                                      <app-print-error [control]="data.controls.max" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <select formControlName="basedOn" (ngModelChange)="addRemoveBasedOnControl(data,constants.BOUNCE.value)">
+                                      <option *ngFor="let data of chargeTypes" [value]="data.id">{{data.name}}</option>
+                                    </select>
+                                    <app-print-error [control]="data.controls.basedOn" [submitted]="submitted" ></app-print-error>
+                                  </td>
+                                  <td>
+                                    <div class="input-group"  *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text pd-new">%</div>
+                                      </div>
+                                      <input type="text" class="form-control" formControlName="basedOnPer">
+                                      <app-print-error [control]="data.controls.basedOnPer" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 47">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>                                    
+                                  </td>
+                                  <td>                                    
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="minRs">
+                                        <app-print-error [control]="data.controls.minRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs" (focusout)="checkValueValidation(data,'minMaxRs',constants.BOUNCE.value)">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td align="right">
+                                    <a (click)="removeReactRange(data,productForm.controls.scalingMaster.controls.bounce.controls,constants.PP.value)"><img src="assets/img/close-red.svg"></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.bounce.controls.length == 0">
+                                <tr>
+                                  <td colspan="6"><div class="d-flex al-center">Range Not Added Yet. </div></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="row  mar-6">
+                            <div class="psb-lg-12 psb-md-12 psb-sm-12 psb-lg-12 psb-xl-12">
+                              <a href="javascript:void(0)" class="product-btn3" (click)="addReactRange(productForm.controls.scalingMaster.controls.bounce.controls.length,productForm.controls.scalingMaster.controls.bounce.controls,constants.BOUNCE.value)">+ Add New Range</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div id="b4l-content" class="charges-roi" style="min-height: 60vh;">
+                        <div class="container">
+                          <div class="row">
+                            <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                              <h4 class="charges-roi-h4">Late Payment </h4>
+                            </div>
+                            <hr>
+                            <table class="table roi">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Score Range</th>
+                                  <th scope="col">Based On</th>
+                                  <th scope="col">Charge (% Or Rs.) </th>
+                                  <th scope="col">Min - Max (Rs.)</th>
+                                  <th scope="col">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.latePayment.controls.length != 0">
+                                <tr *ngFor="let data of productForm.controls.scalingMaster.controls.latePayment.controls; let i=index" [formGroup]="data">
+                                  <th scope="row">{{i+1}}</th>
+                                  <td>
+                                    <div class="d-flex al-center">
+                                      <input type="text" class="form-control" formControlName="min" readonly>
+                                      <app-print-error [control]="data.controls.min" [submitted]="submitted"></app-print-error>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <input type="text" class="form-control" formControlName="max" (focusout)="setMatrixRange(data,productForm.controls.scalingMaster.controls.latePayment.controls,constants.LP.value);checkValueValidation(data,'minMax',constants.LP.value)" [readonly]="i == (productForm.controls.scalingMaster.controls.latePayment.controls.length - 1)">
+                                      <app-print-error [control]="data.controls.max" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <select formControlName="basedOn" (ngModelChange)="addRemoveBasedOnControl(data,constants.LP.value)">
+                                      <option *ngFor="let data of chargeTypes" [value]="data.id">{{data.name}}</option>
+                                    </select>
+                                    <app-print-error [control]="data.controls.basedOn" [submitted]="submitted" ></app-print-error>
+                                  </td>
+                                  <td>
+                                    <div class="input-group"  *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text pd-new">%</div>
+                                      </div>
+                                      <input type="text" class="form-control" formControlName="basedOnPer">
+                                      <app-print-error [control]="data.controls.basedOnPer" [submitted]="submitted"></app-print-error>
+                                    </div>
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 47">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>                                    
+                                  </td>
+                                  <td>                                    
+                                    <div class="d-flex al-center" *ngIf="data.value.basedOn == 48">
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="minRs">
+                                        <app-print-error [control]="data.controls.minRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                      <p class="mb-0 ml-mr-1">to</p>
+                                      <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text pd-new">INR</div>
+                                        </div>
+                                        <input type="text" class="form-control" formControlName="maxRs" (focusout)="checkValueValidation(data,'minMaxRs',constants.LP.value)">
+                                        <app-print-error [control]="data.controls.maxRs" [submitted]="submitted"></app-print-error>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td align="right">
+                                    <a (click)="removeReactRange(data,productForm.controls.scalingMaster.controls.latePayment.controls,constants.LP.value)"><img src="assets/img/close-red.svg"></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tbody *ngIf="productForm.controls.scalingMaster.controls.latePayment.controls.length == 0">
+                                <tr>
+                                  <td colspan="6"><div class="d-flex al-center">Range Not Added Yet. </div></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="row  mar-6">
+                            <div class="psb-lg-12 psb-md-12 psb-sm-12 psb-lg-12 psb-xl-12">
+                              <a href="javascript:void(0)" class="product-btn3" (click)="addReactRange(productForm.controls.scalingMaster.controls.latePayment.controls.length,productForm.controls.scalingMaster.controls.latePayment.controls,constants.LP.value)">+ Add New Range</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
                     </form>
                 </div>
                 <!-- Charges & ROI End -->
