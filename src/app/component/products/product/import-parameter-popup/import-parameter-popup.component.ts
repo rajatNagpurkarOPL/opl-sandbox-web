@@ -40,9 +40,9 @@ export class ImportParameterPopupComponent implements OnInit {
           if(element.paramType.id != null){
             if(element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id || element.inputType.id === Constant.MASTER_TYPE.RANGE.id) {
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
-            }else if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) {
+            }/* else if (element.inputType.id === Constant.MASTER_TYPE.CHECKBOX.id) {
               element.lovs = JSON.parse(element.lovs);
-            }
+            } */
           }
         });
         this.close({product : this.product, event : 'save'});

@@ -362,8 +362,9 @@ export class ProductViewComponent implements OnInit {
         element.answerValue = element.answer.prioSetStr;
         break;
       case "NO_OF_CHEQUES_BOUNCED_N_MONTHS": case "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS": case "MIN_CREDIT_TRAN_ACC_PER_MONTH": case "MIN_DEBIT_TRAN_ACC_PER_MONTH": case "MIN_OVERALL_TRAN_ACC_PER_MONTH": //case "MAX_CASH_TRAN_ALL":
-        let strBank = element.lovs.find(l => l.id === element.answer.lovAns).value;
-        element.answerValue = element.answer.lovAns == 2 ? 'For Time Period : ' + strBank + ' , ' + element.answer.months +' Months' + ', Value : ' + element.answer.value : strBank;
+        console.log("element :: " , element)
+        /* let strBank = element.lovs.find(l => l.id === element.answer.lovAns).value;
+        element.answerValue = element.answer.lovAns == 2 ? 'For Time Period : ' + strBank + ' , ' + element.answer.months +' Months' + ', Value : ' + element.answer.value : strBank; */
         break;
       case "MAX_CASH_TRAN_ALL":
         let strLovSelected : any = [];
@@ -380,9 +381,9 @@ export class ProductViewComponent implements OnInit {
         element.answerValue = 'Cibil DPDs : ' + (element.answer.cibilDpd || '-') + ' Experian DPDs: ' + (element.answer.experianDpd || '-');
         break;
       case "COMMERCIAL_DPD_MAX":
-        let strLovCom : any = [];
+        /* let strLovCom : any = [];
         element.answer.lovAns.filter(fil=>{strLovCom.push(fil.value)});
-        element.answerValue = ' Selected Types : ' + (strLovCom.length > 0 ? strLovCom : '-') + ' Working Capital Account DPDs (Cibil) : ' + (element.answer.wcaCibilDpd || '-') + ' Working Capital Account DPDs (Experian) : ' + (element.answer.wcaExperianDpd || '-') + ' Current Account DPDs (Cibil) : ' + (element.answer.caCibilDpd || '-') + ' Current Account DPDs (Experian) : ' + (element.answer.caExperianDpd || '-') ;
+        element.answerValue = ' Selected Types : ' + (strLovCom.length > 0 ? strLovCom : '-') + ' Working Capital Account DPDs (Cibil) : ' + (element.answer.wcaCibilDpd || '-') + ' Working Capital Account DPDs (Experian) : ' + (element.answer.wcaExperianDpd || '-') + ' Current Account DPDs (Cibil) : ' + (element.answer.caCibilDpd || '-') + ' Current Account DPDs (Experian) : ' + (element.answer.caExperianDpd || '-') ; */
         break;
       case "SECURITY":
         element.answerValue = "Collateral  Security Range Min : " + element.answer.collateralMin + " Max : " + element.answer.collateralMax + " Primary Security Range Min : " + element.answer.primaryMin + " Max : " + element.answer.primaryMax;

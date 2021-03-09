@@ -1077,11 +1077,105 @@ export class ProductComponent implements OnInit, AfterViewInit {
             // Set parameters
             this.product.parameters = response.data.product.parameters;
             this.product.parameters.forEach(element => {
+              /* element.lovs = JSON.parse(element.lovs);
               this.addFormControl(element); // create form field
               element.answer = JSON.parse(element.answer);
               if(element.code != "CONSTITUTION"){
                 element.lovs = JSON.parse(element.lovs);
+              } */
+          element.lovs = JSON.parse(element.lovs);
+          if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
+            element.answer = JSON.parse(element.answer);
+          }
+          this.addFormControl(element); // Create form field
+          if(this.isMultipleControl.includes(element.code)){
+            if(element.code == "GST_TURNOVER_LIMIT"){
+              /* element.answer = { min: null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 120};
+            }else if(element.code == "CREDIT_SUMMATION"){
+              //element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+            }else if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+//              element.answer.forEach(genControl => {this.addRemoveFromRadioForBS(genControl);});
+            }
+            /* else if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            } */
+            else if(element.code == "MAX_CASH_TRAN_ALL"){
+              /* element.answer = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 100000000};
+              element.option3 = {"floor" : 0 , "ceil" : 100};
+              element.option4 = {"floor" : 1 , "ceil" : 100};
+              element.option5 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
+              /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 1 , "ceil" : 10};
+            }else if(element.code =="INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+              /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 0 , "ceil" : 120};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+            }else if(element.code =="COMMERCIAL_DPD_MAX"){
+              /* element.lovs.lovs = [];
+              element.lovs.lovs =element.lovs; */
+              this.generateMultipleControls(element); 
+              /* element.lovs.cibil ={};
+              element.lovs.cibil.optionWCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.cibil.optionCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.experian = {};
+              element.lovs.experian.optionWCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.experian.optionCA = {"floor": 1,"ceil": 120}; */
+              /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
+              /* element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 0 , "ceil" : 120}; */
+            }else if(element.code =="MIN_BUREAU_SCORE_ALL_DIR_PAR"){
+              /* element.answer = { minCibilScore: element.minValue , maxCibilScore: element.maxValue, minExperianScore : element.minValue, maxExperianScore : element.maxValue , firstLov : [] ,secondLov :[]}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : element.minValue , "ceil" : element.maxValue};
+            }else if(element.code =="SECURITY"){
+              element.option = {"floor" : element.lovs.primarySecurity.min , "ceil" : element.lovs.primarySecurity.max};
+              element.option1 = {"floor" : element.lovs.collateralSecurity.min , "ceil" : element.lovs.collateralSecurity.max};
+            }
+            /* if(element.code =="BANK_ACC_PRIO"){
+              element.answer = { prioSetStr: null , orderedJson : [] , lov : []};
+            } */
+          }else{
+            //element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+              if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
+                //console.log("element :: " ,  element);
+                //element.answer = { min: null, max: null };
+                // element.answer = { min: element.minValue, max: element.maxValue };
+                //element.minMaxRange = {min : element.minValue , max : element.maxValue}
+                element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               }
+              if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+                // element.answer = { min: null};
+                element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              }
+            }
+            // if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+            //   element.answer = true;
+            // }
+          }
             });
             if (response.data.product.parameters.length > 0) { // showing success snackbar
               this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
@@ -1302,9 +1396,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
       }else if(element.code == "COMMERCIAL_DPD_MAX"){
         data = {wcaCibilDpd: inData.wcaCibilDpd != null ? inData.wcaCibilDpd : null, wcaExperianDpd : inData.wcaExperianDpd != null ? inData.wcaExperianDpd : null ,caCibilDpd: inData.caCibilDpd != null ? inData.caCibilDpd : null , caExperianDpd : inData.caExperianDpd != null ? inData.caExperianDpd : null, months : inData.months != null ? inData.months : null, lovAns2 : inData.lovAns2 != null ? inData.lovAns2 : null, lovAns :  inData.lovAns != null ? inData.lovAns : null, seqNo : this.generateSeqNo(inData)};
       }else if(element.code == "MAX_CASH_TRAN_ALL"){
-        data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
-      }else{
         data = { minCount: inData.minCount != null ? inData.minCount : null , maxCount : inData.maxCount != null ? inData.maxCount : null, minAmount : inData.minAmount != null ? inData.minAmount : null, maxAmount : inData.maxAmount != null ? inData.maxAmount : null, minCountPer : inData.minCountPer != null ? inData.minCountPer : null, maxCountPer : inData.maxCountPer != null ? inData.maxCountPer : null, minAmtPer : inData.minAmtPer != null ? inData.minAmtPer : null, maxAmtPer : inData.maxAmtPer != null ? inData.maxAmtPer : null, lovAns : inData.lovAns != null ? inData.lovAns : null, lovAns2 : inData.lovAns2 != null ? inData.lovAns2 : null,seqNo : this.generateSeqNo(inData)};
+      }else{
+        data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
       }
       console.log("out data :: " , data)
       this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
@@ -1325,14 +1419,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').addControl('min4_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
         // this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
       }else if(element.code == "MAX_CASH_TRAN_ALL"){
-        this.productForm.get('paramForm').addControl('min_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
-        if (inData.lovAns == 2) {
-          this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
-        }
-      }else{
         this.productForm.get('paramForm').addControl('radio2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
         if(inData.lovAns2 == 2){
           this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        }
+      }else{
+        this.productForm.get('paramForm').addControl('min_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        if (inData.lovAns == 2) {
+          this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
         }
       } 
     });
