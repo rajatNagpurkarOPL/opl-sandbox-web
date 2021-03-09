@@ -13,7 +13,6 @@ import { ImportParameterPopupComponent } from '../import-parameter-popup/import-
 import _ from 'lodash';
 import { Options } from 'ng5-slider';
 import { GeographicalAreasPopupComponent } from 'src/app/popup/geographical-areas-popup/geographical-areas-popup.component';
-import { element } from 'protractor';
 
 // tslint:disable: max-line-length
 
@@ -1078,11 +1077,105 @@ export class ProductComponent implements OnInit, AfterViewInit {
             // Set parameters
             this.product.parameters = response.data.product.parameters;
             this.product.parameters.forEach(element => {
+              /* element.lovs = JSON.parse(element.lovs);
               this.addFormControl(element); // create form field
               element.answer = JSON.parse(element.answer);
               if(element.code != "CONSTITUTION"){
                 element.lovs = JSON.parse(element.lovs);
+              } */
+          element.lovs = JSON.parse(element.lovs);
+          if (!this.commonService.isObjectNullOrEmpty(element.answer)) {
+            element.answer = JSON.parse(element.answer);
+          }
+          this.addFormControl(element); // Create form field
+          if(this.isMultipleControl.includes(element.code)){
+            if(element.code == "GST_TURNOVER_LIMIT"){
+              /* element.answer = { min: null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 120};
+            }else if(element.code == "CREDIT_SUMMATION"){
+              //element.answer = { min: element.minValue , max : element.maxValue , lovAns : null};
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+            }else if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+//              element.answer.forEach(genControl => {this.addRemoveFromRadioForBS(genControl);});
+            }
+            /* else if(element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            }else if(element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+            } */
+            else if(element.code == "MAX_CASH_TRAN_ALL"){
+              /* element.answer = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option2 = {"floor" : 1 , "ceil" : 100000000};
+              element.option3 = {"floor" : 0 , "ceil" : 100};
+              element.option4 = {"floor" : 1 , "ceil" : 100};
+              element.option5 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
+              /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 1 , "ceil" : 10};
+            }else if(element.code =="INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+              /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 0 , "ceil" : 120};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
+            }else if(element.code =="COMMERCIAL_DPD_MAX"){
+              /* element.lovs.lovs = [];
+              element.lovs.lovs =element.lovs; */
+              this.generateMultipleControls(element); 
+              /* element.lovs.cibil ={};
+              element.lovs.cibil.optionWCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.cibil.optionCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.experian = {};
+              element.lovs.experian.optionWCA = {"floor": 1 ,"ceil" : 120};
+              element.lovs.experian.optionCA = {"floor": 1,"ceil": 120}; */
+              /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
+              /* element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : 0 , "ceil" : 120}; */
+            }else if(element.code =="MIN_BUREAU_SCORE_ALL_DIR_PAR"){
+              /* element.answer = { minCibilScore: element.minValue , maxCibilScore: element.maxValue, minExperianScore : element.minValue, maxExperianScore : element.maxValue , firstLov : [] ,secondLov :[]}; */
+              element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              element.option1 = {"floor" : element.minValue , "ceil" : element.maxValue};
+            }else if(element.code =="SECURITY"){
+              element.option = {"floor" : element.lovs.primarySecurity.min , "ceil" : element.lovs.primarySecurity.max};
+              element.option1 = {"floor" : element.lovs.collateralSecurity.min , "ceil" : element.lovs.collateralSecurity.max};
+            }
+            /* if(element.code =="BANK_ACC_PRIO"){
+              element.answer = { prioSetStr: null , orderedJson : [] , lov : []};
+            } */
+          }else{
+            //element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+            if (element.paramType.id === Constant.MASTER_TYPE.RANGE.id) {
+              if (element.inputType.id === Constant.MASTER_TYPE.INPUT_TEXT.id){
+                //console.log("element :: " ,  element);
+                //element.answer = { min: null, max: null };
+                // element.answer = { min: element.minValue, max: element.maxValue };
+                //element.minMaxRange = {min : element.minValue , max : element.maxValue}
+                element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               }
+              if (element.inputType.id === Constant.MASTER_TYPE.RANGE.id){
+                // element.answer = { min: null};
+                element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
+              }
+            }
+            // if (element.paramType.id === Constant.MASTER_TYPE.YES_NO.id) {
+            //   element.answer = true;
+            // }
+          }
             });
             if (response.data.product.parameters.length > 0) { // showing success snackbar
               this.commonService.successSnackBar(response.data.product.parameters.length + ' parameters added successfully');
@@ -1174,12 +1267,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
                   element.option1 = {"floor" : 1 , "ceil" : 10};
                 }
                 if(element.code =="INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
-                  element.answer = { cibilDpd: null , experianDpd : null , lovAns : null};
+                  element.answer = [];
+                  this.addBSControls(element);
+                  //element.answer = { cibilDpd: null , experianDpd : null , lovAns : null};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option1 = {"floor" : 0 , "ceil" : 120};
+                  element.option2 = {"floor" : 1 , "ceil" : 24};
                 }
                 if(element.code =="COMMERCIAL_DPD_MAX"){
-                  element.answer = { wcaCibilDpd: null , wcaExperianDpd : null ,caCibilDpd: null , caExperianDpd : null , lovAns : null};
+                  element.answer = [];
+                  this.addBSControls(element);
+                  //element.answer = { wcaCibilDpd: null , wcaExperianDpd : null ,caCibilDpd: null , caExperianDpd : null , lovAns : null};
                   //element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   //element.option1 = {"floor" : 0 , "ceil" : 120};
                 }
@@ -1241,9 +1339,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
     console.log("element data :: ",element);
     console.log("element data :: ",this.generateSeqNo(element));
     let data = null;
-    if(element.code != "MAX_CASH_TRAN_ALL"){
+    if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      data = { cibilDpd: null , experianDpd : null , lovAns : null, months : null, seqNo : this.generateSeqNo(element)}; 
+    }else if(element.code == "COMMERCIAL_DPD_MAX"){
+      data = {wcaCibilDpd: null , wcaExperianDpd : null ,caCibilDpd: null , caExperianDpd : null , months : null, lovAns2 : null, lovAns :  JSON.parse(JSON.stringify(element.lovs.lovs)), seqNo : this.generateSeqNo(element)};
+    }else if(element.code != "MAX_CASH_TRAN_ALL"){
       data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)} 
-    }else{
+    }
+    /* else if(element.code != "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      data = { cibilDpd: null , experianDpd : null , lovAns : null, month : null, seqNo : this.generateSeqNo(element)}; 
+    } */
+    else{
       data = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null, lovAns2 : null , months : null, seqNo : this.generateSeqNo(element)};
     }
     //{ minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}
@@ -1252,10 +1358,31 @@ export class ProductComponent implements OnInit, AfterViewInit {
     dataList.push(data); */
     element.answer.push(data);
     this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
-    if(element.code != "MAX_CASH_TRAN_ALL"){
+    if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    }else if(element.code == "COMMERCIAL_DPD_MAX"){
+      if(element.lovs.lovs != null && element.lovs.lovs.length > 0){
+        const formArray = [];
+        element.lovs.lovs.forEach((lov, i) => {
+          formArray.push({i: new FormControl() });
+        });
+        this.productForm.get('paramForm').addControl('inputCheckbox_' + data.seqNo + element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+      }
+      this.productForm.get('paramForm').addControl('min1_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min3_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min4_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      // this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
+    }else if(element.code != "MAX_CASH_TRAN_ALL"){
       //this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
       this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
-    }else{
+    }
+    /* else if(element.code != "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    } */
+    else{
       this.productForm.get('paramForm').addControl('radio2_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
     }
   }
@@ -1264,22 +1391,42 @@ export class ProductComponent implements OnInit, AfterViewInit {
     element.answer.forEach(inData => {
       console.log("in data :: " , inData);
       let data = null;
-      if(element.code != "MAX_CASH_TRAN_ALL"){
-        data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
-      }else{
+      if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+        data = { cibilDpd: inData.cibilDpd != null ? inData.cibilDpd : null, experianDpd : inData.experianDpd != null ? inData.experianDpd : null, lovAns : inData.lovAns != null ? inData.lovAns : null, months : inData.months != null ? inData.months : null, seqNo : this.generateSeqNo(inData)}; 
+      }else if(element.code == "COMMERCIAL_DPD_MAX"){
+        data = {wcaCibilDpd: inData.wcaCibilDpd != null ? inData.wcaCibilDpd : null, wcaExperianDpd : inData.wcaExperianDpd != null ? inData.wcaExperianDpd : null ,caCibilDpd: inData.caCibilDpd != null ? inData.caCibilDpd : null , caExperianDpd : inData.caExperianDpd != null ? inData.caExperianDpd : null, months : inData.months != null ? inData.months : null, lovAns2 : inData.lovAns2 != null ? inData.lovAns2 : null, lovAns :  inData.lovAns != null ? inData.lovAns : null, seqNo : this.generateSeqNo(inData)};
+      }else if(element.code == "MAX_CASH_TRAN_ALL"){
         data = { minCount: inData.minCount != null ? inData.minCount : null , maxCount : inData.maxCount != null ? inData.maxCount : null, minAmount : inData.minAmount != null ? inData.minAmount : null, maxAmount : inData.maxAmount != null ? inData.maxAmount : null, minCountPer : inData.minCountPer != null ? inData.minCountPer : null, maxCountPer : inData.maxCountPer != null ? inData.maxCountPer : null, minAmtPer : inData.minAmtPer != null ? inData.minAmtPer : null, maxAmtPer : inData.maxAmtPer != null ? inData.maxAmtPer : null, lovAns : inData.lovAns != null ? inData.lovAns : null, lovAns2 : inData.lovAns2 != null ? inData.lovAns2 : null,seqNo : this.generateSeqNo(inData)};
+      }else{
+        data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
       }
       console.log("out data :: " , data)
       this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
-      if(element.code != "MAX_CASH_TRAN_ALL"){
-        this.productForm.get('paramForm').addControl('min_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
-        if (inData.lovAns == 2) {
-          this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+        this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      }else if(element.code == "COMMERCIAL_DPD_MAX"){
+        if(element.lovs.lovs != null && element.lovs.lovs.length > 0){
+          const formArray = [];
+          element.lovs.lovs.forEach((lov, i) => {
+            formArray.push({i: new FormControl() });
+          });
+          this.productForm.get('paramForm').addControl('inputCheckbox_' + data.seqNo + element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
         }
-      }else{
+        this.productForm.get('paramForm').addControl('min1_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+        this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+        this.productForm.get('paramForm').addControl('min3_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+        this.productForm.get('paramForm').addControl('min4_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+        // this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
+      }else if(element.code == "MAX_CASH_TRAN_ALL"){
         this.productForm.get('paramForm').addControl('radio2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
         if(inData.lovAns2 == 2){
           this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        }
+      }else{
+        this.productForm.get('paramForm').addControl('min_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+        if (inData.lovAns == 2) {
+          this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
         }
       } 
     });
@@ -1377,15 +1524,18 @@ export class ProductComponent implements OnInit, AfterViewInit {
               /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : 0 , "ceil" : 120};
+              element.option2 = {"floor" : 1 , "ceil" : 24};
+              this.generateMultipleControls(element);
             }else if(element.code =="COMMERCIAL_DPD_MAX"){
               /* element.lovs.lovs = [];
-              element.lovs.lovs =element.lovs; */ 
-              element.lovs.cibil ={};
+              element.lovs.lovs =element.lovs; */
+              this.generateMultipleControls(element); 
+              /* element.lovs.cibil ={};
               element.lovs.cibil.optionWCA = {"floor": 1 ,"ceil" : 120};
               element.lovs.cibil.optionCA = {"floor": 1 ,"ceil" : 120};
               element.lovs.experian = {};
               element.lovs.experian.optionWCA = {"floor": 1 ,"ceil" : 120};
-              element.lovs.experian.optionCA = {"floor": 1,"ceil": 120};
+              element.lovs.experian.optionCA = {"floor": 1,"ceil": 120}; */
               /* element.answer = { cibilDpd: null , experianDpd : null , lovAns : null}; */
               /* element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : 0 , "ceil" : 120}; */
@@ -1558,12 +1708,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
       }
-      if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      /* if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
-      }
+      } */
       if(param.code == "COMMERCIAL_DPD_MAX"){
-        if(param.lovs.lovs != null && param.lovs.lovs.length > 0){
+        /* if(param.lovs.lovs != null && param.lovs.lovs.length > 0){
           const formArray = [];
           param.lovs.lovs.forEach((lov, i) => {
             formArray.push({i: new FormControl() });
@@ -1573,7 +1723,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min3_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
-        this.productForm.get('paramForm').addControl('min4_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+        this.productForm.get('paramForm').addControl('min4_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)])); */
       }
       if(param.code == "MIN_BUREAU_SCORE_ALL_DIR_PAR"){
         if(param.lovs != null && param.lovs.firstLov.length > 0){
@@ -1707,18 +1857,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
       } */
-      if(param.code == "MAX_CASH_TRAN_ALL"){
+      if(param.code == "MAX_CASH_TRAN_ALL" || param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         param.answer.forEach(element => {
           this.productForm.get('paramForm').removeControl('radio_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('radio2_'+ element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('max_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min1_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min2_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('max2_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min3_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('max3_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('min4_' + element.seqNo + param.parameterId);
           this.productForm.get('paramForm').removeControl('max4_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min5_' + element.seqNo + param.parameterId);
         });
         param.answer=[];
         /* if(param.lovs != null && param.lovs.length > 0){
@@ -1733,14 +1885,24 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
       }
-      if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+     /*  if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
-      }
+      } */
       if(param.code == "COMMERCIAL_DPD_MAX"){
-        this.productForm.get('paramForm').removeControl('inputRadio_' + param.parameterId);
+        /* this.productForm.get('paramForm').removeControl('inputRadio_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
-        this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('min2_' + param.parameterId); */
+        param.answer.forEach(element => {
+          this.productForm.get('paramForm').removeControl('radio_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('inputCheckbox_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min1_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min2_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min3_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min4_' + element.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min5_' + element.seqNo + param.parameterId);
+        });
+        param.answer=[];
       }
       if(param.code == "MIN_BUREAU_SCORE_ALL_DIR_PAR"){
         if(param.lovs != null && param.lovs.firstLov.length > 0){
@@ -1842,6 +2004,42 @@ export class ProductComponent implements OnInit, AfterViewInit {
   setCheckboxAnswerFeomJSON(param){
     param.answer.lovAns = param.lovs.lovs.filter(l => l.isSelect);
   }
+
+  // setMultiCheckboxAnswerFeomJSON(event,datas){
+  //   console.log("event:: " , event);
+  //   if (-1 !== datas.accIds.indexOf(event.source.id)) {
+  //     if (event.checked) {
+  //       datas.accIds.push(event.source.name);
+  //     } else {
+  //       datas.accIds.splice(datas.accIds.indexOf(event.source.id), 1);
+  //     }
+  //   }
+  // }
+
+  /* setMultiCheckboxAnswerFeomJSON(param,i,item,name){
+    console.log("param asdas:: " , param);
+    console.log("param :: " , this.productForm.get('paramForm'));
+    this.productForm.get('paramForm').controls[name].controls.forEach(inControl => {
+      console.log("inControl.touched ::" ,inControl.touched)
+      console.log("inControl.dirty ::" ,inControl.dirty)
+      if(inControl.dirty){
+        console.log("item.answer[item.answer.indexOf(param)] :: " , item.answer[item.answer.indexOf(param)]);
+        // item.answer[item.answer.indexOf(param)].lovAns = param.lovs.filter(l => l.isSelect);
+        // param.lovAns = param.lovs.filter(l => l.isSelect);
+      }
+    });
+  } */
+
+  /* setMultiCheckboxAnswerFeomJSON(param,i,item,name){
+    this.productForm.get('paramForm').controls[name].controls.forEach(inControl => {
+      if(inControl.dirty){
+        console.log("item.answer[item.answer.indexOf(param)] :: " , item.answer[item.answer.indexOf(param)]);
+        // item.answer[item.answer.indexOf(param)].lovAns = param.lovs.filter(l => l.isSelect);
+        console.log("param.lovs.filter(l => l['isSelect_'+param.seqNo+item.parameterId]) :: " , param.lovs.filter(l => l.isSelected));
+        param.lovAns = param.lovs.filter(l => l.isSelected);
+      }
+    });
+  } */
 
   check(value){
     value.answer.firstLov = value.lovs.firstLov.filter(l => l.isSelect);
@@ -2039,7 +2237,21 @@ export class ProductComponent implements OnInit, AfterViewInit {
   addRemoveInBS(datas,item, multipleLovCheckType ?){
     console.log(datas,item)
     /* if(datas.lovAns != null && datas.lovAns != undefined){ */
-      if(item.code != "MAX_CASH_TRAN_ALL"){
+      if(item.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+        if(datas.lovAns == 2){
+          this.productForm.get('paramForm').addControl('min3_'+ datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)]));
+        }else{
+         /*  datas.value = null;
+          datas.months = null; */
+          this.productForm.get('paramForm').removeControl('min3_'+ datas.seqNo + item.parameterId);
+        }
+      } else if(item.code == "COMMERCIAL_DPD_MAX"){
+        if(datas.lovAns2 == 2){
+          this.productForm.get('paramForm').addControl('min5_' + datas.seqNo + item.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
+        }else{
+          this.productForm.get('paramForm').removeControl('min5_'+ datas.seqNo + item.parameterId);
+        }
+      }else if(item.code != "MAX_CASH_TRAN_ALL"){
         if(datas.lovAns == 2){
           this.productForm.get('paramForm').addControl('min2_'+ datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)]));
         }else{
@@ -2047,7 +2259,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
           datas.months = null; */
           this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
         }
-      }else{
+      }
+      /* else if(item.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+        if(datas.lovAns == 2){
+          this.productForm.get('paramForm').addControl('min3_'+ datas.seqNo + item.parameterId, this.fb.control('', [Validators.required, Validators.max(24) , Validators.min(1)]));
+        }else{
+          this.productForm.get('paramForm').removeControl('min3_'+ datas.seqNo + item.parameterId);
+        }
+      } */ 
+      else{
         let count = ['min2_','max2_','min3_','max3_','min4_','max4_'];
         //let countStr = ['minAmount','maxAmount','minCountPer','maxCountPer','minAmtPer','maxAmtPer'];
         let countPer = ['min2_','max2_','min_','max_','min4_','max4_'];
@@ -2116,6 +2336,19 @@ export class ProductComponent implements OnInit, AfterViewInit {
     console.log('radio_'+ datas.seqNo + item.parameterId);
     
     this.productForm.get('paramForm').removeControl('radio_'+ datas.seqNo + item.parameterId);
+    if(item.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').removeControl('min1_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_'+ datas.seqNo + item.parameterId);
+    }
+    if(item.code == "COMMERCIAL_DPD_MAX"){
+      this.productForm.get('paramForm').removeControl('inputCheckbox_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min1_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min4_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min5_' + datas.seqNo + item.parameterId);
+    }
     if(item.code != "MAX_CASH_TRAN_ALL"){
       this.productForm.get('paramForm').removeControl('min_'+ datas.seqNo + item.parameterId);
       this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
