@@ -192,6 +192,7 @@
                                   </ng-container>
 
                                   <ng-container *ngIf="item.code == 'CREDIT_SUMMATION'">
+                                    {{item | json}}
                                     <!-- <div class="matches-parameter1"> -->
                                       <div class="fl-column">
                                         <p>
@@ -804,7 +805,31 @@
                                   </ng-container>
 
                                   <ng-container *ngIf="item.code == 'INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR'">
-                                    <table class="table btm-0 pd-2">
+                                    <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
+                                    <table class="table btm-0 pd-2" *ngFor="let datas of item.answer; let i=index">
+                                    <div class="fl-column">
+                                      <div class="matches-right">
+                                        <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns" (ngModelChange)="addRemoveInBS(datas,item)" formControlName="radio_{{datas.seqNo}}{{item.parameterId}}">
+                                          <mat-radio-button *ngFor="let data of item.lovs" [value]="data.id">{{data.value}}</mat-radio-button>
+                                        </mat-radio-group>
+                                        <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                      </div>
+                                      
+                                      <div style="width: 100%;" *ngIf="datas.lovAns == 2">
+                                        <div class="fl-column">
+                                          <div class="matches-right w-75">
+                                            <ng5-slider [(value)]="datas.months" [options]="item.option2"></ng5-slider>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Months</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.months" formControlName="min3_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min3_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </div>
                                       <tbody>
                                         <tr>
                                           <th scope="row">Bureau</th>
@@ -814,35 +839,60 @@
                                         <tr>
                                           <th scope="row">CIBIL</th>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.cibilDpd" [options]="item.option"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.cibilDpd" [options]="item.option"></ng5-slider>
                                           </td>
                                           <td class="w-30">
-                                            <input type="text" placeholder="Enter Number" [(ngModel)]="item.answer.cibilDpd" formControlName="min1_{{item.parameterId}}">
-                                            <app-print-error [control]="pf['min1_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            <input type="text" placeholder="Enter Number" [(ngModel)]="datas.cibilDpd" formControlName="min1_{{datas.seqNo}}{{item.parameterId}}">
+                                            <app-print-error [control]="pf['min1_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                           </td>
                                         </tr>
                                         <tr>
                                           <th scope="row">Experian</th>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.experianDpd" [options]="item.option1"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.experianDpd" [options]="item.option1"></ng5-slider>
                                           </td>
                                           <td class="w-30">
-                                            <input type="text" placeholder="Enter Number" [(ngModel)]="item.answer.experianDpd" formControlName="min2_{{item.parameterId}}">
-                                            <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                            <input type="text" placeholder="Enter Number" [(ngModel)]="datas.experianDpd" formControlName="min2_{{datas.seqNo}}{{item.parameterId}}">
+                                            <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                           </td>
                                         </tr>
                                       </tbody>
+                                      <button mat-raised-button color="primary" (click)="removeInParameter(datas,item)" *ngIf="item.answer.length != 1"> Remove </button>
                                     </table>
                                     <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                   </ng-container>
 
                                   <ng-container *ngIf="item.code == 'COMMERCIAL_DPD_MAX'">
+                                    <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
+                                    <div class="fl-column" *ngFor="let datas of item.answer; let i=index">
+                                      <div class="matches-right">
+                                        <mat-radio-group aria-label="Select an option" [(ngModel)]="datas.lovAns2" (ngModelChange)="addRemoveInBS(datas,item)" formControlName="radio_{{datas.seqNo}}{{item.parameterId}}">
+                                          <mat-radio-button *ngFor="let data of item.lovs.lov2" [value]="data.id">{{data.value}}</mat-radio-button>
+                                        </mat-radio-group>
+                                        <app-print-error [control]="pf['radio_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                      </div>
+                                      
+                                      <div style="width: 100%;" *ngIf="datas.lovAns2 == 2">
+                                        <div class="fl-column">
+                                          <div class="matches-right w-75">
+                                            <ng5-slider [(value)]="datas.months" [options]="item.lovs.optionTime"></ng5-slider>
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Months</div>
+                                          </div>
+                                          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.months" formControlName="min5_{{datas.seqNo}}{{item.parameterId}}">
+                                          <app-print-error [control]="pf['min5_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                        </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     <p class="buttin-b4l-opacity">
-                                      <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs.lovs; let i = index">
-                                        <mat-checkbox class="example-margin" class="w-28" [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect"  (ngModelChange)="setCheckboxAnswerFeomJSON(item)"> {{c.value}}</mat-checkbox>
+                                      <label formArrayName="inputCheckbox_{{datas.seqNo}}{{item.parameterId}}" *ngFor="let c of datas.lovAns; let m = index">
+                                        <mat-checkbox class="example-margin" class="w-28" [formControlName]="m" type="checkbox" [(ngModel)]="c.isSelected"> {{c.value}}</mat-checkbox>   <!-- (change)="setMultiCheckboxAnswerFeomJSON(datas,i,item,'inputCheckbox_'+(datas.seqNo)+(item.parameterId))" -->
                                       </label>
-                                      <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                      <app-print-error [control]="pf['inputCheckbox_'+datas.seqNo+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                     </p>
+
                                     <table class="table btm-0 pd-2">
                                       <thead>
                                         <tr>
@@ -860,15 +910,15 @@
                                           <td>Working Capital Accounts</td>
                                           <td>CIBIL</td>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.wcaCibilDpd" [options]="item.lovs.cibil.optionWCA"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.wcaCibilDpd" [options]="item.lovs.cibil.optionWCA"></ng5-slider>
                                           </td>
                                           <td class="w-30">
                                             <div class="input-group">
                                               <div class="input-group-prepend">
                                                 <div class="input-group-text">DPDs</div>
                                               </div>
-                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="item.answer.wcaCibilDpd" (ngModelChange)="ref(item)" formControlName="min1_{{item.parameterId}}">
-                                              <app-print-error [control]="pf['min1_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="datas.wcaCibilDpd" (ngModelChange)="ref(item)" formControlName="min1_{{datas.seqNo}}{{item.parameterId}}">
+                                              <app-print-error [control]="pf['min1_'+datas.seqNo+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </div>
                                           </td>
                                         </tr>
@@ -877,15 +927,15 @@
                                           <td></td>
                                           <td>Experian</td>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.wcaExperianDpd" [options]="item.lovs.experian.optionWCA"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.wcaExperianDpd" [options]="item.lovs.experian.optionWCA"></ng5-slider>
                                           </td>
                                           <td class="w-30">
                                             <div class="input-group">
                                               <div class="input-group-prepend">
                                                 <div class="input-group-text">DPDs</div>
                                               </div>
-                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="item.answer.wcaExperianDpd" formControlName="min2_{{item.parameterId}}">
-                                              <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="datas.wcaExperianDpd" formControlName="min2_{{datas.seqNo}}{{item.parameterId}}">
+                                              <app-print-error [control]="pf['min2_'+datas.seqNo+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </div>
                                           </td>
                                         </tr>
@@ -894,15 +944,15 @@
                                           <td>Current Account</td>
                                           <td>CIBIL</td>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.caCibilDpd" [options]="item.lovs.cibil.optionCA"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.caCibilDpd" [options]="item.lovs.cibil.optionCA"></ng5-slider>
                                           </td>
                                           <td class="w-30">
                                             <div class="input-group">
                                               <div class="input-group-prepend">
                                                 <div class="input-group-text">DPDs</div>
                                               </div>
-                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="item.answer.caCibilDpd" formControlName="min3_{{item.parameterId}}">
-                                              <app-print-error [control]="pf['min3_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="datas.caCibilDpd" formControlName="min3_{{datas.seqNo}}{{item.parameterId}}">
+                                              <app-print-error [control]="pf['min3_'+datas.seqNo+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </div>
                                           </td>
                                         </tr>
@@ -911,20 +961,22 @@
                                           <td></td>
                                           <td>Experian</td>
                                           <td class="w-30">
-                                            <ng5-slider [(value)]="item.answer.caExperianDpd" [options]="item.lovs.experian.optionCA"></ng5-slider>
+                                            <ng5-slider [(value)]="datas.caExperianDpd" [options]="item.lovs.experian.optionCA"></ng5-slider>
                                           </td>
                                           <td class="w-30">
                                             <div class="input-group">
                                               <div class="input-group-prepend">
                                                 <div class="input-group-text">DPDs</div>
                                               </div>
-                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="item.answer.caExperianDpd" formControlName="min4_{{item.parameterId}}">
-                                              <app-print-error [control]="pf['min4_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                              <input type="text" aria-label="Text input with checkbox" placeholder="Enter Days" class="form-control" [(ngModel)]="datas.caExperianDpd" formControlName="min4_{{datas.seqNo}}{{item.parameterId}}">
+                                              <app-print-error [control]="pf['min4_'+datas.seqNo+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                             </div>
                                           </td>
                                         </tr>
                                       </tbody>
                                     </table>
+                                    <button mat-raised-button color="primary" (click)="removeInParameter(datas,item)" *ngIf="item.answer.length != 1"> Remove </button>
+                                  </div>
                                     <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                   </ng-container>
 
