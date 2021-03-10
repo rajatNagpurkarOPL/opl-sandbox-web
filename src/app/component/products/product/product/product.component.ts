@@ -243,6 +243,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
       let range = this.getDynamicRange(Constant.PI.value);
       data.scalingMaster.penalInterest.forEach(ele => {this.piControls.push(this.createRangeForm(Constant.PI.value,range,ele));});
     }
+    if(data.scalingMaster.prePayment != null && data.scalingMaster.prePayment != undefined && data.scalingMaster.prePayment.length > 0){
+      let range = this.getDynamicRange(Constant.PP.value);
+      data.scalingMaster.prePayment.forEach(ele => {this.ppControls.push(this.createRangeForm(Constant.PP.value,range,ele));});
+    }
+
+    if(data.scalingMaster.bounce != null && data.scalingMaster.bounce != undefined && data.scalingMaster.bounce.length > 0){
+      let range = this.getDynamicRange(Constant.BOUNCE.value);
+      data.scalingMaster.bounce.forEach(ele => {this.bounceControls.push(this.createRangeForm(Constant.BOUNCE.value,range,ele));});
+    }
+
+    if(data.scalingMaster.latePayment != null && data.scalingMaster.latePayment != undefined && data.scalingMaster.latePayment.length > 0){
+      let range = this.getDynamicRange(Constant.LP.value);
+      data.scalingMaster.latePayment.forEach(ele => {this.lpControls.push(this.createRangeForm(Constant.LP.value,range,ele));});
+    }
   }
 
   createRangeForm(type, range, data){
