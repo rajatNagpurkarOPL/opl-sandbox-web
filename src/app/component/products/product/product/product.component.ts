@@ -1261,6 +1261,24 @@ export class ProductComponent implements OnInit, AfterViewInit {
             this.product.elGstTurnOverLov = p.elGstTurnOverLov;
             
           }
+          if (type === 'charges') { // copy Charges & ROI data from approved selected product
+            // Remove all form field
+            this.product.scalingMaster = response.data.product.scalingMaster;
+            this.productForm.controls.scalingMaster.controls.roiBasedOn.patchValue(this.product.scalingMaster.roiBasedOn);
+            this.productForm.controls.scalingMaster.controls.processingFeeBasedOn.patchValue(this.product.scalingMaster.processingFeeBasedOn);
+            this.productForm.controls.scalingMaster.controls.unifiedChargesBasedOn.patchValue(this.product.scalingMaster.unifiedChargesBasedOn);
+            this.productForm.controls.scalingMaster.controls.penalIntBasedOn.patchValue(this.product.scalingMaster.penalIntBasedOn);
+            this.productForm.controls.scalingMaster.controls.effectiveRoiCalcMethod.patchValue(this.product.scalingMaster.effectiveRoiCalcMethod);
+            this.productForm.controls.scalingMaster.controls.bounceBasedOn.patchValue(this.product.scalingMaster.bounceBasedOn);
+            this.productForm.controls.scalingMaster.controls.prePaymentBasedOn.patchValue(this.product.scalingMaster.prePaymentBasedOn);
+            this.productForm.controls.scalingMaster.controls.latePaymentBasedOn.patchValue(this.product.scalingMaster.latePaymentBasedOn);
+
+             Constant.CHARGES_ROI_LIST.forEach(element=> {
+               this.productForm.controls.scalingMaster.controls[Constant[element].controlName] = this.fb.array([]);
+             });
+            this.addDataIfFound(this.product);
+
+          }
         }
       });
   }

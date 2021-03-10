@@ -83,6 +83,7 @@ export const Constant = {
     BOUNCE : {"value" : "BOUNCE", "controlName" : "bounce" , "controlGroup" : "bounceControls","dropDownValue": "bounceBasedOn", "isMandatory" : false},
     LP : {"value" : "LP", "controlName" : "latePayment" , "controlGroup" : "lpControls","dropDownValue": "latePaymentBasedOn", "isMandatory" : false},
     MATRIX_LIST :["ROI","PF","UC","PI"],
+    CHARGES_ROI_LIST :["ROI","PF","UC","PI","PP","BOUNCE","LP"],
     ROI_BASED_ON : [{"id":1,"value":"Maximum Limit"},{"id":2,"value":"Individual Invoice limit"},{"id":3,"value":"Bureau Score"}],
     PROCESSING_FEES_BASED_ON : [{"id":1,"value":"Maximum Assessment Limit"},{"id":2,"value":"Individual Invoice financing amount"},{"id":3,"value":"Bureau Score"}],
     UNIFIED_CHARGE_BASED_ON : [{"id":1,"value":"Maximum Assessment Limit"},{"id":2,"value":"Individual Invoice financing amount"},{"id":3,"value":"Bureau Score"}],
