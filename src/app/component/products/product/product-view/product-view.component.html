@@ -257,6 +257,78 @@
                     </tbody>
                   </table>
 
+                  <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">4. Pre-Payment</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.prePayment; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">6. Bounce</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.bounce; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="psb-xl-12 psb-lg-12 psb-sm-12 psb-md-12 psb-xs-12">
+                    <h4 class="charges-roi-h4">7. Pre-Payment</h4>
+                </div>
+                <table class="table roi">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Score Range</th>
+                        <th scope="col">Based On</th>
+                        <th scope="col">Charge (% Or Rs.) </th>
+                        <th scope="col">Min - Max (Rs.)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of product.scalingMaster.latePayment; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{data.min}} to {{data.max || '-'}}</td>
+                        <td>{{data.basedOnStr}}</td>
+                        <td>{{data.basedOnStr == "Fixed Amount" ?  data.maxRs : (data.basedOnPer)}}</td>
+                        <td>{{data.basedOnStr != "Fixed Amount" ? data.minRs + ' to ' + data.maxRs : ''}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                 <!-- <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>1.</p>
