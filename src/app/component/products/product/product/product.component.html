@@ -773,6 +773,12 @@
                                   </ng-container>
 
                                   <ng-container *ngIf="item.code == 'MAX_PERMISSIBLE_MSME_RANK'">
+                                    <p>
+                                      <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs.noMsmeRanking; let i = index">
+                                          <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect"  (ngModelChange)="setCheckboxAnswerForKey(item,'noMsmeRanking')" /> {{c.value}}
+                                        </label>
+                                    </p>
+                                  <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                     <table class="table btm-0 pd-2">
                                       <tbody>
                                         <tr>
@@ -982,6 +988,12 @@
                                   </ng-container>
 
                                   <ng-container *ngIf="item.code == 'MIN_BUREAU_SCORE_ALL_DIR_PAR'">
+                                    <p>
+                                      <label formArrayName="inputCheckbox3_{{item.parameterId}}" *ngFor="let c of item.lovs.noMsmeRanking; let i = index">
+                                          <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect"  (ngModelChange)="setCheckboxAnswerForKey(item,'noMsmeRanking')" /> {{c.value}}
+                                        </label>
+                                    </p>
+                                    <app-print-error [control]="pf['inputCheckbox3_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                     <div class="matches-parameter1 pd-1 mar-2 br-tp-1 ">
                                       <div class="matches-group-b4l">
                                         <div class="matches-left">
