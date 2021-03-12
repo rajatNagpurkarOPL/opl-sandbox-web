@@ -1363,6 +1363,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                   //element.option1 = {"floor" : 0 , "ceil" : 120};
                 }
                 if(element.code =="MIN_BUREAU_SCORE_ALL_DIR_PAR"){
+                  console.log("score chack :: " , element)
                   element.answer = { minCibilScore: element.minValue , maxCibilScore: element.maxValue, minExperianScore : element.minValue, maxExperianScore : element.maxValue , firstLov : [] ,secondLov :[]};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option1 = {"floor" : element.minValue , "ceil" : element.maxValue};
@@ -1407,7 +1408,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   generateSeqNo(element){ 
-    console.log("element in seq gen :: ", element);
+    //console.log("element in seq gen :: ", element);
     if(element.seqNo != null && element.seqNo !=undefined){
       return element.seqNo;
     }else{
@@ -1470,7 +1471,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   generateMultipleControls(element){
     element.answer.forEach(inData => {
-      console.log("in data :: " , inData);
+      //console.log("in data :: " , inData);
       let data = null;
       if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         data = { cibilDpd: inData.cibilDpd != null ? inData.cibilDpd : null, experianDpd : inData.experianDpd != null ? inData.experianDpd : null, lovAns : inData.lovAns != null ? inData.lovAns : null, months : inData.months != null ? inData.months : null, seqNo : this.generateSeqNo(inData)}; 
@@ -1481,7 +1482,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       }else{
         data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
       }
-      console.log("out data :: " , data)
+      // console.log("out data :: " , data)
       this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
       if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
@@ -1511,7 +1512,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }
       } 
     });
-    console.log("form gen :: " , this.productForm);
+    // console.log("form gen :: " , this.productForm);
     /* let data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)}
     this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
     this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element))); */
@@ -1621,6 +1622,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               /* element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : 0 , "ceil" : 120}; */
             }else if(element.code =="MIN_BUREAU_SCORE_ALL_DIR_PAR"){
+              console.log("score check get", element)
               /* element.answer = { minCibilScore: element.minValue , maxCibilScore: element.maxValue, minExperianScore : element.minValue, maxExperianScore : element.maxValue , firstLov : [] ,secondLov :[]}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : element.minValue , "ceil" : element.maxValue};
@@ -1788,6 +1790,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
+        if(param.lovs != null && param.lovs.noMsmeRanking.length > 0){
+          const formArray = [];
+          param.lovs.noMsmeRanking.forEach((lov, i) => {
+            formArray.push({i: new FormControl() });
+          });
+          this.productForm.get('paramForm').addControl('inputCheckbox_' + param.parameterId, this.fb.array(formArray));
+        }
+        console.log("form is  :: " , this.productForm)
       }
       /* if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
@@ -1820,6 +1830,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
             formArray.push({i: new FormControl() });
           });
           this.productForm.get('paramForm').addControl('inputCheckbox2_' + param.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+        }
+        if(param.lovs != null && param.lovs.noMsmeRanking.length > 0){
+          const formArray = [];
+          param.lovs.noMsmeRanking.forEach((lov, i) => {
+            formArray.push({i: new FormControl() });
+          });
+          this.productForm.get('paramForm').addControl('inputCheckbox3_' + param.parameterId, this.fb.array(formArray));
         }
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', validators));
         this.productForm.get('paramForm').addControl('max_' + param.parameterId, this.fb.control('', validators));
@@ -1965,6 +1982,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
+        this.productForm.get('paramForm').removeControl('inputCheckbox_' + param.parameterId);
       }
      /*  if(param.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
@@ -2000,6 +2018,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           });
           this.productForm.get('paramForm').removeControl('inputCheckbox2_' + param.parameterId);
         }
+        this.productForm.get('paramForm').removeControl('inputCheckbox3_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('max_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
@@ -2080,6 +2099,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
   setCheckboxAnswerForCodeContainer(param){
     console.log("param :: ", param);
     param.answer.lovAns = param.lovs.filter(l => l.isSelect);
+  }
+
+  setCheckboxAnswerForKey(param,key){
+    console.log("param :: ", param);
+    param.answer.lovAns = param.lovs[key].filter(l => l.isSelect);
   }
 
   setCheckboxAnswerFeomJSON(param){
@@ -2316,7 +2340,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.addBSControls(item);
   }
   addRemoveInBS(datas,item, multipleLovCheckType ?){
-    console.log(datas,item)
+    //console.log(datas,item)
     /* if(datas.lovAns != null && datas.lovAns != undefined){ */
       if(item.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         if(datas.lovAns == 2){
@@ -2394,7 +2418,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
             break;
         }
       }
-      console.log(this.productForm)
+      // console.log(this.productForm)
     /* } */
   }
 
