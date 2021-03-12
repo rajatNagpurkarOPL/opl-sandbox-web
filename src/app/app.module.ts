@@ -46,6 +46,8 @@ import { RadiobuttonComponent } from './component/controls/radiobutton/radiobutt
 import { SelectComponent } from './component/controls/select/select.component';
 import { ProductCreateComponent } from './component/product-create/product-create.component';
 import { GeographicalAreasPopupComponent } from './popup/geographical-areas-popup/geographical-areas-popup.component';
+import { ProductNewComponent } from './component/products/product/product-new/product-new.component';
+
 
 
 @NgModule({
@@ -83,6 +85,7 @@ import { GeographicalAreasPopupComponent } from './popup/geographical-areas-popu
     SelectComponent,
     ProductCreateComponent,
     GeographicalAreasPopupComponent,
+    ProductNewComponent
   ],
   imports: [
     ReactiveFormsModule,
