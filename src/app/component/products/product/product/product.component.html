@@ -94,6 +94,18 @@
                           </a>
                       </li> -->
 
+                      <li>
+                        <a class="active"  href="javascript:void(0)"> <p>Repayment Plan
+                            <!-- <span class="dot" style="color: red; font-size: large;">•</span> </p>  -->
+                        </a>
+                    </li>
+
+                    <li>
+                      <a class="active"   href="javascript:void(0)"> <p>Disbursement Plan
+                          <!-- <span class="dot" style="color: red; font-size: large;" >•</span> </p>  -->
+                      </a>
+                  </li>
+
 
                 </ul>
                     <a *ngIf="tab.matches" (click)="importParameterPopup('matches');" href="javaScript:void(0);"
@@ -2616,5 +2628,344 @@
 <!--Terms & Conditions New design end-->
 
 
+<!-- <ng-container>
+  <div class="matches-parameter1 btm-0">
+    <div class="fl-column">
+      <div class="matches-right w-75">
+        <ng5-slider [(value)]="item.answer.months" [options]="item.option">
+        </ng5-slider>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Months</div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Months" [(ngModel)]="item.answer.months" formControlName="min_{{item.parameterId}}">
+          <app-print-error [control]="pf['min_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="matches-parameter1">
+    <div class="matches-group-b4l">
+      <div class="matches-left">
+        <p class="blue-light-bck">Max. 130 Cheque Bounced in Last 20 months will be allowed</p>
+      </div>
+    </div>
+    <div class="matches-right">
+      <ng5-slider [(value)]="item.answer.checkBounced" [options]="item.option2">
+      </ng5-slider>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">No.</div>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="item.answer.checkBounced" formControlName="min2_{{item.parameterId}}">
+        <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+      </div>
+    </div>
+    </div>
+    <img class="opl" src="assets/img/close-red.svg" />
+</ng-container> -->
 
 
+<!-- Repayment Plan start-->
+
+<mat-card class="w-100 matches-parameter ">
+  <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+    <div  class="d-flex js-center al-center w-100">
+      <p class="mr-2 mb-0">1.</p>
+      <div  class="matches-left">
+          <p class="mb-0">Automatic Repayment</p>
+          </div>
+  </div>
+
+    <p class="buttin-b4l-opacity mb-0">
+        <mat-button-toggle-group>
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+        <img src="assets/img/close-red.svg"  class="position-rel" />
+    </p>
+</div>
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">2.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Schedule Type</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<p class="buttin-b4l-opacity">
+  <mat-radio-group >
+      <mat-radio-button [value]="true" class="mr-4"> One time </mat-radio-button>
+      <mat-radio-button [value]="false"> Multiple Time </mat-radio-button>
+  </mat-radio-group>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</p>
+
+<div class="d-flex w-100 al-center js-end">
+  <input  type="text" placeholder="Ener no. of schedule" class="w-50" >
+</div>
+</div>
+</div>
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">3.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Early Payment Acceptance</p>
+        </div>
+</div>
+
+  <p class="buttin-b4l-opacity mb-0">
+      <mat-button-toggle-group>
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+      <img src="assets/img/close-red.svg"  class="position-rel" />
+  </p>
+</div>
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">4.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Change of Method</p>
+        </div>
+</div>
+
+  <p class="buttin-b4l-opacity mb-0">
+      <mat-button-toggle-group>
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+      <img src="assets/img/close-red.svg"  class="position-rel" />
+  </p>
+</div>
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">5.</p>
+    <div  class="matches-left">
+        <p class="mb-0">No. of Installments</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<p class="buttin-b4l-opacity mb-0">
+  <mat-radio-group >
+      <mat-radio-button [value]="true" class="mr-4"> Single Payment </mat-radio-button>
+      <mat-radio-button [value]="false"> Multiple Payment</mat-radio-button>
+  </mat-radio-group>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</p>
+
+<div class="d-flex w-100 al-center js-end">
+  <input  type="text" placeholder="Ener no. of payments" class="w-50" >
+</div>
+</div>
+</div>
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">6.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Interest</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<div class="buttin-b4l-opacity mb-0 matches-parameter1 btm-0 pd-0">
+
+
+  <div class="input-group w-50">
+    <div class="input-group-prepend">
+      <div class="input-group-text">%</div>
+    </div>
+    <input matInput type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Value" >   
+  </div>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</div>
+
+
+</div>
+</div>
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">7.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Tenure</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<div class="buttin-b4l-opacity mb-0 matches-parameter1 btm-0 pd-0">
+
+
+  <div class="input-group w-50">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Years</div>
+    </div>
+    <input matInput type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Value" >   
+  </div>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</div>
+
+
+</div>
+</div>
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">8.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Accepted Invoice Amount Range</p>
+        </div>
+</div>
+
+<div class="d-flex w-100 al-center matches-parameter1 btm-0 pd-0">
+
+  <!-- <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+  </ng5-slider> -->
+    <div class="input-group w-50">
+      <div class="input-group-prepend">
+        <div class="input-group-text"> INR</div>
+      </div>
+      <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number">
+      
+    </div>
+    <p class="mb-0">to</p>
+    <div class="input-group w-50">
+      <div class="input-group-prepend">
+        <div class="input-group-text"> INR</div>
+      </div>
+      <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+     
+    </div>
+
+  </div>
+
+<img src="assets/img/close-red.svg"  class="position-rel" />
+</div>
+
+
+</mat-card>
+
+
+<!-- Repayment Plan end-->
+
+
+<!-- Disbursement Plan start-->
+
+<mat-card class="w-100 matches-parameter ">
+  <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+    <div  class="d-flex js-center al-center w-100">
+      <p class="mr-2 mb-0">1.</p>
+      <div  class="matches-left">
+          <p class="mb-0">Automatic Repayment</p>
+          </div>
+  </div>
+
+    <p class="buttin-b4l-opacity mb-0">
+        <mat-button-toggle-group>
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+        <img src="assets/img/close-red.svg"  class="position-rel" />
+    </p>
+</div>
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">2.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Schedule Type</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<p class="buttin-b4l-opacity">
+  <mat-radio-group >
+      <mat-radio-button [value]="true" class="mr-4"> One time </mat-radio-button>
+      <mat-radio-button [value]="false"> Multiple Time </mat-radio-button>
+  </mat-radio-group>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</p>
+
+<div class="d-flex w-100 al-center js-end">
+  <input  type="text" placeholder="Ener no. of schedule" class="w-50" >
+</div>
+</div>
+</div>
+
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">3.</p>
+    <div  class="matches-left">
+        <p class="mb-0">No. of Installments</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<p class="buttin-b4l-opacity mb-0">
+  <mat-radio-group >
+      <mat-radio-button [value]="true" class="mr-4"> Single Payment </mat-radio-button>
+      <mat-radio-button [value]="false"> Multiple Payment</mat-radio-button>
+  </mat-radio-group>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</p>
+
+<div class="d-flex w-100 al-center js-end">
+  <input  type="text" placeholder="Ener no. of payments" class="w-50" >
+</div>
+</div>
+</div>
+
+
+
+
+<div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+  <div  class="d-flex js-center al-center w-100">
+    <p class="mr-2 mb-0">4.</p>
+    <div  class="matches-left">
+        <p class="mb-0">Tenure</p>
+        </div>
+</div>
+
+<div class="fl-column d-flex w-100">
+<div class="buttin-b4l-opacity mb-0 matches-parameter1 btm-0 pd-0">
+
+
+  <div class="input-group w-50">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Years</div>
+    </div>
+    <input matInput type="text" class="form-control" aria-label="Text input with checkbox" placeholder="8" >   
+  </div>
+  <img src="assets/img/close-red.svg"  class="position-rel" />
+</div>
+
+
+</div>
+</div>
+
+
+
+</mat-card>
+
+<!-- Disbursement Plan end-->
