@@ -14,6 +14,7 @@ import { LspBridgeMatrixComponent } from './component/lsp-bridge-matrix/lsp-brid
 import { ProductListComponent } from './component/products/product-list/product-list.component';
 import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
 import { ProductCreateComponent } from './component/product-create/product-create.component';
+import { DocumentationComponent } from './component/documentation/documentation.component';
 
 const routes: Routes = [
   
@@ -36,6 +37,7 @@ const routes: Routes = [
     { path: 'New-Product-Configuration', component: NewProductConfigurationComponent},
     { path: 'create-product', component: ProductCreateComponent},
     { path: 'create-product/:id', component: ProductCreateComponent },
+    { path: 'documentation', component: DocumentationComponent},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },

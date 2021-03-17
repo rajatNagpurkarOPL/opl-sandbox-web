@@ -1,0 +1,229 @@
+<div class="container">
+        <form [formGroup]="documentForm">
+            <div id="b4l-content" class="charges-roi b4l-height">
+        
+                <div class="b4l-height">
+                    <div class="card-header row row-flex">
+                        <h3 class="card-title" style="border-left-color: inherit; ">
+                        <b><span class="label-text">Create Loan Application Request</span></b>
+                        </h3><!---->
+                    </div>
+                    <div class="card-body"><!---->
+                        <div class="well well-sm p-0">
+                            <div class="table-container">
+                                <div class="form-group">
+                                    <mat-form-field style="width: 10em; background-color: #777;">
+                                        <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
+                                    </mat-form-field>
+                                    <mat-form-field style="width: 90em;">
+                                        <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/loanApplication/createLoanApplicationsRequest">
+                                    </mat-form-field>
+                                    <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                                </div>
+                            </div>
+                            
+                        </div><!---->
+                        <p>
+                            <span>API to Create Loan Application Request.</span>
+                        </p>
+                        <mat-tab-group (selectedTabChange)="setTryOut($event)">
+                            <mat-tab label="Documentation"></mat-tab>
+                            <mat-tab label="Tryout"></mat-tab>
+                        </mat-tab-group>
+            
+                        <div [hidden]="!button">
+                            <div class="example-container">
+                                <form formGroupName="createLoanApplicationForm">
+                                    <p>
+                                    <mat-toolbar>
+                                        <span>Loan Application Details</span>
+                                    </mat-toolbar>
+                                    </p>
+                                    <form formGroupName="loanApplication">
+                                        <mat-form-field>
+                                            <mat-label>Loan ApplicationId</mat-label>
+                                            <input matInput type="text" formControlName="loanApplicationId" readonly>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-label>ProductId Type</mat-label>
+                                            <mat-select formControlName="productType">
+                                                <mat-option *ngFor="let data of productIdTypeMaster" [value]="data">{{data}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-label>Loan Product Type</mat-label>
+                                            <mat-select formControlName="productId">
+                                                <mat-option *ngFor="let data of loanProductTypeMaster" [value]="data">{{data}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-label>Loan Application Status</mat-label>
+                                            <mat-select formControlName="loanApplicationStatus">
+                                                <mat-option *ngFor="let data of loanApplicationStatusMaster" [value]="data">{{data}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        
+                                        <p>
+                                            <br/>
+                                            <mat-toolbar>
+                                                <span>Offer Details</span>
+                                            </mat-toolbar>
+                                        </p>
+                                        <form formGroupName="offer">
+                                            <mat-form-field>
+                                                <mat-label>Primary Id</mat-label>
+                                                <input matInput type="text" formControlName="id" readonly>
+                                            </mat-form-field>
+                                        </form>
+                                        <p>
+                                            <br/>
+                                            <mat-toolbar>
+                                                <span>Borrower Details</span>
+                                            </mat-toolbar>
+                                        </p>
+                                        <form formGroupName="borrower">
+                                            <mat-form-field>
+                                                <mat-label>Primary Id</mat-label>
+                                                <input matInput type="text" formControlName="primaryId" readonly>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>Primary Id Type</mat-label>
+                                                <mat-select formControlName="primaryIdtype">
+                                                    <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>Category</mat-label>
+                                                <mat-select formControlName="category">
+                                                    <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <p>
+                                                <br/>
+                                                <mat-toolbar>
+                                                    <span>Document Details</span>
+                                                </mat-toolbar>
+                                            </p>
+                                            <form formGroupName="document">
+                                                <mat-form-field>
+                                                    <mat-label>Source Id</mat-label>
+                                                    <input matInput type="text" formControlName="sourceId" readonly>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Source Type</mat-label>
+                                                    <mat-select formControlName="sourceType">
+                                                        <mat-option *ngFor="let data of sourcetypeMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Reference Id</mat-label>
+                                                    <input matInput type="text" formControlName="reference" readonly>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Format</mat-label>
+                                                    <mat-select formControlName="format">
+                                                        <mat-option *ngFor="let data of documentFormatMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Type</mat-label>
+                                                    <mat-select formControlName="type">
+                                                        <mat-option *ngFor="let data of documentTypeMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Is Data Inline</mat-label>
+                                                    <input matInput type="boolean" formControlName="isDataInline">
+                                                </mat-form-field>
+                                            </form>
+                                        </form>
+                                        <p>
+                                            <br/>
+                                            <mat-toolbar>
+                                                <span>Pledge Document Details</span>
+                                            </mat-toolbar>
+                                        </p>
+                                        <form formGroupName="pledgeDocument">
+                                            <mat-form-field>
+                                                <mat-label>Primary Id</mat-label>
+                                                <input matInput type="text" formControlName="primaryId" readonly>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>Primary Id Type</mat-label>
+                                                <mat-select formControlName="primaryIdType">
+                                                    <mat-option *ngFor="let data of pledgedDocumentPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-label>Type</mat-label>
+                                                <mat-select formControlName="type">
+                                                    <mat-option *ngFor="let data of pledgedDocumentType" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </form>
+                                        <p>
+                                            <br/>
+                                            <mat-toolbar>
+                                                <span>Applicant Details</span>
+                                            </mat-toolbar>
+                                        </p>
+                                        <form formGroupName="applicant">
+                                            <div>
+                                                <mat-form-field>
+                                                    <mat-label>Primary Id</mat-label>
+                                                    <input matInput type="text" formControlName="primaryId" readonly>
+                                                </mat-form-field>
+
+                                                <mat-form-field>
+                                                    <mat-label>Primary Id Type</mat-label>
+                                                    <mat-select formControlName="primaryIdType">
+                                                        <mat-option *ngFor="let data of applicantPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </div>
+                                        </form>
+                                    </form>
+                                    <br/>
+                                    <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Loan Application Request</button>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="button">
+                    <div class="b4l-height">
+                        <div class="card-header row row-flex">
+                            <h3 class="card-title" style="border-left-color: inherit; ">
+                            <b><span class="label-text">Request</span></b>
+                            </h3><!---->
+                        </div>
+                        <div class="card-body">
+                            <div class="b4l-product-title">
+                            <ul class="product">
+                            <li><a href="javaScript:void(0);"> <p>Schema</p> </a> </li>
+                            <li><a href="javaScript:void(0);"> <p>Body</p> </a></li>
+                            <li><a href="javaScript:void(0);"> <p>Header</p> </a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </form>
+</div>

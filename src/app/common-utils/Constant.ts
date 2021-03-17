@@ -6,6 +6,7 @@ export const Constant = {
         DASHBOARD: mainPath + 'dashboard',
         BRIDGE_MATRIX: mainPath + 'bridge-matrix',
         SETTINGS: mainPath + 'settings',
+        DOCUMENTATION: mainPath + 'documentation',
         PRODUCTS: mainPath + 'products',
         SAVED_PRODUCTS:  mainPath + 'products/save',
         SENT_PRODUCTS:  mainPath + 'products/sent',
