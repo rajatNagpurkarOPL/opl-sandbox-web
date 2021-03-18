@@ -13,6 +13,7 @@ import { ImportParameterPopupComponent } from '../import-parameter-popup/import-
 import _ from 'lodash';
 import { Options } from 'ng5-slider';
 import { GeographicalAreasPopupComponent } from 'src/app/popup/geographical-areas-popup/geographical-areas-popup.component';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 // tslint:disable: max-line-length
 
@@ -47,8 +48,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
   bounceBasedOnMaster : any = [];
   latePaymentBasedOnMaster : any = [];
 
+  scheduleTypeMaster : any = [];
+  noOfInstallMentMaster : any = [];
+  repaymentFreqTypeMaster : any = [];
+
   scalingMaster : FormGroup;
   rangeForm : FormGroup;
+  repaymentPlan : FormGroup;
+  disbursementPlan : FormGroup;
 
   roiSelectedVal = null;
   pfSelectedVal = null;
@@ -57,6 +64,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ppSelectedVal = null;
   bounceSelectedVal = null;
   lateRepaySelectedVal = null;
+
+  tenureEnteredInParam = null;
 
 // @kinjal added
  foods: Food[] = [
@@ -97,6 +106,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
   get pf() { return this.productForm.get('paramForm').controls; } // return parameters form controls
   get cf() { return this.productForm.get('chargesForm').controls; } // return charges & roi form controls
   get sm() { return this.productForm.get('scalingMaster').controls; }
+  get rePay() { return this.productForm.get('repaymentPlan').controls; }
+  get disbursement() { return this.productForm.get('disbursementPlan').controls; }
+
 
   // Element ref for autofocus
   @ViewChild('name') nameRef: ElementRef;
@@ -206,9 +218,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
       bounce: ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
       prepayment: ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
       processing: ['', [Validators.required, Validators.maxLength(7), Validators.pattern('^[0-9]*$')]],
-    })
+    }),
+    repaymentPlan : this.fb.array([]),
+    disbursementPlan : this.fb.array([])
   });
-
 /*   let range = this.getDynamicRange(Constant.ROI.value);
   if(range == undefined || range == null){
     range = {min : 1 ,max : 100};
@@ -219,8 +232,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if(data != null && data != undefined && data.scalingMaster != null && data.scalingMaster != undefined){
       this.addDataIfFound(data);
     }
+    console.log("prod form :::: " , this.productForm)
   }
-  
+
   addDataIfFound(data){
     /* let range = this.getDynamicRange(Constant.ROI.value);
     console.log(range)
@@ -247,16 +261,43 @@ export class ProductComponent implements OnInit, AfterViewInit {
       let range = this.getDynamicRange(Constant.PP.value);
       data.scalingMaster.prePayment.forEach(ele => {this.ppControls.push(this.createRangeForm(Constant.PP.value,range,ele));});
     }
-
     if(data.scalingMaster.bounce != null && data.scalingMaster.bounce != undefined && data.scalingMaster.bounce.length > 0){
       let range = this.getDynamicRange(Constant.BOUNCE.value);
       data.scalingMaster.bounce.forEach(ele => {this.bounceControls.push(this.createRangeForm(Constant.BOUNCE.value,range,ele));});
     }
-
     if(data.scalingMaster.latePayment != null && data.scalingMaster.latePayment != undefined && data.scalingMaster.latePayment.length > 0){
       let range = this.getDynamicRange(Constant.LP.value);
       data.scalingMaster.latePayment.forEach(ele => {this.lpControls.push(this.createRangeForm(Constant.LP.value,range,ele));});
     }
+  }
+
+  createRepaymentPlanForm(data?){
+    console.log("RepaymentPlanForm :: " , data);
+    this.repaymentPlan = this.fb.group({
+      automatic : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.automatic) ? data.automatic : true,Validators.required],
+      scheduleType : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) ? data.scheduleType : "ONE_TIME",Validators.required],
+      earlyPaymentAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.earlyPaymentAllowed) ? data.earlyPaymentAllowed : ''],
+      changeMethodAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.changeMethodAllowed) ? data.changeMethodAllowed : ''],
+      noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
+      status: ['ACTIVE']
+    });
+    if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
+      this.repaymentPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
+    }
+    return this.repaymentPlan;
+  }
+  createDisbursementPlanForm(data?){
+    console.log("DisbursementPlanForm :: " , data);
+    this.disbursementPlan = this.fb.group({
+      automatic : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.automatic) ? data.automatic : true,Validators.required],
+      scheduleType : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) ? data.scheduleType : "ONE_TIME",Validators.required],
+      noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
+      status: ['ACTIVE']
+    })
+    if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
+      this.disbursementPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
+    }
+    return this.disbursementPlan;
   }
 
   createRangeForm(type, range, data){
@@ -1051,10 +1092,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
   get bounceControls(){return this.productForm.controls.scalingMaster.controls.bounce as FormArray}
   get lpControls(){return this.productForm.controls.scalingMaster.controls.latePayment as FormArray}
 
+  get repaymentPlanControls(){return this.productForm.controls.repaymentPlan as FormArray}
+  get disbursementPlanControls(){return this.productForm.controls.disbursementPlan as FormArray}
+
   // Save product details
   saveProduct(type) {
     this.submitted = true; 
     console.log("form :: ",this.productForm);
+    console.log("form  raw value:: ",this.productForm.getRawValue());
     console.log("model json :: ",this.product);
     console.log("matrix:: " , this.scalingMatrix);
     //return;
@@ -1062,7 +1107,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.commonService.warningSnackBar('Please fill required and valid details.');
       return 0;
     } */
-    if (this.product.parameters.length === 0) {
+   /*  if (this.product.parameters.length === 0) {
       this.commonService.warningSnackBar('Please add product parameters.');
       return 0;
     }
@@ -1077,14 +1122,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
     if ((type === 1 && this.commonService.isObjectNullOrEmpty(this.approveBtn)) ||
       this.global.USER.roles.indexOf(Constant.ROLES.MAKER.name) === -1) {
       return 0;
-    }
+    } */
     // As of now passing static repayment and disbursement deatils.
-    if (this.product.repayments.length === 0) {
+    /* if (this.product.repayments.length === 0) {
       this.product.repayments.push(this.repayment);
     }
     if (this.product.disbursements.length === 0) {
       this.product.disbursements.push(this.disburse);
-    }
+    } */
+    /* if (this.productForm.getRawValue().repayments.length === 0) { */
+      this.product.repayments = this.productForm.getRawValue().repaymentPlan;
+    /* } */
+    /* if (this.product.disbursements.length === 0) { */
+      this.product.disbursements = this.productForm.getRawValue().disbursementPlan;
+    /* } */
     this.product.pStatus = Constant.MASTER_TYPE.PENDING.id;
     this.product.productType = Constant.MASTER_TYPE.GST_INVOICE_BASE;
     this.product.productStatus = Constant.MASTER_TYPE.SAVED;
@@ -1096,7 +1147,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     // this.product.maxFinValueEachInv=0;
     // this.product.tenurePeriod=0;
     const productReq = cloneDeep(this.product);
-    console.log("final product req :: " , productReq);
+    console.log("final product req :: " , JSON.stringify(productReq));
+    //return;
     productReq.parameters.forEach(element => {
       /* if (element.paramType.id === Constant.MASTER_TYPE.DROPDOWN.id && element.inputType.id === Constant.MASTER_TYPE.DROPDOWN.id) { //  Workaroud for set  ngModel for dropdown
         element.answer = element.lovs.filter(e => e.id === element.answer)[0];
@@ -1543,6 +1595,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if (res.status === 200) {
         this.product = res.data;
         this.product.parameters = res.data.parameters;
+        if(res.data.parameters.length == 0){
+          this.product.assessmentLimitForGstTurnOverInPer = 0;
+          this.product.gstTurnOverToBeCalcOfNMonths = 0;
+          this.product.maxFinValueEachInv = 0;
+          this.product.tenurePeriod = 0;
+        }
         this.createProductForm(res.data);
         if(res.data.scalingMaster == null || res.data.scalingMaster == undefined){
           Constant.MATRIX_LIST.forEach(element=> {
@@ -1550,6 +1608,19 @@ export class ProductComponent implements OnInit, AfterViewInit {
           });
         }
         Constant.MATRIX_LIST.forEach(element=> {this.changeSelectedValue(element)});
+
+        if(!this.commonService.isObjectNullOrEmpty(res.data.repayments) && res.data.repayments.length == 0){
+          this.repaymentPlanControls.push(this.createRepaymentPlanForm())
+        }else{
+          res.data.repayments.forEach(data => { this.repaymentPlanControls.push(this.createRepaymentPlanForm(data)) });
+        }
+        if(!this.commonService.isObjectNullOrEmpty(res.data.disbursements) && res.data.disbursements.length == 0){
+          this.disbursementPlanControls.push(this.createDisbursementPlanForm())
+        }else{
+          res.data.disbursements.forEach(data => { this.disbursementPlanControls.push(this.createDisbursementPlanForm(data)) });
+        }
+        /* this.commonService.isObjectNullOrEmpty(res.data.repayments) ? this.repaymentPlanControls.push(this.createRepaymentPlanForm()) : this.repaymentPlanControls.push(this.createRepaymentPlanForm());
+        this.commonService.isObjectNullOrEmpty(res.data.disbursements) ? this.disbursementPlanControls.push(this.createDisbursementPlanForm()) : this.disbursementPlanControls.push(this.createDisbursementPlanForm()); */
         //Constant.MATRIX_LIST.forEach(element=> {this.addReactRange(this.productForm.controls.scalingMaster.controls.roiRange.controls.length,this.productForm.controls.scalingMaster.controls.roiRange.controls,element);/* this.setMatrixRange(element) */});// this.setMatrixRange(element)
         /* this.addReactRange('roi');
         this.addReactRange('pf');
@@ -2197,6 +2268,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
   setTab(type, ref) {
     Object.entries(this.tab).forEach(([key, value]) => this.tab[key] = false); // setting false for all tabs
     this.tab[type] = true;
+    if(type === 'repay' || type === 'disbursementPlan'){
+      let getTenure = this.product.parameters.filter(fil=> fil.code === "TENURE");
+      if(getTenure.length > 0){
+        this.tenureEnteredInParam = getTenure[0].answer.min;
+      }
+      console.log("Tenure :: " , this.tenureEnteredInParam)
+    }
     // Autofoucs element for appropriate div
     setTimeout(() => {
       if (ref) {
@@ -2528,7 +2606,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   getMastersData(){
-    this.master =  ['roiBasedOn','processingFeeBasedOn','unifiedChargesBasedOn','penalIntBasedOn','prePaymentBasedOn','bounceBasedOn','latePaymentBasedOn'];
+    this.master =  ['roiBasedOn','processingFeeBasedOn','unifiedChargesBasedOn','penalIntBasedOn','prePaymentBasedOn','bounceBasedOn','latePaymentBasedOn','scheduleType','noOfInstallment','repaymentFreqType'];
     this.lenderService.getMastersDataByFieldCodes(this.master).subscribe(resp=>{
       //console.log("get response data ::: " , resp);
       if(resp.status == 200){
@@ -2541,6 +2619,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.prePaymentBasedOnMaster = resp.data.filter(filt=>filt.code === 'prePaymentBasedOn')[0].values;
         this.bounceBasedOnMaster = resp.data.filter(filt=>filt.code === 'bounceBasedOn')[0].values;
         this.latePaymentBasedOnMaster = resp.data.filter(filt=>filt.code === 'latePaymentBasedOn')[0].values;
+        this.scheduleTypeMaster = resp.data.filter(filt=>filt.code === 'scheduleType')[0].values;
+        this.noOfInstallMentMaster = resp.data.filter(filt=>filt.code === 'noOfInstallment')[0].values;
+        this.repaymentFreqTypeMaster = resp.data.filter(filt=>filt.code === 'repaymentFreqType')[0].values;
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'roiBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'processingFeeBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'unifiedChargesBasedOn')[0].values);
@@ -2605,6 +2686,35 @@ export class ProductComponent implements OnInit, AfterViewInit {
       case Constant.UC.value: return this.ucSelectedVal = this.unifiedChangesBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.unifiedChargesBasedOn)[0].value;
       case Constant.PI.value: return this.piSelectedVal = this.penalInterestBasedOnMaster.filter(filt=>filt.id == this.productForm.controls.scalingMaster.value.penalIntBasedOn)[0].value;
     } */
+  }
+
+  addAndRemoveRepayControls(datas : FormGroup,type,enumObj){
+    switch(type){
+      case "schedule": 
+        if(enumObj.code === 'RECURRING'){
+          datas.addControl('frequency', this.fb.control('', [Validators.required]));
+          /* datas.addControl('scheduleTypeTimes', this.fb.control('', [Validators.required])); */
+        }else{
+          /* datas.removeControl('scheduleTypeTimes'); */
+          datas.removeControl('frequency');
+          datas.controls.noOfInstallments.patchValue(1);    
+        }
+        break;
+      /* case "noOfInstall" : 
+        if (enumObj.id == 63) {
+          datas.addControl('noOfInstallmentTimes', this.fb.control('', [Validators.required]));
+        } else {
+          datas.removeControl('noOfInstallmentTimes');
+        }
+        break; */
+    }
+    console.log("form datas ::: ", this.productForm);
+  }
+
+  computeNoOfInstallments(datas : FormGroup, data){
+    if(this.tenureEnteredInParam >= data.description){
+      datas.controls.noOfInstallments.patchValue(parseInt((this.tenureEnteredInParam/data.description).toString()));
+    }
   }
 }
 
