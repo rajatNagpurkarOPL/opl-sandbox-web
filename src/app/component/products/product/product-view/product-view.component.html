@@ -79,7 +79,7 @@
 
         <!-- Eligibility Calculation start-->
 
-        <div id="b4l-content" class="b4l-height">
+        <!-- <div id="b4l-content" class="b4l-height">
 
 
             <div class="b4l-product-title">
@@ -109,11 +109,11 @@
                         <p>1.</p>
                         <p>Maximum Assessment Limit for GST Turnover</p>
                     </div>
-                    <!-- <div class="b4l-product-list-right">
+                    <div class="b4l-product-list-right">
                         <div class="buttin-b4l-opacity opl2">
                             <p>{{product.wcRequirement || '-'}} %</p>
                         </div>
-                    </div> -->
+                    </div> 
                 </div>
                 <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
@@ -329,7 +329,7 @@
                     </tbody>
                   </table>
 
-                <!-- <div class="b4l-product-list">
+               <div class="b4l-product-list">
                     <div class="b4l-product-list-left">
                         <p>1.</p>
                         <p>ROI  </p>
@@ -395,7 +395,7 @@
                             </p>
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 
             </ng-container>
             <ng-container *ngIf="tab.verhistory">
@@ -414,7 +414,642 @@
                 </div>
               </div>
             </ng-container>
-        </div>
+        </div> -->
+
+
+        <div id="b4l-content" class="b4l-height">
+
+
+          <div class="b4l-product-title">
+              <ul class="product">
+                  <li><a [ngClass]="(tab.matches ? 'active' : '')" (click)="setTab('matches')" href="javaScript:void(0);"> <p>Matches Parameter</p> </a> </li>
+                  <li><a [ngClass]="(tab.eligibility ? 'active' : '')" (click)="setTab('eligibility')" href="javaScript:void(0);"> <p>Eligibility Calculation</p> </a></li>
+                  <li><a [ngClass]="(tab.charges ? 'active' : '')" (click)="setTab('charges')" href="javaScript:void(0);"> <p>Charges & ROI</p> </a></li>
+                  <li><a [ngClass]="(tab.terms ? 'active' : '')" (click)="setTab('terms')" href="javaScript:void(0);">  <p>Terms & Conditions</p> </a></li>
+                  <li><a [ngClass]="(tab.disbursementplan ? 'active' : '')" (click)="setTab('disbursementplan')" href="javaScript:void(0);">  <p>Disbursement Plan</p> </a></li>
+                  <li><a [ngClass]="(tab.repaymentplan ? 'active' : '')" (click)="setTab('repaymentplan')" href="javaScript:void(0);">  <p>Repayment Plan</p> </a></li>                 
+                  <li><a [ngClass]="(tab.verhistory ? 'active' : '')" (click)="setTab('verhistory')" href="javaScript:void(0);">  <p>Version History</p> </a></li>
+              </ul>
+          </div>
+          <ng-container *ngIf="tab.matches">
+          
+              <table class="table product-view-table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Parameter</th>
+                    <th scope="col">Set Value</th>                   
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                  <td>1</td>
+                    <td>Bank’s Existing Customer Check Points</td>
+                    <td>CIF, Account Number</td>                  
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                      <td>Maximum Financing Limit per Entity <img   matTooltip="Cap on Maximum Financing to be given to an entity in case of multiple invoice financing" src="assets/img/info.svg"/></td>
+                      <td>₹ 7 Lacs</td>                  
+                    </tr>
+
+
+                    <tr>
+                      <td>3</td>
+                        <td>Invoice Value <img matTooltip="Check for each Invoice Value which should fall within a specific range" src="assets/img/info.svg"/></td>
+                        <td>₹ 3 Lacs to ₹ 7 Lacs</td>                  
+                      </tr>
+
+
+                      <tr>
+                        <td>4</td>
+                          <td>Usance Period <img  matTooltip="Usance Period is the allowable credit period." src="assets/img/info.svg"/></td>
+                          <td>90 Days</td>                  
+                        </tr>
+
+
+
+                        <tr>
+                          <td>5</td>
+                            <td>Invoice Date Should Fall In Last "N" Days <img  matTooltip="To check the age of the Invoice." src="assets/img/info.svg"/></td>
+                            <td>90 Days</td>                  
+                          </tr>
+
+
+                          <tr>
+                            <td>6</td>
+                              <td>Constitution <img matTooltip="Type of organization" src="assets/img/info.svg"/></td>
+                              <td>8 Constitutions Selected <a href="#" class="ml-2">View All</a></td>                  
+                            </tr>
+
+
+                            <tr>
+                              <td>7</td>
+                                <td>Customer Concentration <img matTooltip="Measure of how total revenue is distributed among your customer base"  src="assets/img/info.svg"/></td>
+                                <td>70%</td>                  
+                              </tr>
+
+
+                              <tr>
+                                <td>8</td>
+                                  <td>Geographical Market Focus <img matTooltip="Select allowable states where entity is registered to" src="assets/img/info.svg"/></td>
+                                  <td>4 States Selected <a href="#" class="ml-2">View All</a></td>                  
+                                </tr>
+    
+
+                                <tr>
+                                  <td>9</td>
+                                    <td>Maximum GST Turnover Limit <img matTooltip="Check for Borrowers having a specified amount of GST Turnover" src="assets/img/info.svg"/></td>
+                                    <td>Check For 90 Days</td>                  
+                                  </tr>
+
+                                  <tr>
+                                    <td>10</td>
+                                      <td>Minimum Tenure for GST Data <img matTooltip="Set minimum number of GST Data required" src="assets/img/info.svg"/></td>
+                                      <td>20 Days</td>                  
+                                    </tr>
+
+                                    <tr>
+                                      <td>11</td>
+                                        <td>GSTIN Mismatch Check <img matTooltip="Allow borrowers in case the number of GSTN of Borrower and number of GSTN linked with Account Aggregator are different" src="assets/img/info.svg"/></td>
+                                        <td>Yes</td>                  
+                                      </tr>
+
+
+                                      <tr>
+                                        <td>12</td>
+                                          <td>Credit Summation <img matTooltip="Check for sum of credit of all accounts as a percentage of GST sales for available returns." src="assets/img/info.svg"/></td>
+                                          <td>My bank & Other Banks, 70%</td>                  
+                                        </tr>
+
+
+                                        
+                                      <tr>
+                                        <td>13</td>
+                                          <td>Bank Accounts Prioritization <img matTooltip="Set priority of choosing Customer Account for disbursement of Loan" src="assets/img/info.svg"/></td>
+                                          <td>OD/CC Account > Current Account > Savings Account</td>                  
+                                        </tr>
+
+
+                                        <tr>
+                                          <td>14</td>
+                                            <td>Number of Cheques Bounced <img matTooltip="Allow borrowers in case the number of GSTN of Borrower and number of GSTN linked with Account Aggregator are different" src="assets/img/info.svg"/></td>
+                                            <td>Max. 130 Cheque Bounced in Last 20 months will be allowed</td>                  
+                                          </tr>
+
+                                          <tr>
+                                            <td>15</td>
+                                              <td>Maximum % Allowed For Cheque Issue Bounced <img matTooltip="Check to cap number of cheques bounces in Customer Account (in percentage)" src="assets/img/info.svg"/></td>
+                                              <td>Max. 70% of Cheque Issue Bounced will be allowed till date</td>                  
+                                            </tr>
+
+                                            <tr>
+                                              <td>16</td>
+                                                <td>Maximum permissible MSME Rank <img matTooltip="Please set permissible MSME rank for both bureau" src="assets/img/info.svg"/></td>
+                                                <td>Selected Rank For CIBIL - <a href="#" class="ml-2">9</a> & Experian - <a href="#" class="ml-2">7</a></td>                  
+                                              </tr>
+                  
+                                              <tr>
+                                                <td>17</td>
+                                                  <td>Minimum Bureau Score All Directors/ Partners/ Proprietors <img matTooltip="Please set minimum score required from both bureau"  src="assets/img/info.svg"/></td>
+                                                  <td>For CIBIL- 1,0,-1 and 750 to 900 <br> For Experian - 1,0,-1 and 750 to 900</td>                  
+                                                </tr>
+
+
+                                                <tr>
+                                                  <td>18</td>
+                                                    <td>Commercial Bureau - Maximum DPDs <img matTooltip="Please select account type you want to consider, other account types will not be checked" src="assets/img/info.svg"/></td>
+                                                    <td>Working Capital & Current Account</td>                  
+                                                  </tr>
+
+
+                                                  <tr>
+                                                    <td></td>
+                                                      <td>Working Capital Accounts</td>
+                                                      <td>For CIBIL- 70 Days <br> For Experian - 70 Days</td>                  
+                                                    </tr>
+
+                                                    <tr>
+                                                      <td></td>
+                                                        <td>Current Account</td>
+                                                        <td>For CIBIL- 70 Days <br> For Experian - 70 Days</td>                  
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td>19</td>
+                                                          <td>Other Bank Accounts Check <img matTooltip="Please select account type you want to consider, other account types will not be checked" src="assets/img/info.svg"/></td>
+                                                          <td>CC/OD & Others</td>                  
+                                                        </tr>
+
+                                                        <tr>
+                                                          <td>20</td>
+                                                            <td>Primary Security Required</td>
+                                                            <td>₹ 3 Cr. to ₹ 7 Cr.</td>                  
+                                                          </tr>
+
+                                                          <tr>
+                                                            <td>21</td>
+                                                              <td>Secondary Security Required</td>
+                                                              <td>₹ 3 Cr. to ₹ 7 Cr.</td>                   
+                                                            </tr>
+                  
+                </tbody>
+              </table>
+
+          </ng-container>
+
+ <ng-container *ngIf="tab.eligibility">
+  <table class="table product-view-table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Parameter</th>
+        <th scope="col">Set Value</th>                   
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+      <td>1</td>
+        <td>Maximum Assessment Limit for GST Turnover</td>
+        <td>Working Capital & Current Account</td>                  
+      </tr>
+
+      <tr>
+        <td></td>
+          <td>a. Assessment Limit for GST Turnover in %</td>
+          <td>70%</td>                  
+        </tr>
+
+
+        <tr>
+          <td></td>
+            <td>b. GST Turnover To Be Calculated For Last "N" Months</td>
+            <td>maximum 20% of his last 20 months GST turnover</td>                  
+          </tr>
+  
+
+        <tr>
+          <td>2</td>
+            <td>Maximum Financing Value For Each Invoice <img  matTooltip="Set % limit for each invoice amount to be financed" src="assets/img/info.svg"/></td>
+            <td>70%</td>                  
+          </tr>
+
+
+          <tr>
+            <td>3</td>
+              <td>Tenure Period</td>
+              <td>70%</td>                  
+            </tr>                  
+      
+    </tbody>
+  </table>
+          </ng-container>
+       
+       
+          <ng-container *ngIf="tab.charges">
+            <table class="table product-view-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Set Value</th>                   
+                </tr>
+              </thead>
+              <tbody>
+          
+                <tr>
+                <td>1</td>
+                  <td>ROI Based On</td>
+                  <td>Bureau Score</td>                  
+                </tr>
+          
+                <tr>
+                  <td>2</td>
+                    <td>Processing Fee Based On</td>
+                    <td>Maximum Assessment Limit</td>                  
+                  </tr>
+          
+          
+                  <tr>
+                    <td>3</td>
+                      <td>Unified Changes Based On</td>
+                      <td>Individual Invoice financing amount</td>                  
+                    </tr>
+            
+          
+                  <tr>
+                    <td>4</td>
+                      <td>Penal Interest Based On</td>
+                      <td>Bureau Score</td>                  
+                    </tr>
+          
+          
+                    <tr>
+                      <td>5</td>
+                        <td>Effective ROI Calculation method</td>
+                        <td>Fixed</td>                  
+                      </tr>                  
+                
+              </tbody>
+            </table>
+              
+          </ng-container>
+
+          <ng-container *ngIf="tab.terms">
+            <div class="charges-roi b4l-height pd-2">
+              <div class="container">
+              <div class="row">
+              <div class="psb-lg-12 psb-md-12 psb-xl-12 psb-sm-12 psb-xs-12">
+                  <h4 class="charges-roi-h4">Upload Terms & Conditions in .PDF format</h4>
+              </div>
+              
+              <div class="psb-lg-12 psb-md-12 psb-xl-12 psb-sm-12 psb-xs-12">
+                  <div class="browser-file">
+              <img src="assets/img/file-b4l.svg">
+              <p>Drag your file here or <a href="#">Browse file</a></p>
+                  </div>
+              
+              </div>
+              
+              
+              
+              </div>
+              </div>
+              </div>
+          </ng-container>    
+
+
+          <ng-container *ngIf="tab.disbursementplan">
+            <table class="table product-view-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Set Value</th>                   
+                </tr>
+              </thead>
+              <tbody>
+          
+                <tr>
+                <td>1</td>
+                  <td>Automatic Repayment</td>
+                  <td>Yes</td>                  
+                </tr>
+          
+                <tr>
+                  <td>2</td>
+                    <td>Schedule Type</td>
+                    <td>3 Times</td>                  
+                  </tr>
+          
+          
+                  <tr>
+                    <td>3</td>
+                      <td>Early Payment Acceptance</td>
+                      <td>Yes</td>                  
+                    </tr>
+            
+          
+                  <tr>
+                    <td>4</td>
+                      <td>Change of Method</td>
+                      <td>Yes</td>                  
+                    </tr>
+          
+          
+                    <tr>
+                      <td>5</td>
+                        <td>No. of Installments</td>
+                        <td>32 payments</td>                  
+                      </tr>  
+                      
+                      <tr>
+                        <td>6</td>
+                          <td>Interest</td>
+                          <td>8%</td>                  
+                        </tr>  
+
+                        <tr>
+                          <td>7</td>
+                            <td>Tenure</td>
+                            <td>8 Years</td>                  
+                          </tr>  
+
+                          <tr>
+                            <td>8</td>
+                              <td>Accepted Invoice Amount Range</td>
+                              <td>3cr. to 7 Cr.</td>                  
+                            </tr>  
+                
+              </tbody>
+            </table>
+              
+          </ng-container>
+
+
+          <ng-container *ngIf="tab.repaymentplan">
+            <table class="table product-view-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Set Value</th>                   
+                </tr>
+              </thead>
+              <tbody>
+          
+                <tr>
+                <td>1</td>
+                  <td>Automatic Repayment</td>
+                  <td>Yes</td>                  
+                </tr>
+          
+                <tr>
+                  <td>2</td>
+                    <td>Schedule Type</td>
+                    <td>3 Times</td>                  
+                  </tr>
+          
+          
+          
+          
+                    <tr>
+                      <td>3</td>
+                        <td>No. of Installments</td>
+                        <td>32 payments</td>                  
+                      </tr>  
+                    
+                        <tr>
+                          <td>4</td>
+                            <td>Tenure</td>
+                            <td>8 Years</td>                  
+                          </tr>  
+
+                   
+              </tbody>
+            </table>
+              
+          </ng-container>
+
+
+
+          <ng-container *ngIf="tab.verhistory">
+            <div class="step" *ngFor="let data of product.statusAuditList;">
+              <div>
+                <div class="circle-blue" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id"><img src="assets/img/step-arrow.svg"/></div>
+                <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SAVED.id == data.to.id"><img src="assets/img/step-edit.svg"/></div>  
+                <div class="circle-green" *ngIf="constants.MASTER_TYPE.APPROVED.id == data.to.id"><img src="assets/img/step-true.svg"/></div>
+                <div class="circle-grey" *ngIf="constants.MASTER_TYPE.SEND_BACK.id == data.to.id"><img src="assets/img/sendBackByBanker.svg"/></div>
+              </div>
+              <div>
+                <div class="title" *ngIf="constants.MASTER_TYPE.SENT_TO_CHECKER.id == data.to.id">{{constants.MASTER_TYPE.SENT_TO_CHECKER.statusStr}} - {{data.actionFrom}} to Admin Checker<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                <div class="title" *ngIf="constants.MASTER_TYPE.SAVED.id == data.to.id">{{constants.MASTER_TYPE.SAVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                <div class="title" *ngIf="constants.MASTER_TYPE.APPROVED.id ==  data.to.id">{{constants.MASTER_TYPE.APPROVED.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+                <div class="title" *ngIf="constants.MASTER_TYPE.SEND_BACK.id ==  data.to.id">{{constants.MASTER_TYPE.SEND_BACK.statusStr}} - {{data.actionFrom}}<br> <span>{{data.statusModifiedDate |  date: 'dd MMMM yyyy hh:mm a'}}</span></div>
+              </div>
+            </div>
+          </ng-container>
+      </div>
+
+      <div id="b4l-content" class="b4l-height">     
+      <ng-container *ngIf="tab.charges">
+<h2 class="margin-1 fs-16">Rate Of Interest</h2>
+
+        <table class="table product-view-table">
+          <thead>
+            <tr>
+              <td colspan="2">Minimum & maximum amount cap</td>
+              <td scope="col">₹ 3 Lacs to ₹ 7 Lacs</td>                   
+            </tr>
+            
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Score Range</th>
+              <th scope="col">Effective ROI</th>                   
+            </tr>
+          </thead>
+          <tbody>
+      
+            <tr>
+            <td>1</td>
+              <td>300 to 600</td>
+              <td>5.3 %</td>                  
+            </tr>
+      
+            <tr>
+              <td>2</td>
+              <td>300 to 600</td>
+              <td>5.3 %</td>                  
+              </tr>
+      
+      
+              <tr>
+                <td>3</td>
+                <td>300 to 600</td>
+                <td>5.3 %</td>                 
+                </tr>
+                
+            
+          </tbody>
+        </table>
+          
+      </ng-container>
+</div>
+
+
+<div id="b4l-content" class="b4l-height">     
+  <ng-container *ngIf="tab.charges">
+<h2 class="margin-1 fs-16">Unified Charges</h2>
+
+    <table class="table product-view-table">
+      <thead>
+        <tr>
+          <td colspan="2">Minimum & maximum amount cap</td>
+          <td scope="col">₹ 3 Lacs to ₹ 7 Lacs</td>                   
+        </tr>
+        
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Score Range</th>
+          <th scope="col">Effective ROI</th>                   
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr>
+        <td>1</td>
+          <td>300 to 600</td>
+          <td>5.3 %</td>                  
+        </tr>
+  
+        <tr>
+          <td>2</td>
+          <td>300 to 600</td>
+          <td>5.3 %</td>                  
+          </tr>
+  
+  
+          <tr>
+            <td>3</td>
+            <td>300 to 600</td>
+            <td>5.3 %</td>                 
+            </tr>
+            
+        
+      </tbody>
+    </table>
+      
+  </ng-container>
+</div>
+
+<div id="b4l-content" class="b4l-height">     
+  <ng-container *ngIf="tab.charges">
+<h2 class="margin-1 fs-16">Penal Interest</h2>
+
+    <table class="table product-view-table">
+      <thead>
+        <tr>
+          <td colspan="2">Minimum & maximum amount cap</td>
+          <td scope="col">₹ 3 Lacs to ₹ 7 Lacs</td>                   
+        </tr>
+        
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Score Range</th>
+          <th scope="col">Effective ROI</th>                   
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr>
+        <td>1</td>
+          <td>300 to 600</td>
+          <td>5.3 %</td>                  
+        </tr>
+  
+        <tr>
+          <td>2</td>
+          <td>300 to 600</td>
+          <td>5.3 %</td>                  
+          </tr>
+  
+  
+          <tr>
+            <td>3</td>
+            <td>300 to 600</td>
+            <td>5.3 %</td>                 
+            </tr>
+            
+        
+      </tbody>
+    </table>
+      
+  </ng-container>
+</div>
+
+
+
+
+  <div id="b4l-content" class="charges-roi b4l-height">
+    <ng-container *ngIf="tab.terms">
+    <div class="b4l-product-title">
+    <div class="container">
+        <div class="row">
+    <h4 class="charges-roi-h4 pd-2">Terms & Conditions History</h4>
+<table class="table roi1">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Filename</th>
+        <th scope="col">Uploaded On</th>
+        <th scope="col">Download</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Terms & Conditions (Current)
+        </td>
+        <td>22 March 2020 03:14 AM</td>
+        <td><p class="blue"><img src="assets/img/download-b4l.svg">Download</p></td>       
+      </tr>
+
+      <tr>
+        <th scope="row">2</th>
+        <td>Terms & Conditions Version 3
+        </td>
+        <td>22 March 2020 03:14 AM</td>
+        <td><p class="blue"><img src="assets/img/download-b4l.svg">Download</p></td>       
+      </tr>
+
+      <tr>
+        <th scope="row">3</th>
+        <td>Terms & Conditions Version 2
+        </td>
+        <td>22 March 2020 03:14 AM</td>
+        <td><p class="blue"><img src="assets/img/download-b4l.svg">Download</p></td>       
+      </tr>
+
+      <tr>
+        <th scope="row">4</th>
+        <td>Terms & Conditions Version 1
+        </td>
+        <td>22 March 2020 03:14 AM</td>
+        <td><p class="blue"><img src="assets/img/download-b4l.svg">Download</p></td>       
+      </tr>
+ 
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+</ng-container>  
+</div>
+
 
 
         <!-- Eligibility Calculation end-->
