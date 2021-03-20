@@ -31,4 +31,7 @@ export const RestURL = {
     GET_STATES : '/master/get-states',
     GET_MASTERS_BY_FIELD_CODES : '/master/get-master',
     GET_MATRIX_RANGE : '/master/get-range',
+    SANDBOX : {
+        MASTER_LIST : '/master/get-master-data'
+    }
 };

@@ -6,6 +6,7 @@ export class AppURL {
     // static LSP_BRIDGE = 'http://localhost:8084/b4l/bridge';
     static RULE_ENGINE = baseUrl + '/b4l/ruleengine';
     static LSP_BRIDGE = baseUrl + '/b4l/bridge';
+    static SANDBOX = baseUrl + '/b4l/sandbox';
 
 /*     public static getUrl() {
         const commonserlvice = AppURL.injector.get(CommonService);
