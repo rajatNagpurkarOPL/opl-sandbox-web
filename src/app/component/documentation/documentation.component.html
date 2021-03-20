@@ -1,229 +1,77 @@
-<div class="container">
-        <form [formGroup]="documentForm">
-            <div id="b4l-content" class="charges-roi b4l-height">
-        
-                <div class="b4l-height">
-                    <div class="card-header row row-flex">
-                        <h3 class="card-title" style="border-left-color: inherit; ">
-                        <b><span class="label-text">Create Loan Application Request</span></b>
-                        </h3><!---->
-                    </div>
-                    <div class="card-body"><!---->
-                        <div class="well well-sm p-0">
-                            <div class="table-container">
-                                <div class="form-group">
-                                    <mat-form-field style="width: 10em; background-color: #777;">
-                                        <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
-                                    </mat-form-field>
-                                    <mat-form-field style="width: 90em;">
-                                        <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/loanApplication/createLoanApplicationsRequest">
-                                    </mat-form-field>
-                                    <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
-                                </div>
-                            </div>
-                            
-                        </div><!---->
-                        <p>
-                            <span>API to Create Loan Application Request.</span>
-                        </p>
-                        <mat-tab-group (selectedTabChange)="setTryOut($event)">
-                            <mat-tab label="Documentation"></mat-tab>
-                            <mat-tab label="Tryout"></mat-tab>
-                        </mat-tab-group>
-            
-                        <div [hidden]="!button">
-                            <div class="example-container">
-                                <form formGroupName="createLoanApplicationForm">
-                                    <p>
-                                    <mat-toolbar>
-                                        <span>Loan Application Details</span>
-                                    </mat-toolbar>
-                                    </p>
-                                    <form formGroupName="loanApplication">
-                                        <mat-form-field>
-                                            <mat-label>Loan ApplicationId</mat-label>
-                                            <input matInput type="text" formControlName="loanApplicationId" readonly>
-                                        </mat-form-field>
+<mat-drawer-container class="example-container mat-typography" autosize>
+  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
+    <button mat-mini-fab (click)="isExpanded = !isExpanded" style="margin: 10px; background-color: #2D3079;">
+      <mat-icon aria-label="Menu">menu</mat-icon>
+    </button>
+    <ng-container *ngIf="!commonService.isObjectNullOrEmpty(masterData)">
+    <mat-nav-list (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" *ngFor="let code of getMasterCodes()">
+      <!-- Parent -->
+      <mat-list-item (click)="masterData[code].showSubmenu = !masterData[code].showSubmenu" class="parent" title={{masterData[code].description}} >
+          <span class="full-width" *ngIf="isExpanded || isShowing">{{masterData[code].value}}</span>
+          <mat-icon mat-list-icon>api</mat-icon>
+          <mat-icon class="menu-button" [ngClass]="{'rotated' : masterData[code].showSubmenu}" *ngIf="!commonService.isObjectNullOrEmpty(masterData[code].values) && (isExpanded || isShowing)">expand_more</mat-icon>
+      </mat-list-item>
+      <!-- First Child -->        
+      <div *ngIf="!commonService.isObjectNullOrEmpty(masterData[code].values)">
+        <div class="submenu" [ngClass]="{'expanded' : masterData[code].showSubmenu}" *ngIf="masterData[code].showSubmenu && (isExpanded || isShowing)">
+          <mat-nav-list  *ngFor="let valueObject of masterData[code].values">            
+              <mat-list-item (click)="valueObject.showSubmenu = !valueObject.showSubmenu" class="parent" title={{valueObject.description}}>
+                <span class="full-width">{{valueObject.value}}</span>
+                <mat-icon class="menu-button" [ngClass]="{'rotated' : valueObject.showSubmenu}" *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">expand_more</mat-icon>              
+              </mat-list-item>            
 
-                                        <mat-form-field>
-                                            <mat-label>ProductId Type</mat-label>
-                                            <mat-select formControlName="productType">
-                                                <mat-option *ngFor="let data of productIdTypeMaster" [value]="data">{{data}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field>
-                                            <mat-label>Loan Product Type</mat-label>
-                                            <mat-select formControlName="productId">
-                                                <mat-option *ngFor="let data of loanProductTypeMaster" [value]="data">{{data}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field>
-                                            <mat-label>Loan Application Status</mat-label>
-                                            <mat-select formControlName="loanApplicationStatus">
-                                                <mat-option *ngFor="let data of loanApplicationStatusMaster" [value]="data">{{data}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                        
-                                        <p>
-                                            <br/>
-                                            <mat-toolbar>
-                                                <span>Offer Details</span>
-                                            </mat-toolbar>
-                                        </p>
-                                        <form formGroupName="offer">
-                                            <mat-form-field>
-                                                <mat-label>Primary Id</mat-label>
-                                                <input matInput type="text" formControlName="id" readonly>
-                                            </mat-form-field>
-                                        </form>
-                                        <p>
-                                            <br/>
-                                            <mat-toolbar>
-                                                <span>Borrower Details</span>
-                                            </mat-toolbar>
-                                        </p>
-                                        <form formGroupName="borrower">
-                                            <mat-form-field>
-                                                <mat-label>Primary Id</mat-label>
-                                                <input matInput type="text" formControlName="primaryId" readonly>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-label>Primary Id Type</mat-label>
-                                                <mat-select formControlName="primaryIdtype">
-                                                    <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-label>Category</mat-label>
-                                                <mat-select formControlName="category">
-                                                    <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                            <p>
-                                                <br/>
-                                                <mat-toolbar>
-                                                    <span>Document Details</span>
-                                                </mat-toolbar>
-                                            </p>
-                                            <form formGroupName="document">
-                                                <mat-form-field>
-                                                    <mat-label>Source Id</mat-label>
-                                                    <input matInput type="text" formControlName="sourceId" readonly>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Source Type</mat-label>
-                                                    <mat-select formControlName="sourceType">
-                                                        <mat-option *ngFor="let data of sourcetypeMaster" [value]="data">{{data}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Reference Id</mat-label>
-                                                    <input matInput type="text" formControlName="reference" readonly>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Format</mat-label>
-                                                    <mat-select formControlName="format">
-                                                        <mat-option *ngFor="let data of documentFormatMaster" [value]="data">{{data}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Type</mat-label>
-                                                    <mat-select formControlName="type">
-                                                        <mat-option *ngFor="let data of documentTypeMaster" [value]="data">{{data}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Is Data Inline</mat-label>
-                                                    <input matInput type="boolean" formControlName="isDataInline">
-                                                </mat-form-field>
-                                            </form>
-                                        </form>
-                                        <p>
-                                            <br/>
-                                            <mat-toolbar>
-                                                <span>Pledge Document Details</span>
-                                            </mat-toolbar>
-                                        </p>
-                                        <form formGroupName="pledgeDocument">
-                                            <mat-form-field>
-                                                <mat-label>Primary Id</mat-label>
-                                                <input matInput type="text" formControlName="primaryId" readonly>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-label>Primary Id Type</mat-label>
-                                                <mat-select formControlName="primaryIdType">
-                                                    <mat-option *ngFor="let data of pledgedDocumentPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-label>Type</mat-label>
-                                                <mat-select formControlName="type">
-                                                    <mat-option *ngFor="let data of pledgedDocumentType" [value]="data">{{data}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </form>
-                                        <p>
-                                            <br/>
-                                            <mat-toolbar>
-                                                <span>Applicant Details</span>
-                                            </mat-toolbar>
-                                        </p>
-                                        <form formGroupName="applicant">
-                                            <div>
-                                                <mat-form-field>
-                                                    <mat-label>Primary Id</mat-label>
-                                                    <input matInput type="text" formControlName="primaryId" readonly>
-                                                </mat-form-field>
-
-                                                <mat-form-field>
-                                                    <mat-label>Primary Id Type</mat-label>
-                                                    <mat-select formControlName="primaryIdType">
-                                                        <mat-option *ngFor="let data of applicantPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-
-                                            </div>
-                                        </form>
-                                    </form>
-                                    <br/>
-                                    <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Loan Application Request</button>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+              <div *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">
+                <div class="submenu" [ngClass]="{'expanded' : valueObject.showSubmenu}" *ngIf="valueObject.showSubmenu && (isExpanded || isShowing)">              
+                  <mat-nav-list *ngFor="let lastChild of valueObject.values">            
+                    <mat-list-item (click)="lastChild.showSubmenu = !lastChild.showSubmenu" class="parent" title={{lastChild.description}}>
+                      <span class="full-width">{{lastChild.value}}</span>                                  
+                    </mat-list-item>
+                  </mat-nav-list>
                 </div>
-                <div [hidden]="button">
-                    <div class="b4l-height">
-                        <div class="card-header row row-flex">
-                            <h3 class="card-title" style="border-left-color: inherit; ">
-                            <b><span class="label-text">Request</span></b>
-                            </h3><!---->
-                        </div>
-                        <div class="card-body">
-                            <div class="b4l-product-title">
-                            <ul class="product">
-                            <li><a href="javaScript:void(0);"> <p>Schema</p> </a> </li>
-                            <li><a href="javaScript:void(0);"> <p>Body</p> </a></li>
-                            <li><a href="javaScript:void(0);"> <p>Header</p> </a></li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-        </form>
-</div>
+              </div>            
+          </mat-nav-list> 
+        </div>  
+      </div>        
+    </mat-nav-list>    
+  </ng-container>  
+  </mat-drawer>
+
+  <div class="sidenav-content">
+          <!-- Loan Application Selectors -->
+          <app-create-loan-application-request *ngIf="this.selectedMenuItem == 'CR_LN_APP_REQ'"></app-create-loan-application-request>
+
+          <!-- Consent Selectors -->
+          <app-consent-handle-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-consent-handle-request>
+          <app-consent-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-consent-status-request>
+
+          <!-- Offers Selectors -->
+          <app-generate-offer-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-generate-offer-request>
+          <app-set-offer-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-offer-request>
+
+          <!-- Loan Acceptance Selectors -->
+          <app-trigger-loan-acceptance-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-loan-acceptance-request>
+          <app-verify-loan-acceptance-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-verify-loan-acceptance-request>
+
+          <!-- Grant Loan Selectors -->
+          <app-grant-loan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-grant-loan-request>
+          <app-loan-summary-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-loan-summary-request>
+          <app-get-loan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-get-loan-request>
+          <app-loan-statement-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-loan-statement-request>
+          <app-list-loans-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-list-loans-request>
+
+          <!-- Repayment Selectors -->
+          <app-set-repayment-plan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-repayment-plan-request>
+          <app-set-repayment-plan-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-repayment-plan-status-request>
+          <app-trigger-repayment-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-repayment-request>
+          <app-trigger-repayment-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-repayment-status-request>
+
+          <!-- Disbursement Selectors -->
+          <app-set-disbursement-account-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-disbursement-account-request>
+          <app-trigger-disbursement-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-disbursement-request>
+          <app-trigger-disbursement-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-disbursement-status-request>
+
+          <!-- Loan Dispute Management -->
+          <app-raise-dispute-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-raise-dispute-request>
+          <app-dispute-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-dispute-status-request>
+  </div>
+</mat-drawer-container>

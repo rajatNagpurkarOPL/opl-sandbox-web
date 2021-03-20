@@ -92,4 +92,9 @@ export class LenderService {
   getScalingRangeMastersData(): Observable<any>{
     return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_MATRIX_RANGE, false);
   }
+
+  // Sandbox APIs
+  getMasterListsByCodes(codes):Observable<any>{
+    return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
+  }
 }
