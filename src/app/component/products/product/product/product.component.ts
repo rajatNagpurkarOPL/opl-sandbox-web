@@ -279,7 +279,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       earlyPaymentAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.earlyPaymentAllowed) ? data.earlyPaymentAllowed : ''],
       changeMethodAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.changeMethodAllowed) ? data.changeMethodAllowed : ''],
       noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
-      status: ['ACTIVE']
+      status: ['INACTIVE']
     });
     if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
       this.repaymentPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
@@ -292,7 +292,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       automatic : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.automatic) ? data.automatic : true,Validators.required],
       scheduleType : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) ? data.scheduleType : "ONE_TIME",Validators.required],
       noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
-      status: ['ACTIVE']
+      status: ['INACTIVE']
     })
     if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
       this.disbursementPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
