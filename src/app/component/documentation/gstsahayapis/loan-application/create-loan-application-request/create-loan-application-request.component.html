@@ -31,14 +31,14 @@
     
                 <div [hidden]="!button">
                     <div class="example-container">
-                        <form formGroupName="createLoanApplicationForm">
+                        <form [formGroup]="createLoanApplicationForm">
                             <p>
                             <mat-toolbar>
                                 <span>Loan Application Details</span>
                             </mat-toolbar>
                             </p>
-                            <form formGroupName="loanApplication">
-                                <mat-form-field>
+                            <form *ngFor="let loanApp of createLoanApplicationForm.controls.loanApplications.controls" [formGroup]="loanApp">
+                                <mat-form-field style="width: 25em;">
                                     <mat-label>Loan ApplicationId</mat-label>
                                     <input matInput type="text" formControlName="loanApplicationId" readonly>
                                 </mat-form-field>
@@ -46,7 +46,7 @@
                                 <mat-form-field>
                                     <mat-label>ProductId Type</mat-label>
                                     <mat-select formControlName="productType">
-                                        <mat-option *ngFor="let data of productIdTypeMaster" [value]="data">{{data}}</mat-option>
+                                        <mat-option *ngFor="let data of loanProductTypeMaster" [value]="data">{{data}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
@@ -64,18 +64,6 @@
                                     </mat-select>
                                 </mat-form-field>
                                 
-                                <p>
-                                    <br/>
-                                    <mat-toolbar>
-                                        <span>Offer Details</span>
-                                    </mat-toolbar>
-                                </p>
-                                <form formGroupName="offer">
-                                    <mat-form-field>
-                                        <mat-label>Primary Id</mat-label>
-                                        <input matInput type="text" formControlName="id" readonly>
-                                    </mat-form-field>
-                                </form>
                                 <p>
                                     <br/>
                                     <mat-toolbar>

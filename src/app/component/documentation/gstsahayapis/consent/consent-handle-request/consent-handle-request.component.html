@@ -1,1 +1,123 @@
-<p>consent-handle-request works!</p>
+<form [formGroup]="documentForm">
+    <div id="b4l-content" class="charges-roi b4l-height">
+
+        <div class="b4l-height">
+            <div class="card-header row row-flex">
+                <h3 class="card-title" style="border-left-color: inherit; ">
+                <b><span class="label-text">Consent Request</span></b>
+                </h3><!---->
+            </div>
+            <div class="card-body"><!---->
+                <div class="well well-sm p-0">
+                    <div class="table-container">
+                        <div class="form-group">
+                            <mat-form-field style="width: 10em; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
+                            </mat-form-field>
+                            <mat-form-field style="width: 90em;">
+                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3/consent/consentHandleRequest">
+                            </mat-form-field>
+                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                        </div>
+                    </div>
+                    
+                </div><!---->
+                <p>
+                    <span>API to Consent Handle Request.</span>
+                </p>
+                <mat-tab-group (selectedTabChange)="setTryOut($event)">
+                    <mat-tab label="Documentation"></mat-tab>
+                    <mat-tab label="Tryout"></mat-tab>
+                </mat-tab-group>
+    
+                <div [hidden]="!button">
+                    <div class="example-container">
+                        <form [formGroup]="consentHandleRequestForm">
+                            <p>
+                            <mat-toolbar>
+                                <span>Consent Details</span>
+                            </mat-toolbar>
+                            </p>
+                            <form formGroupName="consent">
+                                <mat-form-field style="width: 25em;">
+                                    <mat-label>vua</mat-label>
+                                    <input matInput type="text" formControlName="vua">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <mat-label>Consent Fetch Type</mat-label>
+                                    <mat-select formControlName="consentFetchType">
+                                        <mat-option *ngFor="let data of consentFetchTypeMaster" [value]="data">{{data}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                
+                                <mat-form-field style="width: 25em;">
+                                    <mat-label>Is Aggregation Enabled</mat-label>
+                                    <input matInput type="boolean" formControlName="isAggregationEnabled">
+                                </mat-form-field>
+
+                                <mat-form-field style="width: 25em;">
+                                    <mat-label>consentAggregationId</mat-label>
+                                    <input matInput type="text" formControlName="consentAggregationId" readonly>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <mat-label>Consent Status</mat-label>
+                                    <mat-select formControlName="consentStatus">
+                                        <mat-option *ngFor="let data of consentStatusMaster" [value]="data">{{data}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <p>
+                                    <br/>
+                                    <mat-toolbar>
+                                        <span>LSP Info Details</span>
+                                    </mat-toolbar>
+                                </p>
+                                <form formGroupName="lspInfo">
+                                    <mat-form-field>
+                                        <mat-label>lsp Id</mat-label>
+                                        <input matInput type="text" formControlName="lspId" readonly>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-label>Version</mat-label>
+                                        <input matInput type="text" formControlName="version">
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-label>App Name</mat-label>
+                                        <input matInput type="text" formControlName="appName">
+                                    </mat-form-field>
+                                </form>
+                            </form>
+                            <br/>
+                            <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Consent Handle Request</button>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </form>
+                    </div>
+                </div>
+                <div [hidden]="button">
+                    <div class="b4l-height">
+                        <div class="card-header row row-flex">
+                            <h3 class="card-title" style="border-left-color: inherit; ">
+                            <b><span class="label-text">Request</span></b>
+                            </h3><!---->
+                        </div>
+                        <div class="card-body">
+                            <div class="b4l-product-title">
+                            <ul class="product">
+                            <li><a href="javaScript:void(0);"> <p>Schema</p> </a> </li>
+                            <li><a href="javaScript:void(0);"> <p>Body</p> </a></li>
+                            <li><a href="javaScript:void(0);"> <p>Header</p> </a></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</form>

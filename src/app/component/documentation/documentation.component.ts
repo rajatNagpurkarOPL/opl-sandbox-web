@@ -44,6 +44,7 @@ export class DocumentationComponent implements OnInit {
   }
 
   setCurrentSelectedAPI(selectedApiCode){
+    console.log("selectedApiCode==>",selectedApiCode);
     this.selectedMenuItem = selectedApiCode;
   }
    // get products by status
