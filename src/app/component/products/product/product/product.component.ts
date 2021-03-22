@@ -279,7 +279,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       earlyPaymentAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.earlyPaymentAllowed) ? data.earlyPaymentAllowed : ''],
       changeMethodAllowed : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.changeMethodAllowed) ? data.changeMethodAllowed : ''],
       noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
-      status: ['ACTIVE']
+      status: ['INACTIVE']
     });
     if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
       this.repaymentPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
@@ -292,7 +292,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       automatic : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.automatic) ? data.automatic : true,Validators.required],
       scheduleType : [!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) ? data.scheduleType : "ONE_TIME",Validators.required],
       noOfInstallments : [{value: !this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.noOfInstallments) ? data.noOfInstallments : 1, disabled: true},Validators.required],
-      status: ['ACTIVE']
+      status: ['INACTIVE']
     })
     if(!this.commonService.isObjectNullOrEmpty(data) && !this.commonService.isObjectNullOrEmpty(data.scheduleType) && data.scheduleType == "RECURRING"){
       this.disbursementPlan.addControl('frequency', this.fb.control(data.frequency, [Validators.required]));
@@ -1238,7 +1238,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               element.option4 = {"floor" : 1 , "ceil" : 100};
               element.option5 = {"floor" : 1 , "ceil" : 24};
               this.generateMultipleControls(element);
-            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
+            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK" || element.code =="MAX_PERMISSIBLE_MSME_RANK_BUYER"){
               /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : 1 , "ceil" : 10};
@@ -1394,7 +1394,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                   element.option4 = {"floor" : 1 , "ceil" : 100};
                   element.option5 = {"floor" : 1 , "ceil" : 24};
                 }
-                if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
+                if(element.code =="MAX_PERMISSIBLE_MSME_RANK" || element.code =="MAX_PERMISSIBLE_MSME_RANK_BUYER"){
                   element.answer = { cibilRank: null , experianRank : null , lovAns : null};
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option1 = {"floor" : 1 , "ceil" : 10};
@@ -1669,7 +1669,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
               element.option4 = {"floor" : 1 , "ceil" : 100};
               element.option5 = {"floor" : 1 , "ceil" : 24};
               this.generateMultipleControls(element);
-            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK"){
+            }else if(element.code =="MAX_PERMISSIBLE_MSME_RANK" || element.code =="MAX_PERMISSIBLE_MSME_RANK_BUYER"){
               /* element.answer = { cibilRank: null , experianRank : null , lovAns : null}; */
               element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
               element.option1 = {"floor" : 1 , "ceil" : 10};
@@ -1858,7 +1858,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.productForm.get('paramForm').addControl('inputCheckbox_' + param.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
         } */
       }
-      if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
+      if(param.code == "MAX_PERMISSIBLE_MSME_RANK" || param.code == "MAX_PERMISSIBLE_MSME_RANK_BUYER"){
         this.productForm.get('paramForm').addControl('min1_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
         this.productForm.get('paramForm').addControl('min2_' + param.parameterId, this.fb.control('', [Validators.max(10) , Validators.min(0)]));
         if(param.lovs != null && param.lovs.noMsmeRanking.length > 0){
@@ -2050,7 +2050,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           this.productForm.get('paramForm').removeControl('inputCheckbox_' + param.parameterId);
         } */
       }
-      if(param.code == "MAX_PERMISSIBLE_MSME_RANK"){
+      if(param.code == "MAX_PERMISSIBLE_MSME_RANK" || param.code == "MAX_PERMISSIBLE_MSME_RANK_BUYER"){
         this.productForm.get('paramForm').removeControl('min1_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('min2_' + param.parameterId);
         this.productForm.get('paramForm').removeControl('inputCheckbox_' + param.parameterId);
