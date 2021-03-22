@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { LenderService } from 'src/app/service/lender.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-create-loan-application-request',
@@ -34,7 +35,10 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
   documentData : any = {};
   documentForm : any =  FormGroup;
-  createLoanApplicationForm: any = FormGroup;  
+  createLoanApplicationForm: any = FormGroup;
+  loanApplicationForm: any = FormGroup;
+  loanApplication: any = FormArray;
+
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
   setTryOut(active){
@@ -57,14 +61,16 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
   createLoanApplicationRequest(){
     return this.createLoanApplicationForm = this.fb.group({
-      loanApplication : this.fb.group({
-        loanApplicationId : [this.documentData.loanApplicationId != null ? this.documentData.loanApplicationId : ''],
-        productType : [this.documentData.productType != null ? this.documentData.productType : this.productIdTypeMaster[0]],
-        productId : [this.documentData.productId != null ? this.documentData.productId : this.loanProductTypeMaster[0]],
+      loanApplications : this.fb.array([this.createLoanApplicationRequestForm({})])
+    });
+  }
+
+  createLoanApplicationRequestForm(data) : FormGroup{
+    this.loanApplicationForm = this.fb.group({
+      loanApplicationId : [this.documentData.loanApplicationId != null ? this.documentData.loanApplicationId : ''],
+        productType : [this.documentData.productType != null ? this.documentData.productType : this.loanProductTypeMaster[0]],
+        productId : [this.documentData.productId != null ? this.documentData.productId : this.productIdTypeMaster[0]],
         loanApplicationStatus: [this.documentData.loanApplicationStatus != null ? this.documentData.loanApplicationStatus : this.loanApplicationStatusMaster[0]],
-        offer : this.fb.group({
-          id : [this.documentData.offerId != null ? this.documentData.offerId : '']
-        }),
         borrower : this.fb.group({
           primaryId : [this.documentData.primaryId != null ? this.documentData.primaryId : ''],
           primaryIdtype: [this.documentData.primaryIdtype != null ? this.documentData.primaryIdtype : this.borrowerPrimaryTypeMaster[0]],
@@ -90,20 +96,31 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
           primaryIdType : [this.documentData.primaryIdType != null ? this.documentData.primaryIdType : this.applicantPrimaryIdTypeMaster[0]],
           primaryId : [this.documentData.primaryId != null ? this.documentData.primaryId : ''],
         })
-      })
-    });
-    
+    })
+
+    return this.loanApplicationForm;
+  }
+
+  getDocumentData(){
+    let uuidString = uuid();
+    uuidString = uuidString.replace("-","");
+    this.documentData.loanApplicationId = uuidString;
+    console.log("this.documentData==>",this.documentData);
   }
 
   ngOnInit(): void {
     console.log("In Docu");
     let data = {};
+    this.getDocumentData();
     this.createDocumentationForm(data);
  }
 
  saveData(){
-   let data = {};
-   data = this.documentForm.value;
-   console.log(data);
+  let data = this.documentForm.getRawValue();
+  this.lenderService.createLoanApplicationRequest(data.createLoanApplicationForm).subscribe(res => {
+    console.log("Response==>",res);
+   }, (error: any) => {
+    this.commonService.errorSnackBar(error);
+   });
  }
 }

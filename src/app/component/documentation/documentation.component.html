@@ -23,7 +23,7 @@
               <div *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">
                 <div class="submenu" [ngClass]="{'expanded' : valueObject.showSubmenu}" *ngIf="valueObject.showSubmenu && (isExpanded || isShowing)">              
                   <mat-nav-list *ngFor="let lastChild of valueObject.values">            
-                    <mat-list-item (click)="lastChild.showSubmenu = !lastChild.showSubmenu" class="parent" title={{lastChild.description}}>
+                    <mat-list-item (click)="lastChild.showSubmenu = !lastChild.showSubmenu && setCurrentSelectedAPI(lastChild.code)" class="parent" title={{lastChild.description}}>
                       <span class="full-width">{{lastChild.value}}</span>                                  
                     </mat-list-item>
                   </mat-nav-list>
@@ -41,37 +41,37 @@
           <app-create-loan-application-request *ngIf="this.selectedMenuItem == 'CR_LN_APP_REQ'"></app-create-loan-application-request>
 
           <!-- Consent Selectors -->
-          <app-consent-handle-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-consent-handle-request>
-          <app-consent-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-consent-status-request>
+          <app-consent-handle-request *ngIf="this.selectedMenuItem == 'CNST_HNDL_REQ'"></app-consent-handle-request>
+          <app-consent-status-request *ngIf="this.selectedMenuItem == 'CNST_HNDL_STS'"></app-consent-status-request>
 
           <!-- Offers Selectors -->
-          <app-generate-offer-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-generate-offer-request>
-          <app-set-offer-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-offer-request>
+          <app-generate-offer-request *ngIf="this.selectedMenuItem == 'GEN_OFRS_REQ'"></app-generate-offer-request>
+          <app-set-offer-request *ngIf="this.selectedMenuItem == 'SET_OFRS_REQ'"></app-set-offer-request>
 
           <!-- Loan Acceptance Selectors -->
-          <app-trigger-loan-acceptance-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-loan-acceptance-request>
-          <app-verify-loan-acceptance-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-verify-loan-acceptance-request>
+          <app-trigger-loan-acceptance-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-trigger-loan-acceptance-request>
+          <app-verify-loan-acceptance-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-verify-loan-acceptance-request>
 
           <!-- Grant Loan Selectors -->
-          <app-grant-loan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-grant-loan-request>
-          <app-loan-summary-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-loan-summary-request>
-          <app-get-loan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-get-loan-request>
-          <app-loan-statement-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-loan-statement-request>
-          <app-list-loans-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-list-loans-request>
+          <app-grant-loan-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-grant-loan-request>
+          <app-loan-summary-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-loan-summary-request>
+          <app-get-loan-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-get-loan-request>
+          <app-loan-statement-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-loan-statement-request>
+          <app-list-loans-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-list-loans-request>
 
           <!-- Repayment Selectors -->
-          <app-set-repayment-plan-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-repayment-plan-request>
-          <app-set-repayment-plan-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-repayment-plan-status-request>
-          <app-trigger-repayment-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-repayment-request>
-          <app-trigger-repayment-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-repayment-status-request>
+          <app-set-repayment-plan-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-set-repayment-plan-request>
+          <app-set-repayment-plan-status-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-set-repayment-plan-status-request>
+          <app-trigger-repayment-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-trigger-repayment-request>
+          <app-trigger-repayment-status-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-trigger-repayment-status-request>
 
           <!-- Disbursement Selectors -->
-          <app-set-disbursement-account-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-set-disbursement-account-request>
-          <app-trigger-disbursement-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-disbursement-request>
-          <app-trigger-disbursement-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-trigger-disbursement-status-request>
+          <app-set-disbursement-account-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-set-disbursement-account-request>
+          <app-trigger-disbursement-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-trigger-disbursement-request>
+          <app-trigger-disbursement-status-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-trigger-disbursement-status-request>
 
           <!-- Loan Dispute Management -->
-          <app-raise-dispute-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-raise-dispute-request>
-          <app-dispute-status-request *ngIf="this.selectedMenuItem != 'CR_LN_APP_REQ'"></app-dispute-status-request>
+          <app-raise-dispute-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-raise-dispute-request>
+          <app-dispute-status-request *ngIf="this.selectedMenuItem == 'HEARTBEAT'"></app-dispute-status-request>
   </div>
 </mat-drawer-container>
