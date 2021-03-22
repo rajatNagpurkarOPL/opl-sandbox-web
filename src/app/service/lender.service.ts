@@ -93,8 +93,14 @@ export class LenderService {
     return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_MATRIX_RANGE, false);
   }
 
+  // used in SandBox
+  createLoanApplicationRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.CREATE_LOAN_APPLICATION_REQUEST, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
   }
+  
 }

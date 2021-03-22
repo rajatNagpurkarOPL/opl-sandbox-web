@@ -1,5 +1,5 @@
 const locationUrl = window.location.protocol + '//' + window.location.host;
-// const locationUrl = 'https://qa-opl.instantmseloans.in'; // for QA(If you are in Local)
+//const locationUrl = 'https://qa-opl.instantmseloans.in'; // for QA(If you are in Local)
 
 /**
  *  This is constants of REST URL which can be hit on backend server
@@ -31,6 +31,7 @@ export const RestURL = {
     GET_STATES : '/master/get-states',
     GET_MASTERS_BY_FIELD_CODES : '/master/get-master',
     GET_MATRIX_RANGE : '/master/get-range',
+    CREATE_LOAN_APPLICATION_REQUEST : '/v3.3/loanApplication/createLoanApplicationsRequest',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data'
     }
