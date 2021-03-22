@@ -148,7 +148,6 @@
                                       <p> {{item.lable}}</p>
                                       <span *ngIf="item.paramDesc != null">{{item.paramDesc}}</span>
                                     </div>
-                                    {{item | json}}
                               </div>
                                 <ng-container *ngIf="isMultipleControl.includes(item.code) ; then codeContainer ;  else idContainer"></ng-container>
 
@@ -830,6 +829,46 @@
                                     </table>
                                     <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
                                   </ng-container>
+
+                                  <ng-container *ngIf="item.code == 'MAX_PERMISSIBLE_MSME_RANK_BUYER'">
+                                    <p>
+                                      <label formArrayName="inputCheckbox_{{item.parameterId}}" *ngFor="let c of item.lovs.noMsmeRanking; let i = index">
+                                          <input [formControlName]="i" type="checkbox" [(ngModel)]="c.isSelect"  (ngModelChange)="setCheckboxAnswerForKey(item,'noMsmeRanking')" /> {{c.value}}
+                                        </label>
+                                    </p>
+                                  <app-print-error [control]="pf['inputCheckbox_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                    <table class="table btm-0 pd-2">
+                                      <tbody>
+                                        <tr>
+                                          <th scope="row">Bureau</th>
+                                          <td></td>
+                                          <td>Max Permissible Range</td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">CIBIL</th>
+                                          <td class="w-30">
+                                            <ng5-slider [(value)]="item.answer.cibilRank" [options]="item.option"></ng5-slider>
+                                          </td>
+                                          <td class="w-30">
+                                            <input type="text" placeholder="Enter Number" [(ngModel)]="item.answer.cibilRank" formControlName="min1_{{item.parameterId}}">
+                                            <app-print-error [control]="pf['min1_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">Experian</th>
+                                          <td class="w-30">
+                                            <ng5-slider [(value)]="item.answer.experianRank" [options]="item.option1"></ng5-slider>
+                                          </td>
+                                          <td class="w-30">
+                                            <input type="text" placeholder="Enter Number" [(ngModel)]="item.answer.experianRank" formControlName="min2_{{item.parameterId}}">
+                                            <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <img class="opl" src="assets/img/close-red.svg" (click)="removeParameter(item)" />
+                                  </ng-container>
+
 
                                   <ng-container *ngIf="item.code == 'INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR'">
                                     <button mat-raised-button color="primary" (click)="addRemoveFromRadioForBS(item)"> + ADD </button>
