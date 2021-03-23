@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="row">
+<!-- <div class="container">
+  <div class="row"> -->
 
-    <!-- <div class="b4l-dashboard">
+<!-- <div class="b4l-dashboard">
       <p>Number of Applications – Analytics Dashboard</p>
       <select _ngcontent-njf-c118="" id="exampleFormControlSelect1" class="form-control">
         <option _ngcontent-njf-c118="">Today</option>
@@ -144,12 +144,12 @@
  -->
 
 
-    <!-- <div class="b4l-dashboard b4l-dashboard-dash-tb"> -->
-    <div class="b4l-dashboard">
+<!-- <div class="b4l-dashboard b4l-dashboard-dash-tb"> -->
+<!-- <div class="b4l-dashboard">
       <p>LSP Bridge Matrix</p>
-    </div>
+    </div> -->
 
-    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-tab-bt-0">
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-tab-bt-0">
     
        
           <ng-container matColumnDef="position">
@@ -178,7 +178,7 @@
     
     
         </table> -->
-        <div class="table-responsive">
+<!-- <div class="table-responsive">
           <table class="table">
             <thead>
                 <tr>
@@ -237,4 +237,669 @@
     </div>
 
   </div>
+</div> -->
+
+<mat-card class="pd-0">
+  <div class="container">
+
+    <div class="dash-b4l-title">
+      <p>Dashboard & Analytics</p>
+
+      <div class="dashboard-date-report">
+        <mat-form-field appearance="outline" class="mr-2">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="btn"><img src="assets/img/download-white.svg"
+            class="mr-2" />Download Report</button>
+
+      </div>
+    </div>
+
+
+    <div class="dash-b4l-title">
+      <div class="dashboard-details">
+
+        <div class="detail-of-dash">
+          <span>Total Applications</span>
+          <h2>1000</h2>
+          <p>₹ 20,00,000</p>
+        </div>
+
+
+        <div class="detail-of-dash">
+          <span>Eligible Applications</span>
+          <h2>500</h2>
+          <p>₹ 5,00,000</p>
+        </div>
+
+
+        <div class="detail-of-dash">
+          <span>Loan disbursed</span>
+          <h2>300</h2>
+          <p>₹ 3,00,000</p>
+        </div>
+
+
+        <div class="detail-of-dash">
+          <span>Upcoming Collection</span>
+          <h2>200</h2>
+          <p>₹ 2,50,000</p>
+        </div>
+
+
+        <div class="detail-of-dash">
+          <span>Total Revenue Collected</span>
+          <h2>50</h2>
+          <p>₹ 50,000</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="b4l-height">
+      <div class="container">
+        <div class="b4l-product-title border-none">
+          <ul class="product">
+            <li><a [ngClass]="(tab.summary ? 'active' : '')" (click)="setTab('summary')" href="javaScript:void(0);">
+                <p class="fs-18">Summary</p>
+              </a> </li>
+              <li><a [ngClass]="(tab.Proposal ? 'active' : '')" (click)="setTab('Proposal')" href="javaScript:void(0);">
+                <p class="fs-18">Proposal Details</p>
+              </a> </li>
+
+              <li><a [ngClass]="(tab.Geographical ? 'active' : '')" (click)="setTab('Geographical')" href="javaScript:void(0);">
+                <p class="fs-18">  Geographical Differentiation</p>
+              </a> </li>
+
+
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</mat-card>
+
+
+
+
+
+<div class="container" *ngIf="tab.summary">
+
+  <mat-card class="mt-4 mb-4">
+
+    <div class="d-flex al-center js-between w-100 pd-30">
+      <p><b>Overall Summary</b></p>
+
+      <div class="d-flex al-center js-center w-30 dash-summary">
+        <mat-form-field appearance="outline" class="mr-2">
+          <mat-label>Favorite food</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="toggle-text-btn-dash w-100">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="bold" checked>Application</mat-button-toggle>
+            <mat-button-toggle value="italic">Amount</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="pd-4">
+      <apx-chart class="apex-charts" [series]="StockAnalysisChart.series" [chart]="StockAnalysisChart.chart"
+        [tooltip]="StockAnalysisChart.tooltip" [yaxis]="StockAnalysisChart.yaxis" [legend]="StockAnalysisChart.legend"
+        [grid]="StockAnalysisChart.grid" [dataLabels]="StockAnalysisChart.dataLabels"
+        [stroke]="StockAnalysisChart.stroke" [xaxis]="StockAnalysisChart.xaxis" [colors]="StockAnalysisChart.colors"
+        [responsive]="StockAnalysisChart.responsive">
+      </apx-chart>
+    </div>
+
+
+
+
+    <table class="table dash-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Application Stage</th>
+          <th scope="col">Total</th>
+          <th scope="col">Success</th>
+          <th scope="col">Failed</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>1.</td>
+          <td>Applications Received</td>
+          <td>1000 <br> <span>₹ 20,00,000</span></td>
+          <td>800 <br><span>₹ 18,00,000</span></td>
+          <td>200 <br><span>₹ 20,00,000</span></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Offers Generated</td>
+          <td>1000 <br> <span>₹ 20,00,000</span></td>
+          <td>800 <br><span>₹ 18,00,000</span></td>
+          <td>200 <br><span>₹ 20,00,000</span></td>
+        </tr>
+
+
+        <tr>
+          <td>3</td>
+          <td>Loans Disbursed</td>
+          <td>50 <br> <span>₹ 35,000</span></td>
+          <td>50 <br> <span>₹ 50,000</span></td>
+          <td>- <br><span>-</span></td>
+        </tr>
+
+
+        <tr>
+          <td>4</td>
+          <td>Loans Collected</td>
+          <td>1000 <br> <span>₹ 20,00,000</span></td>
+          <td>800 <br><span>₹ 18,00,000</span></td>
+          <td>200 <br><span>₹ 20,00,000</span></td>
+        </tr>
+
+
+        <tr>
+          <td>5</td>
+          <td>Loans Overdue</td>
+          <td>200 <br> <span>₹ 2,50,000</span></td>
+          <td>165 <br> <span>₹ 1,90,000</span></td>
+          <td>- <br><span>-</span></td>
+        </tr>
+
+        <tr>
+          <td>6</td>
+          <td>Revenue Earned</td>
+          <td>50 <br> <span>₹ 35,000</span></td>
+          <td>50 <br> <span>₹ 50,000</span></td>
+          <td>- <br><span>-</span></td>
+        </tr>
+
+
+        <tr>
+          <td>7</td>
+          <td>Total Principle Collected</td>
+          <td>50 <br> <span>₹ 35,000</span></td>
+          <td>50 <br> <span>₹ 35,000</span></td>
+          <td>- <br><span>-</span></td>
+        </tr>
+
+        <tr>
+          <td>8</td>
+          <td>Disputes Raised (via App)</td>
+          <td>10 <br> <span>₹ 10,000</span></td>
+          <td>- <br><span>-</span></td>
+          <td>10 <br> <span>₹ 10,000</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </mat-card>
+
+  <div class="row mb-4">
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <div class="w-55">
+          <h2>Type of Application</h2>
+          <apx-chart class="w-55" [series]="totalUsersPieChart.series" [chart]="totalUsersPieChart"
+            [colors]="totalUsersPieChart.colors" [labels]="totalUsersPieChart.labels"
+            [dataLabels]="totalUsersPieChart.dataLabels" [tooltip]="totalUsersPieChart.tooltip"
+            [legend]="totalUsersPieChart.legend" [plotOptions]="totalUsersPieChart.option"
+            [grid]="totalUsersPieChart.grid">
+          </apx-chart>
+        </div>
+        <div class="legend-abs">
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>Existing Bank Customer <span class="ml-4">800</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>New to Bank Customer <span class="ml-4">200</span></p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <div class="w-55">
+          <h2>Applicant Credit History</h2>
+          <apx-chart class="w-55" [series]="b4ltotalUsersPieChart.series" [chart]="b4ltotalUsersPieChart"
+            [colors]="b4ltotalUsersPieChart.colors" [labels]="b4ltotalUsersPieChart.labels"
+            [dataLabels]="b4ltotalUsersPieChart.dataLabels" [tooltip]="b4ltotalUsersPieChart.tooltip"
+            [legend]="b4ltotalUsersPieChart.legend" [plotOptions]="b4ltotalUsersPieChart.option"
+            [grid]="b4ltotalUsersPieChart.grid">
+          </apx-chart>
+        </div>
+        <div class="legend-abs">
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>New to Credit Applications <span class="ml-4">900</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>Existing to Credit Applications <span class="ml-4">300</span></p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+
+  <div class="row mb-4">
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <div class="w-55">
+          <h2>Disbursement Account</h2>
+          <apx-chart class="w-55" [series]="b4lnewtotalUsersPieChart.series" [chart]="b4lnewtotalUsersPieChart"
+            [colors]="b4lnewtotalUsersPieChart.colors" [labels]="b4lnewtotalUsersPieChart.labels"
+            [dataLabels]="b4lnewtotalUsersPieChart.dataLabels" [tooltip]="b4lnewtotalUsersPieChart.tooltip"
+            [legend]="b4lnewtotalUsersPieChart.legend" [plotOptions]="b4lnewtotalUsersPieChart.option"
+            [grid]="b4lnewtotalUsersPieChart.grid">
+          </apx-chart>
+        </div>
+        <div class="legend-abs">
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>Saving Account <span class="ml-4">900</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>OD/CC Account <span class="ml-4">900</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>Current Account <span class="ml-4">300</span></p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card>
+        <div class="w-55">
+          <h2>Average ROI & Tenure </h2>
+        </div>
+        <div class="roi-ave-b4l">
+          <div class="roi-content-b4l">
+            <img src="assets/img/Avg-ROI.svg" />
+            <span>Average ROI</span>
+            <h2>7.5%</h2>          
+       <div class="apex-charts-1">
+            <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+            [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+            [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+            [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+            [responsive]="b4lbasicBarChart.responsive">
+          </apx-chart>
+      
+          <div class="details">
+<span>6%</span>
+<span>18%</span>
+          </div>
+        </div>
+
+          </div>
+
+          <div class="roi-content-b4l">
+            <img src="assets/img/Avg-Tenure.svg" />
+            <span>Average Tenure</span>
+            <h2>45 Days</h2>
+            <div class="apex-charts-1">
+              <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+              [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+              [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+              [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+              [responsive]="b4lbasicBarChart.responsive">
+            </apx-chart>
+        
+            <div class="details">
+  <span>12</span>
+  <span>60</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container" *ngIf="tab.Proposal">
+
+  <mat-card class="mt-4 mb-4">
+
+    <div class="d-flex al-center js-between w-100 pd-30">
+      <p><b>Collection Status</b></p>
+
+      <div class="d-flex al-center js-center w-30 dash-summary">
+        <mat-form-field appearance="outline" class="mr-2">
+          <mat-label>All Products</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="toggle-text-btn-dash w-100">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="bold" checked>Application</mat-button-toggle>
+            <mat-button-toggle value="italic">Amount</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="pd-4">
+      <apx-chart class="apex-charts" [series]="StockAnalysisChart.series" [chart]="StockAnalysisChart.chart"
+        [tooltip]="StockAnalysisChart.tooltip" [yaxis]="StockAnalysisChart.yaxis" [legend]="StockAnalysisChart.legend"
+        [grid]="StockAnalysisChart.grid" [dataLabels]="StockAnalysisChart.dataLabels"
+        [stroke]="StockAnalysisChart.stroke" [xaxis]="StockAnalysisChart.xaxis" [colors]="StockAnalysisChart.colors"
+        [responsive]="StockAnalysisChart.responsive">
+      </apx-chart>
+    </div>
+
+  </mat-card>
+
+  <div class="row mb-4">
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <div class="w-55">
+          <h2>Proposal Distribution</h2>
+          <apx-chart class="w-55" [series]="b4lnewtotalUsersPieChart.series" [chart]="b4lnewtotalUsersPieChart"
+            [colors]="b4lnewtotalUsersPieChart.colors" [labels]="b4lnewtotalUsersPieChart.labels"
+            [dataLabels]="b4lnewtotalUsersPieChart.dataLabels" [tooltip]="b4lnewtotalUsersPieChart.tooltip"
+            [legend]="b4lnewtotalUsersPieChart.legend" [plotOptions]="b4lnewtotalUsersPieChart.option"
+            [grid]="b4lnewtotalUsersPieChart.grid">
+          </apx-chart>
+        </div>
+        <div class="legend-abs">
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>Saving Account <span class="ml-4">900</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>OD/CC Account <span class="ml-4">900</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>Current Account <span class="ml-4">300</span></p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <div class="w-55">
+          <h2>SMA Distribution</h2>
+          <apx-chart class="w-55" [series]="b4lnew4totalUsersPieChart.series" [chart]="b4lnew4totalUsersPieChart"
+            [colors]="b4lnew4totalUsersPieChart.colors" [labels]="b4lnew4totalUsersPieChart.labels"
+            [dataLabels]="b4lnew4totalUsersPieChart.dataLabels" [tooltip]="b4lnew4totalUsersPieChart.tooltip"
+            [legend]="b4lnew4totalUsersPieChart.legend" [plotOptions]="b4lnew4totalUsersPieChart.option"
+            [grid]="b4lnew4totalUsersPieChart.grid">
+          </apx-chart>
+        </div>
+        <div class="legend-abs">
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>SMA 0 <span class="ml-4">40</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-legend mr-2"></div>
+            <p>SMA 1 <span class="ml-4">50</span></p>
+          </div>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>SMA 2 <span class="ml-4">100</span></p>
+          </div>
+            <div class="d-flex al-center js-between w-100 blue-legend">
+            <div class="circle-blue-light-legend mr-2"></div>
+            <p>SMA 3 (NPA) <span class="ml-4">30</span></p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+
+  <div class="row mb-4">
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card>
+        <div class="w-55">
+          <h2>Invoice Value Range & Average Period</h2>
+        </div>
+        <div class="roi-ave-b4l">
+          <div class="roi-content-b4l">
+            <img src="assets/img/rs.svg" />
+            <span>Invoice Value Range</span>
+            <h2>₹ 7.5 lacs</h2>          
+       <div class="apex-charts-1">
+            <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+            [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+            [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+            [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+            [responsive]="b4lbasicBarChart.responsive">
+          </apx-chart>
+      
+          <div class="details">
+            <span>₹ 3.5 Lacs</span>
+            <span>₹ 15 Lacs</span>
+          </div>
+        </div>
+
+          </div>
+
+          <div class="roi-content-b4l">
+            <img src="assets/img/Avg-Tenure.svg" />
+            <span>Invoice Average Period</span>
+            <h2>45 Days</h2>
+            <div class="apex-charts-1">
+              <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+              [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+              [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+              [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+              [responsive]="b4lbasicBarChart.responsive">
+            </apx-chart>
+        
+            <div class="details">
+  <span>15 Days</span>
+  <span>60 Days</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card>
+        <div class="w-55">
+          <h2>MSME Rank & Bureau Score</h2>
+        </div>
+        <div class="roi-ave-b4l">
+          <div class="roi-content-b4l">
+            <img src="assets/img/MSME-Rank.svg" />
+            <span>MSME Rank</span>
+            <h2>6</h2>          
+       <div class="apex-charts-1">
+            <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+            [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+            [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+            [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+            [responsive]="b4lbasicBarChart.responsive">
+          </apx-chart>
+      
+          <div class="details">
+<span>3</span>
+<span>9</span>
+          </div>
+        </div>
+
+          </div>
+
+          <div class="roi-content-b4l">
+            <img src="assets/img/Bureau-Score.svg" />
+            <span>Bureau Score</span>
+            <h2>625</h2>
+            <div class="apex-charts-1">
+              <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+              [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+              [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+              [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+              [responsive]="b4lbasicBarChart.responsive">
+            </apx-chart>
+        
+            <div class="details">
+  <span>378</span>
+  <span>798</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+
+      </mat-card>
+    </div>
+
+  </div>
+
+
+  <div class="row mb-4">
+    <div class="psb-lg-3 psb-xl-3 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card>
+        <div>
+          <h2>GST Turnover (Annual)</h2>
+        </div>
+        <div class="roi-ave-b4l">
+          <div class="roi-content-b4l w-100">
+            <img src="assets/img/rs.svg" />
+            <span>Average GST Turnover</span>
+            <h2>₹ 75 lacs</h2>          
+       <div class="apex-charts-1">
+            <apx-chart class="apex-charts" [series]="b4lbasicBarChart.series" [chart]="b4lbasicBarChart.chart"
+            [tooltip]="b4lbasicBarChart.tooltip" [yaxis]="b4lbasicBarChart.yaxis" [legend]="b4lbasicBarChart.legend"
+            [grid]="b4lbasicBarChart.grid" [dataLabels]="b4lbasicBarChart.dataLabels"
+            [stroke]="b4lbasicBarChart.stroke" [xaxis]="b4lbasicBarChart.xaxis" [colors]="b4lbasicBarChart.colors"
+            [responsive]="b4lbasicBarChart.responsive">
+          </apx-chart>
+      
+          <div class="details">
+            <span>₹ 5 lacs</span>
+            <span>₹ 5 Cr.</span>
+          </div>
+        </div>
+
+          </div>         
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-9 psb-xl-9 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card>
+
+        <div class="d-flex al-center js-between w-100 pd-30">
+          <p><b>Constitution</b></p>
+    
+          <div class="d-flex al-center js-center w-50 dash-summary">
+            <mat-form-field appearance="outline" class="mr-2">
+              <mat-label>All Products</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <div class="toggle-text-btn-dash w-100">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="bold" checked>Application</mat-button-toggle>
+                <mat-button-toggle value="italic">Amount</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+    
+    
+          </div>
+        </div>
+    
+        <div class="pd-4">
+          <apx-chart class="apex-charts" [series]="b4lStockAnalysisChart.series" [chart]="b4lStockAnalysisChart.chart"
+            [tooltip]="b4lStockAnalysisChart.tooltip" [yaxis]="b4lStockAnalysisChart.yaxis" [legend]="b4lStockAnalysisChart.legend"
+            [grid]="b4lStockAnalysisChart.grid" [dataLabels]="b4lStockAnalysisChart.dataLabels"
+            [stroke]="b4lStockAnalysisChart.stroke" [xaxis]="b4lStockAnalysisChart.xaxis" [colors]="b4lStockAnalysisChart.colors"
+            [responsive]="b4lStockAnalysisChart.responsive">
+          </apx-chart>
+        </div>
+    
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container" *ngIf="tab.Geographical">
+
+ 
+  <div class="row mt-4 mb-4">
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+        <highcharts-chart id="container" [Highcharts]="Highcharts" [constructorType]="chartConstructor"
+                [options]="chartOptions">
+              </highcharts-chart>
+
+      </mat-card>
+    </div>
+
+
+    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+      <mat-card class="d-flex al-center js-between w-100">
+       
+   
+      </mat-card>
+    </div>
+
+  </div>
+
+
+
 </div>

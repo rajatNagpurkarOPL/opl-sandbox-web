@@ -71,6 +71,9 @@ import { TriggerDisbursementStatusRequestComponent } from './component/documenta
 import { RaiseDisputeRequestComponent } from './component/documentation/gstsahayapis/loan-dispute-mgmt/raise-dispute-request/raise-dispute-request.component';
 import { DisputeStatusRequestComponent } from './component/documentation/gstsahayapis/loan-dispute-mgmt/dispute-status-request/dispute-status-request.component';
 import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/heartbeat/heartbeat-api/heartbeat-api.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 
 
@@ -133,7 +136,8 @@ import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/he
     TriggerDisbursementStatusRequestComponent,
     RaiseDisputeRequestComponent,
     DisputeStatusRequestComponent,
-    HeartbeatApiComponent
+    HeartbeatApiComponent,
+  
   ],
   imports: [
     ReactiveFormsModule,
@@ -143,7 +147,9 @@ import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/he
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    NgApexchartsModule,
+    HighchartsChartModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
