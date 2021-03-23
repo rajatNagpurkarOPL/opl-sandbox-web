@@ -17,6 +17,8 @@ import * as Highcharts from 'highcharts/highmaps';
 
 export class DashboardComponent implements OnInit {
 
+  selected = '';
+
   lineAnnotationsColumAreaChart: ChartType;
   StockAnalysisChart: ChartType;
   

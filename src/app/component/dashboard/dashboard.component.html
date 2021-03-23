@@ -879,26 +879,341 @@
 
 <div class="container" *ngIf="tab.Geographical">
 
- 
-  <div class="row mt-4 mb-4">
+<mat-card class="mt-4 mb-4">
+  <div class="d-flex al-center js-between w-100">
+    <p><b>Geographical Differentiation</b></p>
+    <mat-form-field appearance="outline">
+      <mat-label>All</mat-label>
+      <mat-select [(value)]="selected">
+      
+        <mat-option value="option0">None</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+  <div class="row">
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+     
         <highcharts-chart id="container" [Highcharts]="Highcharts" [constructorType]="chartConstructor"
                 [options]="chartOptions">
               </highcharts-chart>
 
-      </mat-card>
+     
     </div>
 
 
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+    
        
+        <table class="table1 dash-table1">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">State <img src="assets/img/b4l-arrow.svg"/></th>
+              <th scope="col">Applications <img src="assets/img/b4l-arrow.svg"/></th>
+              <th scope="col">Amount <img src="assets/img/b4l-arrow.svg"/></th>
+              <th scope="col">Applications (%) <img src="assets/img/b4l-arrow.svg"/></th>
+            </tr>
+          </thead>
+          <tbody>
+    
+            <tr>
+              <td>1.</td>
+              <td><a>Andhra Pradesh</a></td>
+              <td>100</td>
+              <td>₹ 2,00,000</td>
+              <td>10% <img src="assets/img/info.svg" matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+            <tr>
+              <td>2</td>
+              <td><a>Arunachal Pradesh</a></td>
+              <td>100</td>
+              <td>₹ 2,00,000</td>
+              <td>10% <img src="assets/img/info.svg" matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+    
+            <tr>
+              <td>3</td>
+              <td><a>Assam</a></td>
+              <td>100</td>
+              <td>₹ 2,00,000</td>
+              <td>10% <img src="assets/img/info.svg" matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+    
+            <tr>
+              <td>4</td>
+              <td><a>Bihar</a></td>
+              <td>100</td>
+              <td>₹ 1,00,000</td>
+              <td>10% <img src="assets/img/info.svg" matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+    
+            <tr>
+              <td>5</td>
+              <td><a>Chhattisgarh</a></td>
+              <td>100</td>
+              <td>₹ 2,00,000</td>
+              <td>10% <img src="assets/img/info.svg" matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+            <tr>
+              <td>6</td>
+              <td><a>Goa</a></td>
+              <td>70</td>
+              <td>₹ 1,00,000</td>
+              <td>10% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+    
+            <tr>
+              <td>7</td>
+              <td><a>Gujarat</a></td>
+              <td>70</td>
+              <td>₹ 1,00,000</td>
+              <td>10% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+    
+            <tr>
+              <td>8</td>
+              <td><a>Haryana</a></td>
+              <td>50</td>
+              <td>₹ 50,000</td>
+              <td>10% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>9</td>
+              <td><a>Himachal Pradesh</a></td>
+              <td>50</td>
+              <td>₹ 50,000</td>
+              <td>6% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>10</td>
+              <td><a>Jharkhand</a></td>
+              <td>50</td>
+              <td>₹ 50,000</td>
+              <td>5% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>11</td>
+              <td><a>Karnataka</a></td>
+              <td>50</td>
+              <td>₹ 50,000</td>
+              <td>5% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>12</td>
+              <td><a>Kerala</a></td>
+              <td>50</td>
+              <td>₹ 50,000</td>
+              <td>5% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>13</td>
+              <td><a>Madhya Pradesh</a></td>
+              <td>50</td>
+              <td>₹ 25,000</td>
+              <td>5% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+            <tr>
+              <td>14</td>
+              <td><a>Maharashtra</a></td>
+              <td>50</td>
+              <td>₹ 25,000</td>
+              <td>5% <img src="assets/img/info.svg"  matTooltip="Total Number of Applications"/></td>
+            </tr>
+
+    
+          </tbody>
+        </table>
    
-      </mat-card>
     </div>
 
   </div>
+</mat-card>
+
+
+
+
+<mat-card class="mt-4 mb-4">
+<div class="row">
+
+<div class="psb-lg-12 psb-xl-12 psb-md-12 psb-sm-12 psb-xs-12">
+  <div class="d-flex al-center js-between w-100">
+    <p><b>Top 5 Branches</b></p>
+    <mat-form-field appearance="outline">
+      <mat-label>All</mat-label>
+      <mat-select [(value)]="selected">
+      
+        <mat-option value="option0">None</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+
+
+  <table class="table2 dash-table2 w-100">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Branch Name</th>
+        <th scope="col">State</th>
+        <th scope="col">Applications</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>1.</td>
+        <td>Amaravati Branch</td>
+        <td>Andhra Pradesh</td>
+        <td>42</td>
+        <td>₹ 2,00,000</td>
+      </tr>
+
+      <tr>
+        <td>2.</td>
+        <td>Itanagar Branch</td>
+        <td>Arunachal Pradesh</td>
+        <td>31</td>
+        <td>₹ 2,00,000</td>
+      </tr>
+
+
+      <tr>
+        <td>3.</td>
+        <td>Guwahati Branch</td>
+        <td>Assam</td>
+        <td>27</td>
+        <td>₹ 2,00,000</td>
+      </tr>
+
+
+      <tr>
+        <td>4.</td>
+        <td>Patna Main Branch</td>
+        <td>Bihar</td>
+        <td>25</td>
+        <td>₹ 1,00,000</td>
+      </tr>
+
+      <tr>
+        <td>5.</td>
+        <td>Raipur Domestic Airport Branch</td>
+        <td>Chhattisgarh</td>
+        <td>21</td>
+        <td>₹ 1,00,000</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+</div>
+
+</div>
+</mat-card>
+
+<mat-card class="mt-4 mb-4">
+  <div class="row">
+  
+  <div class="psb-lg-12 psb-xl-12 psb-md-12 psb-sm-12 psb-xs-12">
+    <div class="d-flex al-center js-between w-100">
+      <p><b>Bottom 5 Branches</b></p>
+      <mat-form-field appearance="outline">
+        <mat-label>All</mat-label>
+        <mat-select [(value)]="selected">
+        
+          <mat-option value="option0">None</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+
+    <table class="table2 dash-table2 w-100">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Branch Name</th>
+          <th scope="col">State</th>
+          <th scope="col">Applications</th>
+          <th scope="col">Disbursement Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr>
+          <td>1.</td>
+          <td>Baner Pune Branch</td>
+          <td>Maharashtra</td>
+          <td>12</td>
+          <td>₹ 22,000</td>
+        </tr>
+  
+        <tr>
+          <td>2.</td>
+          <td>Sehore Branch</td>
+          <td>Madhya Pradesh</td>
+          <td>9</td>
+          <td>₹ 12,000</td>
+        </tr>
+  
+  
+        <tr>
+          <td>3.</td>
+          <td>Kerala Airport Branch</td>
+          <td>Kerala</td>
+          <td>7</td>
+          <td>₹ 10,000</td>
+        </tr>
+  
+  
+        <tr>
+          <td>4.</td>
+          <td>Bangalore Rural Branch</td>
+          <td>Karnataka</td>
+          <td>4</td>
+          <td>₹ 8,000</td>
+        </tr>
+  
+        <tr>
+          <td>5.</td>
+          <td>Dhanbad Branch</td>
+          <td>Jharkhand</td>
+          <td>2</td>
+          <td>₹ 6,000</td>
+        </tr>
+  
+  
+      </tbody>
+    </table>
+  
+  </div>
+  
+  </div>
+  </mat-card>
+
+
+
+
 
 
 
