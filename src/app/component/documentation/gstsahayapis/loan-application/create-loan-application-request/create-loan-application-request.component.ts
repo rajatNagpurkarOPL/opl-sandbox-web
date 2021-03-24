@@ -38,7 +38,9 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   createLoanApplicationForm: any = FormGroup;
   loanApplicationForm: any = FormGroup;
   loanApplication: any = FormArray;
-
+  apiRequestSchemaData: any[] = [];
+  apiResponseSchemaData: any[] = [];
+  domainSchemaData: any[] = [];
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
   setTryOut(active){
@@ -113,6 +115,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     let data = {};
     this.getDocumentData();
     this.createDocumentationForm(data);
+    this.getApiRequestSchema('createLoanApplicationsRequest');
+    this.getApiResponseSchema('createLoanApplicationsResponse');
  }
 
  saveData(){
@@ -123,4 +127,60 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     this.commonService.errorSnackBar(error);
    });
  }
+
+  
+  getApiRequestSchema(data){
+    this.lenderService.getApiSchema(data).subscribe(res => {
+        if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+          if(!this.commonService.isObjectNullOrEmpty(res.data)){
+            this.apiRequestSchemaData = res.data;
+          }
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
+
+    getApiResponseSchema(data){
+      this.lenderService.getApiSchema(data).subscribe(res => {
+          if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+            if(!this.commonService.isObjectNullOrEmpty(res.data)){
+              this.apiResponseSchemaData = res.data;
+            }
+          } else {
+            this.commonService.warningSnackBar(res.message);
+          }
+        }, (error: any) => {
+          this.commonService.errorSnackBar(error);
+        });
+      }
+
+    tabClick(tab) {
+      if(tab.index==0){
+        console.log('Schema Clicked');
+        this.getApiRequestSchema('createLoanApplicationsRequest');
+        this.getApiResponseSchema('createLoanApplicationsResponse');
+      }else if(tab.index==1){
+        console.log('Header Clicked');
+      }else if (tab.index ==2){
+        console.log('Other Clicked');
+      }
+    }
+
+    getDomainSchema(data){
+      console.log('getDomainData Clicked');
+      this.lenderService.getDomainSchema(data).subscribe(res => {
+          if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+            if(!this.commonService.isObjectNullOrEmpty(res.data)){
+              this.domainSchemaData = res.data;
+            }
+          } else {
+            this.commonService.warningSnackBar(res.message);
+          }
+        }, (error: any) => {
+          this.commonService.errorSnackBar(error);
+        });
+      }
 }

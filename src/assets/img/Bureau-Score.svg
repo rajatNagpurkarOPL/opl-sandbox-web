@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="59" height="59" viewBox="0 0 59 59">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1207" data-name="Rectangle 1207" width="22" height="22" transform="translate(-11751 3373)" fill="#2d3079"/>
+    </clipPath>
+  </defs>
+  <g id="Bureau_Score" data-name="Bureau Score" transform="translate(11770 -3354)">
+    <rect id="Rectangle_1092" data-name="Rectangle 1092" width="59" height="59" rx="8" transform="translate(-11770 3354)" fill="#f2f3ff"/>
+    <g id="Bureau_Score-2" data-name="Bureau Score" clip-path="url(#clip-path)">
+      <path id="people_1_" data-name="people (1)" d="M23,19a1,1,0,0,1-1,1H10a1,1,0,0,1-1-1,6,6,0,0,1,6-6h2A6,6,0,0,1,23,19ZM16,4a4,4,0,1,0,4,4A4,4,0,0,0,16,4ZM7,4a4,4,0,1,0,4,4A4,4,0,0,0,7,4ZM7,19a7.94,7.94,0,0,1,2.35-5.65A5.43,5.43,0,0,0,7.44,13H6.56A5.57,5.57,0,0,0,1,18.56V19a1,1,0,0,0,1,1H7.18A3,3,0,0,1,7,19Z" transform="translate(-11752 3372)" fill="#2d3079"/>
+    </g>
+  </g>
+</svg>

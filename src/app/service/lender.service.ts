@@ -102,5 +102,12 @@ export class LenderService {
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
   }
+
+  getApiSchema(data): Observable<any>{
+    return this.http.get(AppURL.SANDBOX + RestURL.SANDBOX.SCHEMA_DETAIL+ '/' + data, false);
+  }
   
+  getDomainSchema(data): Observable<any>{
+    return this.http.get(AppURL.SANDBOX + RestURL.SANDBOX.DOMAIN_DETAIL+ '/' + data, false);
+  }
 }

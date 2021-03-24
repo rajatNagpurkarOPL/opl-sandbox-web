@@ -2,11 +2,12 @@
 const baseUrl = window.location.protocol + '//' + window.location.host;
 export class AppURL {
 
-    /* static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine'; */
+    static RULE_ENGINE = 'http://localhost:7900/b4l/ruleengine';
     // static LSP_BRIDGE = 'http://localhost:8084/b4l/bridge';
-    static RULE_ENGINE = baseUrl + '/b4l/ruleengine';
+    // static RULE_ENGINE = baseUrl + '/b4l/ruleengine';
     static LSP_BRIDGE = baseUrl + '/b4l/bridge';
-    static SANDBOX = baseUrl + '/b4l/sandbox';
+    // static SANDBOX = '' + '/b4l/sandbox';
+    static SANDBOX = 'http://localhost:7902/b4l/sandbox';
 
 /*     public static getUrl() {
         const commonserlvice = AppURL.injector.get(CommonService);

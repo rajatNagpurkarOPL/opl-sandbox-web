@@ -74,6 +74,9 @@ import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/he
 import { DrawerMenuDirective } from './directives/drawer-menu.directive';
 import { DrawerMenuComponent } from './component/common/drawer-menu/drawer-menu.component';
 import { CommonModule } from '@angular/common';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 
 
@@ -87,7 +90,9 @@ import { CommonModule } from '@angular/common';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    NgApexchartsModule,
+    HighchartsChartModule
   ],
   declarations: [
     AppComponent,
