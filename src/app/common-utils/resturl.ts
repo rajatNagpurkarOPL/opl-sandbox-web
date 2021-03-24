@@ -33,6 +33,8 @@ export const RestURL = {
     GET_MATRIX_RANGE : '/master/get-range',
     CREATE_LOAN_APPLICATION_REQUEST : '/v3.3/loanApplication/createLoanApplicationsRequest',
     SANDBOX : {
-        MASTER_LIST : '/master/get-master-data'
+        MASTER_LIST : '/master/get-master-data',
+        SCHEMA_DETAIL : '/schema/api',
+        DOMAIN_DETAIL : '/schema/domain'
     }
 };

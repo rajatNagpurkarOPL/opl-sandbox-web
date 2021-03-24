@@ -192,5 +192,6 @@ export class CommonService {
   backClicked() {
     this.location.back();
   }
+  
 
 }
