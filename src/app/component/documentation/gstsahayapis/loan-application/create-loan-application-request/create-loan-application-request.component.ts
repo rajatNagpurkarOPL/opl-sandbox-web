@@ -38,7 +38,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   createLoanApplicationForm: any = FormGroup;
   loanApplicationForm: any = FormGroup;
   loanApplication: any = FormArray;
-
+  apiSchemaData: any[] = [];
+  domainSchemaData: any[] = [];
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
   setTryOut(active){
@@ -113,6 +114,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     let data = {};
     this.getDocumentData();
     this.createDocumentationForm(data);
+    this.getApiSchema('createLoanApplicationsRequest');
  }
 
  saveData(){
@@ -123,4 +125,45 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     this.commonService.errorSnackBar(error);
    });
  }
+
+  
+  getApiSchema(data){
+    this.lenderService.getApiSchema(data).subscribe(res => {
+        if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+          if(!this.commonService.isObjectNullOrEmpty(res.data)){
+            this.apiSchemaData = res.data;
+          }
+        } else {
+          this.commonService.warningSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
+
+    tabClick(tab) {
+      if(tab.index==0){
+        console.log('Schema Clicked');
+        this.getApiSchema('createLoanApplicationsRequest');
+      }else if(tab.index==1){
+        console.log('Header Clicked');
+      }else if (tab.index ==2){
+        console.log('Other Clicked');
+      }
+    }
+
+    getDomainSchema(data){
+      console.log('getDomainData Clicked');
+      this.lenderService.getDomainSchema(data).subscribe(res => {
+          if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+            if(!this.commonService.isObjectNullOrEmpty(res.data)){
+              this.domainSchemaData = res.data;
+            }
+          } else {
+            this.commonService.warningSnackBar(res.message);
+          }
+        }, (error: any) => {
+          this.commonService.errorSnackBar(error);
+        });
+      }
 }

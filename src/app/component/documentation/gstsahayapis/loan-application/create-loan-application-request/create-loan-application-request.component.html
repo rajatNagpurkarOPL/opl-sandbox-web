@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-        <div [hidden]="button">
+        <div>
             <div class="b4l-height">
                 <div class="card-header row row-flex">
                     <h3 class="card-title" style="border-left-color: inherit; ">
@@ -200,15 +200,66 @@
                     </h3><!---->
                 </div>
                 <div class="card-body">
-                    <div class="b4l-product-title">
-                    <ul class="product">
-                    <li><a href="javaScript:void(0);"> <p>Schema</p> </a> </li>
-                    <li><a href="javaScript:void(0);"> <p>Body</p> </a></li>
-                    <li><a href="javaScript:void(0);"> <p>Header</p> </a></li>
-                    </ul>
+                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+                        <mat-tab label="Schema">
+                            <table>
+                            <tr>
+                                <th> 
+                                    AttributeName
+                                </th>
+                                <th> 
+                                    Type
+                                </th>
+                                <th> 
+                                    Description
+                                </th>
+                                <th> 
+                                    Validation
+                                </th>
+                                <th> 
+                                    Domain
+                                </th>
+                            </tr>
+                            <ng-container *ngFor="let schema of apiSchemaData" [matColumnDef]="schema">
+                                    <tr>
+                                        <td>
+                                            <div *ngIf="schema.isDomain">
+                                                <a href="" ng-click="getDomainSchema(schema.attributeName);" data-id="{{schema.attributeName}}" data-toggle="modal" data-target="#skillModal">{{schema.attributeName}}</a>
+                                            </div>
+                                            <div *ngIf="!schema.isDomain">
+                                                <a>{{schema.attributeName}}</a>
+                                            </div>
+
+                                        </td>
+                                       <!-- <td>{{schema.attributeName}} </td> -->
+                                        <td> {{schema.type}} </td>
+                                        <td> {{schema.description}} </td>
+                                        <td> {{schema.validation}} </td>
+                                        <td> {{schema.isDomain}} </td>
+                                    </tr>
+                            </ng-container>
+                            </table>
+                             
+                        </mat-tab>
+                        <mat-tab label="Header">Content 2</mat-tab>
+                        <mat-tab label="Third">Content 3</mat-tab>
+                      </mat-tab-group>
                     </div>
-                </div>
             </div>
         </div>
+
     </div>   
 </form>
+<style>
+    table, th , td {
+       border: 1px solid grey;
+       border-collapse: collapse;
+       padding: 5px;
+    }
+    table tr:nth-child(odd) {
+       background-color: #f2f2f2;
+    }
+    table tr:nth-child(even) {
+       background-color: #ffffff;
+    }
+ </style>
