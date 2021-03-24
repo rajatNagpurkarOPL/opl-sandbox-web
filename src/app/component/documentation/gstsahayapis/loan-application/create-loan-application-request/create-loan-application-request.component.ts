@@ -38,7 +38,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   createLoanApplicationForm: any = FormGroup;
   loanApplicationForm: any = FormGroup;
   loanApplication: any = FormArray;
-  apiSchemaData: any[] = [];
+  apiRequestSchemaData: any[] = [];
+  apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
@@ -114,7 +115,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     let data = {};
     this.getDocumentData();
     this.createDocumentationForm(data);
-    this.getApiSchema('createLoanApplicationsRequest');
+    this.getApiRequestSchema('createLoanApplicationsRequest');
+    this.getApiResponseSchema('createLoanApplicationsResponse');
  }
 
  saveData(){
@@ -127,11 +129,11 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
  }
 
   
-  getApiSchema(data){
+  getApiRequestSchema(data){
     this.lenderService.getApiSchema(data).subscribe(res => {
         if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
           if(!this.commonService.isObjectNullOrEmpty(res.data)){
-            this.apiSchemaData = res.data;
+            this.apiRequestSchemaData = res.data;
           }
         } else {
           this.commonService.warningSnackBar(res.message);
@@ -141,10 +143,25 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
       });
     }
 
+    getApiResponseSchema(data){
+      this.lenderService.getApiSchema(data).subscribe(res => {
+          if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+            if(!this.commonService.isObjectNullOrEmpty(res.data)){
+              this.apiResponseSchemaData = res.data;
+            }
+          } else {
+            this.commonService.warningSnackBar(res.message);
+          }
+        }, (error: any) => {
+          this.commonService.errorSnackBar(error);
+        });
+      }
+
     tabClick(tab) {
       if(tab.index==0){
         console.log('Schema Clicked');
-        this.getApiSchema('createLoanApplicationsRequest');
+        this.getApiRequestSchema('createLoanApplicationsRequest');
+        this.getApiResponseSchema('createLoanApplicationsResponse');
       }else if(tab.index==1){
         console.log('Header Clicked');
       }else if (tab.index ==2){
