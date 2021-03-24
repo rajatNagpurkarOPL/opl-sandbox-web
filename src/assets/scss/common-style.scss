@@ -403,11 +403,110 @@ box-shadow: none !important;
             
               }
             
-            
-        
+}
+
+.dash-table-brige {
+     td{
+        &.open-down-table{
+            img{
+                fill: #000;
+                height: 12px;
+                width: 12px;
+                margin-left: 18px;
             
             }
+            &.up-arrow{
+                img{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        span{
+            opacity: 0.4;
+         }
+        &.sucess{
+            color: #75B938;
+        }
+        &.failed{
+            color:#F3A41D;
+        }
+    }
+    .down-arrow{
+        display: none;
+        &.opentable{
+            display: block;
+        }
+    }
+     th:nth-child(1) {
+        width: 5%;    
+      }
+    
+      th:nth-child(2) {
+        width: 20%;         
+      }
+    
+      th:nth-child(3) {
+        width: 20%;
+        text-align:left;    
+      }
 
+      
+      th:nth-child(4) {
+        width: 20%;  
+        text-align: right;       
+      }
+
+      
+      th:nth-child(5) {
+        width: 15%;  
+        text-align: right;  
+      }
+
+      th:nth-child(6) {
+        width: 20%;  
+        text-align: right;  
+      }
+      th:nth-child(7) {
+        width: 5%;    
+      }
+    
+      td:nth-child(1) {
+        width: 5%;    
+      }
+    
+      td:nth-child(2) {
+        width: 20%;  
+      }
+    
+      td:nth-child(3) {
+        width: 20%; 
+        text-align: left;  
+      }
+    
+      td:nth-child(4) {
+        width: 20%; 
+        text-align: right; 
+       color: #000000;
+       span{
+          opacity: 0.4;
+       }
+      }
+    
+      td:nth-child(5) {
+        width: 15%; 
+        text-align: right; 
+        vertical-align: middle;       
+      }
+      td:nth-child(6) {
+        width: 20%; 
+        text-align: right; 
+        vertical-align: middle;
+               
+      }
+      td:nth-child(7) {
+        width: 5%;    
+      }
+}
 
 .pd-4 {
     padding: 3em;
@@ -613,6 +712,35 @@ box-shadow: none !important;
 
 }
 
+.dash-b4l-monitoring{
+    .dashboard-details{
+        box-shadow: none;
+        background: transparent;
+        padding: 20px 10px;
+        .detail-of-dash {
+            border-right: 2px solid #E7E7E7;
+            &:last-of-type{
+                border: none;
+            }
+            h2 {
+                color: #2D3079;
+                font-size: 28px;
+                font-weight: 700;
+                margin: 0.5em 0;
+            }
+            span{
+                font-size: 14px;
+                color:#000000;
+                font-weight: 500;
+                margin: 20px 0 0;
+            }
+            p{
+                font-size: 18px;
+                color: rgb(45 48 121 / 60%)
+            }
+        }
+     }
+}
 
 
 // product view 

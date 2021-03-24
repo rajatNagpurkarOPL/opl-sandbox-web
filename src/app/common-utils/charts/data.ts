@@ -431,62 +431,255 @@ const gradientLineChart: ChartType = {
 };
 
 const stackedAreaChart: ChartType = {
-    chart: {
-        height: 380,
-        type: 'area',
-        stacked: true,
-        events: {
-            selection(chart, e) {
-                console.log(new Date(e.xaxis.min));
+    colors: ['#FFB538', '#393D9E'],
+ 
+    series: [
+        {
+      
+          name: "Positive",
+          data: [
+            {
+              x: 1996,
+             y: 600
+            },
+            {
+              x: 1997,
+             y: 600
+            },
+            {
+              x: 1998,
+             y: 600
+            },
+            {
+              x: 1999,
+             y: 600
+            },
+            {
+              x: 2000,
+             y: 600
+            },
+            {
+              x: 2001,
+             y: 600
+            },
+            {
+              x: 2002,
+             y: 600
+            },
+            {
+              x: 2003,
+             y: 600
+            },
+            {
+              x: 2004,
+             y: 600
+            },
+            {
+              x: 2005,
+             y: 600
+            },
+            {
+              x: 2006,
+             y: 600
+            },
+            {
+              x: 2007,
+             y: 600
+            },
+            {
+              x: 2008,
+             y: 600
+            },
+            {
+              x: 2009,
+             y: 600
+            },
+            {
+              x: 2010,
+             y: 600
+            },
+            {
+              x: 2011,
+             y: 600
+            },
+            {
+              x: 2012,
+             y: 600
+            },
+            {
+              x: 2013,
+             y: 600
+            },
+            {
+              x: 2014,
+             y: 600
+            },
+            {
+              x: 2015,
+             y: 600
             }
+          ]
         },
-
-    },
-    colors: ['#3bafda', '#1abc9c', '#CED4DC'],
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        width: [2],
-        curve: 'smooth'
-    },
-    series: [{
-        name: 'South',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-            min: 10,
-            max: 60
-        })
-    },
-    {
-        name: 'North',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-            min: 10,
-            max: 20
-        })
-    },
-
-    {
-        name: 'Central',
-        data: generateDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 20, {
-            min: 10,
-            max: 15
-        })
-    }
-    ],
-    fill: {
-        type: 'gradient',
-        gradient: {
-            opacityFrom: 0.6,
-            opacityTo: 0.8,
+        {
+    
+          name: "Negative",
+          data: [
+            {
+              x: 1996,
+              y: 162
+            },
+            {
+              x: 1997,
+              y: 90
+            },
+            {
+              x: 1998,
+              y: 50
+            },
+            {
+              x: 1999,
+              y: 77
+            },
+            {
+              x: 2000,
+              y: 35
+            },
+            {
+              x: 2001,
+              y: 45
+            },
+            {
+              x: 2002,
+              y: 88
+            },
+            {
+              x: 2003,
+              y: 120
+            },
+            {
+              x: 2004,
+              y: 156
+            },
+            {
+              x: 2005,
+              y: 123
+            },
+            {
+              x: 2006,
+              y: 88
+            },
+            {
+              x: 2007,
+              y: 66
+            },
+            {
+              x: 2008,
+              y: 45
+            },
+            {
+              x: 2009,
+              y: 29
+            },
+            {
+              x: 2010,
+              y: 45
+            },
+            {
+              x: 2011,
+              y: 88
+            },
+            {
+              x: 2012,
+              y: 132
+            },
+            {
+              x: 2013,
+              y: 146
+            },
+            {
+              x: 2014,
+              y: 169
+            },
+            {
+              x: 2015,
+              y: 184
+            }
+          ]
         }
-    },
-    legend: {
-        position: 'top',
-        horizontalAlign: 'left'
-    },
-    xaxis: {
-        type: 'datetime'
-    },
+      ],
+      chart: {
+        type: "area",
+        height: 450,
+        opacity: 1
+       
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight",
+        show: false,
+        
+      },
+
+      title: {
+        text: "Area with Negative Values",
+        align: "left",
+        style: {
+          fontSize: "14px"
+        }
+      },
+      xaxis: {
+        type: "datetime",
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
+      },
+      yaxis: {
+        tickAmount: 4,
+        floating: false,
+
+        labels: {
+          style: {
+            color: "#8e8da4"
+          },
+          offsetY: 7,
+          offsetX: 0
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
+      },
+      fill: {
+        type: ['solid', 'gradient'],
+        opacity: 1
+
+      },
+      tooltip: {
+        x: {
+          format: "yyyy"
+        },
+        fixed: {
+          enabled: false,
+          position: "topRight"
+        }
+      },
+      grid: {
+        yaxis: {
+          lines: {
+            offsetX: 30
+          }
+        },
+        padding: {
+          left: 20
+        }
+      }
 };
 
 const basicColumChart: ChartType = {
@@ -1858,8 +2051,202 @@ const strokedCircularGuage: ChartType = {
         }
     }]
 };
+
+const b4lPingsChart: ChartType = {
+    chart: {
+        height: '450',
+        type: 'bar',
+        padding: {
+            right: 0,
+            left: 0
+        },
+        stacked: true,
+        stackType: "50",
+        toolbar: {
+            show: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        width: [0],
+        curve: 'smooth'
+    },
+    plotOptions: {
+        bar: {
+            columnWidth: '10px',
+        },
+    },
+    colors: ['#2D3079', '#FFB435'],
+    series: [
+
+        {
+            name: 'Positive',
+            type: 'column',
+            data: [30, 25, 27, 40, 30, 25, 27, 40,50,20,60,80,85]
+        },
+        {
+            name: 'Negative',
+            type: 'column',
+            data: [30, 25, 27, 40, 30, 25, 27, 40,50,20,60,80,85]
+        }
+    ],
+    fill: {
+        opacity: [1, 1, 1],
+        gradient: {
+            inverseColors: false,
+            // shade: 'light',
+            type: 'vertical',
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100, 100, 100, 100, 100]
+        }
+    },
+    // tslint:disable-next-line: max-line-length
+    //labels: ['12/01/2019', '01/01/2020', '02/01/2020', '03/01/2020', '04/01/2020', '05/01/2020', '06/01/2020', '07/01/2020', '08/01/2020', '9/01/2020', '10/01/2020', '11/01/2020', '12/01/2020'],
+    markers: {
+        size: 0
+    },
+    legend: {
+        position: "bottom",
+        horizontalAlign: "center",
+        offsetX: 0,
+        offsetY: 10,
+    },
+    xaxis: {
+        categories: ['Create Loan Application', 'Consent Handle', 'Consent Status', 'Set Disbursement A/C', 'Generate Loan Offers', 'Set Offers', 'Trigger Loan Acceptance', 'Verify Loan Acceptance', 'Set Repayment Plan', 'Set Repayment plan Status', 'Grant Loan', 'Trigger Disbursement', 'Trigger Disbursement Status'],
+        type: 'text',
+        barThickness: 14,
+        barPercentage: 0.5,
+        axisBorder: {
+            show: true,
+            color: '#fff'
+        },
+    },
+    yaxis: {
+        categories: ['10', '50', '100', '200', '400', '800', '1200'],
+        type: 'text',
+        axisBorder: {
+            show: true,
+            color: '#dddddd'
+        },
+        axisTicks: {
+            show: true,
+        },
+    },
+    tooltip: {
+        shared: false,
+        intersect: false,
+        y: {
+            formatter: function (val) {
+                return val + "K";
+            }
+        }
+    },
+    // grid: {
+    //     borderColor: '#f1f3fa'
+    // }
+};
+
+const b4lResponseTime: ChartType = {
+    chart: {
+        height: '450',
+        type: 'bar',
+        padding: {
+            right: 0,
+            left: 0
+        },
+        stacked: true,
+        stackType: "50",
+        toolbar: {
+            show: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        width: [0],
+        curve: 'smooth'
+    },
+    plotOptions: {
+        bar: {
+            columnWidth: '10px',
+        },
+    },
+    colors: ['#2D3079', '#FFB435'],
+    series: [
+
+        {
+            name: 'Positive',
+            type: 'column',
+            data: [30, 25, 27, 40, 30, 25, 27, 40,50,20,60,80,85]
+        },
+        {
+            name: 'Negative',
+            type: 'column',
+            data: [30, 25, 27, 40, 30, 25, 27, 40,50,20,60,80,85]
+        }
+    ],
+    fill: {
+        opacity: [1, 1, 1],
+        gradient: {
+            inverseColors: false,
+            // shade: 'light',
+            type: 'vertical',
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100, 100, 100, 100, 100]
+        }
+    },
+    // tslint:disable-next-line: max-line-length
+    //labels: ['12/01/2019', '01/01/2020', '02/01/2020', '03/01/2020', '04/01/2020', '05/01/2020', '06/01/2020', '07/01/2020', '08/01/2020', '9/01/2020', '10/01/2020', '11/01/2020', '12/01/2020'],
+    markers: {
+        size: 0
+    },
+    legend: {
+        position: "bottom",
+        horizontalAlign: "center",
+        offsetX: 0,
+        offsetY: 10,
+    },
+    xaxis: {
+        categories: ['Create Loan Application', 'Consent Handle', 'Consent Status', 'Set Disbursement A/C', 'Generate Loan Offers', 'Set Offers', 'Trigger Loan Acceptance', 'Verify Loan Acceptance', 'Set Repayment Plan', 'Set Repayment plan Status', 'Grant Loan', 'Trigger Disbursement', 'Trigger Disbursement Status'],
+        type: 'text',
+        barThickness: 14,
+        barPercentage: 0.5,
+        axisBorder: {
+            show: true,
+            color: '#fff'
+        },
+    },
+    yaxis: {
+        categories: ['10', '50', '100', '200', '400', '800', '1200'],
+        type: 'text',
+        axisBorder: {
+            show: true,
+            color: '#dddddd'
+        },
+        axisTicks: {
+            show: true,
+        },
+    },
+    tooltip: {
+        shared: false,
+        intersect: false,
+        y: {
+            formatter: function (val) {
+                return val + "K";
+            }
+        }
+    },
+    // grid: {
+    //     borderColor: '#f1f3fa'
+    // }
+};
 export {
     // tslint:disable-next-line: max-line-length
     sparklineChart, sparklineSalesChart, sparklineExpensesChart, sparklineProfitsChart, linewithDataChart, gradientLineChart, stackedAreaChart, basicColumChart, basicBarChart, nagativeValueBarChart, lineColumAreaChart, multipleYAxisChart, simpleBubbleChart, scatterChart, simplePieChart, gradientDonutChart, patternedDonutChart,
-    b4lStockAnalysisChart, b4lnew4totalUsersPieChart, b4lbasicBarChart, b4lnewtotalUsersPieChart, b4ltotalUsersPieChart, B4LbasicRadialBarChart, totalUsersPieChart, multipleRadialBars, strokedCircularGuage, lineAnnotationsColumAreaChart, StockAnalysisChart
+    b4lStockAnalysisChart, b4lnew4totalUsersPieChart, b4lbasicBarChart, b4lnewtotalUsersPieChart, b4ltotalUsersPieChart, B4LbasicRadialBarChart, totalUsersPieChart, multipleRadialBars, strokedCircularGuage, lineAnnotationsColumAreaChart, StockAnalysisChart, b4lPingsChart, b4lResponseTime
 };

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'src/app/common-utils/charts/apex.model';
-import { totalUsersPieChart, lineAnnotationsColumAreaChart, StockAnalysisChart, b4ltotalUsersPieChart, b4lnewtotalUsersPieChart, b4lbasicBarChart, b4lnew4totalUsersPieChart, b4lStockAnalysisChart } from 'src/app/common-utils/charts/data';
+import { totalUsersPieChart, lineAnnotationsColumAreaChart, StockAnalysisChart, b4ltotalUsersPieChart, b4lnewtotalUsersPieChart, b4lbasicBarChart, b4lnew4totalUsersPieChart, b4lStockAnalysisChart, b4lPingsChart, stackedAreaChart, b4lResponseTime } from 'src/app/common-utils/charts/data';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import indiaMap from 'src/app/common-utils/common-services/indiaMap';
 import { Constant } from 'src/app/common-utils/Constant';
@@ -34,6 +34,9 @@ export class DashboardComponent implements OnInit {
   b4lbasicBarChart: ChartType;
   b4lnew4totalUsersPieChart: ChartType;
   b4lStockAnalysisChart: ChartType;
+  b4lPingsChart:ChartType;
+  stackedAreaChart: ChartType;
+  b4lResponseTime: ChartType;
   constructor(private lenderService: LenderService, public commonService: CommonService) { }
 
   foods: Food[] = [
@@ -79,6 +82,9 @@ export class DashboardComponent implements OnInit {
     this.b4lbasicBarChart = b4lbasicBarChart;
     this.b4lnew4totalUsersPieChart =b4lnew4totalUsersPieChart;
     this.b4lStockAnalysisChart = b4lStockAnalysisChart;
+    this.b4lPingsChart = b4lPingsChart;
+    this.stackedAreaChart = stackedAreaChart;
+    this.b4lResponseTime = b4lResponseTime;
   }
 
 
