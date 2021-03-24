@@ -9,7 +9,7 @@
                 <div class="topnav">
                     <a [ngClass]="(router.url.includes('product') ? 'active' : '')" (click)="goToProducts()" href="javasript:void(0)">Products List </a>
                     <a [ngClass]="((router.url === constant.DASHBOARD || router.url ===  constant.BRIDGE_MATRIX) ? 'active' : '')" routerLink="{{constant.DASHBOARD}}" href="javasript:void(0)">Reports & Analytics</a>
-                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.DOCUMENTATION}}"  href="javasript:void(0)">Documentation</a>
+                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.DOCUMENTATION}}/CR_LN_APP_REQ"  href="javasript:void(0)">Documentation</a>
                     <a [ngClass]="(router.url == constant.SETTINGS ? 'active' : '')" routerLink="{{constant.SETTINGS}}"  href="javasript:void(0)">Settings</a>
                 </div>
 

@@ -1,0 +1,34 @@
+.submenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    padding-left: 30px;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+  }
+
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  } 
+
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+   .sidenav-content {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5em;
+  }
+
+  .current-active{
+    background-color: #2D3079 !important;
+    color: white !important;
+  }
+
+  #last-child-item{
+    padding-left: 1.5em;
+  }

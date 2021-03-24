@@ -71,10 +71,24 @@ import { TriggerDisbursementStatusRequestComponent } from './component/documenta
 import { RaiseDisputeRequestComponent } from './component/documentation/gstsahayapis/loan-dispute-mgmt/raise-dispute-request/raise-dispute-request.component';
 import { DisputeStatusRequestComponent } from './component/documentation/gstsahayapis/loan-dispute-mgmt/dispute-status-request/dispute-status-request.component';
 import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/heartbeat/heartbeat-api/heartbeat-api.component';
+import { DrawerMenuDirective } from './directives/drawer-menu.directive';
+import { DrawerMenuComponent } from './component/common/drawer-menu/drawer-menu.component';
+import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    HttpClientModule,
+    Ng5SliderModule
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -133,18 +147,10 @@ import { HeartbeatApiComponent } from './component/documentation/gstsahayapis/he
     TriggerDisbursementStatusRequestComponent,
     RaiseDisputeRequestComponent,
     DisputeStatusRequestComponent,
-    HeartbeatApiComponent
-  ],
-  imports: [
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    HttpClientModule,
-    Ng5SliderModule
-  ],
+    HeartbeatApiComponent,
+    DrawerMenuDirective,
+    DrawerMenuComponent
+  ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
               HttpService,

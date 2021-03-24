@@ -1,7 +1,7 @@
-import { ThrowStmt } from '@angular/compiler';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
@@ -10,16 +10,15 @@ import { LenderService } from 'src/app/service/lender.service';
   styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
-  
   isExpanded : boolean = false;
-  showSubmenu : boolean = false;
   isShowing : boolean = false;
-  static masterCodes : any = [];
+  private static masterCodes : any = [];
   masterData : any = null;
   selectedMenuItem : string = "";   
-  constructor(private lenderService: LenderService, public commonService: CommonService) { 
-    this.selectedMenuItem = "CR_LN_APP_REQ";
+  public readonly constant : any = null;
+  constructor(private lenderService: LenderService, public commonService: CommonService,private route : ActivatedRoute, private router : Router) { 
     DocumentationComponent.masterCodes.push('GST_SAHAY_APIS');
+    this.constant = Constant;
   } 
   
   getMasterCodes(){
@@ -27,9 +26,9 @@ export class DocumentationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Documentation Component Called");        
-    this.getMenuItems();
-    console.log("Menu API Called");
+    this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
+    console.log("Selected Cde : ",this.selectedMenuItem);
+    this.getMenuItems(this.selectedMenuItem);
   }
   mouseenter() {
     if (!this.isExpanded) {
@@ -43,19 +42,56 @@ export class DocumentationComponent implements OnInit {
     }
   }
 
-  setCurrentSelectedAPI(selectedApiCode){
-    console.log("selectedApiCode==>",selectedApiCode);
+  setCurrentSelectedAPI(selectedApiCode:string){    
     this.selectedMenuItem = selectedApiCode;
+    this.router.navigate([this.constant.ROUTE_URL.DOCUMENTATION + '/' + selectedApiCode]);
+    for(let code of DocumentationComponent.masterCodes){
+      this.masterData[code].cssClass = "";
+      if(!this.commonService.isObjectNullOrEmpty(this.masterData[code].values)) {
+        var obj1 =this.setCurrentActiveCss(this.masterData[code].values);
+        if(!this.commonService.isObjectNullOrEmpty(obj1)){
+          this.masterData[code].showSubmenu = true;
+          this.isExpanded = true;
+        }
+      }
+    }
+  }
+
+  private removeCurrentActiveCss(list : any){
+    for(let obj of list){
+      obj.cssClass = "";
+      if(!this.commonService.isObjectNullOrEmpty(obj.values)){
+        this.removeCurrentActiveCss(obj.values);
+      }
+    }
+  }
+  
+  setCurrentActiveCss(list : any){
+    this.removeCurrentActiveCss(list);    
+    for(let obj of list){
+      if(obj.code == this.selectedMenuItem){
+        obj.cssClass = "current-active";
+        return obj;
+      }
+      if(!this.commonService.isObjectNullOrEmpty(obj.values)){
+        var obj1 = this.setCurrentActiveCss(obj.values);
+        if(!this.commonService.isObjectNullOrEmpty(obj1)){
+          obj.showSubmenu = true;
+          return obj;
+        }
+      }
+    }
   }
    // get products by status
-   getMenuItems(){
+   getMenuItems(code : string){
     this.lenderService.getMasterListsByCodes(DocumentationComponent.masterCodes).subscribe(res => {
         if (res.status === 200) {
           this.masterData = {};
           for(let code of DocumentationComponent.masterCodes){            
-            this.masterData[code] = res.data[code];
+            this.masterData[code] = res.data[code];            
             console.log("this.masterData : ",this.masterData);
-          }          
+          }
+          this.setCurrentSelectedAPI(this.selectedMenuItem);
         } else {
           this.commonService.warningSnackBar(res.message);
         }

@@ -37,7 +37,7 @@ const routes: Routes = [
     { path: 'New-Product-Configuration', component: NewProductConfigurationComponent},
     { path: 'create-product', component: ProductCreateComponent},
     { path: 'create-product/:id', component: ProductCreateComponent },
-    { path: 'documentation', component: DocumentationComponent},
+    { path: 'documentation/:code', component: DocumentationComponent},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },

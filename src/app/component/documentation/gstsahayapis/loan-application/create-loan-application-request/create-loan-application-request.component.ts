@@ -18,7 +18,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   productIdTypeMaster : any[] = ['PURCHASE_ORDER_FINANCING','INVOICE_FINANCING'];
   loanProductTypeMaster : any[] = ['CASHFLOW' , 'PERSONAL' , 'HOME' , 'VEHICLE' , 'BUSINESS'];
   loanApplicationStatusMaster : any[] = ['PROCESSING','OFFERED','OFFER_ACCEPTED','GRANTED,REJECTED', 'ACTION_REQUIRED'];
-
+0
   borrowerPrimaryTypeMaster : any[] = ['PAN', 'MOBILE', 'AADHAAR', 'GSTIN', 'FIU'];
   borrowerCategoryMaster : any[] = ['ORGANIZATION','INDIVIDUAL'];
 
