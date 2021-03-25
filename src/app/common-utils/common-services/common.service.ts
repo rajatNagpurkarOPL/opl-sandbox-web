@@ -5,6 +5,7 @@ import { SnackbarService } from './SnackbarService';
 import { Constant } from '../Constant';
 import { CookieService } from './cookie.service';
 import {Location} from '@angular/common';
+import { v4 as uuid } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,12 @@ export class CommonService {
 
   getData() {
     return this.data;
+  }
+
+  getUUID(){
+    let uuidString = uuid();
+    uuidString = uuidString.replace("-","");
+    return uuidString;
   }
 
   /**
