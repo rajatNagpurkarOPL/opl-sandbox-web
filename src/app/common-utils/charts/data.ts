@@ -431,255 +431,68 @@ const gradientLineChart: ChartType = {
 };
 
 const stackedAreaChart: ChartType = {
-    colors: ['#FFB538', '#393D9E'],
- 
-    series: [
-        {
-      
-          name: "Positive",
-          data: [
-            {
-              x: 1996,
-             y: 600
-            },
-            {
-              x: 1997,
-             y: 600
-            },
-            {
-              x: 1998,
-             y: 600
-            },
-            {
-              x: 1999,
-             y: 600
-            },
-            {
-              x: 2000,
-             y: 600
-            },
-            {
-              x: 2001,
-             y: 600
-            },
-            {
-              x: 2002,
-             y: 600
-            },
-            {
-              x: 2003,
-             y: 600
-            },
-            {
-              x: 2004,
-             y: 600
-            },
-            {
-              x: 2005,
-             y: 600
-            },
-            {
-              x: 2006,
-             y: 600
-            },
-            {
-              x: 2007,
-             y: 600
-            },
-            {
-              x: 2008,
-             y: 600
-            },
-            {
-              x: 2009,
-             y: 600
-            },
-            {
-              x: 2010,
-             y: 600
-            },
-            {
-              x: 2011,
-             y: 600
-            },
-            {
-              x: 2012,
-             y: 600
-            },
-            {
-              x: 2013,
-             y: 600
-            },
-            {
-              x: 2014,
-             y: 600
-            },
-            {
-              x: 2015,
-             y: 600
-            }
-          ]
-        },
-        {
     
-          name: "Negative",
-          data: [
-            {
-              x: 1996,
-              y: 162
-            },
-            {
-              x: 1997,
-              y: 90
-            },
-            {
-              x: 1998,
-              y: 50
-            },
-            {
-              x: 1999,
-              y: 77
-            },
-            {
-              x: 2000,
-              y: 35
-            },
-            {
-              x: 2001,
-              y: 45
-            },
-            {
-              x: 2002,
-              y: 88
-            },
-            {
-              x: 2003,
-              y: 120
-            },
-            {
-              x: 2004,
-              y: 156
-            },
-            {
-              x: 2005,
-              y: 123
-            },
-            {
-              x: 2006,
-              y: 88
-            },
-            {
-              x: 2007,
-              y: 66
-            },
-            {
-              x: 2008,
-              y: 45
-            },
-            {
-              x: 2009,
-              y: 29
-            },
-            {
-              x: 2010,
-              y: 45
-            },
-            {
-              x: 2011,
-              y: 88
-            },
-            {
-              x: 2012,
-              y: 132
-            },
-            {
-              x: 2013,
-              y: 146
-            },
-            {
-              x: 2014,
-              y: 169
-            },
-            {
-              x: 2015,
-              y: 184
-            }
-          ]
-        }
-      ],
-      chart: {
+    chart: {
+        height: 280,
         type: "area",
-        height: 450,
-        opacity: 1
-       
+        background: '#ffcc77',
+        toolbar: {
+            show: false
+        },
       },
+      colors: ["#fff"],
       dataLabels: {
         enabled: false
       },
       stroke: {
-        curve: "straight",
-        show: false,
-        
-      },
-
-      title: {
-        text: "Area with Negative Values",
-        align: "left",
-        style: {
-          fontSize: "14px"
+            curve: "straight",        
+          },
+      series: [
+        {
+          name: "Series 1",
+          data: [30, 50, 60, 30, 75, 40, 60,40,80,60,40,50,40],
         }
+      ],
+      fill: {
+        type: "gradient",
+        gradient: {
+        shade: 'dark',
+        gradientToColors: [ '#6568ab'],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 0, 175],
+       
+        }
+      },
+      
+       markers: {
+        size: 4,
+        colors: ["#fff"],
+        strokeColor: "#fff",
+        strokeWidth: .1,
+        radius: 0
+    
       },
       xaxis: {
-        type: "datetime",
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
-      yaxis: {
-        tickAmount: 4,
-        floating: false,
-
-        labels: {
-          style: {
-            color: "#8e8da4"
-          },
-          offsetY: 7,
-          offsetX: 0
-        },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
-      fill: {
-        type: ['solid', 'gradient'],
-        opacity: 1
-
-      },
-      tooltip: {
-        x: {
-          format: "yyyy"
-        },
-        fixed: {
-          enabled: false,
-          position: "topRight"
-        }
-      },
-      grid: {
-        yaxis: {
-          lines: {
-            offsetX: 30
-          }
-        },
-        padding: {
-          left: 20
-        }
+        categories: [
+          "18 feb 2020",
+          "19 feb 2020",
+          "20 feb 2020",
+          "21 feb 2020",
+          "22 feb 2020",
+          "23 feb 2020",
+          "24 feb 2020",
+          "25 feb 2020",
+          "26 feb 2020",
+          "27 feb 2020",
+          "28 feb 2020",
+          "1 mar 2020",
+          "2 mar 2020",
+        ]
       }
+    
 };
 
 const basicColumChart: ChartType = {
@@ -1212,7 +1025,7 @@ const StockAnalysisChart: ChartType = {
     },
     plotOptions: {
         bar: {
-            columnWidth: '10px',
+            columnWidth: '30%',
         },
     },
     colors: ['#2D3079', '#FFB435'],
@@ -1309,7 +1122,7 @@ const b4lStockAnalysisChart: ChartType = {
     },
     plotOptions: {
         bar: {
-            columnWidth: '10px',
+            columnWidth: '30%',
         },
     },
     colors: ['#2D3079'],
@@ -2073,11 +1886,7 @@ const b4lPingsChart: ChartType = {
         width: [0],
         curve: 'smooth'
     },
-    plotOptions: {
-        bar: {
-            columnWidth: '10px',
-        },
-    },
+  
     colors: ['#2D3079', '#FFB435'],
     series: [
 
@@ -2092,6 +1901,11 @@ const b4lPingsChart: ChartType = {
             data: [30, 25, 27, 40, 30, 25, 27, 40,50,20,60,80,85]
         }
     ],
+    plotOptions: {
+        bar: {
+            columnWidth: '30%',            
+        },
+    },
     fill: {
         opacity: [1, 1, 1],
         gradient: {
@@ -2172,7 +1986,7 @@ const b4lResponseTime: ChartType = {
     },
     plotOptions: {
         bar: {
-            columnWidth: '10px',
+            columnWidth: '30%',
         },
     },
     colors: ['#2D3079', '#FFB435'],

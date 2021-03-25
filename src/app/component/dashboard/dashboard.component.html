@@ -242,8 +242,8 @@
 <mat-card class="pd-0">
   <div class="container">
 
-    <div class="dash-b4l-title">
-      <p>Dashboard & Analytics</p>
+    <div class="dash-b4l-title pd-20">
+      <p class="mb-0">Dashboard & Analytics</p>
 
       <div class="dashboard-date-report">
         <mat-form-field appearance="outline" class="mr-2">
@@ -260,7 +260,7 @@
     </div>
 
 
-    <div class="dash-b4l-title">
+    <div class="dash-b4l-title pd-20">
       <div class="dashboard-details">
 
         <div class="detail-of-dash">
@@ -361,12 +361,12 @@
       </div>
     </div>
 
-    <div class="pd-4">
+    <div class="pd-4 pt-0">
       <apx-chart class="apex-charts" [series]="StockAnalysisChart.series" [chart]="StockAnalysisChart.chart"
         [tooltip]="StockAnalysisChart.tooltip" [yaxis]="StockAnalysisChart.yaxis" [legend]="StockAnalysisChart.legend"
         [grid]="StockAnalysisChart.grid" [dataLabels]="StockAnalysisChart.dataLabels"
         [stroke]="StockAnalysisChart.stroke" [xaxis]="StockAnalysisChart.xaxis" [colors]="StockAnalysisChart.colors"
-        [responsive]="StockAnalysisChart.responsive">
+        [responsive]="StockAnalysisChart.responsive" [plotOptions]="StockAnalysisChart.plotOptions">
       </apx-chart>
     </div>
 
@@ -459,9 +459,9 @@
 
   <div class="row mb-4">
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+      <mat-card class="d-flex al-center js-between w-100 bl-round-chart">
         <div class="w-55">
-          <h2>Type of Application</h2>
+          <h2 class="pl-2">Type of Application</h2>
           <apx-chart class="w-55" [series]="totalUsersPieChart.series" [chart]="totalUsersPieChart"
             [colors]="totalUsersPieChart.colors" [labels]="totalUsersPieChart.labels"
             [dataLabels]="totalUsersPieChart.dataLabels" [tooltip]="totalUsersPieChart.tooltip"
@@ -471,12 +471,12 @@
         </div>
         <div class="legend-abs">
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>Existing Bank Customer <span class="ml-4">800</span></p>
+            <p class="circle-blue-legend">Existing Bank Customer</p>
+            <span>800</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>New to Bank Customer <span class="ml-4">200</span></p>
+            <p class="circle-blue-light-legend">New to Bank Customer</p>
+            <span>200</span>
           </div>
         </div>
       </mat-card>
@@ -484,9 +484,9 @@
 
 
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+      <mat-card class="d-flex al-center js-between w-100 bl-round-chart">
         <div class="w-55">
-          <h2>Applicant Credit History</h2>
+          <h2 class="pl-2">Applicant Credit History</h2>
           <apx-chart class="w-55" [series]="b4ltotalUsersPieChart.series" [chart]="b4ltotalUsersPieChart"
             [colors]="b4ltotalUsersPieChart.colors" [labels]="b4ltotalUsersPieChart.labels"
             [dataLabels]="b4ltotalUsersPieChart.dataLabels" [tooltip]="b4ltotalUsersPieChart.tooltip"
@@ -496,12 +496,12 @@
         </div>
         <div class="legend-abs">
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>New to Credit Applications <span class="ml-4">900</span></p>
+            <p class="circle-blue-legend">New to Credit Applications</p>
+            <span>900</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>Existing to Credit Applications <span class="ml-4">300</span></p>
+            <p class="circle-blue-light-legend">Existing to Credit Applications</p>
+            <span>300</span>
           </div>
         </div>
       </mat-card>
@@ -511,9 +511,9 @@
 
   <div class="row mb-4">
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+      <mat-card class="d-flex al-center js-between w-100 bl-round-chart">
         <div class="w-55">
-          <h2>Disbursement Account</h2>
+          <h2 class="pl-2">Disbursement Account</h2>
           <apx-chart class="w-55" [series]="b4lnewtotalUsersPieChart.series" [chart]="b4lnewtotalUsersPieChart"
             [colors]="b4lnewtotalUsersPieChart.colors" [labels]="b4lnewtotalUsersPieChart.labels"
             [dataLabels]="b4lnewtotalUsersPieChart.dataLabels" [tooltip]="b4lnewtotalUsersPieChart.tooltip"
@@ -523,16 +523,16 @@
         </div>
         <div class="legend-abs">
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>Saving Account <span class="ml-4">900</span></p>
+            <p class="circle-blue-legend">Saving Account</p>
+            <span>900</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>OD/CC Account <span class="ml-4">900</span></p>
+            <p class="circle-blue-medium-legend">OD/CC Account</p>
+            <span>900</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>Current Account <span class="ml-4">300</span></p>
+            <p class="circle-blue-light-legend mr-2">Current Account</p>
+            <span>300</span>
           </div>
         </div>
       </mat-card>
@@ -542,7 +542,7 @@
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
       <mat-card>
         <div class="w-55">
-          <h2>Average ROI & Tenure </h2>
+          <h2 class="pl-2">Average ROI & Tenure </h2>
         </div>
         <div class="roi-ave-b4l">
           <div class="roi-content-b4l">
@@ -623,12 +623,12 @@
       </div>
     </div>
 
-    <div class="pd-4">
+    <div class="pd-4 pt-0">
       <apx-chart class="apex-charts" [series]="StockAnalysisChart.series" [chart]="StockAnalysisChart.chart"
         [tooltip]="StockAnalysisChart.tooltip" [yaxis]="StockAnalysisChart.yaxis" [legend]="StockAnalysisChart.legend"
         [grid]="StockAnalysisChart.grid" [dataLabels]="StockAnalysisChart.dataLabels"
         [stroke]="StockAnalysisChart.stroke" [xaxis]="StockAnalysisChart.xaxis" [colors]="StockAnalysisChart.colors"
-        [responsive]="StockAnalysisChart.responsive">
+        [responsive]="StockAnalysisChart.responsive" [plotOptions]="StockAnalysisChart.plotOptions">
       </apx-chart>
     </div>
 
@@ -636,7 +636,7 @@
 
   <div class="row mb-4">
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+      <mat-card class="d-flex al-center js-between w-100 bl-round-chart">
         <div class="w-55">
           <h2>Proposal Distribution</h2>
           <apx-chart class="w-55" [series]="b4lnewtotalUsersPieChart.series" [chart]="b4lnewtotalUsersPieChart"
@@ -648,16 +648,16 @@
         </div>
         <div class="legend-abs">
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>Saving Account <span class="ml-4">900</span></p>
+            <p class="circle-blue-legend">Loans Offered</p>
+            <span>900</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>OD/CC Account <span class="ml-4">900</span></p>
+            <p class="circle-blue-medium-legend">Loans Rejected</p>
+            <span>900</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>Current Account <span class="ml-4">300</span></p>
+            <p class="circle-blue-light-legend mr-2">Loans Collected</p>
+            <span>300</span>
           </div>
         </div>
       </mat-card>
@@ -665,7 +665,7 @@
 
 
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
-      <mat-card class="d-flex al-center js-between w-100">
+      <mat-card class="d-flex al-center js-between w-100 bl-round-chart">
         <div class="w-55">
           <h2>SMA Distribution</h2>
           <apx-chart class="w-55" [series]="b4lnew4totalUsersPieChart.series" [chart]="b4lnew4totalUsersPieChart"
@@ -677,20 +677,20 @@
         </div>
         <div class="legend-abs">
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>SMA 0 <span class="ml-4">40</span></p>
+            <p class="circle-blue-legend">SMA 0</p>
+            <span>100</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-legend mr-2"></div>
-            <p>SMA 1 <span class="ml-4">50</span></p>
+            <p class="circle-blue-medium-legend">SMA 1</p>
+            <span>50</span>
           </div>
           <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>SMA 2 <span class="ml-4">100</span></p>
+            <p class="circle-gray-medium-legend">SMA 2</p>
+            <span>130</span>
           </div>
-            <div class="d-flex al-center js-between w-100 blue-legend">
-            <div class="circle-blue-light-legend mr-2"></div>
-            <p>SMA 3 (NPA) <span class="ml-4">30</span></p>
+          <div class="d-flex al-center js-between w-100 blue-legend">
+            <p class="circle-blue-light-legend mr-2">SMA 3 (NPA)</p>
+            <span>30</span>
           </div>
         </div>
       </mat-card>
@@ -701,7 +701,7 @@
   <div class="row mb-4">
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
       <mat-card>
-        <div class="w-55">
+        <div class="w-100">
           <h2>Invoice Value Range & Average Period</h2>
         </div>
         <div class="roi-ave-b4l">
@@ -753,7 +753,7 @@
 
     <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
       <mat-card>
-        <div class="w-55">
+        <div class="w-100">
           <h2>MSME Rank & Bureau Score</h2>
         </div>
         <div class="roi-ave-b4l">
@@ -806,7 +806,7 @@
 
 
   <div class="row mb-4">
-    <div class="psb-lg-3 psb-xl-3 psb-md-6 psb-sm-12 psb-xs-12">
+    <div class="psb-xl-3 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
       <mat-card>
         <div>
           <h2>GST Turnover (Annual)</h2>
@@ -836,7 +836,7 @@
     </div>
 
 
-    <div class="psb-lg-9 psb-xl-9 psb-md-6 psb-sm-12 psb-xs-12">
+    <div class="psb-xl-9 psb-lg-8 psb-md-6 psb-sm-12 psb-xs-12">
       <mat-card>
 
         <div class="d-flex al-center js-between w-100 pd-30">
@@ -863,12 +863,12 @@
           </div>
         </div>
     
-        <div class="pd-4">
+        <div class="pd-4 pb-0 pt-0">
           <apx-chart class="apex-charts" [series]="b4lStockAnalysisChart.series" [chart]="b4lStockAnalysisChart.chart"
             [tooltip]="b4lStockAnalysisChart.tooltip" [yaxis]="b4lStockAnalysisChart.yaxis" [legend]="b4lStockAnalysisChart.legend"
             [grid]="b4lStockAnalysisChart.grid" [dataLabels]="b4lStockAnalysisChart.dataLabels"
             [stroke]="b4lStockAnalysisChart.stroke" [xaxis]="b4lStockAnalysisChart.xaxis" [colors]="b4lStockAnalysisChart.colors"
-            [responsive]="b4lStockAnalysisChart.responsive">
+            [responsive]="b4lStockAnalysisChart.responsive" [plotOptions]="b4lStockAnalysisChart.plotOptions">
           </apx-chart>
         </div>
     
@@ -933,12 +933,12 @@
       </div>
     </div>
 
-    <div class="pd-4">
+    <div class="pd-4 pt-0">
       <apx-chart class="apex-charts" [series]="b4lPingsChart.series" [chart]="b4lPingsChart.chart"
         [tooltip]="b4lPingsChart.tooltip" [yaxis]="b4lPingsChart.yaxis" [legend]="b4lPingsChart.legend"
         [grid]="b4lPingsChart.grid" [dataLabels]="b4lPingsChart.dataLabels"
         [stroke]="b4lPingsChart.stroke" [xaxis]="b4lPingsChart.xaxis" [colors]="b4lPingsChart.colors"
-        [responsive]="b4lPingsChart.responsive">
+        [responsive]="b4lPingsChart.responsive" [plotOptions]="b4lPingsChart.plotOptions">
       </apx-chart>
     </div>
     <table class="table dash-table">
@@ -1028,12 +1028,22 @@
   <mat-card class="mt-4 mb-4">
     <div class="d-flex al-center js-between w-100 pd-30">
       <p><b>Successful Pings vs Failed Pings</b></p>
+      <div class="d-flex al-center js-center w-40 dash-summary">
+        <mat-form-field appearance="outline" class="mr-2">
+          <mat-label>All</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
     <apx-chart class="apex-charts" [series]="stackedAreaChart.series" [chart]="stackedAreaChart.chart"
     [tooltip]="stackedAreaChart.tooltip" [yaxis]="stackedAreaChart.yaxis" [legend]="stackedAreaChart.legend"
     [grid]="stackedAreaChart.grid" [dataLabels]="stackedAreaChart.dataLabels"
     [stroke]="stackedAreaChart.stroke" [xaxis]="stackedAreaChart.xaxis" [colors]="stackedAreaChart.colors"
-    [responsive]="stackedAreaChart.responsive">
+    [responsive]="stackedAreaChart.responsive" [fill]="stackedAreaChart.fill">
   </apx-chart>
   </mat-card>
 
@@ -1045,7 +1055,7 @@
     [tooltip]="b4lResponseTime.tooltip" [yaxis]="b4lResponseTime.yaxis" [legend]="b4lResponseTime.legend"
     [grid]="b4lResponseTime.grid" [dataLabels]="b4lResponseTime.dataLabels"
     [stroke]="b4lResponseTime.stroke" [xaxis]="b4lResponseTime.xaxis" [colors]="b4lResponseTime.colors"
-    [responsive]="b4lResponseTime.responsive">
+    [responsive]="b4lResponseTime.responsive" [plotOptions]="b4lResponseTime.plotOptions">
   </apx-chart>
   </mat-card>
 
@@ -1068,7 +1078,7 @@
         </div>
       </div>
     </div>
-    <table class="table dash-table dash-table-brige">
+    <table class="table dash-table dash-table-brige table-responsive">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -1094,9 +1104,9 @@
         </tr>
       
         <tr>
-          <td colspan="8">
-            <mat-card class="mt-4 mb-4 down-arrow opentable">
-            <table class="table dash-table dash-table-brige">
+          <td colspan="8" class="open-main-td">
+            <mat-card class="mt-2 mb-2 lsptable-2 showlsptable">
+            <table class="table dash-table dash-table-brige table-responsive">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -1251,7 +1261,7 @@
     </mat-form-field>
     </div>
   <div class="row">
-    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+    <div class="psb-xl-6 psb-lg-12 psb-sm-12 psb-xs-12">
      
         <highcharts-chart id="container" [Highcharts]="Highcharts" [constructorType]="chartConstructor"
                 [options]="chartOptions">
@@ -1261,7 +1271,7 @@
     </div>
 
 
-    <div class="psb-lg-6 psb-xl-6 psb-md-6 psb-sm-12 psb-xs-12">
+    <div class="psb-xl-6 psb-lg-12 psb-sm-12 psb-xs-12">
     
        
         <table class="table1 dash-table1">

@@ -36,6 +36,9 @@
     color: #ffffff;
     width: 18px;
     position: relative;
+    @media (max-width:1199px){
+      margin-right: 5px;
+  }
   }
   .notify-badge{
     position: absolute;
