@@ -1,10 +1,10 @@
-<form [formGroup]="documentForm">
-    <div id="b4l-content" class="charges-roi b4l-height">
+<form [formGroup]="documentationFormData">
+    <div class="b4l-documentation-content charges-roi b4l-height">
 
         <div class="b4l-height">
             <div class="card-header row row-flex">
                 <h3 class="card-title" style="border-left-color: inherit; ">
-                <b><span class="label-text">Consent Request</span></b>
+                <b><span class="label-text">Consent Handle Request</span></b>
                 </h3><!---->
             </div>
             <div class="card-body"><!---->
@@ -25,98 +25,168 @@
                 <p>
                     <span>API to Consent Handle Request.</span>
                 </p>
-                <mat-tab-group (selectedTabChange)="setTryOut($event)">
-                    <mat-tab label="Documentation"></mat-tab>
-                    <mat-tab label="Tryout"></mat-tab>
-                </mat-tab-group>
-    
-                <div [hidden]="!button">
-                    <div class="example-container">
-                        <form [formGroup]="consentHandleRequestForm">
-                            <p>
-                            <mat-toolbar>
-                                <span>Consent Details</span>
-                            </mat-toolbar>
-                            </p>
-                            <form formGroupName="consent">
-                                <mat-form-field style="width: 25em;">
-                                    <mat-label>vua</mat-label>
-                                    <input matInput type="text" formControlName="vua">
-                                </mat-form-field>
-
-                                <mat-form-field>
-                                    <mat-label>Consent Fetch Type</mat-label>
-                                    <mat-select formControlName="consentFetchType">
-                                        <mat-option *ngFor="let data of consentFetchTypeMaster" [value]="data">{{data}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                
-                                <mat-form-field style="width: 25em;">
-                                    <mat-label>Is Aggregation Enabled</mat-label>
-                                    <input matInput type="boolean" formControlName="isAggregationEnabled">
-                                </mat-form-field>
-
-                                <mat-form-field style="width: 25em;">
-                                    <mat-label>consentAggregationId</mat-label>
-                                    <input matInput type="text" formControlName="consentAggregationId" readonly>
-                                </mat-form-field>
-
-                                <mat-form-field>
-                                    <mat-label>Consent Status</mat-label>
-                                    <mat-select formControlName="consentStatus">
-                                        <mat-option *ngFor="let data of consentStatusMaster" [value]="data">{{data}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-
-                                <p>
-                                    <br/>
-                                    <mat-toolbar>
-                                        <span>LSP Info Details</span>
-                                    </mat-toolbar>
-                                </p>
-                                <form formGroupName="lspInfo">
-                                    <mat-form-field>
-                                        <mat-label>lsp Id</mat-label>
-                                        <input matInput type="text" formControlName="lspId" readonly>
-                                    </mat-form-field>
-
-                                    <mat-form-field>
-                                        <mat-label>Version</mat-label>
-                                        <input matInput type="text" formControlName="version">
-                                    </mat-form-field>
-
-                                    <mat-form-field>
-                                        <mat-label>App Name</mat-label>
-                                        <input matInput type="text" formControlName="appName">
-                                    </mat-form-field>
-                                </form>
-                            </form>
-                            <br/>
-                            <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Consent Handle Request</button>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </form>
-                    </div>
-                </div>
-                <div [hidden]="button">
-                    <div class="b4l-height">
-                        <div class="card-header row row-flex">
-                            <h3 class="card-title" style="border-left-color: inherit; ">
-                            <b><span class="label-text">Request</span></b>
-                            </h3><!---->
-                        </div>
-                        <div class="card-body">
-                            <div class="b4l-product-title">
-                            <ul class="product">
-                            <li><a href="javaScript:void(0);"> <p>Schema</p> </a> </li>
-                            <li><a href="javaScript:void(0);"> <p>Body</p> </a></li>
-                            <li><a href="javaScript:void(0);"> <p>Header</p> </a></li>
-                            </ul>
+                <mat-tab-group>
+                    <mat-tab label="Documentation">
+                        <div>
+                            <div class="b4l-height">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Request</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+                                        <mat-tab label="Schema">
+                                            <br>
+                                            <table>
+                                            <tr>
+                                                <th>AttributeName</th>
+                                                <th>Type</th>
+                                                <th>Validation</th>
+                                                <th>Required</th>
+                                                <th>Description</th>
+                                            </tr>
+                                            <ng-container *ngFor="let reqschema of apiRequestSchemaData" [matColumnDef]="reqschema">
+                                                    <tr>
+                                                        <td>
+                                                            <div *ngIf="reqschema.isDomain">
+                                                                <a href="" ng-click="getDomainSchema(reqschema.attributeName);" data-id="{{reqschema.attributeName}}" data-toggle="modal" data-target="#skillModal">{{reqschema.attributeName}}</a>
+                                                            </div>
+                                                            <div *ngIf="!reqschema.isDomain">
+                                                                <a>{{reqschema.attributeName}}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td> {{reqschema.type}} </td>
+                                                        <td> {{reqschema.validation}} </td>
+                                                        <td> {{reqschema.isRequired}} </td>
+                                                        <td> {{reqschema.description}} </td>
+                                                    </tr>
+                                            </ng-container>
+                                            </table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">Body</mat-tab>
+                                        <mat-tab label="Header">Header</mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                            </div>
+                            <div class="b4l-height">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Response</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+                                        <mat-tab label="Schema">
+                                            <br>
+                                            <table>
+                                            <tr>
+                                                <th>AttributeName</th>
+                                                <th>Type</th>
+                                                <th>Validation</th>
+                                                <th>Required</th>
+                                                <th>Description</th>
+                                            </tr>
+                                            <ng-container *ngFor="let resschema of apiResponseSchemaData" [matColumnDef]="resschema">
+                                                    <tr>
+                                                        <td>
+                                                            <div *ngIf="resschema.isDomain">
+                                                                <a href="" ng-click="getDomainSchema(resschema.attributeName);" data-id="{{resschema.attributeName}}" data-toggle="modal" data-target="#skillModal">{{resschema.attributeName}}</a>
+                                                            </div>
+                                                            <div *ngIf="!resschema.isDomain">
+                                                                <a>{{resschema.attributeName}}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td> {{resschema.type}} </td>
+                                                        <td> {{resschema.validation}} </td>
+                                                        <td> {{resschema.isRequired}} </td>
+                                                        <td> {{resschema.description}} </td>
+                                                    </tr>
+                                            </ng-container>
+                                            </table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">Body</mat-tab>
+                                        <mat-tab label="Header">Header</mat-tab>
+                                      </mat-tab-group>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </mat-tab>
+                    <mat-tab label="Tryout">
+                        <div>
+                            <div class="example-container">
+                                <mat-accordion class="example-headers-align" multi>
+                                <form [formGroup]="consentHandleRequestForm">
+                                    <mat-expansion-panel [expanded]="true">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>Consent Details</mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <form formGroupName="consent">
+                                            <mat-form-field style="width: 25em;">
+                                                <mat-label>vua</mat-label>
+                                                <input matInput type="text" formControlName="vua">
+                                            </mat-form-field>
+            
+                                            <mat-form-field>
+                                                <mat-label>Consent Fetch Type</mat-label>
+                                                <mat-select formControlName="consentFetchType">
+                                                    <mat-option *ngFor="let data of consentFetchTypeMaster" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            
+                                            <mat-form-field style="width: 25em;">
+                                                <mat-label>Is Aggregation Enabled</mat-label>
+                                                <input matInput type="boolean" formControlName="isAggregationEnabled">
+                                            </mat-form-field>
+            
+                                            <mat-form-field style="width: 25em;">
+                                                <mat-label>consentAggregationId</mat-label>
+                                                <input matInput type="text" formControlName="consentAggregationId" readonly>
+                                            </mat-form-field>
+            
+                                            <mat-form-field>
+                                                <mat-label>Consent Status</mat-label>
+                                                <mat-select formControlName="consentStatus">
+                                                    <mat-option *ngFor="let data of consentStatusMaster" [value]="data">{{data}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <br/>
+                                            <br/>
+                                            <mat-expansion-panel [expanded]="true">
+                                                <mat-expansion-panel-header>
+                                                    <mat-panel-title>LSP Info Details</mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <form formGroupName="lspInfo">
+                                                    <mat-form-field>
+                                                        <mat-label>lsp Id</mat-label>
+                                                        <input matInput type="text" formControlName="lspId" readonly>
+                                                    </mat-form-field>
+                
+                                                    <mat-form-field>
+                                                        <mat-label>Version</mat-label>
+                                                        <input matInput type="text" formControlName="version">
+                                                    </mat-form-field>
+                
+                                                    <mat-form-field>
+                                                        <mat-label>App Name</mat-label>
+                                                        <input matInput type="text" formControlName="appName">
+                                                    </mat-form-field>
+                                                </form>
+                                            </mat-expansion-panel>
+                                        </form>
+                                    </mat-expansion-panel>
+                                    <br/>
+                                    <br/>
+                                    <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Consent Handle Request</button>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </form>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
         </div>
     </div>   

@@ -17,71 +17,90 @@ export class ConsentHandleRequestComponent implements OnInit {
   consentStatusMaster : any[] = ['READY' , 'PENDING' , 'FAILED', 'ERROR','INITIATED','INPROCESS','ACTIVE'];
   consentFetchTypeMaster : any[] = ['PERIODIC' , 'ONETIME', 'ONE_TIME'];
 
-  documentData : any = {};
-  documentForm : any =  FormGroup;
+  documentationFormData : any = {};
+  documentationForm : any =  FormGroup;
+  apiRequestSchemaData: any[] = [];
+  apiResponseSchemaData: any[] = [];
 
   consentHandleRequestForm : any = FormGroup;
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
 
-  setTryOut(active){
-    console.log("active==>",active.index);
-    if(active.index === 1){
-      this.button = true;
-    }else{
-      this.button = false;
+  tabClick(tab) {
+    if(tab.index==0){
+      console.log('Schema Clicked');
+      this.getApiRequestSchema('consentHandleRequest');
+      this.getApiResponseSchema('consentHandleResponse');
+    }else if(tab.index==1){
+      console.log('Header Clicked');
+    }else if (tab.index ==2){
+      console.log('Other Clicked');
     }
-    console.log("button==>",this.button);
+  }
+
+  getApiRequestSchema(data){
+    this.lenderService.getApiSchema(data).subscribe(res => {
+      if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+        if(!this.commonService.isObjectNullOrEmpty(res.data)){
+          this.apiRequestSchemaData = res.data;
+        }
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
+  }
+  
+  getApiResponseSchema(data){
+    this.lenderService.getApiSchema(data).subscribe(res => {
+      if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
+        if(!this.commonService.isObjectNullOrEmpty(res.data)){
+          this.apiResponseSchemaData = res.data;
+        }
+      } else {
+        this.commonService.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
   }
 
   createDocumentationForm(data){
-    this.documentForm = this.fb.group({
+    this.documentationFormData = this.fb.group({
       consentHandleRequestForm : this.consentHandleRequest()
     });
     
-    console.log("DocumentData==>",this.documentData);
-
-    //this.loanApplicationList.push(this.createLoanApplicationRequest());
-
-    //console.log("After Data==>",this.createLoanApplicationForm);
-
-
+    console.log("DocumentData==>",this.documentationFormData);
     console.log(data);
   }
 
   consentHandleRequest(){
     return this.consentHandleRequestForm = this.fb.group({
       consent : this.fb.group({
-        vua : [this.documentData.vua != null ? this.documentData.vua : ''],
-        consentFetchType : [this.documentData.consentFetchType != null ? this.documentData.consentFetchType : this.consentFetchTypeMaster[0]],
-        isAggregationEnabled : [this.documentData.isAggregationEnabled != null ? this.documentData.isAggregationEnabled : true],
-        consentAggregationId : [this.documentData.consentAggregationId != null ? this.documentData.consentAggregationId : ''],
-        consentStatus : [this.documentData.consentStatus != null ? this.documentData.consentStatus : this.consentStatusMaster[0]],
+        vua : [this.documentationFormData.vua != null ? this.documentationFormData.vua : ''],
+        consentFetchType : [this.documentationFormData.consentFetchType != null ? this.documentationFormData.consentFetchType : this.consentFetchTypeMaster[0]],
+        isAggregationEnabled : [this.documentationFormData.isAggregationEnabled != null ? this.documentationFormData.isAggregationEnabled : true],
+        consentAggregationId : [this.documentationFormData.consentAggregationId != null ? this.documentationFormData.consentAggregationId : ''],
+        consentStatus : [this.documentationFormData.consentStatus != null ? this.documentationFormData.consentStatus : this.consentStatusMaster[0]],
         lspInfo : this.fb.group({
-          lspId : [this.documentData.lspId != null ? this.documentData.lspId : ''],
-          version : [this.documentData.version != null ? this.documentData.version : ''],
-          appName : [this.documentData.appName != null ? this.documentData.appName : '']
+          lspId : [this.documentationFormData.lspId != null ? this.documentationFormData.lspId : ''],
+          version : [this.documentationFormData.version != null ? this.documentationFormData.version : ''],
+          appName : [this.documentationFormData.appName != null ? this.documentationFormData.appName : '']
         })
       })
     });
   }
 
-  getDocumentData(){
-    let uuidString = uuid();
-    uuidString = uuidString.replace("-","");
-    this.documentData.loanApplicationId = uuidString;
-    console.log("this.documentData==>",this.documentData);
-  }
-
   saveData(){
-    let data = this.documentForm.getRawValue();
+    let data = this.documentationFormData.getRawValue();
+    data.loanApplicationId = this.commonService.getUUID();
     console.log(data);
   }
 
   ngOnInit(): void {
     console.log("In Docu");
     let data = {};
-    this.getDocumentData();
     this.createDocumentationForm(data);
  }
 }
