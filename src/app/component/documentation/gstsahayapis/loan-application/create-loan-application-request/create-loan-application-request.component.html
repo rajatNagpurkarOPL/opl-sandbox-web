@@ -115,9 +115,10 @@
                         <div [hidden]="!button">
                             <div class="example-container">
                                 <mat-accordion class="example-headers-align" multi>
-                                <mat-expansion-panel *ngFor="let loanApp of documentationForm.controls.loanApplications.controls;let i = index;">
+                                <mat-expansion-panel *ngFor="let loanApp of documentationForm.controls.loanApplications.controls;let i = index;" [expanded]="true">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>Loan Application Details ({{i+1}}) ({{loanApp.loanApplicationId}})</mat-panel-title>
+                                        <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addNewLoanApplication()">Add Loan Application</button>
                                         <mat-icon (click)="removeIndexFromList(loanApp,documentationForm.controls.loanApplications.controls)">delete_forever</mat-icon>
                                     </mat-expansion-panel-header>
                                     <form [formGroup]="loanApp">
@@ -148,7 +149,7 @@
                                             </mat-select>
                                         </mat-form-field>
                                         
-                                        <mat-expansion-panel>
+                                        <mat-expansion-panel [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Borrower Details</mat-panel-title>
                                             </mat-expansion-panel-header>
@@ -160,7 +161,7 @@
         
                                                 <mat-form-field>
                                                     <mat-label>Primary Id Type</mat-label>
-                                                    <mat-select formControlName="primaryIdtype">
+                                                    <mat-select formControlName="primaryIdType">
                                                         <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -171,9 +172,10 @@
                                                         <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
-                                                <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls;let d = index">
+                                                <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls;let d = index" [expanded]="true">
                                                     <mat-expansion-panel-header>
                                                         <mat-panel-title>Document Details ({{d+1}})</mat-panel-title>
+                                                        <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addDocumentList('borrowerData',loanApp)">Add Document</button>
                                                         <mat-icon (click)="removeIndexFromList(documentDetail,documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls)">delete_forever</mat-icon>
                                                     </mat-expansion-panel-header>
                                                     <form [formGroup]="documentDetail">
@@ -213,7 +215,7 @@
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
         
-                                                        <mat-expansion-panel>
+                                                        <mat-expansion-panel [expanded]="true">
                                                             <mat-expansion-panel-header>
                                                                 <mat-panel-title>GST Profile Data</mat-panel-title>
                                                             </mat-expansion-panel-header>
@@ -256,7 +258,7 @@
                                                                                 <input matInput type="text" [formControl]="nbaData">
                                                                             </mat-form-field>
         
-                                                                            <button mat-icon-button (click)="addNewNba(documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.nba)">
+                                                                            <button *ngIf="n == 0" mat-icon-button (click)="addNewNba(documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.nba)">
                                                                                 <mat-icon>add_box</mat-icon>
                                                                             </button>
         
@@ -290,12 +292,12 @@
                                                                     <input matInput type="text" formControlName="rgdt">
                                                                 </mat-form-field>
         
-                                                                <mat-expansion-panel>
+                                                                <mat-expansion-panel [expanded]="true">
                                                                     <mat-expansion-panel-header>
                                                                         <mat-panel-title>pradr</mat-panel-title>
                                                                     </mat-expansion-panel-header>
                                                                     <form formGroupName="pradr">
-                                                                        <mat-expansion-panel>
+                                                                        <mat-expansion-panel [expanded]="true">
                                                                             <mat-expansion-panel-header>
                                                                                 <mat-panel-title>Address</mat-panel-title>
                                                                             </mat-expansion-panel-header>
@@ -356,10 +358,28 @@
                                                                                 </mat-form-field>
                                                                             </form>
                                                                         </mat-expansion-panel>
-                                                                        <mat-form-field>
+                                                                        <div *ngIf="documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls.length > 0">
+                                                                            <div *ngFor="let ntrData of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls;let ntr = index">
+                                                                                <div [formGroup]="ntrData">
+                                                                                    <mat-form-field>
+                                                                                        <mat-label>ntr ({{ntr+1}})</mat-label>
+                                                                                        <input matInput type="text" [formControl]="ntrData">
+                                                                                    </mat-form-field>
+                
+                                                                                    <button *ngIf="ntr == 0" mat-icon-button (click)="addNewNba(documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr)">
+                                                                                        <mat-icon>add_box</mat-icon>
+                                                                                    </button>
+                
+                                                                                    <button mat-icon-button (click)="removeIndexFromList(ntrData,documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls)">
+                                                                                        <mat-icon>indeterminate_check_box</mat-icon>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- <mat-form-field>
                                                                             <mat-label>ntr</mat-label>
                                                                             <input matInput type="text" formControlName="ntr">
-                                                                        </mat-form-field>
+                                                                        </mat-form-field> -->
                                                                     </form>
                                                                 </mat-expansion-panel>
         
@@ -387,15 +407,38 @@
                                                         </mat-expansion-panel>
                                                     </form>
                                                 </mat-expansion-panel>
-                                                <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addDocumentList('borrowerData',loanApp)">Add Document
-                                                </button>
                                             </form>
                                         </mat-expansion-panel>
-                                        <mat-expansion-panel>
+                                        <mat-expansion-panel [expanded]="true">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>Lender Details</mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <form formGroupName="lender">
+                                                <mat-form-field>
+                                                    <mat-label>Primary Id</mat-label>
+                                                    <input matInput type="text" formControlName="primaryId" readonly>
+                                                </mat-form-field>
+        
+                                                <mat-form-field>
+                                                    <mat-label>Primary Id Type</mat-label>
+                                                    <mat-select formControlName="primaryIdType">
+                                                        <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+        
+                                                <mat-form-field>
+                                                    <mat-label>Category</mat-label>
+                                                    <mat-select formControlName="category">
+                                                        <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </form>
+                                        </mat-expansion-panel>
+                                        <mat-expansion-panel *ngFor="let pledgeDocument of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls;let p = index" [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Pledge Document Details</mat-panel-title>
                                             </mat-expansion-panel-header>
-                                            <form formGroupName="pledgeDocument">
+                                            <form [formGroup]="pledgeDocument">
                                                 <mat-form-field>
                                                     <mat-label>Primary Id</mat-label>
                                                     <input matInput type="text" formControlName="primaryId" readonly>
@@ -415,10 +458,11 @@
                                                     </mat-select>
                                                 </mat-form-field>
         
-                                                <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls;let d = index">
+                                                <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls;let d = index" [expanded]="true">
                                                     <mat-expansion-panel-header>
                                                         <mat-panel-title>Document Details ({{d+1}})</mat-panel-title>
-                                                        <mat-icon (click)="removeIndexFromList(documentDetail,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls)">delete_forever</mat-icon>
+                                                        <!-- <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addDocumentList('pledgeData',loanApp)">Add Document</button> -->
+                                                        <!-- <mat-icon (click)="removeIndexFromList(documentDetail,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls)">delete_forever</mat-icon> -->
                                                     </mat-expansion-panel-header>
                                                     <form [formGroup]="documentDetail">
                                                         <mat-form-field>
@@ -457,9 +501,9 @@
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
                                                         
-                                                        <mat-expansion-panel>
+                                                        <mat-expansion-panel [expanded]="true">
                                                             <mat-expansion-panel-header>
-                                                                <mat-panel-title>GST Profile Data</mat-panel-title>
+                                                                <mat-panel-title>GST Invoice Profile</mat-panel-title>
                                                             </mat-expansion-panel-header>
                                                             <form formGroupName="data">
         
@@ -473,10 +517,10 @@
                                                                     <input matInput type="text" formControlName="cfs">
                                                                 </mat-form-field>
         
-                                                                <mat-expansion-panel *ngFor="let invoiceDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls[d].controls.data.controls.inv.controls;let in = index">
+                                                                <mat-expansion-panel *ngFor="let invoiceDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls[d].controls.data.controls.inv.controls;let in = index" [expanded]="true">
                                                                     <mat-expansion-panel-header>
-                                                                        <mat-panel-title>Invoice Details ({{in+1}})</mat-panel-title>
-                                                                        <mat-icon (click)="removeIndexFromList(invoiceDetail,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls[d].controls.data.controls.inv.controls)">delete_forever</mat-icon>
+                                                                        <mat-panel-title>GST Invoice Details ({{in+1}})</mat-panel-title>
+                                                                        <!-- <mat-icon (click)="removeIndexFromList(invoiceDetail,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls[d].controls.data.controls.inv.controls)">delete_forever</mat-icon> -->
                                                                     </mat-expansion-panel-header>
                                                                     <form [formGroup]="invoiceDetail">
         
@@ -540,10 +584,11 @@
                                                                             <input matInput type="text" formControlName="opd">
                                                                         </mat-form-field>
         
-                                                                        <mat-expansion-panel *ngFor="let items of documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls[d].controls.data.controls.inv.controls[in].controls.itms.controls;let item = index">
+                                                                        <mat-expansion-panel *ngFor="let items of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls[d].controls.data.controls.inv.controls[in].controls.itms.controls;let item = index" [expanded]="true">
                                                                             <mat-expansion-panel-header>
-                                                                                <mat-panel-title>Items ({{item+1}})</mat-panel-title>
-                                                                                <mat-icon (click)="removeIndexFromList(items,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls[d].controls.data.controls.inv.controls[in].controls.itms.controls)">delete_forever</mat-icon>
+                                                                                <mat-panel-title>Invoice Items ({{item+1}})</mat-panel-title>
+                                                                                <!-- <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addItemsList(invoiceDetail)">Add Items</button>
+                                                                                <mat-icon (click)="removeIndexFromList(items,documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls.documents.controls[d].controls.data.controls.inv.controls[in].controls.itms.controls)">delete_forever</mat-icon> -->
                                                                             </mat-expansion-panel-header>
                                                                             <form [formGroup]="items">
         
@@ -552,9 +597,9 @@
                                                                                     <input matInput type="number" formControlName="num">
                                                                                 </mat-form-field>
         
-                                                                                <mat-expansion-panel>
+                                                                                <mat-expansion-panel [expanded]="true">
                                                                                     <mat-expansion-panel-header>
-                                                                                        <mat-panel-title>Item Details</mat-panel-title>
+                                                                                        <mat-panel-title>Invoice Item Details</mat-panel-title>
                                                                                     </mat-expansion-panel-header>
                                                                                     <form formGroupName="itm_det">
         
@@ -592,24 +637,23 @@
                                                                                 </mat-expansion-panel>
                                                                             </form>
                                                                         </mat-expansion-panel>
-                                                                        <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addItemsList(invoiceDetail)">Add Items</button>
+                                                                        
                                                                     </form>
                                                                 </mat-expansion-panel>
-                                                                <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addInvoiceList(documentDetail)">Add Invoice
-                                                                </button>
+                                                                <!-- <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addInvoiceList(documentDetail)">Add Invoice
+                                                                </button> -->
         
                                                             </form>
                                                         </mat-expansion-panel>
         
                                                     </form>
                                                 </mat-expansion-panel>
-                                                <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addDocumentList('pledgeData',loanApp)">Add Document
-                                                </button>
                                             </form>
                                         </mat-expansion-panel>
-                                        <mat-expansion-panel *ngFor="let applicantDetails of documentationForm.controls.loanApplications.controls[i].controls.applicants.controls;let a = index">
+                                        <mat-expansion-panel *ngFor="let applicantDetails of documentationForm.controls.loanApplications.controls[i].controls.applicants.controls;let a = index" [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Applicant Details ({{a+1}})</mat-panel-title>
+                                                <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addApplicantDetails(loanApp)">Add Applicant Details</button>
                                                 <mat-icon (click)="removeIndexFromList(applicantDetails,documentationForm.controls.loanApplications.controls[i].controls.applicants.controls)">delete_forever</mat-icon>
                                             </mat-expansion-panel-header>
                                             <form [formGroup]="applicantDetails">
@@ -625,13 +669,18 @@
                                                             <mat-option *ngFor="let data of applicantPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
                                                         </mat-select>
                                                     </mat-form-field>
+
+                                                    <mat-form-field>
+                                                        <mat-label>Category</mat-label>
+                                                        <mat-select formControlName="category">
+                                                            <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
         
                                                 </div>
                                             </form>
                                         </mat-expansion-panel>
-                                        <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addApplicantDetails(loanApp)">Add Applicant Details
-                                        </button>
-                                        <mat-expansion-panel>
+                                        <mat-expansion-panel [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Terms Details</mat-panel-title>
                                             </mat-expansion-panel-header>
@@ -652,8 +701,6 @@
                                         </mat-expansion-panel>
                                     </form>
                                 </mat-expansion-panel>
-                                <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addNewLoanApplication()">Add Loan Application
-                                </button>
                                 </mat-accordion>
                                 <br/>
                                 <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Create Loan Application Request</button>

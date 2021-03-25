@@ -37,6 +37,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   loanApplicationForm: any = FormGroup;
   documentForm: any = FormGroup;
   dataOfBorrowerDocument: any = FormGroup;
+  pledgeDocumentForm: any = FormGroup;
   dataOfPledgeDocument: any = FormGroup;
   invData: any = FormGroup;
   itemData: any = FormGroup;
@@ -63,30 +64,34 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     });
     
     console.log("this.documentForm==>",this.documentationForm);
-    console.log("this.loanApplications==>",this.documentationForm.controls.loanApplications.controls[0].controls.pledgeDocument.controls.documents.controls[0].controls.data.controls.inv.controls[0].controls.itms);
+    console.log("this.loanApplications==>",this.documentationForm.controls.loanApplications.controls[0].controls.pledgedDocuments.controls[0].controls.documents.controls[0].controls.data.controls.inv.controls[0].controls.itms);
   }
 
   createLoanApplicationRequestForm(data) : FormGroup{
     this.loanApplicationForm = this.fb.group({
         loanApplicationId : [this.commonService.getUUID()],
+        createdDate: new Date(),
         productType : [this.documentationFormData.productType != null ? this.documentationFormData.productType : this.loanProductTypeMaster[0]],
         productId : [this.documentationFormData.productId != null ? this.documentationFormData.productId : this.productIdTypeMaster[0]],
         loanApplicationStatus: [this.documentationFormData.loanApplicationStatus != null ? this.documentationFormData.loanApplicationStatus : this.loanApplicationStatusMaster[0]],
         borrower : this.fb.group({
-          primaryId : [this.documentationFormData.primaryId != null ? this.documentationFormData.primaryId : ''],
-          primaryIdtype: [this.documentationFormData.primaryIdtype != null ? this.documentationFormData.primaryIdtype : this.borrowerPrimaryTypeMaster[0]],
+          primaryId : [this.commonService.getUUID()],
+          primaryIdType: [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.borrowerPrimaryTypeMaster[0]],
           category: [this.documentationFormData.category != null ? this.documentationFormData.category : this.borrowerCategoryMaster[0]],
-          contactDetails : [],
+          additionalIdentifiers: [[]],
+          contactDetails : [[]],
           documents : this.fb.array([this.createDocumentDataForm('borrowerData',{})])
         }),
-        pledgeDocument : this.fb.group({
-          primaryId : [this.documentationFormData.primaryId != null ? this.documentationFormData.primaryId : ''],
-          primaryIdType : [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.pledgedDocumentPrimaryIdTypeMaster[0]],
-          type : [this.documentationFormData.type != null ? this.documentationFormData.type : this.pledgedDocumentType[0]],
+        lender : this.fb.group({
+          primaryId : ['132t3jedyf'],
+          primaryIdType: [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.borrowerPrimaryTypeMaster[0]],
+          category: [this.documentationFormData.category != null ? this.documentationFormData.category : this.borrowerCategoryMaster[0]],
           additionalIdentifiers: [[]],
-          parties: [[]],
-          documents : this.fb.array([this.createDocumentDataForm('pledgeData',{})])
+          contactDetails : [[]],
+          documents : [[]]
         }),
+        pledgedDocuments : this.fb.array([this.createPledgeDocument()]),
+        collaterals : [[]],
         guarantors : [[]],
         applicants : this.fb.array([this.createApplicantForm()]),
         terms: this.fb.group({
@@ -98,17 +103,27 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
     return this.loanApplicationForm;
   }
 
+  createPledgeDocument(): FormGroup{
+    return this.pledgeDocumentForm = this.fb.group({
+      primaryId : [this.commonService.getUUID()],
+      primaryIdType : [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.pledgedDocumentPrimaryIdTypeMaster[0]],
+      type : [this.documentationFormData.type != null ? this.documentationFormData.type : this.pledgedDocumentType[0]],
+      documents : this.fb.array([this.createDocumentDataForm('pledgeData',{})])
+    })
+  }
+
   createApplicantForm(): FormGroup{
     return this.applicantForm = this.fb.group({
       primaryIdType : [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.applicantPrimaryIdTypeMaster[0]],
-      primaryId : [this.documentationFormData.primaryId != null ? this.documentationFormData.primaryId : '']
+      primaryId : [this.commonService.getUUID()],
+      category : [this.documentationFormData.category != null ? this.documentationFormData.category : this.borrowerCategoryMaster[0]]
     })
   }
 
   createDocumentDataForm(typeOfData ,formGroupData) : FormGroup{
     return this.documentForm = this.fb.group({
-      sourceId : [this.documentationFormData.sourceId != null ? this.documentationFormData.sourceId : ''],
-      reference : [this.documentationFormData.reference != null ? this.documentationFormData.reference : ''],
+      sourceId : [this.commonService.getUUID()],
+      reference : [this.commonService.getUUID()],
       sourceType : [this.documentationFormData.sourceType != null ? this.documentationFormData.sourceType : this.sourcetypeMaster[0]],
       format : [this.documentationFormData.documentFormat != null ? this.documentationFormData.documentFormat : this.documentFormatMaster[0]],
       type : [this.documentationFormData.type != null ? this.documentationFormData.type : this.documentTypeMaster[0]],
@@ -144,7 +159,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
           pncd : [this.documentationFormData.pncd != null ? this.documentationFormData.pncd : '400001'],
           lg : [this.documentationFormData.lg != null ? this.documentationFormData.lg : '']
         }),
-        ntr : [this.documentationFormData.ntr != null ? this.documentationFormData.ntr : 'Factory / Manufacturing']
+        ntr : this.documentationFormData.ntr != null ? this.fb.array(this.documentationFormData.ntr) : this.fb.array(['Factory / Manufacturing']),
       }),
       ctjCd : [this.documentationFormData.ctjCd != null ? this.documentationFormData.ctjCd : 'UF0102'],
       tradeNam : [this.documentationFormData.tradeNam != null ? this.documentationFormData.tradeNam : 'ABC PVT. LTD..'],
@@ -213,7 +228,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
   addDocumentList(typeOfData,obj: FormGroup){
     const documentControl = typeOfData == 'borrowerData' ? <FormArray>obj.controls.borrower.get('documents') 
-                                                              : <FormArray>obj.controls.pledgeDocument.get('documents') ;
+                                                              : <FormArray>obj.controls.pledgedDocuments.get('documents') ;
     documentControl.push(this.createDocumentDataForm(typeOfData,{}));
   }
 
@@ -241,9 +256,9 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
  saveData(){
   let data = this.documentationForm.getRawValue();
-  data.metadata = {"version": "3.3","timestamp": new Date(),"traceId": "a8cc6822bd4bbb4eb1b9e1b4996fbff8acb",
-  "orgId": "LSP123"};
-  data.requestId = this.documentationFormData.loanApplicationId;
+  data.metadata = {"version": "3.3","timestamp": new Date(),"traceId": this.commonService.getUUID(),
+  "orgId": "OPLB4L123"};
+  data.requestId = this.commonService.getUUID();
   console.log("Save Data==>",data);
   data.loanApplications.forEach(element => {
     if(element.borrower.documents != null && element.borrower.documents.length > 0){
@@ -252,10 +267,16 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
       });
     }
     console.log("Outside pledgeDocument loop");
-    if(element.pledgeDocument.documents != null && element.pledgeDocument.documents.length > 0){
-      console.log("Inside pledgeDocument loop");
-      element.pledgeDocument.documents.forEach(documentsData => {
-        documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
+    if(element.pledgedDocuments != null && element.pledgedDocuments.length > 0){
+      console.log("Inside pledgeDocument check");
+      element.pledgedDocuments.forEach(pledgedDocumentsData => {
+        console.log("Inside pledgeDocument loop==>",pledgedDocumentsData);
+        if(pledgedDocumentsData.documents != null && pledgedDocumentsData.documents.length > 0){
+          console.log("Inside pledgeDocument loop");
+          pledgedDocumentsData.documents.forEach(documentsData => {
+            documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
+          });
+        }
       });
     }
   });
