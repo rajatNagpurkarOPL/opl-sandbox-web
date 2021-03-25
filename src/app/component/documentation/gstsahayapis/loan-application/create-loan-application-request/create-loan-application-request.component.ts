@@ -48,16 +48,6 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
-  setTryOut(active){
-    console.log("active==>",active.index);
-    if(active.index === 1){
-      this.button = true;
-    }else{
-      this.button = false;
-    }
-    console.log("button==>",this.button);
-  }
-
   createDocumentationForm(data){
     this.documentationForm = this.fb.group({
       loanApplications : this.fb.array([this.createLoanApplicationRequestForm({})])

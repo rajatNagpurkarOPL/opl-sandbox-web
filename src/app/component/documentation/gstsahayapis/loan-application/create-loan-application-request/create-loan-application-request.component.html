@@ -24,7 +24,7 @@
                 <p>
                     <span>API to Create Loan Application Request.</span>
                 </p>
-                <mat-tab-group (selectedTabChange)="setTryOut($event)">
+                <mat-tab-group>
                     <mat-tab label="Documentation">
                         <div>
                             <div class="b4l-height">
@@ -112,7 +112,7 @@
                         </div>
                     </mat-tab>
                     <mat-tab label="Tryout">
-                        <div [hidden]="!button">
+                        <div>
                             <div class="example-container">
                                 <mat-accordion class="example-headers-align" multi>
                                 <mat-expansion-panel *ngFor="let loanApp of documentationForm.controls.loanApplications.controls;let i = index;" [expanded]="true">
@@ -148,7 +148,8 @@
                                                 <mat-option *ngFor="let data of loanApplicationStatusMaster" [value]="data">{{data}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        
+
+                                        <br/><br/>
                                         <mat-expansion-panel [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Borrower Details</mat-panel-title>
@@ -172,6 +173,7 @@
                                                         <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
+                                                <br/><br/>
                                                 <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls;let d = index" [expanded]="true">
                                                     <mat-expansion-panel-header>
                                                         <mat-panel-title>Document Details ({{d+1}})</mat-panel-title>
@@ -214,7 +216,7 @@
                                                             <mat-label>Is Data Inline</mat-label>
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
-        
+                                                        <br/><br/>
                                                         <mat-expansion-panel [expanded]="true">
                                                             <mat-expansion-panel-header>
                                                                 <mat-panel-title>GST Profile Data</mat-panel-title>
@@ -291,7 +293,8 @@
                                                                     <mat-label>rgdt</mat-label>
                                                                     <input matInput type="text" formControlName="rgdt">
                                                                 </mat-form-field>
-        
+
+                                                                <br/><br/>
                                                                 <mat-expansion-panel [expanded]="true">
                                                                     <mat-expansion-panel-header>
                                                                         <mat-panel-title>pradr</mat-panel-title>
@@ -358,6 +361,7 @@
                                                                                 </mat-form-field>
                                                                             </form>
                                                                         </mat-expansion-panel>
+                                                                        <br/>
                                                                         <div *ngIf="documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls.length > 0">
                                                                             <div *ngFor="let ntrData of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls;let ntr = index">
                                                                                 <div [formGroup]="ntrData">
@@ -382,7 +386,7 @@
                                                                         </mat-form-field> -->
                                                                     </form>
                                                                 </mat-expansion-panel>
-        
+                                                                <br/>
                                                                 <mat-form-field>
                                                                     <mat-label>ctjCd</mat-label>
                                                                     <input matInput type="text" formControlName="ctjCd">
@@ -409,6 +413,7 @@
                                                 </mat-expansion-panel>
                                             </form>
                                         </mat-expansion-panel>
+                                        <br/>
                                         <mat-expansion-panel [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Lender Details</mat-panel-title>
@@ -434,6 +439,7 @@
                                                 </mat-form-field>
                                             </form>
                                         </mat-expansion-panel>
+                                        <br/>
                                         <mat-expansion-panel *ngFor="let pledgeDocument of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls;let p = index" [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Pledge Document Details</mat-panel-title>
@@ -457,7 +463,8 @@
                                                         <mat-option *ngFor="let data of pledgedDocumentType" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
-        
+
+                                                <br/><br/>
                                                 <mat-expansion-panel *ngFor="let documentDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls;let d = index" [expanded]="true">
                                                     <mat-expansion-panel-header>
                                                         <mat-panel-title>Document Details ({{d+1}})</mat-panel-title>
@@ -501,6 +508,7 @@
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
                                                         
+                                                        <br/><br/>
                                                         <mat-expansion-panel [expanded]="true">
                                                             <mat-expansion-panel-header>
                                                                 <mat-panel-title>GST Invoice Profile</mat-panel-title>
@@ -516,7 +524,8 @@
                                                                     <mat-label>cfs</mat-label>
                                                                     <input matInput type="text" formControlName="cfs">
                                                                 </mat-form-field>
-        
+
+                                                                <br/><br/>
                                                                 <mat-expansion-panel *ngFor="let invoiceDetail of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls[d].controls.data.controls.inv.controls;let in = index" [expanded]="true">
                                                                     <mat-expansion-panel-header>
                                                                         <mat-panel-title>GST Invoice Details ({{in+1}})</mat-panel-title>
@@ -583,7 +592,8 @@
                                                                             <mat-label>opd</mat-label>
                                                                             <input matInput type="text" formControlName="opd">
                                                                         </mat-form-field>
-        
+                                                                        
+                                                                        <br/><br/>
                                                                         <mat-expansion-panel *ngFor="let items of documentationForm.controls.loanApplications.controls[i].controls.pledgedDocuments.controls[p].controls.documents.controls[d].controls.data.controls.inv.controls[in].controls.itms.controls;let item = index" [expanded]="true">
                                                                             <mat-expansion-panel-header>
                                                                                 <mat-panel-title>Invoice Items ({{item+1}})</mat-panel-title>
@@ -596,7 +606,8 @@
                                                                                     <mat-label>Number</mat-label>
                                                                                     <input matInput type="number" formControlName="num">
                                                                                 </mat-form-field>
-        
+                                                                                
+                                                                                <br/><br/>
                                                                                 <mat-expansion-panel [expanded]="true">
                                                                                     <mat-expansion-panel-header>
                                                                                         <mat-panel-title>Invoice Item Details</mat-panel-title>
@@ -650,6 +661,7 @@
                                                 </mat-expansion-panel>
                                             </form>
                                         </mat-expansion-panel>
+                                        <br/>
                                         <mat-expansion-panel *ngFor="let applicantDetails of documentationForm.controls.loanApplications.controls[i].controls.applicants.controls;let a = index" [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Applicant Details ({{a+1}})</mat-panel-title>
@@ -680,6 +692,7 @@
                                                 </div>
                                             </form>
                                         </mat-expansion-panel>
+                                        <br/>
                                         <mat-expansion-panel [expanded]="true">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title>Terms Details</mat-panel-title>
