@@ -20,8 +20,6 @@ export class ConsentStatusRequestComponent implements OnInit {
   apiResponseSchemaData: any[] = [];
   acknowledgementRes: any = 'Please click on Request Button';
 
-  consentStatusRequestForm : any = FormGroup;
-
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
 
   createDocumentationForm(data){
@@ -54,7 +52,6 @@ export class ConsentStatusRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.createDocumentationForm({});
-    console.log();
  }
 
  tabClick(tab) {
