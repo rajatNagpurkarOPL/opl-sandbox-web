@@ -45,6 +45,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
+  acknowledgementRes: any = 'Please click on Request Button';
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
 
@@ -272,6 +273,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   });
   this.lenderService.createLoanApplicationRequest(data).subscribe(res => {
     console.log("Response==>",res);
+    this.acknowledgementRes = JSON.stringify(res);
   }, (error: any) => {
     this.commonService.errorSnackBar(error);
   });

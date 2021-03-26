@@ -21,6 +21,7 @@ export class ConsentHandleRequestComponent implements OnInit {
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
+  acknowledgementRes: any = 'Please click on Request Button';
 
   consentHandleRequestForm : any = FormGroup;
 
@@ -68,38 +69,43 @@ export class ConsentHandleRequestComponent implements OnInit {
 
   createDocumentationForm(data){
     this.documentationFormData = this.fb.group({
-      consentHandleRequestForm : this.consentHandleRequest()
+      consent : this.consentHandleRequest()
     });
     
     console.log("DocumentData==>",this.documentationFormData);
-    console.log(data);
   }
 
   consentHandleRequest(){
     return this.consentHandleRequestForm = this.fb.group({
-      consent : this.fb.group({
-        vua : [this.documentationFormData.vua != null ? this.documentationFormData.vua : ''],
-        consentFetchType : [this.documentationFormData.consentFetchType != null ? this.documentationFormData.consentFetchType : this.consentFetchTypeMaster[0]],
-        isAggregationEnabled : [this.documentationFormData.isAggregationEnabled != null ? this.documentationFormData.isAggregationEnabled : true],
-        consentAggregationId : [this.documentationFormData.consentAggregationId != null ? this.documentationFormData.consentAggregationId : ''],
-        consentStatus : [this.documentationFormData.consentStatus != null ? this.documentationFormData.consentStatus : this.consentStatusMaster[0]],
-        lspInfo : this.fb.group({
-          lspId : [this.documentationFormData.lspId != null ? this.documentationFormData.lspId : ''],
-          version : [this.documentationFormData.version != null ? this.documentationFormData.version : ''],
-          appName : [this.documentationFormData.appName != null ? this.documentationFormData.appName : '']
-        })
+      vua : [this.documentationFormData.vua != null ? this.documentationFormData.vua : 'user@aa.in'],
+      consentFetchType : [this.documentationFormData.consentFetchType != null ? this.documentationFormData.consentFetchType : this.consentFetchTypeMaster[0]],
+      isAggregationEnabled : [this.documentationFormData.isAggregationEnabled != null ? this.documentationFormData.isAggregationEnabled : true],
+      consentAggregationId : [this.commonService.getUUID()],
+      consentStatus : [this.documentationFormData.consentStatus != null ? this.documentationFormData.consentStatus : this.consentStatusMaster[0]],
+      lspInfo : this.fb.group({
+        lspId : [this.commonService.getUUID()],
+        version : [this.commonService.getUUID()],
+        appName : [this.commonService.getUUID()]
       })
     });
   }
 
   saveData(){
     let data = this.documentationFormData.getRawValue();
-    data.loanApplicationId = this.commonService.getUUID();
+    data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(),
+  "orgId": "OPLB4L123"};
+    data.loanApplicationIds = [this.commonService.getUUID()];
+    data.requestId = this.commonService.getUUID();
     console.log(data);
+    this.lenderService.consentHandleRequest(data).subscribe(res => {
+      console.log("Response==>",res);
+      this.acknowledgementRes = JSON.stringify(res);
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
   }
 
   ngOnInit(): void {
-    console.log("In Docu");
     let data = {};
     this.createDocumentationForm(data);
  }

@@ -116,7 +116,6 @@
                         <div>
                             <div class="example-container">
                                 <mat-accordion class="example-headers-align" multi>
-                                <form [formGroup]="consentHandleRequestForm">
                                     <mat-expansion-panel [expanded]="true">
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>Consent Details</mat-panel-title>
@@ -181,10 +180,20 @@
                                     <br/>
                                     <br/>
                                     <br/>
-                                </form>
                                 </mat-accordion>
                             </div>
                         </div>
+                        
+                        <mat-tab-group>
+                            <mat-tab label="Acknowlegement">
+                                <br/>
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Textarea</mat-label>
+                                    <textarea matInput value={{acknowledgementRes}}></textarea>
+                                  </mat-form-field>
+                            </mat-tab>
+                            <mat-tab label="Response">Response</mat-tab>
+                        </mat-tab-group>
                     </mat-tab>
                 </mat-tab-group>
             </div>
