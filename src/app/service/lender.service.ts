@@ -106,6 +106,14 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.CONSENT_STATUS_REQUEST, data);
   }
 
+  generateOfferRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GENERATE_OFFER_REQUEST, data);
+  }
+
+  setOfferRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_OFFER_REQUEST, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
