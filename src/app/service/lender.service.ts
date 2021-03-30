@@ -114,6 +114,14 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_OFFER_REQUEST, data);
   }
 
+  triggerLoanAcceptanceRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_LOAN_ACCEPTANCE_REQUEST, data);
+  }
+
+  verifyLoanAcceptanceRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.VERIFY_LOAN_ACCEPTANCE_REQUEST, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
