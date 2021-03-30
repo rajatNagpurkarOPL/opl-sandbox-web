@@ -36,6 +36,8 @@ export const RestURL = {
     CONSENT_STATUS_REQUEST : '/v3.3/consent/consentStatusRequest',
     GENERATE_OFFER_REQUEST : '/v3.3/offer/generateOffersRequest',
     SET_OFFER_REQUEST : '/v3.3/offer/setOfferRequest',
+    TRIGGER_LOAN_ACCEPTANCE_REQUEST : '/v3.3/loan/triggerLoanAcceptanceRequest',
+    VERIFY_LOAN_ACCEPTANCE_REQUEST : '/v3.3/loan/verifyLoanAcceptanceRequest',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data',
         SCHEMA_DETAIL : '/schema/api',
