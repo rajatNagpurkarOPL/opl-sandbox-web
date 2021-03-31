@@ -54,11 +54,11 @@
           <app-verify-loan-acceptance-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.VRF_LN_ACCPTNCE"></app-verify-loan-acceptance-request>
 
           <!-- Grant Loan Selectors -->
-          <app-grant-loan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-grant-loan-request>
-          <app-loan-summary-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-loan-summary-request>
-          <app-get-loan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-get-loan-request>
-          <app-loan-statement-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-loan-statement-request>
-          <app-list-loans-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-list-loans-request>
+          <app-grant-loan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.GRNT_LN_REQ"></app-grant-loan-request>
+          <app-loan-summary-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.LOAN_SMRY_REQ"></app-loan-summary-request>
+          <app-get-loan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.GET_LN_REQ"></app-get-loan-request>
+          <app-loan-statement-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.LOAN_STMT_REQ"></app-loan-statement-request>
+          <app-list-loans-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.LIST_LN_REQ"></app-list-loans-request>
 
           <!-- Repayment Selectors -->
           <app-set-repayment-plan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-set-repayment-plan-request>

@@ -38,6 +38,11 @@ export const RestURL = {
     SET_OFFER_REQUEST : '/v3.3/offer/setOfferRequest',
     TRIGGER_LOAN_ACCEPTANCE_REQUEST : '/v3.3/loan/triggerLoanAcceptanceRequest',
     VERIFY_LOAN_ACCEPTANCE_REQUEST : '/v3.3/loan/verifyLoanAcceptanceRequest',
+    GET_LOAN_REQUEST : '/v3.3/loan/getLoanRequest',
+    LOAN_SUMMARY_REQUEST : '/v3.3/loan/loanSummaryRequest',
+    GRANT_LOAN_REQUEST : '/v3.3/loan/grantLoanRequest',
+    LOAN_STATEMENT_REQUEST : '/v3.3/loan/loanStatementRequest',
+    LIST_LOAN_REQUEST : '/v3.3/loan/listLoansRequest',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data',
         SCHEMA_DETAIL : '/schema/api',
