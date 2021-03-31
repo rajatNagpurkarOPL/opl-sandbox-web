@@ -20,6 +20,10 @@ export class SettingsComponent implements OnInit {
   user: any = {};
   isShowAddEBLR = false;
   isEBLRApproved = false;
+  value: string;
+  viewValue: string;
+  selected = '';
+  
 
   constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,private global: Globals, public sendBackService: SendBackModelService) {
     
@@ -139,6 +143,13 @@ export class SettingsComponent implements OnInit {
       this.user = this.global.USER;
     }
     this.listPLRByType();
+
+
+    
   }
 
+  
+
 }
+
+
