@@ -4,7 +4,8 @@
             <div class="sidebar">
                 <a href="javascript:void(0)" class="active"> EBLR Value</a>
                 <a href="javascript:void(0)"> MCLR Value</a>
-                <a href="javascript:void(0)">Account Settings</a>
+                <a href="javascript:void(0)"> Bureau Configuration</a>
+                <a href="javascript:void(0)"> Trigger Management</a>
             </div>
             <div class="main">
                 <div class="sidebar-main-title">
@@ -120,3 +121,187 @@
         </div>
     </div>
 </div>
+
+
+
+<!--Bureau Configuration start-->
+
+
+
+<div class="container">
+  <div class="row">
+      <div id="b4l-content">
+          <div class="sidebar">
+              <a href="javascript:void(0)"> EBLR Value</a>
+              <a href="javascript:void(0)"> MCLR Value</a>
+              <a href="javascript:void(0)"  class="active"> Bureau Configuration</a>
+              <a href="javascript:void(0)"> Trigger Management</a>
+          </div>
+          <div class="main">
+              <div class="sidebar-main-title border-btm-bureau">
+                  <!-- <p>EBLR Value</p> -->
+<div class="d-flex fl-column js-center">
+<p class="Bureau-setting-text">Bureau Priority</p>
+<span class="Bureau-setting-text-span">Set the preferences for bureau configuration. So that you can access the Bureau database.</span>
+</div>
+     </div>
+
+<div class="bureau-setting-grp">
+<p>Choose Primary Bureau <img src="assets/img/note.svg" matTooltip="In Case Primary Bureau is unavailable or there is some error in login. We will use this backup option." class="ml-2"/></p>
+<mat-form-field appearance="outline">
+  <mat-label>Select an option</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option>None</mat-option>
+    <mat-option value="option1">Transunion ( CIBIL )</mat-option>
+    <mat-option value="option2">Option 2</mat-option>
+    <mat-option value="option3">Option 3</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+
+<div class="bureau-setting-grp">
+  <p>In case of Technical error <img src="assets/img/note.svg" matTooltip="In Case Primary Bureau is unavailable or there is some error in login. We will use this backup option." class="ml-2"/></p>
+  <mat-form-field appearance="outline">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Experian</mat-option>
+      <mat-option value="option2">Option 2</mat-option>
+      <mat-option value="option3">Option 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+
+
+  <div class="bureau-setting-grp">
+    <p>In case no information available <img src="assets/img/note.svg" matTooltip="In Case Primary Bureau is unavailable or there is some error in login. We will use this backup option." class="ml-2"/></p>
+    <mat-form-field appearance="outline">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option>None</mat-option>
+        <mat-option value="option1">None</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+
+
+       
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!--Bureau Configuration end-->
+
+
+<!--Trigger Management start-->
+
+<div class="container">
+  <div class="row">
+      <div id="b4l-content">
+          <div class="sidebar">
+              <a href="javascript:void(0)" class="active"> EBLR Value</a>
+              <a href="javascript:void(0)"> MCLR Value</a>
+              <a href="javascript:void(0)"> Bureau Configuration</a>
+              <a href="javascript:void(0)"> Trigger Management</a>
+          </div>
+          <div class="main">
+              <div class="sidebar-main-title">
+                  <!-- <p>EBLR Value</p> -->
+<div class="d-flex fl-column js-center">
+<p class="fs-16">Trigger Management</p>
+<span class="text-span">List of available Triggers across the platform</span>
+</div>
+
+
+                  <a *ngIf="isShowAddEBLR" (click)="openDialog(null);" href="javaScript:void(0);">+ Add New Trigger</a>
+              </div>
+
+
+<p class="sidebar-main-title"><b>Trigger List</b></p>
+           
+          
+
+
+              <table class="table Trigger-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Trigger Name</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Last Modified on</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+
+
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+
+
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>API Failure Check <br> <span>This API will notify the admin users</span></td>
+                      <td><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
+                      <td>15th Jan 2021 2:00 PM</td>
+                      <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    </tr>
+
+                  
+                  </tbody>
+                </table>
+
+
+
+          </div>
+      </div>
+  </div>
+</div>
+<!--Trigger Management end-->
