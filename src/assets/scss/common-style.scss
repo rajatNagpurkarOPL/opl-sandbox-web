@@ -158,6 +158,57 @@ box-shadow: none !important;
 
 
 }
+.trigger-0 {
+    .mat-form-field-wrapper {
+        padding-bottom: 0em !important;
+    }
+}
+.text-heading-span-border {
+padding: 1em;
+color: #000000;
+font-size: 16px;
+font-weight: 500;
+border: 1px solid #DEDEDE;
+border-radius: 4px;
+width: 100%;
+display: flex;
+
+
+}
+.text-heading {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+}
+.text-heading-span {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.4;
+}
+.op-4 {
+    opacity: 0.4 !important; 
+}
+.new-trigger-back {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 0;
+.text {
+    color: #2D3079;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}p {
+    margin-bottom: 0 !important; 
+}
+
+    }
+
 .dash-table{
 
     a {
