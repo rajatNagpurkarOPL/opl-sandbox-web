@@ -15,14 +15,16 @@ import { ProductListComponent } from './component/products/product-list/product-
 import { NewProductConfigurationComponent } from './component/new-product-configuration/new-product-configuration.component';
 import { ProductCreateComponent } from './component/product-create/product-create.component';
 import { DocumentationComponent } from './component/documentation/documentation.component';
+import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
 
-const routes: Routes = [
+const routes: Routes = [ 
   
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent },
+    { path: 'new-trigger-configuration', component: NewTriggerConfigurationComponent },
     { path: 'bridge-matrix', component: LspBridgeMatrixComponent },
     { path: 'products', component: ProductListComponent },
     { path: 'products/save', component: ProductsComponent },
