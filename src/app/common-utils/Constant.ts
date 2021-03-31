@@ -89,7 +89,13 @@ export const Constant = {
         RAISE_DSPT_REQ : "RAISE_DSPT_REQ",
         DSPT_STS_REQ : "DSPT_STS_REQ",
         HEARTBEAT : "HEARTBEAT",
-        HRT_BEAT : "HRT_BEAT"
+        HRT_BEAT : "HRT_BEAT",
+        GRANT_LOAN : "GRANT_LOAN",
+        GRNT_LN_REQ : "GRNT_LN_REQ",
+        LOAN_SMRY_REQ : "LOAN_SMRY_REQ",
+        GET_LN_REQ : "GET_LN_REQ",
+        LOAN_STMT_REQ : "LOAN_STMT_REQ",
+        LIST_LN_REQ : "LIST_LN_REQ"
     },
     MASTER_DATA_IDS:{
         FACILITY_TYPE: {"id" : 1 , "value" : "FacilityType"},
