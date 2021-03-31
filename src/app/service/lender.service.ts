@@ -98,6 +98,30 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.CREATE_LOAN_APPLICATION_REQUEST, data);
   }
 
+  consentHandleRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.CONSENT_HANDLE_REQUEST, data);
+  }
+
+  consentStatusRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.CONSENT_STATUS_REQUEST, data);
+  }
+
+  generateOfferRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GENERATE_OFFER_REQUEST, data);
+  }
+
+  setOfferRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_OFFER_REQUEST, data);
+  }
+
+  triggerLoanAcceptanceRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_LOAN_ACCEPTANCE_REQUEST, data);
+  }
+
+  verifyLoanAcceptanceRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.VERIFY_LOAN_ACCEPTANCE_REQUEST, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
