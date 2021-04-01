@@ -1,1 +1,154 @@
-<p>loan-summary-request works!</p>
+<form [formGroup]="documentationForm">
+    <div class="b4l-documentation-content charges-roi b4l-height">
+
+        <div class="b4l-height">
+            <div class="card-header row row-flex">
+                <h3 class="card-title" style="border-left-color: inherit; ">
+                <b><span class="label-text">Loan Summary Request</span></b>
+                </h3><!---->
+            </div>
+            <div class="card-body"><!---->
+                <div class="well well-sm p-0">
+                    <div class="table-container">
+                        <div class="form-group">
+                            <mat-form-field style="width: 10em; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" readonly>
+                            </mat-form-field>
+                            <mat-form-field style="width: 90em;">
+                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/loan/loanSummaryRequest">
+                            </mat-form-field>
+                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                        </div>
+                    </div>
+                    
+                </div><!---->
+                <p>
+                    <span>API to Loan Summary Request.</span>
+                </p>
+                <mat-tab-group>
+                    <mat-tab label="Documentation">
+                        <div>
+                            <div class="b4l-height">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Request</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+                                        <mat-tab label="Schema">
+                                            <br>
+                                            <table>
+                                            <tr>
+                                                <th>AttributeName</th>
+                                                <th>Type</th>
+                                                <th>Validation</th>
+                                                <th>Required</th>
+                                                <th>Description</th>
+                                            </tr>
+                                            <ng-container *ngFor="let reqschema of apiRequestSchemaData" [matColumnDef]="reqschema">
+                                                    <tr>
+                                                        <td>
+                                                            <div *ngIf="reqschema.isDomain">
+                                                                <a href="" ng-click="getDomainSchema(reqschema.attributeName);" data-id="{{reqschema.attributeName}}" data-toggle="modal" data-target="#skillModal">{{reqschema.attributeName}}</a>
+                                                            </div>
+                                                            <div *ngIf="!reqschema.isDomain">
+                                                                <a>{{reqschema.attributeName}}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td> {{reqschema.type}} </td>
+                                                        <td> {{reqschema.validation}} </td>
+                                                        <td> {{reqschema.isRequired}} </td>
+                                                        <td> {{reqschema.description}} </td>
+                                                    </tr>
+                                            </ng-container>
+                                            </table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">Body</mat-tab>
+                                        <mat-tab label="Header">Header</mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                            </div>
+                            <div class="b4l-height">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Response</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+                                        <mat-tab label="Schema">
+                                            <br>
+                                            <table>
+                                            <tr>
+                                                <th>AttributeName</th>
+                                                <th>Type</th>
+                                                <th>Validation</th>
+                                                <th>Required</th>
+                                                <th>Description</th>
+                                            </tr>
+                                            <ng-container *ngFor="let resschema of apiResponseSchemaData" [matColumnDef]="resschema">
+                                                    <tr>
+                                                        <td>
+                                                            <div *ngIf="resschema.isDomain">
+                                                                <a href="" ng-click="getDomainSchema(resschema.attributeName);" data-id="{{resschema.attributeName}}" data-toggle="modal" data-target="#skillModal">{{resschema.attributeName}}</a>
+                                                            </div>
+                                                            <div *ngIf="!resschema.isDomain">
+                                                                <a>{{resschema.attributeName}}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td> {{resschema.type}} </td>
+                                                        <td> {{resschema.validation}} </td>
+                                                        <td> {{resschema.isRequired}} </td>
+                                                        <td> {{resschema.description}} </td>
+                                                    </tr>
+                                            </ng-container>
+                                            </table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">Body</mat-tab>
+                                        <mat-tab label="Header">Header</mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Tryout">
+                        <div>
+                            <div class="example-container">
+                                <mat-accordion class="example-headers-align" multi>
+                                    <mat-expansion-panel [expanded]="true">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>Loan Details</mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        
+                                        <mat-form-field style="width: 25em;">
+                                            <mat-label>Loan Id</mat-label>
+                                            <input matInput type="text" formControlName="loanId">
+                                        </mat-form-field>
+
+                                    </mat-expansion-panel>
+                                    <br/>
+                                    <button mat-stroked-button style="height: 4em; float: right;" color="primary" href="javascript:void(0)" class="product-btn4" (click)="saveData()"> Loan Summary Request</button>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                </mat-accordion>
+                            </div>
+                        </div>
+
+                        <mat-tab-group>
+                            <mat-tab label="Acknowlegement">
+                                <br/>
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Textarea</mat-label>
+                                    <textarea matInput value={{acknowledgementRes}}></textarea>
+                                  </mat-form-field>
+                            </mat-tab>
+                            <mat-tab label="Response">Response</mat-tab>
+                        </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </div>   
+</form>

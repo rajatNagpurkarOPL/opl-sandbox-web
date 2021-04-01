@@ -13,6 +13,9 @@
     padding-top: 0;
     border-right: 1px solid #e4e4e4;
     border-radius: 8px 0 0 8px;
+    @media(max-width:1366px){
+      width: 200px;
+    }
   }
   
   .sidebar a {
@@ -22,6 +25,10 @@
     color: #000000;
     display: block;
     border-bottom: 1px solid #e4e4e4;
+    @media(max-width:1366px){
+      padding: 1em;
+      font-size: 14px;
+    }
   }
 
 
@@ -39,6 +46,10 @@
   .main {
     margin-left: 25em; /* Same as the width of the sidenav */
     padding: 0px 2em;
+    @media(max-width:1366px){
+        margin-left: 14.5em;
+        padding: 0 1em;
+    }
   }
   
   @media screen and (max-height: 450px) {

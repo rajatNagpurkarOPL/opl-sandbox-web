@@ -122,6 +122,46 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.VERIFY_LOAN_ACCEPTANCE_REQUEST, data);
   }
 
+  getLoanRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GET_LOAN_REQUEST, data);
+  }
+
+  loanSummaryRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.LOAN_SUMMARY_REQUEST, data);
+  }
+
+  grantLoanRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.GRANT_LOAN_REQUEST, data);
+  }
+
+  loanStatementRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.LOAN_STATEMENT_REQUEST, data);
+  }
+
+  listloanRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.LIST_LOAN_REQUEST, data);
+  }
+
+  setRepaymentPlanRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_REPAYMENT_PLAN_REQUEST, data);
+  }
+
+  setRepaymentPlanStatusRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_REPAYMENT_PLAN_STATUS_REQUEST, data);
+  }
+
+  triggerRepaymentRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_REPAYMENT_REQUEST, data);
+  }
+
+  triggerRepaymentStatusRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_REPAYMENT_STATUS_REQUEST, data);
+  }
+
+  confirmRepayment(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.CONFIRM_REPAYMENT, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);
