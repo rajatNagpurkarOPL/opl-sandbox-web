@@ -43,6 +43,11 @@ export const RestURL = {
     GRANT_LOAN_REQUEST : '/v3.3/loan/grantLoanRequest',
     LOAN_STATEMENT_REQUEST : '/v3.3/loan/loanStatementRequest',
     LIST_LOAN_REQUEST : '/v3.3/loan/listLoansRequest',
+    SET_REPAYMENT_PLAN_REQUEST : '/v3.3/repayment/setRepaymentPlanRequest',
+    SET_REPAYMENT_PLAN_STATUS_REQUEST : '/v3.3/repayment/setRepaymentPlanStatusRequest',
+    TRIGGER_REPAYMENT_REQUEST : '/v3.3/repayment/triggerRepaymentRequest',
+    TRIGGER_REPAYMENT_STATUS_REQUEST : '/v3.3/repayment/triggerRepaymentStatusRequest',
+    CONFIRM_REPAYMENT : '/v3.3/repayment/confirmRepayment',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data',
         SCHEMA_DETAIL : '/schema/api',

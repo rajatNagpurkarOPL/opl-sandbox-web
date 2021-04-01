@@ -61,10 +61,11 @@
           <app-list-loans-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.LIST_LN_REQ"></app-list-loans-request>
 
           <!-- Repayment Selectors -->
-          <app-set-repayment-plan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-set-repayment-plan-request>
-          <app-set-repayment-plan-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-set-repayment-plan-status-request>
-          <app-trigger-repayment-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-trigger-repayment-request>
-          <app-trigger-repayment-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-trigger-repayment-status-request>
+          <app-set-repayment-plan-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.SET_REPYMNT_PLN_REQ"></app-set-repayment-plan-request>
+          <app-set-repayment-plan-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.SET_REPYMNT_PLN_STS_REQ"></app-set-repayment-plan-status-request>
+          <app-trigger-repayment-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.TRGR_REPYMNT_REQ"></app-trigger-repayment-request>
+          <app-trigger-repayment-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.TRGR_REPYMNT_STS_REQ"></app-trigger-repayment-status-request>
+          <app-confirm-repayment *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.CNFM_REPYMNT"></app-confirm-repayment>
 
           <!-- Disbursement Selectors -->
           <app-set-disbursement-account-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-set-disbursement-account-request>
