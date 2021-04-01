@@ -77,6 +77,7 @@ import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
+import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
 
 
 
@@ -156,7 +157,8 @@ import { NewTriggerConfigurationComponent } from './component/new-trigger-config
     HeartbeatApiComponent,
     DrawerMenuDirective,
     DrawerMenuComponent,
-    NewTriggerConfigurationComponent
+    NewTriggerConfigurationComponent,
+    DisbursedCountComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

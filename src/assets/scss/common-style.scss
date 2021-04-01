@@ -345,6 +345,122 @@ p {
 }
 
 }
+.ml-55 {
+    margin-left: 5em !important; 
+
+}
+.disbursed-table {
+
+    .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+    }
+
+    border: 1px solid #d3d3d3;
+    border-radius: 8px !important;
+    border-right: 0;
+    border-left: 0;
+    th {
+        padding: 0.8em 1em !important;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        color: #000;
+        font-size: 14px;
+        opacity: 0.5;
+        font-weight: 500;
+        background: none !important;
+    }
+    
+    td {
+        padding: 0.8em 1em !important;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        color: #000;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 30px;
+    }  
+    
+  
+
+    th:nth-child(1) {
+        width: 5%;    
+      }
+    
+      th:nth-child(2) {
+        width: 20%;         
+      }
+    
+      th:nth-child(3) {
+        width: 12%;          
+      }
+
+      
+      th:nth-child(4) {
+        width: 12%;               
+      }
+
+      
+      th:nth-child(5) {
+        width: 35%;        
+      }
+
+      th:nth-child(6) {
+        width: 16%;  
+        text-align: right;  
+      }
+    
+    
+      td:nth-child(1) {
+        width: 5%;  
+        opacity: 0.5;  
+      }
+    
+      td:nth-child(2) {
+        width: 20%;  
+      }
+    
+      td:nth-child(3) {
+        width: 12%;      
+        
+      }
+    
+      td:nth-child(4) {
+        width: 12%; 
+      }
+    
+      td:nth-child(5) {
+        width: 35%;       
+        .input-group {
+            width: 46% !important;
+            input[type=text] {
+                border-radius: 6px !important;
+                padding: 14px !important;
+            } 
+            .input-group-prepend {
+                background: #E9ECEF;
+                
+            }
+        }
+      }
+      td:nth-child(6) {
+        width: 16%; 
+
+        .table-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+    a {
+        text-decoration: underline;
+        color: #2D3079;
+    }
+    p {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+    }
+      }
+}
 
 
 .Trigger-table {
@@ -1419,7 +1535,7 @@ tr.hide-table-padding td {
    // border: 1px solid #DEDEDE;
     border-radius: 8px;
     opacity: 1;
-    margin: 2em auto;
+    margin: 2em auto 0;
     min-height: 80vh;
     width: 100%;
     overflow-x: hidden;

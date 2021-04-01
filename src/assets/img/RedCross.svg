@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1458" data-name="Rectangle 1458" width="14" height="14" transform="translate(1528.059 205.059)" fill="#e36c6c" stroke="#dedede" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Red_Cross" data-name="Red Cross" transform="translate(-1528.059 -205.059)" clip-path="url(#clip-path)">
+    <g id="close_2_" data-name="close (2)" transform="translate(1528.016 205.015)">
+      <g id="Group_6941" data-name="Group 6941">
+        <path id="Path_5035" data-name="Path 5035" d="M14.087,1.424,12.663,0,7.043,5.62,1.424,0,0,1.424l5.62,5.62L0,12.663l1.424,1.424,5.62-5.62,5.62,5.62,1.424-1.424-5.62-5.62Z" fill="#e36c6c"/>
+      </g>
+    </g>
+  </g>
+</svg>

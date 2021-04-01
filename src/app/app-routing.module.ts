@@ -16,6 +16,7 @@ import { NewProductConfigurationComponent } from './component/new-product-config
 import { ProductCreateComponent } from './component/product-create/product-create.component';
 import { DocumentationComponent } from './component/documentation/documentation.component';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
+import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
 
 const routes: Routes = [ 
   
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'new-trigger-configuration', component: NewTriggerConfigurationComponent },
+    { path: 'disbursedcount', component: DisbursedCountComponent },
     { path: 'bridge-matrix', component: LspBridgeMatrixComponent },
     { path: 'products', component: ProductListComponent },
     { path: 'products/save', component: ProductsComponent },
