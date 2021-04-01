@@ -48,6 +48,11 @@ export const RestURL = {
     TRIGGER_REPAYMENT_REQUEST : '/v3.3/repayment/triggerRepaymentRequest',
     TRIGGER_REPAYMENT_STATUS_REQUEST : '/v3.3/repayment/triggerRepaymentStatusRequest',
     CONFIRM_REPAYMENT : '/v3.3/repayment/confirmRepayment',
+    SET_DISBURSEMENT_ACCOUNT_REQUEST : '/v3.3/disbursement/setDisbursementAccountRequest',
+    TRIGGER_DISBURSEMENT_REQUEST : '/v3.3/disbursement/triggerDisbursementRequest',
+    TRIGGER_DISBURSEMENT_STATUS_REQUEST : '/v3.3/disbursement/triggerDisbursementStatusRequest',
+    RAISE_DISPUTE_REQUEST: '/v3.3/loan/dispute/raiseDisputeRequest',
+    DISPUTE_STATUS_REQUEST: '/v3.3/loan/dispute/disputeStatusRequest',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data',
         SCHEMA_DETAIL : '/schema/api',

@@ -63,8 +63,8 @@ export class TriggerLoanAcceptanceRequestComponent implements OnInit {
   tabClick(tab) {
     if(tab.index==0){
       console.log('Schema Clicked');
-      this.getApiRequestSchema('generateOffersRequest');
-      this.getApiResponseSchema('generateOffersResponse');
+      this.getApiRequestSchema('triggerLoanAcceptanceRequest');
+      this.getApiResponseSchema('triggerLoanAcceptanceResponse');
     }else if(tab.index==1){
       console.log('Header Clicked');
     }else if (tab.index ==2){

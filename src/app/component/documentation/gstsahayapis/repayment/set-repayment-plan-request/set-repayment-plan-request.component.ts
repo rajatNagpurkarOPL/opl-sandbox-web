@@ -42,7 +42,7 @@ export class SetRepaymentPlanRequestComponent implements OnInit {
     data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(), "orgId": "OPLB4L123"};
     data.requestId = this.commonService.getUUID();
     console.log(data);
-    this.lenderService.setRepaymentPlanRequest(data).subscribe(res => {
+    this.lenderService.setDisbursementAccountRequest(data).subscribe(res => {
       console.log("Response==>",res);
       this.acknowledgementRes = JSON.stringify(res);
     }, (error: any) => {
@@ -57,8 +57,8 @@ export class SetRepaymentPlanRequestComponent implements OnInit {
   tabClick(tab) {
     if(tab.index==0){
       console.log('Schema Clicked');
-      this.getApiRequestSchema('generateOffersRequest');
-      this.getApiResponseSchema('generateOffersResponse');
+      this.getApiRequestSchema('setRepaymentPlanRequest');
+      this.getApiResponseSchema('setRepaymentPlanResponse');
     }else if(tab.index==1){
       console.log('Header Clicked');
     }else if (tab.index ==2){
