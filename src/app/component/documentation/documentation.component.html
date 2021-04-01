@@ -68,12 +68,12 @@
           <app-confirm-repayment *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.CNFM_REPYMNT"></app-confirm-repayment>
 
           <!-- Disbursement Selectors -->
-          <app-set-disbursement-account-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-set-disbursement-account-request>
-          <app-trigger-disbursement-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-trigger-disbursement-request>
-          <app-trigger-disbursement-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-trigger-disbursement-status-request>
+          <app-set-disbursement-account-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.SET_DISBRSMNT_ACC_REQ"></app-set-disbursement-account-request>
+          <app-trigger-disbursement-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.TRGR_DISBRSMNT_REQ"></app-trigger-disbursement-request>
+          <app-trigger-disbursement-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.TRGR_DISBRSMNT_STS_REQ"></app-trigger-disbursement-status-request>
 
           <!-- Loan Dispute Management -->
-          <app-raise-dispute-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-raise-dispute-request>
-          <app-dispute-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.HEARTBEAT"></app-dispute-status-request>
+          <app-raise-dispute-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.RAISE_DSPT_REQ"></app-raise-dispute-request>
+          <app-dispute-status-request *ngIf="this.selectedMenuItem == this.constant.MASTER_CODE.DSPT_STS_REQ"></app-dispute-status-request>
   </div>
 </mat-drawer-container>
