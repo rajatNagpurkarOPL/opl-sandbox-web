@@ -162,6 +162,26 @@ export class LenderService {
     return this.http.post(AppURL.RULE_ENGINE + RestURL.CONFIRM_REPAYMENT, data);
   }
 
+  setDisbursementAccountRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SET_DISBURSEMENT_ACCOUNT_REQUEST, data);
+  }
+
+  triggerDisbursementRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_DISBURSEMENT_REQUEST, data);
+  }
+
+  triggerDisbursementStatusRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.TRIGGER_DISBURSEMENT_STATUS_REQUEST, data);
+  }
+
+  raiseDisputeRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.RAISE_DISPUTE_REQUEST, data);
+  }
+
+  disputeStatusRequest(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.DISPUTE_STATUS_REQUEST, data);
+  }
+
   // Sandbox APIs
   getMasterListsByCodes(codes):Observable<any>{
     return this.http.post(AppURL.SANDBOX + RestURL.SANDBOX.MASTER_LIST, codes);

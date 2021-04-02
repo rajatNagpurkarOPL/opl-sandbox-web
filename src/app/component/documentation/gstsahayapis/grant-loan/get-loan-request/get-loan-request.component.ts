@@ -47,8 +47,8 @@ export class GetLoanRequestComponent implements OnInit {
   tabClick(tab) {
     if(tab.index==0){
       console.log('Schema Clicked');
-      this.getApiRequestSchema('generateOffersRequest');
-      this.getApiResponseSchema('generateOffersResponse');
+      this.getApiRequestSchema('getLoanRequest');
+      this.getApiResponseSchema('getLoanResponse');
     }else if(tab.index==1){
       console.log('Header Clicked');
     }else if (tab.index ==2){
