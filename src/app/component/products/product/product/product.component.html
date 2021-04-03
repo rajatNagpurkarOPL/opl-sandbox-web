@@ -71,6 +71,12 @@
 
             <!--New B4l changes -->
 
+
+
+
+
+            
+
             <!-- Matches, Eligibility, Charges Tabs -->
             <div id="b4l-content" class="b4l-height">
                 <div class="b4l-product-title">
@@ -123,8 +129,8 @@
                           src="assets/img/import.svg" /> Import Charges & ROI Parameter</a>
                 </div>
                 
-                <!-- Matches Parameter start -->
-                <div [hidden]="!tab.matches">
+                  <!-- Matches Parameter start -->
+                  <div [hidden]="!tab.matches">
                     <form formGroupName="paramForm">
                         <div class="matches-parameter" *ngIf="!product.parameters || !product.parameters.length">
                             <img class="img-match" src="assets/img/matches-parameter.svg" />
@@ -1476,7 +1482,6 @@
 
                 </div>
                 <!-- Matches Parameter End -->
-
                 <!-- Eligibility Calculation start-->
                 <div [hidden]="!tab.eligibility">
                     <div class="b4l-product-list back">
@@ -3262,3 +3267,825 @@
 </mat-card> -->
 
 <!-- Disbursement Plan end-->
+
+
+
+<!-- new Added changess are below matches paramters-->
+
+  <!-- Matches Parameter start -->
+  <table class="table table-striped matches-table">
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Bank’s Existing Customer Check Points</td>
+        <td> 
+          <div class="d-flex al-center js-end">
+          <mat-checkbox class="example-margin mr-4">CIF</mat-checkbox>  
+          <mat-checkbox class="example-margin">Account Number</mat-checkbox>
+        </div>
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>2</td>
+        <td>Maximum Financing Limit per Entity <img src="assets/img/note.svg" matTooltip="Cap on Maximum Financing to be given to an entity in case of multiple invoice financing" class="ml-2"/></td>
+        <td> 
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">INR</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Amount">
+          </div>
+          <p class="warn">Max. 10 Lac</p>
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>3</td>
+        <td>Invoice Value <img src="assets/img/note.svg" matTooltip="Check for each Invoice Value which should fall within a specific range" class="ml-2"/></td>
+        <td> 
+          <div class="d-flex al-center">
+            <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">INR</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+          </div>
+          <p class="mb-0 ml-2 mr-2">to</p>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">INR</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+          </div>
+        </div>
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      
+      <tr>
+        <td>4</td>
+        <td>Usance Period <img src="assets/img/note.svg" matTooltip="Usance Period is the allowable credit period." class="ml-2"/></td>
+        <td> 
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Days</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+          </div>                          
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>5</td>
+        <td>Invoice Date Should Fall In Last "N" Days <img src="assets/img/note.svg" matTooltip="To check the age of the Invoice." class="ml-2"/></td>
+        <td> 
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Days</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+          </div>                          
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>6</td>
+        <td>Constitution <img src="assets/img/note.svg" matTooltip="Type of organization" class="ml-2"/></td>
+        <td>
+            <div class="table-icon">
+              <p class="mr-4 mb-0">8 Constitutions Selected</p>
+                <a href="#" class="mr-2">Change</a>
+               </div>                         
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>7</td>
+        <td>Customer Concentration <img src="assets/img/note.svg" matTooltip="Measure of how total revenue is distributed among your customer base" class="ml-2"/></td>
+        <td> 
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">%</div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+          </div>                          
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+
+      <tr>
+        <td>8</td>
+        <td>Geographical Market Focus <img src="assets/img/note.svg" matTooltip="Select allowable states where entity is registered to" class="ml-2"/></td>
+        <td>
+            <div class="table-icon">
+              <p class="mr-4 mb-0">4 States Selected</p>
+                <a href="#" class="mr-2">Change</a>
+               </div>                         
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>9</td>
+        <td>Maximum GST Turnover Limit <img src="assets/img/note.svg" matTooltip="Check for Borrowers having a specified amount of GST Turnover" class="ml-2"/></td>
+        <td> 
+          <div class="d-flex al-center js-end">
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button  class="mr-4" value="1">Check Till Date</mat-radio-button>
+              <mat-radio-button value="2">Check For Specific Time Period</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Days</div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days">
+        </div>  
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>10</td>
+        <td>Minimum Tenure for GST Data <img src="assets/img/note.svg" matTooltip="Set minimum number of GST Data required" class="ml-2"/></td>
+        <td> 
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Months</div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Month">
+        </div>  
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+      <tr>
+        <td>11</td>
+        <td>GSTIN Mismatch Check <img src="assets/img/note.svg" matTooltip="Allow borrowers in case the number of GSTN of Borrower and number of GSTN linked with Account Aggregator are different" class="ml-2"/></td>
+        <td>
+          <div class="b4l-product-list-right" >                           
+            <mat-button-toggle-group>
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>             
+     
+      </div> 
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+      <tr>
+        <td>12</td>
+        <td>Credit Summation <img src="assets/img/note.svg" matTooltip="Check for sum of credit of all accounts as a percentage of GST sales for available returns." class="ml-2"/></td>
+        <td> 
+          <div class="d-flex al-center js-end mb-4">
+            <mat-checkbox class="example-margin mr-4">My Bank</mat-checkbox>  
+            <mat-checkbox class="example-margin">Other Banks</mat-checkbox>
+          </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">%</div>
+          </div>
+          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+        </div>  
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>13</td>
+        <td>Bank Accounts Prioritization <img src="assets/img/note.svg" matTooltip="Set priority of choosing Customer Account for disbursement of Loan" class="ml-2"/></td>
+        <td>
+            <div class="table-icon">
+              <p class="mr-4 mb-0">OD/CC Account > Current Account > Savings Account</p>
+                <a href="#" class="mr-2">Change</a>
+               </div>                         
+        </td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+
+
+      <tr>
+        <td>14</td>
+        <td>Number of Cheques Bounced For Specific Time Period <img src="assets/img/note.svg" matTooltip="Check to cap number of cheques bounces in Customer Account (in numbers)" class="ml-2"/></td>
+        <td></td>
+        <td><img src="assets/img/RedCross.svg"></td>
+      </tr>
+<tr>
+<td colspan="4" class="pd-0-table">
+<table class="table matches1-table">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">Months</th>
+<th scope="col">No. of Cheques (Max. 120 Allowed)</th>
+<th scope="col">Effective Limit</th>         
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row">1</td>
+<td> <mat-form-field appearance="outline" class="w-100">
+<mat-label>20</mat-label>
+<mat-select [(value)]="selected">
+<mat-option>None</mat-option>
+<mat-option value="option1">None</mat-option>
+<mat-option value="option2">Option 2</mat-option>
+<mat-option value="option3">Option 3</mat-option>
+</mat-select>
+</mat-form-field></td>
+
+<td> <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="110"></td>
+
+<td>Max. 110 Cheque Bounced in Last 20 months will be allowed</td>
+
+<td><img src="assets/img/RedCross.svg"/></td>
+</tr>
+
+
+<tr>
+<td scope="row">2</td>
+<td> <mat-form-field appearance="outline" class="w-100">
+<mat-label>Select no. of months</mat-label>
+<mat-select [(value)]="selected">
+<mat-option>None</mat-option>
+<mat-option value="option1">None</mat-option>
+<mat-option value="option2">Option 2</mat-option>
+<mat-option value="option3">Option 3</mat-option>
+</mat-select>
+</mat-form-field></td>
+
+<td> <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter No. of Cheques"></td>
+
+<td>Limit description</td>
+
+<td><img src="assets/img/RedCross.svg"/></td>
+</tr>
+
+<tr>
+<td></td>
+<td colspan="4">
+<div class="product-details-btn">
+<button  href="javascript:void(0)" class="product-btn3 ml-55 mt-3">+ Add New Condition</button>
+</div>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+</td>
+
+</tr>
+
+
+
+<tr>
+<td>15</td>
+<td>Maximum % Allowed For Cheque Issue Bounced Till Date <img src="assets/img/note.svg" matTooltip="Check to cap number of cheques bounces in Customer Account (in percentage)" class="ml-2"/>
+<p class="blue">Max. 70% of Cheque Issue Bounced will be allowed till date</p>
+</td>
+<td> 
+
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">%</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>  
+</td>
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+
+
+<tr>
+<td>16</td>
+<td>Maximum permissible MSME Rank <img src="assets/img/note.svg" matTooltip="Please set permissible MSME rank for both bureau" class="ml-2"/></td>
+<td></td>
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+<tr>
+<td colspan="4" class="pd-0-table">
+<table class="table matches1-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col">Bureau</th>
+<th scope="col">Description</th>
+<th scope="col">Max Permissible Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row"></td>
+<td> CIBIL</td>
+<td class="w-50">For CIBIL MSME Rank 1 is best and 10 is worst</td>
+<td class="w-30"> <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number"></td>
+</tr>
+
+
+<tr>
+<td scope="row"></td>
+<td>Experian</td>
+<td class="w-50">For Experian MSME Rank 10 is best and 1 is worst</td>
+<td class="w-30"> <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number"></td>
+</tr>
+
+
+
+</tbody>
+</table>
+</td>
+
+</tr> 
+<tr>
+<td>17</td>
+ <td>Minimum Bureau Score All Directors/ Partners/ Proprietors <img src="assets/img/note.svg" matTooltip="Please set minimum score required from both bureau" class="ml-2"/></td>
+     <td></td>
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+<tr>
+<td colspan="4" class="pd-0-table">
+<table class="table matches1-table">
+<thead>
+<tr>               
+<th scope="col" class="w-50">Bureau</th>
+<th scope="col" class="w-50 tx-right">Min Bureau Score</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>              
+
+<td class="w-70">CIBIL
+  <p class="blue">Selected Bureau Range - 1,0,-1 and 750 to 900</p>
+</td>
+<td class="w-30 tx-right">
+  <div class="form-group input-number-cibil cibil-mr w-100">
+    <div class="mandatory-input ">
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <!-- <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div> -->
+          <label class="btn cibil-content-number" ngbButtonLabel>
+              <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+              <input  type="checkbox" class="cibil-content-number activate-input" />5
+              <!-- (click)="check(item)" -->
+          </label>
+        </div>
+      </div>
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <!-- <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div> -->
+          <label class="btn cibil-content-number" ngbButtonLabel>
+              <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+              <input  type="checkbox" class="cibil-content-number activate-input" />5
+              <!-- (click)="check(item)" -->
+          </label>
+        </div>
+      </div>
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <!-- <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div> -->
+          <label class="btn cibil-content-number" ngbButtonLabel>
+              <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+              <input  type="checkbox" class="cibil-content-number activate-input" />5
+              <!-- (click)="check(item)" -->
+          </label>
+        </div>
+      </div>
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <!-- <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div> -->
+          <label class="btn cibil-content-number" ngbButtonLabel>
+              <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+              <input  type="checkbox" class="cibil-content-number activate-input" />5
+              <!-- (click)="check(item)" -->
+          </label>
+        </div>
+      </div>
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div>
+          <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+              <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+              <input  type="checkbox" class="cibil-content-number activate-input" />5
+              <!-- (click)="check(item)" -->
+          </label>
+        </div>
+      </div>
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div>
+          <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+              <input  type="checkbox" class="cibil-content-number activate-input" />5                           
+          </label>
+        </div>
+      </div>
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div>
+          <label class="btn cibil-content-number activate-input" ngbButtonLabel>                             
+              <input  type="checkbox" class="cibil-content-number activate-input" />5                          
+          </label>
+        </div>
+      </div>
+
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div>
+          <label class="btn cibil-content-number activate-input" ngbButtonLabel>                           
+              <input  type="checkbox" class="cibil-content-number activate-input" />5                 
+          </label>
+        </div>
+      </div>
+      <div class="cibil-score-true btn-group btn-group-toggle">
+        <div class="cibil-score-number">
+          <div class="active-img">
+            <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+          </div>
+          <label class="btn cibil-content-number activate-input" ngbButtonLabel>                          
+              <input  type="checkbox" class="cibil-content-number activate-input" />5                            
+          </label>
+        </div>
+      </div>
+
+      
+    </div>
+    <span class="mt-1 float-left d-flex al-center w-100">Lower is better <img src="assets/img/aerrow.svg" class="ml-2" style="width: 2em;"/></span>
+  </div>
+
+<div class="d-flex w-100 js-end">  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Score">
+</div>
+</td>
+</tr>
+
+
+<tr>              
+
+  <td class="w-50">Experian
+    <p class="blue">Selected Bureau Range - 8,9,10 and 750 to 900</p>
+  </td>
+  <td class="w-50 tx-right">
+    <div class="form-group input-number-cibil cibil-mr w-100">
+      <div class="mandatory-input ">
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <!-- <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div> -->
+            <label class="btn cibil-content-number" ngbButtonLabel>
+                <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+                <input  type="checkbox" class="cibil-content-number activate-input" />5
+                <!-- (click)="check(item)" -->
+            </label>
+          </div>
+        </div>
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <!-- <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div> -->
+            <label class="btn cibil-content-number" ngbButtonLabel>
+                <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+                <input  type="checkbox" class="cibil-content-number activate-input" />5
+                <!-- (click)="check(item)" -->
+            </label>
+          </div>
+        </div>
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <!-- <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div> -->
+            <label class="btn cibil-content-number" ngbButtonLabel>
+                <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+                <input  type="checkbox" class="cibil-content-number activate-input" />5
+                <!-- (click)="check(item)" -->
+            </label>
+          </div>
+        </div>
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <!-- <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div> -->
+            <label class="btn cibil-content-number" ngbButtonLabel>
+                <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+                <input  type="checkbox" class="cibil-content-number activate-input" />5
+                <!-- (click)="check(item)" -->
+            </label>
+          </div>
+        </div>
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div>
+            <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+                <!-- <input type="checkbox" [(ngModel)]="obj.isChecked" formControlName="left" ngbButton> {{obj.label}} -->
+                <input  type="checkbox" class="cibil-content-number activate-input" />5
+                <!-- (click)="check(item)" -->
+            </label>
+          </div>
+        </div>
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div>
+            <label class="btn cibil-content-number activate-input" ngbButtonLabel>
+                <input  type="checkbox" class="cibil-content-number activate-input" />5                           
+            </label>
+          </div>
+        </div>
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div>
+            <label class="btn cibil-content-number activate-input" ngbButtonLabel>                             
+                <input  type="checkbox" class="cibil-content-number activate-input" />5                          
+            </label>
+          </div>
+        </div>
+
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div>
+            <label class="btn cibil-content-number activate-input" ngbButtonLabel>                           
+                <input  type="checkbox" class="cibil-content-number activate-input" />5                 
+            </label>
+          </div>
+        </div>
+        <div class="cibil-score-true btn-group btn-group-toggle">
+          <div class="cibil-score-number">
+            <div class="active-img">
+              <img src="assets/img/tick-Profile.svg" alt="Complete Tick Cibil">
+            </div>
+            <label class="btn cibil-content-number activate-input" ngbButtonLabel>                          
+                <input  type="checkbox" class="cibil-content-number activate-input" />5                            
+            </label>
+          </div>
+        </div>
+
+        
+      </div>
+      <span class="mt-1 float-left d-flex al-center w-100">Higher is better <img src="assets/img/aerrow.svg" class="ml-2" style="width: 2em;"/></span>
+    </div>
+
+  <div class="d-flex w-100 js-end">  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Score">
+  </div>
+  </td>
+  </tr>
+
+
+  
+
+
+</tbody>
+</table>
+</td>
+
+</tr> 
+
+
+
+<tr>
+<td>18</td>
+<td>Commercial Bureau - Maximum DPDs <img src="assets/img/note.svg" matTooltip="Please select account type you want to consider, other account types will not be checked" class="ml-2"/></td>
+<td></td>
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+<tr>
+<td colspan="4" class="pd-0-table">
+<table class="table matches1-table">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">Account Type</th>
+<th scope="col">Bureau Type</th>
+<td></td>
+<th scope="col">Max DPDs Allowed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row">1</td>
+<td>Working Capital Accounts</td>
+<td>CIBIL</td>
+<td></td>
+<td>  
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">%</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>  </td>
+</tr>
+
+
+<tr>
+<td scope="row"></td>
+<td></td>
+<td>Experian</td>
+<td></td>
+<td>  
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">%</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>  </td>
+</tr>
+
+<tr>
+<td scope="row">2</td>
+<td>Current Account</td>
+<td>CIBIL</td>
+<td></td>
+<td>  
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">%</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>  </td>
+</tr>
+
+
+<tr>
+<td scope="row"></td>
+<td></td>
+<td>Experian</td>
+<td></td>
+<td>  
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">%</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Percentage">
+</div>  </td>
+</tr>
+
+
+
+</tbody>
+</table>
+</td>
+
+</tr> 
+
+
+<tr>
+<td>19</td>
+<td>Other Bank Accounts Check <img src="assets/img/note.svg" matTooltip="Please select account type you want to consider, other account types will not be checked" class="ml-2"/></td>
+<td> 
+<div class="d-flex al-center js-end mb-4">
+<mat-checkbox class="example-margin mr-4">CC/OD</mat-checkbox>  
+<mat-checkbox class="example-margin">Others</mat-checkbox>
+</div>
+</td>
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+
+<tr>
+<td>20</td>
+<td>Primary Security Required</td>
+<td> 
+<mat-form-field appearance="outline" class="w-100">
+<mat-label>LOV Dropdown</mat-label>
+<mat-select [(value)]="selected">
+<mat-option>None</mat-option>
+<mat-option value="option1">None</mat-option>
+<mat-option value="option2">Option 2</mat-option>
+<mat-option value="option3">Option 3</mat-option>
+</mat-select>
+</mat-form-field>
+
+
+
+<div class="d-flex al-center">
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">INR</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+<p class="mb-0 ml-2 mr-2">to</p>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">INR</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+</div>
+</div>
+</td>
+
+
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+
+
+<tr>
+<td>21</td>
+<td>Secondary Security Required</td>
+<td> 
+<mat-form-field appearance="outline" class="w-100">
+<mat-label>LOV Dropdown</mat-label>
+<mat-select [(value)]="selected">
+<mat-option>None</mat-option>
+<mat-option value="option1">None</mat-option>
+<mat-option value="option2">Option 2</mat-option>
+<mat-option value="option3">Option 3</mat-option>
+</mat-select>
+</mat-form-field>
+
+
+
+<div class="d-flex al-center">
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">INR</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+</div>
+<p class="mb-0 ml-2 mr-2">to</p>
+<div class="input-group">
+<div class="input-group-prepend">
+<div class="input-group-text">INR</div>
+</div>
+<input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+</div>
+</div>
+</td>
+
+
+<td><img src="assets/img/RedCross.svg"></td>
+</tr>
+
+
+
+
+
+    </tbody>
+  </table>
+
+  <div class="product-details-btn d-flex w-100 js-end mb-4 pd-2">
+    <button  href="javascript:void(0)" class="product-btn3 ml-55 mt-3">+ Add Parameters</button>
+</div>
+
+
+<!-- Matches Parameter End -->
