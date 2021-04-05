@@ -31,7 +31,7 @@ interface Food {
 
 
 export class ProductComponent implements OnInit, AfterViewInit {
-
+  selected = '';
   isMultipleControl : any = [];
   constants : any ={};
   master : any;
