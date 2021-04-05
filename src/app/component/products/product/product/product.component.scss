@@ -113,6 +113,9 @@ input[type=number] {
     border-bottom: 1px solid #dee2e6;
     border-top: 0;
     font-weight: bold;
+    @media(max-width:1199px){
+        padding: .8em  1em!important;
+    }
 }
 
 .table {
@@ -274,7 +277,9 @@ padding: 1em 2em !important;
     }
     .product-name {
     padding: 3em;
-    
+    @media(max-width:1199px){
+        padding: 1.5em;
+    }
     }
     
     .product-name p {
@@ -361,7 +366,10 @@ padding: 1em 2em !important;
     
     .product li a p {
         padding: 1em 0;
-    font-size: 18px !important;
+        font-size: 18px !important;
+        @media(max-width:1199px){
+            font-size: 16px !important;
+        }
     
     }
     .matches-parameter {

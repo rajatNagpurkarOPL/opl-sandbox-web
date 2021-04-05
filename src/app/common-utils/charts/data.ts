@@ -1099,6 +1099,104 @@ const StockAnalysisChart: ChartType = {
     // }
 };
 
+
+const b4lnewStockAnalysisChart: ChartType = {
+    chart: {
+        height: '350',
+        type: 'bar',
+        padding: {
+            right: 0,
+            left: 0
+        },
+        stacked: true,
+        stackType: "50",
+        toolbar: {
+            show: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        width: [0],
+        curve: 'smooth'
+    },
+    plotOptions: {
+        bar: {
+            columnWidth: '30%',
+        },
+    },
+    colors: ['#2D3079', '#FFB435'],
+    series: [
+
+        {
+            name: 'Positive',
+            type: 'column',
+            data: [30, 25, 27, 40, 30, 0, 0, 0]
+        },
+        {
+            name: 'Negative',
+            type: 'column',
+            data: [0, 0, 0, 0, 0, 25, 27, 40]
+        }
+    ],
+    fill: {
+        opacity: [1, 1, 1],
+        gradient: {
+            inverseColors: false,
+            // shade: 'light',
+            type: 'vertical',
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [0, 100, 100, 100, 100, 100]
+        }
+    },
+    // tslint:disable-next-line: max-line-length
+    //labels: ['12/01/2019', '01/01/2020', '02/01/2020', '03/01/2020', '04/01/2020', '05/01/2020', '06/01/2020', '07/01/2020', '08/01/2020', '9/01/2020', '10/01/2020', '11/01/2020', '12/01/2020'],
+    markers: {
+        size: 0
+    },
+    legend: {
+        position: "bottom",
+        horizontalAlign: "center",
+        offsetX: 0,
+        offsetY: 10,
+    },
+    xaxis: {
+        categories: ['Applications Received', 'Offers Generated', 'Loans Disbursed', 'Loans Collected', 'Loans Overdue', 'Revenue Earned', 'Total Principle Collected', 'Disputes Raised (via App)'],
+        type: 'text',
+        barThickness: 14,
+        barPercentage: 0.5,
+        axisBorder: {
+            show: true,
+            color: '#fff'
+        },
+    },
+    yaxis: {
+        categories: ['10', '50', '100', '200', '400', '800', '1200'],
+        type: 'text',
+        axisBorder: {
+            show: true,
+            color: '#dddddd'
+        },
+        axisTicks: {
+            show: true,
+        },
+    },
+    tooltip: {
+        shared: false,
+        intersect: false,
+        y: {
+            formatter: function (val) {
+                return val + "K";
+            }
+        }
+    },
+    // grid: {
+    //     borderColor: '#f1f3fa'
+    // }
+};
+
 const b4lStockAnalysisChart: ChartType = {
     chart: {
         height: '350',
@@ -2061,6 +2159,6 @@ const b4lResponseTime: ChartType = {
 };
 export {
     // tslint:disable-next-line: max-line-length
-    sparklineChart, sparklineSalesChart, sparklineExpensesChart, sparklineProfitsChart, linewithDataChart, gradientLineChart, stackedAreaChart, basicColumChart, basicBarChart, nagativeValueBarChart, lineColumAreaChart, multipleYAxisChart, simpleBubbleChart, scatterChart, simplePieChart, gradientDonutChart, patternedDonutChart,
+    b4lnewStockAnalysisChart,sparklineChart, sparklineSalesChart, sparklineExpensesChart, sparklineProfitsChart, linewithDataChart, gradientLineChart, stackedAreaChart, basicColumChart, basicBarChart, nagativeValueBarChart, lineColumAreaChart, multipleYAxisChart, simpleBubbleChart, scatterChart, simplePieChart, gradientDonutChart, patternedDonutChart,
     b4lStockAnalysisChart, b4lnew4totalUsersPieChart, b4lbasicBarChart, b4lnewtotalUsersPieChart, b4ltotalUsersPieChart, B4LbasicRadialBarChart, totalUsersPieChart, multipleRadialBars, strokedCircularGuage, lineAnnotationsColumAreaChart, StockAnalysisChart, b4lPingsChart, b4lResponseTime
 };
