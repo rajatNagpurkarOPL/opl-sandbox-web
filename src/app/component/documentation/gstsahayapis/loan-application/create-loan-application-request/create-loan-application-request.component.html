@@ -10,10 +10,10 @@
                 <div class="well well-sm p-0">
                     <div class="table-container">
                         <div class="form-group">
-                            <mat-form-field style="width: 10em; background-color: #777;">
+                            <mat-form-field  appearance="outline" style="width: 10em; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
                             </mat-form-field>
-                            <mat-form-field style="width: 90em;">
+                            <mat-form-field  appearance="outline" style="width: 90em;">
                                 <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/loanApplication/createLoanApplicationsRequest">
                             </mat-form-field>
                             <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
@@ -123,26 +123,26 @@
                                     </mat-expansion-panel-header>
                                     <form [formGroup]="loanApp">
                                         
-                                        <mat-form-field style="width: 25em;">
+                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                             <mat-label>Loan ApplicationId</mat-label>
                                             <input matInput type="text" formControlName="loanApplicationId" readonly>
                                         </mat-form-field>
         
-                                        <mat-form-field style="padding-left: 10px">
+                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                             <mat-label>ProductId Type</mat-label>
                                             <mat-select formControlName="productId">
                                                 <mat-option *ngFor="let data of productIdTypeMaster" [value]="data">{{data}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
         
-                                        <mat-form-field style="padding-left: 10px">
+                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                             <mat-label>Loan Product Type</mat-label>
                                             <mat-select formControlName="productType">
                                                 <mat-option *ngFor="let data of loanProductTypeMaster" [value]="data">{{data}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
         
-                                        <mat-form-field style="padding-left: 10px">
+                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                             <mat-label>Loan Application Status</mat-label>
                                             <mat-select formControlName="loanApplicationStatus">
                                                 <mat-option *ngFor="let data of loanApplicationStatusMaster" [value]="data">{{data}}</mat-option>
@@ -155,19 +155,19 @@
                                                 <mat-panel-title>Borrower Details</mat-panel-title>
                                             </mat-expansion-panel-header>
                                             <form formGroupName="borrower">
-                                                <mat-form-field style="width: 25em;">
+                                                <mat-form-field  appearance="outline" style="width: 25em;">
                                                     <mat-label>Primary Id</mat-label>
                                                     <input matInput type="text" formControlName="primaryId" readonly>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                     <mat-label>Primary Id Type</mat-label>
                                                     <mat-select formControlName="primaryIdType">
                                                         <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                     <mat-label>Category</mat-label>
                                                     <mat-select formControlName="category">
                                                         <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
@@ -181,38 +181,38 @@
                                                         <mat-icon (click)="removeIndexFromList(documentDetail,documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls)">delete_forever</mat-icon>
                                                     </mat-expansion-panel-header>
                                                     <form [formGroup]="documentDetail">
-                                                        <mat-form-field style="width: 25em;">
+                                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                                             <mat-label>Source Id</mat-label>
                                                             <input matInput type="text" formControlName="sourceId" readonly>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Source Type</mat-label>
                                                             <mat-select formControlName="sourceType">
                                                                 <mat-option *ngFor="let data of sourcetypeMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Reference Id</mat-label>
                                                             <input matInput type="text" formControlName="reference" readonly>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Format</mat-label>
                                                             <mat-select formControlName="format">
                                                                 <mat-option *ngFor="let data of documentFormatMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Type</mat-label>
                                                             <mat-select formControlName="type">
                                                                 <mat-option *ngFor="let data of documentTypeMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Is Data Inline</mat-label>
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
@@ -222,32 +222,32 @@
                                                                 <mat-panel-title>GST Profile Data</mat-panel-title>
                                                             </mat-expansion-panel-header>
                                                             <form formGroupName="data">
-                                                                <mat-form-field>
+                                                                <mat-form-field  appearance="outline">
                                                                     <mat-label>stjCd</mat-label>
                                                                     <input matInput type="text" formControlName="stjCd">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                     <mat-label>dty</mat-label>
                                                                     <input matInput type="text" formControlName="dty">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                     <mat-label>lgnm</mat-label>
                                                                     <input matInput type="text" formControlName="lgnm">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                     <mat-label>stj</mat-label>
                                                                     <input matInput type="text" formControlName="stj">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                     <mat-label>cxdt</mat-label>
                                                                     <input matInput type="text" formControlName="cxdt">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                     <mat-label>GstIn</mat-label>
                                                                     <input matInput type="text" formControlName="gstin">
                                                                 </mat-form-field>
@@ -255,7 +255,7 @@
                                                                 <div *ngIf="documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.nba.controls.length > 0">
                                                                     <div *ngFor="let nbaData of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.nba.controls;let n = index">
                                                                         <div [formGroup]="nbaData">
-                                                                            <mat-form-field style="padding-top: 10px">
+                                                                            <mat-form-field  appearance="outline" style="padding-top: 10px">
                                                                                 <mat-label>nba ({{n+1}})</mat-label>
                                                                                 <input matInput type="text" [formControl]="nbaData">
                                                                             </mat-form-field>
@@ -279,17 +279,17 @@
                                                                     </div>
                                                                 </div>
         
-                                                                <mat-form-field style="padding-top: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-top: 10px">
                                                                     <mat-label>Last update</mat-label>
                                                                     <input matInput type="text" formControlName="lstupdt">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;padding-top: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px">
                                                                     <mat-label>ctb</mat-label>
                                                                     <input matInput type="text" formControlName="ctb">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;padding-top: 10px">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px">
                                                                     <mat-label>rgdt</mat-label>
                                                                     <input matInput type="text" formControlName="rgdt">
                                                                 </mat-form-field>
@@ -305,57 +305,57 @@
                                                                                 <mat-panel-title>Address</mat-panel-title>
                                                                             </mat-expansion-panel-header>
                                                                             <form formGroupName="addr">
-                                                                                <mat-form-field>
+                                                                                <mat-form-field  appearance="outline">
                                                                                     <mat-label>bnm</mat-label>
                                                                                     <input matInput type="text" formControlName="bnm">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                                     <mat-label>Street</mat-label>
                                                                                     <input matInput type="text" formControlName="st">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                                     <mat-label>Location</mat-label>
                                                                                     <input matInput type="text" formControlName="loc">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                                     <mat-label>bno</mat-label>
                                                                                     <input matInput type="text" formControlName="bno">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                                     <mat-label>State code</mat-label>
                                                                                     <input matInput type="text" formControlName="stcd">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                                                     <mat-label>District</mat-label>
                                                                                     <input matInput type="text" formControlName="dst">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-top: 10px;">
+                                                                                <mat-form-field  appearance="outline" style="padding-top: 10px;">
                                                                                     <mat-label>City</mat-label>
                                                                                     <input matInput type="text" formControlName="city">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px; padding-top: 10px;">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px; padding-top: 10px;">
                                                                                     <mat-label>Flat No.</mat-label>
                                                                                     <input matInput type="text" formControlName="flno">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px; padding-top: 10px;">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px; padding-top: 10px;">
                                                                                     <mat-label>lt</mat-label>
                                                                                     <input matInput type="text" formControlName="lt">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px; padding-top: 10px;">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px; padding-top: 10px;">
                                                                                     <mat-label>Pincode</mat-label>
                                                                                     <input matInput type="text" formControlName="pncd">
                                                                                 </mat-form-field>
         
-                                                                                <mat-form-field style="padding-left: 10px; padding-top: 10px;">
+                                                                                <mat-form-field  appearance="outline" style="padding-left: 10px; padding-top: 10px;">
                                                                                     <mat-label>lg</mat-label>
                                                                                     <input matInput type="text" formControlName="lg">
                                                                                 </mat-form-field>
@@ -364,7 +364,7 @@
                                                                         <div *ngIf="documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls.length > 0">
                                                                             <div *ngFor="let ntrData of documentationForm.controls.loanApplications.controls[i].controls.borrower.controls.documents.controls[d].controls.data.controls.pradr.controls.ntr.controls;let ntr = index">
                                                                                 <div [formGroup]="ntrData">
-                                                                                    <mat-form-field style="padding-top: 15px;">
+                                                                                    <mat-form-field  appearance="outline" style="padding-top: 15px;">
                                                                                         <mat-label>ntr ({{ntr+1}})</mat-label>
                                                                                         <input matInput type="text" [formControl]="ntrData">
                                                                                     </mat-form-field>
@@ -379,29 +379,29 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <!-- <mat-form-field>
+                                                                        <!-- <mat-form-field  appearance="outline">
                                                                             <mat-label>ntr</mat-label>
                                                                             <input matInput type="text" formControlName="ntr">
                                                                         </mat-form-field> -->
                                                                     </form>
                                                                 </mat-expansion-panel>
                                                                 <br/>
-                                                                <mat-form-field>
+                                                                <mat-form-field  appearance="outline">
                                                                     <mat-label>ctjCd</mat-label>
                                                                     <input matInput type="text" formControlName="ctjCd">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                     <mat-label>Trade Name</mat-label>
                                                                     <input matInput type="text" formControlName="tradeNam">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                     <mat-label>Status</mat-label>
                                                                     <input matInput type="text" formControlName="sts">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                     <mat-label>ctj</mat-label>
                                                                     <input matInput type="text" formControlName="ctj">
                                                                 </mat-form-field>
@@ -418,19 +418,19 @@
                                                 <mat-panel-title>Lender Details</mat-panel-title>
                                             </mat-expansion-panel-header>
                                             <form formGroupName="lender">
-                                                <mat-form-field style="width: 25em;">
+                                                <mat-form-field  appearance="outline" style="width: 25em;">
                                                     <mat-label>Primary Id</mat-label>
                                                     <input matInput type="text" formControlName="primaryId" readonly>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Primary Id Type</mat-label>
                                                     <mat-select formControlName="primaryIdType">
                                                         <mat-option *ngFor="let data of borrowerPrimaryTypeMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Category</mat-label>
                                                     <mat-select formControlName="category">
                                                         <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
@@ -444,19 +444,19 @@
                                                 <mat-panel-title>Pledge Document Details</mat-panel-title>
                                             </mat-expansion-panel-header>
                                             <form [formGroup]="pledgeDocument">
-                                                <mat-form-field style="width: 25em;">
+                                                <mat-form-field  appearance="outline" style="width: 25em;">
                                                     <mat-label>Primary Id</mat-label>
                                                     <input matInput type="text" formControlName="primaryId" readonly>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Primary Id Type</mat-label>
                                                     <mat-select formControlName="primaryIdType">
                                                         <mat-option *ngFor="let data of pledgedDocumentPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
         
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Type</mat-label>
                                                     <mat-select formControlName="type">
                                                         <mat-option *ngFor="let data of pledgedDocumentType" [value]="data">{{data}}</mat-option>
@@ -471,38 +471,38 @@
                                                         <!-- <mat-icon (click)="removeIndexFromList(documentDetail,documentationForm.controls.loanApplications.controls[i].controls.pledgeDocument.controls.documents.controls)">delete_forever</mat-icon> -->
                                                     </mat-expansion-panel-header>
                                                     <form [formGroup]="documentDetail">
-                                                        <mat-form-field style="width: 25em;">
+                                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                                             <mat-label>Source Id</mat-label>
                                                             <input matInput type="text" formControlName="sourceId" readonly>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px;">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                             <mat-label>Source Type</mat-label>
                                                             <mat-select formControlName="sourceType">
                                                                 <mat-option *ngFor="let data of sourcetypeMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="width: 25em;padding-left: 10px;">
+                                                        <mat-form-field  appearance="outline" style="width: 25em;padding-left: 10px;">
                                                             <mat-label>Reference Id</mat-label>
                                                             <input matInput type="text" formControlName="reference" readonly>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px;">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                             <mat-label>Format</mat-label>
                                                             <mat-select formControlName="format">
                                                                 <mat-option *ngFor="let data of documentFormatMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px;">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                             <mat-label>Type</mat-label>
                                                             <mat-select formControlName="type">
                                                                 <mat-option *ngFor="let data of documentTypeMaster" [value]="data">{{data}}</mat-option>
                                                             </mat-select>
                                                         </mat-form-field>
         
-                                                        <mat-form-field style="padding-left: 10px;">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                             <mat-label>Is Data Inline</mat-label>
                                                             <input matInput type="boolean" formControlName="isDataInline">
                                                         </mat-form-field>
@@ -514,12 +514,12 @@
                                                             </mat-expansion-panel-header>
                                                             <form formGroupName="data">
         
-                                                                <mat-form-field>
+                                                                <mat-form-field  appearance="outline">
                                                                     <mat-label>ctin</mat-label>
                                                                     <input matInput type="text" formControlName="ctin">
                                                                 </mat-form-field>
         
-                                                                <mat-form-field style="padding-left: 10px;">
+                                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                     <mat-label>cfs</mat-label>
                                                                     <input matInput type="text" formControlName="cfs">
                                                                 </mat-form-field>
@@ -532,62 +532,62 @@
                                                                     </mat-expansion-panel-header>
                                                                     <form [formGroup]="invoiceDetail">
         
-                                                                        <mat-form-field style="width: 25em;">
+                                                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                                                             <mat-label>CheckSum</mat-label>
                                                                             <input matInput type="text" formControlName="chksum">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                             <mat-label>Update By</mat-label>
                                                                             <input matInput type="text" formControlName="updby">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                             <mat-label>Invoice Number</mat-label>
                                                                             <input matInput type="text" formControlName="inum">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                             <mat-label>Invoice Date</mat-label>
                                                                             <input matInput type="text" formControlName="idt">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                             <mat-label>Value</mat-label>
                                                                             <input matInput type="number" formControlName="val">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                             <mat-label>pos</mat-label>
                                                                             <input matInput type="text" formControlName="pos">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-top: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-top: 10px;">
                                                                             <mat-label>Recharge</mat-label>
                                                                             <input matInput type="text" formControlName="rchrg">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-top: 10px;padding-left: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-top: 10px;padding-left: 10px;">
                                                                             <mat-label>etin</mat-label>
                                                                             <input matInput type="text" formControlName="etin">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;padding-top: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px;">
                                                                             <mat-label>Invoice Type</mat-label>
                                                                             <input matInput type="text" formControlName="inv_typ">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;padding-top: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px;">
                                                                             <mat-label>cflag</mat-label>
                                                                             <input matInput type="text" formControlName="cflag">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;padding-top: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px;">
                                                                             <mat-label>diff_percent</mat-label>
                                                                             <input matInput type="number" formControlName="diff_percent">
                                                                         </mat-form-field>
         
-                                                                        <mat-form-field style="padding-left: 10px;padding-top: 10px;">
+                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;padding-top: 10px;">
                                                                             <mat-label>opd</mat-label>
                                                                             <input matInput type="text" formControlName="opd">
                                                                         </mat-form-field>
@@ -601,7 +601,7 @@
                                                                             </mat-expansion-panel-header>
                                                                             <form [formGroup]="items">
         
-                                                                                <mat-form-field>
+                                                                                <mat-form-field  appearance="outline">
                                                                                     <mat-label>Number</mat-label>
                                                                                     <input matInput type="number" formControlName="num">
                                                                                 </mat-form-field>
@@ -613,32 +613,32 @@
                                                                                     </mat-expansion-panel-header>
                                                                                     <form formGroupName="itm_det">
         
-                                                                                        <mat-form-field>
+                                                                                        <mat-form-field  appearance="outline">
                                                                                             <mat-label>rt</mat-label>
                                                                                             <input matInput type="number" formControlName="rt">
                                                                                         </mat-form-field>
         
-                                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                                             <mat-label>Tax value</mat-label>
                                                                                             <input matInput type="number" formControlName="txval">
                                                                                         </mat-form-field>
         
-                                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                                             <mat-label>iamt</mat-label>
                                                                                             <input matInput type="number" formControlName="iamt">
                                                                                         </mat-form-field>
         
-                                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                                             <mat-label>camt</mat-label>
                                                                                             <input matInput type="number" formControlName="camt">
                                                                                         </mat-form-field>
         
-                                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                                             <mat-label>samt</mat-label>
                                                                                             <input matInput type="number" formControlName="samt">
                                                                                         </mat-form-field>
         
-                                                                                        <mat-form-field style="padding-left: 10px;">
+                                                                                        <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                                                             <mat-label>csamt</mat-label>
                                                                                             <input matInput type="number" formControlName="csamt">
                                                                                         </mat-form-field>
@@ -669,19 +669,19 @@
                                             </mat-expansion-panel-header>
                                             <form [formGroup]="applicantDetails">
                                                 <div>
-                                                    <mat-form-field style="width: 25em;">
+                                                    <mat-form-field  appearance="outline" style="width: 25em;">
                                                         <mat-label>Primary Id</mat-label>
                                                         <input matInput type="text" formControlName="primaryId" readonly>
                                                     </mat-form-field>
         
-                                                    <mat-form-field style="padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                         <mat-label>Primary Id Type</mat-label>
                                                         <mat-select formControlName="primaryIdType">
                                                             <mat-option *ngFor="let data of applicantPrimaryIdTypeMaster" [value]="data">{{data}}</mat-option>
                                                         </mat-select>
                                                     </mat-form-field>
 
-                                                    <mat-form-field style="padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                         <mat-label>Category</mat-label>
                                                         <mat-select formControlName="category">
                                                             <mat-option *ngFor="let data of borrowerCategoryMaster" [value]="data">{{data}}</mat-option>
@@ -698,12 +698,12 @@
                                             </mat-expansion-panel-header>
                                             <form formGroupName="terms">
                                                 <div>
-                                                    <mat-form-field>
+                                                    <mat-form-field  appearance="outline">
                                                         <mat-label>Requested Amount</mat-label>
                                                         <input matInput type="text" formControlName="requestedAmount">
                                                     </mat-form-field>
         
-                                                    <mat-form-field style="padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                         <mat-label>Currency</mat-label>
                                                         <input matInput type="text" formControlName="currency">
                                                     </mat-form-field>
