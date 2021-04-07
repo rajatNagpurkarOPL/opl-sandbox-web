@@ -724,13 +724,15 @@
 
                         <mat-tab-group>
                             <mat-tab label="Acknowlegement">
-                                <br/>
-                                <mat-form-field style="width:100%">
-                                    <mat-label>Textarea</mat-label>
-                                    <textarea matInput value={{acknowledgementRes}}></textarea>
-                                  </mat-form-field>
+                                  <pre class="json-pretty">
+                                      {{acknowledgementRes}}
+                                    </pre>
                             </mat-tab>
-                            <mat-tab label="Response">Response</mat-tab>
+                            <mat-tab label="Response">
+                                <pre class="json-pretty">
+                                    {{createLoanApplicationResponse}}
+                                </pre>
+                            </mat-tab>
                         </mat-tab-group>
                     </mat-tab>
                 </mat-tab-group>

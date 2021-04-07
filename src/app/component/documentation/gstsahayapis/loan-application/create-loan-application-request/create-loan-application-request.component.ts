@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Websocket } from 'src/app/interface/websocket.interface';
 import { LenderService } from 'src/app/service/lender.service';
+import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -9,11 +11,12 @@ import { v4 as uuid } from 'uuid';
   templateUrl: './create-loan-application-request.component.html',
   styleUrls: ['./create-loan-application-request.component.scss']
 })
-export class CreateLoanApplicationRequestComponent implements OnInit {
+export class CreateLoanApplicationRequestComponent implements OnInit, Websocket {
 
 
   tab: any = { reqSchema: true };
   button: boolean;
+  webSocketAPI: WebSocketAPI;
 
   productIdTypeMaster : any[] = ['PURCHASE_ORDER_FINANCING','INVOICE_FINANCING'];
   loanProductTypeMaster : any[] = ['CASHFLOW' , 'PERSONAL' , 'HOME' , 'VEHICLE' , 'BUSINESS'];
@@ -45,11 +48,19 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
-  acknowledgementRes: any = 'Please click on Request Button';
+  acknowledgementRes: any = 'Acknowledgement will be display here';
+  createLoanApplicationResponse : any = 'Response will be display here';
+
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
+  topic: string = "/createLoanApplicationsResponse";
+  
+  
+  handleResponse(result: any) {
+    this.createLoanApplicationResponse = JSON.stringify(JSON.parse(result),null,4) ;
+  }
 
-  createDocumentationForm(data){
+  createDocumentationForm(data : any){
     this.documentationForm = this.fb.group({
       loanApplications : this.fb.array([this.createLoanApplicationRequestForm({})])
     });
@@ -240,6 +251,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
 
   ngOnInit(): void {
     let data = {};
+    this.webSocketAPI = new WebSocketAPI(this);
+    this.webSocketAPI._connect();
     this.createDocumentationForm(data);
     this.getApiRequestSchema('createLoanApplicationsRequest');
     this.getApiResponseSchema('createLoanApplicationsResponse');
@@ -250,20 +263,20 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
   data.metadata = {"version": "3.3","timestamp": new Date(),"traceId": this.commonService.getUUID(),
   "orgId": "OPLB4L123"};
   data.requestId = this.commonService.getUUID();
-  console.log("Save Data==>",data);
+  // console.log("Save Data==>",data);
   data.loanApplications.forEach(element => {
     if(element.borrower.documents != null && element.borrower.documents.length > 0){
       element.borrower.documents.forEach(documentsData => {
         documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
       });
     }
-    console.log("Outside pledgeDocument loop");
+    // console.log("Outside pledgeDocument loop");
     if(element.pledgedDocuments != null && element.pledgedDocuments.length > 0){
-      console.log("Inside pledgeDocument check");
+      // console.log("Inside pledgeDocument check");
       element.pledgedDocuments.forEach(pledgedDocumentsData => {
-        console.log("Inside pledgeDocument loop==>",pledgedDocumentsData);
+        // console.log("Inside pledgeDocument loop==>",pledgedDocumentsData);
         if(pledgedDocumentsData.documents != null && pledgedDocumentsData.documents.length > 0){
-          console.log("Inside pledgeDocument loop");
+          // console.log("Inside pledgeDocument loop");
           pledgedDocumentsData.documents.forEach(documentsData => {
             documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
           });
@@ -271,9 +284,13 @@ export class CreateLoanApplicationRequestComponent implements OnInit {
       });
     }
   });
+  data.source = "SANDBOX";
+  // this.webSocketAPI._send("/juspayapis/createLoanApplicationsRequest",JSON.stringify(data));
+
+  this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
+  this.createLoanApplicationResponse = "Preparing Response. Please wait for a moment...";
   this.lenderService.createLoanApplicationRequest(data).subscribe(res => {
-    console.log("Response==>",res);
-    this.acknowledgementRes = JSON.stringify(res);
+    this.acknowledgementRes = JSON.stringify(res,null,4);
   }, (error: any) => {
     this.commonService.errorSnackBar(error);
   });

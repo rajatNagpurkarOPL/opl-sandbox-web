@@ -2,6 +2,7 @@ import { Component, enableProdMode } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { LoaderService } from './common-utils/common-services/LoaderService';
 import { Title } from '@angular/platform-browser';
+import { WebSocketAPI } from './websocket/web-socket-api';
 
 enableProdMode();
 @Component({
@@ -11,6 +12,8 @@ enableProdMode();
 })
 export class AppComponent {
   title = 'b4l-lender-web';
+
+  
 
   constructor(private router: Router, private loaderService: LoaderService, private titleService: Title,
               private activatedRoute: ActivatedRoute) {
