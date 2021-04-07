@@ -1,7 +1,6 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { Websocket } from '../interface/websocket.interface';
-import { CommonService } from '../common-utils/common-services/common.service';
 
 
 export class WebSocketAPI {
@@ -54,7 +53,6 @@ export class WebSocketAPI {
     }
 
     onMessageReceived(sdkEvent : any) {        
-        console.log("Body :: " , sdkEvent);
         this.webSocketComponent.handleResponse(sdkEvent.body);
     }
   
