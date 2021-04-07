@@ -27,7 +27,6 @@ export class DocumentationComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
-    console.log("Selected Cde : ",this.selectedMenuItem);
     this.getMenuItems(this.selectedMenuItem);
   }
   mouseenter() {
@@ -89,7 +88,6 @@ export class DocumentationComponent implements OnInit {
           this.masterData = {};
           for(let code of DocumentationComponent.masterCodes){            
             this.masterData[code] = res.data[code];            
-            console.log("this.masterData : ",this.masterData);
           }
           this.setCurrentSelectedAPI(this.selectedMenuItem);
         } else {

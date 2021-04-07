@@ -10,20 +10,22 @@
                 <div class="well well-sm p-0">
                     <div class="table-container">
                         <div class="form-group">
-                            <mat-form-field  appearance="outline" style="width: 10em; background-color: #777;">
+                            <mat-form-field style="width: 10%; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
                             </mat-form-field>
-                            <mat-form-field  appearance="outline" style="width: 90em;">
+                            <mat-form-field style="width: 80%;">
                                 <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/loanApplication/createLoanApplicationsRequest">
                             </mat-form-field>
-                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
+                            <!-- <div style="width: 10%;float:right;padding: 0.6em 1em 1.3em !important;">
+                                <button mat-raised-button color="primary">POST</button>
+                            </div> -->
+                            <!-- <button mat-button style="width: 10%;font-weight: bold; height: 4em;" color="primary">POST</button> -->
                         </div>
                     </div>
-                    
                 </div><!---->
-                <p>
-                    <span>API to Create Loan Application Request.</span>
-                </p>
                 <mat-tab-group>
                     <mat-tab label="Documentation">
                         <div>
@@ -117,7 +119,7 @@
                                 <mat-accordion class="example-headers-align" multi>
                                 <mat-expansion-panel *ngFor="let loanApp of documentationForm.controls.loanApplications.controls;let i = index;" [expanded]="true">
                                     <mat-expansion-panel-header>
-                                        <mat-panel-title>Loan Application Details ({{i+1}}) ({{loanApp.loanApplicationId}})</mat-panel-title>
+                                        <mat-panel-title>Loan Application Details [ ID : {{loanApp.value.loanApplicationId}}]</mat-panel-title>
                                         <button type="button" mat-stroked-button color="psbprimary" class="psb-b-blue" (click)="addNewLoanApplication()">Add Loan Application</button>
                                         <mat-icon (click)="removeIndexFromList(loanApp,documentationForm.controls.loanApplications.controls)">delete_forever</mat-icon>
                                     </mat-expansion-panel-header>

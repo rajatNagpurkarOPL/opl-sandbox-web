@@ -65,8 +65,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit, Websocket 
       loanApplications : this.fb.array([this.createLoanApplicationRequestForm({})])
     });
     
-    console.log("this.documentForm==>",this.documentationForm);
-    console.log("this.loanApplications==>",this.documentationForm.controls.loanApplications.controls[0].controls.pledgedDocuments.controls[0].controls.documents.controls[0].controls.data.controls.inv.controls[0].controls.itms);
+    // console.log("this.documentForm==>",this.documentationForm);
+    // console.log("this.loanApplications==>",this.documentationForm.controls.loanApplications.controls[0].controls.pledgedDocuments.controls[0].controls.documents.controls[0].controls.data.controls.inv.controls[0].controls.itms);
   }
 
   createLoanApplicationRequestForm(data) : FormGroup{
@@ -256,6 +256,7 @@ export class CreateLoanApplicationRequestComponent implements OnInit, Websocket 
     this.createDocumentationForm(data);
     this.getApiRequestSchema('createLoanApplicationsRequest');
     this.getApiResponseSchema('createLoanApplicationsResponse');
+    // console.log("documentationForm.controls.loanApplications.controls : ",this.documentationForm.controls.loanApplications.controls);
  }
 
  saveData(){
@@ -326,7 +327,7 @@ getApiResponseSchema(data){
 
 tabClick(tab) {
   if(tab.index==0){
-    console.log('Schema Clicked');
+    // console.log('Schema Clicked');
     this.getApiRequestSchema('createLoanApplicationsRequest');
     this.getApiResponseSchema('createLoanApplicationsResponse');
   }else if(tab.index==1){
@@ -337,7 +338,7 @@ tabClick(tab) {
 }
 
 getDomainSchema(data){
-  console.log('getDomainData Clicked');
+  // console.log('getDomainData Clicked');
   this.lenderService.getDomainSchema(data).subscribe(res => {
     if (!this.commonService.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!this.commonService.isObjectNullOrEmpty(res.data)){
