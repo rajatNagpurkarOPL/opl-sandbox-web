@@ -14,6 +14,7 @@ import _ from 'lodash';
 import { Options } from 'ng5-slider';
 import { GeographicalAreasPopupComponent } from 'src/app/popup/geographical-areas-popup/geographical-areas-popup.component';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import { ConstitutionPopupComponent } from 'src/app/popup/constitution-popup/constitution-popup.component';
 
 // tslint:disable: max-line-length
 
@@ -1426,6 +1427,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if(element.code =="GEO_MARKET_FOCUS"){
                   element.answer = { geoStr: null, geoSelectedList: [] , lov : []};
                 }
+                if(element.code =="CONSTITUTION"){
+                  // element.answer = { constStr: null, constitutionSelectedList: [] , lov : []};
+                  element.answer = [];
+                }
                 if(element.code == "SECURITY"){
                   element.answer = { primaryMin : element.lovs.primarySecurity.min , primaryMax : element.lovs.primarySecurity.max , collateralMin : element.lovs.collateralSecurity.min , collateralMax : element.lovs.collateralSecurity.max , lovAns : null}
                   element.option = {"floor" : element.lovs.primarySecurity.min , "ceil" : element.lovs.primarySecurity.max};
@@ -1917,7 +1922,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(param.code =="BANK_ACC_PRIO"){
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
       }
-      if(param.code =="GEO_MARKET_FOCUS"){
+      if(param.code =="GEO_MARKET_FOCUS" || param.code == "CONSTITUTION"){
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
       }
       if(param.code == "SECURITY"){
@@ -2362,6 +2367,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
+  constitutionPopup(data) {
+    console.log(data);
+    /* return; */
+    // Work around to make drag and drop work in mat-dialog
+    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { selectedConstitutions: data.answer , popUpData: data.lovs};
+    this.matDialog.open(ConstitutionPopupComponent ,dialogConfig).afterClosed().subscribe(response => {
+      console.log("response ::: " , response)
+      if (response && response.data && response.event === 'save') {
+        data.answer = response.data;
+        data.constSelected = response.data.length + " Constitution Selected";
+      }
+    });
+  }
+
   getPriorityStr(data) {
     data.answer.prioSetStr = _.orderBy(data.answer.orderedJson, ['accOrder']).map(a => a.account).join('>');
     /* return _.orderBy(data.answer.orderedJson, ['accOrder']).map(a => a.account).join('>'); */
@@ -2641,11 +2662,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
+    this.getMastersData();
     this.product.productId = this.route.snapshot.paramMap.get('id');
     if (this.product.productId) { // get product info if product is found
       this.getProductDetails();
     }
-    this.getMastersData();
     this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
     this.getCurrentEBLR(); // get current eblr
     this.getScalingMatrixRange();
