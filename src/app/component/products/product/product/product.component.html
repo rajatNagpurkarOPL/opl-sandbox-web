@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
 
-        <form [formGroup]="productForm" *ngIf="productForm.controls != null && productForm.controls != undefined">
+        <form [formGroup]="productForm" *ngIf="productForm.controls != null && productForm.controls != undefined" class="w-100">
             <div class="product-back-button">
                 <p class="btn-back" (click)="commonService.backClicked()"><img src="assets/img/arrow-right.svg" /> Back
                 </p>
@@ -3275,7 +3275,7 @@
 <!-- new Added changess are below matches paramters-->
 
                  <!-- Matches Parameter start -->
-                 <table class="table table-striped matches-table">
+                 <table class="table table-striped matches-table m-auto">
                   <tbody>
                     <tr>
                       <td>1</td>
