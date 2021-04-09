@@ -41,10 +41,6 @@ export class AddNewTriggerComponent implements OnInit {
     }
   }
 
-  getTriggerDetails(triggerId){
-    
-  }
-
   createTriggerForm(){
     console.log("In createTriggerForm with triggerFormData==>",this.triggerFormData);
     this.triggerForm = this.fb.group({

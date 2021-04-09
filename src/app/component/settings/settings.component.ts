@@ -15,6 +15,7 @@ import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
 })
 export class SettingsComponent implements OnInit {
 
+  public routeURL: any = {};
   eblrList = [];
   triggersList = [];
   nexteblr : any = null;
@@ -29,9 +30,8 @@ export class SettingsComponent implements OnInit {
   currentTab = 'eblr';
 
   constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,private global: Globals, public sendBackService: SendBackModelService,private route : ActivatedRoute , private router : Router) {
-    
+    this.routeURL = Constant.ROUTE_URL;
   }
-
 
   /**
    * Update eblr action  status
