@@ -14,6 +14,7 @@ export class AddNewTriggerComponent implements OnInit {
 
   public routeURL: any = {};
   triggerId: any = null;
+  triggerButton = 'Create Trigger';
 
   copyFromTriggerMaster = ['Dont copy from other trigger','Transunion ( CIBIL )','Option 2','Option 3'];
   triggerForm : any = FormGroup;
@@ -25,16 +26,14 @@ export class AddNewTriggerComponent implements OnInit {
 
   ngOnInit(): void {
     this.triggerId = this.route.snapshot.paramMap.get('id');
-    console.log("TriggerId==>",this.triggerId);
     if(this.triggerId != null){
       this.lenderService.getTriggerDetails(this.triggerId).subscribe(res => {
-        console.log("getTriggerDetails==>",res);
         this.triggerFormData = res.data;
-        console.log("this.triggerFormData==>",this.triggerFormData);
         this.createTriggerForm();
+        this.triggerButton = 'Update Trigger';
       }, (error: any) => {
-        console.log("Error==>",error);
         this.commonService.errorSnackBar(error);
+        this.triggerId = null;
       });
     }else{
       this.createTriggerForm();
@@ -52,18 +51,27 @@ export class AddNewTriggerComponent implements OnInit {
 
   save(){
     let data = this.triggerForm.getRawValue();
-    console.log("Data==>",data);
-    this.lenderService.saveTrigger(data).subscribe(res => {
-      if (res.status === 200) {
-        console.log("Success Data==>",res);
-        this.router.navigate([Constant.ROUTE_URL.CREATE_TRIGGER + '/' +res.data.triggerId]);
-      }else{
-        this.commonService.errorSnackBar(res.message);
-      }
-    }, (error: any) => {
-      console.log("Error==>",error);
-      this.commonService.errorSnackBar(error);
-    });
+    if(this.triggerId == null){
+      this.lenderService.saveTrigger(data).subscribe(res => {
+        if (res.status === 200) {
+          this.router.navigate([Constant.ROUTE_URL.CREATE_TRIGGER + '/' +res.data.triggerId]);
+        }else{
+          this.commonService.errorSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }else{
+      data.triggerId = this.triggerId;
+      this.lenderService.updateTrigger(data).subscribe(res => {
+        if(res.status === 200){
+          this.commonService.successSnackBar(res.data);
+          this.router.navigate([Constant.ROUTE_URL.CREATE_TRIGGER + '/' +this.triggerId]);
+        }
+      }, (error: any) => {
+        this.commonService.errorSnackBar(error);
+      });
+    }
   }
 
 }

@@ -35,21 +35,17 @@ export class CreateTriggerComponent implements OnInit {
   ngOnInit(): void {
     let data = {};
     this.triggerId = this.route.snapshot.paramMap.get('id');
-    console.log("TriggerId==>",this.triggerId);
     if(this.triggerId != null){
       this.lenderService.getTriggerDetails(this.triggerId).subscribe(res => {
-        console.log("getTriggerDetails==>",res);
         this.triggerFormData = res.data;
-        console.log("this.triggerFormData==>",this.triggerFormData);
         this.createTriggerForm();
       }, (error: any) => {
-        console.log("Error==>",error);
         this.commonService.errorSnackBar(error);
+        this.triggerId = null;
       });
     }else{
       this.createTriggerForm();
     }
-    console.log("Parameters Data==>",this.triggerForm);
   }
 
   createTriggerForm(){
