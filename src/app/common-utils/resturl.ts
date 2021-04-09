@@ -54,6 +54,7 @@ export const RestURL = {
     RAISE_DISPUTE_REQUEST: '/v3.3/loan/dispute/raiseDisputeRequest',
     DISPUTE_STATUS_REQUEST: '/v3.3/loan/dispute/disputeStatusRequest',
     SAVE_TRIGGER: '/triggerManagement/saveTrigger',
+    UPDATE_TRIGGER: '/triggerManagement/updateTrigger',
     GET_TRIGGER_DETAIL: '/triggerManagement/getTriggerDetails',
     GET_TRIGGERS_LIST: '/triggerManagement/getTriggersList',
     SANDBOX : {
