@@ -78,6 +78,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
 import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
+import { ConstitutionPopupComponent } from './popup/constitution-popup/constitution-popup.component';
 
 
 
@@ -158,7 +159,8 @@ import { DisbursedCountComponent } from './component/disbursed-count/disbursed-c
     DrawerMenuDirective,
     DrawerMenuComponent,
     NewTriggerConfigurationComponent,
-    DisbursedCountComponent
+    DisbursedCountComponent,
+    ConstitutionPopupComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
