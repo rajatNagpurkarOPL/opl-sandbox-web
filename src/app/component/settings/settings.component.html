@@ -197,7 +197,7 @@
                     <td *ngIf="triggers.isActive===true"><img src="assets/img/green-dot.svg" class="mr-2"/>Active</td>
                     <td *ngIf="triggers.isActive===false"><img src="assets/img/red-dot.svg" class="mr-2"/>InActive</td>
                     <td>15th Jan 2021 2:00 PM</td>
-                    <td><img  class="w-1" src="assets/img/Edit-blue1.svg"/></td>
+                    <td><img class="w-1" src="assets/img/Edit-blue1.svg" routerLink="{{routeURL.CREATE_TRIGGER + '/' + triggers.triggerId}}"/></td>
                   </tr>
                 
                 </tbody>

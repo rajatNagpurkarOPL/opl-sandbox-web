@@ -15,6 +15,7 @@ export class CreateTriggerComponent implements OnInit {
   public routeURL: any = {};
   triggerId: any = null;
   triggerForm : any = FormGroup;
+  triggerFormData  : any = {};
   parameterForm : any = FormGroup;
 
   parameterFormData :any = {};
@@ -35,17 +36,29 @@ export class CreateTriggerComponent implements OnInit {
     let data = {};
     this.triggerId = this.route.snapshot.paramMap.get('id');
     console.log("TriggerId==>",this.triggerId);
-    this.createTriggerForm(data);
+    if(this.triggerId != null){
+      this.lenderService.getTriggerDetails(this.triggerId).subscribe(res => {
+        console.log("getTriggerDetails==>",res);
+        this.triggerFormData = res.data;
+        console.log("this.triggerFormData==>",this.triggerFormData);
+        this.createTriggerForm();
+      }, (error: any) => {
+        console.log("Error==>",error);
+        this.commonService.errorSnackBar(error);
+      });
+    }else{
+      this.createTriggerForm();
+    }
     console.log("Parameters Data==>",this.triggerForm);
   }
 
-  createTriggerForm(data){
+  createTriggerForm(){
     this.triggerForm = this.fb.group({
-      triggerParameters : this.fb.array([this.createParametersForm(data)])
+      triggerParameters : this.fb.array([this.createParametersForm()])
     })
   }
 
-  createParametersForm(data){
+  createParametersForm(){
     return this.parameterForm = this.fb.group({
       name: [this.parameterFormData.name != null ? this.parameterFormData.name : this.parametersMaster[0]],
       duration: [this.parameterFormData.duration != null ? this.parameterFormData.duration : this.durationsMaster[0]],
@@ -58,7 +71,7 @@ export class CreateTriggerComponent implements OnInit {
 
   addNewParameter(obj: FormGroup){
     const parameterControl = <FormArray>obj.get('triggerParameters');
-    parameterControl.push(this.createParametersForm({}));
+    parameterControl.push(this.createParametersForm());
   }
 
   removeIndexFromList(obj: FormGroup,list: any[]){
