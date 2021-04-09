@@ -17,6 +17,8 @@ import { ProductCreateComponent } from './component/product-create/product-creat
 import { DocumentationComponent } from './component/documentation/documentation.component';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
 import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
+import { AddNewTriggerComponent } from './component/settings/add-new-trigger/add-new-trigger.component';
+import { CreateTriggerComponent } from './component/settings/create-trigger/create-trigger.component';
 
 const routes: Routes = [ 
   
@@ -42,6 +44,10 @@ const routes: Routes = [
     { path: 'create-product', component: ProductCreateComponent},
     { path: 'create-product/:id', component: ProductCreateComponent },
     { path: 'documentation/:code', component: DocumentationComponent},
+    { path: 'add-new-trigger', component: AddNewTriggerComponent},
+    { path: 'add-new-trigger/:id', component: AddNewTriggerComponent},
+    { path: 'create-trigger' , component: CreateTriggerComponent},
+    { path: 'create-trigger/:id' , component: CreateTriggerComponent},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   ]
 },

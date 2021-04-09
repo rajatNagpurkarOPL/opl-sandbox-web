@@ -1,0 +1,140 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="new-trigger-back">
+            <p class="text" routerLink="{{routeURL.ADD_NEW_TRIGGER}}"><img src="assets/img/blue-back-arrow.svg" class="mr-2"/> Back </p>
+            <p class="fs-16 ml-4"><b>Add New Trigger</b></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <form [formGroup]="triggerForm" *ngIf="triggerForm.controls != null && triggerForm.controls != undefined">
+                <mat-card id="b4l-content"  class="b4l-height">
+                    <div class="product-name">
+                    
+                        <div class="product-name-details">
+                            
+                            <div class="d-flex  js-center fl-column mb-3">
+                                <p><b>Disbursed Count Management</b></p>
+                                <span class="new-product-config-span mr-4">Following trigger will manage the number of application disbursement</span>
+                            </div>
+                            <div class="product-details-btn">
+                                <button href="javascript:void(0)" class="product-btn4 mr-2">X Cancel</button>
+                                <button  href="javascript:void(0)" class="product-btn3"><img src="assets/img/send-to-checker-white.svg" /> Start Trigger</button>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="b4l-content-txt-all mt-4">
+                            <div class="b4l-content-txt">
+                                <p>Last Modified On - 14 Dec 2020 at 5:17PM</p>
+                            </div>
+                            <a href="#"  class="edit-product"><img src="assets/img/edit-icon.svg"  class="mr-2"/>Edit Product Configuration</a>
+                        </div>
+                    </div>
+                </mat-card>
+
+                <mat-card id="b4l-content"  class="b4l-height">
+                    <div class="product-name">
+                    
+                        <div class="product-name-details">            
+                            <div class="d-flex  js-center fl-column mb-3">
+                                <p><b>Setup Conditions</b></p>
+                                <span class="new-product-config-span mr-4">When all of the conditions will be true then your trigger will execute.</span>
+                            </div>       
+                        </div>
+                    
+                        <table class="table disbursed-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Select Conditions</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Operator</th>
+                                <th scope="col">Value</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let params of triggerForm.controls.triggerParameters.controls;let param = index" [formGroup]="params">
+                                    <td scope="row">{{param+1}}</td>
+                                    <td> 
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <mat-label>Name</mat-label>
+                                            <mat-select formControlName="name">
+                                                <mat-option *ngFor="let data of parametersMaster" [value]="data.id">{{data.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td>
+                                        <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Duration</mat-label>
+                                            <mat-select formControlName="duration">
+                                                <mat-option *ngFor="let data of durationsMaster" [value]="data.id">{{data.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td>
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <mat-label>Is Greater Then</mat-label>
+                                            <mat-select formControlName="operator">
+                                                <mat-option *ngFor="let data of operatorsMaster" [value]="data.id">{{data.value}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td>   
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <div class="input-group-text">INR</div>
+                                        </div>
+                                            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="10,00,000" formControlName="maxValue">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-icon">
+                                            <img src="assets/img/3dots.svg" class="mr-2 w-7"/>
+                                            <img src="assets/img/RedCross.svg" (click)="removeIndexFromList(params,triggerForm.controls.triggerParameters.controls)"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                            </tbody>
+                        </table>
+
+                        <div class="product-details-btn">
+                            <button  href="javascript:void(0)" class="product-btn3 ml-55 mt-3"  (click)="addNewParameter(triggerForm)">+ Add New Condition</button>
+                        </div>
+
+                    </div>
+                </mat-card>
+
+                <mat-card id="b4l-content"  class="b4l-height">
+                    <div class="product-name">
+                    
+                        <div class="product-name-details">            
+                            <div class="d-flex  js-center fl-column mb-3 product-desc-mobile">
+                                <p><b>Setup Action</b></p>
+                                <span class="new-product-config-span mr-4">If following conditions gets fulfilled Following are the list of actions that will execute.</span>
+                            </div>       
+                        </div>
+                    
+                        <hr>
+                        <div class="product-name-details">            
+                            <div class="d-flex  js-center fl-column mb-3 al-center w-100 mt-5">
+                                <p><b>Currently we don't have any actions that need to be executed.</b></p>
+                                <span class="new-product-config-span mr-4">Select from available actions that needs to be executed.</span>
+                                <div class="product-details-btn">
+                                    <button  href="javascript:void(0)" class="product-btn3 mt-5">+ Add New Condition</button>
+                                </div>
+                            </div>       
+                        </div>
+                    </div>
+                </mat-card>
+            </form>
+        </div>
+    </div>

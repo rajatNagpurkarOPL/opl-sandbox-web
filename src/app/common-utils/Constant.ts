@@ -15,7 +15,9 @@ export const Constant = {
         INACTIVE_PRODUCTS:  mainPath + 'products/inactive',
         PRODUCT: mainPath + 'product',
         CREATE_PRODUCT: mainPath + 'create-product',
-        PRODUCT_VIEW: mainPath + 'product-view'
+        PRODUCT_VIEW: mainPath + 'product-view',
+        ADD_NEW_TRIGGER: mainPath + 'add-new-trigger',
+        CREATE_TRIGGER: mainPath + 'create-trigger'
     },
     httpAndCookies: {
         ACTK: 'tk_ac',

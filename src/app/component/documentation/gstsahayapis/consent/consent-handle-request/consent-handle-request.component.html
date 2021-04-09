@@ -11,13 +11,16 @@
                 <div class="well well-sm p-0">
                     <div class="table-container">
                         <div class="form-group">
-                            <mat-form-field style="width: 10em; background-color: #777;">
+                            <mat-form-field style="width: 10%; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
                             </mat-form-field>
-                            <mat-form-field style="width: 90em;">
+                            <mat-form-field style="width: 80%;">
                                 <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3/consent/consentHandleRequest">
                             </mat-form-field>
-                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
+                            <!-- <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button> -->
                         </div>
                     </div>
                     
@@ -121,29 +124,29 @@
                                             <mat-panel-title>Consent Details</mat-panel-title>
                                         </mat-expansion-panel-header>
                                         <form formGroupName="consent">
-                                            <mat-form-field style="width: 25em;">
+                                            <mat-form-field  appearance="outline" style="width: 25em;">
                                                 <mat-label>vua</mat-label>
                                                 <input matInput type="text" formControlName="vua">
                                             </mat-form-field>
             
-                                            <mat-form-field style="padding-left: 10px">
+                                            <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                 <mat-label>Consent Fetch Type</mat-label>
                                                 <mat-select formControlName="consentFetchType">
                                                     <mat-option *ngFor="let data of consentFetchTypeMaster" [value]="data">{{data}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                             
-                                            <mat-form-field style="padding-left: 10px">
+                                            <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                 <mat-label>Is Aggregation Enabled</mat-label>
                                                 <input matInput type="boolean" formControlName="isAggregationEnabled">
                                             </mat-form-field>
             
-                                            <mat-form-field style="width: 25em; padding-left: 10px;">
+                                            <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px;">
                                                 <mat-label>consentAggregationId</mat-label>
                                                 <input matInput type="text" formControlName="consentAggregationId" readonly>
                                             </mat-form-field>
             
-                                            <mat-form-field style="padding-left: 10px;">
+                                            <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                 <mat-label>Consent Status</mat-label>
                                                 <mat-select formControlName="consentStatus">
                                                     <mat-option *ngFor="let data of consentStatusMaster" [value]="data">{{data}}</mat-option>
@@ -156,17 +159,17 @@
                                                     <mat-panel-title>LSP Info Details</mat-panel-title>
                                                 </mat-expansion-panel-header>
                                                 <form formGroupName="lspInfo">
-                                                    <mat-form-field style="width: 25em; padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px;">
                                                         <mat-label>lsp Id</mat-label>
                                                         <input matInput type="text" formControlName="lspId" readonly>
                                                     </mat-form-field>
                 
-                                                    <mat-form-field style="width: 25em; padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px;">
                                                         <mat-label>Version</mat-label>
                                                         <input matInput type="text" formControlName="version">
                                                     </mat-form-field>
                 
-                                                    <mat-form-field style="width: 25em; padding-left: 10px;">
+                                                    <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px;">
                                                         <mat-label>App Name</mat-label>
                                                         <input matInput type="text" formControlName="appName">
                                                     </mat-form-field>
@@ -186,13 +189,15 @@
                         
                         <mat-tab-group>
                             <mat-tab label="Acknowlegement">
-                                <br/>
-                                <mat-form-field style="width:100%">
-                                    <mat-label>Textarea</mat-label>
-                                    <textarea matInput value={{acknowledgementRes}}></textarea>
-                                  </mat-form-field>
+                                  <pre class="json-pretty">
+                                      {{acknowledgementRes}}
+                                    </pre>
                             </mat-tab>
-                            <mat-tab label="Response">Response</mat-tab>
+                            <mat-tab label="Response">
+                                <pre class="json-pretty">
+                                    {{apiResponse}}
+                                </pre>
+                            </mat-tab>
                         </mat-tab-group>
                     </mat-tab>
                 </mat-tab-group>

@@ -11,13 +11,15 @@
                 <div class="well well-sm p-0">
                     <div class="table-container">
                         <div class="form-group">
-                            <mat-form-field style="width: 10em; background-color: #777;">
+                            <mat-form-field style="width: 10%; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" readonly>
                             </mat-form-field>
-                            <mat-form-field style="width: 90em;">
+                            <mat-form-field style="width: 80%;">
                                 <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/disbursement/setDisbursementAccountRequest">
                             </mat-form-field>
-                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
                         </div>
                     </div>
                     
@@ -121,12 +123,12 @@
                                             <mat-panel-title>Disbursement Account Details</mat-panel-title>
                                         </mat-expansion-panel-header>
                                         
-                                        <mat-form-field style="width: 25em;">
+                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                             <mat-label>Loan Application Id</mat-label>
                                             <input matInput type="text" formControlName="loanApplicationId">
                                         </mat-form-field>
 
-                                        <mat-form-field style="width: 25em; padding-left: 10px">
+                                        <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px">
                                             <mat-label>Loan Id</mat-label>
                                             <input matInput type="text" formControlName="loanId">
                                         </mat-form-field>
@@ -136,19 +138,19 @@
                                                 <mat-panel-title>Account Details</mat-panel-title>
                                             </mat-expansion-panel-header>
                                             <form formGroupName="account">
-                                                <mat-form-field style="width: 25em;">
+                                                <mat-form-field  appearance="outline" style="width: 25em;">
                                                     <mat-label>Id</mat-label>
                                                     <input matInput type="text" formControlName="id">
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                     <mat-label>Status</mat-label>
                                                     <mat-select formControlName="status">
                                                         <mat-option *ngFor="let data of accountStatusMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                     <mat-label>Account Data Type</mat-label>
                                                     <mat-select formControlName="accountDataType">
                                                         <mat-option *ngFor="let data of accountDataTypeMaster" [value]="data">{{data}}</mat-option>
@@ -168,17 +170,17 @@
                                                             </mat-select>
                                                         </mat-form-field>
 
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Account Holder Name</mat-label>
                                                             <input matInput type="text" formControlName="accountHolderName">
                                                         </mat-form-field>
 
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Account IFSC</mat-label>
                                                             <input matInput type="text" formControlName="accountIFSC">
                                                         </mat-form-field>
 
-                                                        <mat-form-field style="padding-left: 10px">
+                                                        <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                             <mat-label>Account Number</mat-label>
                                                             <input matInput type="text" formControlName="accountNumber">
                                                         </mat-form-field>
@@ -200,13 +202,15 @@
 
                         <mat-tab-group>
                             <mat-tab label="Acknowlegement">
-                                <br/>
-                                <mat-form-field style="width:100%">
-                                    <mat-label>Textarea</mat-label>
-                                    <textarea matInput value={{acknowledgementRes}}></textarea>
-                                  </mat-form-field>
+                                  <pre class="json-pretty">
+                                      {{acknowledgementRes}}
+                                    </pre>
                             </mat-tab>
-                            <mat-tab label="Response">Response</mat-tab>
+                            <mat-tab label="Response">
+                                <pre class="json-pretty">
+                                    {{apiResponse}}
+                                </pre>
+                            </mat-tab>
                         </mat-tab-group>
                     </mat-tab>
                 </mat-tab-group>

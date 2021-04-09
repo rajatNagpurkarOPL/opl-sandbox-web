@@ -2,28 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { LenderService } from 'src/app/service/lender.service';
+import { Websocket } from 'src/app/interface/websocket.interface';
+import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
 
 @Component({
   selector: 'app-list-loans-request',
   templateUrl: './list-loans-request.component.html',
   styleUrls: ['./list-loans-request.component.scss']
 })
-export class ListLoansRequestComponent implements OnInit {
+export class ListLoansRequestComponent implements OnInit, Websocket {
 
   tab: any = { reqSchema: true };
   button: boolean;
+  webSocketAPI: WebSocketAPI;
 
   documentationFormData : any = {};
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
-  acknowledgementRes: any = 'Please click on Request Button';
+  acknowledgementRes: any = 'Acknowledgement will be display here';
+  apiResponse : any = 'Response will be display here';
 
   documentForm: any = FormGroup;
   dataOfBorrowerDocument: any = FormGroup;
+  pledgeDocumentForm: any = FormGroup;
+  dataOfPledgeDocument: any = FormGroup;
+  invData: any = FormGroup;
+  itemData: any = FormGroup;
 
   borrowerPrimaryTypeMaster : any[] = ['PAN', 'MOBILE', 'AADHAAR', 'GSTIN', 'FIU'];
   borrowerCategoryMaster : any[] = ['ORGANIZATION','INDIVIDUAL'];
+
+  pledgedDocumentPrimaryIdTypeMaster : any[] = ['GST_INVOICE' , 'GEM_PURCHASEORDER' , 'GEM_INVOICE' ,  'VIN'];
+  pledgedDocumentType : any[] = ['INVOICE' , 'GOODS_RECEIPT' , 'PURCHASE_ORDER' ,  'VEHICLE' , 'HOME'];
 
   sourcetypeMaster : any[] = ['AA' , 'FIP' , 'FIU' , 'FSR' , 'USER' , 'GSTN' , 'MERCHANT'];
   documentFormatMaster : any[] = ['DOC', 'IMAGE' , 'CSV', 'JSON' , 'XML'];
@@ -31,8 +42,13 @@ export class ListLoansRequestComponent implements OnInit {
   documentTypeMaster : any[] = ['GSTN_B2B_INVOICE', 'GSTN_PROFILE', 'PAN', 'AADHAAR', 'DRIVING_LICENSE', 'PASSPORT', 'OTHER', 'GEM_PROFILE', 'GEM_INVOICE', 'GEM_PURCHASEORDER'];
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
+  topic: string = "/listLoansResponse";
 
-  createDocumentationForm(data){
+  handleResponse(result: any) {
+    this.apiResponse = JSON.stringify(JSON.parse(result),null,4) ;
+  }
+
+  createDocumentationForm(){
     this.documentationForm = this.fb.group({
       startDate : [],
       endDate : [],
@@ -42,13 +58,19 @@ export class ListLoansRequestComponent implements OnInit {
         category: [this.documentationFormData.category != null ? this.documentationFormData.category : this.borrowerCategoryMaster[0]],
         additionalIdentifiers: [[]],
         contactDetails : [[]],
-        documents : this.fb.array([this.createDocumentDataForm({})])
+        documents : this.fb.array([this.createDocumentDataForm('borrowerData',{})])
       }),
-      collateral : []
+      collateral : [],
+      pledgedDocuments : this.fb.group({
+        primaryId : [this.commonService.getUUID()],
+        primaryIdType : [this.documentationFormData.primaryIdType != null ? this.documentationFormData.primaryIdType : this.pledgedDocumentPrimaryIdTypeMaster[0]],
+        type : [this.documentationFormData.type != null ? this.documentationFormData.type : this.pledgedDocumentType[0]],
+        documents : this.fb.array([this.createDocumentDataForm('pledgeData',{})])
+      })
     });
   }
-
-  createDocumentDataForm(formGroupData) : FormGroup{
+  
+  createDocumentDataForm(typeOfData ,formGroupData) : FormGroup{
     return this.documentForm = this.fb.group({
       sourceId : [this.commonService.getUUID()],
       reference : [this.commonService.getUUID()],
@@ -56,7 +78,7 @@ export class ListLoansRequestComponent implements OnInit {
       format : [this.documentationFormData.documentFormat != null ? this.documentationFormData.documentFormat : this.documentFormatMaster[0]],
       type : [this.documentationFormData.type != null ? this.documentationFormData.type : this.documentTypeMaster[0]],
       isDataInline : [this.documentationFormData.isDataInline != null ? this.documentationFormData.isDataInline : false],
-      data : this.createDataOfBorrowerDocument()
+      data : typeOfData != null && typeOfData == 'borrowerData' ? this.createDataOfBorrowerDocument() : this.createDataOfPledgeDocument()
     })
   }
 
@@ -96,13 +118,54 @@ export class ListLoansRequestComponent implements OnInit {
     })
   }
 
+  createDataOfPledgeDocument(): FormGroup{
+    return this.dataOfPledgeDocument = this.fb.group({
+      ctin : [this.documentationFormData.ctin != null ? this.documentationFormData.ctin : '01AABCE2207R1Z5'],
+      cfs : [this.documentationFormData.cfs != null ? this.documentationFormData.cfs : 'Y'],
+      inv : this.fb.array([this.createInvData()])
+    })
+  }
+
+  createInvData(): FormGroup{
+    return this.invData = this.fb.group({
+      chksum : [this.documentationFormData.chksum != null ? this.documentationFormData.chksum : 'BBUIBUIUIJKKBJKGUYFTFGUY'],
+      updby : [this.documentationFormData.updby != null ? this.documentationFormData.updby : 'S'],
+      inum : [this.documentationFormData.inum != null ? this.documentationFormData.inum : 'S008400'],
+      idt : [this.documentationFormData.idt != null ? this.documentationFormData.idt : '24-11-2016'],
+      val : [this.documentationFormData.val != null ? this.documentationFormData.val : 729248.16],
+      pos : [this.documentationFormData.pos != null ? this.documentationFormData.pos : '06'],
+      rchrg : [this.documentationFormData.rchrg != null ? this.documentationFormData.rchrg : 'N'],
+      etin : [this.documentationFormData.etin != null ? this.documentationFormData.etin : '01AABCE5507R1Z4'],
+      inv_typ : [this.documentationFormData.inv_typ != null ? this.documentationFormData.inv_typ : 'R'],
+      cflag : [this.documentationFormData.cflag != null ? this.documentationFormData.cflag : 'N'],
+      diff_percent : [this.documentationFormData.diff_percent != null ? this.documentationFormData.diff_percent : 0.65],
+      opd : [this.documentationFormData.opd != null ? this.documentationFormData.opd : '2016-12'],
+      itms : this.fb.array([this.createItemData()])
+    })
+  }
+
+  createItemData() :FormGroup {
+    return this.itemData = this.fb.group({
+      num : [this.documentationFormData.num != null ? this.documentationFormData.num : 1],
+      itm_det : this.fb.group({
+        rt : [this.documentationFormData.rt != null ? this.documentationFormData.rt : 5],
+        txval : [this.documentationFormData.txval != null ? this.documentationFormData.txval : 10000],
+        iamt : [this.documentationFormData.iamt != null ? this.documentationFormData.iamt : 325],
+        camt : [this.documentationFormData.camt != null ? this.documentationFormData.camt : 0],
+        samt : [this.documentationFormData.samt != null ? this.documentationFormData.samt : 0],
+        csamt : [this.documentationFormData.csamt != null ? this.documentationFormData.csamt : 10],
+      })
+    })
+  }
+
   removeIndexFromList(obj: FormGroup,list: any[]){
     list.splice(list.indexOf(obj),1);
   }
 
-  addDocumentList(obj: FormGroup){
-    const documentControl = <FormArray>obj.controls.borrower.get('documents');
-    documentControl.push(this.createDocumentDataForm({}));
+  addDocumentList(typeOfData, obj: FormGroup){
+    const documentControl = typeOfData == 'borrowerData' ? <FormArray>obj.controls.borrower.get('documents') 
+                                                              : <FormArray>obj.controls.pledgedDocuments.get('documents') ;
+    documentControl.push(this.createDocumentDataForm(typeOfData,{}));
   }
 
   addNewNba(obj: FormArray){
@@ -113,31 +176,34 @@ export class ListLoansRequestComponent implements OnInit {
     let data = this.documentationForm.getRawValue();
     data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(), "orgId": "OPLB4L123"};
     data.requestId = this.commonService.getUUID();
-    console.log("Out Document Loop");
     if(data.borrower != null && data.borrower.documents != null && data.borrower.documents.length > 0){
-      console.log("in check Document Loop");
       data.borrower.documents.forEach(documentsData => {
-        console.log("in Data Loop");
+        documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
+      });
+      data.pledgedDocuments.documents.forEach(documentsData => {
         documentsData.data = documentsData.data != null ? btoa(JSON.stringify(documentsData.data)) : '';
       });
     }
 
-    console.log(data);
+    data.source = "SANDBOX";
+    this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
+    this.apiResponse = "Preparing Response. Please wait for a moment...";
+
     this.lenderService.listloanRequest(data).subscribe(res => {
-      console.log("Response==>",res);
-      this.acknowledgementRes = JSON.stringify(res);
+      this.acknowledgementRes = JSON.stringify(res,null,4);
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
   }
 
   ngOnInit(): void {
-    this.createDocumentationForm({});
+    this.webSocketAPI = new WebSocketAPI(this);
+    this.webSocketAPI._connect();
+    this.createDocumentationForm();
   }
 
   tabClick(tab) {
     if(tab.index==0){
-      console.log('Schema Clicked');
       this.getApiRequestSchema('listLoansRequest');
       this.getApiResponseSchema('listLoansResponse');
     }else if(tab.index==1){
