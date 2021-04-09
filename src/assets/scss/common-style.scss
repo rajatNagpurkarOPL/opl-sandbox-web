@@ -267,6 +267,11 @@ display: flex;
 }
 
         .matches1-table {
+
+            .mat-form-field-wrapper {
+                padding-bottom: 0 !important;
+            }
+            
             tr:nth-of-type(even) {
                 background-color: #F5F6F8 !important;
             }
@@ -597,7 +602,7 @@ p {
 
 }
 .ml-55 {
-    margin-left: 5em !important; 
+    margin-left: 0 !important; 
 
 }
 .disbursed-table {
@@ -1571,6 +1576,81 @@ td:last-child {
 
 }
 
+
+.Claculate-table {
+
+    th {
+   
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        color: #000;
+        font-size: 16px;
+        opacity: 0.4;
+        font-weight: 500;
+    }
+    
+    td {
+        padding: 0.75rem !important;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        color: #000;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 30px;
+    }
+    
+    th:nth-child(1) {
+        width: 40%;     
+      }
+    
+      th:nth-child(2) {
+        width: 15%;
+        text-align: right;    
+      }
+    
+      th:nth-child(3) {
+        width: 15%;
+        text-align: right;      
+      }
+
+      th:nth-child(4) {
+        width: 15%; 
+        text-align: right;     
+      }
+
+      th:nth-child(5) {
+        width: 15%;  
+        text-align: right;    
+      }
+    
+    
+      td:nth-child(1) {
+        width: 40%;    
+      }
+    
+      td:nth-child(2) {
+        width: 15%; 
+        text-align: right;   
+      }
+    
+      td:nth-child(3) {
+        width: 15%;  
+        text-align: right;    
+      }
+
+      td:nth-child(4) {
+        width: 15%;  
+        text-align: right;    
+      }
+
+      td:nth-child(5) {
+        width: 15%; 
+        text-align: right;   
+      }  
+
+    
+    }
+    
 
 
 
@@ -3163,6 +3243,73 @@ header{
             padding: 0.8em .5em !important;
         }
     }
+}
+
+.calculate-now {
+
+    p {
+        font-weight: 500;
+        padding: 1.75em 1.75em 0.75em;
+    }
+h4 {
+    font-weight: 500 !important;
+}
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.75em;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.25rem;
+}
+.product-details-btn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2em;
+}
+
+.calculate-details {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+
+
+.text:last-of-type {
+    border-right: 0;
+}
+
+.text {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right: 1px solid #0000000F;
+    margin-bottom: 4rem;
+
+    h2 {
+        font-size: 36px;
+        font-weight: bold;   
+        padding-bottom: 1rem; 
+    }
+span {
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0.4;    
+}
+}
+
+}
+
 }
 
 // .ng-untouched{
