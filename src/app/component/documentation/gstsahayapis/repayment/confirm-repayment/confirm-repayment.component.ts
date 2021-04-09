@@ -46,9 +46,7 @@ export class ConfirmRepaymentComponent implements OnInit {
     let data = this.documentationForm.getRawValue();
     data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(), "orgId": "OPLB4L123"};
     data.requestId = this.commonService.getUUID();
-    console.log(data);
     this.lenderService.confirmRepayment(data).subscribe(res => {
-      console.log("Response==>",res);
       this.acknowledgementRes = JSON.stringify(res);
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
@@ -61,7 +59,6 @@ export class ConfirmRepaymentComponent implements OnInit {
 
   tabClick(tab) {
     if(tab.index==0){
-      console.log('Schema Clicked');
       this.getApiRequestSchema('confirmRepayment');
       this.getApiResponseSchema('confirmRepayment');
     }else if(tab.index==1){

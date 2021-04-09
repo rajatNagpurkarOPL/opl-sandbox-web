@@ -11,13 +11,15 @@
                 <div class="well well-sm p-0">
                     <div class="table-container">
                         <div class="form-group">
-                            <mat-form-field style="width: 10em; background-color: #777;">
+                            <mat-form-field style="width: 10%; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" readonly>
                             </mat-form-field>
-                            <mat-form-field style="width: 90em;">
+                            <mat-form-field style="width: 80%;">
                                 <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://qa-opl.instantmseloans.in/b4l/ruleengine/web/ruleengine/v3.3/repayment/setRepaymentPlanRequest">
                             </mat-form-field>
-                            <button mat-button style="float: right;font-weight: bold; height: 4em;" color="primary">POST</button>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
                         </div>
                     </div>
                     
@@ -121,12 +123,12 @@
                                             <mat-panel-title>Loan Details</mat-panel-title>
                                         </mat-expansion-panel-header>
                                         
-                                        <mat-form-field style="width: 25em;">
+                                        <mat-form-field  appearance="outline" style="width: 25em;">
                                             <mat-label>Loan Application Id</mat-label>
                                             <input matInput type="text" formControlName="loanApplicationId">
                                         </mat-form-field>
 
-                                        <mat-form-field style="width: 25em; padding-left: 10px">
+                                        <mat-form-field  appearance="outline" style="width: 25em; padding-left: 10px">
                                             <mat-label>Loan Id</mat-label>
                                             <input matInput type="text" formControlName="loanId">
                                         </mat-form-field>
@@ -136,29 +138,29 @@
                                                 <mat-panel-title>Plan Data</mat-panel-title>
                                             </mat-expansion-panel-header>
                                             <form formGroupName="plan">
-                                                <mat-form-field style="width: 25em;">
+                                                <mat-form-field  appearance="outline" style="width: 25em;">
                                                     <mat-label>Id</mat-label>
                                                     <input matInput type="text" formControlName="id">
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Automatic</mat-label>
                                                     <input matInput type="text" formControlName="automatic">
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px">
                                                     <mat-label>Schedule Type</mat-label>
                                                     <mat-select formControlName="scheduleType">
                                                         <mat-option *ngFor="let data of scheduleTypeMaster" [value]="data">{{data}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Number of Installments</mat-label>
                                                     <input matInput type="number" formControlName="noOfInstallments">
                                                 </mat-form-field>
 
-                                                <mat-form-field style="padding-left: 10px;">
+                                                <mat-form-field  appearance="outline" style="padding-left: 10px;">
                                                     <mat-label>Total Amounts</mat-label>
                                                     <input matInput type="number" formControlName="totalAmount">
                                                 </mat-form-field>
@@ -178,13 +180,15 @@
 
                         <mat-tab-group>
                             <mat-tab label="Acknowlegement">
-                                <br/>
-                                <mat-form-field style="width:100%">
-                                    <mat-label>Textarea</mat-label>
-                                    <textarea matInput value={{acknowledgementRes}}></textarea>
-                                  </mat-form-field>
+                                  <pre class="json-pretty">
+                                      {{acknowledgementRes}}
+                                    </pre>
                             </mat-tab>
-                            <mat-tab label="Response">Response</mat-tab>
+                            <mat-tab label="Response">
+                                <pre class="json-pretty">
+                                    {{apiResponse}}
+                                </pre>
+                            </mat-tab>
                         </mat-tab-group>
                     </mat-tab>
                 </mat-tab-group>

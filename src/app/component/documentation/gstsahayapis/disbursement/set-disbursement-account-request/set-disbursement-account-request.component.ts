@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Websocket } from 'src/app/interface/websocket.interface';
 import { LenderService } from 'src/app/service/lender.service';
+import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
 
 @Component({
   selector: 'app-set-disbursement-account-request',
   templateUrl: './set-disbursement-account-request.component.html',
   styleUrls: ['./set-disbursement-account-request.component.scss']
 })
-export class SetDisbursementAccountRequestComponent implements OnInit {
+export class SetDisbursementAccountRequestComponent implements OnInit, Websocket {
 
   tab: any = { reqSchema: true };
   button: boolean;
+  webSocketAPI: WebSocketAPI;
 
   documentationFormData : any = {};
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
-  acknowledgementRes: any = 'Please click on Request Button';
+  acknowledgementRes: any = 'Acknowledgement will be display here';
+  apiResponse : any = 'Response will be display here';
 
   accountDataTypeMaster = ['ACCOUNT' , 'VPA'];
   accountStatusMaster = ['ACTIVE' , 'INACTIVE', 'VERIFICATION_FAILED'];
@@ -25,6 +29,11 @@ export class SetDisbursementAccountRequestComponent implements OnInit {
   accountTypeMaster = ['CURRENT' , 'SAVINGS' , 'OVERDRAFT', 'DEFAULT'];
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
+  topic: string = "/setDisbursementAccountResponse";
+
+  handleResponse(result: any) {
+    this.apiResponse = JSON.stringify(JSON.parse(result),null,4) ;
+  }
 
   createDocumentationForm(data){
     this.documentationForm = this.fb.group({
@@ -48,16 +57,21 @@ export class SetDisbursementAccountRequestComponent implements OnInit {
     let data = this.documentationForm.getRawValue();
     data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(), "orgId": "OPLB4L123"};
     data.requestId = this.commonService.getUUID();
-    console.log(data);
+
+    data.source = "SANDBOX";
+    this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
+    this.apiResponse = "Preparing Response. Please wait for a moment...";
+
     this.lenderService.setDisbursementAccountRequest(data).subscribe(res => {
-      console.log("Response==>",res);
-      this.acknowledgementRes = JSON.stringify(res);
+      this.acknowledgementRes = JSON.stringify(res,null,4);
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
   }
 
   ngOnInit(): void {
+    this.webSocketAPI = new WebSocketAPI(this);
+    this.webSocketAPI._connect();
     this.createDocumentationForm({});
   }
 
