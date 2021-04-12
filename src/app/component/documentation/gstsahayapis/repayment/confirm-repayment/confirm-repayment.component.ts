@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { LenderService } from 'src/app/service/lender.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ConfirmRepaymentComponent implements OnInit {
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
-  acknowledgementRes: any = 'Please click on Request Button';
+  acknowledgementRes: any = Constant.ACKNOWLEDGEMENT_RESPONSE;
 
   paymentMethodTypeMaster = ['EMANDATE_UPI' , 'NETBANKING' , 'UPI' , 'ENACH' , 'DEBIT_CARD' , 'NEFT' , 'IMPS' , 'RTGS' , 'CREDIT_LINE', 'COLLECTIONS_VIA_LSP', 'ANY'];
   paymentStatusMaster = ['SUCCESS' , 'FAILURE', 'PENDING_AUTH', 'PROCESSING'];
