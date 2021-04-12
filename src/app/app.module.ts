@@ -79,6 +79,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
 import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
 import { ConstitutionPopupComponent } from './popup/constitution-popup/constitution-popup.component';
+import { AddNewTriggerComponent } from './component/settings/add-new-trigger/add-new-trigger.component';
+import { CreateTriggerComponent } from './component/settings/create-trigger/create-trigger.component';
 
 
 
@@ -160,7 +162,9 @@ import { ConstitutionPopupComponent } from './popup/constitution-popup/constitut
     DrawerMenuComponent,
     NewTriggerConfigurationComponent,
     DisbursedCountComponent,
-    ConstitutionPopupComponent
+    ConstitutionPopupComponent,
+    AddNewTriggerComponent,
+    CreateTriggerComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

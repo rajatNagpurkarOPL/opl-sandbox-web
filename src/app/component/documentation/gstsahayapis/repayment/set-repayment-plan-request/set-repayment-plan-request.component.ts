@@ -2,26 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { LenderService } from 'src/app/service/lender.service';
+import { Websocket } from 'src/app/interface/websocket.interface';
+import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
 
 @Component({
   selector: 'app-set-repayment-plan-request',
   templateUrl: './set-repayment-plan-request.component.html',
   styleUrls: ['./set-repayment-plan-request.component.scss']
 })
-export class SetRepaymentPlanRequestComponent implements OnInit {
+export class SetRepaymentPlanRequestComponent implements OnInit, Websocket {
 
   tab: any = { reqSchema: true };
   button: boolean;
+  webSocketAPI: WebSocketAPI;
 
   documentationFormData : any = {};
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
-  acknowledgementRes: any = 'Please click on Request Button';
+  acknowledgementRes: any = 'Acknowledgement will be display here';
+  apiResponse : any = 'Response will be display here';
 
   scheduleTypeMaster = ['ONE_TIME' , 'RECURRING' , 'AS_PRESENTED'];
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
+  topic: string = "/setRepaymentPlanResponse";
+
+  handleResponse(result: any) {
+    this.apiResponse = JSON.stringify(JSON.parse(result),null,4) ;
+  }
 
   createDocumentationForm(data){
     this.documentationForm = this.fb.group({
@@ -41,16 +50,21 @@ export class SetRepaymentPlanRequestComponent implements OnInit {
     let data = this.documentationForm.getRawValue();
     data.metadata = {"version": "1.0","timestamp": new Date(),"traceId": this.commonService.getUUID(), "orgId": "OPLB4L123"};
     data.requestId = this.commonService.getUUID();
-    console.log(data);
-    this.lenderService.setDisbursementAccountRequest(data).subscribe(res => {
-      console.log("Response==>",res);
-      this.acknowledgementRes = JSON.stringify(res);
+
+    data.source = "SANDBOX";
+    this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
+    this.apiResponse = "Preparing Response. Please wait for a moment...";
+
+    this.lenderService.setRepaymentPlanRequest(data).subscribe(res => {
+      this.acknowledgementRes = JSON.stringify(res,null,4);
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
   }
 
   ngOnInit(): void {
+    this.webSocketAPI = new WebSocketAPI(this);
+    this.webSocketAPI._connect();
     this.createDocumentationForm({});
   }
 

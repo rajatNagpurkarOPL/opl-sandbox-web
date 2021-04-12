@@ -53,6 +53,10 @@ export const RestURL = {
     TRIGGER_DISBURSEMENT_STATUS_REQUEST : '/v3.3/disbursement/triggerDisbursementStatusRequest',
     RAISE_DISPUTE_REQUEST: '/v3.3/loan/dispute/raiseDisputeRequest',
     DISPUTE_STATUS_REQUEST: '/v3.3/loan/dispute/disputeStatusRequest',
+    SAVE_TRIGGER: '/triggerManagement/saveTrigger',
+    UPDATE_TRIGGER: '/triggerManagement/updateTrigger',
+    GET_TRIGGER_DETAIL: '/triggerManagement/getTriggerDetails',
+    GET_TRIGGERS_LIST: '/triggerManagement/getTriggersList',
     SANDBOX : {
         MASTER_LIST : '/master/get-master-data',
         SCHEMA_DETAIL : '/schema/api',

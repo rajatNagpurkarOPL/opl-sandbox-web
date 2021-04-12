@@ -1,0 +1,71 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="new-trigger-back">
+                <p class="text" routerLink="{{routeURL.SETTINGS}}"><img src="assets/img/blue-back-arrow.svg" class="mr-2"/> Back </p>
+                <p class="fs-16 ml-4"><b>Add New Trigger</b></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+                <div id="b4l-content">
+
+                    <div class="row pd-2">
+                        <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+                            <p class="text-heading">New Trigger Configuration</p>
+                            <span class="text-heading-span">Please choose what type of Trigger you want to create, you will not be able to change some things later once Trigger is created</span>
+                        </div>
+                    </div>
+                
+                    <hr>  
+                    <form [formGroup]="triggerForm" *ngIf="triggerForm.controls != null && triggerForm.controls != undefined">
+                        <div class="row pd-2">
+                            <div class="psb-xl-4 psb-lg-4 psb-md-12 psb-sm-12 psb-xs-12">
+                                <p><b>Trigger Name</b></p>
+                                <mat-form-field class="example-full-width mb-3" style="width:25em">          
+                                    <input matInput  type="text" formControlName="name">
+                                </mat-form-field>
+                                <br/>
+                                <span class="fs-16 op-4">This name will be visible to users who will be matched with this Trigger</span>
+                            </div>
+
+                            <div class="psb-xl-4 psb-lg-4 psb-md-12 psb-sm-12 psb-xs-12">
+                                <p><b>Copy from Trigger</b></p>
+                                <mat-form-field appearance="outline" class="w-100 trigger-0 mb-3">
+                                    <mat-select formControlName="copyFromTrigger">
+                                        <mat-option *ngFor="let data of copyFromTriggerMaster" [value]="data">{{data}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <span class="fs-16 op-4">If you want to copy conditions and actions from any existing trigger</span>
+
+                            </div>
+                        </div>
+
+                        <div class="row pd-1" style="padding-left:3.1em">
+                            <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+                            <p class="text-heading">Description About Trigger</p>
+                            <!-- <span class="text-heading-span-border">This trigger will check the disbursed amount & number of applications And notify to admin users.</span> -->
+                            <mat-form-field class="example-full-width mb-3" style="width:90%">          
+                                <input matInput  type="text" formControlName="description">
+                            </mat-form-field>
+                            </div>
+                        </div>
+
+
+                        <div class="row pd-1">
+                            <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+                                <hr class="mb-5">
+                                <div class="d-flex al-center js-end w-100">
+                                    <button mat-raised-button color="primary" class="btn cancel-btn mr-4" routerLink="{{routeURL.SETTINGS}}">Cancel</button>
+                                    <button mat-raised-button color="primary" class="btn trigger-btn" (click)="save()">+ {{triggerButton}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+

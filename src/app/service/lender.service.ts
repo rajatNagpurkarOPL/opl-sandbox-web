@@ -194,4 +194,21 @@ export class LenderService {
   getDomainSchema(data): Observable<any>{
     return this.http.get(AppURL.SANDBOX + RestURL.SANDBOX.DOMAIN_DETAIL+ '/' + data, false);
   }
+
+  //trigger management API
+  saveTrigger(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.SAVE_TRIGGER,data);
+  }
+
+  updateTrigger(data): Observable<any>{
+    return this.http.post(AppURL.RULE_ENGINE + RestURL.UPDATE_TRIGGER,data);
+  }
+
+  getTriggerDetails(triggerId): Observable<any>{
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_TRIGGER_DETAIL + '/' + triggerId, false);
+  }
+
+  getTriggersList(): Observable<any>{
+    return this.http.get(AppURL.RULE_ENGINE + RestURL.GET_TRIGGERS_LIST, false);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { SendBackModelService } from 'src/app/common-utils/common-services/SendBackModelService';
 import { Constant } from 'src/app/common-utils/Constant';
@@ -14,7 +15,9 @@ import { EblrpopupComponent } from './eblrpopup/eblrpopup.component';
 })
 export class SettingsComponent implements OnInit {
 
+  public routeURL: any = {};
   eblrList = [];
+  triggersList = [];
   nexteblr : any = null;
   dialogRef = null;
   user: any = {};
@@ -23,12 +26,12 @@ export class SettingsComponent implements OnInit {
   value: string;
   viewValue: string;
   selected = '';
-  
 
-  constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,private global: Globals, public sendBackService: SendBackModelService) {
-    
+  currentTab = 'eblr';
+
+  constructor(private commonService: CommonService, private lenderService: LenderService, private matDialog: MatDialog,private global: Globals, public sendBackService: SendBackModelService,private route : ActivatedRoute , private router : Router) {
+    this.routeURL = Constant.ROUTE_URL;
   }
-
 
   /**
    * Update eblr action  status
@@ -61,6 +64,10 @@ export class SettingsComponent implements OnInit {
     }, (error: any) => {
       this.commonService.errorSnackBar(error);
     });
+  }
+
+  switchTab(data){
+    this.currentTab = data;
   }
 
 
@@ -126,14 +133,31 @@ export class SettingsComponent implements OnInit {
     item.id = eblr.id;
     item.plr = eblr.plr;
     item.effectiveFrom = eblr.effectiveFrom;
-    this.openDialog(item);
+    this.openDialog(item ,'eblr');
   }
 
-  openDialog(data): void {
+  openDialog(data , dialogName): void {
+    console.log("In Open Dialog==>",data);
+    console.log("DialogName==>",dialogName);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
-    const dialogRef = this.matDialog.open(EblrpopupComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => { this.listPLRByType(); });
+    if(dialogName === 'eblr'){
+      const dialogRef = this.matDialog.open(EblrpopupComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(() => { this.listPLRByType(); });
+    }else if(dialogName === 'trigger'){
+      this.router.navigate([Constant.ROUTE_URL.ADD_NEW_TRIGGER]);
+    }
+  }
+
+  getTriggersList(){
+    this.lenderService.getTriggersList().subscribe(res => {
+      if (res.status === 200) {
+        this.triggersList = res.data;
+      }
+      console.log("Triggers Data==>",this.triggersList);
+    }, (error: any) => {
+      this.commonService.errorSnackBar(error);
+    });
   }
 
   ngOnInit(): void {
@@ -143,9 +167,7 @@ export class SettingsComponent implements OnInit {
       this.user = this.global.USER;
     }
     this.listPLRByType();
-
-
-    
+    this.getTriggersList();
   }
 
   

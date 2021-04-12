@@ -393,7 +393,7 @@
                           <tr *ngIf="!constants.SINGLE_TR_PARAM.includes(item.code)">
                             <td>{{i+1}}.</td>
                             <td>{{item.lable}} <img *ngIf="item.paramDesc != null && item.paramDesc != undefined" src="assets/img/note.svg" matTooltip={{item.paramDesc}} class="ml-2"/></td>  
-                            {{item | json}}
+                            <!-- {{item | json}} -->
                             <td></td>
                             <td><img src="assets/img/RedCross.svg" (click)="removeParameter(item)"></td>
                           </tr>
@@ -520,7 +520,7 @@
                             <td><img src="assets/img/RedCross.svg" (click)="removeParameter(item)"></td>
                           </tr>
                           <tr *ngIf="!constants.SINGLE_TR_PARAM.includes(item.code)">
-                            <td colspan="4"  class="pd-0-table">
+                            <td colspan="5"  class="pd-0-table">
                               
                             <ng-container *ngIf="item.code == 'NO_OF_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS' || item.code == 'MIN_CREDIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_DEBIT_TRAN_ACC_PER_MONTH' || item.code == 'MIN_OVERALL_TRAN_ACC_PER_MONTH'">
                               <div class="matches-right">
@@ -593,6 +593,7 @@
                                     <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                   </div>
                                     </div>
+                                    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Days" [(ngModel)]="item.answer.min" formControlName="min_{{item.parameterId}}">
                                   </div>
                                 </div>
                               <div class="matches-parameter1" style="flex-direction: row;padding: 2em 0; position: relative; border-bottom: 0;" *ngIf="datas.lovAns == 1 || datas.lovAns == 2">
@@ -654,7 +655,7 @@
                                   <ng5-slider [(value)]="datas.minCount" [(highValue)]="datas.maxCount" [options]="item.option"></ng5-slider>
                                   <div class="input-group w-45">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">Counts</div>
+                                      <div class="input-group-text">Months</div>
                                     </div>
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Months" [(ngModel)]="datas.minCount" formControlName="min_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['min_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted"></app-print-error>
@@ -667,12 +668,14 @@
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max" [(ngModel)]="datas.maxCount" formControlName="max_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['max_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted"></app-print-error>
                                   </div>
+                                  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="item.answer.checkBounced" formControlName="min2_{{item.parameterId}}">
+                                  <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                 </div>
                                 <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 3">
                                   <ng5-slider [(value)]="datas.minAmount" [(highValue)]="datas.maxAmount" [options]="item.option2"></ng5-slider>
                                   <div class="input-group w-45">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">INR</div>
+                                      <div class="input-group-text">Months</div>
                                     </div>
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minAmount" formControlName="min2_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['min2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -685,13 +688,15 @@
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxAmount" formControlName="max2_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['max2_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                   </div>
+                                  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="item.answer.checkBounced" formControlName="min2_{{item.parameterId}}">
+                                  <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                 </div>
                                 <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 2">
                                   <ng5-slider [(value)]="datas.minCountPer" [(highValue)]="datas.maxCountPer" [options]="item.option3">
                                   </ng5-slider>
-                                  <div class="input-group w-45">
+                                  <div class="input-group">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">%</div>
+                                      <div class="input-group-text">Months</div>
                                     </div>
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minCountPer" formControlName="min3_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['min3_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -704,13 +709,15 @@
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxCountPer" formControlName="max3_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['max3_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                   </div>
+                                  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="item.answer.checkBounced" formControlName="min2_{{item.parameterId}}">
+                                  <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                 </div>
                                 <div class="buttin-b4l-opacity opl2" *ngIf="datas.lovAns == 4">
                                   <ng5-slider [(value)]="datas.minAmtPer" [(highValue)]="datas.maxAmtPer" [options]="item.option4">
                                   </ng5-slider>
                                   <div class="input-group w-45">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">%</div>
+                                      <div class="input-group-text">Counts</div>
                                     </div>
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="datas.minAmtPer" formControlName="min4_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['min4_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
@@ -718,11 +725,13 @@
                                   <p class="mb-0">to</p>
                                   <div class="input-group w-45">
                                     <div class="input-group-prepend">
-                                      <div class="input-group-text">%</div>
+                                      <div class="input-group-text">Counts</div>
                                     </div>
                                     <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max"  [(ngModel)]="datas.maxAmtPer" formControlName="max4_{{datas.seqNo}}{{item.parameterId}}">
                                     <app-print-error [control]="pf['max4_'+(datas.seqNo)+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                   </div>
+                                  <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Enter Number" [(ngModel)]="item.answer.minAmount" formControlName="min2_{{item.parameterId}}">
+                                  <app-print-error [control]="pf['min2_'+item.parameterId]" [submitted]="submitted" ></app-print-error>
                                 </div>
                                 <button mat-raised-button color="primary" (click)="removeInParameter(datas,item)" *ngIf="item.answer.length != 1"> Remove </button>
                               </div>
