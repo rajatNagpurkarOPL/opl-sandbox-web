@@ -2471,8 +2471,24 @@
                     
                   
                     <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
-                      <div class="d-flex js-center al-center w-100">
+                      <div class="d-flex js-center al-center">
                         <p class="mr-2 mb-0">2.</p>
+                        <div class="matches-left">
+                          <p class="mb-0">No. of Installments</p>
+                        </div>
+                      </div>
+                  <div class="">
+                    <mat-radio-group aria-label="Select an option" class="d-flex w-100 al-center">
+                      <mat-radio-button value="1" class="mr-2">One time</mat-radio-button>
+                      <mat-radio-button value="2">Multiple Time</mat-radio-button>
+                    </mat-radio-group>
+                    <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Ener no. of installments">
+                  </div>
+                    </div>
+
+                    <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+                      <div class="d-flex js-center al-center w-100">
+                        <p class="mr-2 mb-0">3.</p>
                         <div class="matches-left">
                           <p class="mb-0">Early Payment Acceptance</p>
                         </div>
@@ -2485,10 +2501,10 @@
                         <!-- <img src="assets/img/close-red.svg" class="position-rel" /> -->
                       </p>
                     </div>
-
+                  
                     <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
                       <div class="d-flex js-center al-center w-100">
-                        <p class="mr-2 mb-0">3.</p>
+                        <p class="mr-2 mb-0">4.</p>
                         <div class="matches-left">
                           <p class="mb-0">Change of Method</p>
                         </div>
@@ -2500,33 +2516,6 @@
                         </mat-button-toggle-group>
                         <!-- <img src="assets/img/close-red.svg" class="position-rel" /> -->
                       </p>
-                    </div>
-                  
-                    <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
-                      <div class="d-flex js-center al-center w-100">
-                        <p class="mr-2 mb-0">4.</p>
-                        <div class="matches-left">
-                          <p class="mb-0">Schedule Type</p>
-                        </div>
-                      </div>
-                      <div class="fl-column d-flex w-100">
-                        <p class="buttin-b4l-opacity">
-                          <mat-radio-group formControlName="scheduleType">
-                            <!-- <mat-radio-button *ngFor="let data of scheduleTypeMaster" [value]="data.code" class="mr-4" (click)="addAndRemoveRepayControls(datas,'schedule',data)" [checked]="scheduleTypeMaster.indexOf(data) == 0"> {{data.value}} </mat-radio-button> -->
-                            <mat-radio-button *ngFor="let data of scheduleTypeMaster" [value]="data.code" class="mr-4" (click)="addAndRemoveRepayControls(datas,'schedule',data)"> {{data.value}} </mat-radio-button>
-                          </mat-radio-group>
-                        </p>
-
-                        <p class="buttin-b4l-opacity" *ngIf="datas.controls.scheduleType.value === 'RECURRING'">
-                          <mat-radio-group formControlName="frequency">
-                            <mat-radio-button *ngFor="let data of repaymentFreqTypeMaster" [value]="data.code" class="mr-4" [disabled]="tenureEnteredInParam < data.description" (click)="computeNoOfInstallments(datas,data)" > {{data.value}} </mat-radio-button>
-                          </mat-radio-group>
-                        </p>
-
-                        <!-- <div class="d-flex w-100 al-center js-end" *ngIf="datas.controls.scheduleType.value === 'RECURRING'">
-                          <input type="text" placeholder="Ener no. of schedule" class="w-50" formControlName="scheduleTypeTimes">
-                        </div> -->
-                      </div>
                     </div>
 
                     <!-- <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
@@ -2549,7 +2538,7 @@
                       </div>
                     </div> -->
                   
-                    <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+                    <!-- <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
                       <div class="d-flex js-center al-center w-100">
                         <p class="mr-2 mb-0">5.</p>
                         <div class="matches-left">
@@ -2566,9 +2555,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
+                    <!-- <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
                       <div class="d-flex js-center al-center w-100">
                         <p class="mr-2 mb-0">6.</p>
                         <div class="matches-left">
@@ -2585,7 +2574,7 @@
                             </div>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
                   
                     <!-- <div class="b4l-product-list-right d-flex js-between al-center w-100 btm-1 pt-4 pb-4">
                       <div class="d-flex js-center al-center w-100">
@@ -2707,6 +2696,138 @@
             </div>
         </div>
         <!-- Claculate now end-->
+
+
+
+<!-- Calculate now Details start-->
+<div id="b4l-content" class="calculate-now">
+  <div class="row">
+  <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+   <p class="fs-16 mb-0">Calculate Installments Details</p> 
+  </div>
+  </div>
+  <hr>
+  
+  
+  <div class="row pd-1">
+    <div class="psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+      <h4>Eligible Loan Amount</h4>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">INR</div>
+        </div>    
+        <input   type="text" aria-label="Text input with checkbox" placeholder="1,00,000" class="form-control">
+      </div>
+    </div>
+  
+    <div class="psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+      <h4>Rate of Interest</h4>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">%</div>
+        </div>    
+        <input   type="text" aria-label="Text input with checkbox" placeholder="10.00" class="form-control">
+      </div>
+    </div>
+  
+    <div class="psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+      <h4>Tenure</h4>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Months</div>
+        </div>    
+        <input   type="text" aria-label="Text input with checkbox" placeholder="3" class="form-control">
+      </div>
+    </div>
+  
+    <div class="psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+      <h4>Number of Installments</h4>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Nos.</div>
+        </div>    
+        <input   type="text" aria-label="Text input with checkbox" placeholder="3" class="form-control">
+      </div>
+    </div>
+    </div>
+  
+  
+    <div class="product-details-btn">
+      <button href="javascript:void(0)" class="product-btn4 mr-2"> Cancel</button>
+      <button  href="javascript:void(0)" class="product-btn3 pd-1">Calculate</button>
+  </div>
+  
+  <hr>
+  
+  <div class="pd-2">
+  <table class="table Claculate-table">
+    <thead>
+      <tr>
+        <th scope="col">Installment No.</th>
+        <th scope="col">Outstanding Amount</th>
+        <th scope="col">Installment Amount</th>
+        <th scope="col">Principle Amount</th>
+        <th scope="col">Interest Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+      </tr>
+  
+      <tr>
+        <td>2</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+      </tr>
+  
+      <tr>
+        <td>3</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+        <td>₹1,00,000</td>
+      </tr>
+  
+    </tbody>
+  </table>
+  </div>
+  
+  
+  
+  <div class="calculate-details">
+  
+  <div class="text">
+    <h2>₹1,00,000</h2>
+    <span>Principle Amount</span>
+  </div>
+  
+  <div class="text">
+    <h2>₹20,000</h2>
+    <span>Interest Payable</span>
+  </div>
+  
+  <div class="text">
+    <h2>₹1,20,000</h2>
+    <span>Total Amount</span>
+  </div>
+  
+  
+  </div>
+  
+  
+  
+  
+  </div>
+  
+  <!-- Calculate now Details start-->
+
         
           <!-- Repayment Plan -->
           
@@ -3971,7 +4092,140 @@
             </tr>
             
             
-            
+            <tr>
+              <td>22</td>
+              <td>Maximum Number of Cash transactions allowed in Last “n” Months <img src="assets/img/note.svg" matTooltip="Check for security required for each invoice" class="ml-2"/></td>
+              <td> 
+                <div class="d-flex al-center js-end">
+                  <mat-checkbox class="example-margin mr-4">Check till date</mat-checkbox>  
+                  <mat-checkbox class="example-margin">Check For Specific Time Period</mat-checkbox>
+                  </div>
+              </td>                
+              
+              <td><img src="assets/img/RedCross.svg"></td>
+              </tr>
+
+              <tr>
+                <td colspan="4" class="pd-0-table">
+                <table class="table matches1-table">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Select Period</th>
+                <th scope="col">Check for</th>
+                <th scope="col">Set Range</th>         
+                <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td scope="row">1</td>
+                <td> <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Check till date</mat-label>
+                <mat-select [(value)]="selected">
+                <mat-option>None</mat-option>
+                <mat-option value="option1">None</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+                </mat-form-field></td>
+                
+                <td> 
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Count (Numbers)</mat-label>
+                    <mat-select [(value)]="selected">
+                    <mat-option>None</mat-option>
+                    <mat-option value="option1">None</mat-option>
+                    <mat-option value="option2">Option 2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                </td>
+                
+                <td>
+                       
+            <div class="d-flex al-center">
+              <div class="input-group">
+              <div class="input-group-prepend">
+              <div class="input-group-text">Nos.</div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+              </div>
+              <p class="mb-0 ml-2 mr-2">to</p>
+              <div class="input-group">
+              <div class="input-group-prepend">
+              <div class="input-group-text">Nos.</div>
+              </div>
+              <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+              </div>
+              </div>
+                </td>
+                
+                <td></td>
+                </tr>
+                
+                
+                <tr>
+                  <td scope="row">1</td>
+                  <td> <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>20 Months</mat-label>
+                  <mat-select [(value)]="selected">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">None</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                  </mat-select>
+                  </mat-form-field></td>
+                  
+                  <td> 
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Amount (%)</mat-label>
+                      <mat-select [(value)]="selected">
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">None</mat-option>
+                      <mat-option value="option2">Option 2</mat-option>
+                      <mat-option value="option3">Option 3</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                  </td>
+                  
+                  <td>
+                         
+              <div class="d-flex al-center">
+                <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">%</div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Min">
+                </div>
+                <p class="mb-0 ml-2 mr-2">to</p>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">%</div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Max">
+                </div>
+                </div>
+                  </td>
+                  
+                  <td><img src="assets/img/RedCross.svg"/></td>
+                  </tr>
+                
+                <tr>
+                <td></td>
+                <td colspan="4">
+                <div class="product-details-btn">
+                <button  href="javascript:void(0)" class="product-btn3 ml-55 mt-3">+ Add New Range</button>
+                </div>
+                
+                </td>
+                </tr>
+                
+                </tbody>
+                </table>
+                </td>
+                
+                </tr>
             
             
                 </tbody>
