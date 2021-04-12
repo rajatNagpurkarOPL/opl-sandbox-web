@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { Websocket } from 'src/app/interface/websocket.interface';
 import { LenderService } from 'src/app/service/lender.service';
 import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
@@ -48,8 +49,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit, Websocket 
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
-  acknowledgementRes: any = 'Acknowledgement will be display here';
-  createLoanApplicationResponse : any = 'Response will be display here';
+  acknowledgementRes: any = Constant.ACKNOWLEDGEMENT_RESPONSE;
+  createLoanApplicationResponse : any = Constant.API_RESPONSE;
 
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) {}
@@ -288,8 +289,8 @@ export class CreateLoanApplicationRequestComponent implements OnInit, Websocket 
   data.source = "SANDBOX";
   // this.webSocketAPI._send("/juspayapis/createLoanApplicationsRequest",JSON.stringify(data));
 
-  this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
-  this.createLoanApplicationResponse = "Preparing Response. Please wait for a moment...";
+  this.acknowledgementRes = Constant.PREP_ACKNOWLEDGEMENT_RESPONSE;
+  this.createLoanApplicationResponse = Constant.PREP_API_RESPONSE;
   this.lenderService.createLoanApplicationRequest(data).subscribe(res => {
     this.acknowledgementRes = JSON.stringify(res,null,4);
   }, (error: any) => {

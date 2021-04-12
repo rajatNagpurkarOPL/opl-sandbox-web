@@ -131,5 +131,9 @@ export const Constant = {
     BASED_ON_STR : "(Based on : ",
     CLOSE_BRACKET :")",
     VALIDATION_CHECK_TYPE : { minMaxCheck : { min : "min" , max : "max" , value : "minMaxCheck"} , minMaxRSCheck : { min : "minRs" , max : "maxRs", value : "minMaxRSCheck"}},
-    SINGLE_TR_PARAM : ["CONSTITUTION","GEO_MARKET_FOCUS","GST_TURNOVER_LIMIT","CREDIT_SUMMATION","BANK_ACC_PRIO"]
+    SINGLE_TR_PARAM : ["CONSTITUTION","GEO_MARKET_FOCUS","GST_TURNOVER_LIMIT","CREDIT_SUMMATION","BANK_ACC_PRIO"],
+    ACKNOWLEDGEMENT_RESPONSE : "Acknowledgement will be display here",
+    API_RESPONSE : "Response will be display here",
+    PREP_ACKNOWLEDGEMENT_RESPONSE : "Preparing Acknowledgement. Please wait ...",
+    PREP_API_RESPONSE : "Preparing Response. Please wait for a moment..."
 };

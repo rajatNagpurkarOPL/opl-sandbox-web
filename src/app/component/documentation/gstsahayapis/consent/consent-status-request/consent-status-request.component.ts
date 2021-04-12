@@ -5,6 +5,7 @@ import { LenderService } from 'src/app/service/lender.service';
 import { Websocket } from 'src/app/interface/websocket.interface';
 import { WebSocketAPI } from 'src/app/websocket/web-socket-api';
 import { v4 as uuid } from 'uuid';
+import { Constant } from 'src/app/common-utils/Constant';
 
 @Component({
   selector: 'app-consent-status-request',
@@ -21,8 +22,8 @@ export class ConsentStatusRequestComponent implements OnInit, Websocket {
   documentationForm : any =  FormGroup;
   apiRequestSchemaData: any[] = [];
   apiResponseSchemaData: any[] = [];
-  acknowledgementRes: any = 'Acknowledgement will be display here';
-  apiResponse : any = 'Response will be display here';
+  acknowledgementRes: any = Constant.ACKNOWLEDGEMENT_RESPONSE;
+  apiResponse : any = Constant.API_RESPONSE;
 
   constructor(private lenderService: LenderService, public commonService: CommonService, private fb: FormBuilder) { }
   topic: string = "/consentStatusResponse";
@@ -50,8 +51,8 @@ export class ConsentStatusRequestComponent implements OnInit, Websocket {
     data.requestId = this.commonService.getUUID();
     data.source = "SANDBOX";
 
-    this.acknowledgementRes = "Preparing Acknowledgement. Please wait ...";
-    this.apiResponse = "Preparing Response. Please wait for a moment...";
+    this.acknowledgementRes = Constant.PREP_ACKNOWLEDGEMENT_RESPONSE;
+    this.apiResponse = Constant.PREP_API_RESPONSE;
 
     this.lenderService.consentStatusRequest(data).subscribe(res => {
       this.acknowledgementRes = JSON.stringify(res,null,4);
