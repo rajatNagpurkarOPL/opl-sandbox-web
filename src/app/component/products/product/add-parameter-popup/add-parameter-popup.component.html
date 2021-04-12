@@ -14,8 +14,9 @@
 
     <div class="pop-up-content">
         <div class="pop-up-cl" *ngFor="let param of itemList">
-            <mat-checkbox *ngIf="param.isParameterActive === true" [(ngModel)]="param.isSelected"> {{param.lable}} </mat-checkbox>
-            <mat-checkbox *ngIf="param.isParameterActive === false" [disabled]=true> {{param.lable}} (Parameter Already added)</mat-checkbox>
+            <!-- <mat-checkbox *ngIf="param.isParameterActive === true" [(ngModel)]="param.isSelected"  matTooltip={{param.paramDesc}} class="ml-2"> {{param.lable}} </mat-checkbox>
+            <mat-checkbox *ngIf="param.isParameterActive === false" [disabled]=true matTooltip={{param.paramDesc}} class="ml-2"> {{param.lable}} (Parameter Already added) </mat-checkbox> -->
+            <mat-checkbox [(ngModel)]="param.isSelected"  matTooltip={{param.paramDesc}} class="ml-2" [disabled]="!param.isParameterActive"> {{param.lable}}</mat-checkbox>
             <!-- <p class="padd-lt"> Account No. Match with our database</p> -->
             <!-- <span class="b4l-pop-up-span">Lorem ipsum doler sit amen is there therefore the’s something</span> -->
             <!-- <span class="b4l-pop-up-span">Sales value of invoices fetched from GSTIN of applicant</span> -->
