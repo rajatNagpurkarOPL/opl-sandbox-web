@@ -111,7 +111,7 @@ export const Constant = {
         PRODUCT_PARAMETER  : "PRODUCT_PARAMETER",
         PRODUCT_ELIGIBILITY  : "PRODUCT_ELIGIBILITY"
     },
-    IS_MULTILECONTROLS : ["GST_TURNOVER_LIMIT","CREDIT_SUMMATION","NO_OF_CHEQUES_BOUNCED_N_MONTHS","MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS","MIN_CREDIT_TRAN_ACC_PER_MONTH","MIN_DEBIT_TRAN_ACC_PER_MONTH","MIN_OVERALL_TRAN_ACC_PER_MONTH","MAX_CASH_TRAN_ALL","MAX_PERMISSIBLE_MSME_RANK","MIN_BUREAU_SCORE_ALL_DIR_PAR","INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR","COMMERCIAL_DPD_MAX","SECURITY","BANK_ACC_PRIO","GEO_MARKET_FOCUS"],
+    IS_MULTILECONTROLS : ["GST_TURNOVER_LIMIT","CREDIT_SUMMATION","NO_OF_CHEQUES_BOUNCED_N_MONTHS","MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS","MIN_CREDIT_TRAN_ACC_PER_MONTH","MIN_DEBIT_TRAN_ACC_PER_MONTH","MIN_OVERALL_TRAN_ACC_PER_MONTH","MAX_CASH_TRAN_ALL","MAX_PERMISSIBLE_MSME_RANK","MIN_BUREAU_SCORE_ALL_DIR_PAR","INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR","COMMERCIAL_DPD_MAX","SECURITY","BANK_ACC_PRIO","GEO_MARKET_FOCUS","MAX_PERMISSIBLE_MSME_RANK_BUYER","CONSTITUTION"],
     TILL_DATE_MASTER : [{"id":1,"value":"Check Till Date"},{"id":2,"value":"Check For Specific Time Period"}],
     ROI :  {"value" : "ROI", "controlName" : "roiRange" , "controlGroup" : "roiControls","dropDownValue": "roiBasedOn", "code" : "roiBasedOn" , "isMandatory" : true},
     PF : {"value" : "PF", "controlName" : "processingFee" , "controlGroup" : "pfControls","dropDownValue": "processingFeeBasedOn", "isMandatory" : true},
@@ -130,5 +130,6 @@ export const Constant = {
     EFFECTIVE_ROI_CALC_METHOD : [{"id":44,"value":"EBLR"},{"id":45,"value":"MCLR"},{"id":46,"value":"FIXED"}],
     BASED_ON_STR : "(Based on : ",
     CLOSE_BRACKET :")",
-    VALIDATION_CHECK_TYPE : { minMaxCheck : { min : "min" , max : "max" , value : "minMaxCheck"} , minMaxRSCheck : { min : "minRs" , max : "maxRs", value : "minMaxRSCheck"}}
+    VALIDATION_CHECK_TYPE : { minMaxCheck : { min : "min" , max : "max" , value : "minMaxCheck"} , minMaxRSCheck : { min : "minRs" , max : "maxRs", value : "minMaxRSCheck"}},
+    SINGLE_TR_PARAM : ["CONSTITUTION","GEO_MARKET_FOCUS","GST_TURNOVER_LIMIT","CREDIT_SUMMATION","BANK_ACC_PRIO"]
 };

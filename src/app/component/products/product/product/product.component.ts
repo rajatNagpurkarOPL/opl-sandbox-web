@@ -14,6 +14,7 @@ import _ from 'lodash';
 import { Options } from 'ng5-slider';
 import { GeographicalAreasPopupComponent } from 'src/app/popup/geographical-areas-popup/geographical-areas-popup.component';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import { ConstitutionPopupComponent } from 'src/app/popup/constitution-popup/constitution-popup.component';
 
 // tslint:disable: max-line-length
 
@@ -66,6 +67,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
   lateRepaySelectedVal = null;
 
   tenureEnteredInParam = null;
+
+  isSpecificTimePeriod = false;
 
 // @kinjal added
  foods: Food[] = [
@@ -1357,8 +1360,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 }
                 if(element.code == "NO_OF_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MAX_PERCENTAGE_CHEQUES_BOUNCED_N_MONTHS" || element.code == "MIN_CREDIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_DEBIT_TRAN_ACC_PER_MONTH" || element.code == "MIN_OVERALL_TRAN_ACC_PER_MONTH"){
                   console.log("bs element is :: " , element);
-                  element.answer = [];
-                  this.addBSControls(element);
+                  element.answer = {lovs : cloneDeep(element.lovs), answer : []};
+                  this.addBSControlsByCheck(element);
+                  //this.addBSControls(element);
                   element.option = {"floor" : element.minValue , "ceil" : element.maxValue};
                   element.option2 = {"floor" : 1 , "ceil" : 24};
                   console.log("now element is :: ", element)
@@ -1426,6 +1430,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if(element.code =="GEO_MARKET_FOCUS"){
                   element.answer = { geoStr: null, geoSelectedList: [] , lov : []};
                 }
+                if(element.code =="CONSTITUTION"){
+                  // element.answer = { constStr: null, constitutionSelectedList: [] , lov : []};
+                  element.answer = [];
+                }
                 if(element.code == "SECURITY"){
                   element.answer = { primaryMin : element.lovs.primarySecurity.min , primaryMax : element.lovs.primarySecurity.max , collateralMin : element.lovs.collateralSecurity.min , collateralMax : element.lovs.collateralSecurity.max , lovAns : null}
                   element.option = {"floor" : element.lovs.primarySecurity.min , "ceil" : element.lovs.primarySecurity.max};
@@ -1459,6 +1467,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
+  generateSeqNoForBS(element){ 
+    //console.log("element in seq gen :: ", element);
+    if(element.seqNo != null && element.seqNo !=undefined){
+      return element.seqNo;
+    }else{
+      let num = (element.answer.answer.length > 0 ?  (element.answer.answer.reduce((data, obj) => data = data > obj.seqNo ? data : obj.seqNo, 0) + 1) : 1)
+      return num;
+    } 
+  }
+
   generateSeqNo(element){ 
     //console.log("element in seq gen :: ", element);
     if(element.seqNo != null && element.seqNo !=undefined){
@@ -1467,6 +1485,171 @@ export class ProductComponent implements OnInit, AfterViewInit {
       let num = (element.answer.length > 0 ?  (element.answer.reduce((data, obj) => data = data > obj.seqNo ? data : obj.seqNo, 0) + 1) : 1)
       return num;
     } 
+  }
+
+  setCheckboxBSParams(param){
+    let checkTillDatePresent = param.answer.answer.filter(fil=> fil.lovAns == 1).length;
+    if(param.answer.lovs[0].isSelect == true && checkTillDatePresent == 0){ //&& (param.lovs[1].isSelect == undefined || param.lovs[1].isSelect == null || param.lovs[1].isSelect == false)
+      //param.answer.answer.unshift();
+      this.addBSControlsByCheckCondition(param,{ months: null , value : null , lovAns : 1 , seqNo : this.generateSeqNoForBS(param)});
+    }else if(param.answer.lovs[0].isSelect == false && checkTillDatePresent == 1){
+      this.productForm.get('paramForm').removeControl('min_' + param.answer.answer[0].seqNo + param.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_' + param.answer.answer[0].seqNo + param.parameterId);
+      //param.answer.answer.pop(0);
+      param.answer.answer.splice(0,1);
+    }
+    if(param.answer.lovs[1].isSelect != null && param.answer.lovs[1].isSelect == true){
+      this.isSpecificTimePeriod = true;
+      if(param.answer.answer.filter(fil=> fil.lovAns == 2).length == 0){
+        this.addBSControlsByCheckCondition(param);
+      }
+    }else if(param.answer.lovs[1].isSelect != null && param.answer.lovs[1].isSelect == false){
+      this.isSpecificTimePeriod = false;
+      let dataToClear =  param.answer.answer.filter(fil=> fil.lovAns == 2);
+      if(dataToClear.length > 0){
+        let dtcList = [];
+        param.answer.answer.forEach(dtc => {
+          if(dtc.lovAns == 2){
+            this.productForm.get('paramForm').removeControl('min_' + dtc.seqNo + param.parameterId);
+            this.productForm.get('paramForm').removeControl('min2_' + dtc.seqNo + param.parameterId);
+            console.log("form is :: ", this.productForm);
+            console.log("param.answer.answer.indexOf(dtc) :: " , param.answer.answer.indexOf(dtc))
+            console.log("array data :: " , param.answer.answer)
+            //param.answer.answer.pop(param.answer.answer.indexOf(dtc));
+            dtcList.unshift(param.answer.answer.indexOf(dtc))
+            console.log("array data :: " , param.answer.answer);  
+            console.log("dtcList : ", dtcList);
+          }
+        });
+        dtcList.forEach(rm=> {
+          console.log(param.answer.answer);
+          param.answer.answer.pop(rm);
+          console.log(param.answer.answer);
+        })
+        console.log("array data :: " , param.answer.answer);
+
+        /* dataToClear.forEach(dtc => {
+          this.productForm.get('paramForm').removeControl('min_' + dtc.seqNo + param.parameterId);
+          this.productForm.get('paramForm').removeControl('min2_' + dtc.seqNo + param.parameterId);
+          console.log("form is :: ", this.productForm);
+          console.log("param.answer.answer.indexOf(dtc) :: " , param.answer.answer.indexOf(dtc))
+          console.log("array data :: " , param.answer.answer)
+          //param.answer.answer.pop(param.answer.answer.indexOf(dtc));
+          dtcList.unshift(param.answer.answer.indexOf(dtc))
+          console.log("array data :: " , param.answer.answer);
+          console.log("dtcList : ", dtcList);
+        }); */
+      }
+    }
+    console.log("param is :  ", param);
+    //param.answer = param.lovs.filter(l => l.isSelect);
+  }
+
+  addBSControlsByCheckCondition(element, data?){
+    if(data != null && data!= undefined && data.lovAns == 1){
+      element.answer.answer.unshift(data);
+    }else{
+      data = { months: null , value : null , lovAns : 2 , seqNo : this.generateSeqNoForBS(element)}
+      element.answer.answer.push(data);
+    }
+    
+    if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    }else if(element.code == "COMMERCIAL_DPD_MAX"){
+      if(element.lovs.lovs != null && element.lovs.lovs.length > 0){
+        const formArray = [];
+        element.lovs.lovs.forEach((lov, i) => {
+          formArray.push({i: new FormControl() });
+        });
+        this.productForm.get('paramForm').addControl('inputCheckbox_' + data.seqNo + element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+      }
+      this.productForm.get('paramForm').addControl('min1_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min3_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      this.productForm.get('paramForm').addControl('min4_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+      // this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
+    }else if(element.code != "MAX_CASH_TRAN_ALL"){
+      //this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+      this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    }
+    /* else if(element.code != "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+      this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    } */
+    else{
+      this.productForm.get('paramForm').addControl('radio2_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    }
+  }
+
+  addBSControlsByCheck(element){
+    console.log("element data :: ",element);
+    console.log("element data :: ",this.generateSeqNo(element));
+    if(element.answer.lovs != null && element.answer.lovs.length > 0){
+      const formArray = [];
+      element.answer.lovs.forEach((lov, i) => {
+        formArray.push({i: new FormControl() });
+      });
+      /*  + data.seqNo  */
+      this.productForm.get('paramForm').addControl('inputCheckbox_'+ element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+    }
+    // let data = null;
+    // if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+    //   data = { cibilDpd: null , experianDpd : null , lovAns : null, months : null, seqNo : this.generateSeqNo(element)}; 
+    // }else if(element.code == "COMMERCIAL_DPD_MAX"){
+    //   data = {wcaCibilDpd: null , wcaExperianDpd : null ,caCibilDpd: null , caExperianDpd : null , months : null, lovAns2 : null, lovAns :  JSON.parse(JSON.stringify(element.lovs.lovs)), seqNo : this.generateSeqNo(element)};
+    // }else if(element.code != "MAX_CASH_TRAN_ALL"){
+    //   data = { months: element.months != null ? element.months : null , value : element.value != null ? element.value : null , lovAns : element.lovAns != null ? element.lovAns : null , seqNo : this.generateSeqNo(element)} 
+    // }
+    // /* else if(element.code != "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+    //   data = { cibilDpd: null , experianDpd : null , lovAns : null, month : null, seqNo : this.generateSeqNo(element)}; 
+    // } */
+    // else{
+    //   data = { minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null, lovAns2 : null , months : null, seqNo : this.generateSeqNo(element)};
+    // }
+    // //{ minCount: element.minValue , maxCount : element.maxValue, minAmount : 1, maxAmount : 100000000 , minCountPer : 0, maxCountPer : 100, minAmtPer : 0, maxAmtPer : 100, lovAns : null}
+    
+    // /* let dataList = [] ;
+    // dataList.push(data); */
+    // element.answer.push(data);
+
+    // if(element.lovs != null && element.lovs.length > 0){
+    //   const formArray = [];
+    //   element.lovs.forEach((lov, i) => {
+    //     formArray.push({i: new FormControl() });
+    //   });
+    //   /*  + data.seqNo  */
+    //   this.productForm.get('paramForm').addControl('inputCheckbox_'+ element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+    // }
+    // // this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    // if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+    //   this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    //   this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    // }else if(element.code == "COMMERCIAL_DPD_MAX"){
+    //   if(element.lovs.lovs != null && element.lovs.lovs.length > 0){
+    //     const formArray = [];
+    //     element.lovs.lovs.forEach((lov, i) => {
+    //       formArray.push({i: new FormControl() });
+    //     });
+    //     this.productForm.get('paramForm').addControl('inputCheckbox_' + data.seqNo + element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+    //   }
+    //   this.productForm.get('paramForm').addControl('min1_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+    //   this.productForm.get('paramForm').addControl('min2_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+    //   this.productForm.get('paramForm').addControl('min3_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+    //   this.productForm.get('paramForm').addControl('min4_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(120) , Validators.min(0)]));
+    //   // this.productForm.get('paramForm').addControl('min5_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.max(24) , Validators.min(1)]));
+    // }else if(element.code != "MAX_CASH_TRAN_ALL"){
+    //   //this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    //   this.productForm.get('paramForm').addControl('min_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    // }
+    // /* else if(element.code != "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+    //   this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    //   this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
+    // } */
+    // else{
+    //   this.productForm.get('paramForm').addControl('radio2_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+    // }
   }
 
   addBSControls(element){
@@ -1491,7 +1674,16 @@ export class ProductComponent implements OnInit, AfterViewInit {
     /* let dataList = [] ;
     dataList.push(data); */
     element.answer.push(data);
-    this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
+
+    if(element.lovs != null && element.lovs.length > 0){
+      const formArray = [];
+      element.lovs.forEach((lov, i) => {
+        formArray.push({i: new FormControl() });
+      });
+      /*  + data.seqNo  */
+      this.productForm.get('paramForm').addControl('inputCheckbox_'+ element.parameterId, this.fb.array(formArray, this.checkBoxValidator(1)));
+    }
+    // this.productForm.get('paramForm').addControl('radio_'+ data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
     if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
       this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
       this.productForm.get('paramForm').addControl('min2_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
@@ -1534,7 +1726,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       }else{
         data = { months: inData.months != null ? inData.months : null , value : inData.value != null ? inData.value : null , lovAns : inData.lovAns != null ? inData.lovAns : null , seqNo : this.generateSeqNo(inData)};
       }
-      // console.log("out data :: " , data)
+      console.log("out data :: " , element)
       this.productForm.get('paramForm').addControl('radio_' + data.seqNo + element.parameterId, this.fb.control('', [Validators.required]));
       if(element.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
         this.productForm.get('paramForm').addControl('min1_'+ data.seqNo + element.parameterId, this.fb.control('', this.getValidators(element)));
@@ -1917,7 +2109,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       if(param.code =="BANK_ACC_PRIO"){
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
       }
-      if(param.code =="GEO_MARKET_FOCUS"){
+      if(param.code =="GEO_MARKET_FOCUS" || param.code == "CONSTITUTION"){
         this.productForm.get('paramForm').addControl('min_' + param.parameterId, this.fb.control('', [Validators.required]));
       }
       if(param.code == "SECURITY"){
@@ -2167,6 +2359,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     param.answer = param.lovs.filter(l => l.isSelect);
   }
 
+  
+
   setCheckboxAnswerForCodeContainer(param){
     console.log("param :: ", param);
     param.answer.lovAns = param.lovs.filter(l => l.isSelect);
@@ -2362,6 +2556,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
+  constitutionPopup(data) {
+    console.log(data);
+    /* return; */
+    // Work around to make drag and drop work in mat-dialog
+    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { selectedConstitutions: data.answer , popUpData: data.lovs};
+    this.matDialog.open(ConstitutionPopupComponent ,dialogConfig).afterClosed().subscribe(response => {
+      console.log("response ::: " , response)
+      if (response && response.data && response.event === 'save') {
+        data.answer = response.data;
+        data.constSelected = response.data.length + " Constitution Selected";
+      }
+    });
+  }
+
   getPriorityStr(data) {
     data.answer.prioSetStr = _.orderBy(data.answer.orderedJson, ['accOrder']).map(a => a.account).join('>');
     /* return _.orderBy(data.answer.orderedJson, ['accOrder']).map(a => a.account).join('>'); */
@@ -2512,6 +2722,52 @@ export class ProductComponent implements OnInit, AfterViewInit {
     datas.months = null;
   }
 
+  removeInParameterCheck(datas,item){
+    console.log("item :: " ,  item.answer.answer.indexOf(datas));
+    console.log('min2_'+ datas.seqNo + item.parameterId);
+    console.log('min_'+ datas.seqNo + item.parameterId);
+    console.log('radio_'+ datas.seqNo + item.parameterId);
+    
+    //this.productForm.get('paramForm').removeControl('radio_'+ datas.seqNo + item.parameterId);
+    if(item.code == "INDIVIDUAL_DPD_MAX_MAIN_DIR_PAR"){
+      this.productForm.get('paramForm').removeControl('min1_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_'+ datas.seqNo + item.parameterId);
+    }
+    if(item.code == "COMMERCIAL_DPD_MAX"){
+      this.productForm.get('paramForm').removeControl('inputCheckbox_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min1_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min4_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min5_' + datas.seqNo + item.parameterId);
+    }
+    if(item.code != "MAX_CASH_TRAN_ALL"){
+      this.productForm.get('paramForm').removeControl('min_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_'+ datas.seqNo + item.parameterId);
+    }else{
+      this.productForm.get('paramForm').removeControl('radio2_'+ datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max2_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max3_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('min4_' + datas.seqNo + item.parameterId);
+      this.productForm.get('paramForm').removeControl('max4_' + datas.seqNo + item.parameterId);
+    }
+    /* console.log('min2_'+ (item.answer.length) + item.parameterId);
+    console.log('min_'+ (item.answer.length) + item.parameterId);
+    console.log('radio_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('min2_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('min_'+ (item.answer.length) + item.parameterId);
+    this.productForm.get('paramForm').removeControl('radio_'+ (item.answer.length) + item.parameterId); */
+    item.answer.answer.splice(item.answer.answer.indexOf(datas),1);
+    console.log("item form :: " ,  this.productForm);
+  }
+
   removeInParameter(datas,item){
     console.log("item :: " ,  item.answer.indexOf(datas));
     console.log('min2_'+ datas.seqNo + item.parameterId);
@@ -2626,6 +2882,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'processingFeeBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'unifiedChargesBasedOn')[0].values);
         // console.log("resp.data.filter(filt=>filt.code) :: " , resp.data.filter(filt=>filt.code === 'penalIntBasedOn')[0].values);
+        if (this.product.productId) { // get product info if product is found
+          this.getProductDetails();
+        }
       }
     })
   }
@@ -2642,13 +2901,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.routeURL = Constant.ROUTE_URL;
     this.inputType = Constant.MASTER_TYPE;
     this.product.productId = this.route.snapshot.paramMap.get('id');
-    if (this.product.productId) { // get product info if product is found
-      this.getProductDetails();
-    }
-    this.getMastersData();
-    this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
     this.getCurrentEBLR(); // get current eblr
     this.getScalingMatrixRange();
+    this.getMastersData();
+    this.approveBtn = Constant.MASTER_TYPE.SENT_TO_CHECKER;
   }
   ngAfterViewInit(): void {
     //this.nameRef.nativeElement.focus();

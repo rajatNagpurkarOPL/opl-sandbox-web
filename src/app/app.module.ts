@@ -78,6 +78,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { NewTriggerConfigurationComponent } from './component/new-trigger-configuration/new-trigger-configuration.component';
 import { DisbursedCountComponent } from './component/disbursed-count/disbursed-count.component';
+import { ConstitutionPopupComponent } from './popup/constitution-popup/constitution-popup.component';
 import { AddNewTriggerComponent } from './component/settings/add-new-trigger/add-new-trigger.component';
 import { CreateTriggerComponent } from './component/settings/create-trigger/create-trigger.component';
 
@@ -161,6 +162,7 @@ import { CreateTriggerComponent } from './component/settings/create-trigger/crea
     DrawerMenuComponent,
     NewTriggerConfigurationComponent,
     DisbursedCountComponent,
+    ConstitutionPopupComponent,
     AddNewTriggerComponent,
     CreateTriggerComponent
   ] ,
