@@ -6,7 +6,7 @@ import { CommonService } from 'src/app/common-utils/common-services/common.servi
 import { CookieService } from 'src/app/common-utils/common-services/cookie.service';
 import { SeoService } from 'src/app/common-utils/common-services/seo.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { LenderService } from 'src/app/service/lender.service';
+import { LenderService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-login',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
-import { LenderService } from 'src/app/service/lender.service';
+import { LenderService } from 'src/app/service/sandbox.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Validators, FormBuilder, AbstractControl } from '@angular/forms';

@@ -2,7 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { LenderService } from 'src/app/service/lender.service';
+import { LenderService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-documentation',
@@ -83,19 +83,7 @@ export class DocumentationComponent implements OnInit {
   }
    // get products by status
    getMenuItems(code : string){
-    this.lenderService.getMasterListsByCodes(DocumentationComponent.masterCodes).subscribe(res => {
-        if (res.status === 200) {
-          this.masterData = {};
-          for(let code of DocumentationComponent.masterCodes){            
-            this.masterData[code] = res.data[code];            
-          }
-          this.setCurrentSelectedAPI(this.selectedMenuItem);
-        } else {
-          this.commonService.warningSnackBar(res.message);
-        }
-      }, (error: any) => {
-        this.commonService.errorSnackBar(error);
-      });
+    
     }
     
     

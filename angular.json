@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "b4l-lender-web": {
+    "opl-sandbox": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/b4l-lender-web",
+            "outputPath": "dist/opl-sandbox",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "b4l-lender-web:build"
+            "browserTarget": "opl-sandbox:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "b4l-lender-web:build:production"
+              "browserTarget": "opl-sandbox:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "b4l-lender-web:build"
+            "browserTarget": "opl-sandbox:build"
           }
         },
         "test": {
@@ -121,18 +121,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "b4l-lender-web:serve"
+            "devServerTarget": "opl-sandbox:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "b4l-lender-web:serve:production"
+              "devServerTarget": "opl-sandbox:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "b4l-lender-web",
+  "defaultProject": "opl-sandbox",
   "cli": {
     "analytics": false
   }

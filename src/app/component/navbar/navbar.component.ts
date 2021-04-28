@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common-utils/common-services/common.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
-import { LenderService } from 'src/app/service/lender.service';
+import { LenderService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-navbar',
@@ -56,34 +56,6 @@ export class NavbarComponent implements OnInit {
       this.commonService.errorSnackBar(error);
     });
   }
-
-  // Get products counts
-  getProductsCounts(){
-    this.lenderService.productsCounts().subscribe(res => {
-        if (res.status === 200) {
-          const counts = res.data;
-          this.productCount.saved = counts[Constant.MASTER_TYPE.SAVED.id];
-          this.productCount.sent = counts[Constant.MASTER_TYPE.SENT_TO_CHECKER.id];
-          this.productCount.sendBack = counts[Constant.MASTER_TYPE.SEND_BACK.id];
-          this.productCount.active = counts[Constant.MASTER_TYPE.APPROVED.id];
-          this.productCount.inActive = counts[Constant.MASTER_TYPE.INACTIVE.id];
-          this.globals.COUNT = this.productCount;
-        } else {
-          this.commonService.warningSnackBar(res.message);
-        }
-      }, (error: any) => {
-        this.commonService.errorSnackBar(error);
-      });
-    }
-  // Go to products user wise
-  goToProducts(){
-    if (this.globals.USER.roles.indexOf(Constant.ROLES.MAKER.name) > -1){ // If maker then go to saved products
-      this.router.navigate([Constant.ROUTE_URL.SAVED_PRODUCTS]);
-    } else if (this.globals.USER.roles.indexOf(Constant.ROLES.CHECKER.name) > -1){ // If Cheker then go to Sent products
-      this.router.navigate([Constant.ROUTE_URL.SENT_PRODUCTS]);
-    }
-  }
-
 
   ngOnInit(): void {
     this.constant = Constant.ROUTE_URL;

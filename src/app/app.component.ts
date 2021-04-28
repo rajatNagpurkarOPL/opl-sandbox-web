@@ -11,7 +11,7 @@ enableProdMode();
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'b4l-lender-web';
+  title = 'Online PSB loans Sandbox';
 
   
 
