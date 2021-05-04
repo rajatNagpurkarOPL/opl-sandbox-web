@@ -24,7 +24,7 @@ export class ValidationRule {
 
     public static setValidationsRulesMap(name: string, value) {
         if (name === 'required') {
-            ValidationRule.setValidationRulesMap('required', new ValidationRule('required', Validators.required));
+            ValidationRule.setValidationRulesMap(name, new ValidationRule(name, Validators.required));
         } else if (name === 'minLength') {
             ValidationRule.setValidationRulesMap('minLength', new ValidationRule('minLength', Validators.minLength(value)));
         } else if (name === 'maxLength') {

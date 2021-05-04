@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "opl-sandbox": {
+    "opl-sandbox-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/opl-sandbox",
+            "outputPath": "dist/opl-sandbox-web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "opl-sandbox:build"
+            "browserTarget": "opl-sandbox-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "opl-sandbox:build:production"
+              "browserTarget": "opl-sandbox-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "opl-sandbox:build"
+            "browserTarget": "opl-sandbox-web:build"
           }
         },
         "test": {
@@ -121,18 +121,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "opl-sandbox:serve"
+            "devServerTarget": "opl-sandbox-web:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "opl-sandbox:serve:production"
+              "devServerTarget": "opl-sandbox-web:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "opl-sandbox",
+  "defaultProject": "opl-sandbox-web",
   "cli": {
     "analytics": false
   }

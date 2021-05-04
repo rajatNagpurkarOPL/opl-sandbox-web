@@ -2,7 +2,6 @@ import { Component, enableProdMode } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { LoaderService } from './common-utils/common-services/LoaderService';
 import { Title } from '@angular/platform-browser';
-import { WebSocketAPI } from './websocket/web-socket-api';
 
 enableProdMode();
 @Component({
@@ -34,6 +33,5 @@ export class AppComponent {
     });
 
   }
-
 
 }

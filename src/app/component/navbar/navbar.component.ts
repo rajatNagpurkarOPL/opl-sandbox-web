@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
-import { LenderService } from 'src/app/service/sandbox.service';
+import { SandboxService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   productCount: any = {};
   user: any;
   dashboardClass: boolean;
-  constructor(public router: Router, public globals: Globals, private lenderService: LenderService, private commonService: CommonService) {
+  constructor(private utils : Utils, public router: Router, public globals: Globals, private lenderService: SandboxService) {
     this.globals.COUNT =  {}; // reset globle variable
     this.globals.USER =  {}; // reset globle variable
   }
@@ -25,17 +25,17 @@ export class NavbarComponent implements OnInit {
   logoutUser() {
     this.lenderService.logout().subscribe(res => {
       if (res.status === 200) {
-        this.commonService.successSnackBar(res.message);
+        this.utils.successSnackBar(res.message);
       } else {
-        this.commonService.errorSnackBar(res.message);
+        this.utils.errorSnackBar(res.message);
       }
     }, error => {
-      this.commonService.errorSnackBar(error);
+      this.utils.errorSnackBar(error);
     });
     // Remove localstorage
-    this.commonService.removeStorage(Constant.STORAGE.USER);
+    Utils.removeStorage(Constant.STORAGE.USER);
     // Remove cookies
-    this.commonService.deleteAuthCookie();
+    Utils.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);
   }
 
@@ -47,13 +47,13 @@ export class NavbarComponent implements OnInit {
         if (res.data){
           this.globals.USER = res.data;
           this.user = res.data;
-          this.commonService.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
+          Utils.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
         }
       } else {
-        this.commonService.errorSnackBar(res.message);
+        this.utils.errorSnackBar(res.message);
       }
     }, error => {
-      this.commonService.errorSnackBar(error);
+      this.utils.errorSnackBar(error);
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { LenderService } from 'src/app/service/sandbox.service';
+import { SandboxService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   tab: any = {matches: true};
   audits  = [];
   routeURL : any;
-  constructor(private lenderService: LenderService, public commonService: CommonService) { }
+  constructor(private lenderService: SandboxService, public utils: Utils) { }
 
   ngOnInit(): void {
     this.routeURL = Constant.ROUTE_URL;

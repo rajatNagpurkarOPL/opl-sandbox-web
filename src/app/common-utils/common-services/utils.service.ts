@@ -6,24 +6,29 @@ import { Constant } from '../Constant';
 import { CookieService } from './cookie.service';
 import {Location} from '@angular/common';
 import { v4 as uuid } from 'uuid';
+import { SandboxService } from 'src/app/service/sandbox.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommonService {
+export class Utils {
   data: any;
-  constructor(private snackbar: SnackbarService, private router: Router, private cookieservice: CookieService, 
-              private location: Location) { }
+  private static cookieservice : CookieService;
+  // private snackBar = SnackbarService;
+  constructor(private router :  Router,private snackBar : SnackbarService, private location: Location) { }
 
   setData(data: any) {
     this.data = data;
+  }
+  static jsonStringify(json : any){
+    return JSON.stringify(json,null,4);
   }
 
   getData() {
     return this.data;
   }
 
-  getUUID(){
+  static getUUID(){
     let uuidString = uuid();
     uuidString = uuidString.replace("-","");
     return uuidString;
@@ -32,19 +37,19 @@ export class CommonService {
   /**
    * For check null,empty and undefined
    */
-  isObjectNullOrEmpty(data: any) {
+   static isObjectNullOrEmpty(data: any) {
     return (data == null || data === undefined || data === '' || data === 'null' || data === 'undefined' ||
       data === '' || data === [] || data === {});
   }
 
-  isObjectIsEmpty(data: any) {
+  static isObjectIsEmpty(data: any) {
     return data && Object.keys(data).length <= 0;
   }
 
   /**
    * for convert value(encrypt)
    */
-  toBTOA(value: string) {
+   static toBTOA(value: string) {
     try {
       return btoa(value);
     } catch (err) {
@@ -55,7 +60,7 @@ export class CommonService {
   /**
    * Decrypt value
    */
-  toATOB(value: string) {
+   static toATOB(value: string) {
     try {
       return atob(value);
     } catch (err) {
@@ -66,7 +71,7 @@ export class CommonService {
   /**
    * Get value from storage
    */
-  getStorage(key: string, decrypt: boolean) {
+   static getStorage(key: string, decrypt: boolean) {
     const data = localStorage.getItem(key);
     if (this.isObjectNullOrEmpty(data)) {
       return data;
@@ -81,21 +86,21 @@ export class CommonService {
   /**
    * set value in storage
    */
-  setStorage(key: any, value: string) {
+   static setStorage(key: any, value: string) {
     localStorage.setItem(key, this.toBTOA(value));
   }
 
   /**
    * Remove value from storage
    */
-  removeStorage(key: any) {
+   static removeStorage(key: any) {
     localStorage.removeItem(key);
   }
 
   /**
    * for set Header for cookies
    */
-  setSessionAndHttpAttr(email: any, response: { access_token: any; refresh_token: any; }, loginToken: any) {
+   static setSessionAndHttpAttr(email: any, response: { access_token: any; refresh_token: any; }, loginToken: any) {
     this.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
     // set cookies object
     const cookies = {};
@@ -111,7 +116,7 @@ export class CommonService {
 /**
  * Set login token cookies
  */
-  setAuthCookie(params: any){
+ static setAuthCookie(params: any){
     const cookies = {};
     cookies[Constant.httpAndCookies.USNM] = params.userName;
     cookies[Constant.httpAndCookies.ACTK] = params.access_token;
@@ -128,7 +133,7 @@ export class CommonService {
 /**
  * Delete cookies
  */
-   deleteAuthCookie(){
+   static deleteAuthCookie(){
     this.cookieservice.deleteCookie(Constant.httpAndCookies.COOKIES_OBJ);
     this.cookieservice.deleteCookie(Constant.httpAndCookies.USNM);
     this.cookieservice.deleteCookie(Constant.httpAndCookies.ACTK);
@@ -151,7 +156,7 @@ export class CommonService {
   /**
    * For handle error and display error msg
    */
-  errorHandle(error: any) {
+   errorHandle(error: any) {
     let errMsg = '';
     if (error.status === 401) {
       this.router.navigate(['/login']);
@@ -179,19 +184,19 @@ export class CommonService {
    */
 
   successSnackBar(message, action?) {
-    this.snackbar.openSnackBar(message, action, 'success');
+    this.snackBar.openSnackBar(message, action, 'success');
   }
-  errorSnackBar(message, action?) {
-    this.snackbar.openSnackBar(message, action, 'error');
+   errorSnackBar(message, action?) {
+    this.snackBar.openSnackBar(message, action, 'error');
   }
-  warningSnackBar(message, action?) {
-    this.snackbar.openSnackBar(message, action, 'warning');
+   warningSnackBar(message, action?) {
+    this.snackBar.openSnackBar(message, action, 'warning');
   }
-  infoSnackBar(message, action?) {
-    this.snackbar.openSnackBar(message, action, 'info');
+   infoSnackBar(message, action?) {
+    this.snackBar.openSnackBar(message, action, 'info');
   }
-  defaultSnackBar(message, action?) {
-    this.snackbar.openSnackBar(message, action, '');
+   defaultSnackBar(message, action?) {
+    this.snackBar.openSnackBar(message, action, '');
   }
   /**
    * Goto the previous page

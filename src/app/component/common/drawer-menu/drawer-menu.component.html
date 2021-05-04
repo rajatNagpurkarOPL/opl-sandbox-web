@@ -1,9 +1,9 @@
 <!-- Parent -->
-<div *ngIf="!commonService.isObjectNullOrEmpty(item[arrayKey])">    
+<div *ngIf="!isObjectNullOrEmpty(item[arrayKey])">    
     <mat-list-item class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)" (click)="item[expandFlagKey] = !item[expandFlagKey]" class="parent" title={{item.description}} >
         <span class="full-width" *ngIf="isExpanded || isShowing">{{item.value}}</span>
         <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : item[rotationFlagKey]}" *ngIf="!commonService.isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)">expand_more</mat-icon>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : item[rotationFlagKey]}" *ngIf="!isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)">expand_more</mat-icon>
     </mat-list-item>
     <!-- First Child -->     
     <div class="submenu" [ngClass]="{'expanded' : item[expandFlagKey]}" *ngIf="item[expandFlagKey] && (isExpanded || isShowing)">
@@ -12,28 +12,6 @@
         </mat-nav-list>
     </div>
 </div>
-<!-- {{item.value}} - {{item.description}} - {{commonService.isObjectNullOrEmpty(item[arrayKey])}} - {{isShowing}} - {{isExpanded}} -->
-<!-- <div *ngIf="commonService.isObjectNullOrEmpty(item[arrayKey])" class="submenu"> -->      
-    <mat-list-item id="last-child-item" class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)" title={{item.description}} (click)="docuComp.setCurrentSelectedAPI(item.code)" *ngIf="commonService.isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)"  class="parent">
+    <mat-list-item id="last-child-item" class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)" title={{item.description}} (click)="docuComp.setCurrentSelectedAPI(item.code)" *ngIf="isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)"  class="parent">
       <span  class="full-width">{{item.value}}</span>
     </mat-list-item>
-<!-- </div> -->
-
-<!-- <div class="submenu" [ngClass]="{'expanded' : item[expandFlagKey]}" *ngIf="item[expandFlagKey] && (isExpanded || isShowing)">
-    <mat-nav-list  *ngFor="let valueObject of item[arrayKey]">            
-        <mat-list-item (click)="valueObject.showSubmenu = !valueObject.showSubmenu" class="parent" title={{valueObject.description}}>
-          <span class="full-width">{{valueObject.value}}</span>
-          <mat-icon class="menu-button" [ngClass]="{'rotated' : valueObject.showSubmenu}" *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">expand_more</mat-icon>              
-        </mat-list-item>             -->
-
-        <!-- <div *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">
-          <div class="submenu" [ngClass]="{'expanded' : valueObject.showSubmenu}" *ngIf="valueObject.showSubmenu && (isExpanded || isShowing)">              
-            <mat-nav-list *ngFor="let lastChild of valueObject.values">            
-              <mat-list-item (click)="lastChild.showSubmenu = !lastChild.showSubmenu" class="parent" title={{lastChild.description}}>
-                <span class="full-width">{{lastChild.value}}</span>                                  
-              </mat-list-item>
-            </mat-nav-list>
-          </div>
-        </div>             -->
-    <!-- </mat-nav-list> 
-  </div>   -->

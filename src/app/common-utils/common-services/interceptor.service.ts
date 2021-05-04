@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } fr
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
-import { CommonService } from './common.service';
+import { Utils } from './utils.service';
 import { LoaderService } from './LoaderService';
 import { Constant } from '../Constant';
 import { CookieService } from './cookie.service';
@@ -13,7 +13,7 @@ import { CookieService } from './cookie.service';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
-  constructor(private loaderService: LoaderService, private commonService: CommonService, private cookieService: CookieService) { }
+  constructor(private loaderService: LoaderService, private cookieService: CookieService) { }
 
   // Handle request for loader spin
   removeRequest(req: HttpRequest<any>) {
@@ -27,7 +27,7 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = req.headers;
     if (!this.isHeaderSkipUrls(req.url)) {// for skip URL
-      if (!this.commonService.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ))) {
+      if (!Utils.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ))) {
         const cookies = {};
         cookies[Constant.httpAndCookies.RFTK] = this.cookieService.getCookie(Constant.httpAndCookies.RFTK);
         cookies[Constant.httpAndCookies.USNM] = this.cookieService.getCookie(Constant.httpAndCookies.USNM);

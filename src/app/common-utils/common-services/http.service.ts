@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { CommonService } from './common.service';
+import { Utils } from './utils.service';
 import { LoaderService } from './LoaderService';
 
 
@@ -10,7 +10,7 @@ import { LoaderService } from './LoaderService';
 })
 export class HttpService {
 
-  constructor(private http: HttpClient, private commonService: CommonService, private loaderService: LoaderService) { }
+  constructor(private utils : Utils, private http: HttpClient, private loaderService: LoaderService) { }
 
   /**
    * For Post service url with data
@@ -21,13 +21,13 @@ export class HttpService {
       this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
       return this.http.post(url, data, { headers: this.header }).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     } else {
       this.loaderService.show();
       return this.http.post(url, data).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     }
   }
@@ -42,13 +42,13 @@ export class HttpService {
         this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
         return this.http.get(url, { responseType: 'arraybuffer', headers: this.header }).pipe(
           catchError((err: HttpErrorResponse) => {
-            return this.commonService.errorHandle(err);
+            return this.utils.errorHandle(err);
           }));
       } else {
         this.loaderService.show();
         return this.http.get(url, { responseType: 'arraybuffer' }).pipe(
           catchError((err: HttpErrorResponse) => {
-            return this.commonService.errorHandle(err);
+            return this.utils.errorHandle(err);
           }));
       }
     } else {
@@ -56,13 +56,13 @@ export class HttpService {
         this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
         return this.http.get(url, { headers: this.header }).pipe(
           catchError((err: HttpErrorResponse) => {
-            return this.commonService.errorHandle(err);
+            return this.utils.errorHandle(err);
           }));
       } else {
         this.loaderService.show();
         return this.http.get(url).pipe(
           catchError((err: HttpErrorResponse) => {
-            return this.commonService.errorHandle(err);
+            return this.utils.errorHandle(err);
           }));
       }
     }
@@ -76,13 +76,13 @@ export class HttpService {
       this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
       return this.http.delete(url, { headers: this.header }).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     } else {
       this.loaderService.show();
       return this.http.delete(url).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     }
   }
@@ -95,13 +95,13 @@ export class HttpService {
       this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
       return this.http.put(url, data, { headers: this.header }).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     } else {
       this.loaderService.show();
       return this.http.put(url, data).pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.commonService.errorHandle(err);
+          return this.utils.errorHandle(err);
         }));
     }
   }
@@ -110,7 +110,7 @@ export class HttpService {
     const headersData = new HttpHeaders({ 'Content-Type': 'multipart/form-data', enctype: 'multipart/form-data' });
     return this.http.post(url, formData, { reportProgress: true, observe: 'events', headers: headersData }).pipe(
       catchError((err: HttpErrorResponse) => {
-        return this.commonService.errorHandle(err);
+        return this.utils.errorHandle(err);
       }));
   }
 

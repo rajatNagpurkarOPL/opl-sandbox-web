@@ -1,0 +1,124 @@
+        <div>
+            <div class="card-header row row-flex">
+                <h3 class="card-title" style="border-left-color: inherit; ">
+                <strong><span class="label-text">Credit Rating </span></strong>
+                </h3><!---->
+            </div>
+            <div class="card-body"><!---->
+                <div class="well well-sm p-0">
+                    <div class="table-container">
+                        <div class="form-group">
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
+                            </mat-form-field>
+                            <mat-form-field style="width: 80%;">
+                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="http://qa-opl.instantmseloans.in/ecr/credit-rating">
+                            </mat-form-field>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div><!---->
+                <mat-tab-group>
+                    <mat-tab label="Documentation">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Request</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms">
+                                        <mat-tab label="Schema">
+                                        Show Request Schema    
+                                        </mat-tab>
+                                        <mat-tab label="Body">
+                                            <pre class="json-pretty">
+                                                {{requestBody}}
+                                            </pre>
+                                        </mat-tab>
+                                        <mat-tab label="Header" style="align-items: center;">
+                                            <p style="color: red;align-items: center;">NO HEADER</p>
+                                        </mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Response</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms">
+                                        <mat-tab label="Schema">
+                                            Schema Details
+
+                                        </mat-tab>
+                                        <mat-tab label="Body">
+                                            <pre class="json-pretty">
+                                                {{responseBody}}                                            </pre>
+                                        </mat-tab>
+                                        <mat-tab label="Header">
+                                            <p style="color: red;">NO HEADER</p>
+                                        </mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                    </mat-tab>
+                    <mat-tab label="Tryout">
+                        <div>
+                                <form>
+                                    <mat-card style="display: flex; width: 100%;">
+                                        <form class="example-form" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
+                                          <mat-form-field class="example-full-width">
+                                            <mat-label>CIN/PAN/KID</mat-label>
+                                            <input type="text" matInput [formControl]="creditRatingForm.controls.id" [errorStateMatcher]="matcher" placeholder="Ex. L23201MH1959GOI011388">
+                                            <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
+                                                Please Enter CIN/PAN/KID.
+                                            </mat-error>
+                                        </mat-form-field>
+                                          <mat-form-field class="example-full-width">
+                                              <mat-label>Name</mat-label>
+                                              <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
+                                            </mat-form-field>
+                                          <mat-form-field class="example-full-width">
+                                            <mat-label>Rating Agency</mat-label>
+                                            <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
+                                                {{agency}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="creditRatingForm.get('ratingAgency').hasError('required')">
+                                                Please select rating agency.
+                                            </mat-error>
+                                          </mat-form-field>
+                                          <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Get Credit Ratings</button>
+                                        </form>
+                                      </mat-card>
+                                </form>
+                        </div>
+
+                        <mat-tab-group>
+                            <mat-tab label="Response">
+                                <div style="overflow: auto;">
+                                    <pre class="json-pretty">
+                                        {{response}}
+                                    </pre>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+    </div>   
+<style>
+    table, th , td {
+       border: 1px solid grey;
+       border-collapse: collapse;
+       padding: 5px;
+    }
+    table tr:nth-child(odd) {
+       background-color: #f2f2f2;
+    }
+    table tr:nth-child(even) {
+       background-color: #ffffff;
+    }
+ </style>

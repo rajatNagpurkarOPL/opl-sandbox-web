@@ -2,11 +2,11 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/common-utils/auth/auth.guard';
 import { CanonicalService } from 'src/app/common-utils/common-services/canonical.service';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { CookieService } from 'src/app/common-utils/common-services/cookie.service';
 import { SeoService } from 'src/app/common-utils/common-services/seo.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { LenderService } from 'src/app/service/sandbox.service';
+import { SandboxService } from 'src/app/service/sandbox.service';
 
 @Component({
   selector: 'app-login',
@@ -22,32 +22,32 @@ export class LoginComponent implements OnInit, AfterViewInit {
   isSentSuccess = false;
   @ViewChild('name') nameElement: ElementRef; // autofocus while login
   @ViewChild('email') emailElement: ElementRef; // autofocus while reset password
-  constructor(private commonService: CommonService, private psbSeo: SeoService, private canonicalService: CanonicalService,
-              private lenderService: LenderService, private router: Router, private commonMethod: AuthGuard,
-              private cookieservice: CookieService) { }
+  constructor(private psbSeo: SeoService, private canonicalService: CanonicalService,
+              private lenderService: SandboxService, private router: Router, private commonMethod: AuthGuard,
+              private cookieservice: CookieService,private utils : Utils) { }
 
   /**
    * Log in
    */
   onSubmit() {
-    if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
-      this.commonService.warningSnackBar('Please enter your username.');
+    if (Utils.isObjectNullOrEmpty(this.user.userName)) {
+      this.utils.warningSnackBar('Please enter your username.');
       return false;
     }
     this.lenderService.login(this.user).subscribe(res => {
       if (res.status === 200) {
-        this.commonService.successSnackBar(res.message);
+        this.utils.successSnackBar(res.message);
         this.userResponse = res;
-        if (!this.commonService.isObjectNullOrEmpty(this.userResponse) && !this.commonService.isObjectNullOrEmpty(this.userResponse.data)){
+        if (!Utils.isObjectNullOrEmpty(this.userResponse) && !Utils.isObjectNullOrEmpty(this.userResponse.data)){
           // Set cookies
-          this.commonService.setAuthCookie(this.userResponse.data);
+          Utils.setAuthCookie(this.userResponse.data);
         }
-        this.router.navigate([Constant.ROUTE_URL.PRODUCTS]);
+        this.router.navigate([Constant.ROUTE_URL.DOCUMENTATION]);
       } else {
-        this.commonService.errorSnackBar(res.message);
+        this.utils.errorSnackBar(res.message);
       }
     }, error => {
-      this.commonService.errorSnackBar(error);
+      this.utils.errorSnackBar(error);
     });
   }
 
@@ -55,20 +55,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
    * Forgot password
    */
   forgorPassword() {
-    if (this.commonService.isObjectNullOrEmpty(this.user.userName)) {
-      this.commonService.warningSnackBar('Please enter your email.');
+    if (Utils.isObjectNullOrEmpty(this.user.userName)) {
+      this.utils.warningSnackBar('Please enter your email.');
       return false;
     }
     this.lenderService.forgotPassword(this.user).subscribe(res => {
       if (res.status === 200) {
-        this.commonService.successSnackBar(res.message);
+        this.utils.successSnackBar(res.message);
         this.isSentSuccess = true;
         this.isForgotPasss = false;
       } else {
-        this.commonService.errorSnackBar(res.message);
+        this.utils.errorSnackBar(res.message);
       }
     }, error => {
-      this.commonService.errorSnackBar(error);
+      this.utils.errorSnackBar(error);
     });
   }
 

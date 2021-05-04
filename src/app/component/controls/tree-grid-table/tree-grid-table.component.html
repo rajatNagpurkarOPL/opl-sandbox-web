@@ -1,0 +1,42 @@
+<table *ngIf="jsonData != undefined && jsonData != null" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="attributeName">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span [style.paddingLeft.px]="40"> Name </span>
+      </th>
+      <td mat-cell *matCellDef="let data"> 
+        <button mat-icon-button 
+                [style.visibility]="!data.expandable ? 'hidden' : ''"
+                [style.marginLeft.px]="data.level * 32"
+                (click)="treeControl.toggle(data)">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+  
+        {{data.attributeName}}
+      </td>
+    </ng-container> 
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let data"> {{data.type}} </td>
+    </ng-container> 
+
+    <ng-container matColumnDef="validation">
+        <th mat-header-cell *matHeaderCellDef>Validation</th>
+        <td mat-cell *matCellDef="let data"> {{data.validation}} </td>
+    </ng-container> 
+
+    <ng-container matColumnDef="isRequired">
+        <th mat-header-cell *matHeaderCellDef>Is Required</th>
+        <td mat-cell *matCellDef="let data"> {{data.isRequired}} </td>
+    </ng-container> 
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let data"> {{data.description}} </td>
+    </ng-container> 
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

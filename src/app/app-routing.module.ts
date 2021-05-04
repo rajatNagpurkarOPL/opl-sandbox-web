@@ -6,7 +6,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { AuthGuard } from './common-utils/auth/auth.guard';
 import { SignupComponent } from './component/signup/signup.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
-
+import { DocumentationComponent } from './component/documentation/documentation.component';
 const routes: Routes = [ 
   
   { path: 'login', component: LoginComponent},
@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent},
   { path: '', component: NavbarComponent , canActivate: [AuthGuard], children : [
     { path: 'dashboard', component: DashboardComponent },
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },    
+    { path: 'documentation/:code', component: DocumentationComponent}
   ]
 },
 { path: '', redirectTo: 'login', pathMatch: 'full' },

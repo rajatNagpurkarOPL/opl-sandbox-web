@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './common-utils/auth/auth.guard';
 import { LoaderComponent } from './common-utils/common-component/loader/loader.component';
 import { PrintErrorComponent } from './common-utils/common-component/print-error/print-error.component';
-import { SendBackModelComponent } from './common-utils/common-component/send-back-model/send-back-model.component';
 import { TostrComponent } from './common-utils/common-component/tostr/tostr.component';
 import { CookieService } from './common-utils/common-services/cookie.service';
 import { HttpService } from './common-utils/common-services/http.service';
@@ -38,6 +37,8 @@ import { DrawerMenuComponent } from './component/common/drawer-menu/drawer-menu.
 import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { CreditRatingComponent } from './component/apis/credit-rating/credit-rating.component';
+import { CustomErrorStateMatcherComponent } from './component/custom-error-state-matcher/custom-error-state-matcher.component';
 
 
 
@@ -65,7 +66,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
     NavbarComponent,
     LoaderComponent,
     SignupComponent,
-    SendBackModelComponent,
     PrintErrorComponent,
     ResetPasswordComponent,
     ButtonComponent,
@@ -79,6 +79,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     DocumentationComponent,
     DrawerMenuDirective,
     DrawerMenuComponent,
+    CreditRatingComponent,
+    CustomErrorStateMatcherComponent,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

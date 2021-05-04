@@ -6,7 +6,7 @@ import { URLS } from '../common-utils/urls';
 @Injectable({
   providedIn: 'root'
 })
-export class LenderService {
+export class SandboxService {
 
   constructor(private http: HttpService) { }
   login(data: any): Observable<any> {
@@ -28,9 +28,11 @@ export class LenderService {
     return this.http.get(URLS.SANDBOX_USER.USER_DETAILS, false);
   }
 
-  getMasterData(data): Observable<any>{
+  getMasterListsByCodes(data : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GET_MASTER_DATA,data);
   }
-
-
+  //ECR APIs
+  getCreditRating(data : any): Observable<any>{
+    return this.http.post(URLS.ECR.CREDIT_RATING,data);
+  }
 }

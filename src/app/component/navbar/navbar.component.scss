@@ -1,17 +1,20 @@
+.w-10  {
+  width: 12%;
+}
 #header {
 
   padding: 0;
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   }
   .header {
     background: #2D3079;
   }
   .header-right {
   display: flex;
-  width: 40%;
+  width: 55%;
   align-items: center;
   justify-content: flex-end;
   }

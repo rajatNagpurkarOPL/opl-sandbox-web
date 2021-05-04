@@ -3,23 +3,36 @@
     <div class="header">
         <div class="container">
             <div id="header">
-
-                <img class="logo" src="assets/img/sbi-logo.png" />
+                    <img class="w-10 ml-2" src="assets/img/opl-logo.svg" />
+                <!-- <img class="logo" src="assets/img/opl-logo.svg" /> -->
 
                 <div class="topnav">
-                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.DOCUMENTATION}}/CR_LN_APP_REQ"  href="javasript:void(0)">Documentation</a>
+                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.DOCUMENTATION}}/CRDT_RTNG"  href="javasript:void(0)">Documentation</a>
                 </div>
 
                 <div class="header-right">
 
-                    <a href="#" class="pos">
+                    <!-- <a href="#" class="pos">
                         <span class="notify-badge"></span>
                         <img class="down-arrow" src="assets/img/alert.svg" />
                     </a>
 
                     <p><img src="assets/img/b4lDefault.png" /> Hi, {{globals.USER.userName}}</p>
                     <img class="down-arrow" src="assets/img/down-arrow.svg" />
-                    <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a>
+                    <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a> -->
+                
+                    <a href="#" class="pos">
+                        <span class="notify-badge"></span>
+                        <img class="down-arrow" src="assets/img/alert.svg" alt=""/>
+                    </a>
+
+                    <button mat-button [matMenuTriggerFor]="menu">  <p><img src="assets/img/b4lDefault.png" alt=""/> Hi, <span class="w-50 text-over"> {{globals.USER.userName}}</span> <img class="down-arrow ml-2" style="width: 10px;" src="assets/img/down-arrow.svg" /></p>  </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item><p><img src="assets/img/b4l-profile.svg" class="mr-2" alt=""/> <strong>View Profile</strong></p></button>
+                        <button mat-menu-item (click)="logoutUser()"><p style="color: #E36C6C;"><img src="assets/img/b4l-logout.svg" class="mr-2" alt=""/>  <strong>Logout</strong></p></button>
+                        </mat-menu>
+
+                        <img src="assets/img/psb-logo.svg" alt=""/>
                 </div>
             </div>
         </div>

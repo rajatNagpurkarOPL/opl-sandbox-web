@@ -3,41 +3,14 @@
     <button mat-mini-fab (click)="isExpanded = !isExpanded" style="margin: 10px; background-color: #2D3079;">
       <mat-icon aria-label="Menu">menu</mat-icon>
     </button>
-    <ng-container *ngIf="!commonService.isObjectNullOrEmpty(masterData)">
+    <ng-container *ngIf="!isObjectNullOrEmpty(masterData)">
     <mat-nav-list (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" *ngFor="let code of getMasterCodes()">
       <app-drawer-menu appDrawerMenu [item]="masterData[code]"  arrayKey="values" expandFlagKey="showSubmenu" rotationFlagKey="showSubmenu" [isExpanded]="isExpanded" [isShowing]="isShowing"></app-drawer-menu>
-      <!-- Parent -->
-      <!-- <mat-list-item (click)="masterData[code].showSubmenu = !masterData[code].showSubmenu" class="parent" title={{masterData[code].description}} >
-          <span class="full-width" *ngIf="isExpanded || isShowing">{{masterData[code].value}}</span>
-          <mat-icon mat-list-icon>api</mat-icon>
-          <mat-icon class="menu-button" [ngClass]="{'rotated' : masterData[code].showSubmenu}" *ngIf="!commonService.isObjectNullOrEmpty(masterData[code].values) && (isExpanded || isShowing)">expand_more</mat-icon>
-      </mat-list-item> -->
-      <!-- First Child -->        
-      <!-- <div *ngIf="!commonService.isObjectNullOrEmpty(masterData[code].values)">
-        <div class="submenu" [ngClass]="{'expanded' : masterData[code].showSubmenu}" *ngIf="masterData[code].showSubmenu && (isExpanded || isShowing)">
-          <mat-nav-list  *ngFor="let valueObject of masterData[code].values">            
-              <mat-list-item (click)="valueObject.showSubmenu = !valueObject.showSubmenu" class="parent" title={{valueObject.description}}>
-                <span class="full-width">{{valueObject.value}}</span>
-                <mat-icon class="menu-button" [ngClass]="{'rotated' : valueObject.showSubmenu}" *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">expand_more</mat-icon>              
-              </mat-list-item>            
-
-              <div *ngIf="!commonService.isObjectNullOrEmpty(valueObject.values)">
-                <div class="submenu" [ngClass]="{'expanded' : valueObject.showSubmenu}" *ngIf="valueObject.showSubmenu && (isExpanded || isShowing)">              
-                  <mat-nav-list *ngFor="let lastChild of valueObject.values">            
-                    <mat-list-item (click)="lastChild.showSubmenu = !lastChild.showSubmenu && setCurrentSelectedAPI(lastChild.code)" class="parent" title={{lastChild.description}}>
-                      <span class="full-width">{{lastChild.value}}</span>                                  
-                    </mat-list-item>
-                  </mat-nav-list>
-                </div>
-              </div>            
-          </mat-nav-list> 
-        </div>  
-      </div>       -->
     </mat-nav-list>        
   </ng-container>  
   </mat-drawer>
 
   <div class="sidenav-content">
-          Import Your Component Here...
+          <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG"></app-credit-rating>
   </div>
 </mat-drawer-container>

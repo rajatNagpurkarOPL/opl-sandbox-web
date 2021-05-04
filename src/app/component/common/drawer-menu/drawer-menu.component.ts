@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonService } from 'src/app/common-utils/common-services/common.service';
+import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { DocumentationComponent } from 'src/app/component/documentation/documentation.component'
 @Component({
   selector: 'app-drawer-menu',
@@ -15,8 +15,9 @@ export class DrawerMenuComponent implements OnInit {
   @Input() isExpanded: boolean;
   @Input() isShowing: boolean;
   @Input() subMenuClass: string;
-
-  constructor(public commonService: CommonService,public docuComp : DocumentationComponent) {     
+  isObjectNullOrEmpty = Utils.isObjectNullOrEmpty;
+  constructor(public docuComp : DocumentationComponent) {     
+    
   }
   ngOnInit(): void {}    
 
