@@ -17,7 +17,10 @@ export class CreditRatingComponent implements OnInit {
     "name": "",
     "ratingAgency": "CRICIL"
 });
-responseBody = Utils.jsonStringify(                                     [
+responseBody = Utils.jsonStringify({
+  "status": 1001,
+    "message": "Details found",
+    "data" : [
   {
       "internalRelativeUri": "rating_doc/crisil_IndianOilCorporationLimited_March 23, 2021_RR_267664.html",
       "rating": "CRISIL A1+",
@@ -36,7 +39,7 @@ responseBody = Utils.jsonStringify(                                     [
       "name": "Indian Oil Corporation Limited",
       "ratingTerm": "Short Term",
       "sourceId_": "05ac8ea78fe31b73591a8ec2dacf6cedd4a94cb3"
-  }]);
+  }]});
  creditRatingForm: FormGroup;
   position = '';
   industry = '';
@@ -71,11 +74,11 @@ responseBody = Utils.jsonStringify(                                     [
   getCreditRating(requestedData : any){
     this.sandboxService.getCreditRating(requestedData).subscribe(res => {
       console.log("Res : ",res);
-      if (res.status === 1001) {        
-        this.response = Utils.jsonStringify(res.data);
-      } else {
-        this.utils.warningSnackBar(res.message);
-      }
+      // if (res.status === 1001) {        
+      //   this.response = Utils.jsonStringify(res.data);
+      // } else {
+        this.response = Utils.jsonStringify(res);
+      // }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });

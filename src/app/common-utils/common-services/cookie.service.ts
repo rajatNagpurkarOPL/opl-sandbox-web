@@ -10,7 +10,7 @@ export class CookieService {
   /**
    * Get cookie by name
    */
-  public getCookie(name: string) {
+  public static getCookie(name: string) {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;
     const cookieName = `${name}=`;
@@ -35,7 +35,7 @@ export class CookieService {
    * {service instance}.setCookie({name:'userName',value:'John Doe', secure:true }); <- If page is not https then secure will not apply
    * {service instance}.setCookie({name:'niceCar', value:'red', expireDays:10 }); <- For all this examples if path is not provided default will be root
    */
-  public setCookie(params: any)
+  public static setCookie(params: any)
   {
     let d: Date = new Date();
     d.setTime(d.getTime() + (params.expireDays ? params.expireDays:1) * 24 * 60 * 60 * 1000);
@@ -49,8 +49,8 @@ export class CookieService {
   /**
    * Delete cookie by cookieName
    */
-  public deleteCookie(cookieName) {
-    this.setCookie({name : cookieName, value: '', expireDays : -1});
+  public static deleteCookie(cookieName) {
+    CookieService.setCookie({name : cookieName, value: '', expireDays : -1});
   }
 
 

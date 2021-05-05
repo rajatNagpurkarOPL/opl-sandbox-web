@@ -12,10 +12,10 @@ import { CookieService } from '../common-services/cookie.service';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private utils : Utils, private router: Router, private loaderService: LoaderService,
-              private sandboxService: SandboxService , private cookieService: CookieService) { }
+              private sandboxService: SandboxService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!Utils.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ)) ) {
+    if (!Utils.isObjectNullOrEmpty(CookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ)) ) {
       // logged in so return true
       return true;
     } else {

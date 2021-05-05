@@ -75,10 +75,12 @@
                                                 Please Enter CIN/PAN/KID.
                                             </mat-error>
                                         </mat-form-field>
+                                        &nbsp;
                                           <mat-form-field class="example-full-width">
                                               <mat-label>Name</mat-label>
                                               <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
                                             </mat-form-field>
+                                            &nbsp;
                                           <mat-form-field class="example-full-width">
                                             <mat-label>Rating Agency</mat-label>
                                             <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">

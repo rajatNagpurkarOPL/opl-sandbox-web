@@ -13,7 +13,7 @@ import { CookieService } from './cookie.service';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
-  constructor(private loaderService: LoaderService, private cookieService: CookieService) { }
+  constructor(private loaderService: LoaderService) { }
 
   // Handle request for loader spin
   removeRequest(req: HttpRequest<any>) {
@@ -27,12 +27,12 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = req.headers;
     if (!this.isHeaderSkipUrls(req.url)) {// for skip URL
-      if (!Utils.isObjectNullOrEmpty(this.cookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ))) {
+      if (!Utils.isObjectNullOrEmpty(CookieService.getCookie(Constant.httpAndCookies.COOKIES_OBJ))) {
         const cookies = {};
-        cookies[Constant.httpAndCookies.RFTK] = this.cookieService.getCookie(Constant.httpAndCookies.RFTK);
-        cookies[Constant.httpAndCookies.USNM] = this.cookieService.getCookie(Constant.httpAndCookies.USNM);
-        cookies[Constant.httpAndCookies.ACTK] = this.cookieService.getCookie(Constant.httpAndCookies.ACTK);
-        // cookies[Constant.httpAndCookies.LGTK] = this.cookieService.getCookie(Constant.httpAndCookies.LGTK);
+        cookies[Constant.httpAndCookies.RFTK] = CookieService.getCookie(Constant.httpAndCookies.RFTK);
+        cookies[Constant.httpAndCookies.USNM] = CookieService.getCookie(Constant.httpAndCookies.USNM);
+        cookies[Constant.httpAndCookies.ACTK] = CookieService.getCookie(Constant.httpAndCookies.ACTK);
+        // cookies[Constant.httpAndCookies.LGTK] = CookieService.getCookie(Constant.httpAndCookies.LGTK);
 
         // Set cookies
         req = req.clone({ headers: req.headers.set(Constant.httpAndCookies.USNM, cookies[Constant.httpAndCookies.USNM]) });

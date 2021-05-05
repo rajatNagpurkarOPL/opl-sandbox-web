@@ -13,7 +13,6 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 })
 export class Utils {
   data: any;
-  private static cookieservice : CookieService;
   // private snackBar = SnackbarService;
   constructor(private router :  Router,private snackBar : SnackbarService, private location: Location) { }
 
@@ -122,11 +121,11 @@ export class Utils {
     cookies[Constant.httpAndCookies.ACTK] = params.access_token;
     cookies[Constant.httpAndCookies.RFTK] = params.refresh_token;
     // cookies[Constant.httpAndCookies.LGTK] = params.loginToken;
-    this.cookieservice.setCookie({name : Constant.httpAndCookies.COOKIES_OBJ, value :  this.toBTOA(JSON.stringify(cookies)) });
+    CookieService.setCookie({name : Constant.httpAndCookies.COOKIES_OBJ, value :  Utils.toBTOA(JSON.stringify(cookies)) });
 
-    this.cookieservice.setCookie({name : Constant.httpAndCookies.USNM, value : params.userName});
-    this.cookieservice.setCookie({name : Constant.httpAndCookies.ACTK, value : params.access_token});
-    this.cookieservice.setCookie({name : Constant.httpAndCookies.RFTK, value : params.refresh_token});
+    CookieService.setCookie({name : Constant.httpAndCookies.USNM, value : params.userName});
+    CookieService.setCookie({name : Constant.httpAndCookies.ACTK, value : params.access_token});
+    CookieService.setCookie({name : Constant.httpAndCookies.RFTK, value : params.refresh_token});
     // this.cookieservice.setCookie({name : Constant.httpAndCookies.LGTK, value : params.loginToken});
   }
 
@@ -134,11 +133,11 @@ export class Utils {
  * Delete cookies
  */
    static deleteAuthCookie(){
-    this.cookieservice.deleteCookie(Constant.httpAndCookies.COOKIES_OBJ);
-    this.cookieservice.deleteCookie(Constant.httpAndCookies.USNM);
-    this.cookieservice.deleteCookie(Constant.httpAndCookies.ACTK);
-    this.cookieservice.deleteCookie(Constant.httpAndCookies.RFTK);
-    this.cookieservice.deleteCookie(Constant.httpAndCookies.LGTK);
+    CookieService.deleteCookie(Constant.httpAndCookies.COOKIES_OBJ);
+    CookieService.deleteCookie(Constant.httpAndCookies.USNM);
+    CookieService.deleteCookie(Constant.httpAndCookies.ACTK);
+    CookieService.deleteCookie(Constant.httpAndCookies.RFTK);
+    CookieService.deleteCookie(Constant.httpAndCookies.LGTK);
 }
 
   /**
