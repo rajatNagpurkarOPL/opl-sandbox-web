@@ -32,7 +32,7 @@ export class SandboxService {
     return this.http.post(URLS.SANDBOX_USER.GET_MASTER_DATA,data);
   }
   //ECR APIs
-  getCreditRating(data : any): Observable<any>{
-    return this.http.post(URLS.ECR.CREDIT_RATING,data);
+  getCreditRating(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.ECR.CREDIT_RATING,data,requestHeader);
   }
 }

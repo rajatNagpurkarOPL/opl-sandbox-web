@@ -16,10 +16,11 @@ export class HttpService {
    * For Post service url with data
    */
   header = new HttpHeaders();
-  post(url: string, data: any, ignoreLoader?: string | string[]) {
-    if (ignoreLoader !== undefined && !ignoreLoader) {
-      this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
-      return this.http.post(url, data, { headers: this.header }).pipe(
+  post(url: string, data: any, requestHeader ? :any) {
+    if (!Utils.isObjectNullOrEmpty(requestHeader)) {
+      // this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
+      let headerToSend = new HttpHeaders(requestHeader);
+      return this.http.post(url, data, { headers: headerToSend }).pipe(
         catchError((err: HttpErrorResponse) => {
           return this.utils.errorHandle(err);
         }));
