@@ -12,6 +12,11 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 })
 export class CreditRatingComponent implements OnInit {
 
+  requestHeader = Utils.jsonStringify({
+    "clientId" : "w0nwp8ln7xkfj5fcmeiozs55ixzff6ugogvjhgmbqeange8cfnscex2n58tfaun6sgpouaitbarvyzhydek1jtk9ctd7lvsianzp-84e092472eda-45bd-b603-814468d86abd",
+    "secretId" : "iavqc0gg2cdx8eo9k46ge7mzk99kgitcj2iac2e546ceko2nh7ynn-hdp6nlp4ex7mf-hlsaifg8den885daviejb634prwwfwda1e40zbda3nged5-48yb4z6dfeueds6ph864x",
+    "Content-Type" : "application/json"
+  });
   requestBody  = Utils.jsonStringify({
     "id": "L23201MH1959GOI011388",
     "name": "",
