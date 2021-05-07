@@ -1,20 +1,28 @@
+const SIT_URL = "https://sit-opl.instantmseloans.in";
+const QA_URL = "https://qa-opl.instantmseloans.in";
+const UAT_URL = "https://uat.instantmseloans.in";
+const PREPROD_URL = "https://prepod-opl.instantmseloans.in";
+const PROD_V2_URL = "https://prod-v2.instantmseloans.in";
+const PROD_URL = "https://www.psbloansin59minutes.com";
+const LOCAL_URL = "http://localhost:";
+
 const SANDBOX  =  {
-    endpointFromLocal : "http://localhost:1104",
+    endpointFromLocal : SIT_URL,
     postFix : '/sandbox/usermgmt'
 };
 
 const ECR  =  {
-    endpointFromLocal : "http://localhost:1101",
+    endpointFromLocal : SIT_URL,
     postFix : '/gateway-service/ecr'
 };
 const host = window.location.host;
-let locationUrl = host.includes('sit-opl') ? 'https://sit-opl.instantmseloans.in' 
-: host.includes('qa-opl') ? 'https://qa-opl.instantmseloans.in' 
-: host.includes('uat.instant') ? 'https://uat.instantmseloans.in' 
-: host.includes('prepod-opl') ? 'https://prepod-opl.instantmseloans.in' 
-: host.includes('prod-v2') ? 'https://prod-v2.instantmseloans.in' 
-: host.includes('psbloansin59minutes') ? 'https://www.psbloansin59minutes.com' 
-: 'http://localhost:'; // Default
+let locationUrl = host.includes('sit-opl') ? SIT_URL 
+: host.includes('qa-opl') ? QA_URL 
+: host.includes('uat.instant') ? UAT_URL 
+: host.includes('prepod-opl') ? PREPROD_URL 
+: host.includes('prod-v2') ? PROD_V2_URL 
+: host.includes('psbloansin59minutes') ? PROD_URL 
+: LOCAL_URL; // Default
 
 
 let SANDBOX_BASE_URL = '';
@@ -28,6 +36,7 @@ if(locationUrl.includes('localhost')){
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
+console.log("HOST : ",host);
 
 /**
  *  This is constants of REST URL which can be hit on backend server
