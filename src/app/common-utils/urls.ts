@@ -1,38 +1,37 @@
-const SIT_URL = "https://sit-opl.instantmseloans.in";
-const QA_URL = "https://qa-opl.instantmseloans.in";
-const UAT_URL = "https://uat.instantmseloans.in";
-const PREPROD_URL = "https://prepod-opl.instantmseloans.in";
-const PROD_V2_URL = "https://prod-v2.instantmseloans.in";
-const PROD_URL = "https://www.psbloansin59minutes.com";
-const LOCAL_URL = "http://localhost:";
-
+const SERVER_URL = "https://sit-opl.instantmseloans.in";
 const SANDBOX  =  {
-    endpointFromLocal : SIT_URL,
+    endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
 
-const ECR  =  {
-    endpointFromLocal : SIT_URL,
-    postFix : '/gateway-service/ecr'
+const GATEWAY  =  {
+    endpointFromLocal : SERVER_URL,
+    postFix : '/gateway-service'
 };
-const host = window.location.host;
-let locationUrl = host.includes('sit-opl') ? SIT_URL 
-: host.includes('qa-opl') ? QA_URL 
-: host.includes('uat.instant') ? UAT_URL 
-: host.includes('prepod-opl') ? PREPROD_URL 
-: host.includes('prod-v2') ? PROD_V2_URL 
-: host.includes('psbloansin59minutes') ? PROD_URL 
-: LOCAL_URL; // Default
+
+const ECR  =  {
+    endpointFromLocal : SERVER_URL,
+    postFix : '/ecr'
+};
+let host = window.location.origin;
+// let locationUrl = host.includes('localhost') ? SIT_URL 
+// : host.includes('qa-opl') ? QA_URL 
+// : host.includes('uat.instant') ? UAT_URL 
+// : host.includes('prepod-opl') ? PREPROD_URL 
+// : host.includes('prod-v2') ? PROD_V2_URL 
+// : host.includes('psbloansin59minutes') ? PROD_URL 
+// : LOCAL_URL; // Default
 
 
 let SANDBOX_BASE_URL = '';
 let ECR_BASE_URL = ''
-if(locationUrl.includes('localhost')){
+if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
     ECR_BASE_URL = ECR.endpointFromLocal + ECR.postFix;
 }else{
-    SANDBOX_BASE_URL = locationUrl + SANDBOX.postFix;
-    ECR_BASE_URL = locationUrl + ECR.postFix;
+    host = "http://10.10.5.66:"; // SIT IP
+    SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
+    ECR_BASE_URL = host + "1102" + ECR.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
@@ -53,5 +52,5 @@ export const URLS = {
     },
     ECR : {
         CREDIT_RATING : ECR_BASE_URL + '/credit-rating' 
-    }
+    },
 };

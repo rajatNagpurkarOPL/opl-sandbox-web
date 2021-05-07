@@ -63,7 +63,6 @@ responseBody = Utils.jsonStringify({
 
   onFormSubmit() {
       if (this.creditRatingForm.valid) {
-        console.log(this.creditRatingForm.value);
         this.getCreditRating(this.creditRatingForm.value);
       } else {
         this.utils.warningSnackBar("Please Enter Required Or Valid Details.");
@@ -73,14 +72,11 @@ responseBody = Utils.jsonStringify({
   
   getCreditRating(requestedData : any){
     this.sandboxService.getCreditRating(requestedData).subscribe(res => {
-      console.log("Res : ",res);
-      // if (res.status === 1001) {        
-      //   this.response = Utils.jsonStringify(res.data);
-      // } else {
         this.response = Utils.jsonStringify(res);
-      // }
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
+    },err => {
+      console.log("ERROR : ",err);
+      this.utils.errorHandle(err);
+      // this.utils.errorSnackBar(err);
     });
   }
 }

@@ -157,20 +157,17 @@ export class Utils {
    */
    errorHandle(error: any) {
     let errMsg = '';
-    if (error.status === 401) {
-      this.router.navigate(['/login']);
-      localStorage.clear();
-      errMsg = 'You are not authorised';
-    } else if (error.status === 404) {
-      errMsg = 'Method Not found';
-    } else if (error.status === 400) {
-      errMsg = 'Bad Request';
-    } else {
-      if (error.message != null) {
-        errMsg = error.message;
-      } else {
-        errMsg = 'Something went wrong';
+    if(!Utils.isObjectNullOrEmpty(error.status) && Utils.isObjectNullOrEmpty(error.message)){
+      errMsg = Constant.HTTP_ERROR[error.status];
+      if(error.status == 401){
+        this.router.navigate(['/login']);
+        localStorage.clear();        
       }
+    }else{
+      errMsg = error.message;
+    }
+    if(Utils.isObjectNullOrEmpty(errMsg)){
+      errMsg = "Something went wrong. Please try again after sometime."
     }
     this.errorSnackBar(errMsg);
     return throwError(errMsg);

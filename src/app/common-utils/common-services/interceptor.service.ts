@@ -42,7 +42,7 @@ export class InterceptorService implements HttpInterceptor {
         // req = req.clone({ headers: req.headers.set('req_auth', 'true') });
       } else {
         this.hideLoader();
-        console.log('You are not authorised person');
+        console.log(Constant.HTTP_ERROR[401]);
       }
 
     }
