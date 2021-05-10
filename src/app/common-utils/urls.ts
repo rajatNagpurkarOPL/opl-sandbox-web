@@ -1,4 +1,4 @@
-const SERVER_URL = "https://sit-opl.instantmseloans.in";
+const SERVER_URL = "http://10.10.5.66:";
 const SANDBOX  =  {
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
@@ -26,8 +26,8 @@ let host = window.location.origin;
 let SANDBOX_BASE_URL = '';
 let ECR_BASE_URL = ''
 if(host.includes('localhost')){
-    SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
-    ECR_BASE_URL = ECR.endpointFromLocal + ECR.postFix;
+    SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + "1104" + SANDBOX.postFix;
+    ECR_BASE_URL = ECR.endpointFromLocal + "1101" + ECR.postFix;
 }else{
     host = "http://10.10.5.66:"; // SIT IP
     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
