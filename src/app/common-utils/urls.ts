@@ -29,9 +29,8 @@ if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + "1104" + SANDBOX.postFix;
     ECR_BASE_URL = ECR.endpointFromLocal + "1101" + ECR.postFix;
 }else{
-    host = "http://10.10.5.66:"; // SIT IP
-    SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
-    ECR_BASE_URL = host + "1102" + ECR.postFix;
+    SANDBOX_BASE_URL = host + SANDBOX.postFix;
+    ECR_BASE_URL = host + ECR.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
