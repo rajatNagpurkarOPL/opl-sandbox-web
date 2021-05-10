@@ -1,16 +1,16 @@
 const SERVER_URL = "http://10.10.5.66:";
 const SANDBOX  =  {
-    endpointFromLocal : SERVER_URL + "1104",
+    endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
 
 const GATEWAY  =  {
-    endpointFromLocal : SERVER_URL + "1101",
+    endpointFromLocal : SERVER_URL,
     postFix : '/gateway-service'
 };
 
 const ECR  =  {
-    endpointFromLocal : SERVER_URL + "1101",
+    endpointFromLocal : SERVER_URL,
     postFix : '/ecr'
 };
 let host = window.location.origin;
@@ -27,10 +27,10 @@ let SANDBOX_BASE_URL = '';
 let ECR_BASE_URL = ''
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
-    ECR_BASE_URL = ECR.endpointFromLocal + ECR.postFix;
+    ECR_BASE_URL = ECR.endpointFromLocal + "1101" + ECR.postFix;
 }else{
-    SANDBOX_BASE_URL = host  + SANDBOX.postFix;
     host = "http://10.10.5.66:"; // SIT IP
+    SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
     ECR_BASE_URL = host + "1101" + ECR.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
