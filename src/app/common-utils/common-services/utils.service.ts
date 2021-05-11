@@ -7,6 +7,7 @@ import { CookieService } from './cookie.service';
 import {Location} from '@angular/common';
 import { v4 as uuid } from 'uuid';
 import { SandboxService } from 'src/app/service/sandbox.service';
+import { Globals } from '../globals';
 
 @Injectable({
   providedIn: 'root'
@@ -226,7 +227,17 @@ handleSuccess(res : any,msgPopupType ? : string){
     this.location.back();
   }
 static getAPIKeys(){
-  return JSON.parse(Utils.getStorage(Constant.STORAGE.KEYS,true));
-}  
+    return JSON.parse(Utils.getStorage(Constant.STORAGE.KEYS,true));
+}
+
+static getUser(){
+    return JSON.parse(Utils.getStorage(Constant.STORAGE.USER,true));
+}
+
+static getAPIHeader(){
+  let apiKeys = Utils.getAPIKeys();
+  let user = Utils.getUser();
+  return {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId,"tokenNo" : user.id.toString()};
+}
 
 }

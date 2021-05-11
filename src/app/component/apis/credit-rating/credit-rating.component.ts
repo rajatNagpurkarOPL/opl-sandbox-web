@@ -76,8 +76,8 @@ responseBody = Utils.jsonStringify({
   }
   
   getCreditRating(requestedData : any){
-    let apiKeys = Utils.getAPIKeys();
-    let headers = {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId};
+    let headers = Utils.getAPIHeader();
+    console.log("headers : ",headers);
     this.sandboxService.getCreditRating(requestedData,headers).subscribe(res => {
         this.response = Utils.jsonStringify(res);
     },err => {
