@@ -37,7 +37,7 @@ export class DocumentationComponent implements OnInit {
           this.utils.warningSnackBar(res.message);
         }
       }, (error: any) => {
-        this.utils.errorSnackBar(error);
+        this.utils.errorHandle(error);
       });
     }
 

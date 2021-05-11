@@ -155,6 +155,31 @@ export class Utils {
   /**
    * For handle error and display error msg
    */
+handleSuccess(res : any,msgPopupType ? : string){
+  let resMsg = res.message;
+  if(Utils.isObjectNullOrEmpty(resMsg)){
+    resMsg = Constant.INTERNAL_STATUS_CODES[res.status];; 
+  }
+
+  if(Utils.isObjectNullOrEmpty(msgPopupType)){
+    this.warningSnackBar(resMsg);
+  }else{
+    if(msgPopupType == 'success'){
+      this.successSnackBar(resMsg);
+    }else if(msgPopupType == 'error'){
+      this.errorSnackBar(resMsg);
+    }else if(msgPopupType == 'warning'){
+      this.warningSnackBar(resMsg);
+    }else if(msgPopupType == 'info'){
+      this.infoSnackBar(resMsg);
+    }else{
+      this.defaultSnackBar(resMsg);
+    }
+  }
+  
+    return throwError(resMsg);
+}
+
    errorHandle(error: any) {
     let errMsg = '';
     if(!Utils.isObjectNullOrEmpty(error.status) && Utils.isObjectNullOrEmpty(error.message)){
@@ -200,6 +225,8 @@ export class Utils {
   backClicked() {
     this.location.back();
   }
-  
+static getAPIKeys(){
+  return JSON.parse(Utils.getStorage(Constant.STORAGE.KEYS,true));
+}  
 
 }

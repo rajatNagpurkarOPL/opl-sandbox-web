@@ -13,8 +13,8 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 export class CreditRatingComponent implements OnInit {
 
   requestHeader = Utils.jsonStringify({
-    "clientId" : "w0nwp8ln7xkfj5fcmeiozs55ixzff6ugogvjhgmbqeange8cfnscex2n58tfaun6sgpouaitbarvyzhydek1jtk9ctd7lvsianzp-84e092472eda-45bd-b603-814468d86abd",
-    "secretId" : "iavqc0gg2cdx8eo9k46ge7mzk99kgitcj2iac2e546ceko2nh7ynn-hdp6nlp4ex7mf-hlsaifg8den885daviejb634prwwfwda1e40zbda3nged5-48yb4z6dfeueds6ph864x",
+    "clientId" : "{{your clientId available in profile section}}",
+    "secretId" : "{{your secretId available in profile section}}",
     "Content-Type" : "application/json"
   });
   requestBody  = Utils.jsonStringify({
@@ -76,7 +76,8 @@ responseBody = Utils.jsonStringify({
   }
   
   getCreditRating(requestedData : any){
-    let headers = {"clientId" : "skndkjbcbdvbj","secretId" : "safasfasfa"};
+    let apiKeys = Utils.getAPIKeys();
+    let headers = {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId};
     this.sandboxService.getCreditRating(requestedData,headers).subscribe(res => {
         this.response = Utils.jsonStringify(res);
     },err => {

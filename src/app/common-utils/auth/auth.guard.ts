@@ -46,6 +46,10 @@ export class AuthGuard implements CanActivate {
     Utils.removeStorage(Constant.httpAndCookies.COOKIES_OBJ);
     Utils.removeStorage(Constant.httpAndCookies.ORGID);
     Utils.removeStorage(Constant.httpAndCookies.ROLEID);
+
+    for(let key in Constant.STORAGE){
+      Utils.removeStorage(key.toLocaleLowerCase());
+    }
     // Remove cookies
     Utils.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);

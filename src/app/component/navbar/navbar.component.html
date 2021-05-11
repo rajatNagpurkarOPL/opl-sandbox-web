@@ -7,7 +7,7 @@
                 <!-- <img class="logo" src="assets/img/opl-logo.svg" /> -->
 
                 <div class="topnav">
-                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.DOCUMENTATION}}/CRDT_RTNG"  href="javasript:void(0)">Documentation</a>
+                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"  href="javasript:void(0)">Documentation</a>
                 </div>
 
                 <div class="header-right">
@@ -28,8 +28,8 @@
 
                     <button mat-button [matMenuTriggerFor]="menu">  <p><img src="assets/img/b4lDefault.png" alt=""/> Hi, <span class="w-50 text-over"> {{globals.USER.userName}}</span> <img class="down-arrow ml-2" style="width: 10px;" src="assets/img/down-arrow.svg" /></p>  </button>
                         <mat-menu #menu="matMenu">
-                        <button mat-menu-item><p><mat-icon>person_pin</mat-icon> <strong>View Profile</strong></p></button>
-                        <button mat-menu-item [routerLink]="[constant.ACTIVITY_LOGS]"><p><mat-icon>local_activity</mat-icon> <strong>Activity Logs</strong></p></button>
+                        <button mat-menu-item [routerLink]="[constant.ROUTE_URL.PROFILE , constant.PROFILE_PAGE.SETTING]"><p><mat-icon>person_pin</mat-icon> <strong>Profile</strong></p></button>
+                        <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]"><p><mat-icon>local_activity</mat-icon> <strong>Activity</strong></p></button>
                         <button mat-menu-item (click)="logoutUser()"><p style="color: #E36C6C;"><mat-icon>exit_to_app</mat-icon><strong>Logout</strong></p></button>
                         </mat-menu>
 

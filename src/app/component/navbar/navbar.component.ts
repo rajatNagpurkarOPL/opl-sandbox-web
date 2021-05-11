@@ -4,6 +4,7 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
+import { ApiAccessKeyComponent } from '../api-access-key/api-access-key.component';
 
 @Component({
   selector: 'app-navbar',
@@ -13,17 +14,16 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 
 export class NavbarComponent implements OnInit {
 
-  constant: any = {};
+  public readonly constant: any = {};
   productCount: any = {};
   user: any;
   dashboardClass: boolean;
-  constructor(private utils : Utils, public router: Router, public globals: Globals, private lenderService: SandboxService) {
-    this.globals.COUNT =  {}; // reset globle variable
-    this.globals.USER =  {}; // reset globle variable
+  constructor(private utils : Utils, public router: Router, public globals: Globals, private sandboxService: SandboxService) {
+    this.constant = Constant;
   }
 
   logoutUser() {
-    this.lenderService.logout().subscribe(res => {
+    this.sandboxService.logout().subscribe(res => {
       if (res.status === 200) {
         this.utils.successSnackBar(res.message);
       } else {
@@ -42,24 +42,25 @@ export class NavbarComponent implements OnInit {
 
   // Get user details
   getUserDetails() {
-    this.lenderService.getLoggedInUserDetails().subscribe(res => {
+    this.sandboxService.getLoggedInUserDetails().subscribe(res => {
       if (res.status === 200) {
         if (res.data){
           this.globals.USER = res.data;
           this.user = res.data;
           Utils.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
+          new ApiAccessKeyComponent(this.sandboxService,this.globals,this.utils).getKeys();
         }
       } else {
         this.utils.errorSnackBar(res.message);
       }
     }, error => {
-      this.utils.errorSnackBar(error);
+      // this.utils.errorSnackBar(error);
+      this.utils.errorHandle(error);
     });
   }
 
   ngOnInit(): void {
-    this.constant = Constant.ROUTE_URL;
-    this.getUserDetails();
+    this.getUserDetails();    
   }
 
 }

@@ -40,6 +40,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { CreditRatingComponent } from './component/apis/credit-rating/credit-rating.component';
 import { CustomErrorStateMatcherComponent } from './component/custom-error-state-matcher/custom-error-state-matcher.component';
 import { ActivityLogsComponent } from './component/activity-logs/activity-logs.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { ApiAccessKeyComponent } from './component/api-access-key/api-access-key.component';
+import { ApiCreditComponent } from './component/api-credit/api-credit.component';
 
 
 
@@ -83,6 +86,9 @@ import { ActivityLogsComponent } from './component/activity-logs/activity-logs.c
     CreditRatingComponent,
     CustomErrorStateMatcherComponent,
     ActivityLogsComponent,
+    ProfileComponent,
+    ApiAccessKeyComponent,
+    ApiCreditComponent,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

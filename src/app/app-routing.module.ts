@@ -8,6 +8,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { DocumentationComponent } from './component/documentation/documentation.component';
 import { ActivityLogsComponent } from './component/activity-logs/activity-logs.component';
+import { ProfileComponent } from './component/profile/profile.component';
 const routes: Routes = [ 
   
   { path: 'login', component: LoginComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },    
     { path: 'documentation/:code', component: DocumentationComponent},
-    { path: 'activity', component: ActivityLogsComponent}
+    { path: 'activity', component: ActivityLogsComponent},
+    { path: 'profile/:pageName', component: ProfileComponent}
   ]
 },
 { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,7 +29,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation : 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

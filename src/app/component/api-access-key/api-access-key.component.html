@@ -1,0 +1,18 @@
+<div class="main">
+    <div class="sidebar-main-title">
+      <div class="d-flex fl-column js-center" style="width: 100%;"> 
+        <mat-form-field class="example-full-width">
+          <mat-label>Client Id</mat-label>
+          <input type="text" style="width: 100%;" readonly matInput [value]="this.apiKeys.clientId" placeholder="ClientId">
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width" style="margin-top: 1em;">
+          <mat-label>Secret Id</mat-label>
+          <input type="text" style="width: 100%;" readonly matInput [value]="this.apiKeys.secretId" placeholder="SecretId">
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <button type="button" mat-flat-button color="primary" (click)="generateKey(true)" >Re-Generate Keys</button>
+    </div>
+</div>
