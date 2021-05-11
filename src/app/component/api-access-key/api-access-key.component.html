@@ -3,12 +3,14 @@
       <div class="d-flex fl-column js-center" style="width: 100%;"> 
         <mat-form-field class="example-full-width">
           <mat-label>Client Id</mat-label>
-          <input type="text" style="width: 100%;" readonly matInput [value]="this.apiKeys.clientId" placeholder="ClientId">
+          <input type="text" style="width: 100%;"  readonly matInput [value]="this.apiKeys.clientId" placeholder="ClientId">
+          <mat-icon matSuffix style="cursor: pointer;" matTooltip = "Copy ClientId"  (click)="copyContent(this.apiKeys.clientId,'ClientId')">content_copy</mat-icon>
         </mat-form-field>
         
         <mat-form-field class="example-full-width" style="margin-top: 1em;">
           <mat-label>Secret Id</mat-label>
           <input type="text" style="width: 100%;" readonly matInput [value]="this.apiKeys.secretId" placeholder="SecretId">
+          <mat-icon matSuffix matSuffix style="cursor: pointer;"  (click)="copyContent(this.apiKeys.secretId,'SecretId')" matTooltip = "Copy SecretId">content_copy</mat-icon>
         </mat-form-field>
       </div>
     </div>

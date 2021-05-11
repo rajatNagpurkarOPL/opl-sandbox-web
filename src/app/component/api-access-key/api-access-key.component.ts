@@ -3,6 +3,8 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
+import { Clipboard } from "@angular/cdk/clipboard";
+
 
 @Component({
   selector: 'app-api-access-key',
@@ -13,7 +15,7 @@ export class ApiAccessKeyComponent implements OnInit {
 
   apiKeys : any = {};
   user : any = null;
-  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils) {
+  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils,private clipBoard : Clipboard) {
     this.user = globals.USER;
     console.log("user :",this.user);
    }
@@ -65,6 +67,11 @@ export class ApiAccessKeyComponent implements OnInit {
       // this.utils.errorSnackBar(err);
     });
   }
+
+copyContent(text : any,type : string){
+  this.clipBoard.copy(text);
+  this.utils.successSnackBar(type + " Copied");
+}
 
 private processResponse(res : any){
   this.apiKeys = res.data;

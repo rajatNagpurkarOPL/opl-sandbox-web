@@ -43,6 +43,7 @@ import { ActivityLogsComponent } from './component/activity-logs/activity-logs.c
 import { ProfileComponent } from './component/profile/profile.component';
 import { ApiAccessKeyComponent } from './component/api-access-key/api-access-key.component';
 import { ApiCreditComponent } from './component/api-credit/api-credit.component';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 
@@ -59,7 +60,8 @@ import { ApiCreditComponent } from './component/api-credit/api-credit.component'
     HttpClientModule,
     Ng5SliderModule,
     NgApexchartsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ClipboardModule
   ],
   declarations: [
     AppComponent,
