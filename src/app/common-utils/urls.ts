@@ -5,8 +5,9 @@ const SANDBOX  =  {
 };
 
 const GATEWAY  =  {
-    endpointFromLocal : SERVER_URL,
-    postFix : '/gateway-service'
+    endpointFromLocal : SERVER_URL + "1101",
+    // postFix : '/gateway-service'
+    postFix : ''
 };
 
 const ECR  =  {
@@ -24,17 +25,21 @@ let host = window.location.origin;
 
 
 let SANDBOX_BASE_URL = '';
-let ECR_BASE_URL = ''
+let ECR_BASE_URL = '';
+let GATEWAY_BASE_URL = '';
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
     ECR_BASE_URL = ECR.endpointFromLocal + ECR.postFix;
+    GATEWAY_BASE_URL = GATEWAY.endpointFromLocal + GATEWAY.postFix;
 }else{
     host = "http://10.10.5.66:"; // SIT IP
     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
     ECR_BASE_URL = host + "1101" + ECR.postFix;
+    GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
+console.log("GATEWAT Url :", GATEWAY_BASE_URL);
 console.log("HOST : ",host);
 
 /**
@@ -51,9 +56,12 @@ export const URLS = {
         GET_MASTER_DATA: SANDBOX_BASE_URL + '/master/get-master-data',
         GET_API_ACCESS_KEYS : SANDBOX_BASE_URL + '/api/acceekey/get',
         GENERATE_API_ACCESS_KEYS : SANDBOX_BASE_URL + '/api/acceekey/generate'
-         
+        
     },
     ECR : {
         CREDIT_RATING : ECR_BASE_URL + '/credit-rating' 
     },
+    GATEWAY : {
+        USER_LOGS : GATEWAY_BASE_URL + '/auditlogs/user'
+    }
 };
