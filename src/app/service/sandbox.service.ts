@@ -45,4 +45,8 @@ export class SandboxService {
   generateAPIAccessKey(data : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GENERATE_API_ACCESS_KEYS,data);
   }
+
+  getUserLogs(data): Observable<any>{
+    return this.http.get(URLS.GATEWAY.USER_LOGS + '/' + data , false);
+  }
 }
