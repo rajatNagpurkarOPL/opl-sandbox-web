@@ -35,7 +35,7 @@ if(host.includes('localhost')){
     host = "http://10.10.5.66:"; // SIT IP
     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
     ECR_BASE_URL = host + "1101" + ECR.postFix;
-    GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
+    GATEWAY_BASE_URL = host + "1101" + GATEWAY.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
