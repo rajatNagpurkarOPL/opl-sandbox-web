@@ -3,6 +3,7 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
+import { ApiAccessKeyComponent } from '../api-access-key/api-access-key.component';
 
 @Component({
   selector: 'app-api-credit',
@@ -15,6 +16,7 @@ export class ApiCreditComponent implements OnInit {
   requestBody : any;
   balanceCredit : any = '';
   totalCredit : any = '';
+  apiName : any = '';
 
   constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils) {
     this.user = globals.USER;
@@ -49,6 +51,7 @@ export class ApiCreditComponent implements OnInit {
           console.log("Res.Data[1].balance :"+res.data[1].balance);
           this.totalCredit = res.data[1].total;
           this.balanceCredit = res.data[1].balance;
+          this.apiName = "Credit Rating";
         }
       }
     },err => {
