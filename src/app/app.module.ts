@@ -44,6 +44,8 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { ApiAccessKeyComponent } from './component/api-access-key/api-access-key.component';
 import { ApiCreditComponent } from './component/api-credit/api-credit.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { TreeGridTableComponent } from './component/controls/tree-grid-table/tree-grid-table.component';
+import { TreeGridTableDirective } from './directives/tree-grid-table.directive';
 
 
 
@@ -91,6 +93,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     ProfileComponent,
     ApiAccessKeyComponent,
     ApiCreditComponent,
+    TreeGridTableComponent,
+    TreeGridTableDirective,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

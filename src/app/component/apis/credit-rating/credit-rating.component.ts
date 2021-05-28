@@ -4,7 +4,6 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 
-
 @Component({
   selector: 'app-credit-rating',
   templateUrl: './credit-rating.component.html',
@@ -53,6 +52,11 @@ responseBody = Utils.jsonStringify({
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
   ratingAgencies: any[] = ["SMERA","ONICRA","CARE","INDIA","CRISIL","BRICKWORK","ICRA"];
+  apiRequestSchemaData: any[] = [];
+  apiResponseSchemaData: any[] = [];
+  domainSchemaData: any[] = [];
+  apiRequestBody: any = {};
+  apiResponseBody: any = {};
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
     this.formBuilder = fb;
@@ -64,6 +68,8 @@ responseBody = Utils.jsonStringify({
       name: ['', null],
       ratingAgency: ["CRISIL", Validators.required]
     });
+    this.getApiRequestSchema('CreditRatingRequest');
+    this.getApiResponseSchema('CreditRatingResponse');
   }
 
   onFormSubmit() {
@@ -79,6 +85,7 @@ responseBody = Utils.jsonStringify({
     let headers = Utils.getAPIHeader();
     console.log("headers : ",headers);
     this.sandboxService.getCreditRating(requestedData,headers).subscribe(res => {
+      console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {
       console.log("ERROR : ",err);
@@ -86,4 +93,66 @@ responseBody = Utils.jsonStringify({
       // this.utils.errorSnackBar(err);
     });
   }
+  
+  getApiRequestSchema(data){
+  this.sandboxService.getApiSchema(data).subscribe(res => {
+    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        console.log("res.data::",res.data)
+        this.apiRequestSchemaData = res.data;
+        console.log("apiRequestSchemaData::",this.apiRequestSchemaData)
+        this.apiRequestBody = res.data.body;
+      }
+    } else {
+      this.utils.warningSnackBar(res.message);
+    }
+  }, (error: any) => {
+    this.utils.errorSnackBar(error);
+  });
+}
+
+getApiResponseSchema(data){
+  this.sandboxService.getApiSchema(data).subscribe(res => {
+    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        console.log("res.data::",res.data)
+        this.apiResponseSchemaData = res.data;
+        console.log("apiResponseSchemaData::",this.apiResponseSchemaData)
+        this.apiResponseBody = res.data.body;
+      }
+    } else {
+      this.utils.warningSnackBar(res.message);
+    }
+  }, (error: any) => {
+    this.utils.errorSnackBar(error);
+  });
+}
+
+getDomainSchema(data){
+  console.log('getDomainData Clicked');
+  this.sandboxService.getDomainSchema(data).subscribe(res => {
+    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        this.domainSchemaData = res.data;
+      }
+    } else {
+      this.utils.warningSnackBar(res.message);
+    }
+  }, (error: any) => {
+    this.utils.errorSnackBar(error);
+  });
+}
+
+tabClick(tab) {
+  if(tab.index==0){
+    console.log('Schema Clicked');
+    // this.getApiRequestSchema('createLoanApplicationsRequest');
+    // this.getApiResponseSchema('createLoanApplicationsResponse');
+  }else if(tab.index==1){
+    console.log('Header Clicked');
+  }else if (tab.index ==2){
+    console.log('Other Clicked');
+  }
+}
+  
 }

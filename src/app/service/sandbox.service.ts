@@ -53,4 +53,12 @@ export class SandboxService {
   getApiCreditLimit(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GET_API_CREDIT_LIMIT,data,requestHeader);
   }
+  
+  getApiSchema(data): Observable<any>{
+    return this.http.get(URLS.SANDBOX_USER.SCHEMA_DETAIL+ '/' + data, false);
+  }
+
+  getDomainSchema(data): Observable<any>{
+    return this.http.get(URLS.SANDBOX_USER.DOMAIN_DETAIL+ '/' + data, false);
+  }
 }
