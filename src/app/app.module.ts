@@ -38,6 +38,7 @@ import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CreditRatingComponent } from './component/apis/credit-rating/credit-rating.component';
+import { PanStatusCheckComponent } from './component/apis/pan-status-check/pan-status-check.component';
 import { CustomErrorStateMatcherComponent } from './component/custom-error-state-matcher/custom-error-state-matcher.component';
 import { ActivityLogsComponent } from './component/activity-logs/activity-logs.component';
 import { ProfileComponent } from './component/profile/profile.component';
@@ -88,6 +89,7 @@ import { TreeGridTableDirective } from './directives/tree-grid-table.directive';
     DrawerMenuDirective,
     DrawerMenuComponent,
     CreditRatingComponent,
+    PanStatusCheckComponent,
     CustomErrorStateMatcherComponent,
     ActivityLogsComponent,
     ProfileComponent,
