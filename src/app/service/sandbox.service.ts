@@ -65,5 +65,9 @@ export class SandboxService {
     //PENNYDROP APIs
   panStatusCheck(data : any,requestHeader : any): Observable<any>{
       return this.http.post(URLS.PENNYDROP.PAN_STATUS_CHECK,data,requestHeader);
-    }
+  }
+
+  bankAccountVerification(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.PENNYDROP.BANK_ACCOUNT_VERIFICATION,data,requestHeader);
+  }
 }

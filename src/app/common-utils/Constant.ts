@@ -30,7 +30,8 @@ export const Constant = {
     MASTER_CODE : {
         API : "API",
         CRDT_RTNG : "CRDT_RTNG",
-        PAN_STATUS_CHECK : "PAN_STATUS_CHECK"
+        PAN_STATUS_CHECK : "PAN_STATUS_CHECK",
+        BANK_ACCOUNT_VERIFICATION : "BANK_ACCOUNT_VERIFICATION"
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {

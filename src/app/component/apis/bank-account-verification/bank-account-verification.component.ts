@@ -6,34 +6,37 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
-  selector: 'app-pan-status-check',
-  templateUrl: './pan-status-check.component.html',
-  styleUrls: ['./pan-status-check.component.scss']
+  selector: 'app-bank-account-verification',
+  templateUrl: './bank-account-verification.component.html',
+  styleUrls: ['./bank-account-verification.component.scss']
 })
-export class PanStatusCheckComponent implements OnInit {
+export class BankAccountVerificationComponent implements OnInit {
 
   requestHeader = Utils.jsonStringify({
     "clientId" : "{{your clientId available in profile section}}",
     "secretId" : "{{your secretId available in profile section}}",
     "Content-Type" : "application/json"
   });
-  requestBody  = Utils.jsonStringify({
-    "pan": "",
-    "name": "",
-    "dob": "DD/MM/YYYY",
-    "consent": "Y"
-  });
-responseBody = Utils.jsonStringify({
+  requestBody  = Utils.jsonStringify(
+   {
+      "consent": "Y",
+      "ifsc": "ICIC0000123",
+      "accountNumber": "123456789012"
+   }
+  );
+responseBody = Utils.jsonStringify(
+  {
     "status": 1001,
     "message": "Details found",
     "data": {
-        "nameMatch": false,
-        "status": "Active",
-        "dobMatch": true,
-        "duplicate": false
+        "bankTxnStatus": true,
+        "accountNumber": "123456789012",
+        "ifsc": "ICIC0000123",
+        "accountName": "XYZ",
+        "bankResponse": "Transaction Successful"
     }
   });
- panStatusCheckForm: FormGroup;
+ bankAccountVerificationForm: FormGroup;
   position = '';
   industry = '';
   experience = 0;
@@ -51,29 +54,28 @@ responseBody = Utils.jsonStringify({
    }
 
   ngOnInit(): void {
-    this.panStatusCheckForm = this.formBuilder.group({
-      pan: ['', Validators.required],
-      name: ['', Validators.required],
-      dob: ['', Validators.required],
+    this.bankAccountVerificationForm = this.formBuilder.group({
+      ifsc: ['', Validators.required],
+      accountNumber: ['', Validators.required],
       consent:['', null]
     });
-    this.getApiRequestSchema('PanStatusCheckRequest');
-    this.getApiResponseSchema('PanStatusCheckResponse');
+    this.getApiRequestSchema('BankAccountVerificationRequest');
+    this.getApiResponseSchema('BankAccountVerificationResponse');
   }
 
   onFormSubmit() {
-      if (this.panStatusCheckForm.valid) {
-        this.panStatusCheck(this.panStatusCheckForm.value);
+      if (this.bankAccountVerificationForm.valid) {
+        this.bankAccountVerification(this.bankAccountVerificationForm.value);
       } else {
         this.utils.warningSnackBar("Please Enter Required Or Valid Details.");
         return;
       }
   }
   
-  panStatusCheck(requestedData : any){
+  bankAccountVerification(requestedData : any){
     let headers = Utils.getAPIHeader();
     console.log("headers : ",headers);
-    this.sandboxService.panStatusCheck(requestedData,headers).subscribe(res => {
+    this.sandboxService.bankAccountVerification(requestedData,headers).subscribe(res => {
       console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {

@@ -86,6 +86,7 @@ export const URLS = {
         USER_LOGS : GATEWAY_BASE_URL + '/auditlogs/user'
     },
     PENNYDROP : {
-        PAN_STATUS_CHECK : PENNYDROP_BASE_URL + '/panVerification/pan_status_check'
+        PAN_STATUS_CHECK : PENNYDROP_BASE_URL + '/panVerification/pan_status_check',
+        BANK_ACCOUNT_VERIFICATION : PENNYDROP_BASE_URL + '/accountValidation/bankAccountVerification'
     }
 };
