@@ -1,0 +1,125 @@
+        <div>
+            <div class="card-header row row-flex">
+                <h3 class="card-title" style="border-left-color: inherit; ">
+                <strong><span class="label-text">Bank Account Verification</span></strong>
+                </h3><!---->
+            </div>
+            <div class="card-body"><!---->
+                <div class="well well-sm p-0">
+                    <div class="table-container">
+                        <div class="form-group">
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
+                            </mat-form-field>
+                            <mat-form-field style="width: 80%;">
+                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://sit-opl.instantmseloans.in/gateway-service/pennydrop/accountValidation/bankAccountVerification">
+                            </mat-form-field>
+                            <mat-form-field style="width: 10%; background-color: #777;">
+                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div><!---->
+                <mat-tab-group>
+                    <mat-tab label="Documentation">
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Request</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms">
+                                        <mat-tab label="Schema">
+                                            <app-tree-grid-table *ngIf="apiRequestSchemaData.length > 0"  [jsonData]="apiRequestSchemaData"></app-tree-grid-table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">
+                                            <pre class="json-pretty">
+                                                {{requestBody}}
+                                            </pre>
+                                        </mat-tab>
+                                        <mat-tab label="Header" style="align-items: center;">
+                                            <pre class="json-pretty">
+                                                {{requestHeader}}
+                                            </pre>
+                                        </mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                                <div class="card-header row row-flex">
+                                    <h3 class="card-title" style="border-left-color: inherit; ">
+                                    <span class="label-text">Response</span>
+                                    </h3><!---->
+                                </div>
+                                <div class="card-body">
+                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
+ 										<mat-tab label="Schema">
+                                            <br>
+                                            <app-tree-grid-table *ngIf="apiResponseSchemaData.length > 0"  [jsonData]="apiResponseSchemaData"></app-tree-grid-table>
+                                        </mat-tab>
+                                        <mat-tab label="Body">
+                                            <pre class="json-pretty">
+                                                {{responseBody}}                                            </pre>
+                                        </mat-tab>
+                                        <mat-tab label="Header">
+                                            <p style="color: red;">NO HEADER</p>
+                                        </mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                    </mat-tab>
+                    <mat-tab label="Tryout">
+                        <div>
+                                <form>
+                                    <mat-card style="display: flex; width: 100%;">
+                                        <form class="example-form" [formGroup]="bankAccountVerificationForm" (ngSubmit)="onFormSubmit()">
+                                          <mat-form-field class="example-full-width">
+                                            <mat-label>IFSC Code</mat-label>
+                                            <input type="text" matInput [formControl]="bankAccountVerificationForm.controls.ifsc" [errorStateMatcher]="matcher" placeholder="Ex. ICIC0000123">
+                                            <mat-error *ngIf="bankAccountVerificationForm.get('ifsc').hasError('required')">
+                                                Please Enter IFSC Code
+                                            </mat-error>
+                                        </mat-form-field>
+                                        &nbsp;
+                                          <mat-form-field class="example-full-width">
+                                              <mat-label>Account Number</mat-label>
+                                              <input type="text" matInput [formControl]="bankAccountVerificationForm.controls.accountNumber" [errorStateMatcher]="matcher" placeholder="Ex. 123456789012">
+                                              <mat-error *ngIf="bankAccountVerificationForm.get('accountNumber').hasError('required')">
+                                                Please Enter Account Number
+                                            </mat-error>
+                                            </mat-form-field>
+                                            &nbsp;
+                                          <mat-form-field class="example-full-width">
+                                            <mat-label>Consent</mat-label>
+                                            <input type="text" matInput [formControl]="bankAccountVerificationForm.controls.consent" [errorStateMatcher]="matcher" placeholder="Ex. Y/N">
+                                          </mat-form-field>
+
+                                          <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Send</button>
+                                        </form>
+                                      </mat-card>
+                                </form>
+                        </div>
+
+                        <mat-tab-group>
+                            <mat-tab label="Response">
+                                <div style="overflow: auto;">
+                                    <pre class="json-pretty">
+                                        {{response}}
+                                    </pre>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+    </div>   
+<style>
+    table, th , td {
+       border: 1px solid grey;
+       border-collapse: collapse;
+       padding: 5px;
+    }
+    table tr:nth-child(odd) {
+       background-color: #f2f2f2;
+    }
+    table tr:nth-child(even) {
+       background-color: #ffffff;
+    }
+ </style>

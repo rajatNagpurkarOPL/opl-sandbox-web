@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreditRatingComponent } from './credit-rating.component';
+import { PanStatusCheckComponent } from './pan-status-check.component';
 
-describe('CreditRatingComponent', () => {
+describe('PanStatusCheckComponent', () => {
   let component: PanStatusCheckComponent;
   let fixture: ComponentFixture<PanStatusCheckComponent>;
 
