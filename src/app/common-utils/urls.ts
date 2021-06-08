@@ -1,6 +1,5 @@
-//const SERVER_URL = "http://localhost:";
+const SERVER_URL = "http://localhost:";
 // const SERVER_URL = "http://10.10.5.66:";
-const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  {
     endpointFromLocal : SERVER_URL + "1104",
@@ -48,13 +47,13 @@ if(host.includes('localhost')){
     ECR_GATEWAY_BASE_URL = GATEWAY.endpointFromLocal + ECR.postFix;
     PENNYDROP_BASE_URL = GATEWAY.endpointFromLocal + PENNYDROP.postFix;
 }else{
-    //host = "http://10.10.5.66:"; // SIT IP
-    SANDBOX_BASE_URL = SERVER_URL + SANDBOX.postFix; //host + "1104" + SANDBOX.postFix;
-    ECR_BASE_URL = SERVER_URL + ECR.postFix;  //host + "1101" + ECR.postFix;
-    GATEWAY_BASE_URL = SERVER_URL + GATEWAY.postFix; //host + "1101" + GATEWAY.postFix;
-    SANDBOX_GATEWAY_BASE_URL = SERVER_URL + SANDBOX.postFix; //host + "1101" + SANDBOX.postFix;
-    ECR_GATEWAY_BASE_URL = SERVER_URL + ECR.postFix;  //host + "1101" + ECR.postFix;
-    PENNYDROP_BASE_URL = SERVER_URL + PENNYDROP.postFix; //host + "1101" + PENNYDROP.postFix;
+    host = "http://10.10.5.66:"; // SIT IP
+    SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
+    ECR_BASE_URL = host + "1101" + ECR.postFix;
+    GATEWAY_BASE_URL = host + "1101" + GATEWAY.postFix;
+    SANDBOX_GATEWAY_BASE_URL = host + "1101" + SANDBOX.postFix;
+    ECR_GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
+    PENNYDROP_BASE_URL = host + "1101" + PENNYDROP.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
