@@ -19,6 +19,7 @@ export class DocumentationComponent implements OnInit {
   isObjectNullOrEmpty  = Utils.isObjectNullOrEmpty;
   constructor(private sandboxService: SandboxService, public utils: Utils,private route : ActivatedRoute, private router : Router) { 
     this.constant = Constant;
+    DocumentationComponent.masterCodes = [];
     DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
   } 
   
