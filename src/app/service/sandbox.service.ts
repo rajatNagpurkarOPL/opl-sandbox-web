@@ -70,4 +70,8 @@ export class SandboxService {
   bankAccountVerification(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.PENNYDROP.BANK_ACCOUNT_VERIFICATION,data,requestHeader);
   }
+
+  udhyamRegDetail(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.UDHYAM.GETDETAIL,data,requestHeader);
+  }
 }

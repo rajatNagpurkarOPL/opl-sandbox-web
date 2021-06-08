@@ -40,6 +40,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { CreditRatingComponent } from './component/apis/credit-rating/credit-rating.component';
 import { PanStatusCheckComponent } from './component/apis/pan-status-check/pan-status-check.component';
 import { BankAccountVerificationComponent } from './component/apis/bank-account-verification/bank-account-verification.component';
+import { UdhyamRegDetailComponent } from './component/apis/udhyam-reg-detail/udhyam-reg-detail.component';
 import { CustomErrorStateMatcherComponent } from './component/custom-error-state-matcher/custom-error-state-matcher.component';
 import { ActivityLogsComponent } from './component/activity-logs/activity-logs.component';
 import { ProfileComponent } from './component/profile/profile.component';
@@ -94,6 +95,7 @@ import { DocumentationDataDirective } from './directives/documentation-data.dire
     CreditRatingComponent,
     PanStatusCheckComponent,
     BankAccountVerificationComponent,
+    UdhyamRegDetailComponent,
     CustomErrorStateMatcherComponent,
     ActivityLogsComponent,
     ProfileComponent,
