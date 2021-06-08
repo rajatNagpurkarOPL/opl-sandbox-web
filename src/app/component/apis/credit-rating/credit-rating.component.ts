@@ -52,11 +52,13 @@ responseBody = Utils.jsonStringify({
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
   ratingAgencies: any[] = ["SMERA","ONICRA","CARE","INDIA","CRISIL","BRICKWORK","ICRA"];
-  apiRequestSchemaData: any[] = [];
-  apiResponseSchemaData: any[] = [];
+  //apiRequestSchemaData: any[] = [];
+  //apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
-  apiRequestBody: any = {};
-  apiResponseBody: any = {};
+  //apiRequestBody: any = {};
+  //apiResponseBody: any = {};
+  apiRequestData: any = {};
+  apiResponseData: any = {};
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
     this.formBuilder = fb;
@@ -99,9 +101,12 @@ responseBody = Utils.jsonStringify({
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
         console.log("res.data::",res.data)
-        this.apiRequestSchemaData = res.data;
-        console.log("apiRequestSchemaData::",this.apiRequestSchemaData)
-        this.apiRequestBody = res.data.body;
+        // this.apiRequestSchemaData = res.data;
+        // console.log("apiRequestSchemaData::",this.apiRequestSchemaData)
+        // this.apiRequestBody = res.data.body;
+
+        this.apiRequestData = {"apiSchemaData": res.data ,
+              "apiBodyData":this.requestBody ,"apiHeaderData":this.requestHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -116,9 +121,11 @@ getApiResponseSchema(data){
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
         console.log("res.data::",res.data)
-        this.apiResponseSchemaData = res.data;
-        console.log("apiResponseSchemaData::",this.apiResponseSchemaData)
-        this.apiResponseBody = res.data.body;
+        // this.apiResponseSchemaData = res.data;
+        // console.log("apiResponseSchemaData::",this.apiResponseSchemaData)
+        // this.apiResponseBody = res.data.body;
+        this.apiResponseData = {"apiSchemaData": res.data ,
+              "apiBodyData":this.requestBody ,"apiHeaderData":this.requestHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -141,18 +148,6 @@ getDomainSchema(data){
   }, (error: any) => {
     this.utils.errorSnackBar(error);
   });
-}
-
-tabClick(tab) {
-  if(tab.index==0){
-    console.log('Schema Clicked');
-    // this.getApiRequestSchema('createLoanApplicationsRequest');
-    // this.getApiResponseSchema('createLoanApplicationsResponse');
-  }else if(tab.index==1){
-    console.log('Header Clicked');
-  }else if (tab.index ==2){
-    console.log('Other Clicked');
-  }
 }
   
 }
