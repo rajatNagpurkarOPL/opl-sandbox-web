@@ -48,6 +48,8 @@ import { ApiCreditComponent } from './component/api-credit/api-credit.component'
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { TreeGridTableComponent } from './component/controls/tree-grid-table/tree-grid-table.component';
 import { TreeGridTableDirective } from './directives/tree-grid-table.directive';
+import { DocumentationDataComponent } from './component/documentation-data/documentation-data.component';
+import { DocumentationDataDirective } from './directives/documentation-data.directive';
 
 
 
@@ -99,6 +101,8 @@ import { TreeGridTableDirective } from './directives/tree-grid-table.directive';
     ApiCreditComponent,
     TreeGridTableComponent,
     TreeGridTableDirective,
+    DocumentationDataComponent,
+    DocumentationDataDirective,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
