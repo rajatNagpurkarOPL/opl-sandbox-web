@@ -27,6 +27,11 @@ const UDHYAM = {
     postFix : '/udhyam'
 };
 
+const CAAPI = {
+    endpointFromLocal : SERVER_URL + "14524",
+    postFix : '/caapi/ca-msme'
+};
+
 let host = window.location.origin;
 // let locationUrl = host.includes('localhost') ? SIT_URL 
 // : host.includes('qa-opl') ? QA_URL 
@@ -44,6 +49,7 @@ let SANDBOX_GATEWAY_BASE_URL = '';
 let ECR_GATEWAY_BASE_URL = '';
 let PENNYDROP_BASE_URL = '';
 let UDHYAM_BASE_URL = '';
+let CAAPI_BASE_URL = '';
 
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
@@ -53,6 +59,7 @@ if(host.includes('localhost')){
     ECR_GATEWAY_BASE_URL = GATEWAY.endpointFromLocal + ECR.postFix;
     PENNYDROP_BASE_URL = GATEWAY.endpointFromLocal + PENNYDROP.postFix;
     UDHYAM_BASE_URL = GATEWAY.endpointFromLocal + UDHYAM.postFix;
+    CAAPI_BASE_URL = GATEWAY.endpointFromLocal + CAAPI.postFix;
 }else{
     host = "http://10.10.5.66:"; // SIT IP
     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
@@ -62,12 +69,14 @@ if(host.includes('localhost')){
     ECR_GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
     PENNYDROP_BASE_URL = host + "1101" + PENNYDROP.postFix;
     UDHYAM_BASE_URL = host + "1101" + UDHYAM.postFix;
+    CAAPI_BASE_URL = host + "1101" + CAAPI.postFix;
 }
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
 console.log("PennyDrop Url : ",PENNYDROP_BASE_URL);
 console.log("GATEWAY Url :", GATEWAY_BASE_URL);
 console.log("UDHYAM Url :", UDHYAM_BASE_URL);
+console.log("CAAPI Url :", CAAPI_BASE_URL);
 console.log("HOST : ",host);
 
 /**
@@ -100,5 +109,9 @@ export const URLS = {
     },
     UDHYAM : {
         GETDETAIL : UDHYAM_BASE_URL + '/get-details'
+    },
+    CAAPI : {
+        CAINDIVIDUALDETAIL : CAAPI_BASE_URL + '/icai/caindividualdetails',
+        CAFIRMDETAIL : CAAPI_BASE_URL + '/icai/cafirmdetails'
     }
 };

@@ -51,6 +51,8 @@ import { TreeGridTableComponent } from './component/controls/tree-grid-table/tre
 import { TreeGridTableDirective } from './directives/tree-grid-table.directive';
 import { DocumentationDataComponent } from './component/documentation-data/documentation-data.component';
 import { DocumentationDataDirective } from './directives/documentation-data.directive';
+import { CAIndividualDetailComponent } from './component/apis/ca-individual-detail/ca-individual-detail.component';
+import { CAFirmDetailComponent } from './component/apis/ca-firm-detail/ca-firm-detail.component';
 
 
 
@@ -96,6 +98,8 @@ import { DocumentationDataDirective } from './directives/documentation-data.dire
     PanStatusCheckComponent,
     BankAccountVerificationComponent,
     UdhyamRegDetailComponent,
+    CAIndividualDetailComponent,
+    CAFirmDetailComponent,
     CustomErrorStateMatcherComponent,
     ActivityLogsComponent,
     ProfileComponent,

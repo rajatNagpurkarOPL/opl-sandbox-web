@@ -74,4 +74,12 @@ export class SandboxService {
   udhyamRegDetail(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.UDHYAM.GETDETAIL,data,requestHeader);
   }
+
+  caIndividualDetail(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.CAAPI.CAINDIVIDUALDETAIL,data,requestHeader);
+  }
+
+  caFirmDetail(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.CAAPI.CAFIRMDETAIL,data,requestHeader);
+  }
 }
