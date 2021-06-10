@@ -53,9 +53,8 @@ import { DocumentationDataComponent } from './component/documentation-data/docum
 import { DocumentationDataDirective } from './directives/documentation-data.directive';
 import { CAIndividualDetailComponent } from './component/apis/ca-individual-detail/ca-individual-detail.component';
 import { CAFirmDetailComponent } from './component/apis/ca-firm-detail/ca-firm-detail.component';
-
-
-
+import { SetNotificationAlertComponent } from './component/set-notification-alert/set-notification-alert.component';
+import { SetNotificationAlertServiceService } from './common-utils/common-services/set-notification-alert-service.service';
 
 @NgModule({
   imports: [
@@ -109,6 +108,7 @@ import { CAFirmDetailComponent } from './component/apis/ca-firm-detail/ca-firm-d
     TreeGridTableDirective,
     DocumentationDataComponent,
     DocumentationDataDirective,
+    SetNotificationAlertComponent,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
@@ -116,7 +116,8 @@ import { CAFirmDetailComponent } from './component/apis/ca-firm-detail/ca-firm-d
               AuthGuard,
               CookieService,
               SendBackModelService,
-              Globals],
+              Globals,
+              SetNotificationAlertServiceService],
   bootstrap: [AppComponent],
   entryComponents: []
 })

@@ -82,4 +82,16 @@ export class SandboxService {
   caFirmDetail(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.CAAPI.CAFIRMDETAIL,data,requestHeader);
   }
+
+  getOrganisationEmailsList(orgId: any): Observable<any> {
+    return this.http.get(URLS.SANDBOX_USER.GET_ALL_EMAIL_IDS_OF_ORGANISATION + '/' + orgId, false);
+  }
+
+  saveOrUpdateApiTriggers(data : any): Observable<any>{
+    return this.http.post(URLS.SANDBOX_USER.SAVE_OR_UPDATE_API_TRIGGERS,data);
+  }
+
+  getTriggersList(data: any): Observable<any> {
+    return this.http.post(URLS.SANDBOX_USER.GET_TRIGGERS_LIST, data);
+  }
 }

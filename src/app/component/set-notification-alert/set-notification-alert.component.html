@@ -1,0 +1,71 @@
+<div id="b4l-pop-up" *ngIf="data != undefined && data != null">
+    <div class="pop-up-content">
+ <div class="fl-column">  
+    <h4>Set Notification Trigger</h4>
+ 
+    <span>API name : {{data.name}} <br/> Total Credits : {{creditBalance}}</span> 
+</div>
+        <button class="psb-submit" (click)="addTrigger()">+ Add Trigger</button>
+    </div>
+    <form *ngIf="triggerForm!= null" class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12 pd-0" [formGroup]="triggerForm" autocomplete="off"> 
+        <div formArrayName="triggers">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Trigger Limit</th>
+                    <th scope="col">Notification to(Comma seperated)</th>
+                    <th scope="col">No Of intimation</th>
+                    <th scope="col" style="text-align: center;">Active</th>
+                    <th scope="col" style="text-align: center;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let triggerControls of trigger.controls; let i=index" [formGroupName]="i">
+                        <td>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input type="number" matInput #credits formControlName="triggerLimit" (change)="setCreditBalance($event.target.value)" required>
+                                <mat-hint style="color: midnightblue;" >Value between {{triggerControls.minValue}} to {{triggerControls.maxValue}}</mat-hint>
+                                <mat-error>
+                                    <app-print-error [control]="triggerControls.controls.triggerLimit"></app-print-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input placeholder="Ex. abc@gmail.com,cde@gmail.com" matInput formControlName="toEmail" required>
+                                <mat-hint style="color: midnightblue;">Ex. abc@gmail.com,cde@gmail.com</mat-hint>
+                                <mat-error>
+                                  <app-print-error [control]="triggerControls.controls.toEmail"></app-print-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input type="number" matInput placeholder="No Of intimation" formControlName="noOfIntimation" required>
+                                <mat-hint style="color: midnightblue;">Value between 1 to 5</mat-hint>
+                                <mat-error>
+                                    <app-print-error [control]="triggerControls.controls.noOfIntimation"></app-print-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                        <td style="text-align: center;">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="isActive" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td style="text-align: right;">
+                            <button mat-raised-button matTooltip="Remove Trigger" (click)="removeTrigger(i)" matTooltipPosition="above" aria-label="Remove Trigger">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="btn-pop-up">
+      <a href="javaScript:void(0);" (click)="close()" class="product-btn4">Cancel</a>
+      <a href="javaScript:void(0);" (click)="save()" class="product-btn3">Save</a>
+    </div>
+</div>
