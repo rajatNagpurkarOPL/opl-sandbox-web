@@ -79,15 +79,15 @@ export class SetNotificationAlertComponent implements OnInit {
   }
 
   setBalanceLimit(){
-    let localValue = this.creditBalance;
+    let localValue = this.creditBalance - this.limitBalance;
     let alertData = this.triggerForm.controls.triggers.controls;
  
     let loopIndex = 0;
     
     alertData.forEach(element => {
-      element.availableCredits = localValue ;
+      //element.availableCredits = localValue ;
       if(loopIndex == 0){
-        element.minValue = 1;
+        element.minValue = localValue + 1;
       }else{
         element.minValue = alertData[loopIndex-1].controls.triggerLimit.value + 1;
       }
@@ -117,7 +117,8 @@ export class SetNotificationAlertComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.data;
-    this.creditBalance = this.data.balance;
+    this.creditBalance = this.data.total;
+
     this.limitBalance = this.data.balance;
     console.log("Pop up data==>",this.data);
     this.createTriggerForm({});

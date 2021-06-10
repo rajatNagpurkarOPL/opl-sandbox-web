@@ -3,7 +3,7 @@
  <div class="fl-column">  
     <h4>Set Notification Trigger</h4>
  
-    <span>API name : {{data.name}} <br/> Total Credits : {{creditBalance}}</span> 
+    <span>API name : {{data.name}} <br/> Total Credits : {{creditBalance}} <br/> Used Credits : {{creditBalance - limitBalance}} <br/> Balance Credits : {{limitBalance}}</span> 
 </div>
         <button class="psb-submit" (click)="addTrigger()">+ Add Trigger</button>
     </div>
