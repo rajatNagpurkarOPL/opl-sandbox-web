@@ -95,7 +95,10 @@ export const URLS = {
         GENERATE_API_ACCESS_KEYS : SANDBOX_BASE_URL + '/api/acceekey/generate',
         GET_API_CREDIT_LIMIT : SANDBOX_BASE_URL + '/api/credits/get',
         SCHEMA_DETAIL : SANDBOX_BASE_URL + '/schema/api',
-        DOMAIN_DETAIL : SANDBOX_BASE_URL + '/schema/domain'
+        DOMAIN_DETAIL : SANDBOX_BASE_URL + '/schema/domain',
+        GET_ALL_EMAIL_IDS_OF_ORGANISATION: SANDBOX_BASE_URL+ '/user/get-organisation-emails-list',
+        GET_TRIGGERS_LIST: SANDBOX_BASE_URL + '/api/credits/get-triggers-list',
+        SAVE_OR_UPDATE_API_TRIGGERS: SANDBOX_BASE_URL + '/api/credits/save-update-triggers'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 

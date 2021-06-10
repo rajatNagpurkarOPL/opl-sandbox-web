@@ -2,23 +2,31 @@
     <div class="sidebar-main-title">
       <div class="d-flex fl-column js-center"> 
        </div>
-                  <table class="table dash-table dash-table-brige table-responsive" style="margin-top: 1em;">
-                    <thead>
-                      <tr>
-                        <th scope="col">Api</th>
-                        <th scope="col">Total Credit</th>
-                        <th scope="col">Balance Credit</th>
-                      </tr>
-                    </thead>
-        
-                  <tbody>
-                      <tr>
-                          <td>{{apiName}}</td>
-                          <td>{{totalCredit}}</td>
-                          <td>{{balanceCredit}}</td>
-                      </tr>
-                </tbody>
-              
-                  </table>
+      <table class="table dash-table-api" style="margin-top: 1em;">
+        <thead>
+          <tr>
+            <th scope="col">Api</th>
+            <th scope="col">Total Credit</th>
+            <th scope="col">Balance Credit</th>
+            <th scope="col">Total Triggers</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of apiData | keyvalue">
+                <td>{{item.value.name}}</td>
+                <td>{{item.value.total}}</td>
+                <td>{{item.value.balance}}</td>
+                <td>{{item.value.triggerCount}}</td>
+                <td>
+                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item.value)">
+                    <mat-icon>notification_important</mat-icon>
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+  
+      </table>
     </div>
 </div>
