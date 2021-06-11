@@ -30,7 +30,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
   }
 
   getAPICreditLogsList(pageNo){
-    const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: 2};
+    const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: this.data.apiUserId};
     this.lenderService.getAPICreditLogsList(req).subscribe(resp=> {
       this.collectionSize = resp.data.apiCreditLogsCount;
       this.creditLogsList = resp.data.apiCreditLogs;
