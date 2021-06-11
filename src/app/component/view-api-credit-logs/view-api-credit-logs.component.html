@@ -38,7 +38,7 @@
 </tbody>
 </table>
 
-<div class="row pagination-table ml-2 mr-2">
+<div class="row pagination-table ml-2 mr-2" *ngIf="collectionSize != null && collectionSize > 0">
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
         <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
         Showing
