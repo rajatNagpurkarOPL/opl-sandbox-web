@@ -10,6 +10,7 @@
             <th scope="col">Balance Credit</th>
             <th scope="col">Total Triggers</th>
             <th scope="col">Action</th>
+            <th scope="col"></th>
           </tr>
         </thead>
 
@@ -20,9 +21,14 @@
                 <td>{{item.value.balance}}</td>
                 <td>{{item.value.triggerCount}}</td>
                 <td>
-                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item.value)">
+                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger Alert" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item.value)">
                     <mat-icon>notification_important</mat-icon>
                   </button>
+                </td>
+                <td>
+                  <a  href="javaScript:void(0);" (click)="viewCreditLogsHistory(item.value)">
+                    {{'View Credit History'}}
+                  </a>
                 </td>
             </tr>
         </tbody>

@@ -28,7 +28,7 @@ export class SetNotificationAlertComponent implements OnInit {
     }
   }
 
-  createTriggerForm(triggerData){
+  createTriggerForm(){
     return this.triggerForm = this.formBuilder.group({
       triggers : this.formBuilder.array([
         this.addAlertForm({})
@@ -41,7 +41,7 @@ export class SetNotificationAlertComponent implements OnInit {
       id: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.id) ? alertData.id :null],
       triggerLimit: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.triggerLimit) ? alertData.triggerLimit :'' ,[Validators.required]],
       toEmail: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.toEmail) ? alertData.toEmail :'',[Validators.required]],
-      noOfIntimation: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.noOfIntimation) ? alertData.noOfIntimation :'',[Validators.required , Validators.min(1), Validators.max(5)]],
+      noOfIntimation: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.noOfIntimation) ? alertData.noOfIntimation : 1],
       isActive: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.isActive) ? alertData.isActive :'true',[Validators.required]]
     });
     console.log("Set alertForm");
@@ -85,7 +85,6 @@ export class SetNotificationAlertComponent implements OnInit {
     let loopIndex = 0;
     
     alertData.forEach(element => {
-      //element.availableCredits = localValue ;
       if(loopIndex == 0){
         element.minValue = localValue + 1;
       }else{
@@ -121,7 +120,7 @@ export class SetNotificationAlertComponent implements OnInit {
 
     this.limitBalance = this.data.balance;
     console.log("Pop up data==>",this.data);
-    this.createTriggerForm({});
+    this.createTriggerForm();
     this.getTriggerData();
     this.setBalanceLimit();
     console.log("Inside popup dtaa==>",this.user);
@@ -135,7 +134,6 @@ export class SetNotificationAlertComponent implements OnInit {
       });
       this.alertForm.controls.toEmail.patchValue(this.orgEmailList);
     }
-    console.log("emailsId==>",this.orgEmailList);
   }
 
   removeTrigger(index:any){

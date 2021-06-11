@@ -1,0 +1,58 @@
+<div class="pop-up-content-pop">   
+        <h4>View Credit History</h4>
+
+    
+    <a (click)="close()"><img src="/assets/img/close-red.svg"/></a>
+      
+</div>
+
+
+
+<div class="pop-up-content">
+    <div class="fl-column">       
+        <span>API name : {{data.name}} <br/> Total Credits : {{data.total}} <br/> Used Credits : {{data.total - data.balance}} <br/> Balance Credits : {{data.balance}}</span> 
+        
+    </div>
+    
+  
+            <span><b>Total Credit History :{{collectionSize}}</b></span>
+</div>
+<table class="table dash-table-brige table-responsive">
+<thead>
+    <tr>
+    <th scope="col">#</th>
+    <th scope="col">Action</th>
+    <th scope="col">DateTime</th>
+    <th scope="col">Balance</th>
+    <th scope="col">Used</th>
+    </tr>
+</thead>
+<tbody *ngFor="let creditLog of creditLogsList; index as audit">
+    <tr>
+        <td>{{audit+1}}.</td>
+        <td>{{creditLog.actionType}}</td>
+        <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }}</td>
+        <td>{{creditLog.balanceCredits}}</td>
+        <td>{{creditLog.operatedCredits}}</td>
+    </tr>
+</tbody>
+</table>
+
+<div class="row pagination-table ml-2 mr-2">
+    <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
+        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+        Showing
+        {{startIndex}} to {{endIndex}} of {{totalRecords}}
+        entries
+        </div>
+    </div>
+    <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="getAPICreditLogsList(page)">
+        </ngb-pagination>
+        </div>
+    </div>
+</div>
+<!-- <div class="btn-pop-up">
+    <a href="javaScript:void(0);" (click)="close()" class="product-btn4">Close</a>
+</div> -->

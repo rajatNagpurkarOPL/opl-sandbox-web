@@ -55,6 +55,9 @@ import { CAIndividualDetailComponent } from './component/apis/ca-individual-deta
 import { CAFirmDetailComponent } from './component/apis/ca-firm-detail/ca-firm-detail.component';
 import { SetNotificationAlertComponent } from './component/set-notification-alert/set-notification-alert.component';
 import { SetNotificationAlertServiceService } from './common-utils/common-services/set-notification-alert-service.service';
+import { ViewApiCreditLogsComponent } from './component/view-api-credit-logs/view-api-credit-logs.component';
+import { ViewApiCreditLogsService } from './common-utils/common-services/view-api-credit-logs.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -69,7 +72,8 @@ import { SetNotificationAlertServiceService } from './common-utils/common-servic
     Ng5SliderModule,
     NgApexchartsModule,
     HighchartsChartModule,
-    ClipboardModule
+    ClipboardModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
@@ -109,6 +113,7 @@ import { SetNotificationAlertServiceService } from './common-utils/common-servic
     DocumentationDataComponent,
     DocumentationDataDirective,
     SetNotificationAlertComponent,
+    ViewApiCreditLogsComponent,
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
@@ -117,7 +122,8 @@ import { SetNotificationAlertServiceService } from './common-utils/common-servic
               CookieService,
               SendBackModelService,
               Globals,
-              SetNotificationAlertServiceService],
+              SetNotificationAlertServiceService,
+              ViewApiCreditLogsService],
   bootstrap: [AppComponent],
   entryComponents: []
 })

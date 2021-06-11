@@ -98,7 +98,8 @@ export const URLS = {
         DOMAIN_DETAIL : SANDBOX_BASE_URL + '/schema/domain',
         GET_ALL_EMAIL_IDS_OF_ORGANISATION: SANDBOX_BASE_URL+ '/user/get-organisation-emails-list',
         GET_TRIGGERS_LIST: SANDBOX_BASE_URL + '/api/credits/get-triggers-list',
-        SAVE_OR_UPDATE_API_TRIGGERS: SANDBOX_BASE_URL + '/api/credits/save-update-triggers'
+        SAVE_OR_UPDATE_API_TRIGGERS: SANDBOX_BASE_URL + '/api/credits/save-update-triggers',
+        GET_API_CREDIT_LOGS_LIST: SANDBOX_BASE_URL + '/api/credits/get-credit-logs-list'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
