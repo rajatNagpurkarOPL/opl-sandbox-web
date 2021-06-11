@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SetNotificationAlertServiceService } from 'src/app/common-utils/common-services/set-notification-alert-service.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
+import { ViewApiCreditLogsService } from 'src/app/common-utils/common-services/view-api-credit-logs.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
@@ -19,7 +20,8 @@ export class ApiCreditComponent implements OnInit {
   apiName : any = '';
   apiData : any = {};
 
-  constructor(private sandboxService : SandboxService,public globals : Globals, public setNotificationAlert: SetNotificationAlertServiceService ,private utils : Utils) {
+  constructor(private sandboxService : SandboxService,public globals : Globals, public setNotificationAlert: SetNotificationAlertServiceService 
+    ,private utils : Utils ,public viewApiCreditLogsService : ViewApiCreditLogsService) {
     this.user = globals.USER;
     console.log("user :",this.user.id);
    }
@@ -58,7 +60,14 @@ export class ApiCreditComponent implements OnInit {
       this.setNotificationAlert.openDialog(data).subscribe(data => {
       });
     }else{
-      this.utils.errorSnackBar("Balance is less tha 0 or 0. You cant set Limit.")
+      this.utils.errorSnackBar("Balance Limit is exceeded.")
+    }
+  }
+
+  viewCreditLogsHistory(data: any){
+    if(!Utils.isObjectNullOrEmpty(data)){
+      this.viewApiCreditLogsService.openDialog(data).subscribe(data => {
+      });
     }
   }
 
