@@ -27,18 +27,23 @@
     <th scope="col">Used</th>
     </tr>
 </thead>
-<tbody *ngFor="let creditLog of creditLogsList; index as audit">
-    <tr>
-        <td>{{audit+1}}.</td>
-        <td>{{creditLog.actionType}}</td>
-        <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }}</td>
-        <td>{{creditLog.balanceCredits}}</td>
-        <td>{{creditLog.operatedCredits}}</td>
+<tbody>
+    <ng-container *ngIf="creditLogsList != null && creditLogsList.length > 0">
+        <tr *ngFor="let creditLog of creditLogsList; index as audit">
+            <td>{{audit+1}}.</td>
+            <td>{{creditLog.actionType}}</td>
+            <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }}</td>
+            <td>{{creditLog.balanceCredits}}</td>
+            <td>{{creditLog.operatedCredits}}</td>
+        </tr>
+    </ng-container>
+    <tr *ngIf="creditLogsList == null || creditLogsList.length == 0">
+        <td colspan="5" style="text-align: center;">No Record Found</td>
     </tr>
 </tbody>
 </table>
 
-<div class="row pagination-table ml-2 mr-2" *ngIf="collectionSize != null && collectionSize > 0">
+<div class="row pagination-table ml-2 mr-2" *ngIf="creditLogsList != null && creditLogsList.length > 0">
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
         <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
         Showing
