@@ -19,6 +19,7 @@ export class SetNotificationAlertComponent implements OnInit {
   alertForm : any = FormGroup;
   creditBalance = 0;
   limitBalance = 0;
+  usagePercentage = 0;
 
   constructor(public dialogRef: MatDialogRef<SetNotificationAlertComponent>, public lenderService: SandboxService,
            @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder ,public globals : Globals ,public utils:Utils) {
@@ -54,7 +55,7 @@ export class SetNotificationAlertComponent implements OnInit {
     alertData.forEach(element => {
         limitSum = element.controls.triggerLimit.value;
     })
-    if(value >= 0 && limitSum <= this.creditBalance){
+    if(value >= 0 && limitSum <= 100){
       this.setBalanceLimit();
     }
   }
@@ -65,8 +66,11 @@ export class SetNotificationAlertComponent implements OnInit {
     alertData.forEach(element => {
         limitSum = element.controls.triggerLimit.value;
     })
-    if(limitSum < this.creditBalance){
-      console.log("triggerForm==>",this.triggerForm);
+    if(limitSum < 100){
+      if(alertData.length > 2){
+        this.utils.errorSnackBar("Maximum 3 alert can be set.");
+        return;
+      }
       if(this.triggerForm.valid){
         this.trigger.push(this.addAlertForm({"toEmail": this.orgEmailList}));
         this.setBalanceLimit();
@@ -74,26 +78,32 @@ export class SetNotificationAlertComponent implements OnInit {
         this.triggerForm.markAllAsTouched();
       }
     }else {
-      this.utils.errorSnackBar("Credit Limit exceeded to Set Alert.");
+      this.utils.errorSnackBar("Usage can be set up to Last 100 in percentage.");
     }
   }
 
+  setPercentage(totalLimit, balanceLimit){
+    this.usagePercentage = (totalLimit-balanceLimit)/totalLimit*100;
+  }
+
   setBalanceLimit(){
-    let localValue = this.creditBalance - this.limitBalance;
-    let alertData = this.triggerForm.controls.triggers.controls;
+    let localValue = this.usagePercentage; //this.creditBalance - this.limitBalance;
  
     let loopIndex = 0;
-    
-    alertData.forEach(element => {
+    this.triggerForm.controls.triggers.controls.forEach(element => {
       if(loopIndex == 0){
         element.minValue = localValue + 1;
       }else{
-        element.minValue = alertData[loopIndex-1].controls.triggerLimit.value + 1;
+        element.minValue = this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value < 100 ? this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value + 1 : 100;
       }
-      element.controls["triggerLimit"].setValidators([Validators.required, Validators.min(element.minValue), Validators.max(this.creditBalance)]);
-      element.maxValue = this.creditBalance;
+      
+      this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].setValidators([Validators.required, Validators.min(element.minValue), Validators.max(100)]);
+      this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].updateValueAndValidity();
+
+      element.maxValue = 100;//this.creditBalance;
       loopIndex = loopIndex +1;
     })
+    this.triggerForm.markAllAsTouched();
   }
 
   get trigger() {
@@ -102,11 +112,9 @@ export class SetNotificationAlertComponent implements OnInit {
 
   getTriggerData(){
     this.lenderService.getTriggersList({"apiUserId":this.data.apiUserId}).subscribe(resp =>{
-      console.log("getTriggersList==>",resp);
       if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && !Utils.isObjectNullOrEmpty(resp.data)){
-        this.removeTrigger(0);
+        this.removeTrigger(0 ,null);
         resp.data.forEach(element => {
-          console.log("element==>",element);
           this.trigger.push(this.addAlertForm(element));
         });
         this.setBalanceLimit();
@@ -119,11 +127,10 @@ export class SetNotificationAlertComponent implements OnInit {
     this.creditBalance = this.data.total;
 
     this.limitBalance = this.data.balance;
-    console.log("Pop up data==>",this.data);
+    this.setPercentage(this.creditBalance , this.limitBalance);
     this.createTriggerForm();
     this.getTriggerData();
     this.setBalanceLimit();
-    console.log("Inside popup dtaa==>",this.user);
   }
 
   async getOrgEmail(orgId){
@@ -136,9 +143,18 @@ export class SetNotificationAlertComponent implements OnInit {
     }
   }
 
-  removeTrigger(index:any){
+  removeTrigger(index:any, triggerId:any){
     if(!Utils.isObjectNullOrEmpty(index)){
       this.trigger.removeAt(index);
+      if(!Utils.isObjectNullOrEmpty(triggerId)){
+        this.lenderService.deleteTriggerByTriggerId({id: triggerId}).subscribe(resp =>{
+          if(resp != null && resp.data != null && resp.data){
+            this.utils.successSnackBar("Trigger deleted successfully.");
+          }else{
+            this.utils.errorSnackBar("Please try again to delete trigger.")
+          }
+        })
+      }
     }else {
       this.trigger.removeAt(this.trigger.length - 1);
     }
@@ -153,13 +169,11 @@ export class SetNotificationAlertComponent implements OnInit {
     let data = this.triggerForm.getRawValue();
     if(data != null && data.triggers.length > 0){
       if(this.triggerForm.valid){
-        console.log("save triggerForm==>",data);
         data.triggers.forEach(element => {
           element.apiUserId = this.data.apiUserId;
           element.balanceCredits = this.data.balance;
         });
         this.lenderService.saveOrUpdateApiTriggers(data.triggers).subscribe(resp =>{
-          console.log("saveOrUpdateApiTriggers==>",resp);
           if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && resp.data != null){
             this.utils.successSnackBar(resp.message);
             this.close();

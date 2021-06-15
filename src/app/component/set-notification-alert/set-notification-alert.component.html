@@ -3,7 +3,7 @@
  <div class="fl-column">  
     <h4>Set Notification Trigger</h4>
  
-    <span>API name : {{data.name}} <br/> Total Credits : {{creditBalance}} <br/> Used Credits : {{creditBalance - limitBalance}} <br/> Balance Credits : {{limitBalance}}</span> 
+    <span>API name : {{data.name}} <br/> Total Credits : {{creditBalance}} <br/> Used Credits : {{creditBalance - limitBalance}} <br/> Balance Credits : {{limitBalance}} <br/> Used Credits(%): {{this.usagePercentage}}</span> 
 </div>
         <button class="psb-submit" (click)="addTrigger()">+ Add Trigger</button>
     </div>
@@ -12,7 +12,7 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Trigger Limit</th>
+                    <th scope="col">Credit Usage(%)</th>
                     <th scope="col">Notification to(Comma seperated)</th>
                     <!-- <th scope="col">No Of intimation</th> -->
                     <th scope="col" style="text-align: center;">Active</th>
@@ -55,7 +55,7 @@
                             </label>
                         </td>
                         <td style="text-align: right;">
-                            <button mat-raised-button matTooltip="Remove Trigger" (click)="removeTrigger(i)" matTooltipPosition="above" aria-label="Remove Trigger">
+                            <button mat-raised-button matTooltip="Remove Trigger" (click)="removeTrigger(i ,triggerControls.controls.id.value)" matTooltipPosition="above" aria-label="Remove Trigger">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
