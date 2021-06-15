@@ -58,6 +58,8 @@ export class ApiCreditComponent implements OnInit {
   setNotification(data){
     if(data != null && data.balance != null && data.balance > 0){
       this.setNotificationAlert.openDialog(data).subscribe(data => {
+        console.log("after setNotification data==>",data);
+        this.getApiCreditLimit(this.requestBody);
       });
     }else{
       this.utils.errorSnackBar("Balance Limit is exceeded.")
