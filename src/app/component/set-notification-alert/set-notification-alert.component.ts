@@ -90,10 +90,14 @@ export class SetNotificationAlertComponent implements OnInit {
     let localValue = this.usagePercentage; //this.creditBalance - this.limitBalance;
  
     let loopIndex = 0;
+    let removeIndex = [];
     this.triggerForm.controls.triggers.controls.forEach(element => {
       if(loopIndex == 0){
         element.minValue = localValue + 1;
       }else{
+        if(this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value == 100){
+          removeIndex.push(loopIndex);
+        }
         element.minValue = this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value < 100 ? this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value + 1 : 100;
       }
       
@@ -103,6 +107,9 @@ export class SetNotificationAlertComponent implements OnInit {
       element.maxValue = 100;//this.creditBalance;
       loopIndex = loopIndex +1;
     })
+    if(!Utils.isObjectNullOrEmpty(removeIndex)){
+      removeIndex.forEach(resp =>{this.removeTrigger(resp, this.triggerForm.controls.triggers.controls[resp].controls["id"].value)});
+    }
     this.triggerForm.markAllAsTouched();
   }
 
