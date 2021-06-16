@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Options } from 'ng5-slider';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
@@ -40,22 +41,21 @@ export class SetNotificationAlertComponent implements OnInit {
   addAlertForm(alertData){
     this.alertForm = this.formBuilder.group({
       id: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.id) ? alertData.id :null],
-      triggerLimit: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.triggerLimit) ? alertData.triggerLimit :'' ,[Validators.required]],
+      minMaxLimit: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.minMaxLimit) ? alertData.minMaxLimit :[0,100]],
       toEmail: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.toEmail) ? alertData.toEmail :'',[Validators.required]],
       noOfIntimation: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.noOfIntimation) ? alertData.noOfIntimation : 1],
       isActive: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.isActive) ? alertData.isActive :'true',[Validators.required]]
     });
-    console.log("Set alertForm");
     return this.alertForm;
   }
 
-  setCreditBalance(value){
+  setCreditBalance(){
     let alertData = this.triggerForm.controls.triggers.controls;
     let limitSum = 0;
     alertData.forEach(element => {
-        limitSum = element.controls.triggerLimit.value;
+        limitSum = element.controls.minMaxLimit.value[1];
     })
-    if(value >= 0 && limitSum <= 100){
+    if(limitSum <= 100){
       this.setBalanceLimit();
     }
   }
@@ -64,8 +64,9 @@ export class SetNotificationAlertComponent implements OnInit {
     let alertData = this.triggerForm.controls.triggers.controls;
     let limitSum = 0;
     alertData.forEach(element => {
-        limitSum = element.controls.triggerLimit.value;
+        limitSum = element.maxValue;
     })
+    console.log("limitSum==>",limitSum);
     if(limitSum < 100){
       if(alertData.length > 2){
         this.utils.errorSnackBar("Maximum 3 alert can be set.");
@@ -94,22 +95,27 @@ export class SetNotificationAlertComponent implements OnInit {
     this.triggerForm.controls.triggers.controls.forEach(element => {
       if(loopIndex == 0){
         element.minValue = localValue + 1;
+        element.maxValue = element.controls.minMaxLimit.value[1] != undefined ? element.controls.minMaxLimit.value[1] : 100;
       }else{
-        if(this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value == 100){
+        if(this.triggerForm.controls.triggers.controls[loopIndex-1].controls.minMaxLimit.value[1] == 100){
           removeIndex.push(loopIndex);
         }
-        element.minValue = this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value < 100 ? this.triggerForm.controls.triggers.controls[loopIndex-1].controls.triggerLimit.value + 1 : 100;
+        element.minValue = this.triggerForm.controls.triggers.controls[loopIndex-1].controls.minMaxLimit.value[1] + 1;
+        element.maxValue = element.controls.minMaxLimit.value[1] != undefined ? element.controls.minMaxLimit.value[1] : 100;
       }
-      
-      this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].setValidators([Validators.required, Validators.min(element.minValue), Validators.max(100)]);
-      this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].updateValueAndValidity();
-
-      element.maxValue = 100;//this.creditBalance;
+      //this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].setValidators([Validators.required, Validators.min(element.minValue), Validators.max(100)]);
+      //this.triggerForm.controls.triggers.controls[loopIndex].controls["triggerLimit"].updateValueAndValidity();
+      //element.maxValue = 100;//this.creditBalance;
+      element.options = {"floor": element.minValue, "ceil": 100};
+      //element.controls.minMaxLimit.patchValue([element.minValue,element.maxValue]);
+      // this.triggerForm.controls.triggers.controls[loopIndex].controls["minLimit"].patchValue(element.minValue);
+      // this.triggerForm.controls.triggers.controls[loopIndex].controls["maxLimit"].patchValue(element.maxValue);
       loopIndex = loopIndex +1;
     })
-    if(!Utils.isObjectNullOrEmpty(removeIndex)){
-      removeIndex.forEach(resp =>{this.removeTrigger(resp, this.triggerForm.controls.triggers.controls[resp].controls["id"].value)});
-    }
+    // if(!Utils.isObjectNullOrEmpty(removeIndex)){
+    //   removeIndex.forEach(resp =>{this.removeTrigger(resp, this.triggerForm.controls.triggers.controls[resp].controls["id"].value)});
+    // }
+    
     this.triggerForm.markAllAsTouched();
   }
 
@@ -122,6 +128,7 @@ export class SetNotificationAlertComponent implements OnInit {
       if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && !Utils.isObjectNullOrEmpty(resp.data)){
         this.removeTrigger(0 ,null);
         resp.data.forEach(element => {
+          element.minMaxLimit = [element.minLimit,element.maxLimit];
           this.trigger.push(this.addAlertForm(element));
         });
         this.setBalanceLimit();
@@ -156,20 +163,22 @@ export class SetNotificationAlertComponent implements OnInit {
       if(!Utils.isObjectNullOrEmpty(triggerId)){
         this.lenderService.deleteTriggerByTriggerId({id: triggerId}).subscribe(resp =>{
           if(resp != null && resp.data != null && resp.data){
+            let data = this.triggerForm.getRawValue();
+            this.data.triggerCount = data.triggers.length;
             this.utils.successSnackBar("Trigger deleted successfully.");
           }else{
             this.utils.errorSnackBar("Please try again to delete trigger.")
           }
         })
       }
-    }else {
-      this.trigger.removeAt(this.trigger.length - 1);
     }
     this.setBalanceLimit();
+    
+    
   }
 
   close(){
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 
   save(){
@@ -179,10 +188,13 @@ export class SetNotificationAlertComponent implements OnInit {
         data.triggers.forEach(element => {
           element.apiUserId = this.data.apiUserId;
           element.balanceCredits = this.data.balance;
+          element.minLimit = element.minMaxLimit[0];
+          element.maxLimit = element.minMaxLimit[1];
         });
         this.lenderService.saveOrUpdateApiTriggers(data.triggers).subscribe(resp =>{
           if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && resp.data != null){
             this.utils.successSnackBar(resp.message);
+            this.data.triggerCount = data.triggers.length;
             this.close();
           }else{
             this.utils.errorSnackBar(resp.message);

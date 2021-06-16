@@ -10,6 +10,8 @@ export class SetNotificationAlertServiceService {
   
   openDialog(data): Observable<any> {
     const dialogRef = this.dialog.open(SetNotificationAlertComponent, {
+      height: '650px',
+      width: '1000px',
       data
     });
 

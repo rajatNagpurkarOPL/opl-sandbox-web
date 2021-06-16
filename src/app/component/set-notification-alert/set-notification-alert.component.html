@@ -9,7 +9,7 @@
     </div>
     <form *ngIf="triggerForm!= null" class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12 pd-0" [formGroup]="triggerForm" autocomplete="off"> 
         <div formArrayName="triggers">
-            <table class="table">
+            <table class="table dash-table-api">
                 <thead>
                   <tr>
                     <th scope="col">Credit Usage(%)</th>
@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let triggerControls of trigger.controls; let i=index" [formGroupName]="i">
-                        <td>
+                        <!-- <td>
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <input type="number" matInput #credits formControlName="triggerLimit" (change)="setCreditBalance($event.target.value)" required>
                                 <mat-hint style="color: midnightblue;" >Value between {{triggerControls.minValue}} to {{triggerControls.maxValue}}</mat-hint>
@@ -29,9 +29,13 @@
                                     <app-print-error [control]="triggerControls.controls.triggerLimit"></app-print-error>
                                 </mat-error>
                             </mat-form-field>
+                        </td> -->
+                        <td>
+                            <ng5-slider [formControl]="triggerControls.controls.minMaxLimit" [options]="triggerControls.options" (valueChange)="setCreditBalance()" (click)="setCreditBalance()"></ng5-slider>
+                            <mat-hint style="color: midnightblue;">Credit usage range between {{triggerControls.controls.minMaxLimit.value[0]}} to {{triggerControls.controls.minMaxLimit.value[1]}}</mat-hint>
                         </td>
                         <td>
-                            <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-form-field class="example-full-width" appearance="outline" style="display: contents;">
                                 <input placeholder="Ex. abc@gmail.com,cde@gmail.com" matInput formControlName="toEmail" required>
                                 <mat-hint style="color: midnightblue;">Ex. abc@gmail.com,cde@gmail.com</mat-hint>
                                 <mat-error>
