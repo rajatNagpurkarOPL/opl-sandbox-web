@@ -91,16 +91,7 @@
                                       </mat-card>
                                 </form>
                         </div>
-
-                        <mat-tab-group>
-                            <mat-tab label="Response">
-                                <div style="overflow: auto;">
-                                    <pre class="json-pretty">
-                                        {{response}}
-                                    </pre>
-                                </div>
-                            </mat-tab>
-                        </mat-tab-group>
+                        <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
                     </mat-tab>
                 </mat-tab-group>
             </div>
