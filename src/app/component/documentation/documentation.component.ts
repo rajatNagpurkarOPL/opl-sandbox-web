@@ -24,14 +24,15 @@ export class DocumentationComponent implements OnInit {
     DocumentationComponent.masterCodes = [];
     DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
     this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
-    this.getMenuItems(this.selectedMenuItem);
+    //this.getMenuItems(this.selectedMenuItem);
+    this.getMasterCodesByModule();
   } 
   
   getMasterCodes(){
     return DocumentationComponent.masterCodes;
   }
-  getMenuItems(code : string){
-   this.sandboxService.getMasterListsByCodes(DocumentationComponent.masterCodes).subscribe(res => {
+  getMenuItems(codes : any){
+   this.sandboxService.getMasterListsByCodes(codes).subscribe(res => {
         if (res.status === 1001) {
           this.masterData = {};
           for(let code of DocumentationComponent.masterCodes){            
@@ -113,5 +114,17 @@ export class DocumentationComponent implements OnInit {
         }
       }
     }
+  }
+
+  async getMasterCodesByModule(){
+    await (await this.sandboxService.getMasterCodes("USER")).toPromise().then(response=>{
+      console.log("response :: " , response);
+      if(response.status == 1000){
+        //this.getMenuItems(response.data);
+        console.log("codess :: " , response.data);
+        console.log("instance of :: " ,typeof response.data);
+        this.getMenuItems(response.data);
+      }
+    })
   }
 }
