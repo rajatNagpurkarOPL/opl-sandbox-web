@@ -63,27 +63,28 @@ if(host.includes('localhost')){
     UDHYAM_BASE_URL = GATEWAY.endpointFromLocal + UDHYAM.postFix;
     CAAPI_BASE_URL = GATEWAY.endpointFromLocal + CAAPI.postFix;
 }else{
-    //host = //"http://10.10.5.66:"; // SIT IP
-    SANDBOX_BASE_URL = SERVER_URL + SANDBOX.postFix;
-    ECR_BASE_URL = SERVER_URL + ECR.postFix;
-    GATEWAY_BASE_URL = SERVER_URL + GATEWAY.postFix;
-    SANDBOX_GATEWAY_BASE_URL = SERVER_URL + SANDBOX.postFix;
-    ECR_GATEWAY_BASE_URL = SERVER_URL + ECR.postFix;
-    PENNYDROP_BASE_URL = SERVER_URL + PENNYDROP.postFix;
-    UDHYAM_BASE_URL = SERVER_URL + UDHYAM.postFix;
-    CAAPI_BASE_URL = SERVER_URL + CAAPI.postFix;
+    host = "http://10.10.5.66:"; // SIT IP
+    SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
+    ECR_BASE_URL = host + "1101" + ECR.postFix;
+    GATEWAY_BASE_URL = host + "1101" + GATEWAY.postFix;
+    SANDBOX_GATEWAY_BASE_URL = host + "1101" + SANDBOX.postFix;
+    ECR_GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
+    PENNYDROP_BASE_URL = host + "1101" + PENNYDROP.postFix;
+    UDHYAM_BASE_URL = host + "1101" + UDHYAM.postFix;
+    CAAPI_BASE_URL = host + "1101" + CAAPI.postFix;
 }
 // else{
-//     host = //"http://10.10.5.66:"; // SIT IP
-//     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
-//     ECR_BASE_URL = host + "1101" + ECR.postFix;
-//     GATEWAY_BASE_URL = host + "1101" + GATEWAY.postFix;
-//     SANDBOX_GATEWAY_BASE_URL = host + "1101" + SANDBOX.postFix;
-//     ECR_GATEWAY_BASE_URL = host + "1101" + ECR.postFix;
-//     PENNYDROP_BASE_URL = host + "1101" + PENNYDROP.postFix;
-//     UDHYAM_BASE_URL = host + "1101" + UDHYAM.postFix;
-//     CAAPI_BASE_URL = host + "1101" + CAAPI.postFix;
+//     //host = //"http://10.10.5.66:"; // SIT IP
+//     SANDBOX_BASE_URL = SERVER_URL + SANDBOX.postFix;
+//     ECR_BASE_URL = SERVER_URL + ECR.postFix;
+//     GATEWAY_BASE_URL = SERVER_URL + GATEWAY.postFix;
+//     SANDBOX_GATEWAY_BASE_URL = SERVER_URL + SANDBOX.postFix;
+//     ECR_GATEWAY_BASE_URL = SERVER_URL + ECR.postFix;
+//     PENNYDROP_BASE_URL = SERVER_URL + PENNYDROP.postFix;
+//     UDHYAM_BASE_URL = SERVER_URL + UDHYAM.postFix;
+//     CAAPI_BASE_URL = SERVER_URL + CAAPI.postFix;
 // }
+
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
 console.log("PennyDrop Url : ",PENNYDROP_BASE_URL);
