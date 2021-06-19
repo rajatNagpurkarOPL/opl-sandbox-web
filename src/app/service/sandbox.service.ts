@@ -107,4 +107,9 @@ export class SandboxService {
   deleteTriggerByTriggerId(data: any): Observable<any> {
     return this.http.post(URLS.SANDBOX_USER.DELETE_TRIGGER_BY_TRIGGER_ID, data);
   }
+
+  async getMasterCodes(data : any): Promise<Observable<any>>{
+    return await this.http.post(URLS.SANDBOX_USER.GET_CODES, data)
+  }
+
 }
