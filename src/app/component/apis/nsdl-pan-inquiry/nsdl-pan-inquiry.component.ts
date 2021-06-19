@@ -22,7 +22,7 @@ export class NsdlPanInquiryComponent implements OnInit {
 
   apiRequestData: any = {};
   apiResponseData: any = {};
-  response : any = null;
+  response : any = "Response Will be Rendered Here.";
   matcher = new CustomErrorStateMatcherComponent();
   panInquiryForm: FormGroup;
   formBuilder : any = null;
