@@ -17,17 +17,21 @@ export class DocumentationComponent implements OnInit {
   selectedMenuItem : string = "";   
   public readonly constant : any = null;
   isObjectNullOrEmpty  = Utils.isObjectNullOrEmpty;
+  selectedInnerData : any = null;
+
   constructor(private sandboxService: SandboxService, public utils: Utils,private route : ActivatedRoute, private router : Router) { 
     this.constant = Constant;
     DocumentationComponent.masterCodes = [];
     DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
+    this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
+    this.getMenuItems(this.selectedMenuItem);
   } 
   
   getMasterCodes(){
     return DocumentationComponent.masterCodes;
   }
   getMenuItems(code : string){
-    this.sandboxService.getMasterListsByCodes(DocumentationComponent.masterCodes).subscribe(res => {
+   this.sandboxService.getMasterListsByCodes(DocumentationComponent.masterCodes).subscribe(res => {
         if (res.status === 1001) {
           this.masterData = {};
           for(let code of DocumentationComponent.masterCodes){            
@@ -40,11 +44,12 @@ export class DocumentationComponent implements OnInit {
       }, (error: any) => {
         this.utils.errorHandle(error);
       });
-    }
+  }
+    
 
   ngOnInit(): void {
-    this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
-    this.getMenuItems(this.selectedMenuItem);
+    // this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
+    // this.getMenuItems(this.selectedMenuItem);
   }
   mouseenter() {
     if (!this.isExpanded) {
@@ -59,7 +64,18 @@ export class DocumentationComponent implements OnInit {
   }
 
   setCurrentSelectedAPI(selectedApiCode:string){    
+    console.log("se;e :: " , selectedApiCode)
     this.selectedMenuItem = selectedApiCode;
+
+    this.masterData[DocumentationComponent.masterCodes].values.forEach(element => {
+      element.values.forEach(data => {
+        if(data.code == selectedApiCode){
+          this.selectedInnerData = data;
+        }
+      });
+    });
+    console.log("this.selectedInnerData :: " , this.selectedInnerData);
+    
     this.router.navigate([this.constant.ROUTE_URL.DOCUMENTATION + '/' + selectedApiCode]);
     for(let code of DocumentationComponent.masterCodes){
       this.masterData[code].cssClass = "";

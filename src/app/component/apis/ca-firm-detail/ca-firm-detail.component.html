@@ -9,10 +9,10 @@
                     <div class="table-container">
                         <div class="form-group">
                             <mat-form-field style="width: 10%; background-color: #777;">
-                                <input matInput type="text" style="font-weight: bold; color: white;" value="API - URL" [disabled]="true">
+                                <input matInput type="text" style="font-weight: bold; color: white;" value="Service-URL" [disabled]="true">
                             </mat-form-field>
                             <mat-form-field style="width: 80%;">
-                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="https://sit-opl.instantmseloans.in/gateway-service/caapi/ca-msme/icai/cafirmdetails">
+                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}"> <!-- https://sit-opl.instantmseloans.in/gateway-service/caapi/ca-msme/icai/cafirmdetails -->
                             </mat-form-field>
                             <mat-form-field style="width: 10%; background-color: #777;">
                                 <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
@@ -100,16 +100,7 @@
                                       </mat-card>
                                 </form>
                         </div>
-
-                        <mat-tab-group>
-                            <mat-tab label="Response">
-                                <div style="overflow: auto;">
-                                    <pre class="json-pretty">
-                                        {{response}}
-                                    </pre>
-                                </div>
-                            </mat-tab>
-                        </mat-tab-group>
+                        <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
                     </mat-tab>
                 </mat-tab-group>
             </div>

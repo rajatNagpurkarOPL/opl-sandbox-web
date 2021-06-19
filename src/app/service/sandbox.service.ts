@@ -32,8 +32,8 @@ export class SandboxService {
     return this.http.post(URLS.SANDBOX_USER.GET_MASTER_DATA,data);
   }
   //ECR APIs
-  getCreditRating(data : any,requestHeader : any): Observable<any>{
-    return this.http.post(URLS.ECR.CREDIT_RATING,data,requestHeader);
+  getCreditRating(url : string, data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
   }
 
   //
@@ -63,24 +63,24 @@ export class SandboxService {
   }
 
     //PENNYDROP APIs
-  panStatusCheck(data : any,requestHeader : any): Observable<any>{
-      return this.http.post(URLS.PENNYDROP.PAN_STATUS_CHECK,data,requestHeader);
+  panStatusCheck(url : string,data : any,requestHeader : any): Observable<any>{
+      return this.http.post(url,data,requestHeader);
   }
 
-  bankAccountVerification(data : any,requestHeader : any): Observable<any>{
-    return this.http.post(URLS.PENNYDROP.BANK_ACCOUNT_VERIFICATION,data,requestHeader);
+  bankAccountVerification(url : string, data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
   }
 
-  udhyamRegDetail(data : any,requestHeader : any): Observable<any>{
+  udhyamRegDetail(url : string,data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.UDHYAM.GETDETAIL,data,requestHeader);
   }
 
-  caIndividualDetail(data : any,requestHeader : any): Observable<any>{
-    return this.http.post(URLS.CAAPI.CAINDIVIDUALDETAIL,data,requestHeader);
+  caIndividualDetail(url : string,data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
   }
 
-  caFirmDetail(data : any,requestHeader : any): Observable<any>{
-    return this.http.post(URLS.CAAPI.CAFIRMDETAIL,data,requestHeader);
+  caFirmDetail(url : string,data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
   }
 
   //NSDL Pan Inquiry APIs

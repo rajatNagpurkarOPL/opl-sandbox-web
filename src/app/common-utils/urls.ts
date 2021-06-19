@@ -1,5 +1,7 @@
-const SERVER_URL = "http://localhost:";
+//const SERVER_URL = "http://localhost:";
+//const SERVER_URL = "https://sit-opl.instantmseloans.in";
 //  const SERVER_URL = "http://10.10.5.66:";
+const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  {
     endpointFromLocal : SERVER_URL + "1104",
@@ -78,6 +80,18 @@ if(host.includes('localhost')){
     UDHYAM_BASE_URL = host + "1101" + UDHYAM.postFix;
     CAAPI_BASE_URL = host + "1101" + CAAPI.postFix;
 }
+// else{
+//     //host = //"http://10.10.5.66:"; // SIT IP
+//     SANDBOX_BASE_URL = SERVER_URL + SANDBOX.postFix;
+//     ECR_BASE_URL = SERVER_URL + ECR.postFix;
+//     GATEWAY_BASE_URL = SERVER_URL + GATEWAY.postFix;
+//     SANDBOX_GATEWAY_BASE_URL = SERVER_URL + SANDBOX.postFix;
+//     ECR_GATEWAY_BASE_URL = SERVER_URL + ECR.postFix;
+//     PENNYDROP_BASE_URL = SERVER_URL + PENNYDROP.postFix;
+//     UDHYAM_BASE_URL = SERVER_URL + UDHYAM.postFix;
+//     CAAPI_BASE_URL = SERVER_URL + CAAPI.postFix;
+// }
+
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
 console.log("PennyDrop Url : ",PENNYDROP_BASE_URL);
@@ -90,6 +104,7 @@ console.log("HOST : ",host);
  *  This is constants of REST URL which can be hit on backend server
  */
 export const URLS = {
+    BASE_URL : SERVER_URL,
     SANDBOX_USER : {
         LOGIN: SANDBOX_BASE_URL + '/auth/login',
         LOG_OUT: SANDBOX_BASE_URL +  '/auth/logoutUser',

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CustomErrorStateMatcherComponent } from '../../custom-error-state-matcher/custom-error-state-matcher.component';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 
@@ -10,6 +10,11 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
   styleUrls: ['./credit-rating.component.scss']
 })
 export class CreditRatingComponent implements OnInit {
+
+  @Input() menuData: any;
+
+  creditMasterData : any = null;
+  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
 
   requestHeader = Utils.jsonStringify({
     "clientId" : "{{your clientId available in profile section}}",
@@ -65,6 +70,7 @@ responseBody = Utils.jsonStringify({
    }
 
   ngOnInit(): void {
+    this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.creditRatingForm = this.formBuilder.group({
       id: ['', Validators.required],
       name: ['', null],
@@ -86,7 +92,7 @@ responseBody = Utils.jsonStringify({
   getCreditRating(requestedData : any){
     let headers = Utils.getAPIHeader();
     console.log("headers : ",headers);
-    this.sandboxService.getCreditRating(requestedData,headers).subscribe(res => {
+    this.sandboxService.getCreditRating(this.url,requestedData,headers).subscribe(res => {
       console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {
