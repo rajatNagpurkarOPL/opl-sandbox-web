@@ -58,6 +58,7 @@ import { SetNotificationAlertServiceService } from './common-utils/common-servic
 import { ViewApiCreditLogsComponent } from './component/view-api-credit-logs/view-api-credit-logs.component';
 import { ViewApiCreditLogsService } from './common-utils/common-services/view-api-credit-logs.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-pan-inquiry.component';
 
 @NgModule({
   imports: [
@@ -114,6 +115,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DocumentationDataDirective,
     SetNotificationAlertComponent,
     ViewApiCreditLogsComponent,
+    NsdlPanInquiryComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

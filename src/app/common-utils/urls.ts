@@ -32,6 +32,11 @@ const CAAPI = {
     postFix : '/caapi/ca-msme'
 };
 
+const NSDL_PAN_INQUIRY = {
+    endpointFromLocal : SERVER_URL + "1101",
+    postFix : '/nsdl/paninquiry'
+};
+
 let host = window.location.origin;
 // let locationUrl = host.includes('localhost') ? SIT_URL 
 // : host.includes('qa-opl') ? QA_URL 
@@ -50,6 +55,7 @@ let ECR_GATEWAY_BASE_URL = '';
 let PENNYDROP_BASE_URL = '';
 let UDHYAM_BASE_URL = '';
 let CAAPI_BASE_URL = '';
+let NSDL_PAN_InQUIRY_BASE_URL = '';
 
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
@@ -60,6 +66,7 @@ if(host.includes('localhost')){
     PENNYDROP_BASE_URL = GATEWAY.endpointFromLocal + PENNYDROP.postFix;
     UDHYAM_BASE_URL = GATEWAY.endpointFromLocal + UDHYAM.postFix;
     CAAPI_BASE_URL = GATEWAY.endpointFromLocal + CAAPI.postFix;
+    NSDL_PAN_InQUIRY_BASE_URL = GATEWAY.endpointFromLocal + NSDL_PAN_INQUIRY.postFix;
 }else{
     host = "http://10.10.5.66:"; // SIT IP
     SANDBOX_BASE_URL = host + "1104" + SANDBOX.postFix;
@@ -104,6 +111,8 @@ export const URLS = {
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
+    },NSDL : {
+        PAN_INQUIRY : NSDL_PAN_InQUIRY_BASE_URL + '/verify' 
     },
     GATEWAY : {
         USER_LOGS : GATEWAY_BASE_URL + '/auditlogs/user'

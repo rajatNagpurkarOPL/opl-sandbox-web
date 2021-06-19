@@ -83,6 +83,11 @@ export class SandboxService {
     return this.http.post(URLS.CAAPI.CAFIRMDETAIL,data,requestHeader);
   }
 
+  //NSDL Pan Inquiry APIs
+  getPanDetails(data : any,requestHeader : any): Observable<any>{
+    return this.http.post(URLS.NSDL.PAN_INQUIRY,data,requestHeader);
+  }
+
   getOrganisationEmailsList(orgId: any): Observable<any> {
     return this.http.get(URLS.SANDBOX_USER.GET_ALL_EMAIL_IDS_OF_ORGANISATION + '/' + orgId, false);
   }
