@@ -60,6 +60,7 @@ import { ViewApiCreditLogsService } from './common-utils/common-services/view-ap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TryoutResponseDirective } from './directives/tryout-response.directive';
 import { TryoutResponseComponent } from './component/tryout-response/tryout-response.component';
+import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-pan-inquiry.component';
 
 @NgModule({
   imports: [
@@ -118,6 +119,7 @@ import { TryoutResponseComponent } from './component/tryout-response/tryout-resp
     ViewApiCreditLogsComponent,
     TryoutResponseDirective,
     TryoutResponseComponent,
+    NsdlPanInquiryComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
