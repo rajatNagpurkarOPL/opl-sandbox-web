@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CustomErrorStateMatcherComponent } from '../../custom-error-state-matcher/custom-error-state-matcher.component';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { SandboxService } from 'src/app/service/sandbox.service';
@@ -11,6 +11,10 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./udhyam-reg-detail.component.scss']
 })
 export class UdhyamRegDetailComponent implements OnInit {
+
+  @Input() menuData: any;
+
+  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
 
   requestHeader = Utils.jsonStringify({
     "clientId" : "{{your clientId available in profile section}}",
@@ -101,6 +105,7 @@ responseBody = Utils.jsonStringify({
    }
 
   ngOnInit(): void {
+    this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.udhyamRegDetailForm = this.formBuilder.group({
       udhyamNo: ['', Validators.required],
       mobileNo: ['', Validators.required]
@@ -121,7 +126,7 @@ responseBody = Utils.jsonStringify({
   udhyamRegDetail(requestedData : any){
     let headers = Utils.getAPIHeader();
     console.log("headers : ",headers);
-    this.sandboxService.udhyamRegDetail(requestedData,headers).subscribe(res => {
+    this.sandboxService.udhyamRegDetail(this.url,requestedData,headers).subscribe(res => {
       console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {

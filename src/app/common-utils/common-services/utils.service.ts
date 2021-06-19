@@ -6,8 +6,7 @@ import { Constant } from '../Constant';
 import { CookieService } from './cookie.service';
 import {Location} from '@angular/common';
 import { v4 as uuid } from 'uuid';
-import { SandboxService } from 'src/app/service/sandbox.service';
-import { Globals } from '../globals';
+import { URLS } from '../urls';
 
 @Injectable({
   providedIn: 'root'
@@ -238,6 +237,14 @@ static getAPIHeader(){
   let apiKeys = Utils.getAPIKeys();
   let user = Utils.getUser();
   return {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId,"tokenNo" : user.id.toString(), "Content-Type" : "application/json; charset=utf-8"};
+}
+
+static prepareApiUrl(data : any, context : string){
+  if(!this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
+     return URLS.BASE_URL + "/" + context + "/" + data.service.provider.contextPath + "/" + data.service.provider.endPoint;
+  }else{
+    return URLS.BASE_URL + "/" + context;
+  }
 }
 
 }

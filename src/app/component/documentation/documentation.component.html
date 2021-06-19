@@ -10,12 +10,12 @@
   </ng-container>  
   </mat-drawer>
 
-  <div class="sidenav-content">
-          <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG"></app-credit-rating>
-          <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK"></app-pan-status-check>
-          <app-bank-account-verification *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION"></app-bank-account-verification>   
-          <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL"></app-udhyam-reg-detail>
-          <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL"></app-ca-individual-detail>
-          <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL"></app-ca-firm-detail>
+  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined">
+          <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG" [menuData]="selectedInnerData"></app-credit-rating>
+          <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK" [menuData]="selectedInnerData"></app-pan-status-check>
+          <app-bank-account-verification *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION" [menuData]="selectedInnerData"></app-bank-account-verification>   
+          <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL" [menuData]="selectedInnerData"></app-udhyam-reg-detail>
+          <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL" [menuData]="selectedInnerData"></app-ca-individual-detail>
+          <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL" [menuData]="selectedInnerData"></app-ca-firm-detail>
   </div>
 </mat-drawer-container>

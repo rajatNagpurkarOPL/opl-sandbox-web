@@ -83,6 +83,7 @@ console.log("HOST : ",host);
  *  This is constants of REST URL which can be hit on backend server
  */
 export const URLS = {
+    BASE_URL : SERVER_URL,
     SANDBOX_USER : {
         LOGIN: SANDBOX_BASE_URL + '/auth/login',
         LOG_OUT: SANDBOX_BASE_URL +  '/auth/logoutUser',
