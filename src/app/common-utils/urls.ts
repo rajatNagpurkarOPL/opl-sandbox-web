@@ -1,4 +1,5 @@
-const SERVER_URL = "http://localhost:";
+//const SERVER_URL = "http://localhost:";
+const SERVER_URL = "https://sit-opl.instantmseloans.in";
 //  const SERVER_URL = "http://10.10.5.66:";
 
 const SANDBOX  =  {
