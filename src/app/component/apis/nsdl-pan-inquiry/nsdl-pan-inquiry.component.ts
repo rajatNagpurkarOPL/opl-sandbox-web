@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { SandboxService } from 'src/app/service/sandbox.service';
@@ -10,6 +10,10 @@ import { CustomErrorStateMatcherComponent } from '../../custom-error-state-match
   styleUrls: ['./nsdl-pan-inquiry.component.scss']
 })
 export class NsdlPanInquiryComponent implements OnInit {
+
+  @Input() menuData: any;
+
+  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
 
   requestHeader = Utils.jsonStringify({
     "clientId" : "{{your clientId available in profile section}}",
@@ -31,6 +35,7 @@ export class NsdlPanInquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.panInquiryForm = this.formBuilder.group({
       pan: ['', Validators.required]
     });
@@ -50,7 +55,7 @@ export class NsdlPanInquiryComponent implements OnInit {
 
   getPanDetails(requestedData : any){
     let headers = Utils.getAPIHeader();
-    this.sandboxService.getPanDetails(requestedData,headers).subscribe(res => {
+    this.sandboxService.getPanDetails(this.url,requestedData,headers).subscribe(res => {
       console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {

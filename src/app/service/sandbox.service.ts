@@ -84,8 +84,8 @@ export class SandboxService {
   }
 
   //NSDL Pan Inquiry APIs
-  getPanDetails(data : any,requestHeader : any): Observable<any>{
-    return this.http.post(URLS.NSDL.PAN_INQUIRY,data,requestHeader);
+  getPanDetails(url : string , data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
   }
 
   getOrganisationEmailsList(orgId: any): Observable<any> {

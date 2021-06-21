@@ -241,7 +241,8 @@ static getAPIHeader(){
 
 static prepareApiUrl(data : any, context : string){
   if(!this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
-     return URLS.BASE_URL + "/" + context + "/" + data.service.provider.contextPath + "/" + data.service.provider.endPoint;
+    return URLS.BASE_URL + "/" + context + data.service.provider.contextPath + data.service.provider.endPoint;
+     //return URLS.BASE_URL + "/" + context + "/" + data.service.provider.contextPath + "/" + data.service.provider.endPoint;
   }else{
     return URLS.BASE_URL + "/" + context;
   }
