@@ -240,11 +240,16 @@ static getAPIHeader(){
 }
 
 static prepareApiUrl(data : any, context : string){
+  let baseUrl = URLS.BASE_URL;
+  if(baseUrl.includes('localhost') || baseUrl.includes('http://10.10.5.66:')){
+    let stringSplit = URLS.BASE_URL.split(":");
+    stringSplit[stringSplit.length -1] = "1101";
+    baseUrl = stringSplit.join(":");
+  }
   if(!this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
-    return URLS.BASE_URL + "/" + context + data.service.provider.contextPath + data.service.provider.endPoint;
-     //return URLS.BASE_URL + "/" + context + "/" + data.service.provider.contextPath + "/" + data.service.provider.endPoint;
+    return baseUrl + "/" + context + data.service.provider.contextPath + data.service.provider.endPoint;
   }else{
-    return URLS.BASE_URL + "/" + context;
+    return baseUrl + "/" + context;
   }
 }
 
