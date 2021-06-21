@@ -243,13 +243,15 @@ static prepareApiUrl(data : any, context : string){
   let baseUrl = URLS.BASE_URL;
   if(baseUrl.includes('localhost') || baseUrl.includes('http://10.10.5.66:')){
     let stringSplit = URLS.BASE_URL.split(":");
-    stringSplit[stringSplit.length -1] = "1101";
+    stringSplit[stringSplit.length -1] = "1101";//gateway port
     baseUrl = stringSplit.join(":");
+  }else{
+    baseUrl = URLS.BASE_URL + "/" + context;
   }
   if(!this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
-    return baseUrl + "/" + context + data.service.provider.contextPath + data.service.provider.endPoint;
+    return baseUrl + data.service.provider.contextPath + data.service.provider.endPoint;
   }else{
-    return baseUrl + "/" + context;
+    return baseUrl;
   }
 }
 
