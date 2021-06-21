@@ -106,5 +106,10 @@ export const Constant = {
         1007 : "User already Registered!",
         1008 : "Invalid Inputs.",
         1009 : "Unknown Error"
+    },
+    MODULE_TYPE : {
+        USER : "USER",
+        ADMIN : "ADMIN",
+        BOTH : "BOTH"
     }
 };
