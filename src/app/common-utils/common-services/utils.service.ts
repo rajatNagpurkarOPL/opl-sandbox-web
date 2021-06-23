@@ -248,7 +248,7 @@ static prepareApiUrl(data : any, context : string){
   }else{
     baseUrl = URLS.BASE_URL + "/" + context;
   }
-  if(!this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
+  if(!this.isObjectNullOrEmpty(data) && !this.isObjectNullOrEmpty(data.service) && !this.isObjectNullOrEmpty(data.service.provider)){
     return baseUrl + data.service.provider.contextPath + data.service.provider.endPoint;
   }else{
     return baseUrl;
