@@ -28,21 +28,7 @@
                                     </h3><!---->
                                 </div>
                                 <div class="card-body">
-                                    <mat-tab-group animationDuration="0ms">
-                                        <mat-tab label="Schema">
-                                            <app-tree-grid-table *ngIf="apiRequestSchemaData.length > 0"  [jsonData]="apiRequestSchemaData"></app-tree-grid-table>
-                                        </mat-tab>
-                                        <mat-tab label="Body">
-                                            <pre class="json-pretty">
-                                                {{requestBody}}
-                                            </pre>
-                                        </mat-tab>
-                                        <mat-tab label="Header" style="align-items: center;">
-                                            <pre class="json-pretty">
-                                                {{requestHeader}}
-                                            </pre>
-                                        </mat-tab>
-                                      </mat-tab-group>
+                                    <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
                                 </div>
                                 <div class="card-header row row-flex">
                                     <h3 class="card-title" style="border-left-color: inherit; ">
@@ -50,19 +36,7 @@
                                     </h3><!---->
                                 </div>
                                 <div class="card-body">
-                                    <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)">
- 										<mat-tab label="Schema">
-                                            <br>
-                                            <app-tree-grid-table *ngIf="apiResponseSchemaData.length > 0"  [jsonData]="apiResponseSchemaData"></app-tree-grid-table>
-                                        </mat-tab>
-                                        <mat-tab label="Body">
-                                            <pre class="json-pretty">
-                                                {{responseBody}}                                            </pre>
-                                        </mat-tab>
-                                        <mat-tab label="Header">
-                                            <p style="color: red;">NO HEADER</p>
-                                        </mat-tab>
-                                      </mat-tab-group>
+                                    <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
                                 </div>
                     </mat-tab>
                     <mat-tab label="Tryout">

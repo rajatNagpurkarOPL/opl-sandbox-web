@@ -39,11 +39,10 @@ export class CAFirmDetailComponent implements OnInit {
   response : any = "Response Will be Rendered Here.";
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
-  apiRequestSchemaData: any[] = [];
-  apiResponseSchemaData: any[] = [];
   domainSchemaData: any[] = [];
-  apiRequestBody: any = {};
-  apiResponseBody: any = {};
+  apiMstrId = null;
+  apiRequestData: any = {};
+  apiResponseData: any = {};
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
     this.formBuilder = fb;
@@ -56,8 +55,9 @@ export class CAFirmDetailComponent implements OnInit {
       dob: ['', Validators.required],
       firmRegNumber: ['', Validators.required]
     });
-    this.getApiRequestSchema('CAFirmDetailRequest');
-    this.getApiResponseSchema('CAFirmDetailResponse');
+    this.apiMstrId = this.menuData.service.id;
+    this.getApiRequestSchema();
+    this.getApiResponseSchema();
   }
 
   onFormSubmit() {
@@ -71,25 +71,20 @@ export class CAFirmDetailComponent implements OnInit {
   
   caFirmDetail(requestedData : any){
     let headers = Utils.getAPIHeader();
-    console.log("headers : ",headers);
     this.sandboxService.caFirmDetail(this.url,requestedData,headers).subscribe(res => {
-      console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {
-      console.log("ERROR : ",err);
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
     });
   }
   
-  getApiRequestSchema(data){
-  this.sandboxService.getApiSchema(data).subscribe(res => {
+  getApiRequestSchema(){
+    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        console.log("res.data::",res.data)
-        this.apiRequestSchemaData = res.data;
-        console.log("apiRequestSchemaData::",this.apiRequestSchemaData)
-        this.apiRequestBody = res.data.body;
+        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -99,14 +94,12 @@ export class CAFirmDetailComponent implements OnInit {
   });
 }
 
-getApiResponseSchema(data){
-  this.sandboxService.getApiSchema(data).subscribe(res => {
+getApiResponseSchema(){
+  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        console.log("res.data::",res.data)
-        this.apiResponseSchemaData = res.data;
-        console.log("apiResponseSchemaData::",this.apiResponseSchemaData)
-        this.apiResponseBody = res.data.body;
+        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -117,7 +110,6 @@ getApiResponseSchema(data){
 }
 
 getDomainSchema(data){
-  console.log('getDomainData Clicked');
   this.sandboxService.getDomainSchema(data).subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
@@ -133,13 +125,10 @@ getDomainSchema(data){
 
 tabClick(tab) {
   if(tab.index==0){
-    console.log('Schema Clicked');
     // this.getApiRequestSchema('createLoanApplicationsRequest');
     // this.getApiResponseSchema('createLoanApplicationsResponse');
   }else if(tab.index==1){
-    console.log('Header Clicked');
   }else if (tab.index ==2){
-    console.log('Other Clicked');
   }
 }
   

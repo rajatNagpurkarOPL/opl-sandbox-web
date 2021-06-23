@@ -28,8 +28,7 @@
                             </h3><!---->
                         </div>
                         <div class="card-body">
-                            Show Request Schema
-                            <!-- <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data> -->
+                            <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
                         </div>
                         <div class="card-header row row-flex">
                             <h3 class="card-title" style="border-left-color: inherit; ">
@@ -37,7 +36,6 @@
                             </h3><!---->
                         </div>
                         <div class="card-body">
-                            Show Response Schema
                             <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
                         </div>
             </mat-tab>

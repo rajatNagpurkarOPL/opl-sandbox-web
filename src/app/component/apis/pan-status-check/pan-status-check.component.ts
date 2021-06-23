@@ -51,6 +51,7 @@ responseBody = Utils.jsonStringify({
   // apiResponseBody: any = {};
   apiRequestData: any = {};
   apiResponseData: any = {};
+  apiMstrId = null;
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
     this.formBuilder = fb;
@@ -64,8 +65,9 @@ responseBody = Utils.jsonStringify({
       dob: ['', Validators.required],
       consent:['', null]
     });
-    this.getApiRequestSchema('PanStatusCheckRequest');
-    this.getApiResponseSchema('PanStatusCheckResponse');
+    this.apiMstrId = this.menuData.service.id;
+    this.getApiRequestSchema();
+    this.getApiResponseSchema();
   }
 
   onFormSubmit() {
@@ -79,27 +81,20 @@ responseBody = Utils.jsonStringify({
   
   panStatusCheck(requestedData : any){
     let headers = Utils.getAPIHeader();
-    console.log("headers : ",headers);
     this.sandboxService.panStatusCheck(this.url,requestedData,headers).subscribe(res => {
-      console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {
-      console.log("ERROR : ",err);
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
     });
   }
   
-  getApiRequestSchema(data){
-  this.sandboxService.getApiSchema(data).subscribe(res => {
+  getApiRequestSchema(){
+    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        console.log("res.data::",res.data)
-        // this.apiRequestSchemaData = res.data;
-        // console.log("apiRequestSchemaData::",this.apiRequestSchemaData)
-        // this.apiRequestBody = res.data.body;
-        this.apiRequestData = {"apiSchemaData": res.data ,
-              "apiBodyData":res.data.body ,"apiHeaderData":this.requestHeader};
+        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -109,16 +104,12 @@ responseBody = Utils.jsonStringify({
   });
 }
 
-getApiResponseSchema(data){
-  this.sandboxService.getApiSchema(data).subscribe(res => {
+getApiResponseSchema(){
+  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        console.log("res.data::",res.data)
-        // this.apiResponseSchemaData = res.data;
-        // console.log("apiResponseSchemaData::",this.apiResponseSchemaData)
-        // this.apiResponseBody = res.data.body;
-        this.apiResponseData = {"apiSchemaData": res.data ,
-              "apiBodyData":res.data.body ,"apiHeaderData":this.requestHeader};
+        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
       }
     } else {
       this.utils.warningSnackBar(res.message);
@@ -129,7 +120,6 @@ getApiResponseSchema(data){
 }
 
 getDomainSchema(data){
-  console.log('getDomainData Clicked');
   this.sandboxService.getDomainSchema(data).subscribe(res => {
     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
       if(!Utils.isObjectNullOrEmpty(res.data)){

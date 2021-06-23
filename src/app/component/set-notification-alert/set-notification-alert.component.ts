@@ -50,6 +50,7 @@ export class SetNotificationAlertComponent implements OnInit {
   }
 
   setCreditBalance(){
+    console.log("setCreditBalance");
     let alertData = this.triggerForm.controls.triggers.controls;
     let limitSum = 0;
     alertData.forEach(element => {
