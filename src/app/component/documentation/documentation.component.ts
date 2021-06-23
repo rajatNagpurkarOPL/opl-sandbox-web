@@ -23,6 +23,8 @@ export class DocumentationComponent implements OnInit {
     this.constant = Constant;
     DocumentationComponent.masterCodes = [];
     DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
+    DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.DATA_TYPE);
+    DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.ATM);
     this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
     //this.getMenuItems(this.selectedMenuItem);
     this.getMasterCodesByModule(Constant.MODULE_TYPE.USER);

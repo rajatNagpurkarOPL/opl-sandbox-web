@@ -35,7 +35,9 @@ export const Constant = {
         UDHYAM_DETAIL : "UDHYAM_DETAILS",
         CAINDIVIDUAL_DETAIL : "CAINDIVIDUAL_DETAIL",
         CAFIRM_DETAIL : "CAFIRM_DETAIL",
-        NSDL_PAN_INQUIRY : "PAN_INQ"
+        NSDL_PAN_INQUIRY : "PAN_INQ",
+        DATA_TYPE : "DATA_TYPE", 
+        ATM : "ATM"
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {
