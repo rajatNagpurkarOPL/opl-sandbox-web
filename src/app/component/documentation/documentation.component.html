@@ -5,7 +5,7 @@
     </button>
     <ng-container *ngIf="!isObjectNullOrEmpty(masterData)">
     <mat-nav-list (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" *ngFor="let code of getMasterCodes()">
-      <app-drawer-menu appDrawerMenu [item]="masterData[code]"  arrayKey="values" expandFlagKey="showSubmenu" rotationFlagKey="showSubmenu" [isExpanded]="isExpanded" [isShowing]="isShowing"></app-drawer-menu>
+      <app-drawer-menu appDrawerMenu [item]="masterData[code]"  arrayKey="values" expandFlagKey="showSubmenu" rotationFlagKey="showSubmenu" [isExpanded]="isExpanded" [isShowing]="isShowing" *ngIf="masterData[code] != undefined"></app-drawer-menu>
     </mat-nav-list>        
   </ng-container>  
   </mat-drawer>

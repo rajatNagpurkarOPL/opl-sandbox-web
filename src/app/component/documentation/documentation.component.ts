@@ -18,6 +18,7 @@ export class DocumentationComponent implements OnInit {
   public readonly constant : any = null;
   isObjectNullOrEmpty  = Utils.isObjectNullOrEmpty;
   selectedInnerData : any = null;
+  codesList = [];
 
   constructor(private sandboxService: SandboxService, public utils: Utils,private route : ActivatedRoute, private router : Router) { 
     this.constant = Constant;
@@ -67,29 +68,41 @@ export class DocumentationComponent implements OnInit {
   }
 
   setCurrentSelectedAPI(selectedApiCode:string){    
-    console.log("se;e :: " , selectedApiCode)
     this.selectedMenuItem = selectedApiCode;
-
-    this.masterData[DocumentationComponent.masterCodes].values.forEach(element => {
-      element.values.forEach(data => {
-        if(data.code == selectedApiCode){
-          this.selectedInnerData = data;
-        }
+    if(this.masterData != undefined){
+      this.codesList.forEach(element => {
+        this.masterData[element].values.forEach(inData => {
+          if(inData.values!= undefined && inData.values != null){
+            inData.values.forEach(finalData => {
+              if(finalData.code == selectedApiCode){
+                this.selectedInnerData = finalData;
+                return;
+              }
+            });
+          }
+        });
       });
-    });
-    console.log("this.selectedInnerData :: " , this.selectedInnerData);
-    
-    this.router.navigate([this.constant.ROUTE_URL.DOCUMENTATION + '/' + selectedApiCode]);
-    for(let code of DocumentationComponent.masterCodes){
-      this.masterData[code].cssClass = "";
-      if(!Utils.isObjectNullOrEmpty(this.masterData[code].values)) {
-        var obj1 =this.setCurrentActiveCss(this.masterData[code].values);
-        if(!Utils.isObjectNullOrEmpty(obj1)){
-          this.masterData[code].showSubmenu = true;
-          this.isExpanded = true;
+      // this.masterData[DocumentationComponent.masterCodes].values.forEach(element => {
+      //   element.values.forEach(data => {
+      //     if(data.code == selectedApiCode){
+      //       this.selectedInnerData = data;
+      //     }
+      //   });
+      // });
+    }
+      this.router.navigate([this.constant.ROUTE_URL.DOCUMENTATION + '/' + selectedApiCode]);
+      for(let code of DocumentationComponent.masterCodes){
+        if(this.masterData[code] != undefined){
+          this.masterData[code].cssClass = "";
+          if(!Utils.isObjectNullOrEmpty(this.masterData[code].values)) {
+            var obj1 =this.setCurrentActiveCss(this.masterData[code].values);
+            if(!Utils.isObjectNullOrEmpty(obj1)){
+              this.masterData[code].showSubmenu = true;
+              this.isExpanded = true;
+            }
+          }
         }
       }
-    }
   }
 
   private removeCurrentActiveCss(list : any){
@@ -121,6 +134,8 @@ export class DocumentationComponent implements OnInit {
   async getMasterCodesByModule(moduleType : string){
     await (await this.sandboxService.getMasterCodes(moduleType)).toPromise().then(response=>{
       if(response.status == 1000){
+        this.codesList = [];
+        this.codesList = response.data;
         this.getMenuItems(response.data);
       }
     })
