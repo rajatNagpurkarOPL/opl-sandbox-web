@@ -112,4 +112,8 @@ export class SandboxService {
     return await this.http.post(URLS.SANDBOX_USER.GET_CODES, data)
   }
 
+  getDocumentationAPIDetails(apiMstrId: any, fieldType: any): Observable<any>{
+    return this.http.get(URLS.SANDBOX_USER.GET_API_DOCUMENTATION_DETAILS + '/' + apiMstrId +'/'+fieldType, false);
+  }
+
 }

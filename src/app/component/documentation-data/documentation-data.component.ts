@@ -45,7 +45,6 @@ export class DocumentationDataComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("dd data==>",this.jsonData);
     this.dataSource.data = this.jsonData.apiSchemaData;
     this.apiBody = this.jsonData.apiBodyData;
     this.apiHeader = this.jsonData.apiHeaderData;
@@ -53,13 +52,10 @@ export class DocumentationDataComponent implements OnInit {
 
   tabClick(tab) {
     if(tab.index==0){
-      console.log('Schema Clicked');
       // this.getApiRequestSchema('createLoanApplicationsRequest');
       // this.getApiResponseSchema('createLoanApplicationsResponse');
     }else if(tab.index==1){
-      console.log('Header Clicked');
     }else if (tab.index ==2){
-      console.log('Other Clicked');
     }
   }
 

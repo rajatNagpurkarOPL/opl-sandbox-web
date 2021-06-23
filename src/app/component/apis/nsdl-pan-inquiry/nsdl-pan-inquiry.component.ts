@@ -30,6 +30,8 @@ export class NsdlPanInquiryComponent implements OnInit {
   matcher = new CustomErrorStateMatcherComponent();
   panInquiryForm: FormGroup;
   formBuilder : any = null;
+  apiMstrId = null;
+
   constructor(private fb : FormBuilder,private sandboxService : SandboxService, private utils : Utils) { 
     this.formBuilder = fb;
   }
@@ -39,9 +41,9 @@ export class NsdlPanInquiryComponent implements OnInit {
     this.panInquiryForm = this.formBuilder.group({
       pan: ['', Validators.required]
     });
-    this.apiRequestData.apiSchemaData = "{}";
-    this.apiRequestData.apiBodyData = this.requestBody;
-    this.apiRequestData.apiHeaderData = this.requestHeader;
+    this.apiMstrId = this.menuData.service.id;
+    this.getApiRequestSchema();
+    this.getApiResponseSchema();
 
   }
   onFormSubmit() {
@@ -53,13 +55,41 @@ export class NsdlPanInquiryComponent implements OnInit {
     }
   }
 
+  getApiRequestSchema(){
+    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
+    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
+      }
+    } else {
+      this.utils.warningSnackBar(res.message);
+    }
+  }, (error: any) => {
+    this.utils.errorSnackBar(error);
+  });
+}
+
+getApiResponseSchema(){
+  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
+    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
+              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
+      }
+    } else {
+      this.utils.warningSnackBar(res.message);
+    }
+  }, (error: any) => {
+    this.utils.errorSnackBar(error);
+  });
+}
+
   getPanDetails(requestedData : any){
     let headers = Utils.getAPIHeader();
     this.sandboxService.getPanDetails(this.url,requestedData,headers).subscribe(res => {
-      console.log("Response::",res);
         this.response = Utils.jsonStringify(res);
     },err => {
-      console.log("ERROR : ",err);
       this.utils.errorHandle(err);
     });
   }

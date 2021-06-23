@@ -123,7 +123,8 @@ export const URLS = {
         SAVE_OR_UPDATE_API_TRIGGERS: SANDBOX_BASE_URL + '/api/credits/save-update-triggers',
         GET_API_CREDIT_LOGS_LIST: SANDBOX_BASE_URL + '/api/credits/get-credit-logs-list',
         DELETE_TRIGGER_BY_TRIGGER_ID: SANDBOX_BASE_URL + '/api/credits/delete-api-trigger',
-        GET_CODES : SANDBOX_BASE_URL +"/master/get-mstr-codes"
+        GET_CODES : SANDBOX_BASE_URL +"/master/get-mstr-codes",
+        GET_API_DOCUMENTATION_DETAILS: SANDBOX_BASE_URL + '/schema/api-documentation'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
