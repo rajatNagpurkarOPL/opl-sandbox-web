@@ -22,10 +22,10 @@ export class DocumentationComponent implements OnInit {
 
   constructor(private sandboxService: SandboxService, public utils: Utils,private route : ActivatedRoute, private router : Router) { 
     this.constant = Constant;
-    DocumentationComponent.masterCodes = [];
-    DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
-    DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.DATA_TYPE);
-    DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.ATM);
+    // DocumentationComponent.masterCodes = [];
+    // DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.API);
+    // DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.DATA_TYPE);
+    // DocumentationComponent.masterCodes.push(this.constant.MASTER_CODE.ATM);
     this.selectedMenuItem = this.route.snapshot.paramMap.get('code');    
     //this.getMenuItems(this.selectedMenuItem);
     this.getMasterCodesByModule(Constant.MODULE_TYPE.USER);
@@ -136,6 +136,7 @@ export class DocumentationComponent implements OnInit {
       if(response.status == 1000){
         this.codesList = [];
         this.codesList = response.data;
+        DocumentationComponent.masterCodes = response.data;
         this.getMenuItems(response.data);
       }
     })
