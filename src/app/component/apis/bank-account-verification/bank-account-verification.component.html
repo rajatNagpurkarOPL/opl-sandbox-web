@@ -21,25 +21,28 @@
                     </div>
                 </div><!---->
                 <mat-tab-group>
-                    <mat-tab label="Documentation">
-                                <div class="card-header row row-flex">
+                    <mat-tab label="Request Document">
+                               <!-- <div class="card-header row row-flex">
                                     <h3 class="card-title" style="border-left-color: inherit; ">
                                     <span class="label-text">Request</span>
-                                    </h3><!---->
-                                </div>
+                                    </h3>
+                                </div> -->
                                 <div class="card-body">
                                     <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
                                 </div>
-                                <div class="card-header row row-flex">
+                                </mat-tab> 
+                               <mat-tab label="Response Document">
+                               <!---<div class="card-header row row-flex">
                                     <h3 class="card-title" style="border-left-color: inherit; ">
                                     <span class="label-text">Response</span>
-                                    </h3><!---->
-                                </div>
+                                    </h3>
+                                </div>-->
                                 <div class="card-body">
                                     <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
                                 </div>
-                    </mat-tab>
-                    <mat-tab label="Tryout">
+                                </mat-tab>
+
+                    <mat-tab label="Tryout / Implement">
                         <div>
                                 <form>
                                     <mat-card style="display: flex; width: 100%;">
