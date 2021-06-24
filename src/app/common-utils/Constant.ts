@@ -37,7 +37,8 @@ export const Constant = {
         CAFIRM_DETAIL : "CAFIRM_DETAIL",
         NSDL_PAN_INQUIRY : "PAN_INQ",
         DATA_TYPE : "DATA_TYPE", 
-        ATM : "ATM"
+        ATM : "ATM",
+        E_SIGN_E_STMP : "E_SIGN_E_STMP"
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {

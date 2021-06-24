@@ -61,6 +61,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TryoutResponseDirective } from './directives/tryout-response.directive';
 import { TryoutResponseComponent } from './component/tryout-response/tryout-response.component';
 import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-pan-inquiry.component';
+import { EsignAndEstampingComponent } from './component/apis/esign-and-estamping/esign-and-estamping.component';
 
 @NgModule({
   imports: [
@@ -119,7 +120,8 @@ import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-
     ViewApiCreditLogsComponent,
     TryoutResponseDirective,
     TryoutResponseComponent,
-    NsdlPanInquiryComponent
+    NsdlPanInquiryComponent,
+    EsignAndEstampingComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
