@@ -1,0 +1,163 @@
+<mat-tab-group>
+  <mat-tab label="Registration">  
+    <br>
+<div>
+<p>API access will be granted to Customers registered with OPL. To request an access to test APIs please get in touch with OPL Team at support@onlinepsbloans.com with the following details:</p>
+<table class="table table-striped"> 
+  <thead>
+    <tr>
+      <th scope="col"> Field</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Organization Name</td>
+      <td> Full Organization Name</td>  
+    </tr>
+    <tr>
+      <td>Sector</td>
+      <td>In which sector your company provide services.</td>  
+    </tr>
+    <tr>
+      <td>Email-id </td>
+      <td>email-id will use to register with our company.</td>  
+    </tr>
+    <tr>
+      <td>Mobile Number</td>
+      <td>MobileNo will use to register with our company.</td>  
+    </tr>
+    <tr>
+      <td>Service Name </td>
+      <td> Service Name which you want to access to test APIs.</td>  
+    </tr>
+    <tr>
+      <td>Contact Details</td>
+      <td> Minimum 1 Person Contact Detail Will be required. (Name, Email-id, Mobile Number, Designation)</td>  
+    </tr>
+  </tbody>
+</table>
+</div>
+</mat-tab>
+
+<mat-tab label="HTTP Status Codes">
+<br>  
+  <div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Message</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>200</td>
+        <td>OK</td>
+        <td>Request Successful</td>
+      </tr>
+      <tr>
+        <td>400</td>
+        <td>Bad Request</td>
+        <td>Mandatory fields are missing / invalid</td>
+      </tr>
+      <tr>
+        <td>401</td>
+        <td>Unauthorized Access</td>
+        <td>API Key is missing or invalid.</td>
+      </tr>
+      <tr>
+        <td>402</td>
+        <td>Insufficient Credits</td>
+        <td>Credits to access the APIs expired</td>
+      </tr>
+      <tr>
+        <td>500</td>
+        <td> Internal Server Error</td>
+        <td>Internal processing error of Karza.</td>
+      </tr>
+      <tr>
+        <td>503</td>
+        <td>Source Unavailable</td>
+        <td>The source for authentication is down for maintenance or inaccessible.</td>
+      </tr>
+      <tr>
+        <td>504</td>
+        <td>Endpoint Request Timed Out</td>
+        <td>The response latency from the source for authentication is >30sec.</td>
+      </tr>
+    </tbody>
+  </table> 
+</div>
+</mat-tab> 
+
+<mat-tab label="Internal Status Codes">  
+  <br>
+  <div> 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1001</td>
+        <td>Details found</td>  
+      </tr>
+      <tr>
+        <td>1002</td>
+        <td>Details not found based on combination of inputs</td>  
+      </tr>
+      <tr>
+        <td>1003</td>
+        <td>Invalid Keypair.</td>  
+      </tr>
+      <tr>
+        <td>1004</td>
+        <td>Unauthorized.</td>  
+      </tr>
+      <tr>
+        <td>1005</td>
+        <td>Missing Inputs.</td>  
+      </tr>
+      <tr>
+        <td>1006</td>
+        <td>Technical Error</td>  
+      </tr>
+      <tr>
+        <td>1007</td>
+        <td>User already Registered!</td>  
+      </tr>
+      <tr>
+        <td>1008</td>
+        <td>Invalid Inputs.</td>  
+      </tr>
+      <tr>
+        <td>1009</td>
+        <td>Unknown Error</td>  
+      </tr>
+      <tr>
+        <td>1010</td>
+        <td>Required Headers Missing.</td>  
+      </tr>
+      <tr>
+        <td>1011</td>
+        <td>Verification Failed.</td>  
+      </tr>
+      <tr>
+        <td>1012</td>
+        <td>User Doesn't have credit limit to access the APIs. Kindly contact to Administrator</td>  
+      </tr>
+      <tr>
+        <td>1013</td>
+        <td>User Doesn't have API access, Kindly contact to Administrator</td>  
+      </tr>
+
+    </tbody>
+  </table> 
+</div>
+</mat-tab>
+</mat-tab-group>

@@ -67,7 +67,7 @@ export class DocumentationComponent implements OnInit {
     }
   }
 
-  setCurrentSelectedAPI(selectedApiCode:string){    
+  setCurrentSelectedAPI(selectedApiCode:string){   
     this.selectedMenuItem = selectedApiCode;
     if(this.masterData != undefined){
       this.codesList.forEach(element => {
