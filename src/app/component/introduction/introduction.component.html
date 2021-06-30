@@ -1,5 +1,25 @@
-<mat-tab-group>
-  <mat-tab label="Registration">  
+<mat-tab-group> 
+  <mat-tab label="About">
+   <div> 
+     <br><br>
+    <ul>
+   <li><p>The OAM(OPL API Manager) API is organized around RESTful Web Services. 
+     Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. 
+     We use built-in HTTP features, like HTTP authentication and HTTP verbs (POST), which are understood by off-the-shelf HTTP clients.
+    We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your secret Id and Client Id API keys in any public website's client-side code).
+  </p></li>
+    <li><p>
+      To make the API as explorable as possible, you will have different account for test mode and live mode accecss. 
+      Requests made with TEST mode credentials incur no cost but the total number of TEST mode calls will be restricted as per the relevant API. 
+      Please contact our business development team for further details.
+  </p></li>
+  <li><p>
+    You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of the API.
+  </p></li>
+    </ul>
+   </div>
+  </mat-tab>
+  <mat-tab label="Registration / Onboarding">  
     <br>
 <div>
 <p>API access will be granted to Customers registered with OPL. To request an access to test APIs please get in touch with OPL Team at support@onlinepsbloans.com with the following details:</p>
@@ -159,5 +179,24 @@
     </tbody>
   </table> 
 </div>
+</mat-tab> 
+<mat-tab label=" Authentication / Security ">
+   <div>  
+     <br> 
+     <br> 
+     <ul>
+  <li><p>Authenticate your account when using the API by including your secret Id and Client Id API key pair in the request header.</p>
+    </li>
+  <li> <p> Each registered user is allotted a unique key pair which must be part of each request from. 
+      The Key pair is used to authenticate each request and is valid only for the period of contract between you and Online psb Loans Ltd.
+   </p></li>  
+    <li><p>Your API key pair carry many privileges, so be sure to keep them secret! Do not share your secret API key pair in publicly accessible areas such GitHub, client-side code, and so forth.
+    </p></li>
+    <li><p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail. 
+      API requests without authentication will also fail.</p></li>
+    </ul>
+    </div>
+
 </mat-tab>
+
 </mat-tab-group>
