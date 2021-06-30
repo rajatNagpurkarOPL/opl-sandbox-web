@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           // Set cookies
           Utils.setAuthCookie(this.userResponse.data);
         }
-        this.router.navigate([Constant.ROUTE_URL.DOCUMENTATION,"CRDT_RTNG"]);
+        this.router.navigate([Constant.ROUTE_URL.DOCUMENTATION,"DETAILS"]);
       } else {
         this.utils.errorSnackBar(res.message);
       }
