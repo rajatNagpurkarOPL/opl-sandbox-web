@@ -41,11 +41,582 @@
             </mat-tab>
             <mat-tab label="Tryout">
                 <div>
-                        <form>
-                            <mat-card style="display: flex; width: 100%;">
-                                
-                            </mat-card>
-                        </form>
+                    <form class="example-form" [formGroup]="eSignAndeStampingForm" autocomplete="off">
+                        <mat-card class="mat-card-tryout">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>Esign And Estamping Details</span>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Sanction Number</mat-label>
+                                        <input type="text" matInput formControlName="snctnno" [errorStateMatcher]="matcher" placeholder="Ex. ABC12345">
+                                        <mat-error *ngIf="eSignAndeStampingForm.get('snctnno').hasError('required')">
+                                            Please Enter sanction number.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group psb-xl-6 psb-lg-6 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Transaction ID</mat-label>
+                                        <input type="text" matInput formControlName="txnID" readonly [errorStateMatcher]="matcher" placeholder="Ex. ABC12345XYZ">
+                                        <mat-error *ngIf="eSignAndeStampingForm.get('txnID').hasError('required')">
+                                            Please Enter Transaction ID.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>State</mat-label>
+                                        <mat-select formControlName="state" [errorStateMatcher]="matcher">
+                                          <mat-option *ngFor="let data of stateList" [value]="data.code">
+                                            {{data.name}}
+                                          </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="eSignAndeStampingForm.get('state').hasError('required')">
+                                            Please select State.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout" formArrayName="estampdtls">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>E-stamp Details Section</span>
+                            </div>
+                            <hr>
+                            <mat-accordion #estampAccordion="matAccordion" *ngFor="let estamp of estampdtls.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
+                                <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" class="row form-group example-full-width">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title style="color: #777;">
+                                            E-stamp Details {{i+1}}.
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Open panel for fill up estamp details.
+                                            <mat-icon *ngIf="estampdtls.length != 1" color="warn" (click)="removeField(i, estampdtls)" matTooltip="Remove E-Stamp" matTooltipPosition="above">delete</mat-icon>
+                                        </mat-panel-description>                                    
+                                    </mat-expansion-panel-header>
+                                    <mat-divider></mat-divider>
+                                    <div class="row panel-form">
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Fisrt Party Name</mat-label>
+                                            <input type="text" matInput formControlName="firstparty" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="estamp.get('firstparty').hasError('required')">
+                                                Please enter first party name.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Consideration Price</mat-label>
+                                            <input type="number" matInput formControlName="considerationPrice" [errorStateMatcher]="matcher" placeholder="Ex. 1">
+                                            <mat-error *ngIf="estamp.get('considerationPrice').hasError('required')">
+                                                Please enter consideration price.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Stamp Duty Amount</mat-label>
+                                            <input type="number" matInput formControlName="stampDutyAmount" [errorStateMatcher]="matcher" placeholder="Ex. 10">
+                                            <mat-error *ngIf="estamp.get('stampDutyAmount').hasError('required')">
+                                                Please enter stamp duty amount.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Stamp Duty Paid By</mat-label>
+                                            <input type="text" matInput formControlName="stampdutyPaidby" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="estamp.get('stampdutyPaidby').hasError('required')">
+                                                Please enter stamp duty paid by.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Second Party Name</mat-label>
+                                            <input type="text" matInput formControlName="secondparty" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="estamp.get('secondparty').hasError('required')">
+                                                Please enter second party name.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Document ID</mat-label>
+                                            <input type="number" matInput formControlName="documentID" [errorStateMatcher]="matcher" placeholder="Ex. 1">
+                                            <mat-error *ngIf="estamp.get('documentID').hasError('required')">
+                                                Please enter document id.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Article Code</mat-label>
+                                            <input type="number" matInput formControlName="articleCode" [errorStateMatcher]="matcher" placeholder="Ex. 1234">
+                                            <mat-error *ngIf="estamp.get('articleCode').hasError('required')">
+                                                Please enter article code.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Description of Document</mat-label>
+                                            <input type="text" matInput formControlName="descriptionofDocument" [errorStateMatcher]="matcher" placeholder="Ex. Test Doc">
+                                            <mat-error *ngIf="estamp.get('descriptionofDocument').hasError('required')">
+                                                Please enter description of document.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-action-row>
+                                        <button type="button" matTooltip="Move on Previos E-stamp Details" matTooltipPosition="above" mat-button *ngIf="i !== 0" color="primary" (click)="prevStep()">Previous</button>
+                                        <button type="button" matTooltip="{{estampdtls.length === i+1 ? 'Close' : 'Move on Next E-stamp Details'}}" matTooltipPosition="above" mat-button color="primary" (click)="nextStep()">{{estampdtls.length === i+1 ? 'Close' : 'Next'}}</button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            <hr>
+                            <div style="text-align: right;">
+                                <button type="button" style="line-height: 400%;" (click)="addEstampField()" mat-flat-button color="primary">+ Add Estamp</button>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout" formArrayName="prtcptentty">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>Participating Details Section</span>
+                            </div>
+                            <hr>
+                            <mat-accordion #participantAccordion="matAccordion" *ngFor="let participant of prtcptentty.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
+                                <mat-expansion-panel [expanded]="participantStep === i" (opened)="setParticipantStep(i)" class="row form-group example-full-width">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title style="color: #777;">
+                                            Participating Details {{i+1}}.
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Open panel for fill up participating details.
+                                            <mat-icon *ngIf="prtcptentty.length != 1" color="warn" (click)="removeField(i, prtcptentty)" matTooltip="Remove Participant" matTooltipPosition="above">delete</mat-icon>
+                                        </mat-panel-description>                                    
+                                    </mat-expansion-panel-header>
+                                    <mat-divider></mat-divider>
+                                    <div class="row panel-form">
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Participant ID</mat-label>
+                                            <input type="number" matInput formControlName="prtcptenttyId" [errorStateMatcher]="matcher" placeholder="Ex. 1">
+                                            <mat-error *ngIf="participant.get('prtcptenttyId').hasError('required')">
+                                                Please enter participant id.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Primary Mobile Number</mat-label>
+                                            <input type="number" matInput formControlName="cntrprtycntmobno" [errorStateMatcher]="matcher" placeholder="Ex. 6767670000">
+                                            <mat-error *ngIf="participant.get('cntrprtycntmobno').hasError('required')">
+                                                Please enter primary mobile number.
+                                            </mat-error>
+                                            <mat-error *ngIf="participant.get('cntrprtycntmobno').hasError('pattern')">
+                                                Please enter valid mobile number.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Contact Person Name</mat-label>
+                                            <input type="text" matInput formControlName="cntrprtycntnm" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="participant.get('cntrprtycntnm').hasError('required')">
+                                                Please enter contact person name.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Date of Birth/Date of Incorporation</mat-label>
+                                            <input matInput formControlName="doi" [max]="maxDate" readonly (dateChange)="onDateChange($event.value, participant, 'doi', 'en_IN', 'yyyy-MM-dd')" [matDatepicker]="picker" [errorStateMatcher]="matcher" placeholder="Ex. 01/01/1991">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                            <mat-error *ngIf="participant.get('doi').hasError('required')">
+                                                Please enter date of birth/incorporation.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Primary Email Address</mat-label>
+                                            <input type="text" matInput formControlName="emlid" [errorStateMatcher]="matcher" placeholder="Ex. abc@gmail.com">
+                                            <mat-error *ngIf="participant.get('emlid').hasError('required')">
+                                                Please enter primary email address.
+                                            </mat-error>
+                                            <mat-error *ngIf="participant.get('emlid').hasError('pattern')">
+                                                Please enter valid email address.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Party Name/Entity Name</mat-label>
+                                            <input type="text" matInput formControlName="fulnm" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="participant.get('fulnm').hasError('required')">
+                                                Please enter Party name or entity name.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>PAN Number</mat-label>
+                                            <input type="text" matInput formControlName="panno" [errorStateMatcher]="matcher" placeholder="Ex. ABCDE1234F">
+                                            <mat-error *ngIf="participant.get('panno').hasError('required')">
+                                                Please enter pan number.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Party Type</mat-label>
+                                            <mat-select formControlName="partytyp" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of participantPartyType" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="participant.get('partytyp').hasError('required')">
+                                                Please select party type.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Relationship of Party With Loan</mat-label>
+                                            <mat-select formControlName="reltocntrct" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of participantPartyRelationship" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="participant.get('reltocntrct').hasError('required')">
+                                                Please select relationship of party.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Legal Constitution of Party/Entity</mat-label>
+                                            <mat-select formControlName="lglcnstn" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of participantLegalConstitution" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="participant.get('lglcnstn').hasError('required')">
+                                                Please select constitution of party/entity.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Officially Valid Document Type</mat-label>
+                                            <mat-select formControlName="ovdtype" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of participantOfficiallyValidDocumentType" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="participant.get('ovdtype').hasError('required')">
+                                                Please select document type.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Officially Valid Document Id</mat-label>
+                                            <input type="text" matInput formControlName="ovdid" [errorStateMatcher]="matcher" placeholder="Ex. ABCDEF123">
+                                            <mat-error *ngIf="participant.get('ovdid').hasError('required')">
+                                                Please enter document id.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Document ID Details</mat-label>
+                                            <mat-chip-list #docIdList formControlName="documentID" aria-label="Document Id selection">
+                                              <mat-chip *ngFor="let docId of participant.get('documentID').value" [selectable]="selectable"
+                                                       [removable]="removable" (removed)="remove(docId, participant, 'documentID')">
+                                                {{docId}}
+                                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                              </mat-chip>
+                                              <input type="number" placeholder="document Id..."
+                                                     [matChipInputFor]="docIdList"
+                                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                     [matChipInputAddOnBlur]="addOnBlur"
+                                                     (matChipInputTokenEnd)="add($event, participant, 'documentID')">
+                                            </mat-chip-list>
+                                            <mat-error *ngIf="participant.get('documentID').hasError('required')">
+                                                Please enter document id.
+                                            </mat-error>    
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Sequence Number</mat-label>
+                                            <input type="text" maxlength="10" matInput formControlName="seqno" [errorStateMatcher]="matcher" placeholder="Ex. 4">
+                                            <mat-error *ngIf="participant.get('seqno').hasError('required')">
+                                                Please enter sequence number.
+                                            </mat-error>
+                                            <mat-error *ngIf="participant.get('seqno').hasError('pattern')">
+                                                Please enter valid sequence number.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-action-row>
+                                        <button type="button" matTooltip="Move on Previos Participant Details" matTooltipPosition="above" mat-button *ngIf="i !== 0" color="primary" (click)="prevParticipantStep()">Previous</button>
+                                        <button type="button" matTooltip="{{prtcptentty.length === i+1 ? 'Close' : 'Move on Next Participant Details'}}" matTooltipPosition="above" mat-button color="primary" (click)="nextParticipantStep()">{{prtcptentty.length === i+1 ? 'Close' : 'Next'}}</button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            <hr>
+                            <div style="text-align: right;">
+                                <button type="button" style="line-height: 400%;" (click)="addParticipantField()" mat-flat-button color="primary">+ Add Participant</button>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>Loan Details Section</span>
+                            </div>
+                            <hr>
+                            <div class="row" formGroupName="loandtls">
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Credit Subtype Facility Name</mat-label>
+                                    <mat-select formControlName="crdtsubtyp" [errorStateMatcher]="matcher">
+                                      <mat-option *ngFor="let data of loanDetailsCreditSubtypeFacility" [value]="data">
+                                        {{data}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.crdtsubtyp').hasError('required')">
+                                        Please select credit facility subtype.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Sanction Currency</mat-label>
+                                    <mat-select formControlName="currofsanc" [errorStateMatcher]="matcher">
+                                      <mat-option *ngFor="let data of loanDetailsSanctionCurrency" [value]="data">
+                                        {{data}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.currofsanc').hasError('required')">
+                                        Please select sanction currency.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Date of Sanction of the Loan</mat-label>
+                                    <input matInput formControlName="dtofsnctn" (dateChange)="onDateChange($event.value, eSignAndeStampingForm, 'loandtls.dtofsnctn', 'en_IN', 'yyyy-MM-dd')" readonly [max]="maxDate" [matDatepicker]="picker" [errorStateMatcher]="matcher" placeholder="Ex. 01/01/1991">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.dtofsnctn').hasError('required')">
+                                        Please enter date of sanction loan.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Facility Name of the Loan</mat-label>
+                                    <input type="text" matInput formControlName="fcltynm" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.fcltynm').hasError('required')">
+                                        Please enter facility name of the loan.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Funded Type</mat-label>
+                                    <mat-select formControlName="fundtyp" [errorStateMatcher]="matcher">
+                                      <mat-option *ngFor="let data of loanDetailsFundedType" [value]="data">
+                                        {{data}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.fundtyp').hasError('required')">
+                                        Please select funded type.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Account Closed Flag</mat-label>
+                                    <mat-select formControlName="isacctclosed" [errorStateMatcher]="matcher">
+                                      <mat-option *ngFor="let data of loanDetailsAccountClosedFlag" [value]="data">
+                                        {{data}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.isacctclosed').hasError('required')">
+                                        Please select account closed flag.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Type of Debt</mat-label>
+                                    <mat-select formControlName="ntrofcrdt" [errorStateMatcher]="matcher">
+                                      <mat-option *ngFor="let data of loanDetailsDebtType" [value]="data">
+                                        {{data}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.ntrofcrdt').hasError('required')">
+                                        Please select type of debt.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Rate of Interest</mat-label>
+                                    <input type="number" class="loan-roi" matInput formControlName="rtofint" [errorStateMatcher]="matcher" placeholder="Ex. 10">
+                                    <span matSuffix>%</span>
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.rtofint').hasError('required')">
+                                        Please enter rate of interest.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Sanction Amount</mat-label>
+                                    <input type="number" matInput formControlName="snctnamt" [errorStateMatcher]="matcher" placeholder="Ex. 100000">
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.snctnamt').hasError('required')">
+                                        Please enter sanction amount.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Instalment Amount</mat-label>
+                                    <input type="number" matInput formControlName="emiamt" [errorStateMatcher]="matcher" placeholder="Ex. 20000">
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.emiamt').hasError('required')">
+                                        Please enter instalment amount.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                    <mat-label>Tenure of the Loan</mat-label>
+                                    <input type="number" matInput formControlName="tenure" [errorStateMatcher]="matcher" placeholder="Ex. 20">
+                                    <mat-error *ngIf="eSignAndeStampingForm.get('loandtls.tenure').hasError('required')">
+                                        Please enter tenure of the loan.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout" formArrayName="documentdtls">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>Document Details Section</span>
+                            </div>
+                            <hr>
+                            <mat-accordion #documentAccordion="matAccordion" *ngFor="let document of documentdtls.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
+                                <mat-expansion-panel [expanded]="documentStep === i" (opened)="setDocumentStep(i)" class="row form-group example-full-width">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title style="color: #777;">
+                                            Document Details {{i+1}}.
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Open panel for fill up document details.
+                                            <mat-icon *ngIf="documentdtls.length != 1" color="warn" (click)="removeField(i, documentdtls)" matTooltip="Remove Document" matTooltipPosition="above">delete</mat-icon>
+                                        </mat-panel-description>                                    
+                                    </mat-expansion-panel-header>
+                                    <mat-divider></mat-divider>
+                                    <div class="row panel-form">
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Document ID</mat-label>
+                                            <input type="number" matInput formControlName="documentID" [errorStateMatcher]="matcher" placeholder="Ex. 1">
+                                            <mat-error *ngIf="document.get('documentID').hasError('required')">
+                                                Please enter document id.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <input type="file" matInput formControlName="docData" accept="application/pdf" (change)="onSelectDocument($event, document)">
+                                            <mat-error *ngIf="document.get('docData').hasError('required')">
+                                                Please select document.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-action-row>
+                                        <button type="button" matTooltip="Move on Previos Document Details" matTooltipPosition="above" mat-button *ngIf="i !== 0" color="primary" (click)="prevDocumentStep()">Previous</button>
+                                        <button type="button" matTooltip="{{documentdtls.length === i+1 ? 'Close' : 'Move on Next Document Details'}}" matTooltipPosition="above" mat-button color="primary" (click)="nextDocumentStep()">{{documentdtls.length === i+1 ? 'Close' : 'Next'}}</button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            <hr>
+                            <div style="text-align: right;">
+                                <button type="button" style="line-height: 400%;" (click)="addDocumentField()" mat-flat-button color="primary">+ Add Document</button>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout" formArrayName="scrtydtls">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>Security Details Section</span>
+                            </div>
+                            <hr>
+                            <mat-accordion #securityAccordion="matAccordion" *ngFor="let security of scrtydtls.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
+                                <mat-expansion-panel [expanded]="securityStep === i" (opened)="setSecurityStep(i)" class="row form-group example-full-width">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title style="color: #777;">
+                                            Security Details {{i+1}}.
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Open panel for fill up security details.
+                                            <mat-icon *ngIf="scrtydtls.length != 1" color="warn" (click)="removeField(i, scrtydtls)" matTooltip="Remove Security" matTooltipPosition="above">delete</mat-icon>
+                                        </mat-panel-description>                                    
+                                    </mat-expansion-panel-header>
+                                    <mat-divider></mat-divider>
+                                    <div class="row panel-form">
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Asset ID</mat-label>
+                                            <input type="text" matInput formControlName="assetid" [errorStateMatcher]="matcher" placeholder="Ex. 12ABC34">
+                                            <mat-error *ngIf="security.get('assetid').hasError('required')">
+                                                Please enter asset id.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Assets Type</mat-label>
+                                            <mat-select formControlName="asstyp" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of securityAssetType" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="security.get('asstyp').hasError('required')">
+                                                Please select asset type.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Description of Security</mat-label>
+                                            <input type="text" matInput formControlName="dscofscrty" [errorStateMatcher]="matcher" placeholder="Ex. ABCD">
+                                            <mat-error *ngIf="security.get('dscofscrty').hasError('required')">
+                                                Please enter description of security.
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Type of Charge Created</mat-label>
+                                            <mat-select formControlName="typofchrg" [errorStateMatcher]="matcher">
+                                              <mat-option *ngFor="let data of securityChargeType" [value]="data">
+                                                {{data}}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="security.get('typofchrg').hasError('required')">
+                                                Please select type of charge created.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-action-row>
+                                        <button type="button" matTooltip="Move on Previos Security Details" matTooltipPosition="above" mat-button *ngIf="i !== 0" color="primary" (click)="prevSecurityStep()">Previous</button>
+                                        <button type="button" matTooltip="{{scrtydtls.length === i+1 ? 'Close' : 'Move on Next Security Details'}}" matTooltipPosition="above" mat-button color="primary" (click)="nextSecurityStep()">{{scrtydtls.length === i+1 ? 'Close' : 'Next'}}</button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            <hr>
+                            <div style="text-align: right;">
+                                <button type="button" style="line-height: 400%;" (click)="addSecurityField()" mat-flat-button color="primary">+ Add Security</button>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout" formArrayName="eSignCordinates">
+                            <div style="color: #777;" class="d-flex al-center js-center">
+                                <span>E-Sign Co-ordinates Details Section (Optional Section)</span>
+                            </div>
+                            <hr>
+                            <mat-accordion #eSignCordinatesAccordion="matAccordion" *ngFor="let eSignCordinate of eSignCordinates.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
+                                <mat-expansion-panel [expanded]="eSignCordinatesStep === i" (opened)="setEsignCordinatesStep(i)" class="row form-group example-full-width">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title style="color: #777;">
+                                            E-Sign Co-ordinates Details {{i+1}}.
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Open panel for fill up e-sign co-ordinates details.
+                                            <mat-icon *ngIf="eSignCordinates.length != 1" color="warn" (click)="removeField(i, eSignCordinates)" matTooltip="Remove EsignCordinates" matTooltipPosition="above">delete</mat-icon>
+                                        </mat-panel-description>                                    
+                                    </mat-expansion-panel-header>
+                                    <mat-divider></mat-divider>
+                                    <div class="row panel-form">
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Participant ID</mat-label>
+                                            <input type="number" matInput formControlName="prtcptenttyId" [errorStateMatcher]="matcher" placeholder="Ex. 12345">
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Document ID</mat-label>
+                                            <input type="number" matInput formControlName="documentID" [errorStateMatcher]="matcher" placeholder="Ex. 12345">
+                                        </mat-form-field>
+                                        <mat-form-field class="form-group psb-xl-3 psb-lg-3 psb-md-6 psb-sm-12 psb-xs-12">
+                                            <mat-label>Coordinate Details [P,X,Y]</mat-label>
+                                            <mat-chip-list #coordinateList formControlName="coordinates" aria-label="Coordinate selection">
+                                              <mat-chip *ngFor="let coordinate of eSignCordinate.get('coordinates').value" [selectable]="selectable"
+                                                       [removable]="removable" (removed)="remove(coordinate, eSignCordinate, 'coordinates')">
+                                                {{coordinate}}
+                                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                              </mat-chip>
+                                              <input type="number" placeholder="Coordinate..."
+                                                     [matChipInputFor]="coordinateList"
+                                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                     [matChipInputAddOnBlur]="addOnBlur"
+                                                     (matChipInputTokenEnd)="add($event, eSignCordinate, 'coordinates')">
+                                            </mat-chip-list>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-action-row>
+                                        <button type="button" matTooltip="Move on Previos EsignCordinates Details" matTooltipPosition="above" mat-button *ngIf="i !== 0" color="primary" (click)="prevEsignCordinatesStep()">Previous</button>
+                                        <button type="button" matTooltip="{{eSignCordinates.length === i+1 ? 'Close' : 'Move on Next EsignCordinates Details'}}" matTooltipPosition="above" mat-button color="primary" (click)="nextEsignCordinatesStep()">{{eSignCordinates.length === i+1 ? 'Close' : 'Next'}}</button>
+                                    </mat-action-row>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                            <hr>
+                            <div style="text-align: right;">
+                                <button type="button" style="line-height: 400%;" (click)="addEsignCordinatesField()" mat-flat-button color="primary">+ Add EsignCordinates</button>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mat-card-tryout">
+                            <div class="w-100 js-between filter-txt" style="text-align: right;">
+                                <button type="button" class="btn-reset" (click)="reset()"  mat-flat-button color="basic">Reset</button>
+                                <button type="button" style="line-height: 400%;" mat-flat-button color="primary" (click)="onFormSubmit()">Get Esign And Estamping</button>
+                            </div>
+                        </mat-card>
+                    </form>
                 </div>
                 <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
             </mat-tab>
