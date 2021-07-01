@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { SandboxService } from 'src/app/service/sandbox.service';
@@ -26,6 +26,7 @@ export class EsignAndEstampingComponent implements OnInit {
   url : string = "https://sit-opl.instantmseloans.in/gateway-service";
 
   eSignAndeStampingForm: FormGroup;
+  returnUpdateUrl: FormControl;
   stateList = [{name: "Gujarat", code: "GJ"},{name: "Rajasthan", code: "RJ"},{name: "Delhi", code: "DL"},{name :"Karnataka", code: "KA"}];
   participantPartyType = ["Indian Entity","Resident Individual","Foreign Entity","NRI/Foreign Individual"];
   participantPartyRelationship = ["Debtor","Guarantor","Co-Obligant","Creditor"];
@@ -66,10 +67,15 @@ export class EsignAndEstampingComponent implements OnInit {
   ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.apiMstrId = this.menuData.service.id;
+    this.createControls();
     this.createEsignAndEstampingForm();
     this.getApiRequestSchema();
     this.getApiResponseSchema();
     this.setLoanTransactionId();
+  }
+
+  createControls(){
+    this.returnUpdateUrl = new FormControl('', Validators.required);
   }
 
   createEsignAndEstampingForm(){
@@ -288,21 +294,23 @@ export class EsignAndEstampingComponent implements OnInit {
     this.securityAccordion.closeAll();
     this.eSignCordinatesAccordion.closeAll();
     this.setLoanTransactionId();
+    this.returnUpdateUrl.reset();
   }
 
   onFormSubmit() {
-    if (this.eSignAndeStampingForm.valid) {
+    if (this.eSignAndeStampingForm.valid && this.returnUpdateUrl.valid) {
       this.getEsignAndEstamping(this.eSignAndeStampingForm.value);
     } else {
       this.utils.warningSnackBar("Please Enter Required Or Valid Details.");
       this.eSignAndeStampingForm.markAllAsTouched();
+      this.returnUpdateUrl.markAsTouched();
       return;
     }
   }
 
   getEsignAndEstamping(data : any){
     let headers = Utils.getAPIHeader();
-    let requestedData = {"applicationId": -1, "userId": -1,"returnUpdateUrl": null, "neSLRequestProxy": {"loan": data}};
+    let requestedData = {"applicationId": -1, "userId": -1,"returnUpdateUrl": this.returnUpdateUrl.value, "neSLRequestProxy": {"loan": data}};
     this.sandboxService.getEsignAndEstamping(this.url, requestedData, headers).subscribe(res => {
       this.response = Utils.jsonStringify(res);
       this.setLoanTransactionId();
