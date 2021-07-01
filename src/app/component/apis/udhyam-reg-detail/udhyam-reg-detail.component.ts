@@ -91,7 +91,7 @@ responseBody = Utils.jsonStringify({
   position = '';
   industry = '';
   experience = 0;
-  response : any = "Response Will be Rendered Here.";
+  response : any;
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
   domainSchemaData: any[] = [];
