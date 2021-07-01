@@ -116,4 +116,8 @@ export class SandboxService {
     return this.http.get(URLS.SANDBOX_USER.GET_API_DOCUMENTATION_DETAILS + '/' + apiMstrId +'/'+fieldType, false);
   }
 
+  //E Sign and E Stamping APIs
+  getEsignAndEstamping(url : string , data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
+  }
 }

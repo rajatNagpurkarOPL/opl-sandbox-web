@@ -8,11 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TryoutResponseComponent implements OnInit {
 
   @Input() jsonData:any;
-  response:any;
   constructor() { }
 
   ngOnInit(): void {
-    this.response = this.jsonData;
   }
 
 }
