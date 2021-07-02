@@ -313,10 +313,10 @@ export class EsignAndEstampingComponent implements OnInit {
     let requestedData = {"applicationId": -1, "userId": -1,"returnUpdateUrl": this.returnUpdateUrl.value, "neSLRequestProxy": {"loan": data}};
     this.sandboxService.getEsignAndEstamping(this.url, requestedData, headers).subscribe(res => {
       this.response = Utils.jsonStringify(res);
-      this.setLoanTransactionId();
     }, error => {
       this.utils.errorHandle(error);
     });
+    this.setLoanTransactionId();
   }
 
   getApiRequestSchema(){
