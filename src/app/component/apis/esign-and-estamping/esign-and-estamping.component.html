@@ -45,7 +45,7 @@
                 <div>
                     <form class="example-form" [formGroup]="eSignAndeStampingForm" autocomplete="off">
                         <mat-card class="mat-card-tryout">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Esign And Estamping Details</span>
                             </div>
                             <hr>
@@ -85,7 +85,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout" formArrayName="estampdtls">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>E-stamp Details Section</span>
                             </div>
                             <hr>
@@ -172,7 +172,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout" formArrayName="prtcptentty">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Participating Details Section</span>
                             </div>
                             <hr>
@@ -339,7 +339,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Loan Details Section</span>
                             </div>
                             <hr>
@@ -448,7 +448,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout" formArrayName="documentdtls">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Document Details Section</span>
                             </div>
                             <hr>
@@ -492,7 +492,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout" formArrayName="scrtydtls">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Security Details Section</span>
                             </div>
                             <hr>
@@ -559,8 +559,8 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout" formArrayName="eSignCordinates">
-                            <div style="color: #777;" class="d-flex al-center js-center">
-                                <span>E-Sign Co-ordinates Details Section (Optional Section)</span>
+                            <div class="d-flex al-center js-center">
+                                <span>E-Sign Co-ordinates Details Section (Optional)</span>
                             </div>
                             <hr>
                             <mat-accordion #eSignCordinatesAccordion="matAccordion" *ngFor="let eSignCordinate of eSignCordinates.controls; let i=index" [formGroupName]="i" class="example-headers-align" multi>
@@ -613,7 +613,7 @@
                         </mat-card>
 
                         <mat-card class="mat-card-tryout">
-                            <div style="color: #777;" class="d-flex al-center js-center">
+                            <div class="d-flex al-center js-center">
                                 <span>Call Back URL Details</span>
                             </div>
                             <hr>
