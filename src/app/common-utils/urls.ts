@@ -1,41 +1,41 @@
 // const SERVER_URL = "http://localhost:";
-//const SERVER_URL = "https://sit-opl.instantmseloans.in";
-//  const SERVER_URL = "http://10.10.5.66:";
- const SERVER_URL = window.location.protocol + '//' + window.location.host;
+// const SERVER_URL = "https://sit-opl.instantmseloans.in";
+// const SERVER_URL = "http://10.10.5.66:";
+const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  {
-    endpointFromLocal : SERVER_URL + "1104",
+    endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
 
 const GATEWAY  =  {
-    endpointFromLocal : SERVER_URL + "1101",
+    endpointFromLocal : SERVER_URL,
     // postFix : '/gateway-service'
     postFix : ''
 };
 
 const ECR  =  {
-    endpointFromLocal : SERVER_URL + "1101",
+    endpointFromLocal : SERVER_URL,
     postFix : '/ecr'
 };
 
 const PENNYDROP  =  {
-    endpointFromLocal : SERVER_URL + "9000",
+    endpointFromLocal : SERVER_URL,
     postFix : '/pennydrop'
 };
 
 const UDHYAM = {
-    endpointFromLocal : SERVER_URL + "1106",
+    endpointFromLocal : SERVER_URL,
     postFix : '/udhyam'
 };
 
 const CAAPI = {
-    endpointFromLocal : SERVER_URL + "14524",
+    endpointFromLocal : SERVER_URL,
     postFix : '/caapi/ca-msme'
 };
 
 const NSDL_PAN_INQUIRY = {
-    endpointFromLocal : SERVER_URL + "1101",
+    endpointFromLocal : SERVER_URL,
     postFix : '/nsdl/paninquiry'
 };
 
