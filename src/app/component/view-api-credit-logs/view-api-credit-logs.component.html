@@ -10,7 +10,7 @@
 
 <div class="pop-up-content">
     <div class="fl-column">       
-        <span>API name : {{data.name}} <br/> Total Credits : {{data.total}} <br/> Used Credits : {{data.total - data.balance}} <br/> Balance Credits : {{data.balance}}</span> 
+        <span>Service Name : {{data.name}} <br/> Total Credits : {{data.total}} <br/> Used Credits : {{data.total - data.balance}} <br/> Balance Credits : {{data.balance}}</span> 
         
     </div>
     
@@ -30,7 +30,7 @@
 <tbody>
     <ng-container *ngIf="creditLogsList != null && creditLogsList.length > 0">
         <tr *ngFor="let creditLog of creditLogsList; index as audit">
-            <td>{{audit+1}}.</td>
+            <td>{{10 *(page-1)+ (audit+1)}}.</td>
             <td>{{creditLog.actionType}}</td>
             <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }}</td>
             <td>{{creditLog.balanceCredits}}</td>
@@ -47,13 +47,13 @@
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
         <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
         Showing
-        {{startIndex}} to {{endIndex}} of {{totalRecords}}
+        {{10 *(page-1) + startIndex}} to <span *ngIf="totalRecords >10">{{10 *(page-1) + endIndex}}</span> <span *ngIf="totalRecords <10">{{totalRecords}}</span> of {{totalRecords}}
         entries
         </div>
     </div>
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
         <div class="text-md-right float-md-right pagination-rounded">
-        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="getAPICreditLogsList(page)">
+         <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="getAPICreditLogsList(page)">
         </ngb-pagination>
         </div>
     </div>
