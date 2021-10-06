@@ -47,7 +47,10 @@
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
         <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
         Showing
-        {{10 *(page-1) + startIndex}} to <span *ngIf="totalRecords >10">{{10 *(page-1) + endIndex}}</span> <span *ngIf="totalRecords <10">{{totalRecords}}</span> of {{totalRecords}}
+        {{10 *(page-1) + startIndex}} to 
+         <span *ngIf="creditLogsList.length == 10">{{10 *(page-1) + endIndex}}</span>
+         <span *ngIf="creditLogsList.length != 10">{{totalRecords}}</span> 
+         of {{totalRecords}}
         entries
         </div>
     </div>
