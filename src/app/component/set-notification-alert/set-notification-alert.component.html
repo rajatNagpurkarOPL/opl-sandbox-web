@@ -5,7 +5,7 @@
  
     <span>API name : {{data.name}} <br/> 
         Total Credits : {{creditBalance}} <br/>
-         Used Credits({{this.usagePercentage.toFixed(2)}}%) : {{creditBalance - limitBalance}} <br/> 
+         Used Credits : {{creditBalance - limitBalance}}({{this.usagePercentage.toFixed(2)}}%) <br/> 
          Balance Credits : {{limitBalance}}<br/></span> 
 </div>
         <button class="psb-submit" (click)="addTrigger()">+ Add Trigger</button>
