@@ -120,4 +120,14 @@ export class SandboxService {
   getEsignAndEstamping(url : string , data : any,requestHeader : any): Observable<any>{
     return this.http.post(url,data,requestHeader);
   }
+
+  //File APIs
+  uploadDocuments(data : any): Observable<any>{
+    return this.http.post(URLS.SANDBOX_USER.UPLOAD_DOCUMENTS,data);
+  }
+
+  getAllDocumentDetails(userId : any): Observable<any>{
+    return this.http.post(URLS.SANDBOX_USER.GET_ALL_DOCUMENTS + '/' + userId, false);
+  }
+
 }

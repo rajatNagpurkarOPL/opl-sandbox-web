@@ -57,7 +57,8 @@ export const Constant = {
     PROFILE_PAGE : {
         SETTING : "setting",
         API_ACCESS_KEY : "access-key",
-        API_CREDITS : "credits"
+        API_CREDITS : "credits",
+        CERTIFICATE : "certificate"
     },
     INTERNAL_STATUS_CODES : {
         SUCCESS : {
