@@ -63,6 +63,7 @@ import { TryoutResponseComponent } from './component/tryout-response/tryout-resp
 import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-pan-inquiry.component';
 import { EsignAndEstampingComponent } from './component/apis/esign-and-estamping/esign-and-estamping.component';
 import { IntroductionComponent } from './component/introduction/introduction.component';
+import { CertificateComponent } from './component/certificate/certificate.component';
 
 @NgModule({
   imports: [
@@ -123,7 +124,8 @@ import { IntroductionComponent } from './component/introduction/introduction.com
     TryoutResponseComponent,
     NsdlPanInquiryComponent,
     EsignAndEstampingComponent,
-    IntroductionComponent
+    IntroductionComponent,
+    CertificateComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
