@@ -82,8 +82,9 @@ export class CertificateComponent implements OnInit {
 
   getAllDocumentDetails(){
     this.sandboxService.getAllDocumentDetails(this.getUserId()).subscribe(res => {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
         this.documentsList = res.data;
-        console.log("Doc List : ", this.documentsList);
+      }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
