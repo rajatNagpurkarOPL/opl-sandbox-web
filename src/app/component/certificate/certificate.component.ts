@@ -13,7 +13,7 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 export class CertificateComponent implements OnInit {
 
   file: File;
-  DocumentsList: any = [];
+  documentsList: any = [];
   public readonly constant : any = null;
   fileControl: FormControl;
   user : any = null;
@@ -39,6 +39,7 @@ export class CertificateComponent implements OnInit {
       if(type != "application/x-x509-ca-cert" && type != "text/plain"){
         this.utils.warningSnackBar("You can select cert and text file only.");
         this.fileControl.reset();
+        this.file = null;
         return false;
       }
       this.file = event.target.files[0];
@@ -69,6 +70,7 @@ export class CertificateComponent implements OnInit {
       if (!Utils.isObjectNullOrEmpty(res.status) && res.status === this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
         this.utils.successSnackBar(res.message);
         this.fileControl.reset();
+        this.file = null;
         this.getAllDocumentDetails();
       } else {
         this.utils.warningSnackBar(res.message);
@@ -80,8 +82,8 @@ export class CertificateComponent implements OnInit {
 
   getAllDocumentDetails(){
     this.sandboxService.getAllDocumentDetails(this.getUserId()).subscribe(res => {
-        this.DocumentsList = res.data;
-        console.log("Doc List : ", this.DocumentsList);
+        this.documentsList = res.data;
+        console.log("Doc List : ", this.documentsList);
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });

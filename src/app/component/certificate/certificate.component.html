@@ -35,8 +35,8 @@
                 <th scope="col">Status</th>
             </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let document of DocumentsList; index as documentIndex">
+            <tbody *ngIf="documentsList.length > 0">
+                <tr *ngFor="let document of documentsList; index as documentIndex">
                     <td>{{documentIndex+1}}.</td>
                     <td>{{document.fileName}}</td>
                     <td>{{document.createdDate | date}}</td>
@@ -55,6 +55,11 @@
                     <td><p class="d-flex al-center w-100 js-center mb-0"><span [ngClass]="{'dot':document.isActive,'inActive':!document.isActive}">&#8226; </span>{{document.isActive ? 'Active' : 'InActive'}}</p></td>
                 </tr>
             </tbody>
+            <tbody *ngIf="documentsList.length == 0">
+                <tr>
+                  <td colspan="16" style="text-align: center;background-color: lightgrey;">No Certificate Uploaded.</td>
+                </tr>
+              </tbody>
         </table>
     </div>
 </div>
