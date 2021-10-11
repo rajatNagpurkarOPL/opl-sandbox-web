@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { CertificateActivationAlertService } from 'src/app/common-utils/common-services/certificate-activation-alert.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
@@ -18,10 +19,9 @@ export class CertificateComponent implements OnInit {
   fileControl: FormControl;
   user : any = null;
 
-  constructor(private sandboxService : SandboxService, private utils : Utils, public globals : Globals) { 
+  constructor(private sandboxService : SandboxService, private utils : Utils, public globals : Globals, public certificateActivationAlertService : CertificateActivationAlertService) { 
     this.constant = Constant;
     this.user = globals.USER;
-    console.log("user :",this.user);
   }
 
   ngOnInit(): void {
@@ -90,15 +90,6 @@ export class CertificateComponent implements OnInit {
     });
   }
 
-  getActiveCertificate(){
-    this.sandboxService.getActiveCertificate(this.getUserId()).subscribe(res => {
-      console.log(res.data);  
-      return res.data;
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    });
-  }
-
   activateCertificate(documentId: any){
     this.sandboxService.activateCertificate(this.getUserId(), documentId).subscribe(res => {
       if(!Utils.isObjectNullOrEmpty(res.status) && res.status === this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
@@ -113,14 +104,22 @@ export class CertificateComponent implements OnInit {
   }
 
   changeCertificateStatus(event: any, documentId: any){
-    console.log(documentId);
-    console.log(event.checked);
     if(event.checked === true){
-      if(!Utils.isObjectNullOrEmpty(this.getActiveCertificate())){
-        this.activateCertificate(documentId);
-      }else{
-        this.activateCertificate(documentId);
-      }
+      this.sandboxService.getActiveCertificate(this.getUserId()).subscribe(res => {
+        if(!Utils.isObjectNullOrEmpty(res.data)){
+          this.certificateActivationAlertService.openDialog({title: "Certificate Activation Alert"}).subscribe(dialogResponse => {
+            if(dialogResponse){
+              this.activateCertificate(documentId);
+            }else{
+              this.getAllDocumentDetails();
+            }
+          });
+        }else{
+          this.activateCertificate(documentId);
+        }
+      }, (error: any) => {
+        this.utils.errorSnackBar(error);
+      });
     }
   }
 

@@ -64,6 +64,7 @@ import { NsdlPanInquiryComponent } from './component/apis/nsdl-pan-inquiry/nsdl-
 import { EsignAndEstampingComponent } from './component/apis/esign-and-estamping/esign-and-estamping.component';
 import { IntroductionComponent } from './component/introduction/introduction.component';
 import { CertificateComponent } from './component/certificate/certificate.component';
+import { CertificateActivationAlertComponent } from './component/certificate-activation-alert/certificate-activation-alert.component';
 
 @NgModule({
   imports: [
@@ -125,7 +126,8 @@ import { CertificateComponent } from './component/certificate/certificate.compon
     NsdlPanInquiryComponent,
     EsignAndEstampingComponent,
     IntroductionComponent,
-    CertificateComponent
+    CertificateComponent,
+    CertificateActivationAlertComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
