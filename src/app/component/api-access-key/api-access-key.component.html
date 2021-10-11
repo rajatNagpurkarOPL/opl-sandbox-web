@@ -18,3 +18,71 @@
       <button type="button" mat-flat-button color="primary" (click)="generateKey(true)" >Re-Generate Keys</button>
     </div>
 </div>
+   
+
+<div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12" style="float: right;">
+  <mat-form-field class="input-group" appearance="outline" >
+  <input matInput placeholder="Type to search..."  [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">            
+</mat-form-field>
+</div> 
+
+
+<div class="main">
+  <div class="sidebar-main-title">
+    <div class="d-flex fl-column js-center"> 
+     </div>  
+
+    <table matSort (matSortChange)="sortData($event)"  class="table dash-table-org" style="margin-top: 1em;">
+       <thead>
+         <tr>
+          <th scope="col">#</th> 
+          <th mat-sort-header="clientId" scope="col">Client Id</th>
+          <th mat-sort-header="secretId" scope="col">Secret Id</th> 
+          <th mat-sort-header="createdDate" scope="col">Created Date</th>
+          <th mat-sort-header="modifiedDate" scope="col">Inactivated On</th>
+          <th mat-sort-header="isActive" scope="col">Active</th>
+          <th mat-sort-header="isExpired" scope="col">Expire</th>
+         </tr>
+       </thead>
+
+      <tbody>
+        <tr *ngFor="let item of keyPairList ; index as itemIndex"> 
+              <td>{{itemIndex+1}}</td>
+              <td title="{{item.clientId}}">{{(item.showMoreCID) ? item.clientId:item.clientId | slice:0:20}}
+                <span (click)="item.showMoreCID=!item.showMoreCID" style="cursor: pointer;" title="{{item.showMoreCID ? 'Less' : 'More'}}"><b>...</b></span>
+              </td>
+             <td title="{{item.secretId}}">{{(item.showMore) ? item.secretId:item.secretId | slice:0:20}}
+              <span (click)="item.showMore=!item.showMore" style="cursor: pointer;" title="{{item.showMore ? 'Less' : 'More'}}"><b>...</b></span>
+             </td>
+             <td>{{item.stringCreatedDate || '-'}} - {{ item.createdDate | date : 'HH:mm:ss'}}</td>
+             <td>{{item.stringModifiedDate || '-'}} - {{item.modifiedDate | date : 'HH:mm:ss'}}</td>
+             <td>{{item.isActive}}</td> 
+             <td>{{item.isExpired}}</td>
+        </tr>
+      </tbody>    
+    </table>  
+  </div>
+</div>  
+
+ <!---pagination-->  
+ <div class="row pagination-table" *ngIf="keyPairList"> 
+    <!--<h3>showing th</h3> -->
+  <div class="col-sm-12 col-md-4" style="margin-left:18%;" > 
+    <div class="dataTables_info mb-2"  id="tickets-table_info" role="status" aria-live="polite">Showing
+       
+      {{((pagination.size*(pagination.page-1))+1)}} to
+      {{(pagination.size*pagination.page) > (keyPairList.length) ? (keyPairList.length) : (pagination.size*pagination.page)}} of {{keyPairList.length}}
+      entries
+    </div>
+  </div>  
+   
+  <div class="col-sm-10 col-md-5">
+    <div class="text-md-right float-md-right pagination-rounded">
+      <ngb-pagination [maxSize]=3 [collectionSize]="keyPairList.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
+      [boundaryLinks]="true">
+      </ngb-pagination>
+    </div>
+  </div>
+  </div> 
+
+

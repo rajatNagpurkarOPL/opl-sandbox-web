@@ -129,7 +129,9 @@ export const URLS = {
         UPLOAD_DOCUMENTS : SANDBOX_BASE_URL + '/file/upload',
         GET_ALL_DOCUMENTS : SANDBOX_BASE_URL + '/file/getFileDetails',
         GET_ACTIVE_CERTIFICATE : SANDBOX_BASE_URL + '/file/getActiveCertificate',
-        ACTIVATE_CERTIFICATE : SANDBOX_BASE_URL + '/file/activateCertificate'
+        ACTIVATE_CERTIFICATE : SANDBOX_BASE_URL + '/file/activateCertificate',
+        GET_KEYPAIR_LIST : SANDBOX_BASE_URL + '/api/acceekey/keypairs' 
+       
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
