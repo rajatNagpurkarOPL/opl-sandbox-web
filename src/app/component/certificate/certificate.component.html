@@ -33,6 +33,7 @@
                 <th scope="col">Common Name</th>
                 <th scope="col">Email Address</th>
                 <th scope="col">Status</th>
+                <th scope="col">Active/Inactive</th>
             </tr>
             </thead>
             <tbody *ngIf="documentsList.length > 0">
@@ -53,6 +54,7 @@
                     <td>{{document.commonName}}</td>
                     <td>{{document.emailAddress}}</td>
                     <td><p class="d-flex al-center w-100 js-center mb-0"><span [ngClass]="{'dot':document.isActive,'inActive':!document.isActive}">&#8226; </span>{{document.isActive ? 'Active' : 'InActive'}}</p></td>
+                    <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id)" color="primary" checked="{{document.isActive}}"></mat-slide-toggle>
                 </tr>
             </tbody>
             <tbody *ngIf="documentsList.length == 0">
