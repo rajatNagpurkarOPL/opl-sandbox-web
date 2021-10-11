@@ -136,5 +136,11 @@ export class SandboxService {
 
   activateCertificate(userId : any, documentId: any): Observable<any>{
     return this.http.put(URLS.SANDBOX_USER.ACTIVATE_CERTIFICATE + '/' + userId + '/' + documentId, false);
-  }
+  } 
+  
+  getKeyPairList(data : any): Observable<any>{
+    return this.http.post(URLS.SANDBOX_USER.GET_KEYPAIR_LIST,data);
+ } 
+
+
 }
