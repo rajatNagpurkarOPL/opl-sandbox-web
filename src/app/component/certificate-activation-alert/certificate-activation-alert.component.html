@@ -1,14 +1,15 @@
 <h2 class="cert-title">{{data.title}}</h2>
-<hr>
+<mat-divider></mat-divider>
 <div class="cert-content">
     <p>Are you sure you want to change active certificate ? if so, following things will be impacted and may cause inappropriate in result.</p>
-        <p>1. New Certificate (New Certificate Name in bold) will be in use immediately.<br>
-        <p>2. All authorized/activated API's encryption and decryption will be based on new Certificate(Certificate Name in Bold).</p>
-        <p>3. Current Active Certificate (OLD Certificate Name in bold) will be inactivated.</p>
-        <p>4. Make sure that New Certificate (New Certificate Name in bold) is properly tested and the same should be used from your end while encryption the payload.</p>
-    
+    <ul style="text-justify: auto;">
+        <li>New Certificate (<b>{{data.newCertName}}</b>) will be in use immediately.</li>
+        <li>All authorized/activated API's encryption and decryption will be based on new Certificate (<b>{{data.newCertName}}</b>).</li>
+        <li>Current Active Certificate (<b>{{data.oldCertName}}</b>) will be inactivated.</li>
+        <li>Make sure that New Certificate (<b>{{data.newCertName}}</b>) is properly tested and the same should be used from your end while encryption the payload.</li>
+    </ul>
 </div>
-<hr>
+<mat-divider></mat-divider>
 <br>
 <div align="end" style="margin-right: 1em;">
     <button mat-raised-button style="background-color: lightgray;" (click)="close()">No</button>&nbsp;&nbsp;

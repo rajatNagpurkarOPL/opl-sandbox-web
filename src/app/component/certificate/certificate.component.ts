@@ -103,11 +103,11 @@ export class CertificateComponent implements OnInit {
     });
   }
 
-  changeCertificateStatus(event: any, documentId: any){
+  changeCertificateStatus(event: any, documentId: any, newCertName: any){
     if(event.checked === true){
       this.sandboxService.getActiveCertificate(this.getUserId()).subscribe(res => {
         if(!Utils.isObjectNullOrEmpty(res.data)){
-          this.certificateActivationAlertService.openDialog({title: "Certificate Activation Alert"}).subscribe(dialogResponse => {
+          this.certificateActivationAlertService.openDialog({title: "Certificate Activation Alert", newCertName: newCertName, oldCertName: res.data[0].fileName}).subscribe(dialogResponse => {
             if(dialogResponse){
               this.activateCertificate(documentId);
             }else{
