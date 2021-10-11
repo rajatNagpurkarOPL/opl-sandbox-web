@@ -127,7 +127,9 @@ export const URLS = {
         GET_CODES : SANDBOX_BASE_URL +"/master/get-mstr-codes",
         GET_API_DOCUMENTATION_DETAILS: SANDBOX_BASE_URL + '/schema/api-documentation',
         UPLOAD_DOCUMENTS : SANDBOX_BASE_URL + '/file/upload',
-        GET_ALL_DOCUMENTS : SANDBOX_BASE_URL + '/file/getFileDetails'
+        GET_ALL_DOCUMENTS : SANDBOX_BASE_URL + '/file/getFileDetails',
+        GET_ACTIVE_CERTIFICATE : SANDBOX_BASE_URL + '/file/getActiveCertificate',
+        ACTIVATE_CERTIFICATE : SANDBOX_BASE_URL + '/file/activateCertificate'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
