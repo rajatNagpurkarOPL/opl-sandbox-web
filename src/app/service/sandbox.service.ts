@@ -127,7 +127,14 @@ export class SandboxService {
   }
 
   getAllDocumentDetails(userId : any): Observable<any>{
-    return this.http.post(URLS.SANDBOX_USER.GET_ALL_DOCUMENTS + '/' + userId, false);
+    return this.http.get(URLS.SANDBOX_USER.GET_ALL_DOCUMENTS + '/' + userId, false);
   }
 
+  getActiveCertificate(userId : any): Observable<any>{
+    return this.http.get(URLS.SANDBOX_USER.GET_ACTIVE_CERTIFICATE + '/' + userId, false);
+  }
+
+  activateCertificate(userId : any, documentId: any): Observable<any>{
+    return this.http.put(URLS.SANDBOX_USER.ACTIVATE_CERTIFICATE + '/' + userId + '/' + documentId, false);
+  }
 }

@@ -90,4 +90,38 @@ export class CertificateComponent implements OnInit {
     });
   }
 
+  getActiveCertificate(){
+    this.sandboxService.getActiveCertificate(this.getUserId()).subscribe(res => {
+      console.log(res.data);  
+      return res.data;
+    }, (error: any) => {
+      this.utils.errorSnackBar(error);
+    });
+  }
+
+  activateCertificate(documentId: any){
+    this.sandboxService.activateCertificate(this.getUserId(), documentId).subscribe(res => {
+      if(!Utils.isObjectNullOrEmpty(res.status) && res.status === this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.utils.successSnackBar(res.message);
+      }else{
+        this.utils.warningSnackBar(res.message);
+      }
+      this.getAllDocumentDetails();
+    }, (error: any) => {
+      this.utils.errorSnackBar(error);
+    });
+  }
+
+  changeCertificateStatus(event: any, documentId: any){
+    console.log(documentId);
+    console.log(event.checked);
+    if(event.checked === true){
+      if(!Utils.isObjectNullOrEmpty(this.getActiveCertificate())){
+        this.activateCertificate(documentId);
+      }else{
+        this.activateCertificate(documentId);
+      }
+    }
+  }
+
 }
