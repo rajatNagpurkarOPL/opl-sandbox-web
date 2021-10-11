@@ -46,16 +46,16 @@
        </thead>
 
       <tbody>
-        <tr *ngFor="let item of keyPairList ; index as itemIndex"> 
-              <td>{{itemIndex+1}}</td>
+        <tr *ngFor="let item of keyPairList | slice: (pagination.page-1) * pagination.size : (pagination.page-1) * pagination.size + pagination.size; let i=index;"> 
+              <td>{{i+1}}</td>
               <td title="{{item.clientId}}">{{(item.showMoreCID) ? item.clientId:item.clientId | slice:0:20}}
                 <span (click)="item.showMoreCID=!item.showMoreCID" style="cursor: pointer;" title="{{item.showMoreCID ? 'Less' : 'More'}}"><b>...</b></span>
               </td>
              <td title="{{item.secretId}}">{{(item.showMore) ? item.secretId:item.secretId | slice:0:20}}
               <span (click)="item.showMore=!item.showMore" style="cursor: pointer;" title="{{item.showMore ? 'Less' : 'More'}}"><b>...</b></span>
              </td>
-             <td>{{item.stringCreatedDate || '-'}} - {{ item.createdDate | date : 'HH:mm:ss'}}</td>
-             <td>{{item.stringModifiedDate || '-'}} - {{item.modifiedDate | date : 'HH:mm:ss'}}</td>
+             <td>{{item.stringCreatedDate || '-'}}</td>
+             <td>{{item.stringModifiedDate || '-'}}</td>
              <td>{{item.isActive}}</td> 
              <td>{{item.isExpired}}</td>
         </tr>
@@ -65,24 +65,23 @@
 </div>  
 
  <!---pagination-->  
- <div class="row pagination-table" *ngIf="keyPairList"> 
-    <!--<h3>showing th</h3> -->
-  <div class="col-sm-12 col-md-4" style="margin-left:18%;" > 
-    <div class="dataTables_info mb-2"  id="tickets-table_info" role="status" aria-live="polite">Showing
-       
+ <div class="row pagination-table" *ngIf="keyPairList">
+  <div class="col-sm-12 col-md-4" style="margin-left: 15%;">
+    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
       {{((pagination.size*(pagination.page-1))+1)}} to
       {{(pagination.size*pagination.page) > (keyPairList.length) ? (keyPairList.length) : (pagination.size*pagination.page)}} of {{keyPairList.length}}
       entries
     </div>
   </div>  
-   
-  <div class="col-sm-10 col-md-5">
+
+
+  <div class="col-sm-12 col-md-6">
     <div class="text-md-right float-md-right pagination-rounded">
       <ngb-pagination [maxSize]=3 [collectionSize]="keyPairList.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
       [boundaryLinks]="true">
       </ngb-pagination>
     </div>
   </div>
-  </div> 
+  </div>
 
 
