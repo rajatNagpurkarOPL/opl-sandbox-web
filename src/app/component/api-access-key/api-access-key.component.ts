@@ -24,8 +24,8 @@ export class ApiAccessKeyComponent implements OnInit {
 showMore = false;
 showMoreCID=false; 
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-pageSize = 10;
-pagination:any;  
+ // pagination
+ pagination : any;
 filterKeys : String [] = ["clientId","secretId","stringCreatedDate","stringModifiedDate","isActive","isExpired"];
 valueToFilter : String = ""; 
 
@@ -45,11 +45,11 @@ valueToFilter : String = "";
   }
   
  
-getPaginationData(page:any, tabIndex:any) { 
-  if (this.pagination.data.length > 0) {
+  getPaginationData(page:any, tabIndex:any) {
+    if (this.pagination.data.length > 0) {
       this.keyPairList = this.pagination.data.slice((page - 1) * this.pagination.size, (page - 1) * this.pagination.size + this.pagination.size);
+    }
   }
-}
  
 filterApplicationData() {
   if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
@@ -133,11 +133,11 @@ private getKeyPairList(){
         this.keyPairList.forEach(keypair => {
           if(!Utils.isObjectNullOrEmpty(keypair.createdDate)){
             var createDate = new Date(keypair.createdDate);
-            keypair.stringCreatedDate = this.months[createDate.getMonth()] + ' ' + createDate.getDate() + ', ' + createDate.getFullYear();
+            keypair.stringCreatedDate = this.months[createDate.getMonth()] + ' ' + createDate.getDate() + ', ' + createDate.getFullYear() + " " + createDate.getHours() + ":" + createDate.getMinutes() + ":" + createDate.getSeconds();
           }
           if(!Utils.isObjectNullOrEmpty(keypair.modifiedDate)){
             var modifiedDate = new Date(keypair.modifiedDate);          
-            keypair.stringModifiedDate = this.months[modifiedDate.getMonth()] + ' ' + modifiedDate.getDate() + ', ' + modifiedDate.getFullYear();
+            keypair.stringModifiedDate = this.months[modifiedDate.getMonth()] + ' ' + modifiedDate.getDate() + ', ' + modifiedDate.getFullYear() + " " + modifiedDate.getHours() + ":" + modifiedDate.getMinutes() + ":" + modifiedDate.getSeconds();
           }          
         });
         this.pagination.data = this.keyPairList;
