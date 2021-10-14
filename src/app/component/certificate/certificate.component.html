@@ -1,6 +1,6 @@
 <div class="main">
     <div class="sidebar-main-title">
-        <div class="d-flex fl-column js-center" style="width: 100%;">
+        <div style="width: 100%;">
             <h5>
                 <b>Note :</b>  .cer,.crt.txt formats are allowed.
             </h5> 
@@ -11,7 +11,13 @@
                     </mat-form-field>
                 </div>
                 <div class="col-mg-2">
-                    <button type="button" style="margin-top: 15%;" (click)="uploadDocuments()" mat-flat-button color="primary">Upload</button>
+                    <button type="button" style="margin-top: 16%;" (click)="uploadDocuments()" mat-flat-button color="primary">Upload</button>
+                </div>
+                <div class="col" style="margin-top: 12px; text-align: -webkit-right;">
+                    <button type="button" (click)="downloadFile(null, 'OPL_Public_Certificate.csr', true)" color="primary" mat-flat-button style="display: flex; border-radius: 5px;" matTooltip="Click here to download OPL public Certificate" matTooltipPosition="above">
+                        <mat-icon>file_download</mat-icon>OPL Certificate
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -37,6 +43,7 @@
                 <th scope="col">Email Address</th>
                 <th scope="col">Status</th>
                 <th scope="col">Active/Inactive</th>
+                <th scope="col">Download</th>
             </tr>
             </thead>
             <tbody *ngIf="documentsList.length > 0">
@@ -57,12 +64,17 @@
                     <td>{{document.commonName ? document.commonName : '-'}}</td>
                     <td>{{document.emailAddress ? document.emailAddress : '-'}}</td>
                     <td><p class="d-flex al-center w-100 js-center mb-0"><span [ngClass]="{'dot':document.isActive,'inActive':!document.isActive}">&#8226; </span>{{document.isActive ? 'Active' : 'InActive'}}</p></td>
-                    <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id, document.fileName)" color="primary" checked="{{document.isActive}}"></mat-slide-toggle>
+                    <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id, document.fileName)" color="primary" checked="{{document.isActive}}" matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : ''}}" matTooltipPosition="above"></mat-slide-toggle>
+                    <td style="text-align: center;">
+                        <button class="btn3-b4l"  matTooltip="{{document.fileName}}" style="line-height: 14px;"  matTooltipPosition="above" aria-label="Download File" (click)="downloadFile(document.referenceId, document.fileName, false)">
+                            <mat-icon>file_download</mat-icon>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
             <tbody *ngIf="documentsList.length == 0">
                 <tr>
-                  <td colspan="17" style="text-align: center;background-color: lightgrey;">No Certificate Uploaded.</td>
+                  <td colspan="18" style="text-align: center;background-color: lightgrey;">No Certificate Uploaded.</td>
                 </tr>
               </tbody>
         </table>
