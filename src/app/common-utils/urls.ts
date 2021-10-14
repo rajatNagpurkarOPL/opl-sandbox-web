@@ -39,6 +39,11 @@ const NSDL_PAN_INQUIRY = {
     postFix : '/nsdl/paninquiry'
 };
 
+const SANDBOX_DMS = {
+    endpointFromLocal : SERVER_URL + '1110',
+    postFix : '/sandbox/dms'
+};
+
 let host = window.location.origin;
 // let locationUrl = host.includes('localhost') ? SIT_URL 
 // : host.includes('qa-opl') ? QA_URL 
@@ -50,6 +55,7 @@ let host = window.location.origin;
 
 
 let SANDBOX_BASE_URL = '';
+let SANDBOX_DMS_URL = '';
 let ECR_BASE_URL = '';
 let GATEWAY_BASE_URL = '';
 let SANDBOX_GATEWAY_BASE_URL = '';
@@ -61,6 +67,7 @@ let NSDL_PAN_InQUIRY_BASE_URL = '';
 
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
+    SANDBOX_DMS_URL = SANDBOX_DMS.endpointFromLocal + SANDBOX_DMS.postFix;
     ECR_BASE_URL = ECR.endpointFromLocal + ECR.postFix;
     GATEWAY_BASE_URL = GATEWAY.endpointFromLocal + GATEWAY.postFix;
     SANDBOX_GATEWAY_BASE_URL = GATEWAY.endpointFromLocal + SANDBOX.postFix;
@@ -84,6 +91,7 @@ if(host.includes('localhost')){
  else{
         //host = //"http://10.10.5.66:"; // SIT IP
        SANDBOX_BASE_URL = SERVER_URL + SANDBOX.postFix;
+       SANDBOX_DMS_URL = SERVER_URL + SANDBOX_DMS.postFix;
        ECR_BASE_URL = SERVER_URL + ECR.postFix;
        GATEWAY_BASE_URL = SERVER_URL + GATEWAY.postFix;
        SANDBOX_GATEWAY_BASE_URL = SERVER_URL + SANDBOX.postFix;
@@ -94,6 +102,7 @@ if(host.includes('localhost')){
      }
 
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
+console.log("Sandbox DMS Url : ",SANDBOX_DMS_URL);
 console.log("ECR Url : ",ECR_BASE_URL);
 console.log("PennyDrop Url : ",PENNYDROP_BASE_URL);
 console.log("GATEWAY Url :", GATEWAY_BASE_URL);
@@ -131,7 +140,6 @@ export const URLS = {
         GET_ACTIVE_CERTIFICATE : SANDBOX_BASE_URL + '/file/getActiveCertificate',
         ACTIVATE_CERTIFICATE : SANDBOX_BASE_URL + '/file/activateCertificate',
         GET_KEYPAIR_LIST : SANDBOX_BASE_URL + '/api/acceekey/keypairs' 
-       
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
@@ -151,5 +159,9 @@ export const URLS = {
     CAAPI : {
         CAINDIVIDUALDETAIL : CAAPI_BASE_URL + '/icai/caindividualdetails',
         CAFIRMDETAIL : CAAPI_BASE_URL + '/icai/cafirmdetails'
+    },
+    SANDBOX_DMS : {
+        DOWNLOAD_FILE : SANDBOX_DMS_URL + '/file/downloadFile',
+        DOWNLOAD_OPL_CERTIFIICATE : SANDBOX_DMS_URL + '/file/download'
     }
 };

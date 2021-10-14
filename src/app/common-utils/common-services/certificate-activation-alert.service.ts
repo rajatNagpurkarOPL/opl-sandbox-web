@@ -12,7 +12,7 @@ export class CertificateActivationAlertService {
 
   openDialog(data: any): Observable<any> {
     const dialogRef = this.dialog.open(CertificateActivationAlertComponent, {
-      height:"58%", width:"45%", data, panelClass: "dialog-container-class" 
+      height: "56%", data
     });
     return dialogRef.afterClosed();
   }

@@ -142,5 +142,12 @@ export class SandboxService {
     return this.http.post(URLS.SANDBOX_USER.GET_KEYPAIR_LIST,data);
  } 
 
+ downloadFile(referenceId: any, fileName: any,isOplCertificate: any): Observable<any>{
+    if(isOplCertificate){
+      return this.http.get(URLS.SANDBOX_DMS.DOWNLOAD_OPL_CERTIFIICATE + '/' + fileName, true, false);
+    }else{
+      return this.http.get(URLS.SANDBOX_DMS.DOWNLOAD_FILE + '/' + referenceId, true, false);
+    }
+ }
 
 }

@@ -2,7 +2,7 @@
 <mat-divider></mat-divider>
 <div class="cert-content">
     <p>Are you sure you want to change active certificate ? if so, following things will be impacted and may cause inappropriate in result.</p>
-    <ul style="text-justify: auto;">
+    <ul>
         <li>New Certificate (<b>{{data.newCertName}}</b>) will be in use immediately.</li>
         <li>All authorized/activated API's encryption and decryption will be based on new Certificate (<b>{{data.newCertName}}</b>).</li>
         <li>Current Active Certificate (<b>{{data.oldCertName}}</b>) will be inactivated.</li>
@@ -11,7 +11,7 @@
 </div>
 <mat-divider></mat-divider>
 <br>
-<div align="end" style="margin-right: 1em;">
+<div class="cert-action">
     <button mat-raised-button style="background-color: lightgray;" (click)="close()">No</button>&nbsp;&nbsp;
     <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
 </div>
