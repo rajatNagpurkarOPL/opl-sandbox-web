@@ -1,7 +1,7 @@
 // const SERVER_URL = "http://localhost:";
-// const SERVER_URL = "https://sit-opl.instantmseloans.in";
+const SERVER_URL = "https://sit-opl.instantmseloans.in/gateway-service";
 // const SERVER_URL = "http://10.10.5.66:";
-const SERVER_URL = window.location.protocol + '//' + window.location.host;
+//const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  {
     endpointFromLocal : SERVER_URL,
@@ -9,7 +9,7 @@ const SANDBOX  =  {
 };
 
 const GATEWAY  =  {
-    endpointFromLocal : SERVER_URL,
+    endpointFromLocal : "http://localhost:1101",
     // postFix : '/gateway-service'
     postFix : ''
 };
