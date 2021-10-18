@@ -1,15 +1,17 @@
 // const SERVER_URL = "http://localhost:";
-const SERVER_URL = "https://sit-opl.instantmseloans.in";
+// const SERVER_URL = "https://sit-opl.instantmseloans.in";
 // const SERVER_URL = "http://10.10.5.66:";
-//const SERVER_URL = window.location.protocol + '//' + window.location.host;
+const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  {
+    // endpointFromLocal : SERVER_URL + '1104',
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
 
 const GATEWAY  =  {
-    endpointFromLocal : "http://localhost:1101",
+    // endpointFromLocal : SERVER_URL + '1101',
+    endpointFromLocal : SERVER_URL,
      postFix : '/gateway-service'
     // postFix : ''
 };
@@ -40,7 +42,8 @@ const NSDL_PAN_INQUIRY = {
 };
 
 const SANDBOX_DMS = {
-    endpointFromLocal : SERVER_URL + '1110',
+    // endpointFromLocal : SERVER_URL + '1110',
+    endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/dms'
 };
 

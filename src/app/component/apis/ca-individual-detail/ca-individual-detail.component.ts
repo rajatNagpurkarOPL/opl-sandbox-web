@@ -4,6 +4,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Metadata, Payload } from 'src/app/common-utils/model/common-payload-model';
 
 @Component({
   selector: 'app-ca-individual-detail',
@@ -70,7 +71,8 @@ export class CAIndividualDetailComponent implements OnInit {
   
   caIndividualDetail(requestedData : any){
     let headers = Utils.getAPIHeader();
-    this.sandboxService.caIndividualDetail(this.url,requestedData,headers).subscribe(res => {
+    let payload = new Payload(new Metadata("sKey", "1.0", new Date(), Utils.getUUID()), requestedData);
+    this.sandboxService.caIndividualDetail(this.url,payload,headers).subscribe(res => {
         this.response = Utils.jsonStringify(res);
     },err => {
       this.utils.errorHandle(err);
