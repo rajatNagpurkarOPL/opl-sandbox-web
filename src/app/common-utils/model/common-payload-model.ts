@@ -8,6 +8,7 @@ export class Payload {
 export class Metadata {
     constructor(
         public sKey: string,
+        public iv: string,
         public version: string,
         public timestamp: Date,
         public requestId: string
