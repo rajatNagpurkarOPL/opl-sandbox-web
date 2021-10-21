@@ -5,6 +5,9 @@ import { ViewApiCreditLogsService } from 'src/app/common-utils/common-services/v
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
+import {Sort} from '@angular/material/sort'; 
+import {SortingTableData} from '../../common-utils/sort';  
+import {ApplicationFilterMultiPipe}  from '../pipes/filter.pipe'; 
 
 @Component({
   selector: 'app-api-credit',
@@ -18,8 +21,12 @@ export class ApiCreditComponent implements OnInit {
   balanceCredit : any = '';
   totalCredit : any = '';
   apiName : any = '';
-  apiData : any = {};
+  apiData : any;
+  pagination : any;
+  valueToFilter : String = ""; 
+  filterKeys : String [] = ["name","total","balance","triggerCount"];
 
+  
   constructor(private sandboxService : SandboxService,public globals : Globals, public setNotificationAlert: SetNotificationAlertServiceService 
     ,private utils : Utils ,public viewApiCreditLogsService : ViewApiCreditLogsService) {
     this.user = globals.USER;
@@ -31,6 +38,7 @@ export class ApiCreditComponent implements OnInit {
       "userId": this.user.id
   });
     this.getApiCreditLimit(this.requestBody);
+    this.resetPagination();
   }
 
   getApiCreditLimit(requestedData : any){
@@ -45,14 +53,42 @@ export class ApiCreditComponent implements OnInit {
     let headers = Utils.getAPIHeader();
     this.sandboxService.getApiCreditLimit(requestedData,headers).subscribe(res => {
       if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
-        if(res.data != null){
-          this.apiData = res.data;
+        if(res.data != null){ 
+        
+          this.apiData =Object.values(res.data);  
+          this.pagination.data= this.apiData;
+      
         }
       }
     },err => {
       console.log("ERROR : ",err);
       this.utils.errorHandle(err);
     });
+  }
+
+  resetPagination(){
+    this.pagination = {
+      page:1,     //Current Page
+      size:10,    // default page size
+      data:[]     // Pagination Data
+    };
+  }
+  sortData(sort: Sort) {  
+    this.apiData  = new SortingTableData().sortingTableValue(this.apiData ,sort);
+  }
+
+  filterApplicationData() {
+    if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
+        this.apiData =  this.pagination.data; 
+        return;
+    }
+    if(this.apiData.length < 3){
+      return;
+    } 
+    this.apiData = new ApplicationFilterMultiPipe().transform(this.apiData, this.filterKeys,this.valueToFilter);
+    if (this.apiData === undefined || this.apiData == null) {
+        this.apiData = this.pagination.data;
+    }
   }
 
   setNotification(data){
