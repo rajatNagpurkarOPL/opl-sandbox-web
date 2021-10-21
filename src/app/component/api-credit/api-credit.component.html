@@ -1,38 +1,72 @@
-<div class="main">
+<div class="main mt-5">
+  <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12" style="float: right;">
+    <mat-form-field class="input-group" appearance="outline" >
+    <input matInput placeholder="Type to search..."  [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">            
+  </mat-form-field>
+  </div> 
     <div class="sidebar-main-title">
       <div class="d-flex fl-column js-center"> 
        </div>
-      <table class="table dash-table-api" style="margin-top: 1em;">
+      
+      <table matSort (matSortChange)="sortData($event)" class="table dash-table-api" style="margin-top: 1em;">
         <thead>
-          <tr>
-            <th scope="col">Api</th>
-            <th scope="col">Total Credit</th>
-            <th scope="col">Balance Credit</th>
-            <th scope="col">Total Triggers</th>
-            <th scope="col">Action</th>
-            <th scope="col"></th>
+          <tr class="row">
+            <th class="col-sm-1 col-md-1" scope="col">#</th> 
+            <th class="col-sm-2 col-md-2" mat-sort-header="name" scope="col">Api</th>
+            <th class="col-sm-2 col-md-2" mat-sort-header="total" scope="col">Total Credit</th>
+            <th class="col-sm-2 col-md-2" mat-sort-header="balance" scope="col">Balance Credit</th>
+            <th class="col-sm-1 col-md-1" mat-sort-header="triggerCount" scope="col">Total Triggers</th>
+            <th class="col-sm-1 col-md-1" scope="col">Action</th>
+            <th class="col-sm-3 col-md-3" scope="col"></th>
           </tr>
         </thead>
 
-        <tbody>
-            <tr *ngFor="let item of apiData | keyvalue">
-                <td>{{item.value.name}}</td>
-                <td>{{item.value.total}}</td>
-                <td>{{item.value.balance}}</td>
-                <td>{{item.value.triggerCount}}</td>
-                <td>
-                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger Alert" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item.value)">
+        <tbody> 
+           
+
+            <tr *ngFor="let item of apiData | slice: (pagination.page-1) * pagination.size : (pagination.page-1) * pagination.size + pagination.size;  let i=index;" class="row"> 
+              <td class="col-sm-1 col-md-1"> {{(pagination.size*(pagination.page-1)) + (i+1)}}</td>
+              <td class="col-sm-2 col-md-2 text-left">{{item.name}}</td>
+                <td class="col-sm-2 col-md-2 ml-n5">{{item.total}}</td>
+                <td class="col-sm-2 col-md-2">{{item.balance}}</td>
+                <td class="col-sm-1 col-md-1">{{item.triggerCount}}</td>
+                <td class="col-sm-1 col-md-1 ml-5">
+                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger Alert" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item)">
                     <mat-icon>notification_important</mat-icon>
                   </button>
+          
                 </td>
-                <td>
-                  <a  href="javaScript:void(0);" (click)="viewCreditLogsHistory(item.value)">
+                <td class="col-sm-3 col-md-3">
+                  <a  href="javaScript:void(0);" (click)="viewCreditLogsHistory(item)">
                     {{'View Credit History'}}
                   </a>
                 </td>
             </tr>
         </tbody>
+
+
   
       </table>
     </div>
+
+    <!---pagination-->  
+ <div class="row" *ngIf="apiData">
+  <div class="col-sm-6 col-md-6">
+    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
+      {{ apiData.length > 0 ? ((pagination.size * (pagination.page - 1)) + 1) : 0}} to
+      {{(pagination.size*pagination.page) > (apiData.length) ? (apiData.length) : (pagination.size*pagination.page)}} of {{apiData.length}}
+      entries
+    </div>
+  </div>  
+
+
+  <div class="col-sm-6 col-md-6">
+    <div class="text-md-right float-md-right pagination-rounded">
+      <ngb-pagination [maxSize]=3 [collectionSize]="apiData.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
+      [boundaryLinks]="true">
+      </ngb-pagination>
+    </div>
+  </div>
+  </div>
+
 </div>
