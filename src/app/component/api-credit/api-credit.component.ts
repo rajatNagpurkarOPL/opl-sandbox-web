@@ -82,7 +82,7 @@ export class ApiCreditComponent implements OnInit {
         this.apiData =  this.pagination.data; 
         return;
     }
-    if(this.apiData.length < 3){
+    if(this.apiData.length < 2){
       return;
     } 
     this.apiData = new ApplicationFilterMultiPipe().transform(this.apiData, this.filterKeys,this.valueToFilter);
