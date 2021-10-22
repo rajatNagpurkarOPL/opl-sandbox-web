@@ -71,10 +71,10 @@ export class CAIndividualDetailComponent implements OnInit {
   
   caIndividualDetail(requestedData : any){
     let headers = Utils.getAPIHeader(); 
-    let payload = this.aesGcmEncryption.getPayload(JSON.stringify(requestedData));
-    console.log("Payload : ", payload);
+    let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.caIndividualDetail(this.url,payload,headers).subscribe(res => {
-        this.response = Utils.jsonStringify(res);
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     },err => {
       this.utils.errorHandle(err);
     });
