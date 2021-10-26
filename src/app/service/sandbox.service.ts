@@ -100,8 +100,8 @@ export class SandboxService {
     return this.http.post(URLS.SANDBOX_USER.GET_TRIGGERS_LIST, data);
   }
 
-  getAPICreditLogsList(data: any): Observable<any> {
-    return this.http.post(URLS.SANDBOX_USER.GET_API_CREDIT_LOGS_LIST, data);
+  getAPICreditLogsListDateFilter(data: any): Observable<any> {
+    return this.http.post(URLS.SANDBOX_USER.GET_API_CREDIT_LOGS_LIST_DATE_FILTER, data);
   }
 
   deleteTriggerByTriggerId(data: any): Observable<any> {
