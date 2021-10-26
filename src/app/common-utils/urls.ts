@@ -165,6 +165,7 @@ export const URLS = {
     },
     SANDBOX_DMS : {
         DOWNLOAD_FILE : SANDBOX_DMS_URL + '/file/downloadFile',
-        DOWNLOAD_OPL_CERTIFIICATE : SANDBOX_DMS_URL + '/file/download'
+        DOWNLOAD_OPL_CERTIFIICATE : SANDBOX_DMS_URL + '/file/download',
+        GET_OPL_PUBLIC_KEY : SANDBOX_DMS_URL + '/file/getOPLPublicKey'
     }
 };

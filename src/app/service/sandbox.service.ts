@@ -150,4 +150,8 @@ export class SandboxService {
     }
  }
 
+ getOplPublicKey(): Observable<any>{
+  return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PUBLIC_KEY, false);
+ }
+
 }
