@@ -20,7 +20,6 @@ export class ViewApiCreditLogsComponent implements OnInit {
   endIndex = 10;
   totalRecords: any;
   collectionSize = 0;
-  collectionSize2 = 0;
   // page number
   page = 1;
   // default page size
@@ -46,7 +45,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
     });
     this.dateChange();
   }
-  
+
   dateChange(){
     this.fromDate=new Date(this.dateForm.value.fromDate);
   }
