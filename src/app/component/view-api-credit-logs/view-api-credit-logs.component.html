@@ -9,17 +9,44 @@
 
 
 <div class="pop-up-content">
-    <div class="fl-column">       
+
+   
+    <div class="d-flex w-100 al-center js-between">       
         <span>Service Name : {{data.name}} <br/> Total Credits : {{data.total}} <br/> Used Credits : {{data.total - data.balance}} <br/> Balance Credits : {{data.balance}}</span> 
-        
-    </div>
-    
+       
+        <form [formGroup]="dateForm" (ngSubmit)="filterByDate(page)">
+        <div>            
+            <div class="form-outline tx-right">
+                
+                <label class="mr-2">From Date</label>
+              <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}"  formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}"/>
+             
+         
+
+            </div>
+            <div class="form-outline tx-right">
+                <label class="mr-2">To Date</label>
+                <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{fromDate | date:'yyyy-MM-dd'}}"  value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}"/>
+            
+                <!-- <span class="text-danger" *ngIf="submitted==true">From date should be less than to date!</span><br> -->
+
+              </div>
+            <button type="submit" class="btn btn-primary btn-sm mt-2 float-right">
+         Search
+            </button>
+          </div>
+          
+        </form>
   
-            <span><b>Total Credit History :{{collectionSize}}</b></span>
+    </div>
+ 
+</div>
+<div class="pop-up-content">
+<span><b>Total Credit History {{collectionSize}} for {{days}} days</b></span>
 </div>
 <table class="table dash-table-brige11">
 <thead>
-    <tr>
+    <tr>    
     <th scope="col">#</th>
     <th scope="col">Action</th>
     <th scope="col">DateTime</th>
@@ -32,7 +59,7 @@
         <tr *ngFor="let creditLog of creditLogsList; index as audit">
             <td>{{10 *(page-1)+ (audit+1)}}.</td>
             <td>{{creditLog.actionType}}</td>
-            <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }}</td>
+            <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }} </td>
             <td>{{creditLog.balanceCredits}}</td>
             <td>{{creditLog.operatedCredits}}</td>
         </tr>
@@ -56,7 +83,7 @@
     </div>
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
         <div class="text-md-right float-md-right pagination-rounded">
-         <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="getAPICreditLogsList(page)">
+         <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="filterByDate(page)">
         </ngb-pagination>
         </div>
     </div>
