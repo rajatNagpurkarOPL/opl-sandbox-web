@@ -109,7 +109,7 @@ console.log("GATEWAY Url :", GATEWAY_BASE_URL);
 console.log("UDHYAM Url :", UDHYAM_BASE_URL);
 console.log("CAAPI Url :", CAAPI_BASE_URL);
 console.log("HOST : ",host);
-
+//
 /**
  *  This is constants of REST URL which can be hit on backend server
  */
