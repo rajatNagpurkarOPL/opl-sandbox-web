@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import * as forge from 'node-forge';
+import { SandboxService } from 'src/app/service/sandbox.service';
 import { Metadata, Payload } from '../model/common-payload-model';
 import { Utils } from './utils.service';
 
@@ -11,8 +12,11 @@ export class AesGcmEncryptionService {
 
   sKey: any;
   iv: any;
+  oplPublicKey: any;
 
-  constructor() { }
+  constructor(private sandboxService : SandboxService, private utils : Utils) { 
+    this.getOplPublicKey();
+  }
 
    getSecretKey(){
     return forge.random.getBytesSync(32);
@@ -49,7 +53,8 @@ export class AesGcmEncryptionService {
 
   getEncPayload(data: any){
     this.sKey = this.getSecretKey()
-    const sKeyEnc = forge.util.encode64(this.sKey);
+    // const sKeyEnc = forge.util.encode64(this.sKey);
+    const sKeyEnc = this.encryptSecretKey(forge.util.encode64(this.sKey));
     const trasDate = new DatePipe("en_IN").transform(new Date(), "dd-MM-yyyy hh:mm:ss");
     this.iv = this.getBytesFromString(trasDate);
     return new Payload(
@@ -60,7 +65,7 @@ export class AesGcmEncryptionService {
   getDecPayload(payload: any){
     const byteData = forge.util.decode64(payload.data);
     const sKey = forge.util.decode64(payload.metadata.sKey);
-    const iv = this.getBytesFromString(forge.util.decode64(payload.metadata.timestamp));
+    const iv = this.getBytesFromString(this.getBytesFromString(payload.metadata.timestamp));
     const decData = this.decryptAesGcm(sKey, iv, byteData);
     payload.data = decData
     return payload;
@@ -68,6 +73,24 @@ export class AesGcmEncryptionService {
 
   getBytesFromString(data: any){
     return forge.util.createBuffer(data).getBytes(16);
+  }
+
+  encryptSecretKey(sKey: any){
+    const BEGIN = "-----BEGIN PUBLIC KEY-----";
+    const END = "-----END PUBLIC KEY-----";
+    const rsa = forge.pki.publicKeyFromPem(BEGIN + this.oplPublicKey + END);
+    const sKeyEnc = rsa.encrypt(sKey);
+    return forge.util.encode64(sKeyEnc);
+  }
+
+  getOplPublicKey(){
+    this.sandboxService.getOplPublicKey().subscribe(res => {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        this.oplPublicKey = res.data;
+      }
+    }, (error: any) => {
+      this.utils.errorSnackBar(error);
+    });
   }
 
 }
