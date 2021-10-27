@@ -13,9 +13,15 @@ export class AesGcmEncryptionService {
   sKey: any;
   iv: any;
   oplPublicKey: any;
+  oplPrivateKey: any;
+  BEGIN_PUBLIC_KEY: any = "-----BEGIN PUBLIC KEY-----";
+  END_PUBLIC_KEY: any = "-----END PUBLIC KEY-----";
+  BEGIN_PRIVATE_KEY: any = "-----BEGIN PRIVATE KEY-----";
+  END_PRIVATE_KEY: any = "-----END PRIVATE KEY-----";
 
   constructor(private sandboxService : SandboxService, private utils : Utils) { 
     this.getOplPublicKey();
+    this.getOplPrivateKey();
   }
 
    getSecretKey(){
@@ -53,7 +59,6 @@ export class AesGcmEncryptionService {
 
   getEncPayload(data: any){
     this.sKey = this.getSecretKey()
-    // const sKeyEnc = forge.util.encode64(this.sKey);
     const sKeyEnc = this.encryptSecretKey(forge.util.encode64(this.sKey));
     const trasDate = new DatePipe("en_IN").transform(new Date(), "dd-MM-yyyy hh:mm:ss");
     this.iv = this.getBytesFromString(trasDate);
@@ -66,7 +71,8 @@ export class AesGcmEncryptionService {
     const byteData = forge.util.decode64(payload.data);
     const sKey = forge.util.decode64(payload.metadata.sKey);
     const iv = this.getBytesFromString(this.getBytesFromString(payload.metadata.timestamp));
-    const decData = this.decryptAesGcm(sKey, iv, byteData);
+    const sKeyDec = forge.util.decode64(this.decryptSecretKey(sKey));
+    const decData = this.decryptAesGcm(sKeyDec, iv, byteData);
     payload.data = decData
     return payload;
   }
@@ -76,17 +82,31 @@ export class AesGcmEncryptionService {
   }
 
   encryptSecretKey(sKey: any){
-    const BEGIN = "-----BEGIN PUBLIC KEY-----";
-    const END = "-----END PUBLIC KEY-----";
-    const rsa = forge.pki.publicKeyFromPem(BEGIN + this.oplPublicKey + END);
+    const rsa = forge.pki.publicKeyFromPem(this.BEGIN_PUBLIC_KEY + this.oplPublicKey + this.END_PUBLIC_KEY);
     const sKeyEnc = rsa.encrypt(sKey);
     return forge.util.encode64(sKeyEnc);
+  }
+
+  decryptSecretKey(sKey: any){
+    const rsa = forge.pki.privateKeyFromPem(this.BEGIN_PRIVATE_KEY + this.oplPrivateKey + this.END_PRIVATE_KEY);
+    const sKeyEnc = rsa.decrypt(sKey);
+    return sKeyEnc;
   }
 
   getOplPublicKey(){
     this.sandboxService.getOplPublicKey().subscribe(res => {
       if(!Utils.isObjectNullOrEmpty(res.data)){
         this.oplPublicKey = res.data;
+      }
+    }, (error: any) => {
+      this.utils.errorSnackBar(error);
+    });
+  }
+
+  getOplPrivateKey(){
+    this.sandboxService.getOplPrivateKey().subscribe(res => {
+      if(!Utils.isObjectNullOrEmpty(res.data)){
+        this.oplPrivateKey = res.data;
       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);

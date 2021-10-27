@@ -158,4 +158,8 @@ export class SandboxService {
   return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PUBLIC_KEY, false);
  }
 
+ getOplPrivateKey(): Observable<any>{
+  return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PRIVATE_KEY, false);
+ }
+ 
 }
