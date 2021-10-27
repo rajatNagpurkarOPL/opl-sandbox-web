@@ -55,9 +55,6 @@ filterApplicationData() {
   if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
       this.keyPairList =  this.pagination.data; 
       return;
-  }
-  if(this.keyPairList.length < 3){
-    return;
   } 
   this.keyPairList = new ApplicationFilterMultiPipe().transform(this.keyPairList, this.filterKeys,this.valueToFilter);
   if (this.keyPairList === undefined || this.keyPairList == null) {
