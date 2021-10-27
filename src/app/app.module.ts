@@ -65,6 +65,7 @@ import { EsignAndEstampingComponent } from './component/apis/esign-and-estamping
 import { IntroductionComponent } from './component/introduction/introduction.component';
 import { CertificateComponent } from './component/certificate/certificate.component';
 import { CertificateActivationAlertComponent } from './component/certificate-activation-alert/certificate-activation-alert.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -136,6 +137,7 @@ import { CertificateActivationAlertComponent } from './component/certificate-act
               CookieService,
               SendBackModelService,
               Globals,
+              DatePipe,
               SetNotificationAlertServiceService,
               ViewApiCreditLogsService],
   bootstrap: [AppComponent],

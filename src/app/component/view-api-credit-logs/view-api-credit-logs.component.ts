@@ -4,8 +4,11 @@ import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import alasql from 'alasql';
 
 import { DatePipe, formatDate } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-view-api-credit-logs',
@@ -34,7 +37,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
 
   
 
-  constructor(public dialogRef: MatDialogRef<ViewApiCreditLogsComponent>, public lenderService: SandboxService,
+  constructor(public dialogRef: MatDialogRef<ViewApiCreditLogsComponent>, public lenderService: SandboxService,public datepipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any ,public globals : Globals ,public utils:Utils,private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {  
@@ -44,10 +47,51 @@ export class ViewApiCreditLogsComponent implements OnInit {
       toDate: [this.dates.toDate,Validators.required]
     });
     this.dateChange();
+    this.filterByDate(1);
   }
 
   dateChange(){
     this.fromDate=new Date(this.dateForm.value.fromDate);
+  }
+
+  exportToExcel(){
+
+    const req: any = {pageSize: this.pageSize, apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
+    this.lenderService.getAPICreditLogsListDateFilterExportToExcel(req).subscribe(resp=> {
+
+    this.creditLogsList = resp.data.apiCreditLogs;
+    let date = new Date();
+    let latest_date = this.datepipe.transform(date, 'dd-MM-yyyy');
+    const fileName = "Credit_History_" + latest_date + ".xlsx";
+    var creditHistoryDownload = [];
+    var opts = {
+      headers: true,
+      column: { style: { Font: { Bold: "1", Color: "#3C3741" } } }
+    };
+    this.creditLogsList.forEach((item, i) => {
+      var outstanding;
+      if(item.actionType=='DEBIT'){
+         outstanding=item.balanceCredits-item.operatedCredits;
+      }
+      if(item.actionType=='CREDIT'){
+         outstanding=item.balanceCredits+item.operatedCredits;
+      }
+
+      var index = i + 1;
+      let creditDetails = [{
+        '#': index,
+        'Action': item.actionType,
+        'DateTime': this.datepipe.transform(item.createdDate, 'dd-MM-yyyy'),
+        'Balance': item.balanceCredits,
+        'Operated': item.operatedCredits,
+        'Outstanding':outstanding
+       
+      }];
+      creditHistoryDownload = creditHistoryDownload.concat(creditDetails);
+    });
+    alasql('SELECT * INTO XLSX("' + fileName + '",?) FROM ?', [opts,creditHistoryDownload]);
+  })
+
   }
 
   filterByDate(pageNo : any){
