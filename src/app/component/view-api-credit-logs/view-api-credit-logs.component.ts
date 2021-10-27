@@ -59,7 +59,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
     const req: any = {pageSize: this.pageSize, apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
     this.lenderService.getAPICreditLogsListDateFilterExportToExcel(req).subscribe(resp=> {
 
-    this.creditLogsList = resp.data.apiCreditLogs;
+    this.creditLogsList = resp.data;
     let date = new Date();
     let latest_date = this.datepipe.transform(date, 'dd-MM-yyyy');
     const fileName = "Credit_History_" + latest_date + ".xlsx";
