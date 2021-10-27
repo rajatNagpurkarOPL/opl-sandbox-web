@@ -42,8 +42,10 @@
  
 </div>
 <div class="pop-up-content">
-<span><b>Total Credit History {{collectionSize}} for {{days}} days</b></span>
+<span><b>Total {{collectionSize}} Transactions for {{days}} days</b></span>
+<button type="button" (click)="exportToExcel()" class="btn btn-success btn-sm">Export To Excel</button>
 </div>
+
 <table class="table dash-table-brige11">
 <thead>
     <tr>    
@@ -51,7 +53,8 @@
     <th scope="col">Action</th>
     <th scope="col">DateTime</th>
     <th scope="col">Balance</th>
-    <th scope="col">Used</th>
+    <th scope="col">Operated</th>
+    <th scope="col">Outstanding</th>
     </tr>
 </thead>
 <tbody>
@@ -62,6 +65,7 @@
             <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }} </td>
             <td>{{creditLog.balanceCredits}}</td>
             <td>{{creditLog.operatedCredits}}</td>
+            <td>{{creditLog.actionType == "DEBIT" ? (creditLog.balanceCredits - creditLog.operatedCredits) : (creditLog.balanceCredits + creditLog.operatedCredits)}}</td>
         </tr>
     </ng-container>
     <tr *ngIf="creditLogsList == null || creditLogsList.length == 0">
