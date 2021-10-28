@@ -30,7 +30,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
 
   dateForm:FormGroup;
   dates : any;  
-  days:any=0;
+  days:any=1;
   fromDate:any
   toDate:any
   todayDate:Date = new Date();
@@ -100,16 +100,20 @@ export class ViewApiCreditLogsComponent implements OnInit {
       this.toDate = new Date(this.dateForm.value.toDate); 
       const ONE_DAY = 1000 * 60 * 60 * 24;
       const differenceMs = Math.abs(this.toDate - this.fromDate);
-      this.days=   Math.round(differenceMs / ONE_DAY);
 
-    if(this.dateForm.value.toDate<this.dateForm.value.fromDate){
-      this.utils.errorSnackBar("From date should be less than to date!");
-    }
-    if(this.dateForm.value.toDate==''||this.dateForm.value.fromDate==''){
-      this.utils.errorSnackBar("Dates can not be blank!");
-    }
- 
-    const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
+      if( Math.abs(this.toDate - this.fromDate)==0){
+        this.days=1;
+      }
+      if( Math.abs(this.toDate - this.fromDate)!=0){
+        this.days= Math.round(differenceMs / ONE_DAY);
+      }   
+      if(this.dateForm.value.toDate<this.dateForm.value.fromDate){
+        this.utils.errorSnackBar("From date should be less than to date!");
+     }
+     if(this.dateForm.value.toDate==''||this.dateForm.value.fromDate==''){
+       this.utils.errorSnackBar("Dates can not be blank!");
+      }
+      const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
       this.lenderService.getAPICreditLogsListDateFilter(req).subscribe(resp=> {
       this.totalRecords = resp.data.apiCreditLogsCount;
       this.collectionSize = resp.data.apiCreditLogsCount;
