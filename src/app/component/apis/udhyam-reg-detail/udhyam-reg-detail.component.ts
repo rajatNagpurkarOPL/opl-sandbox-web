@@ -4,6 +4,8 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
+import { Constant } from 'src/app/common-utils/Constant';
 
 @Component({
   selector: 'app-udhyam-reg-detail',
@@ -98,10 +100,12 @@ responseBody = Utils.jsonStringify({
   apiMstrId = null;
   apiRequestData: any = {};
   apiResponseData: any = {};
+  public readonly constant : any = null;
 
-  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
+  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.formBuilder = fb;
-   }
+    this.constant = Constant;
+  }
 
   ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
@@ -124,9 +128,12 @@ responseBody = Utils.jsonStringify({
   }
   
   udhyamRegDetail(requestedData : any){
-    let headers = Utils.getAPIHeader();
-    this.sandboxService.udhyamRegDetail(this.url,requestedData,headers).subscribe(res => {
-        this.response = Utils.jsonStringify(res);
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+    let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
+    this.sandboxService.udhyamRegDetail(this.url,payload,headers).subscribe(res => {
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     },err => {
       this.utils.errorHandle(err);
     });

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { CustomErrorStateMatcherComponent } from '../../custom-error-state-matcher/custom-error-state-matcher.component';
 
@@ -31,9 +33,11 @@ export class NsdlPanInquiryComponent implements OnInit {
   panInquiryForm: FormGroup;
   formBuilder : any = null;
   apiMstrId = null;
+  public readonly constant : any = null;
 
-  constructor(private fb : FormBuilder,private sandboxService : SandboxService, private utils : Utils) { 
+  constructor(private fb : FormBuilder,private sandboxService : SandboxService, private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) { 
     this.formBuilder = fb;
+    this.constant = Constant;
   }
 
   ngOnInit(): void {
@@ -86,9 +90,12 @@ getApiResponseSchema(){
 }
 
   getPanDetails(requestedData : any){
-    let headers = Utils.getAPIHeader();
-    this.sandboxService.getPanDetails(this.url,requestedData,headers).subscribe(res => {
-        this.response = Utils.jsonStringify(res);
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+    let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
+    this.sandboxService.getPanDetails(this.url,payload,headers).subscribe(res => {
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     },err => {
       this.utils.errorHandle(err);
     });
