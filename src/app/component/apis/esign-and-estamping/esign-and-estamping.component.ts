@@ -8,6 +8,8 @@ import { CustomErrorStateMatcherComponent } from '../../custom-error-state-match
 import { MatChipInputEvent } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
+import { Constant } from 'src/app/common-utils/Constant';
+import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
 
 @Component({
   selector: 'app-esign-and-estamping',
@@ -59,9 +61,11 @@ export class EsignAndEstampingComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  public readonly constant : any = null;
 
-  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
+  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.formBuilder = fb;
+    this.constant = Constant;
   }
 
   ngOnInit(): void {
@@ -309,10 +313,13 @@ export class EsignAndEstampingComponent implements OnInit {
   }
 
   getEsignAndEstamping(data : any){
-    let headers = Utils.getAPIHeader();
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
     let requestedData = {"applicationId": -1, "userId": -1,"returnUpdateUrl": this.returnUpdateUrl.value, "neSLRequestProxy": {"loan": data}};
-    this.sandboxService.getEsignAndEstamping(this.url, requestedData, headers).subscribe(res => {
-      this.response = Utils.jsonStringify(res);
+    let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
+    this.sandboxService.getEsignAndEstamping(this.url, payload, headers).subscribe(res => {
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     }, error => {
       this.utils.errorHandle(error);
     });

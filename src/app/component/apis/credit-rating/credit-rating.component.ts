@@ -3,6 +3,8 @@ import { CustomErrorStateMatcherComponent } from '../../custom-error-state-match
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
+import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
+import { Constant } from 'src/app/common-utils/Constant';
 
 @Component({
   selector: 'app-credit-rating',
@@ -61,9 +63,11 @@ responseBody = Utils.jsonStringify({
   apiRequestData: any = {};
   apiResponseData: any = {};
   apiMstrId = null;
+  public readonly constant : any = null;
 
-  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils ) {
+  constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.formBuilder = fb;
+    this.constant = Constant;
    }
 
   ngOnInit(): void {
@@ -88,9 +92,12 @@ responseBody = Utils.jsonStringify({
   }
   
   getCreditRating(requestedData : any){
-    let headers = Utils.getAPIHeader();
-    this.sandboxService.getCreditRating(this.url,requestedData,headers).subscribe(res => {
-        this.response = Utils.jsonStringify(res);
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+    let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
+    this.sandboxService.getCreditRating(this.url,payload,headers).subscribe(res => {
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     },err => {
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
