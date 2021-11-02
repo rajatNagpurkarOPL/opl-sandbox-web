@@ -236,7 +236,13 @@ static getUser(){
 static getAPIHeader(){
   let apiKeys = Utils.getAPIKeys();
   let user = Utils.getUser();
-  return {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId,"tokenNo" : user.id.toString(), "Content-Type" : "application/json; charset=utf-8", "source": "sandbox"};
+  return {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId,"tokenNo" : user.id.toString(), "Content-Type" : "application/json; charset=utf-8"};
+}
+
+static getAPIHeaderWithSourceKeyValue(HeaderSourceEncValue: any){
+  let apiKeys = Utils.getAPIKeys();
+  let user = Utils.getUser();
+  return {"clientId" : apiKeys.clientId,"secretId" : apiKeys.secretId,"tokenNo" : user.id.toString(), "Content-Type" : "application/json; charset=utf-8", "source": HeaderSourceEncValue};
 }
 
 static prepareApiUrl(data : any, context : string){

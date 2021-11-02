@@ -5,6 +5,7 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
+import { Constant } from 'src/app/common-utils/Constant';
 
 @Component({
   selector: 'app-ca-individual-detail',
@@ -44,9 +45,11 @@ export class CAIndividualDetailComponent implements OnInit {
   apiMstrId = null;
   apiRequestData: any = {};
   apiResponseData: any = {};
+  public readonly constant : any = null;
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.formBuilder = fb;
+    this.constant = Constant;
    }
 
   ngOnInit(): void {
@@ -70,7 +73,8 @@ export class CAIndividualDetailComponent implements OnInit {
   }
   
   caIndividualDetail(requestedData : any){
-    let headers = Utils.getAPIHeader(); 
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.caIndividualDetail(this.url,payload,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);

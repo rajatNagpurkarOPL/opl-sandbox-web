@@ -116,5 +116,8 @@ export const Constant = {
         USER : "USER",
         ADMIN : "ADMIN",
         BOTH : "BOTH"
+    },
+    HEADER : {
+        SOURCE : "sandbox"
     }
 };

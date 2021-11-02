@@ -18,6 +18,8 @@ export class AesGcmEncryptionService {
   END_PUBLIC_KEY: any = "-----END PUBLIC KEY-----";
   BEGIN_PRIVATE_KEY: any = "-----BEGIN PRIVATE KEY-----";
   END_PRIVATE_KEY: any = "-----END PRIVATE KEY-----";
+  HeaderEncryptionKey: any = "egyUmG7EHW49PpM7XUtJ2ogjulwWX1l1Az6QaCZp6Sw=";
+  HeaderEncryptionIV: any = "4oGprBpOO6M1FcPNJDu2VQ==";
 
   constructor(private sandboxService : SandboxService, private utils : Utils) { 
     this.getOplPublicKey();
@@ -30,6 +32,12 @@ export class AesGcmEncryptionService {
 
    getIV(){
     return forge.random.getBytesSync(16);
+   }
+
+   encryptHeader(data : any){
+    let keyByte = forge.util.decode64(this.HeaderEncryptionKey);
+    let iv = forge.util.decode64(this.HeaderEncryptionIV);
+    return this.encryptAesGcm(keyByte, iv, data);
    }
 
    encryptAesGcm(key: any, iv: any, data: any){
@@ -60,7 +68,7 @@ export class AesGcmEncryptionService {
   getEncPayload(data: any){
     this.sKey = this.getSecretKey()
     const sKeyEnc = this.encryptSecretKey(forge.util.encode64(this.sKey));
-    const trasDate = new DatePipe("en_IN").transform(new Date(), "dd-MM-yyyy hh:mm:ss");
+    const trasDate = this.getIvFromTimestamp();
     this.iv = this.getBytesFromString(trasDate);
     return new Payload(
       new Metadata(sKeyEnc,"1.0", trasDate, Utils.getUUID()), 
@@ -79,6 +87,10 @@ export class AesGcmEncryptionService {
 
   getBytesFromString(data: any){
     return forge.util.createBuffer(data).getBytes(16);
+  }
+
+  getIvFromTimestamp(){
+    return new DatePipe("en_IN").transform(new Date(), "dd-MM-yyyy hh:mm:ss");
   }
 
   encryptSecretKey(sKey: any){
