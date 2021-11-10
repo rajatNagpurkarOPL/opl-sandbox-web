@@ -1,88 +1,26 @@
-        <div>
-            <div class="card-header row row-flex">
-                <h3 class="card-title" style="border-left-color: inherit; ">
-                <strong><span class="label-text">Udhyam Registration Detail</span></strong>
-                </h3><!---->
-            </div>
-            <div class="card-body"><!---->
-                <div class="well well-sm p-0">
-                    <div class="table-container">
-                        <div class="form-group">
-                            <mat-form-field style="width: 10%; background-color: #777;">
-                                <input matInput type="text" style="font-weight: bold; color: white;" value="End-Point" [disabled]="true">
-                            </mat-form-field>
-                            <mat-form-field style="width: 80%;">
-                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}" readonly> <!-- https://sit-opl.instantmseloans.in/gateway-service/udhyam/get-details -->
-                            </mat-form-field>
-                            <mat-form-field style="width: 10%; background-color: #777;">
-                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div><!---->
-                <mat-tab-group> 
-                    <mat-tab label="Tryout / Implement">
-                        <div>
-                                <form>
-                                    <mat-card style="display: flex; width: 100%;">
-                                        <form class="example-form" [formGroup]="udhyamRegDetailForm" (ngSubmit)="onFormSubmit()">
-                                          <mat-form-field class="example-full-width">
-                                            <mat-label>Udyam Registration Number</mat-label>
-                                            <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.udhyamNo" [errorStateMatcher]="matcher" placeholder="Ex. UDYAM-MH-19-0000001">
-                                            <mat-error *ngIf="udhyamRegDetailForm.get('udhyamNo').hasError('required')">
-                                                Please Enter Udhyam Registration Number
-                                            </mat-error>
-                                        </mat-form-field>
-                                        &nbsp;
-                                          <mat-form-field class="example-full-width">
-                                              <mat-label>Mobile Number</mat-label>
-                                              <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.mobileNo" [errorStateMatcher]="matcher" placeholder="Ex. 9819574650">
-                                              <mat-error *ngIf="udhyamRegDetailForm.get('mobileNo').hasError('required')">
-                                                Please Enter Mobile Number
-                                            </mat-error>
-                                            </mat-form-field>
-                                            &nbsp;
-                                          <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Send</button>
-                                        </form>
-                                      </mat-card>
-                                </form>
-                        </div>
-                        <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
-                    </mat-tab>
-                    <mat-tab label="Request Document">
-                                <!--<div class="card-header row row-flex">
-                                    <h3 class="card-title" style="border-left-color: inherit; ">
-                                    <span class="label-text">Request</span>
-                                    </h3>
-                                </div> -->
-                                <div class="card-body">
-                                    <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
-                                </div> 
-                    </mat-tab> 
-                    <mat-tab label="Response Document">
-                               <!--- <div class="card-header row row-flex">
-                                    <h3 class="card-title" style="border-left-color: inherit; ">
-                                    <span class="label-text">Response</span>
-                                    </h3>
-                                </div> -->
-                                <div class="card-body">
-                                    <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
-                                </div>
-                    </mat-tab>  
-
-                </mat-tab-group>
-            </div>
-    </div>   
-<style>
-    table, th , td {
-       border: 1px solid grey;
-       border-collapse: collapse;
-       padding: 5px;
-    }
-    table tr:nth-child(odd) {
-       background-color: #f2f2f2;
-    }
-    table tr:nth-child(even) {
-       background-color: #ffffff;
-    }
- </style>
+<form>
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form" [formGroup]="udhyamRegDetailForm" (ngSubmit)="onFormSubmit()">
+            <mat-form-field class="example-full-width">
+                <mat-label>Udyam Registration Number</mat-label>
+                <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.udhyamNo"
+                    [errorStateMatcher]="matcher" placeholder="Ex. UDYAM-MH-19-0000001">
+                <mat-error *ngIf="udhyamRegDetailForm.get('udhyamNo').hasError('required')">
+                    Please Enter Udhyam Registration Number
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>Mobile Number</mat-label>
+                <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.mobileNo"
+                    [errorStateMatcher]="matcher" placeholder="Ex. 9819574650">
+                <mat-error *ngIf="udhyamRegDetailForm.get('mobileNo').hasError('required')">
+                    Please Enter Mobile Number
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Send</button>
+        </form>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

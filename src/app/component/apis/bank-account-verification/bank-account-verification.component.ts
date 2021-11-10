@@ -16,43 +16,15 @@ export class BankAccountVerificationComponent implements OnInit {
 
   @Input() menuData: any;
 
-  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
-  
-  requestHeader = Utils.jsonStringify({
-    "clientId" : "{{your clientId available in profile section}}",
-    "secretId" : "{{your secretId available in profile section}}",
-    "Content-Type" : "application/json"
-  });
-  requestBody  = Utils.jsonStringify(
-   {
-      "consent": "Y",
-      "ifsc": "ICIC0000123",
-      "accountNumber": "123456789012"
-   }
-  );
-responseBody = Utils.jsonStringify(
-  {
-    "status": 1001,
-    "message": "Details found",
-    "data": {
-        "bankTxnStatus": true,
-        "accountNumber": "123456789012",
-        "ifsc": "ICIC0000123",
-        "accountName": "XYZ",
-        "bankResponse": "Transaction Successful"
-    }
-  });
- bankAccountVerificationForm: FormGroup;
+  url : string = null;
+  bankAccountVerificationForm: FormGroup;
   position = '';
   industry = '';
   experience = 0;
   response : any="Response Will be Rendered Here.";
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
-  domainSchemaData: any[] = [];
-  apiMstrId = null;
-  apiRequestData: any = {};
-  apiResponseData: any = {};
+  // domainSchemaData: any[] = [];
   public readonly constant : any = null;
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
@@ -67,9 +39,6 @@ responseBody = Utils.jsonStringify(
       accountNumber: ['', Validators.required],
       consent:['', null]
     });
-    this.apiMstrId = this.menuData.service.id;
-    this.getApiRequestSchema();
-    this.getApiResponseSchema();
   }
 
   onFormSubmit() {
@@ -93,49 +62,19 @@ responseBody = Utils.jsonStringify(
       // this.utils.errorSnackBar(err);
     });
   }
-  
-  getApiRequestSchema(){
-    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
 
-getApiResponseSchema(){
-  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
-
-getDomainSchema(data){
-  this.sandboxService.getDomainSchema(data).subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.domainSchemaData = res.data;
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
+// getDomainSchema(data){
+//   this.sandboxService.getDomainSchema(data).subscribe(res => {
+//     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+//       if(!Utils.isObjectNullOrEmpty(res.data)){
+//         this.domainSchemaData = res.data;
+//       }
+//     } else {
+//       this.utils.warningSnackBar(res.message);
+//     }
+//   }, (error: any) => {
+//     this.utils.errorSnackBar(error);
+//   });
+// }
 
 }

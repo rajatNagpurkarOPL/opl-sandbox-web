@@ -16,35 +16,15 @@ export class CAFirmDetailComponent implements OnInit {
 
   @Input() menuData: any;
 
-  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
-
-  requestHeader = Utils.jsonStringify({
-    "clientId" : "{{your clientId available in profile section}}",
-    "secretId" : "{{your secretId available in profile section}}",
-    "Content-Type" : "application/json"
-  });
-  requestBody  = Utils.jsonStringify({
-    "membershipNumber":"171302",
-    "dob":"1992-05-22",
-    "firmRegNumber":"109826W"
-  });
-  responseBody = Utils.jsonStringify(
-  {
-      "message": "SUCCESS",
-      "data": "{\"RESULT\":\"SUCCESS\",\"MESSAGE\":\"Data retrieved successfully.No of Records=1\",\"SEARCH_RESULTS\":{\"RECORDS\":[{\"COLUMNS\":[{\"NAME\":\"Firm Registration No\",\"VALUE\":\"109826W\"},{\"NAME\":\"Firm Name\",\"VALUE\":\"V M SHAH & CO\"},{\"NAME\":\"Firm Status\",\"VALUE\":\"Active\"},{\"NAME\":\"Member Firm Mapping Status\",\"VALUE\":\"Active\"}],\"ID\":\"0\"}]}}",
-      "status": 200
-  });
- caFirmDetailForm: FormGroup;
+  url : string = null;
+  caFirmDetailForm: FormGroup;
   position = '';
   industry = '';
   experience = 0;
   response : any="Response Will be Rendered Here.";
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
-  domainSchemaData: any[] = [];
-  apiMstrId = null;
-  apiRequestData: any = {};
-  apiResponseData: any = {};
+  // domainSchemaData: any[] = [];
   public readonly constant : any = null;
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
@@ -59,9 +39,6 @@ export class CAFirmDetailComponent implements OnInit {
       dob: ['', Validators.required],
       firmRegNumber: ['', Validators.required]
     });
-    this.apiMstrId = this.menuData.service.id;
-    this.getApiRequestSchema();
-    this.getApiResponseSchema();
   }
 
   onFormSubmit() {
@@ -86,57 +63,27 @@ export class CAFirmDetailComponent implements OnInit {
     });
   }
   
-  getApiRequestSchema(){
-    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
+// getDomainSchema(data){
+//   this.sandboxService.getDomainSchema(data).subscribe(res => {
+//     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+//       if(!Utils.isObjectNullOrEmpty(res.data)){
+//         this.domainSchemaData = res.data;
+//       }
+//     } else {
+//       this.utils.warningSnackBar(res.message);
+//     }
+//   }, (error: any) => {
+//     this.utils.errorSnackBar(error);
+//   });
+// }
 
-getApiResponseSchema(){
-  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
-
-getDomainSchema(data){
-  this.sandboxService.getDomainSchema(data).subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.domainSchemaData = res.data;
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
-
-tabClick(tab) {
-  if(tab.index==0){
-    // this.getApiRequestSchema('createLoanApplicationsRequest');
-    // this.getApiResponseSchema('createLoanApplicationsResponse');
-  }else if(tab.index==1){
-  }else if (tab.index ==2){
-  }
-}
+// tabClick(tab) {
+//   if(tab.index==0){
+//     // this.getApiRequestSchema('createLoanApplicationsRequest');
+//     // this.getApiResponseSchema('createLoanApplicationsResponse');
+//   }else if(tab.index==1){
+//   }else if (tab.index ==2){
+//   }
+// }
   
 }
