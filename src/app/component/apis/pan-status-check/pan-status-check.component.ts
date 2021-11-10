@@ -16,44 +16,15 @@ export class PanStatusCheckComponent implements OnInit {
 
   @Input() menuData: any;
 
-  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
-
-  requestHeader = Utils.jsonStringify({
-    "clientId" : "{{your clientId available in profile section}}",
-    "secretId" : "{{your secretId available in profile section}}",
-    "Content-Type" : "application/json"
-  });
-  requestBody  = Utils.jsonStringify({
-    "pan": "",
-    "name": "",
-    "dob": "DD/MM/YYYY",
-    "consent": "Y"
-  });
-responseBody = Utils.jsonStringify({
-    "status": 1001,
-    "message": "Details found",
-    "data": {
-        "nameMatch": false,
-        "status": "Active",
-        "dobMatch": true,
-        "duplicate": false
-    }
-  });
- panStatusCheckForm: FormGroup;
+  url : string = null;
+  panStatusCheckForm: FormGroup;
   position = '';
   industry = '';
   experience = 0;
   response : any="Response Will be Rendered Here.";
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
-  // apiRequestSchemaData: any[] = [];
-  // apiResponseSchemaData: any[] = [];
-  domainSchemaData: any[] = [];
-  // apiRequestBody: any = {};
-  // apiResponseBody: any = {};
-  apiRequestData: any = {};
-  apiResponseData: any = {};
-  apiMstrId = null;
+  // domainSchemaData: any[] = [];
   public readonly constant : any = null;
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils, private aesGcmEncryption: AesGcmEncryptionService) {
@@ -69,9 +40,6 @@ responseBody = Utils.jsonStringify({
       dob: ['', Validators.required],
       consent:['', null]
     });
-    this.apiMstrId = this.menuData.service.id;
-    this.getApiRequestSchema();
-    this.getApiResponseSchema();
   }
 
   onFormSubmit() {
@@ -96,48 +64,18 @@ responseBody = Utils.jsonStringify({
     });
   }
   
-  getApiRequestSchema(){
-    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
-
-getApiResponseSchema(){
-  this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
-              "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
-
-getDomainSchema(data){
-  this.sandboxService.getDomainSchema(data).subscribe(res => {
-    if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-      if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.domainSchemaData = res.data;
-      }
-    } else {
-      this.utils.warningSnackBar(res.message);
-    }
-  }, (error: any) => {
-    this.utils.errorSnackBar(error);
-  });
-}
+// getDomainSchema(data){
+//   this.sandboxService.getDomainSchema(data).subscribe(res => {
+//     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+//       if(!Utils.isObjectNullOrEmpty(res.data)){
+//         this.domainSchemaData = res.data;
+//       }
+//     } else {
+//       this.utils.warningSnackBar(res.message);
+//     }
+//   }, (error: any) => {
+//     this.utils.errorSnackBar(error);
+//   });
+// }
 
 }

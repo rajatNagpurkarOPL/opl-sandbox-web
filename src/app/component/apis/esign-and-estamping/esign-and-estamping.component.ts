@@ -25,7 +25,7 @@ export class EsignAndEstampingComponent implements OnInit {
   @ViewChild('eSignCordinatesAccordion') eSignCordinatesAccordion: MatAccordion;
   @Input() menuData: any;
 
-  url : string = "https://sit-opl.instantmseloans.in/gateway-service";
+  url : string = null;
 
   eSignAndeStampingForm: FormGroup;
   returnUpdateUrl: FormControl;
@@ -47,10 +47,7 @@ export class EsignAndEstampingComponent implements OnInit {
   response : any = "Response Will be Rendered Here.";
   formBuilder : any = null;
   matcher = new CustomErrorStateMatcherComponent();
-  domainSchemaData: any[] = [];
-  apiRequestData: any = {};
-  apiResponseData: any = {};
-  apiMstrId = null;
+  // domainSchemaData: any[] = [];
   step = 0;
   participantStep = 0;
   documentStep = 0;
@@ -70,11 +67,8 @@ export class EsignAndEstampingComponent implements OnInit {
 
   ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
-    this.apiMstrId = this.menuData.service.id;
     this.createControls();
     this.createEsignAndEstampingForm();
-    this.getApiRequestSchema();
-    this.getApiResponseSchema();
     this.setLoanTransactionId();
   }
 
@@ -326,49 +320,19 @@ export class EsignAndEstampingComponent implements OnInit {
     this.setLoanTransactionId();
   }
 
-  getApiRequestSchema(){
-    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'REQUEST').subscribe(res => {
-      if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-        if(!Utils.isObjectNullOrEmpty(res.data)){
-          this.apiRequestData = {"apiSchemaData": res.data.apiReqResDetails ,
-                "apiBodyData":res.data.reqBody ,"apiHeaderData":res.data.reqHeader};
-        }
-      } else {
-        this.utils.warningSnackBar(res.message);
-      }
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    });
-  }
-
-  getApiResponseSchema(){
-    this.sandboxService.getDocumentationAPIDetails(this.apiMstrId,'RESPONSE').subscribe(res => {
-      if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-        if(!Utils.isObjectNullOrEmpty(res.data)){
-          this.apiResponseData = {"apiSchemaData": res.data.apiReqResDetails ,
-                "apiBodyData":res.data.resBody ,"apiHeaderData":res.data.resHeader};
-        }
-      } else {
-        this.utils.warningSnackBar(res.message);
-      }
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    });
-  }
-
-  getDomainSchema(data){
-    this.sandboxService.getDomainSchema(data).subscribe(res => {
-      if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
-        if(!Utils.isObjectNullOrEmpty(res.data)){
-          this.domainSchemaData = res.data;
-        }
-      } else {
-        this.utils.warningSnackBar(res.message);
-      }
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    });
-  }
+  // getDomainSchema(data){
+  //   this.sandboxService.getDomainSchema(data).subscribe(res => {
+  //     if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
+  //       if(!Utils.isObjectNullOrEmpty(res.data)){
+  //         this.domainSchemaData = res.data;
+  //       }
+  //     } else {
+  //       this.utils.warningSnackBar(res.message);
+  //     }
+  //   }, (error: any) => {
+  //     this.utils.errorSnackBar(error);
+  //   });
+  // }
 
   setStep(index: number) {
     this.step = index;

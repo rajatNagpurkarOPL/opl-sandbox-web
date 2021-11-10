@@ -1,96 +1,34 @@
-        <div>
-            <div class="card-header row row-flex">
-                <h3 class="card-title" style="border-left-color: inherit; ">
-                <strong><span class="label-text">Credit Rating </span></strong>
-                </h3><!---->
-            </div>
-            <div class="card-body"><!---->
-                <div class="well well-sm p-0">
-                    <div class="table-container">
-                        <div class="form-group">
-                            <mat-form-field style="width: 10%; background-color: #777;">
-                                <input matInput type="text" style="font-weight: bold; color: white;" value="End-Point" [disabled]="true">
-                            </mat-form-field>
-                            <mat-form-field style="width: 80% !important;">
-                                <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}" readonly>
-                            </mat-form-field>
-                            <mat-form-field style="width: 10%; background-color: #777;">
-                                <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div><!---->
-                <mat-tab-group>   
-                    <mat-tab label="Tryout / Implement">
-                        <div>
-                                <form>
-                                    <mat-card style="display: flex; width: 100%;">
-                                        <form class="example-form" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
-                                          <mat-form-field class="example-full-width">
-                                            <mat-label>CIN/PAN/KID</mat-label>
-                                            <input type="text" matInput [formControl]="creditRatingForm.controls.id" [errorStateMatcher]="matcher" placeholder="Ex. L23201MH1959GOI011388">
-                                            <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
-                                                Please Enter CIN/PAN/KID.
-                                            </mat-error>
-                                        </mat-form-field>
-                                        &nbsp;
-                                          <mat-form-field class="example-full-width">
-                                              <mat-label>Name (Optional)</mat-label>
-                                              <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
-                                            </mat-form-field>
-                                            &nbsp;
-                                          <mat-form-field class="example-full-width">
-                                            <mat-label>Rating Agency</mat-label>
-                                            <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
-                                              <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
-                                                {{agency}}
-                                              </mat-option>
-                                            </mat-select>
-                                            <mat-error *ngIf="creditRatingForm.get('ratingAgency').hasError('required')">
-                                                Please select rating agency.
-                                            </mat-error>
-                                          </mat-form-field>
-                                          <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Get Credit Ratings</button>
-                                        </form>
-                                      </mat-card>
-                                </form>
-                        </div>
-                        <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
-                    </mat-tab>
-
-                      <mat-tab label="Request Document"> 
-                                <div class="card-body">
-                                    <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
-                                  </div>
-                                <!--<div class="card-header row row-flex">
-                                    <h3 class="card-title" style="border-left-color: inherit; ">
-                                 <span class="label-text">Request</span>
-                                    </h3>
-                                </div>-->
-                        </mat-tab>  
-                        <mat-tab label="Response Document">
-                                <!-- <div class="card-header row row-flex">
-                                   <h3 class="card-title" style="border-left-color: inherit; ">
-                                    <span class="label-text">Response</span>
-                                    </h3> 
-                                </div>--> 
-                                <div class="card-body">
-                                    <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
-                                </div> 
-                        </mat-tab>
-                </mat-tab-group>
-            </div>
-    </div>   
-<style>
-    table, th , td {
-       border: 1px solid grey;
-       border-collapse: collapse;
-       padding: 5px;
-    }
-    table tr:nth-child(odd) {
-       background-color: #f2f2f2;
-    }
-    table tr:nth-child(even) {
-       background-color: #ffffff;
-    }
- </style>
+<form>
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
+            <mat-form-field class="example-full-width">
+                <mat-label>CIN/PAN/KID</mat-label>
+                <input type="text" matInput [formControl]="creditRatingForm.controls.id" [errorStateMatcher]="matcher"
+                    placeholder="Ex. L23201MH1959GOI011388">
+                <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
+                    Please Enter CIN/PAN/KID.
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>Name (Optional)</mat-label>
+                <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher"
+                    placeholder="Ex. Abc Pvt Ltd">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>Rating Agency</mat-label>
+                <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
+                    <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
+                        {{agency}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="creditRatingForm.get('ratingAgency').hasError('required')">
+                    Please select rating agency.
+                </mat-error>
+            </mat-form-field>
+            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Get Credit Ratings</button>
+        </form>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

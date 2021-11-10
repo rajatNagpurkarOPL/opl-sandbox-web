@@ -9,16 +9,70 @@
     </mat-nav-list>        
   </ng-container>  
   </mat-drawer>
-
-  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined">
-          <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG" [menuData]="selectedInnerData"></app-credit-rating>
-          <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK" [menuData]="selectedInnerData"></app-pan-status-check>
-          <app-bank-account-verification *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION" [menuData]="selectedInnerData"></app-bank-account-verification>   
-          <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL" [menuData]="selectedInnerData"></app-udhyam-reg-detail>
-          <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL" [menuData]="selectedInnerData"></app-ca-individual-detail>
-          <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL" [menuData]="selectedInnerData"></app-ca-firm-detail>
-          <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY" [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
-          <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP" [menuData]="selectedInnerData"></app-esign-and-estamping>
-          <app-introduction *ngIf="selectedMenuItem == this.constant.MASTER_CODE.DETAILS"></app-introduction>
+  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined && selectedMenuItem == this.constant.MASTER_CODE.DETAILS">
+    <app-introduction *ngIf="selectedMenuItem == this.constant.MASTER_CODE.DETAILS"></app-introduction>
+  </div>
+  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined && selectedMenuItem != this.constant.MASTER_CODE.DETAILS">
+    <div>
+      <div class="card-header row row-flex">
+          <h3 class="card-title" style="border-left-color: inherit; ">
+          <strong><span class="label-text">{{selectedInnerData != null ? selectedInnerData.value : ""}}</span></strong>
+          </h3>
+      </div>
+      <div class="card-body">
+          <div class="well well-sm p-0">
+              <div class="table-container">
+                  <div class="form-group">
+                      <mat-form-field style="width: 10%; background-color: #777;">
+                          <input matInput type="text" style="font-weight: bold; color: white;" value="End-Point" [disabled]="true">
+                      </mat-form-field>
+                      <mat-form-field style="width: 80% !important;">
+                          <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}" readonly>
+                      </mat-form-field>
+                      <mat-form-field style="width: 10%; background-color: #777;">
+                          <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div><!---->
+          <mat-tab-group>   
+              <mat-tab label="Tryout / Implement">
+                  <div>
+                    <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG" [menuData]="selectedInnerData"></app-credit-rating>
+                    <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK" [menuData]="selectedInnerData"></app-pan-status-check>
+                    <app-bank-account-verification *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION" [menuData]="selectedInnerData"></app-bank-account-verification>   
+                    <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL" [menuData]="selectedInnerData"></app-udhyam-reg-detail>
+                    <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL" [menuData]="selectedInnerData"></app-ca-individual-detail>
+                    <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL" [menuData]="selectedInnerData"></app-ca-firm-detail>
+                    <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY" [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
+                    <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP" [menuData]="selectedInnerData"></app-esign-and-estamping>
+                  </div>
+              </mat-tab>
+              <mat-tab label="Request Document">
+                <div class="card-body">
+                  <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
+                </div>
+              </mat-tab>  
+              <mat-tab label="Response Document">       
+                <div class="card-body">
+                  <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
+                </div> 
+              </mat-tab>
+          </mat-tab-group>
+      </div>
+</div>   
+<style>
+table, th , td {
+ border: 1px solid grey;
+ border-collapse: collapse;
+ padding: 5px;
+}
+table tr:nth-child(odd) {
+ background-color: #f2f2f2;
+}
+table tr:nth-child(even) {
+ background-color: #ffffff;
+}
+</style>          
         </div>
 </mat-drawer-container>
