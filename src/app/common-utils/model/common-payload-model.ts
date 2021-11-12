@@ -1,13 +1,13 @@
 export class Payload {
     constructor(
         public metadata: Metadata,
-        public data: any
+        public payload: any
     ){}
 }
 
 export class Metadata {
     constructor(
-        public sKey: string,
+        public secretId: string,
         public version: string,
         public timestamp: String,
         public requestId: string
