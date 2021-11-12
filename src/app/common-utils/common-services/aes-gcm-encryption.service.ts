@@ -76,12 +76,12 @@ export class AesGcmEncryptionService {
   }
 
   getDecPayload(payload: any){
-    const byteData = forge.util.decode64(payload.data);
-    const sKey = forge.util.decode64(payload.metadata.sKey);
+    const byteData = forge.util.decode64(payload.payload);
+    const sKey = forge.util.decode64(payload.metadata.secretId);
     const iv = this.getBytesFromString(this.getBytesFromString(payload.metadata.timestamp));
     const sKeyDec = forge.util.decode64(this.decryptSecretKey(sKey));
     const decData = this.decryptAesGcm(sKeyDec, iv, byteData);
-    payload.data = decData
+    payload.payload = decData
     return payload;
   }
 
