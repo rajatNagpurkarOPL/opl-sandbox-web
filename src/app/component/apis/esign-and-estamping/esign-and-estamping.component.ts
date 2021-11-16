@@ -312,8 +312,12 @@ export class EsignAndEstampingComponent implements OnInit {
     let requestedData = {"applicationId": -1, "userId": -1,"returnUpdateUrl": this.returnUpdateUrl.value, "neSLRequestProxy": {"loan": data}};
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.getEsignAndEstamping(this.url, payload, headers).subscribe(res => {
-      let decData = this.aesGcmEncryption.getDecPayload(res);
-      this.response = Utils.jsonStringify(decData);
+      if(!Utils.isObjectNullOrEmpty(res.status)){
+        this.utils.errorSnackBar(res.message);
+      }else{
+        let decData = this.aesGcmEncryption.getDecPayload(res);
+        this.response = Utils.jsonStringify(decData);
+      }
     }, error => {
       this.utils.errorHandle(error);
     });
