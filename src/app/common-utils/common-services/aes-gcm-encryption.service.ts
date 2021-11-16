@@ -81,7 +81,7 @@ export class AesGcmEncryptionService {
     const iv = this.getBytesFromString(this.getBytesFromString(payload.metadata.timestamp));
     const sKeyDec = forge.util.decode64(this.decryptSecretKey(sKey));
     const decData = this.decryptAesGcm(sKeyDec, iv, byteData);
-    payload.payload = JSON.stringify(JSON.parse(decData))
+    payload.payload = JSON.parse(decData);
     return payload;
   }
 
