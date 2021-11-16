@@ -71,7 +71,7 @@ export class AesGcmEncryptionService {
     const trasDate = this.getIvFromTimestamp();
     this.iv = this.getBytesFromString(trasDate);
     return new Payload(
-      new Metadata(sKeyEnc,"1.0", trasDate, Utils.getUUID()), 
+      new Metadata(sKeyEnc,"V1.0", trasDate, Utils.getUUID()), 
       this.encryptAesGcm(this.sKey, this.iv, data));
   }
 
