@@ -56,8 +56,12 @@ export class PanStatusCheckComponent implements OnInit {
     let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.panStatusCheck(this.url,payload,headers).subscribe(res => {
-      let decData = this.aesGcmEncryption.getDecPayload(res);
-      this.response = Utils.jsonStringify(decData);
+      if(!Utils.isObjectNullOrEmpty(res.status)){
+        this.utils.errorSnackBar(res.message);
+      }else{
+        let decData = this.aesGcmEncryption.getDecPayload(res);
+        this.response = Utils.jsonStringify(decData);
+      }
     },err => {
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
