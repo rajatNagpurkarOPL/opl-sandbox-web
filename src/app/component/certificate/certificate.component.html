@@ -10,8 +10,13 @@
                         <input type="file" matInput accept="application/x-x509-ca-cert, text/plain" [formControl]="fileControl" (change)="onSelectDocument($event)">
                     </mat-form-field>
                 </div>
-                <div class="col-mg-2">
-                    <button type="button" style="margin-top: 16%;" (click)="uploadDocuments()" mat-flat-button color="primary">Upload</button>
+                <div class="col-mg-2 d-flex al-center">
+                    <button type="button"  (click)="uploadDocuments()" mat-flat-button color="primary">Upload</button>
+                     &nbsp;&nbsp;&nbsp; <h3>or</h3> 
+                    <div class="col" *ngIf="!formOpen">
+                        <button type="button" (click)="manuallyCertificate(); formOpen=true;" color="primary" mat-flat-button>Manually Certificate</button>
+                    </div>
+
                 </div>
                 <div class="col" style="margin-top: 12px; text-align: -webkit-right;">
                     <button type="button" (click)="downloadFile(null, 'OPL_Public_Certificate.crt', true)" color="primary" mat-flat-button style="display: flex; border-radius: 5px;" matTooltip="Click here to download OPL public Certificate" matTooltipPosition="above">
@@ -21,34 +26,188 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
+
+      <!-- form created for ssl -->  
+        <form [formGroup]="manuallyCertificateForm" *ngIf="formOpen" class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12">
+            <hr>
+            <div class="row">
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>File Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter File Name" formControlName="fileName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.fileName"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <!-- <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                            <label>Created Date</label>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <input matInput placeholder="Enter Created Date " formControlName="createdDate">
+                                <mat-error>
+                                    <app-print-error [control]="manuallyCertificateForm.controls.createdDate"></app-print-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>    -->
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Algorithm Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-select formControlName="algorithm" placeholder="Select Algorithm Name">
+                            <mat-option *ngFor="let data of algorithmList" [value]="data.value">{{data.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.algorithm"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Key Size</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-select formControlName="keySize" placeholder="Select Key Size">
+                            <mat-option *ngFor="let data of keySizeList" [value]="data.value">{{data.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.keySize"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Organization Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Organization Name" formControlName="organizationName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.organizationName"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Organization Unit Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Organization Unit Name" formControlName="organizationUnitName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.organizationUnitName">
+                            </app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Country</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Country" formControlName="country">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.country"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>State</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter State" formControlName="state">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.state"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Locality</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Locality" formControlName="locality">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.locality"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <!-- <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Public Key Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter public Key Name" formControlName="publicKeyName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.publicKeyName"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Private Key Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter private Key Name" formControlName="privateKeyName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.privateKeyName"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div> -->
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Common Name</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Common Name" formControlName="commonName">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.commonName"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+                    <label>Email Address</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <input matInput placeholder="Enter Email Address" formControlName="emailAddress">
+                        <mat-error>
+                            <app-print-error [control]="manuallyCertificateForm.controls.emailAddress"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="d-flex al-center w-100 js-between filter-txt">
+                    <div class="sidebar-main-title1 mt-4">
+                        <button type="button" (click)="saveDocument()" color="primary"
+                            mat-flat-button>Save</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" (click)="cancelOrResetForm();formOpen = false;" color="primary"
+                            mat-flat-button>Cancel</button>
+                    </div>
+                </div>
+        
+            </div>
+        </form>
+        <br> <br> <br>
+
+          <!--table -->
     <div style="overflow-x: auto;">
-        <table class="table dash-table-api">
+        <table matSort (matSortChange)="sortData($event)"  class="table dash-table-api">
             <thead>
             <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Cert File Name</th>
-                <th scope="col">Created Date</th>
-                <th scope="col">ReferenceId</th>
-                <th scope="col">Algorithm</th>
-                <th scope="col">Cert Created Date</th>
-                <th scope="col">Cert Expity Date</th>
-                <th scope="col">Key Size</th>
-                <th scope="col">Organization Name</th>
-                <th scope="col">Organization Unit Name</th>
-                <th scope="col">Country</th>
-                <th scope="col">State</th>
-                <th scope="col">Locality</th>
-                <th scope="col">Common Name</th>
-                <th scope="col">Email Address</th>
+                <th  scope="col">No.</th>
+                <th mat-sort-header="fileName"  scope="col">Cert File Name</th>
+                <th mat-sort-header="createdDate" scope="col">Created Date</th>
+                <th mat-sort-header="referenceId" scope="col">ReferenceId</th>
+                <th mat-sort-header="algorithm" scope="col">Algorithm</th>
+                <th mat-sort-header="certCreatedDate" scope="col">Cert Created Date</th>
+                <th mat-sort-header="certExpiryDate"  scope="col">Cert Expity Date</th>
+                <th mat-sort-header="keySize" scope="col">Key Size</th>
+                <th mat-sort-header="organizationName" scope="col">Organization Name</th>
+                <th mat-sort-header="organizationUnitName" scope="col">Organization Unit Name</th>
+                <th mat-sort-header="country" scope="col">Country</th>
+                <th mat-sort-header="state" scope="col">State</th>
+                <th mat-sort-header="locality" scope="col">Locality</th>
+                <th mat-sort-header="commonName" scope="col">Common Name</th>
+                <th mat-sort-header="emailAddress" scope="col">Email Address</th>
                 <th scope="col">Status</th>
-                <th scope="col">Active/Inactive</th>
-                <th scope="col">Download</th>
+                <th scope="col">Active/Inactive</th> 
+                <th scope="col">Genrate</th>
             </tr>
             </thead>
             <tbody *ngIf="documentsList.length > 0">
-                <tr *ngFor="let document of documentsList; index as documentIndex">
-                    <td>{{documentIndex+1}}.</td>
+                <tr *ngFor="let document of documentsList | slice: (pagination.page-1) * pagination.size : (pagination.page-1) * pagination.size + pagination.size; index as documentIndex;">
+                    <td>{{(pagination.size*(pagination.page-1))+(documentIndex+1)}}</td>
                     <td>{{document.fileName}}</td>
                     <td>{{document.createdDate | date}}</td>
                     <td>{{document.referenceId}}</td>
@@ -65,12 +224,17 @@
                     <td>{{document.emailAddress ? document.emailAddress : '-'}}</td>
                     <td><p class="d-flex al-center w-100 js-center mb-0"><span [ngClass]="{'dot':document.isActive,'inActive':!document.isActive}">&#8226; </span>{{document.isActive ? 'Active' : 'InActive'}}</p></td>
                     <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id, document.fileName)" color="primary" checked="{{document.isActive}}" matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : ''}}" matTooltipPosition="above"></mat-slide-toggle>
-                    <td style="text-align: center;">
+                    <td style="text-align: center;" *ngIf="document.referenceId == null">
+                        <button class="btn3-b4l"  matTooltip="{{document.fileName}}" style="line-height: 14px;"  matTooltipPosition="above" aria-label="Download File" (click)="generateFile(document)">
+                             genrate
+                        </button>
+                    </td> 
+                    <td style="text-align: center;" *ngIf="document.referenceId != null" >
                         <button class="btn3-b4l"  matTooltip="{{document.fileName}}" style="line-height: 14px;"  matTooltipPosition="above" aria-label="Download File" (click)="downloadFile(document.referenceId, document.fileName, false)">
                             <mat-icon>file_download</mat-icon>
                         </button>
-                    </td>
-                </tr>
+                    </td> 
+              </tr>
             </tbody>
             <tbody *ngIf="documentsList.length == 0">
                 <tr>
@@ -78,7 +242,28 @@
                 </tr>
               </tbody>
         </table>
+    </div> 
+</div>
+   
+<br><br>
+
+<!---pagination-->
+<div class="row pagination-table" *ngIf="documentsList">
+    <div class="col-sm-12 col-md-4" style="margin-left: 15%;">
+        <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
+            {{((pagination.size*(pagination.page-1))+1)}} to
+            {{(pagination.size*pagination.page) > (documentsList .length) ? (documentsList .length) :
+            (pagination.size*pagination.page)}} of {{documentsList .length}}entries
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [maxSize]=3 [collectionSize]="documentsList .length" [(page)]="pagination.page"
+                [pageSize]="pagination.size" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+            </ngb-pagination>
+        </div>
     </div>
 </div>
-        
+  
+  
     

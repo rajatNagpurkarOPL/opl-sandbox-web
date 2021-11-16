@@ -152,7 +152,11 @@ export class SandboxService {
     }else{
       return this.http.get(URLS.SANDBOX_DMS.DOWNLOAD_FILE + '/' + referenceId, true, false);
     }
- }
+ }  
+  
+ generateFile(data:any): Observable<any>{
+  return this.http.post(URLS.SANDBOX_USER.GET_Generate_Certificate,data);
+}
 
  getOplPublicKey(): Observable<any>{
   return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PUBLIC_KEY, false);
@@ -160,6 +164,10 @@ export class SandboxService {
 
  getOplPrivateKey(): Observable<any>{
   return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PRIVATE_KEY, false);
- }
- 
+ }  
+
+manualSslCertificate(data : any):Observable<any>{
+ return this.http.post(URLS.SANDBOX_USER.GET_Manual_Certificate,data);
+}  
+
 }
