@@ -14,7 +14,7 @@
                     <button type="button"  (click)="uploadDocuments()" mat-flat-button color="primary">Upload</button>
                      &nbsp;&nbsp;&nbsp; <h3>or</h3> 
                     <div class="col" *ngIf="!formOpen">
-                        <button type="button" (click)="manuallyCertificate(); formOpen=true;" color="primary" mat-flat-button>Manually Certificate</button>
+                        <button type="button" (click)="manuallyCertificate(); formOpen=true;" color="primary" mat-flat-button>Generate New</button>
                     </div>
 
                 </div>
@@ -169,13 +169,13 @@
         
                 <div class="d-flex al-center w-100 js-between filter-txt">
                     <div class="sidebar-main-title1 mt-4">
-                        <button type="button" (click)="saveDocument()" color="primary"
+                        <button class="sand-box-cnl" type="button" (click)="cancelOrResetForm();formOpen = false;" color="basic"
+                           mat-flat-button>Cancel</button>&nbsp;&nbsp; 
+                           <button type="button" (click)="saveDocument()" color="primary"
                             mat-flat-button>Save</button>&nbsp;&nbsp;&nbsp;
-                        <button type="button" (click)="cancelOrResetForm();formOpen = false;" color="primary"
-                            mat-flat-button>Cancel</button>
-                    </div>
+                    </div>  
                 </div>
-        
+                
             </div>
         </form>
         <br> <br> <br>

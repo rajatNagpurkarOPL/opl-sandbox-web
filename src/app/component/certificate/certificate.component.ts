@@ -83,8 +83,8 @@ export class CertificateComponent implements OnInit {
       locality: new FormControl('', [Validators.required]),
       //publicKeyName: new FormControl('', [Validators.required]),
       //privateKeyName: new FormControl('', [Validators.required]),
-      commonName: new FormControl('', [Validators.required]),
-      emailAddress: new FormControl('', [Validators.required]),
+      commonName: new FormControl('', [Validators.required,Validators.minLength(3)]),
+      emailAddress: new FormControl('', [Validators.required,Validators.pattern('^(([^<>()\\[\\]\\.,;:\\s@"]+(\.[^<>()\\[\\]\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]),
       userId: new FormControl(this.getUserId(), [Validators.required]),
       sslUploadType: new FormControl('MANUALLY', [Validators.required]),
     })
