@@ -54,12 +54,8 @@ export class CAIndividualDetailComponent implements OnInit {
     let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.caIndividualDetail(this.url,payload,headers).subscribe(res => {
-      if(!Utils.isObjectNullOrEmpty(res.status)){
-        this.utils.errorSnackBar(res.message);
-      }else{
-        let decData = this.aesGcmEncryption.getDecPayload(res);
-        this.response = Utils.jsonStringify(decData);
-      }
+      let decData = this.aesGcmEncryption.getDecPayload(res);
+      this.response = Utils.jsonStringify(decData);
     },err => {
       this.utils.errorHandle(err);
     });
