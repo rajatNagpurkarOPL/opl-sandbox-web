@@ -224,14 +224,12 @@ createPropertyLoanApplication(stateName:any ,data: any): Observable<any> {
   return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data ,false);
 }
 
-
 ivprSaveForm(ipvrUrl: any, data: any): Observable<any> {
   return this.http.post(ipvrUrl, data, false);
 }  
 
-ipvrviewresponse(url: any): Observable<any> {
-  return this.http.get(url, false);
+ipvrviewresponse(applicationId: any): Observable<any> {
+  return this.http.get(URLS.PROPLEGIT.GET_PROPLEGIT_REQ_VIEW +'/' + applicationId, false);
 } 
   
-
 }
