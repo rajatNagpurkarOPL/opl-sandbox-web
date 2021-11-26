@@ -92,6 +92,7 @@ export class CertificateComponent implements OnInit {
 
   saveDocument() {
     console.log("certificatesslform", this.manuallyCertificateForm.getRawValue());
+     if(this.manuallyCertificateForm.valid){
     this.sandboxService.manualSslCertificate(this.manuallyCertificateForm.getRawValue()).subscribe(res => {
       if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
         console.log("line82res", res);
@@ -105,6 +106,9 @@ export class CertificateComponent implements OnInit {
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
+  }else{
+    this.manuallyCertificateForm.markAllAsTouched();
+  }
   }
 
   cancelOrResetForm() {

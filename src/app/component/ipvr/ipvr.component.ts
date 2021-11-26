@@ -7,7 +7,7 @@ import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/ae
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { SandboxService } from 'src/app/service/sandbox.service';
-import { isJsxFragment } from 'typescript';
+
 
 
 @Component({
@@ -83,6 +83,7 @@ export class IpvrComponent implements OnInit {
       LoanAmount: new FormControl('', [Validators.required, Validators.min(1)]),
       State: new FormControl('', [Validators.required]),
       Region: new FormControl(''),
+      SurveyGatNo: new FormControl(''),
       PropertyOwners: this.fb.array([])
     });
   }
@@ -102,6 +103,22 @@ export class IpvrComponent implements OnInit {
   onDateChange(value: any, group: any, control: any, locale: any, format: any) {
     if (value) {
       group.get(control).patchValue(new DatePipe(locale).transform(value, format));
+    }
+  }
+
+  stateAndDocumentValidation() {
+    if (this.ipvrreqForm.controls.State == 1) {
+      if (this.ipvrreqForm.controls.BaseDocumentType === '712') {
+
+      } else if (this.ipvrreqForm.controls.BaseDocumentType === 'PropertyCard') {
+
+      }
+    } else if (this.ipvrreqForm.controls.State == 2) {
+      if (this.ipvrreqForm.controls.BaseDocumentType === '712') {
+
+      } else if (this.ipvrreqForm.controls.BaseDocumentType === 'PropertyCard') {
+
+      }
     }
   }
 
@@ -229,7 +246,6 @@ export class IpvrComponent implements OnInit {
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
-
     //WardMaster
     this.sandboxService.getWardListByDistrictIdMaster(event.id).subscribe(res => {
       this.wardList = res.data;
@@ -261,11 +277,11 @@ export class IpvrComponent implements OnInit {
   }
 
   saveipvrform() {
-    console.log("ipvrform261", this.ipvrreqForm);
-    console.log("ipvrform34::>>", this.ipvrreqForm.value);
-    console.log("final url:>>>", this.ipvrUrl);
-
-    var ipvrSaveData = this.ipvrreqForm.value;
+    this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value;
+    this.removeIpvrFormControls();
+    //if (this.ipvrreqForm.valid) {
+    let ipvrSaveData = this.ipvrreqForm.value;
+    //set the  statename
     ipvrSaveData.DistrictName = this.ipvrreqForm.value.DistrictName.name;
     ipvrSaveData.State = this.ipvrreqForm.value.State.name;
     if (ipvrSaveData.BaseDocumentType === '712') {
@@ -274,30 +290,50 @@ export class IpvrComponent implements OnInit {
     if (ipvrSaveData.BaseDocumentType === 'PropertyCard') {
       ipvrSaveData.CitySurveyOffice = this.ipvrreqForm.value.CitySurveyOffice.name;
     }
-    if (ipvrSaveData.State != null && ipvrSaveData.State == 1 && ipvrSaveData.BaseDocumentType === 'PropertyCard') {
+    if (ipvrSaveData.State != null && this.ipvrreqForm.controls.State.value.id == 1 && ipvrSaveData.BaseDocumentType === 'PropertyCard') {
       ipvrSaveData.Region = this.ipvrreqForm.value.Region.name;
     }
 
-    if (this.ipvrreqForm.valid) {
-      //let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE);
-      // let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
-      //let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData)); 
+    this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, ipvrSaveData).subscribe(res => {
+      if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
+        this.response = Utils.jsonStringify(res);
+        this.utils.successSnackBar(res.message);
+        this.ipvrForm();
+      } else {
+        this.utils.warningSnackBar(res.message);
+      }
+    }, (error: any) => {
+      this.utils.errorSnackBar(error);
+    });
+    //} else {
+    // this.ipvrreqForm.markAllAsTouched();
+    // }
+  }
 
-      this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, ipvrSaveData).subscribe(res => {
-        //if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
-          console.log("saveapiresponse", res);
-          //let decData = this.aesGcmEncryption.getDecPayload(res);
-          this.response = Utils.jsonStringify(res);
-          this.utils.successSnackBar(res.message);
-          this.ipvrreqForm.reset();
-        //} else {
-         // this.utils.warningSnackBar(res.message);
-        //}
-      }, (error: any) => {
-        this.utils.errorSnackBar(error);
-      });
-    } else {
-      this.ipvrreqForm.markAllAsTouched();
+  removeIpvrFormControls() {
+    if (!(this.ipvrreqForm.value.State.id == 1 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard')) {
+      this.ipvrreqForm.removeControl('Region');
+    }
+    if (this.ipvrreqForm.value.BaseDocumentType != '712') {
+      this.ipvrreqForm.removeControl('TalukaName');
+    }
+    if (this.ipvrreqForm.value.BaseDocumentType != 'PropertyCard') {
+      this.ipvrreqForm.removeControl('CitySurveyOffice');
+    }
+    if (this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType == 'PropertyCard') {
+      this.ipvrreqForm.removeControl('VillageName');
+    }
+    if (this.ipvrreqForm.value.State.id == 1 || this.ipvrreqForm.value.BaseDocumentType != '712') {
+      this.ipvrreqForm.removeControl('SurveyNo');
+    }
+    if (this.ipvrreqForm.value.State.id == 2) {
+      this.ipvrreqForm.removeControl('SurveyGatNo');
+    }
+    if (this.ipvrreqForm.value.BaseDocumentType != 'PropertyCard') {
+      this.ipvrreqForm.removeControl('CitySurveyNumber');
+    }
+    if (!(this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard')) {
+      this.ipvrreqForm.removeControl('Ward');
     }
   }
 
