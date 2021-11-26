@@ -30,9 +30,9 @@ export class IpvrViewComponent implements OnInit {
 
   saveipvrform() {
     let applicationId = this.ipvrResponseForm.value.ApplicationId;
-    let checkurl = "http://10.10.4.167:1114/proplegit/application/pvr/view" + "/" + applicationId;
+    let prepredurl = this.url + "/" + applicationId;
     if(this.ipvrResponseForm.valid){
-    this.sandboxService.ipvrviewresponse(checkurl).subscribe(res => {
+    this.sandboxService.ipvrviewresponse(prepredurl).subscribe(res => {
       console.log("res-viewres", res);
       this.response = Utils.jsonStringify(res);
     }, (error: any) => {
