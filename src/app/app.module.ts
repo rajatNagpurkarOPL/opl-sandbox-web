@@ -66,6 +66,8 @@ import { IntroductionComponent } from './component/introduction/introduction.com
 import { CertificateComponent } from './component/certificate/certificate.component';
 import { CertificateActivationAlertComponent } from './component/certificate-activation-alert/certificate-activation-alert.component';
 import { DatePipe } from '@angular/common';
+import { IpvrComponent } from './component/ipvr/ipvr.component';
+import { IpvrViewComponent } from './component/ipvr-view/ipvr-view.component';
 
 @NgModule({
   imports: [
@@ -128,7 +130,9 @@ import { DatePipe } from '@angular/common';
     EsignAndEstampingComponent,
     IntroductionComponent,
     CertificateComponent,
-    CertificateActivationAlertComponent
+    CertificateActivationAlertComponent,
+    IpvrComponent,
+    IpvrViewComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

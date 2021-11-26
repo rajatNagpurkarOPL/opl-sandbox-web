@@ -1,0 +1,327 @@
+<!-- <p> ipvr component</p>   -->
+
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form" [formGroup]="ipvrreqForm">     
+        <!-- stateName-->
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>StateName</mat-label>
+            <mat-select formControlName="State" (valueChange)="getRegionMaster($event)">
+                <mat-option *ngFor="let data of stateMasterList" [value]="data">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.State"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>ApplicationNo</mat-label>
+            <input type="text" matInput placeholder="Enter ApplicationNo" formControlName="ApplicationNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.ApplicationNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>BranchCode</mat-label>
+            <input type="text" matInput placeholder="Enter BranchCode" formControlName="BranchCode">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.BranchCode"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>ApplicantName</mat-label>
+            <input type="text" matInput placeholder="Enter ApplicantName" formControlName="ApplicantName">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.ApplicantName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>BankMobileNumber</mat-label>
+            <input type="text" matInput placeholder="Enter BankMobileNumber" formControlName="BankMobileNumber">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.BankMobileNumber"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>BankEmail</mat-label>
+            <input type="text" matInput placeholder="Enter BankEmail" formControlName="BankEmail">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.BankEmail"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>PropertyAddress</mat-label>
+            <input type="text" matInput placeholder="Enter PropertyAddress" formControlName="PropertyAddress">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.PropertyAddress"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>BaseDocumentType</mat-label>
+            <mat-select formControlName="BaseDocumentType" (valueChange)="baseDocumentTypeValidation($event)">
+                <mat-option *ngFor="let data of baseDocumentType" [value]="data.value">
+                    {{data.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.BaseDocumentType"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LandPropertyType</mat-label>
+            <mat-select formControlName="LandPropertyType">
+                <mat-option *ngFor="let data of landPropertyType" [value]="data.value">
+                    {{data.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LandPropertyType"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Region-->
+        <mat-form-field *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.State.id === 1 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'" class="example-full-width mr-all">
+            <mat-label>Region</mat-label>
+            <mat-select formControlName="Region" (valueChange)="getdistrictListByRegionIdMaster($event)">
+                <mat-option *ngFor="let data of regionMasterList" [value]="data">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.Region"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <!--DistrictName-->
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>DistrictName</mat-label>
+            <mat-select formControlName="DistrictName" (valueChange)="getTalukaListByDistrictIdMaster($event)">
+                <mat-option *ngFor="let data of districtNameList" [value]="data">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+          
+        <!--TalukaName-->
+        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
+            <mat-label>TalukaName</mat-label>
+            <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">
+                <mat-option *ngFor="let data of talukaNameList" [value]="data">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.TalukaName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+               
+        <!--CitySurveyOffice-->
+        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'" class="example-full-width mr-all">
+            <mat-label>CitySurveyOffice</mat-label>
+            <mat-select formControlName="CitySurveyOffice" (valueChange)="getVilageListBySurveyOfficeNameMaster($event)">
+                <mat-option *ngFor="let data of getCitySurveyOfficeList" [value]="data">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.CitySurveyOffice"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <!--VillageName-->
+        <mat-form-field *ngIf="this.ipvrreqForm.value.State != null  && !(this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType == 'PropertyCard')" class="example-full-width mr-all">
+            <mat-label>VillageName</mat-label>
+            <mat-select formControlName="VillageName">
+                <mat-option *ngFor="let data of villageNameList" [value]="data.name">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.VillageName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
+            <mat-label>SurveyNo</mat-label>
+            <input type="text" matInput placeholder="Enter SurveyNo" formControlName="SurveyNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.SurveyNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>TpNo</mat-label>
+            <input type="text" matInput placeholder="Enter TpNo" formControlName="TpNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.TpNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>FpNo</mat-label>
+            <input type="text" matInput placeholder="Enter FpNo" formControlName="FpNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.FpNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>KhataNo</mat-label>
+            <input type="text" matInput placeholder="Enter KhataNo" formControlName="KhataNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.KhataNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'" class="example-full-width mr-all">
+            <mat-label>CitySurveyNumber</mat-label>
+            <input type="text" matInput placeholder="Enter CitySurveyNumber" formControlName="CitySurveyNumber">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.CitySurveyNumber"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <!--Ward-->
+        <mat-form-field  *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.State.id === 2 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'" class="example-full-width mr-all">
+            <mat-label>Ward</mat-label>
+            <mat-select formControlName="Ward">
+                <mat-option *ngFor="let data of wardList" [value]="data.name">
+                    {{data.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.Ward"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>SheetNo</mat-label>
+            <input type="text" matInput placeholder="Enter SheetNo" formControlName="SheetNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.SheetNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>FlatSocietySchemeName</mat-label>
+            <input type="text" matInput placeholder="Enter FlatSocietySchemeName" formControlName="FlatSocietySchemeName">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.FlatSocietySchemeName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>FlatBuildingPlotShopNo</mat-label>
+            <input type="text" matInput placeholder="Enter FlatBuildingPlotShopNo" formControlName="FlatBuildingPlotShopNo">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.FlatBuildingPlotShopNo"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LoanAmount</mat-label>
+            <input type="text" matInput placeholder="Enter LoanAmount" formControlName="LoanAmount">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LoanAmount"></app-print-error>
+            </mat-error>
+        </mat-form-field> 
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>TypeOfLoan</mat-label>
+            <mat-select formControlName="TypeOfLoan">
+                <mat-option *ngFor="let data of typeofLoans" [value]="data.value">
+                    {{data.value}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.TypeOfLoan"></app-print-error>
+            </mat-error>
+        </mat-form-field> 
+
+        <!--IsLien--> 
+        <mat-slide-toggle style="margin-right:10em;"  formControlName="IsLien" color="primary" (change)="islienValidation()">IsLien</mat-slide-toggle>               
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LienAmount</mat-label>
+            <input type="text" matInput placeholder="Enter LienAmount" formControlName="LienAmount">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LienAmount"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+            
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LienDate</mat-label>
+            <input matInput formControlName="LienDate" [matDatepicker]="picker" placeholder="Ex.1991/12/03"
+                (dateChange)="onDateChange($event.value, ipvrreqForm, 'LienDate', 'en_IN', 'yyyy-MM-dd')">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LienDate"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LienPersonName</mat-label>
+            <input type="text" matInput placeholder="Enter LienPersonName" formControlName="LienPersonName">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LienPersonName"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+           
+        <mat-form-field class="example-full-width mr-all">
+            <mat-label>LienFrom</mat-label>
+            <input type="text" matInput placeholder="Enter LienFrom" formControlName="LienFrom">
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls.LienFrom"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+        <!--IsOwnerSame-->       
+        <mat-slide-toggle  formControlName="IsOwnerSame" color="primary" style="width: 180px;">IsOwnerSame</mat-slide-toggle> 
+            
+        <!-- #docregion basic-panel -->
+        <!-- #docregion hide-toggle -->
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                    Owner Names
+                </mat-panel-description>
+                <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary" (click)="addNewGroup()">Addownername</button>
+            </mat-expansion-panel-header>
+            <div formArrayName="PropertyOwners">
+                <div *ngFor="let data of ipvrreqForm.get('PropertyOwners').controls;index as i" [formGroupName]="i">
+                    <mat-form-field class="example-full-width mr-all">
+                        <mat-label>Owner Name</mat-label>
+                        <input type="text" matInput placeholder="Enter ownername" formControlName="OwnerName">
+                        <mat-error>
+                            <app-print-error [control]="ipvrreqForm.controls.ownername"></app-print-error>
+                        </mat-error>
+                    </mat-form-field>
+        
+                    <button mat-icon-button color="gray" (click)="deleteAddGroup(i)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </div>      
+            
+        </mat-expansion-panel>     
+                  <br><br>
+           <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary"  (click)="saveipvrform()">save</button> 
+        </form> 
+    </mat-card>
+    <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
+
+    

@@ -28,6 +28,7 @@
                       </mat-form-field>
                       <mat-form-field style="width: 80% !important;">
                           <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}" readonly>
+                          <!-- <input *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{tempIpvrUrl}}" readonly> -->
                       </mat-form-field>
                       <mat-form-field style="width: 10%; background-color: #777;">
                           <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
@@ -46,6 +47,8 @@
                     <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL" [menuData]="selectedInnerData"></app-ca-firm-detail>
                     <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY" [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
                     <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP" [menuData]="selectedInnerData"></app-esign-and-estamping>
+                    <app-ipvr (updatedUrl)="updateIpvrUrl($event)" *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" [menuData]="selectedInnerData"></app-ipvr>
+                    <app-ipvr-view  *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_RES_VIEW" [menuData]="selectedInnerData"></app-ipvr-view>
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">

@@ -39,7 +39,9 @@ export const Constant = {
         DATA_TYPE : "DATA_TYPE", 
         ATM : "ATM",
         E_SIGN_E_STMP : "E_SIGN_E_STMP", 
-        DETAILS:"DETAILS"
+        DETAILS:"DETAILS",
+        PROPLEGIT_REQ:"PROPLEGIT_REQ",
+        PROPLEGIT_RES_VIEW:"PROPLEGIT_RES_VIEW", 
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {
