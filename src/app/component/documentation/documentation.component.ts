@@ -1,3 +1,4 @@
+import { I } from '@angular/cdk/keycodes';
 import {Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
@@ -10,7 +11,7 @@ import { SandboxService } from 'src/app/service/sandbox.service';
   styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
-
+  tempIpvrUrl :String = null;
   url : string = null;
   isExpanded : boolean = false;
   isShowing : boolean = false;
@@ -181,11 +182,18 @@ getApiResponseSchema(){
 getApiData(){
   console.log("MenuData : ",this.selectedInnerData);
   this.url = Utils.prepareApiUrl(this.selectedInnerData, "gateway-service");
-  console.log("URL : ",this.url);
+  this.updateIpvrUrl(null);
+  console.log("URL : ",this.url); 
   this.apiMstrId = this.selectedInnerData.service.id;
   console.log("API Master Id : ",this.apiMstrId);
   this.getApiRequestSchema();
   this.getApiResponseSchema();
+} 
+
+updateIpvrUrl(ipvrStateName:any) {
+    if(!Utils.isObjectNullOrEmpty(ipvrStateName)){
+      this.url = ipvrStateName;
+    }
 }
 
 }

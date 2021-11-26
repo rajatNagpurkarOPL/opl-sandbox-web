@@ -1,10 +1,11 @@
-// const SERVER_URL = "http://localhost:";
-// const SERVER_URL = "https://sit-opl.instantmseloans.in";
-// const SERVER_URL = "http://10.10.5.66:";
-const SERVER_URL = window.location.protocol + '//' + window.location.host;
+ //const SERVER_URL = "http://localhost:";
+ //const SERVER_URL = "https://sit-opl.instantmseloans.in"; 
+ const SERVER_URL = "https://oam.instantmseloans.in";
+ //const SERVER_URL = "http://10.10.5.66:";
+//const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
-const SANDBOX  =  {
-    // endpointFromLocal : SERVER_URL + '1104',
+const SANDBOX  =  { 
+    //endpointFromLocal : SERVER_URL + '1104',
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
@@ -42,9 +43,15 @@ const NSDL_PAN_INQUIRY = {
 };
 
 const SANDBOX_DMS = {
-    // endpointFromLocal : SERVER_URL + '1110',
+  // endpointFromLocal : SERVER_URL + '1110',
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/dms'
+};
+ 
+const PROPLEGIT = {
+    //endpointFromLocal : SERVER_URL + '1114',
+    endpointFromLocal : SERVER_URL,
+    postFix : '/proplegit'
 };
 
 let host = window.location.origin;
@@ -66,7 +73,8 @@ let ECR_GATEWAY_BASE_URL = '';
 let PENNYDROP_BASE_URL = '';
 let UDHYAM_BASE_URL = '';
 let CAAPI_BASE_URL = '';
-let NSDL_PAN_InQUIRY_BASE_URL = '';
+let NSDL_PAN_InQUIRY_BASE_URL = '';  
+let PROPLEGIT_BASE_URL ='';
 
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
@@ -78,7 +86,8 @@ if(host.includes('localhost')){
     PENNYDROP_BASE_URL = GATEWAY.endpointFromLocal + PENNYDROP.postFix;
     UDHYAM_BASE_URL = GATEWAY.endpointFromLocal + UDHYAM.postFix;
     CAAPI_BASE_URL = GATEWAY.endpointFromLocal + CAAPI.postFix;
-    NSDL_PAN_InQUIRY_BASE_URL = GATEWAY.endpointFromLocal + NSDL_PAN_INQUIRY.postFix;
+    NSDL_PAN_InQUIRY_BASE_URL = GATEWAY.endpointFromLocal + NSDL_PAN_INQUIRY.postFix; 
+    PROPLEGIT_BASE_URL =GATEWAY.endpointFromLocal + PROPLEGIT.postFix;
 }
 //else{
    // host = "http://10.10.5.66:"; // SIT IP
@@ -102,7 +111,8 @@ if(host.includes('localhost')){
        PENNYDROP_BASE_URL = SERVER_URL + PENNYDROP.postFix;
        UDHYAM_BASE_URL = SERVER_URL + UDHYAM.postFix;
        CAAPI_BASE_URL = SERVER_URL + CAAPI.postFix;
-     }
+       PROPLEGIT_BASE_URL =SERVER_URL + PROPLEGIT.postFix;
+    }
 
 console.log("Sandbox Url : ",SANDBOX_BASE_URL);
 console.log("Sandbox DMS Url : ",SANDBOX_DMS_URL);
@@ -110,7 +120,8 @@ console.log("ECR Url : ",ECR_BASE_URL);
 console.log("PennyDrop Url : ",PENNYDROP_BASE_URL);
 console.log("GATEWAY Url :", GATEWAY_BASE_URL);
 console.log("UDHYAM Url :", UDHYAM_BASE_URL);
-console.log("CAAPI Url :", CAAPI_BASE_URL);
+console.log("CAAPI Url :", CAAPI_BASE_URL); 
+console.log("PROPLEGIT Url:",PROPLEGIT_BASE_URL);
 console.log("HOST : ",host);
 //
 /**
@@ -171,5 +182,18 @@ export const URLS = {
         DOWNLOAD_OPL_CERTIFIICATE : SANDBOX_DMS_URL + '/file/download',
         GET_OPL_PUBLIC_KEY : SANDBOX_DMS_URL + '/file/getOPLPublicKey',
         GET_OPL_PRIVATE_KEY : SANDBOX_DMS_URL + '/file/getOPLPrivateKey'
+    },
+    PROPLEGIT : { 
+       // CREATE_LOAN_APPLICATION : GATEWAY_BASE_URL + '/proplegit/application/create',
+        CREATE_LOAN_APPLICATION : PROPLEGIT_BASE_URL + '/application/create',
+        GET_LIST_BY_CLASSES:PROPLEGIT_BASE_URL + '/application/getListByClasses',
+        GET_STATE_MASTER : PROPLEGIT_BASE_URL + '/application/stateList', 
+        GET_REGION_MASTER: PROPLEGIT_BASE_URL + '/application/regionListByStateId', 
+        GET_CITYSURVEY_OFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/citySurveyOfcNameMasterListByDistrictId', 
+        GET_DISTRICTLIST_BY_STATEID_MASTER: PROPLEGIT_BASE_URL + '/application/districtListByStateId',
+        GET_TALUKALIST_BY_DISTRICTD_MASTER:PROPLEGIT_BASE_URL + '/application/talukaListByDistrictId',
+        GET_VILAGELIST_BY_DId_And_TId:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndTalukaId',
+        GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndCitySurveyOfcNameId', 
+        GET_WARDLIST_BY_DISTRICTID_MASTER:PROPLEGIT_BASE_URL + '/application/wardListByDistrictId',  
     }
 };

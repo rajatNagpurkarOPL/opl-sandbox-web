@@ -167,7 +167,71 @@ export class SandboxService {
  }  
 
 manualSslCertificate(data : any):Observable<any>{
- return this.http.post(URLS.SANDBOX_USER.GET_Manual_Certificate,data);
+ return this.http.post(URLS.SANDBOX_USER.GET_Manual_Certificate,data); 
 }  
+
+
+//ipvr service  
+getState(): Observable<any>{
+  return this.http.get(URLS.PROPLEGIT.GET_STATE_MASTER, false);
+ }      
+ 
+ getListByClassesMaster(data:any):Observable<any> {
+  return this.http.post(URLS.PROPLEGIT.GET_LIST_BY_CLASSES,data,false);
+ }
+
+ getRegionMaster(data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_REGION_MASTER + '/' + data,false);
+}  
+
+getCitySurveyOfficeMaster(data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_CITYSURVEY_OFFICE_MASTER + '/' + data,false);
+}  
+
+getdistrictListByStateId(data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_DISTRICTLIST_BY_STATEID_MASTER + '/' + data,false);
+} 
+
+getdistrictListByRegionId(data:any,regionid:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_DISTRICTLIST_BY_STATEID_MASTER + '/' + data + '/' + regionid,false);
+}
+
+getTalukaListByDistrictIdMaster(data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_TALUKALIST_BY_DISTRICTD_MASTER + '/' + data,false);
+}
+ 
+getvilageListByDistrictIdAndTalukaId(districtid:any,data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_VILAGELIST_BY_DId_And_TId  + '/' + districtid + '/' + data ,false);
+} 
+
+getvilageListByDistrictIdAndCofficeId(districtid:any,data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER  + '/' + districtid + '/' + data ,false);
+} 
+
+getWardListByDistrictIdMaster(data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + data,false);
+}
+
+getWardListByDidAndCofficeId(districtId:any,data:any):Observable<any>{  
+  return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + districtId + '/' + data,false);
+}
+
+// createPropertyLoanApplication(stateName:any ,data: any,requestHeader : any): Observable<any> {
+//   return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data,requestHeader ,false);
+// }
+
+createPropertyLoanApplication(stateName:any ,data: any): Observable<any> {
+  return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data ,false);
+}
+
+
+ivprSaveForm(ipvrUrl: any, data: any): Observable<any> {
+  return this.http.post(ipvrUrl, data, false);
+}  
+
+ipvrviewresponse(url: any): Observable<any> {
+  return this.http.get(url, false);
+} 
+  
 
 }
