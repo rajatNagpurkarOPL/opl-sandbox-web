@@ -30,10 +30,8 @@ export class IpvrViewComponent implements OnInit {
 
   saveipvrform() {
     let applicationId = this.ipvrResponseForm.value.ApplicationId;
-    let prepredurl = this.url + "/" + applicationId;
     if(this.ipvrResponseForm.valid){
-    this.sandboxService.ipvrviewresponse(prepredurl).subscribe(res => {
-      console.log("res-viewres", res);
+    this.sandboxService.ipvrviewresponse(applicationId).subscribe(res => {
       this.response = Utils.jsonStringify(res);
     }, (error: any) => {
       this.utils.errorSnackBar(error);

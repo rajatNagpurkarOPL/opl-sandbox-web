@@ -195,5 +195,6 @@ export const URLS = {
         GET_VILAGELIST_BY_DId_And_TId:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndTalukaId',
         GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndCitySurveyOfcNameId', 
         GET_WARDLIST_BY_DISTRICTID_MASTER:PROPLEGIT_BASE_URL + '/application/wardListByDistrictId',  
+        GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view'
     }
 };
