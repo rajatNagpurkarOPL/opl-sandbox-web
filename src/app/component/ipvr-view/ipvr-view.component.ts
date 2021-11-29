@@ -13,6 +13,7 @@ export class IpvrViewComponent implements OnInit {
   url: string = null;
   ipvrResponseForm: any = FormGroup;
   response: any = "Response Will be Rendered Here.";
+  downloadFile: string = null;
   constructor(public utils: Utils, private sandboxService: SandboxService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -30,15 +31,30 @@ export class IpvrViewComponent implements OnInit {
 
   saveipvrform() {
     let applicationId = this.ipvrResponseForm.value.ApplicationId;
-    if(this.ipvrResponseForm.valid){
-    this.sandboxService.ipvrviewresponse(applicationId).subscribe(res => {
-      this.response = Utils.jsonStringify(res);
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    });
-  }else {
-    this.ipvrResponseForm.markAllAsTouched();
+    if (this.ipvrResponseForm.valid) {
+      this.sandboxService.ipvrviewresponse(applicationId).subscribe(res => {
+        this.response = Utils.jsonStringify(res);
+        if (res != null && res.data != null && res.data.length > 0 && res.data[0].PVRDocumentFile != null) {
+          this.downloadFile = res.data[0].PVRDocumentFile;
+        }
+      }, (error: any) => {
+        this.utils.errorSnackBar(error);
+      });
+    } else {
+      this.ipvrResponseForm.markAllAsTouched();
+    }
   }
+
+  convertBase64ToFile() {
+    const base64 = this.downloadFile;
+    this.downloadPdf(base64, "IPVRReport");
+  }
+
+  downloadPdf(base64String, fileName) {
+    const link = document.createElement("a");
+    link.href = `data:application/pdf;base64,${base64String}`;
+    link.download = `${fileName}-${this.ipvrResponseForm.value.ApplicationId}.pdf`
+    link.click();
   }
 
 }
