@@ -33,7 +33,12 @@ export class NavbarComponent implements OnInit {
       this.utils.errorSnackBar(error);
     });
     // Remove localstorage
-    Utils.removeStorage(Constant.STORAGE.USER);
+    //Utils.removeStorage(Constant.STORAGE.USER);
+    for(let key in Constant.STORAGE){ 
+      Utils.removeStorage(key.toLocaleLowerCase());
+    }
+
+
     // Remove cookies
     Utils.deleteAuthCookie();
     this.router.navigate([Constant.ROUTE_URL.LOGIN]);
