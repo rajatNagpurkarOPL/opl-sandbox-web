@@ -216,18 +216,22 @@ getWardListByDidAndCofficeId(districtId:any,data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + districtId + '/' + data,false);
 }
 
-// createPropertyLoanApplication(stateName:any ,data: any,requestHeader : any): Observable<any> {
-//   return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data,requestHeader ,false);
-// }
-
-createPropertyLoanApplication(stateName:any ,data: any): Observable<any> {
-  return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data ,false);
+createPropertyLoanApplication(stateName:any ,data: any,requestHeader : any): Observable<any> {
+  return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data,requestHeader ,false);
 }
+
+//notgetway
+// createPropertyLoanApplication(stateName:any ,data: any): Observable<any> {
+//   return this.http.post(URLS.PROPLEGIT.CREATE_LOAN_APPLICATION + '/' + stateName ,data ,false);
+// }
 
 ivprSaveForm(ipvrUrl: any, data: any): Observable<any> {
   return this.http.post(ipvrUrl, data, false);
 }  
 
+// ipvrviewresponse(applicationId: any): Observable<any> {
+//   return this.http.get(URLS.PROPLEGIT.GET_PROPLEGIT_REQ_VIEW +'/' + applicationId, false);
+// } 
 ipvrviewresponse(applicationId: any): Observable<any> {
   return this.http.get(URLS.PROPLEGIT.GET_PROPLEGIT_REQ_VIEW +'/' + applicationId, false);
 } 

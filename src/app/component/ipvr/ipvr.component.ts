@@ -293,21 +293,25 @@ export class IpvrComponent implements OnInit {
     if (ipvrSaveData.State != null && this.ipvrreqForm.controls.State.value.id == 1 && ipvrSaveData.BaseDocumentType === 'PropertyCard') {
       ipvrSaveData.Region = this.ipvrreqForm.value.Region.name;
     }
-
-    this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, ipvrSaveData).subscribe(res => {
-      if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
-        this.response = Utils.jsonStringify(res);
-        this.utils.successSnackBar(res.message);
+     // gatway 
+        let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+        let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+        let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData)); 
+    this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {
+      //if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
+        let decData = this.aesGcmEncryption.getDecPayload(res);
+        this.response = Utils.jsonStringify(decData);
+        this.utils.successSnackBar(res.payload.message);
         this.ipvrForm();
-      } else {
-        this.utils.warningSnackBar(res.message);
-      }
+      //} else {
+       // this.utils.warningSnackBar(res.message);
+     // }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
-    //} else {
-    // this.ipvrreqForm.markAllAsTouched();
-    // }
+    //  } else {
+    //    ipvrSaveData.markAllAsTouched();
+    //   }
   }
 
   removeIpvrFormControls() {
