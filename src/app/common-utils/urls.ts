@@ -184,8 +184,8 @@ export const URLS = {
         GET_OPL_PRIVATE_KEY : SANDBOX_DMS_URL + '/file/getOPLPrivateKey'
     },
     PROPLEGIT : { 
-       // CREATE_LOAN_APPLICATION : GATEWAY_BASE_URL + '/proplegit/application/create',
-        CREATE_LOAN_APPLICATION : PROPLEGIT_BASE_URL + '/application/create',
+       CREATE_LOAN_APPLICATION : GATEWAY_BASE_URL + '/proplegit/application/create',
+        //CREATE_LOAN_APPLICATION : PROPLEGIT_BASE_URL + '/application/create',
         GET_LIST_BY_CLASSES:PROPLEGIT_BASE_URL + '/application/getListByClasses',
         GET_STATE_MASTER : PROPLEGIT_BASE_URL + '/application/stateList', 
         GET_REGION_MASTER: PROPLEGIT_BASE_URL + '/application/regionListByStateId', 
@@ -195,6 +195,7 @@ export const URLS = {
         GET_VILAGELIST_BY_DId_And_TId:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndTalukaId',
         GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndCitySurveyOfcNameId', 
         GET_WARDLIST_BY_DISTRICTID_MASTER:PROPLEGIT_BASE_URL + '/application/wardListByDistrictId',  
-        GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view'
+        GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view' 
+        //GET_PROPLEGIT_REQ_VIEW:GATEWAY_BASE_URL + '/proplegit/application/pvr/view'
     }
 };

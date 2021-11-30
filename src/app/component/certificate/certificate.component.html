@@ -223,10 +223,10 @@
                     <td>{{document.commonName ? document.commonName : '-'}}</td>
                     <td>{{document.emailAddress ? document.emailAddress : '-'}}</td>
                     <td><p class="d-flex al-center w-100 js-center mb-0"><span [ngClass]="{'dot':document.isActive,'inActive':!document.isActive}">&#8226; </span>{{document.isActive ? 'Active' : 'InActive'}}</p></td>
-                    <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id, document.fileName)" color="primary" checked="{{document.isActive}}" matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : ''}}" matTooltipPosition="above"></mat-slide-toggle>
+                    <td style="text-align: center;"><mat-slide-toggle disabled="{{document.isActive}}" (change)="changeCertificateStatus($event, document.id, document.fileName)" color="primary" checked="{{document.isActive}}"  disabled="{{document.referenceId==null ? true : false}}"   matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : '' || document.referenceId==null ? 'Please Genrate Certificate': ''}}" matTooltipPosition="above"></mat-slide-toggle>
                     <td style="text-align: center;" *ngIf="document.referenceId == null">
                         <button class="btn3-b4l"  matTooltip="{{document.fileName}}" style="line-height: 14px;"  matTooltipPosition="above" aria-label="Download File" (click)="generateFile(document)">
-                             genrate
+                             Genrate
                         </button>
                     </td> 
                     <td style="text-align: center;" *ngIf="document.referenceId != null" >
