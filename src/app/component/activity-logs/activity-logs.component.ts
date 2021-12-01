@@ -6,6 +6,9 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 import {Sort} from '@angular/material/sort'; 
 import {SortingTableData} from '../../common-utils/sort';  
 import {ApplicationFilterMultiPipe}  from '../pipes/filter.pipe'; 
+import { Observable } from 'rxjs';
+import { ViewDetailedLogsComponent } from '../view-detailed-logs/view-detailed-logs.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-activity-logs',
@@ -20,9 +23,8 @@ export class ActivityLogsComponent implements OnInit {
  
   filterKeys : String [] = ["requestId","requestTime","responseTime","path","httpStatus","httpStatusDescription",,"clientIp",,"serverRequestId"];
 
-  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils) {
+  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils ,public dialog: MatDialog) {
     this.user = globals.USER;
-    console.log("user :",this.user.id);
    }
 
   ngOnInit(): void {
@@ -39,16 +41,12 @@ export class ActivityLogsComponent implements OnInit {
     if(Utils.isObjectIsEmpty(this.user)){
       this.user = JSON.parse(Utils.getStorage(Constant.STORAGE.USER, true)); 
     }
-    console.log("userId :",this.user.id);
     this.sandboxService.getUserLogs(this.user.id).subscribe(res => {
-      console.log("res new  : ",res);
       if(res.status == Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
         this.audits = res.data;
         this.pagination.data = this.audits;
-        console.log("33line",this.audits);
       }
     },err => {
-      console.log("ERROR : ",err);
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
     });
@@ -75,6 +73,20 @@ export class ActivityLogsComponent implements OnInit {
     if (this.audits === undefined || this.audits == null) {
         this.audits = this.pagination.data;
     }
+  }
+
+  openDialog(data): Observable<any> {
+    if(data != undefined && data != null){      
+      const dialogRef = this.dialog.open(ViewDetailedLogsComponent, {
+        height: '1000px',
+        width: '1000px',
+        data
+      });
+      return dialogRef.afterClosed();
+    }else{
+      this.utils.errorSnackBar("No Details Found.")
+    }
+    
   }
 
 }

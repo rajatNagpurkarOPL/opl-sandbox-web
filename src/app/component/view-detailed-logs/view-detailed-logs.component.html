@@ -1,0 +1,36 @@
+<div class="dismiss" style="float: right;">
+    <button mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-tab-group>
+    <mat-tab label="Request Data">
+        <div style="overflow: auto;">
+            <pre class="json-pretty">
+                {{requestData | json}}
+            </pre>
+        </div>
+    </mat-tab>
+    <mat-tab label="Request Header Data">
+        <div style="overflow: auto;">
+            <pre class="json-pretty">
+                {{requestHeaderData}}
+            </pre>
+        </div>
+    </mat-tab>
+    <mat-tab label="Response Data">
+        <div style="overflow: auto;">
+            <pre class="json-pretty">
+                {{responseData | json}}
+            </pre>
+        </div>
+    </mat-tab>
+    <mat-tab label="Response Header Data">
+        <div style="overflow: auto;">
+            <pre class="json-pretty">
+                {{responseHeaderData}}
+            </pre>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+

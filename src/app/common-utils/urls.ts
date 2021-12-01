@@ -5,7 +5,7 @@
 //const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  { 
-    //endpointFromLocal : SERVER_URL + '1104',
+    //endpointFromLocal : 'http://localhost:1104',
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
@@ -157,6 +157,7 @@ export const URLS = {
         GET_KEYPAIR_LIST : SANDBOX_BASE_URL + '/api/acceekey/keypairs',  
         GET_Manual_Certificate : SANDBOX_BASE_URL + '/file/manual-ssl', 
         GET_Generate_Certificate:SANDBOX_BASE_URL + '/file/generate-certificate',
+        USER_LOGS : SANDBOX_BASE_URL + '/auditlogs/user'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 

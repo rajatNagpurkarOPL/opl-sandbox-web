@@ -47,7 +47,7 @@ export class SandboxService {
   }
 
   getUserLogs(data): Observable<any>{
-    return this.http.get(URLS.GATEWAY.USER_LOGS + '/' + data , false);
+    return this.http.get(URLS.SANDBOX_USER.USER_LOGS + '/' + data , false);
   }
 
   getApiCreditLimit(data : any,requestHeader : any): Observable<any>{
