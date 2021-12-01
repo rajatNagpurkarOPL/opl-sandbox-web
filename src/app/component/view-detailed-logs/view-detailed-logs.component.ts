@@ -18,8 +18,8 @@ export class ViewDetailedLogsComponent implements OnInit {
     if(this.data != undefined && this.data != null){
       this.requestData = this.data.requestData != null ? JSON.parse(this.data.requestData) : null;
       this.responseData = this.data.responseData != null ? JSON.parse(this.data.responseData) : null;
-      this.requestHeaderData = this.data.requestHeaderData != null ? this.data.requestHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : null;
-      this.responseHeaderData = this.data.responseHeaderData != null ? this.data.responseHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : null;
+      this.requestHeaderData = this.data.requestHeaderData != null ? this.data.requestHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.requestHeaderData;
+      this.responseHeaderData = this.data.responseHeaderData != null ? this.data.responseHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.responseHeaderData;
     }
   }
 
