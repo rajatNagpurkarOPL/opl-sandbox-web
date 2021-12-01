@@ -68,6 +68,7 @@ import { CertificateActivationAlertComponent } from './component/certificate-act
 import { DatePipe } from '@angular/common';
 import { IpvrComponent } from './component/ipvr/ipvr.component';
 import { IpvrViewComponent } from './component/ipvr-view/ipvr-view.component';
+import { ViewDetailedLogsComponent } from './component/view-detailed-logs/view-detailed-logs.component';
 
 @NgModule({
   imports: [
@@ -132,7 +133,8 @@ import { IpvrViewComponent } from './component/ipvr-view/ipvr-view.component';
     CertificateComponent,
     CertificateActivationAlertComponent,
     IpvrComponent,
-    IpvrViewComponent
+    IpvrViewComponent,
+    ViewDetailedLogsComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
