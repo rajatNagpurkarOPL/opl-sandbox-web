@@ -18,8 +18,17 @@ import { MatDialog } from '@angular/material/dialog';
 export class ActivityLogsComponent implements OnInit {
   user : any = null;
   audits =[];
-  pagination : any;  
-  valueToFilter : String = ""; 
+  paginationData : any;  
+  valueToFilter : String = "";
+
+  startIndex = 1;
+  endIndex = 10;
+
+  collectionSize = 0;
+  // page number
+  page = 1;
+  // default page size
+  pageSize = 10;
  
   filterKeys : String [] = ["requestId","requestTime","responseTime","path","httpStatus","httpStatusDescription",,"clientIp",,"serverRequestId"];
 
@@ -28,8 +37,7 @@ export class ActivityLogsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getUserLogs();
-    this.resetPagination();
+    this.getUserLogs(1);
   } 
 
   sortData(sort: Sort) {  
@@ -37,33 +45,31 @@ export class ActivityLogsComponent implements OnInit {
   }
 
 
-  getUserLogs(){
+  getUserLogs(pageNo){
+    this.startIndex = (pageNo - 1) * this.pageSize;
+    this.endIndex = (pageNo - 1) * this.pageSize + this.pageSize;
     if(Utils.isObjectIsEmpty(this.user)){
       this.user = JSON.parse(Utils.getStorage(Constant.STORAGE.USER, true)); 
     }
-    this.sandboxService.getUserLogs(this.user.id).subscribe(res => {
+    const data: any = {userId :this.user.id ,pageSize: this.pageSize, pageNo : pageNo - 1};
+    this.sandboxService.getUserLogs(data).subscribe(res => {
       if(res.status == Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
-        this.audits = res.data;
-        this.pagination.data = this.audits;
+        this.collectionSize = res.data.auditLogCount;
+        this.audits = res.data.auditLogData;
+        this.paginationData = this.audits;
+      }else{
+        this.collectionSize = 0;
+        this.audits = [];
+        this.paginationData = [];
       }
     },err => {
       this.utils.errorHandle(err);
-      // this.utils.errorSnackBar(err);
     });
-  }
-
-
-  resetPagination(){
-    this.pagination = {
-      page:1,     //Current Page
-      size:10,    // default page size
-      data:[]     // Pagination Data
-    };
   }
 
   filterApplicationData() {
     if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
-        this.audits =  this.pagination.data; 
+        this.audits =  this.paginationData; 
         return;
     }
     if(this.audits.length < 3){
@@ -71,16 +77,16 @@ export class ActivityLogsComponent implements OnInit {
     } 
     this.audits = new ApplicationFilterMultiPipe().transform(this.audits, this.filterKeys,this.valueToFilter);
     if (this.audits === undefined || this.audits == null) {
-        this.audits = this.pagination.data;
+        this.audits = this.paginationData;
     }
   }
 
   openDialog(data): Observable<any> {
     if(data != undefined && data != null){      
       const dialogRef = this.dialog.open(ViewDetailedLogsComponent, {
-        height: '1000px',
-        width: '1000px',
-        data
+        // height: '1000px',
+        // width: '1000px',
+         data
       });
       return dialogRef.afterClosed();
     }else{
