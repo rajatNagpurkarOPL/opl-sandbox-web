@@ -7,6 +7,7 @@ import { Clipboard } from "@angular/cdk/clipboard";
 import {ApplicationFilterMultiPipe}  from '../pipes/filter.pipe'; 
 import {Sort} from '@angular/material/sort'; 
 import {SortingTableData} from '../../common-utils/sort'; 
+import { ApiAccessKeyAlertService } from 'src/app/common-utils/common-services/api-access-key-alert.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', '
 filterKeys : String [] = ["clientId","secretId","stringCreatedDate","stringModifiedDate","isActive","isExpired"];
 valueToFilter : String = ""; 
 
-  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils,private clipBoard : Clipboard) {
+  constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils,private clipBoard : Clipboard,public ApiAccessKeyAlertService: ApiAccessKeyAlertService) {
     this.user = globals.USER;
     console.log("user :",this.user);
    }
@@ -93,8 +94,11 @@ filterApplicationData() {
     
   }
 
-  generateKey(showMsg ? : boolean){
-    this.sandboxService.generateAPIAccessKey(this.getAPIAccessKeyRequest()).subscribe(res => {
+  generateKey(showMsg ? : boolean){ 
+      
+      this.ApiAccessKeyAlertService.openDialog({ title: "Access Keys Re-Generate  Alert" }).subscribe(dialogResponse => {
+            if (dialogResponse) {
+          this.sandboxService.generateAPIAccessKey(this.getAPIAccessKeyRequest()).subscribe(res => {
         if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
           this.processResponse(res);
           this.getKeyPairList();
@@ -109,6 +113,8 @@ filterApplicationData() {
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
     });
+        } 
+      });  
   }
 
 copyContent(text : any,type : string){

@@ -1,0 +1,17 @@
+<h2 class="cert-title">{{data.title}}</h2>
+<mat-divider></mat-divider>
+<div class="cert-content">
+    <p>Are you sure you want to Re-Genreate the Client Id and Secret Id  ? if so, following things will be impacted and may cause inappropriate in result.</p>
+      <ul>
+        <li>Previous Keys will be inactivated.</li>
+        <li>New Generated Keys will be in use immediately.</li>
+        <li>All registered service must share this new client Id and Secret Id in header.</li>
+        <li>make sure that the same is managed at your end.</li>
+    </ul>
+</div>
+<mat-divider></mat-divider>
+<br>
+<div class="cert-action">
+    <button mat-raised-button style="background-color: lightgray;" (click)="close()">No</button>&nbsp;&nbsp;
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+</div>
