@@ -50,6 +50,10 @@ export class SandboxService {
     return this.http.post(URLS.SANDBOX_USER.USER_LOGS ,data , false);
   }
 
+  getUserDetailedLogsByLogId(logId): Observable<any>{
+    return this.http.get(URLS.SANDBOX_USER.USER_DETAILED_LOGS_BY_LOG_ID + '/' + logId , false);
+  }
+
   getApiCreditLimit(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GET_API_CREDIT_LIMIT,data,requestHeader);
   }
