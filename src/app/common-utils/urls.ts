@@ -157,7 +157,8 @@ export const URLS = {
         GET_KEYPAIR_LIST : SANDBOX_BASE_URL + '/api/acceekey/keypairs',  
         GET_Manual_Certificate : SANDBOX_BASE_URL + '/file/manual-ssl', 
         GET_Generate_Certificate:SANDBOX_BASE_URL + '/file/generate-certificate',
-        USER_LOGS : SANDBOX_BASE_URL + '/auditlogs/user'
+        USER_LOGS : SANDBOX_BASE_URL + '/auditlogs/user',
+        USER_DETAILED_LOGS_BY_LOG_ID: SANDBOX_BASE_URL + '/auditDetailedlogsByLogId'
     },
     ECR : {
         CREDIT_RATING : ECR_GATEWAY_BASE_URL + '/credit-rating' 
