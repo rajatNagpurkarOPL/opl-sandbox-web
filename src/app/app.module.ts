@@ -69,6 +69,7 @@ import { DatePipe } from '@angular/common';
 import { IpvrComponent } from './component/ipvr/ipvr.component';
 import { IpvrViewComponent } from './component/ipvr-view/ipvr-view.component';
 import { ViewDetailedLogsComponent } from './component/view-detailed-logs/view-detailed-logs.component';
+import { ApiAccessKeyAlertComponent } from './component/api-access-key-alert/api-access-key-alert.component';
 
 @NgModule({
   imports: [
@@ -134,7 +135,8 @@ import { ViewDetailedLogsComponent } from './component/view-detailed-logs/view-d
     CertificateActivationAlertComponent,
     IpvrComponent,
     IpvrViewComponent,
-    ViewDetailedLogsComponent
+    ViewDetailedLogsComponent,
+    ApiAccessKeyAlertComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

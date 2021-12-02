@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
           this.globals.USER = res.data;
           this.user = res.data;
           Utils.setStorage(Constant.STORAGE.USER, JSON.stringify(res.data));
-          new ApiAccessKeyComponent(this.sandboxService,this.globals,this.utils,null).getKeys();
+          new ApiAccessKeyComponent(this.sandboxService,this.globals,this.utils,null,null).getKeys();
         }
       } else {
         this.utils.errorSnackBar(res.message);

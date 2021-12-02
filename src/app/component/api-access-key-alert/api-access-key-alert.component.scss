@@ -1,0 +1,20 @@
+.cert-title{
+    text-align  : center;
+    margin: 15px 0px 15px 0px;
+}
+.cert-content{
+    display: block;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: auto;
+    height: auto;
+    margin: 10px 10px 10px 10px;
+    min-height: inherit;
+    max-height: inherit;
+}
+.cert-action{
+    text-align: end;
+    margin: 0em 1em 1em 1em;;
+}
