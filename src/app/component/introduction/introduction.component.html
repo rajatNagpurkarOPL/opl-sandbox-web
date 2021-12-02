@@ -201,7 +201,13 @@
     <li><p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail. 
       API requests without authentication will also fail.</p></li>
     </ul>
-    </div>
+    </div> 
+
+    <div class="col" style="margin-top: 12px; text-align: -webkit-left;">
+      <button type="button" (click)="downloadFile(null, 'Encryption_Decryption_Specifications.pdf', true)" color="primary" mat-flat-button style="display: flex; border-radius: 5px;" matTooltip="Click here to download OPL public Certificate" matTooltipPosition="above">
+          <mat-icon>file_download</mat-icon>Document
+      </button>
+  </div>   
 
 </mat-tab>
 
