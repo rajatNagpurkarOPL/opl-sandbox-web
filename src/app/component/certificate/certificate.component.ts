@@ -41,7 +41,7 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', '
   ngOnInit(): void {
     this.pagination = {
       page: 1,     //Current Page
-      size: 10,    // default page size
+      size: 5,    // default page size
       data: []     // Pagination Data
     };
     this.createControls();
