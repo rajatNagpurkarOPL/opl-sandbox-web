@@ -178,8 +178,14 @@
                 
             </div>
         </form>
-        <br> <br> <br>
-
+        <br>
+          
+        <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12" style="margin-left: 52em;">
+            <mat-form-field class="input-group" appearance="outline" >
+            <input matInput placeholder="Type to search..."  [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">            
+          </mat-form-field>
+          </div>
+                   <br>
           <!--table -->
     <div style="overflow-x: auto;">
         <table matSort (matSortChange)="sortData($event)"  class="table dash-table-api">
@@ -200,7 +206,7 @@
                 <th mat-sort-header="locality" scope="col">Locality</th>
                 <th mat-sort-header="commonName" scope="col">Common Name</th>
                 <th mat-sort-header="emailAddress" scope="col">Email Address</th>
-                <th scope="col">Status</th>
+                <th mat-sort-header="isActive" scope="col">Status</th>
                 <th scope="col">Active/Inactive</th> 
                 <th scope="col">Genrate</th>
             </tr>
