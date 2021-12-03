@@ -53,11 +53,12 @@ export class ActivityLogsComponent implements OnInit {
     }
     const data: any = {userId :this.user.id ,pageSize: this.pageSize, pageNo : pageNo - 1};
     this.sandboxService.getUserLogs(data).subscribe(res => {
-      if(res.status == Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+      if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
         this.collectionSize = res.data.auditLogCount;
         this.audits = res.data.auditLogData;
         this.paginationData = this.audits;
       }else{
+        this.utils.errorSnackBar(res.message);
         this.collectionSize = 0;
         this.audits = [];
         this.paginationData = [];

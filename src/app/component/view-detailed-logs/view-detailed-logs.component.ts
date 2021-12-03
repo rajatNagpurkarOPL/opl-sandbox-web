@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
+import { Constant } from 'src/app/common-utils/Constant';
 import { SandboxService } from 'src/app/service/sandbox.service';
 
 @Component({
@@ -20,13 +21,13 @@ export class ViewDetailedLogsComponent implements OnInit {
 
     if(this.data != null && this.data.id != null){
       this.sandboxService.getUserDetailedLogsByLogId(this.data.id).subscribe(res => {
-        if(!Utils.isObjectNullOrEmpty(res) && !Utils.isObjectNullOrEmpty(res.data)){
+        if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
           this.requestData = res.data.requestData != undefined && res.data.requestData != null ? JSON.parse(res.data.requestData) : this.requestData;
           this.responseData = res.data.responseData != undefined && res.data.responseData != null ? JSON.parse(res.data.responseData) : this.responseData;
           this.requestHeaderData = res.data.requestHeaderData != undefined && res.data.requestHeaderData != null ? res.data.requestHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.requestHeaderData;
           this.responseHeaderData = res.data.responseHeaderData != undefined && res.data.responseHeaderData != null ? res.data.responseHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.responseHeaderData;
         }else{
-          this.utils.errorSnackBar("No Details Found");
+          this.utils.errorSnackBar(res.message);
         }
       },err => {
         this.utils.errorHandle(err);
