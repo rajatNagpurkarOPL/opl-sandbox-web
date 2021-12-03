@@ -7,6 +7,7 @@ import { Globals } from 'src/app/common-utils/globals';
 import { SandboxService } from 'src/app/service/sandbox.service'; 
 import {Sort} from '@angular/material/sort'; 
 import {SortingTableData} from '../../common-utils/sort'; 
+import { ApplicationFilterMultiPipe } from '../pipes/filter.pipe';
 
 @Component({
   selector: 'app-certificate',
@@ -26,7 +27,12 @@ export class CertificateComponent implements OnInit {
   formOpen =false;  
   generateHideShow:any;
   // pagination
-  pagination : any;
+  pagination : any; 
+  //filter 
+  filterKeys : String [] = ["fileName","stringCreatedDate","referenceId","algorithm","stringcertCreatedDate","stringcertExpiryDate","keySize","organizationName","organizationUnitName","country","state","locality","commonName","emailAddress" ,"isActive"];
+valueToFilter : String = "";  
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   constructor(private fb: FormBuilder, private sandboxService: SandboxService, private utils: Utils, public globals: Globals, public certificateActivationAlertService: CertificateActivationAlertService) {
     this.constant = Constant;
     this.user = globals.USER;
@@ -113,7 +119,19 @@ export class CertificateComponent implements OnInit {
 
   cancelOrResetForm() {
     this.manuallyCertificateForm.reset();
-  }
+  } 
+
+  filterApplicationData() {
+    if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
+        this.documentsList =  this.pagination.data; 
+        return;
+    } 
+    this.documentsList = new ApplicationFilterMultiPipe().transform(this.documentsList, this.filterKeys,this.valueToFilter);
+    if (this.documentsList === undefined || this.documentsList == null) {
+        this.documentsList = this.pagination.data;
+    }
+  } 
+
 
   sortData(sort: Sort) {
     this.documentsList = new SortingTableData().sortingTableValue(this.documentsList, sort);
@@ -148,8 +166,23 @@ export class CertificateComponent implements OnInit {
 
   getAllDocumentDetails() {
     this.sandboxService.getAllDocumentDetails(this.getUserId()).subscribe(res => {
+      this.documentsList = [];
       if (!Utils.isObjectNullOrEmpty(res.data)) {
-        this.documentsList = res.data; 
+        this.documentsList = res.data;  
+        this.documentsList.forEach(documentkeypair => {
+          if(!Utils.isObjectNullOrEmpty(documentkeypair.createdDate)){
+            var createDate = new Date(documentkeypair.createdDate);
+            documentkeypair.stringCreatedDate = this.months[createDate.getMonth()] + ' ' + createDate.getDate() + ', ' + createDate.getFullYear() + " " + createDate.getHours() + ":" + createDate.getMinutes() + ":" + createDate.getSeconds();
+          }  
+          if(!Utils.isObjectNullOrEmpty(documentkeypair.certCreatedDate)){
+            var certCreatedDate = new Date(documentkeypair.certCreatedDate);
+            documentkeypair.stringcertCreatedDate = this.months[certCreatedDate.getMonth()] + ' ' + certCreatedDate.getDate() + ', ' + certCreatedDate.getFullYear() + " " + certCreatedDate.getHours() + ":" + certCreatedDate.getMinutes() + ":" + certCreatedDate.getSeconds();
+          } 
+          if(!Utils.isObjectNullOrEmpty(documentkeypair.certExpiryDate)){
+            var certExpiryDate = new Date(documentkeypair.certExpiryDate);
+            documentkeypair.stringcertExpiryDate = this.months[certExpiryDate.getMonth()] + ' ' + certExpiryDate.getDate() + ', ' + certExpiryDate.getFullYear() + " " + certExpiryDate.getHours() + ":" + certExpiryDate.getMinutes() + ":" + certExpiryDate.getSeconds();
+          }      
+        });
          console.log("149line" ,this.documentsList);
         this.pagination.data = this.documentsList;
 
@@ -170,7 +203,10 @@ export class CertificateComponent implements OnInit {
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
-  }
+  }  
+
+  
+
 
   changeCertificateStatus(event: any, documentId: any, newCertName: any) {
     if (event.checked === true) {
