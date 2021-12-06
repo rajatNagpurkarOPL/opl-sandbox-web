@@ -294,7 +294,7 @@ export class IpvrComponent implements OnInit {
       ipvrSaveData.Region = this.ipvrreqForm.value.Region.name;
     }
      // gatway 
-        let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+        let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
         let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
         let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData)); 
     this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {

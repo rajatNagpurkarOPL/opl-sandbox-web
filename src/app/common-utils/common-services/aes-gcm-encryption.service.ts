@@ -18,8 +18,8 @@ export class AesGcmEncryptionService {
   END_PUBLIC_KEY: any = "-----END PUBLIC KEY-----";
   BEGIN_PRIVATE_KEY: any = "-----BEGIN PRIVATE KEY-----";
   END_PRIVATE_KEY: any = "-----END PRIVATE KEY-----";
-  HeaderEncryptionKey: any = "egyUmG7EHW49PpM7XUtJ2ogjulwWX1l1Az6QaCZp6Sw=";
-  HeaderEncryptionIV: any = "4oGprBpOO6M1FcPNJDu2VQ==";
+  encryptionKey: any = "egyUmG7EHW49PpM7XUtJ2ogjulwWX1l1Az6QaCZp6Sw=";
+  encryptionIV: any = "4oGprBpOO6M1FcPNJDu2VQ==";
 
   constructor(private sandboxService : SandboxService, private utils : Utils) { 
     this.getOplPublicKey();
@@ -34,10 +34,16 @@ export class AesGcmEncryptionService {
     return forge.random.getBytesSync(16);
    }
 
-   encryptHeader(data : any){
-    let keyByte = forge.util.decode64(this.HeaderEncryptionKey);
-    let iv = forge.util.decode64(this.HeaderEncryptionIV);
+   encryptData(data : any){
+    let keyByte = forge.util.decode64(this.encryptionKey);
+    let iv = forge.util.decode64(this.encryptionIV);
     return this.encryptAesGcm(keyByte, iv, data);
+   }
+
+   decryptData(data: any){
+    let keyByte = forge.util.decode64(this.encryptionKey);
+    let iv = forge.util.decode64(this.encryptionIV);
+    return this.decryptAesGcm(keyByte, iv, data);
    }
 
    encryptAesGcm(key: any, iv: any, data: any){
@@ -118,7 +124,7 @@ export class AesGcmEncryptionService {
   getOplPrivateKey(){
     this.sandboxService.getOplPrivateKey().subscribe(res => {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.oplPrivateKey = res.data;
+        this.oplPrivateKey = this.decryptData(res.data);
       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
