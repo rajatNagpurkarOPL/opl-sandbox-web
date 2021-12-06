@@ -239,5 +239,17 @@ ivprSaveForm(ipvrUrl: any, data: any): Observable<any> {
 ipvrviewresponse(applicationId: any): Observable<any> {
   return this.http.get(URLS.PROPLEGIT.GET_PROPLEGIT_REQ_VIEW +'/' + applicationId, false);
 } 
-  
+
+getGeneratedOtpOfGST(url : string, data : any,requestHeader : any): Observable<any> {
+  return this.http.post(url ,data ,requestHeader ,false);
+}
+
+verifyOtpOfGST(url : string, data : any,requestHeader : any): Observable<any> {
+  return this.http.post(url ,data ,requestHeader ,false);
+}
+
+getGstTaxPayersData(url : string, data : any,requestHeader : any): Observable<any> {
+  return this.http.post(url ,data ,requestHeader ,false);
+}
+
 }

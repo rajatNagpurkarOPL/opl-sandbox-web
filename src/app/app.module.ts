@@ -70,6 +70,9 @@ import { IpvrComponent } from './component/ipvr/ipvr.component';
 import { IpvrViewComponent } from './component/ipvr-view/ipvr-view.component';
 import { ViewDetailedLogsComponent } from './component/view-detailed-logs/view-detailed-logs.component';
 import { ApiAccessKeyAlertComponent } from './component/api-access-key-alert/api-access-key-alert.component';
+import { GstGenerateOtpComponent } from './component/apis/gst-generate-otp/gst-generate-otp.component';
+import { GstVerifyOtpComponent } from './component/apis/gst-verify-otp/gst-verify-otp.component';
+import { GstTaxPayersApiComponent } from './component/apis/gst-tax-payers-api/gst-tax-payers-api.component';
 
 @NgModule({
   imports: [
@@ -136,7 +139,10 @@ import { ApiAccessKeyAlertComponent } from './component/api-access-key-alert/api
     IpvrComponent,
     IpvrViewComponent,
     ViewDetailedLogsComponent,
-    ApiAccessKeyAlertComponent
+    ApiAccessKeyAlertComponent,
+    GstGenerateOtpComponent,
+    GstVerifyOtpComponent,
+    GstTaxPayersApiComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

@@ -1,0 +1,35 @@
+<form>
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form" [formGroup]="generateOtpForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+            <mat-form-field class="example-full-width">
+                <mat-label>GST No.</mat-label>
+                <input type="text" matInput [formControl]="generateOtpForm.controls.id" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="generateOtpForm.get('id').hasError('required')">
+                    Please Enter GST Number.
+                </mat-error>
+                <mat-error *ngIf="generateOtpForm.get('id').hasError('pattern')">
+                    Please Enter Valid GST Number.
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>User Name</mat-label>
+                <input type="text" matInput [formControl]="generateOtpForm.controls.userName" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="generateOtpForm.get('userName').hasError('required')">
+                    Please Enter User Name.
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <!-- <mat-form-field class="example-full-width">
+                <mat-label>Request Type</mat-label>
+                <input type="text" matInput [formControl]="generateOtpForm.controls.requestType" [errorStateMatcher]="matcher"
+                    placeholder="Ex. OTPREQUEST">
+                <mat-error *ngIf="generateOtpForm.get('requestType').hasError('required')">
+                    Please Enter Request Type.
+                </mat-error>
+            </mat-form-field> -->
+            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Generate OTP</button>
+        </form>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
