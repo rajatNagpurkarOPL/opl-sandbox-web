@@ -38,7 +38,7 @@ export class IpvrViewComponent implements OnInit {
     let applicationId = this.ipvrResponseForm.value.ApplicationId;
     if (this.ipvrResponseForm.valid) { 
 
-        //let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+        //let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
         //let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
         //let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(applicationId)); 
       

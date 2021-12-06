@@ -38,7 +38,7 @@ export class GstVerifyOtpComponent implements OnInit {
   }
 
   verifyOtp(requestedData: any){
-    let headerSourceEnc = this.aesGcmEncryption.encryptHeader(Constant.HEADER.SOURCE); 
+    let headerSourceEnc = this.aesGcmEncryption.encryptData(Constant.HEADER.SOURCE); 
     let headers = Utils.getAPIHeaderWithSourceKeyValue(headerSourceEnc);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.verifyOtpOfGST(this.url ,payload ,headers).subscribe(res => {

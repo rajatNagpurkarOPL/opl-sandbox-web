@@ -51,7 +51,7 @@ export class CAFirmDetailComponent implements OnInit {
   }
   
   caFirmDetail(requestedData : any){
-    let HeaderSourceEnc = this.aesGcmEncryption.encryptHeader(this.constant.HEADER.SOURCE); 
+    let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
     let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     this.sandboxService.caFirmDetail(this.url,payload,headers).subscribe(res => {
