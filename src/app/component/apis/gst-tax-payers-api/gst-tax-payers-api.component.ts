@@ -39,7 +39,7 @@ export class GstTaxPayersApiComponent implements OnInit {
     if(event === 'MONTH'){
       this.taxPayersForm.removeControl('fromDate');
       this.taxPayersForm.removeControl('toDate');
-      this.taxPayersForm.addControl('returnPeriod', new FormControl('' , [Validators.required ,Validators.pattern("^((0[1-9]|1[0-2])"+"[12]\d{3})$")]));
+      this.taxPayersForm.addControl('returnPeriod', new FormControl('' , [Validators.required ,Validators.pattern("^((0[1-9]|1[0-2])[12][0-9]{3})$")]));
     }else{
       this.taxPayersForm.removeControl('returnPeriod');
       this.taxPayersForm.addControl('fromDate', new FormControl('' , Validators.required));
