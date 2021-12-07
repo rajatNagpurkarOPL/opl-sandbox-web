@@ -216,7 +216,7 @@ export class DocumentationComponent implements OnInit {
       "userId": this.user.id
     });
     console.log("userId in Credit Limit:", this.user.id);
-    let headers = Utils.getAPIHeader();
+    let headers = Utils.getHeader();
     this.sandboxService.getApiCreditLimit(requestedData, headers).subscribe(res => {
       if (res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE) {
         if (res.data != null) {

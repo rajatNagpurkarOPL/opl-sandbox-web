@@ -233,6 +233,10 @@ static getUser(){
     return JSON.parse(Utils.getStorage(Constant.STORAGE.USER,true));
 }
 
+static getHeader(){
+  return {"Content-Type" : "application/json; charset=utf-8"};
+}
+
 static getAPIHeader(){
   let apiKeys = Utils.getAPIKeys();
   let user = Utils.getUser();
