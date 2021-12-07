@@ -297,21 +297,24 @@ export class IpvrComponent implements OnInit {
         let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
         let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
         let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData)); 
-    this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {
-      //if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
+      
+  if(ipvrSaveData.State != null &&  payload != null){
+        this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {
+       //if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData);
         this.utils.successSnackBar(res.payload.message);
         this.ipvrForm();
       //} else {
-       // this.utils.warningSnackBar(res.message);
-     // }
+       //this.utils.warningSnackBar(res.message);
+      //} 
     }, (error: any) => {
       this.utils.errorSnackBar(error);
-    });
-    //  } else {
-    //    ipvrSaveData.markAllAsTouched();
-    //   }
+    }); 
+  } else {
+    this.utils.errorSnackBar("please fill the form data");
+  }
+
   }
 
   removeIpvrFormControls() {
