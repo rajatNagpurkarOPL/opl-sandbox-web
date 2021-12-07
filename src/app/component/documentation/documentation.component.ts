@@ -221,6 +221,8 @@ export class DocumentationComponent implements OnInit {
       if (res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE) {
         if (res.data != null) {
           this.apiData = Object.values(res.data);
+          this.totalCredit=0;
+          this.balanceCredit=0;
           this.apiData.forEach(apiObj => {
             if (this.selectedInnerData.service.id == apiObj.apiId) {
               this.totalCredit = apiObj.total;
