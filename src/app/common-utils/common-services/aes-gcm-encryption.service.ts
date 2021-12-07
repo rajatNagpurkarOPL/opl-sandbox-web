@@ -124,7 +124,7 @@ export class AesGcmEncryptionService {
   getOplPrivateKey(){
     this.sandboxService.getOplPrivateKey().subscribe(res => {
       if(!Utils.isObjectNullOrEmpty(res.data)){
-        this.oplPrivateKey = this.decryptData(res.data);
+        this.oplPrivateKey = this.decryptData(forge.util.decode64(res.data));
       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
