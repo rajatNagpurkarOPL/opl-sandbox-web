@@ -73,6 +73,15 @@ import { ApiAccessKeyAlertComponent } from './component/api-access-key-alert/api
 import { GstGenerateOtpComponent } from './component/apis/gst-generate-otp/gst-generate-otp.component';
 import { GstVerifyOtpComponent } from './component/apis/gst-verify-otp/gst-verify-otp.component';
 import { GstTaxPayersApiComponent } from './component/apis/gst-tax-payers-api/gst-tax-payers-api.component';
+import { GstTaxPayersGstr3SummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr3-summary/gst-tax-payers-gstr3-summary.component';
+import { GstTaxPayersGstr1SummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-summary/gst-tax-payers-gstr1-summary.component';
+import { GstTaxPayersGstr2aB2bComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2a-b2b/gst-tax-payers-gstr2a-b2b.component';
+import { GstTaxPayersGstr2aCdnComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2a-cdn/gst-tax-payers-gstr2a-cdn.component';
+import { GstTaxPayersGstr1CdnurComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-cdnur/gst-tax-payers-gstr1-cdnur.component';
+import { GstTaxPayersGstr2SummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2-summary/gst-tax-payers-gstr2-summary.component';
+import { GstTaxPayersGstr2CdnurComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2-cdnur/gst-tax-payers-gstr2-cdnur.component';
+import { GstTaxPayersGstr1HsnSummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-hsn-summary/gst-tax-payers-gstr1-hsn-summary.component';
+import { GstTaxPayersGstr2HsnSummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2-hsn-summary/gst-tax-payers-gstr2-hsn-summary.component';
 
 @NgModule({
   imports: [
@@ -142,7 +151,16 @@ import { GstTaxPayersApiComponent } from './component/apis/gst-tax-payers-api/gs
     ApiAccessKeyAlertComponent,
     GstGenerateOtpComponent,
     GstVerifyOtpComponent,
-    GstTaxPayersApiComponent
+    GstTaxPayersApiComponent,
+    GstTaxPayersGstr3SummaryComponent,
+    GstTaxPayersGstr1SummaryComponent,
+    GstTaxPayersGstr2aB2bComponent,
+    GstTaxPayersGstr2aCdnComponent,
+    GstTaxPayersGstr1CdnurComponent,
+    GstTaxPayersGstr2SummaryComponent,
+    GstTaxPayersGstr2CdnurComponent,
+    GstTaxPayersGstr1HsnSummaryComponent,
+    GstTaxPayersGstr2HsnSummaryComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
