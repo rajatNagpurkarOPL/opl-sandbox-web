@@ -56,6 +56,15 @@
                     <app-gst-generate-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_GENERATE_OTP" [menuData]="selectedInnerData"></app-gst-generate-otp>
                     <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP" [menuData]="selectedInnerData"></app-gst-verify-otp>
                     <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS" [menuData]="selectedInnerData"></app-gst-tax-payers-api>
+                    <app-gst-tax-payers-gstr1-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-summary>
+                    <app-gst-tax-payers-gstr2-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-summary>
+                    <app-gst-tax-payers-gstr3-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR3_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr3-summary>
+                    <app-gst-tax-payers-gstr2a-b2b *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_B2B" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-b2b>
+                    <app-gst-tax-payers-gstr2a-cdn *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_CDN" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-cdn>
+                    <app-gst-tax-payers-gstr1-cdnur *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_CDNUR" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-cdnur>
+                    <app-gst-tax-payers-gstr2-cdnur *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_CDNUR" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-cdnur>
+                    <app-gst-tax-payers-gstr1-hsn-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_HSN_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-hsn-summary>
+                    <app-gst-tax-payers-gstr2-hsn-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_HSN_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-hsn-summary>
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
