@@ -44,7 +44,18 @@ export const Constant = {
         PROPLEGIT_RES_VIEW:"PROPLEGIT_RES_VIEW",
         GST_GENERATE_OTP:"GST_GEN_OTP",
         GST_VERIFY_OTP: "GST_VERIFY_OTP",
-        GST_TAX_PAYERS: "GST_TAX_PAYERS"
+        GST_TAX_PAYERS: "GST_TAX_PAYERS",
+        TAX_PAYERS_GST: {
+            GSTR1_SUMMARY: "GSTR1_SUMMARY",
+            GSTR2_SUMMARY: "GSTR2_SUMMARY",
+            GSTR3_SUMMARY: "GSTR3_SUMMARY",
+            GSTR2A_B2B: "GSTR2A_B2B",
+            GSTR2A_CDN: "GSTR2A_CDN",
+            GSTR1_CDNUR: "GSTR1_CDNUR",
+            GSTR2_CDNUR: "GSTR2_CDNUR",
+            GSTR1_HSN_SUMMARY: "GSTR1_HSN_SUMMARY",
+            GSTR2_HSN_SUMMARY: "GSTR2_HSN_SUMMARY"
+        }
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {
