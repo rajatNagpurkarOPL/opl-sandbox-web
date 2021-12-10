@@ -5,7 +5,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    width: 750px;
+    width: 100%;
 
 h4
 {
@@ -23,7 +23,7 @@ font-weight: bold;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    width: 750px;
+    width: 100%;
 
 h4
 {
@@ -55,9 +55,9 @@ font-weight: bold;
 }
 
 .dash-table-brige11{
-    td {
-        padding: 0.8em 1em !important;  
-    }
+    // td {
+    //     padding: 0.8em 1em !important;  
+    // }
   
 
    th{

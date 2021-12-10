@@ -157,11 +157,12 @@
 .btn-pop-up .product-btn3 {
     border: 1px solid #2D3079;
     border-radius: 8px;
+    max-width: 110px;
     opacity: 1;
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 2em;  
+    padding: .8em;  
     width: 48%;
     text-align: center;
     background: #2D3079;
@@ -171,10 +172,11 @@
     border: 1px solid #BEBEBE;
     border-radius: 8px;
     opacity: 1;
+    max-width: 110px;
     color: #5C5C5C;
     font-size: 16px;
     font-weight: 500;
-    padding: 1em 2em;  
+    padding: .8em;  
     width: 48%;
     text-align: center;
     background: #F7F7F7;
@@ -203,7 +205,7 @@
 
 .psb-submit {
     background-color: #2D3079;
-    padding: 1.5em 3.5em;
+    padding: 0.7em 1.3em;
     color: #FFFFFF;
     border-radius: 5px;
     
