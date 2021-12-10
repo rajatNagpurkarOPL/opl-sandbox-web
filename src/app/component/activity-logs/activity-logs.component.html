@@ -1,56 +1,58 @@
-
-
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div id="b4l-content">
       <div class="main">
-          <div class="sidebar-main-title">
-            <div class="d-flex al-center js-between w-100 pd-30"> 
-              <span class="text-span">Activity Logs</span> 
+        <div class="sidebar-main-title">
+          <div class="d-flex al-center js-between w-100 pl-4 pt-2">
+            <span class="text-span">Activity Logs</span>
+            <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+              <mat-form-field class="input-group p-0" appearance="outline">
+                <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter"
+                  (keyup)="filterApplicationData()">
+              </mat-form-field>
             </div>
           </div>
-          <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12" style="float: right;">
-            <mat-form-field class="input-group" appearance="outline" >
-            <input matInput placeholder="Type to search..."  [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">            
-          </mat-form-field>
-          </div> 
-          <table matSort (matSortChange)="sortData($event)"  class="table activity-log-table dash-table-brige-new table-responsive" style="margin-top: 1em;">
-            <thead>
-              <tr>
-                <th scope="col">#</th> 
-                <th  mat-sort-header="requestId" scope="col">Request ID</th>
-                <th mat-sort-header="requestTime"  scope="col">Request Timestamp</th>
-                <th mat-sort-header="responseTime"  scope="col">Response Timestamp</th>
-                <th mat-sort-header="path" scope="col" style="text-align: left;">Path</th>
-                <th mat-sort-header="httpStatus" scope="col">Http Status</th>
-                <th mat-sort-header="httpStatusDescription" scope="col">Http Status Description</th>
-                <th mat-sort-header="clientIp" scope="col">Client IP</th>
-                <th mat-sort-header="serverRequestId" scope="col">Server Request Id</th>
-                <th mat-sort-header="serverRequestId" scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let audit of audits; let i=index;">
-                  <td> {{(pageSize*(page-1)) + (i+1)}}</td>
-                  <td>{{audit.requestId}}</td>
-                  <td>{{audit.requestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-                  <td>{{audit.responseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-                  <td style="text-align: left;">{{audit.path}}</td>
-                  <td>{{audit.httpStatus}}</td>
-                  <td>{{audit.httpStatusDescription}}</td>
-                  <td>{{audit.clientIp}}</td>
-                  <td>{{audit.serverRequestId}}</td>
-                  <td>
-                    <button class="btn3-b4l" *ngIf="audit.auditDataLogProxy != null"  matTooltip="View Detailed Logs" style="line-height: 24px;"  matTooltipPosition="above" aria-label="View Detailed logs" (click)="openDialog(audit.auditDataLogProxy)">
-                      <mat-icon>visibility</mat-icon>
-                    </button>
-                  </td>
-              </tr>
+        </div>
+        <table matSort (matSortChange)="sortData($event)"
+          class="table activity-log-table dash-table-brige-new table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th mat-sort-header="requestId" scope="col">Request ID</th>
+              <th mat-sort-header="requestTime" scope="col">Request Timestamp</th>
+              <th mat-sort-header="responseTime" scope="col">Response Timestamp</th>
+              <th mat-sort-header="path" scope="col" style="text-align: left;">Path</th>
+              <th mat-sort-header="httpStatus" scope="col">Http Status</th>
+              <th mat-sort-header="httpStatusDescription" scope="col">Http Status Description</th>
+              <th mat-sort-header="clientIp" scope="col">Client IP</th>
+              <th mat-sort-header="serverRequestId" scope="col">Server Request Id</th>
+              <th mat-sort-header="serverRequestId" scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let audit of audits; let i=index;">
+              <td> {{(pageSize*(page-1)) + (i+1)}}</td>
+              <td>{{audit.requestId}}</td>
+              <td>{{audit.requestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+              <td>{{audit.responseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+              <td style="text-align: left;">{{audit.path}}</td>
+              <td>{{audit.httpStatus}}</td>
+              <td>{{audit.httpStatusDescription}}</td>
+              <td>{{audit.clientIp}}</td>
+              <td>{{audit.serverRequestId}}</td>
+              <td>
+                <button class="btn3-b4l" *ngIf="audit.auditDataLogProxy != null" matTooltip="View Detailed Logs"
+                  style="line-height: 24px;" matTooltipPosition="above" aria-label="View Detailed logs"
+                  (click)="openDialog(audit.auditDataLogProxy)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </tr>
           </tbody>
-      
-          </table>
-        <div class="row pagination-table" *ngIf="audits">
-          <div class="col-sm-12 col-md-4" style="margin-left: 15%;">
+
+        </table>
+        <div class="row justify-content-between pagination-table mx-4" *ngIf="audits">
+          <div class="col-sm-12 col-md-4 ">
             <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
               Showing
               {{startIndex}} to {{endIndex > collectionSize ? collectionSize : endIndex}} of {{collectionSize}}
@@ -59,8 +61,8 @@
           </div>
           <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
             <div class="text-md-right float-md-right pagination-rounded">
-              <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize"  [rotate]="true" [ellipses]="false"
-              [boundaryLinks]="true" (pageChange)="getUserLogs(page)">
+              <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize"
+                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="getUserLogs(page)">
               </ngb-pagination>
             </div>
           </div>

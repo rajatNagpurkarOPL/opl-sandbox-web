@@ -5,7 +5,7 @@
 
 .sidebar {
     min-height: 750px;
-    width: 346px;
+    width: 250px;
     position: absolute;
     z-index: 1;
     background-color: #FAFAFA;
@@ -35,17 +35,18 @@
     
   
   .sidebar a.active {
-    color: #2D3079;
-    background-color: #FFFFFF;
+    color: #ffffff;
+    background-color: #2d3079;
     border-right: none;
- 
   }
   
 
   
   .main {
-    margin-left: 25em; /* Same as the width of the sidenav */
+    // margin-left: 25em; /* Same as the width of the sidenav */
     padding: 0px 2em;
+    width: calc(100% - 250px);
+    margin-left: auto;
     @media(max-width:1366px){
         margin-left: 14.5em;
         padding: 0 1em;

@@ -1,33 +1,36 @@
 <form>
-    <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
-            <mat-form-field class="example-full-width">
-                <mat-label>CIN/PAN/KID</mat-label>
-                <input type="text" matInput [formControl]="creditRatingForm.controls.id" [errorStateMatcher]="matcher"
-                    placeholder="Ex. L23201MH1959GOI011388">
-                <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
-                    Please Enter CIN/PAN/KID.
-                </mat-error>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field class="example-full-width">
-                <mat-label>Name (Optional)</mat-label>
-                <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher"
-                    placeholder="Ex. Abc Pvt Ltd">
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field class="example-full-width">
-                <mat-label>Rating Agency</mat-label>
-                <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
-                    <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
-                        {{agency}}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="creditRatingForm.get('ratingAgency').hasError('required')">
-                    Please select rating agency.
-                </mat-error>
-            </mat-form-field>
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Get Credit Ratings</button>
+    <mat-card style="width: 100%;">
+        <form class="example-form d-flex flex-column flex-wrap" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
+            <div class="input-fields">
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>CIN/PAN/KID</mat-label>
+                    <input type="text" matInput [formControl]="creditRatingForm.controls.id"
+                        [errorStateMatcher]="matcher" placeholder="Ex. L23201MH1959GOI011388">
+                    <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
+                        Please Enter CIN/PAN/KID.
+                    </mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field class="example-full-width">
+                    <mat-label>Name (Optional)</mat-label>
+                    <input type="text" matInput [formControl]="creditRatingForm.controls.name"
+                        [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field class="example-full-width">
+                    <mat-label>Rating Agency</mat-label>
+                    <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
+                            {{agency}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="creditRatingForm.get('ratingAgency').hasError('required')">
+                        Please select rating agency.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Get Credit Ratings</button>
         </form>
     </mat-card>
 </form>

@@ -1,17 +1,24 @@
 <!-- Parent -->
-<div *ngIf="!isObjectNullOrEmpty(item[arrayKey])">    
-    <mat-list-item class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)" (click)="item[expandFlagKey] = !item[expandFlagKey]" class="parent" title={{item.description}} >
-        <span class="full-width" *ngIf="isExpanded || isShowing">{{item.value}}</span>
-        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : item[rotationFlagKey]}" *ngIf="!isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)">expand_more</mat-icon>
+<div *ngIf="!isObjectNullOrEmpty(item[arrayKey])">
+    <mat-list-item class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)"
+        (click)="item[expandFlagKey] = !item[expandFlagKey]" class="parent" title={{item.description}}>
+        <span class="full-width side-nav-text" *ngIf="isExpanded || isShowing">{{item.value}}</span>
+        <mat-icon class="side-nav-icons" mat-list-icon>{{item.icon}}</mat-icon>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : item[rotationFlagKey]}"
+            *ngIf="!isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)">expand_more</mat-icon>
     </mat-list-item>
-    <!-- First Child -->     
-    <div class="submenu" [ngClass]="{'expanded' : item[expandFlagKey]}" *ngIf="item[expandFlagKey] && (isExpanded || isShowing)">
-        <mat-nav-list  *ngFor="let valueObject of item[arrayKey]">
-                <app-drawer-menu appDrawerMenu [item]="valueObject" arrayKey="values" [expandFlagKey]="expandFlagKey" [rotationFlagKey]="rotationFlagKey" [isExpanded]="isExpanded" [isShowing]="isShowing"></app-drawer-menu>
+    <!-- First Child -->
+    <div class="submenu" [ngClass]="{'expanded' : item[expandFlagKey]}"
+        *ngIf="item[expandFlagKey] && (isExpanded || isShowing)">
+        <mat-nav-list *ngFor="let valueObject of item[arrayKey]">
+            <app-drawer-menu appDrawerMenu [item]="valueObject" arrayKey="values" [expandFlagKey]="expandFlagKey"
+                [rotationFlagKey]="rotationFlagKey" [isExpanded]="isExpanded" [isShowing]="isShowing">
+            </app-drawer-menu>
         </mat-nav-list>
     </div>
 </div>
-    <mat-list-item id="last-child-item" class={{item.cssClass}} (mouseenter)="mouseenter(item)" (mouseleave)="mouseleave(item)" title={{item.description}} (click)="docuComp.setCurrentSelectedAPI(item.code)" *ngIf="isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)"  class="parent">
-      <span  class="full-width">{{item.value}}</span>
-    </mat-list-item>
+<mat-list-item id="last-child-item" class={{item.cssClass}} (mouseenter)="mouseenter(item)"
+    (mouseleave)="mouseleave(item)" title={{item.description}} (click)="docuComp.setCurrentSelectedAPI(item.code)"
+    *ngIf="isObjectNullOrEmpty(item[arrayKey]) && (isExpanded || isShowing)" class="parent">
+    <span class="full-width child-sidenav-text">{{item.value}}</span>
+</mat-list-item>

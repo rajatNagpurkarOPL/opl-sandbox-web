@@ -26,14 +26,14 @@ label {
   color: white;
 }
 
-.dismiss {
-  float: right;
-  height: 0 !important;
-}
+// .dismiss {
+//   float: right;
+//   height: 0 !important;
+// }
 
 .dismiss button {
-  top: -8px;
-  color: white;
+  color: #2D3079;
+  outline: none;
 }
 .mat-snack-bar-container {
   max-width: 900px;

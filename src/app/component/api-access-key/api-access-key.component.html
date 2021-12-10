@@ -32,7 +32,7 @@
     <div class="d-flex fl-column js-center"> 
      </div>  
 
-    <table matSort (matSortChange)="sortData($event)"  class="table dash-table-org" style="margin-top: 1em;">
+    <table matSort (matSortChange)="sortData($event)"  class="table dash-table-org main-table">
        <thead>
          <tr>
           <th scope="col">#</th> 
@@ -62,11 +62,10 @@
       </tbody>    
     </table>  
   </div>
-</div>  
-
+  
  <!---pagination-->  
- <div class="row pagination-table" *ngIf="keyPairList">
-  <div class="col-sm-12 col-md-4" style="margin-left: 15%;">
+ <div class="row pagination-table justify-content-between" *ngIf="keyPairList">
+  <div class="col-sm-12 col-md-4">
     <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
       {{((pagination.size*(pagination.page-1))+1)}} to
       {{(pagination.size*pagination.page) > (keyPairList.length) ? (keyPairList.length) : (pagination.size*pagination.page)}} of {{keyPairList.length}}
@@ -83,5 +82,7 @@
     </div>
   </div>
   </div>
+</div>  
+
 
 

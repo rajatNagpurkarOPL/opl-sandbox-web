@@ -2539,7 +2539,6 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 /* Start table css */
 .table {
-  width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent
@@ -5289,13 +5288,13 @@ tbody.collapse.show {
   padding: .5rem .75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: #2d3079;
   background-color: #fff;
   border: 1px solid #dee2e6
 }
 
 .page-link-psb:hover {
-  color: #0056b3;
+  color: #2d3079;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6

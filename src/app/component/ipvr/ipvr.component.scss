@@ -1,11 +1,61 @@
-.json-pretty{
-    color:#2D3079; 
-    font-size: 15px; 
+.json-pretty {
+    color: #2d3079;
+    font-size: 15px;
     font-weight: bold;
     align-items: center;
     overflow: auto;
 }
 
 .mr-all {
+    margin: 0.6rem 0.4rem;
+}
+
+.ipvr-page-form {
+    display: flex;
+    flex-wrap: wrap;
+    .mat-form-field {
+        max-width: 210px;
+    }
+    .mat-expansion-panel {
+        width: 100%;
+        padding: 30px 10px;
+        .mat-expansion-panel-header {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+        .mat-panel-description {
+            align-items: center;
+        }
+        button {
+            padding: 10px 20px;
+        }
+    }
+    .mat-slide-toggle {
+        min-width: 210px;
+        margin: 0.6rem 0.4rem;
+        min-height: 56px;
+        color: rgba(0, 0, 0, 0.87);
+        ::ng-deep .mat-slide-toggle-label {
+            height: 100%;
+            border: 2px solid #dedede;
+            border-radius: 4px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.create-application-btn {
+    margin: 20px 0 0 0;
+    padding: 12px 20px;
+    // max-height: 50px;
+}
+
+.toggle-btn-form {
+    max-width: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0.6rem 0.4rem;
 }

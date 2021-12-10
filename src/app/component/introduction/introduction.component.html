@@ -1,214 +1,239 @@
 <div>
-  <div class="card-header row row-flex">
-      <h3 class="card-title" style="border-left-color: inherit; ">
-      <strong><span class="label-text">Introduction </span></strong>
-      </h3><!---->
+  <div class="card-header">
+    <h3 class="card-title m-0">
+      <strong>Introduction</strong>
+    </h3>
+    <!---->
   </div>
-<mat-tab-group> 
-  <mat-tab label="About">
-   <div> 
-     <br><br>
-    <ul>
-   <li><p>The OAM(OPL API Manager) API is organized around RESTful Web Services. 
-     Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. 
-     We use built-in HTTP features, like HTTP authentication and HTTP verbs (POST), which are understood by off-the-shelf HTTP clients.
-    We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your secret Id and Client Id API keys in any public website's client-side code).
-  </p></li>
-    <li><p>
-      To make the API as explorable as possible, you will have different account for test mode and live mode accecss. 
-      Requests made with TEST mode credentials incur no cost but the total number of TEST mode calls will be restricted as per the relevant API. 
-      Please contact our business development team for further details.
-  </p></li>
-  <li><p>
-    You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of the API.
-  </p></li>
-    </ul>
-   </div>
-  </mat-tab>
-  <mat-tab label="Registration / Onboarding">  
-    <br>
-<div>
-<p>API access will be granted to Customers registered with OPL. To request an access to test APIs please get in touch with OPL Team at support@onlinepsbloans.com with the following details:</p>
-<table class="table table-striped"> 
-  <thead>
-    <tr>
-      <th scope="col"> Field</th>
-      <th scope="col">Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Organization Name</td>
-      <td> Full Organization Name</td>  
-    </tr>
-    <tr>
-      <td>Sector</td>
-      <td>In which sector your company provide services.</td>  
-    </tr>
-    <tr>
-      <td>Email-id </td>
-      <td>email-id will use to register with our company.</td>  
-    </tr>
-    <tr>
-      <td>Mobile Number</td>
-      <td>MobileNo will use to register with our company.</td>  
-    </tr>
-    <tr>
-      <td>Service Name </td>
-      <td> Service Name which you want to access to test APIs.</td>  
-    </tr>
-    <tr>
-      <td>Contact Details</td>
-      <td> Minimum 1 Person Contact Detail Will be required. (Name, Email-id, Mobile Number, Designation)</td>  
-    </tr>
-  </tbody>
-</table>
-</div>
-</mat-tab>
+  <mat-tab-group>
+    <mat-tab label="About">
+      <div>
+        <br><br>
+        <ul>
+          <li>
+            <p>The OAM(OPL API Manager) API is organized around RESTful Web Services.
+              Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors.
+              We use built-in HTTP features, like HTTP authentication and HTTP verbs (POST), which are understood by
+              off-the-shelf HTTP clients.
+              We support cross-origin resource sharing, allowing you to interact securely with our API from a
+              client-side web application (though you should never expose your secret Id and Client Id API keys in any
+              public website's client-side code).
+            </p>
+          </li>
+          <li>
+            <p>
+              To make the API as explorable as possible, you will have different account for test mode and live mode
+              accecss.
+              Requests made with TEST mode credentials incur no cost but the total number of TEST mode calls will be
+              restricted as per the relevant API.
+              Please contact our business development team for further details.
+            </p>
+          </li>
+          <li>
+            <p>
+              You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of
+              the API.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </mat-tab>
+    <mat-tab label="Registration / Onboarding">
+      <br>
+      <div>
+        <p>API access will be granted to Customers registered with OPL. To request an access to test APIs please get in
+          touch with OPL Team at support@onlinepsbloans.com with the following details:</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"> Field</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Organization Name</td>
+              <td> Full Organization Name</td>
+            </tr>
+            <tr>
+              <td>Sector</td>
+              <td>In which sector your company provide services.</td>
+            </tr>
+            <tr>
+              <td>Email-id </td>
+              <td>email-id will use to register with our company.</td>
+            </tr>
+            <tr>
+              <td>Mobile Number</td>
+              <td>MobileNo will use to register with our company.</td>
+            </tr>
+            <tr>
+              <td>Service Name </td>
+              <td> Service Name which you want to access to test APIs.</td>
+            </tr>
+            <tr>
+              <td>Contact Details</td>
+              <td> Minimum 1 Person Contact Detail Will be required. (Name, Email-id, Mobile Number, Designation)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
 
-<mat-tab label="HTTP Status Codes">
-<br>  
-  <div>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Code</th>
-        <th scope="col">Message</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>200</td>
-        <td>OK</td>
-        <td>Request Successful</td>
-      </tr>
-      <tr>
-        <td>400</td>
-        <td>Bad Request</td>
-        <td>Mandatory fields are missing / invalid</td>
-      </tr>
-      <tr>
-        <td>401</td>
-        <td>Unauthorized Access</td>
-        <td>API Key is missing or invalid.</td>
-      </tr>
-      <tr>
-        <td>402</td>
-        <td>Insufficient Credits</td>
-        <td>Credits to access the APIs expired</td>
-      </tr>
-      <tr>
-        <td>500</td>
-        <td> Internal Server Error</td>
-        <td>Internal processing error of OPL.</td>
-      </tr>
-      <tr>
-        <td>503</td>
-        <td>Source Unavailable</td>
-        <td>The source for authentication is down for maintenance or inaccessible.</td>
-      </tr>
-      <tr>
-        <td>504</td>
-        <td>Endpoint Request Timed Out</td>
-        <td>The response latency from the source for authentication is >30sec.</td>
-      </tr>
-    </tbody>
-  </table> 
-</div>
-</mat-tab> 
+    <mat-tab label="HTTP Status Codes">
+      <br>
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Message</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>200</td>
+              <td>OK</td>
+              <td>Request Successful</td>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td>Bad Request</td>
+              <td>Mandatory fields are missing / invalid</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>Unauthorized Access</td>
+              <td>API Key is missing or invalid.</td>
+            </tr>
+            <tr>
+              <td>402</td>
+              <td>Insufficient Credits</td>
+              <td>Credits to access the APIs expired</td>
+            </tr>
+            <tr>
+              <td>500</td>
+              <td> Internal Server Error</td>
+              <td>Internal processing error of OPL.</td>
+            </tr>
+            <tr>
+              <td>503</td>
+              <td>Source Unavailable</td>
+              <td>The source for authentication is down for maintenance or inaccessible.</td>
+            </tr>
+            <tr>
+              <td>504</td>
+              <td>Endpoint Request Timed Out</td>
+              <td>The response latency from the source for authentication is >30sec.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
 
-<mat-tab label="Internal Status Codes">  
-  <br>
-  <div> 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Code</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1001</td>
-        <td>Details found</td>  
-      </tr>
-      <tr>
-        <td>1002</td>
-        <td>Details not found based on combination of inputs</td>  
-      </tr>
-      <tr>
-        <td>1003</td>
-        <td>Invalid Keypair.</td>  
-      </tr>
-      <tr>
-        <td>1004</td>
-        <td>Unauthorized.</td>  
-      </tr>
-      <tr>
-        <td>1005</td>
-        <td>Missing Inputs.</td>  
-      </tr>
-      <tr>
-        <td>1006</td>
-        <td>Technical Error</td>  
-      </tr>
-      <tr>
-        <td>1007</td>
-        <td>User already Registered!</td>  
-      </tr>
-      <tr>
-        <td>1008</td>
-        <td>Invalid Inputs.</td>  
-      </tr>
-      <tr>
-        <td>1009</td>
-        <td>Unknown Error</td>  
-      </tr>
-      <tr>
-        <td>1010</td>
-        <td>Required Headers Missing.</td>  
-      </tr>
-      <tr>
-        <td>1011</td>
-        <td>Verification Failed.</td>  
-      </tr>
-      <tr>
-        <td>1012</td>
-        <td>User Doesn't have credit limit to access the APIs. Kindly contact to Administrator</td>  
-      </tr>
-      <tr>
-        <td>1013</td>
-        <td>User Doesn't have API access, Kindly contact to Administrator</td>  
-      </tr>
+    <mat-tab label="Internal Status Codes">
+      <br>
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1001</td>
+              <td>Details found</td>
+            </tr>
+            <tr>
+              <td>1002</td>
+              <td>Details not found based on combination of inputs</td>
+            </tr>
+            <tr>
+              <td>1003</td>
+              <td>Invalid Keypair.</td>
+            </tr>
+            <tr>
+              <td>1004</td>
+              <td>Unauthorized.</td>
+            </tr>
+            <tr>
+              <td>1005</td>
+              <td>Missing Inputs.</td>
+            </tr>
+            <tr>
+              <td>1006</td>
+              <td>Technical Error</td>
+            </tr>
+            <tr>
+              <td>1007</td>
+              <td>User already Registered!</td>
+            </tr>
+            <tr>
+              <td>1008</td>
+              <td>Invalid Inputs.</td>
+            </tr>
+            <tr>
+              <td>1009</td>
+              <td>Unknown Error</td>
+            </tr>
+            <tr>
+              <td>1010</td>
+              <td>Required Headers Missing.</td>
+            </tr>
+            <tr>
+              <td>1011</td>
+              <td>Verification Failed.</td>
+            </tr>
+            <tr>
+              <td>1012</td>
+              <td>User Doesn't have credit limit to access the APIs. Kindly contact to Administrator</td>
+            </tr>
+            <tr>
+              <td>1013</td>
+              <td>User Doesn't have API access, Kindly contact to Administrator</td>
+            </tr>
 
-    </tbody>
-  </table> 
-</div>
-</mat-tab> 
-<mat-tab label=" Authentication / Security ">
-   <div>  
-     <br> 
-     <br> 
-     <ul>
-  <li><p>Authenticate your account when using the API by including your secret Id and Client Id API key pair in the request header.</p>
-    </li>
-  <li> <p> Each registered user is allotted a unique key pair which must be part of each request from. 
-      The Key pair is used to authenticate each request and is valid only for the period of contract between you and Online psb Loans Ltd.
-   </p></li>  
-    <li><p>Your API key pair carry many privileges, so be sure to keep them secret! Do not share your secret API key pair in publicly accessible areas such GitHub, client-side code, and so forth.
-    </p></li>
-    <li><p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail. 
-      API requests without authentication will also fail.</p></li>
-    </ul>
-    </div> 
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label=" Authentication / Security ">
+      <div>
+        <br>
+        <br>
+        <ul>
+          <li>
+            <p>Authenticate your account when using the API by including your secret Id and Client Id API key pair in
+              the request header.</p>
+          </li>
+          <li>
+            <p> Each registered user is allotted a unique key pair which must be part of each request from.
+              The Key pair is used to authenticate each request and is valid only for the period of contract between you
+              and Online psb Loans Ltd.
+            </p>
+          </li>
+          <li>
+            <p>Your API key pair carry many privileges, so be sure to keep them secret! Do not share your secret API key
+              pair in publicly accessible areas such GitHub, client-side code, and so forth.
+            </p>
+          </li>
+          <li>
+            <p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
+              API requests without authentication will also fail.</p>
+          </li>
+        </ul>
+      </div>
 
-    <div class="col" style="margin-top: 12px; text-align: -webkit-left;">
-      <button type="button" (click)="downloadFile(null, 'Encryption_Decryption_Specifications.pdf', true)" color="primary" mat-flat-button style="display: flex; border-radius: 5px;" matTooltip="Click here to Download Encryption Decryption Specifications" matTooltipPosition="above">
-          <mat-icon>file_download</mat-icon>Document
+      <button type="button" class="ml-4" (click)="downloadFile(null, 'Encryption_Decryption_Specifications.pdf', true)"
+        color="primary" mat-flat-button matTooltip="Click here to Download Encryption Decryption Specifications"
+        matTooltipPosition="above">
+        <mat-icon>file_download</mat-icon>Document
       </button>
-  </div>   
 
-</mat-tab>
 
-</mat-tab-group>
+    </mat-tab>
+
+  </mat-tab-group>

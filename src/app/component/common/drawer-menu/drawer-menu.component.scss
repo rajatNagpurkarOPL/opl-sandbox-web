@@ -3,7 +3,7 @@
     transition: transform 300ms ease;
     transform: scaleY(0);
     transform-origin: top;
-    padding-left: 30px;
+    padding: 0 4px 0 12px;
   }
   .submenu.expanded {
     transform: scaleY(1);
@@ -21,14 +21,21 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    padding-left: 0.5em;
+    // padding-left: 0.5em;
   }
 
   .current-active{
-    background-color: #2D3079 !important;
-    color: white !important;
+    background-color: #2d30791c !important;
+    color: #2D3079 !important;
+    min-width: 220px;
   }
 
-  #last-child-item{
-    padding-left: 1.5em;
+
+  .mat-list-item{
+    padding: 0 !important;
+    border-radius: 8px;
+    .mat-list-item-content{
+      padding: 0 !important;
+    }
+
   }

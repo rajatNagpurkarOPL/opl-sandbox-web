@@ -1,18 +1,25 @@
 <!-- Header -->
-<header>
-    <div class="header">
-        <div class="container">
-            <div id="header">
-                    <img class="w-10 ml-2" src="assets/img/opl-logo.svg" />
-                <!-- <img class="logo" src="assets/img/opl-logo.svg" /> -->
+<header id="header">
+    <!-- <div class="container"> -->
+        <div class="header">
+            <div class="header-logo">
+                <img src="https://www.onlinepsbloans.com/img/logo.svg" />
+            </div>
+            <div class="topnav">
+                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
+                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
+                    href="javasript:void(0)">Documentation</a>
+                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
+                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
+                    href="javasript:void(0)">Security</a>
+                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
+                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
+                    href="javasript:void(0)">Others</a>
+            </div>
 
-                <div class="topnav">
-                    <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')" routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"  href="javasript:void(0)">Documentation</a>
-                </div>
+            <div class="header-right">
 
-                <div class="header-right">
-
-                    <!-- <a href="#" class="pos">
+                <!-- <a href="#" class="pos">
                         <span class="notify-badge"></span>
                         <img class="down-arrow" src="assets/img/alert.svg" />
                     </a>
@@ -20,48 +27,63 @@
                     <p><img src="assets/img/b4lDefault.png" /> Hi, {{globals.USER.userName}}</p>
                     <img class="down-arrow" src="assets/img/down-arrow.svg" />
                     <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a> -->
-                
-                    <a href="#" class="pos">
-                        <span class="notify-badge"></span>
-                        <img class="down-arrow" src="assets/img/alert.svg" alt=""/>
-                    </a>
 
-                    <button mat-button [matMenuTriggerFor]="menu">  <p><img src="assets/img/b4lDefault.png" alt=""/> Hi, <span class="w-50 text-over"> {{globals.USER.userName}}</span> <img class="down-arrow ml-2" style="width: 10px;" src="assets/img/down-arrow.svg" /></p>  </button>
-                        <mat-menu #menu="matMenu">
-                        <button mat-menu-item [routerLink]="[constant.ROUTE_URL.PROFILE , constant.PROFILE_PAGE.SETTING]"><p><mat-icon>person_pin</mat-icon> <strong>Profile</strong></p></button>
-                        <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]"><p><mat-icon>local_activity</mat-icon> <strong>Activity</strong></p></button>
-                        <button mat-menu-item (click)="logoutUser()"><p style="color: #E36C6C;"><mat-icon>logout</mat-icon><strong>Logout</strong></p></button>
-                        </mat-menu>
+                <a href="#" class="pos">
+                    <span class="notify-badge"></span>
+                    <img class="down-arrow" src="assets/img/alert.svg" alt="" />
+                </a>
 
-                        <!-- <img src="assets/img/psb-logo.svg" alt=""/> -->
-                </div>
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <p>
+                        <img src="assets/img/b4lDefault.png" alt="" /> Hi, <span>
+                            {{globals.USER.userName}}</span>
+                        <img class="down-arrow" src="assets/img/down-arrow.svg" />
+                    </p>
+                </button>
+
+
+
+                <mat-menu class="profile-details-menu" #menu="matMenu">
+                    <button mat-menu-item [routerLink]="[constant.ROUTE_URL.PROFILE , constant.PROFILE_PAGE.SETTING]">
+                        <p>
+                            <mat-icon>person_pin</mat-icon> <strong>Profile</strong>
+                        </p>
+                    </button>
+                    <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]">
+                        <p>
+                            <mat-icon>local_activity</mat-icon> <strong>Activity</strong>
+                        </p>
+                    </button>
+                    <button mat-menu-item (click)="logoutUser()">
+                        <p style="color: #E36C6C;">
+                            <mat-icon>logout</mat-icon><strong>Logout</strong>
+                        </p>
+                    </button>
+                </mat-menu>
+
+                <!-- <img src="assets/img/psb-logo.svg" alt=""/> -->
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </header>
 
 <router-outlet></router-outlet>
 
-<footer>
-    <div class="container">
-        <div id="footer">
+<!-- Footer -->
+
+<footer id="footer">
+    <!-- <div class="container"> -->
+        <div class="footer">
             <div class="footer-left">
                 <p>Copyright © 2020 All rights reserved. Powred by psbloansin59minutes.com</p>
             </div>
-
-
-
             <div class="footer-right">
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms & Conditions</a></li>
                     <li><a href="#">Help & Support</a></li>
-
-
-
                 </ul>
             </div>
         </div>
-
-    </div>
+    <!-- </div> -->
 </footer>

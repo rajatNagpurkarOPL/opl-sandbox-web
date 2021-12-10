@@ -1,97 +1,141 @@
 <mat-drawer-container class="example-container mat-typography" autosize>
-  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
-    <button mat-mini-fab (click)="isExpanded = !isExpanded" style="margin: 10px; background-color: #2D3079;">
-      <mat-icon aria-label="Menu">menu</mat-icon>
-    </button>
-    <ng-container *ngIf="!isObjectNullOrEmpty(masterData)">
-    <mat-nav-list (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" *ngFor="let code of getMasterCodes()">
-      <app-drawer-menu appDrawerMenu [item]="masterData[code]"  arrayKey="values" expandFlagKey="showSubmenu" rotationFlagKey="showSubmenu" [isExpanded]="isExpanded" [isShowing]="isShowing" *ngIf="masterData[code] != undefined"></app-drawer-menu>
-    </mat-nav-list>        
-  </ng-container>  
+  <mat-drawer class="main-mat-drawer" #drawer mode="side" disableClose="true" opened="true">
+     <button mat-mini-fab class="hamburger" (click)="isExpanded = !isExpanded">
+        <mat-icon aria-label="Menu">menu</mat-icon>
+     </button>
+     <ng-container *ngIf="!isObjectNullOrEmpty(masterData)">
+        <mat-nav-list (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" *ngFor="let code of getMasterCodes()">
+        <app-drawer-menu appDrawerMenu [item]="masterData[code]" arrayKey="values" expandFlagKey="showSubmenu"
+        rotationFlagKey="showSubmenu" [isExpanded]="isExpanded" [isShowing]="isShowing"
+        *ngIf="masterData[code] != undefined"></app-drawer-menu>
+        </mat-nav-list>
+     </ng-container>
   </mat-drawer>
-  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined && selectedMenuItem == this.constant.MASTER_CODE.DETAILS">
-    <app-introduction *ngIf="selectedMenuItem == this.constant.MASTER_CODE.DETAILS"></app-introduction>
+  <div class="sidenav-content"
+     *ngIf="masterData != null && masterData != undefined && selectedMenuItem == this.constant.MASTER_CODE.DETAILS">
+     <app-introduction *ngIf="selectedMenuItem == this.constant.MASTER_CODE.DETAILS"></app-introduction>
   </div>
-  <div class="sidenav-content" *ngIf="masterData != null && masterData != undefined && selectedMenuItem != this.constant.MASTER_CODE.DETAILS">
-    <div>
-      <div class="card-header d-flex w-100 justify-content-between al-center">
-          <h3 class="card-title mb-0">
-          {{selectedInnerData != null ? selectedInnerData.value : ""}}
-          </h3> 
-          <div class="credit-data d-flex flex-column al-center text-start">
-            <p>Total Credit: <span>{{totalCredit}}</span> </p> 
-            <p>Balance Credit: <span>{{balanceCredit}}</span></p> 
-          </div>
+  <div class="sidenav-content"
+     *ngIf="masterData != null && masterData != undefined && selectedMenuItem != this.constant.MASTER_CODE.DETAILS">
+     <div>
+        <div class="card-header">
+           <h3 class="card-title m-0">
+              <strong>{{selectedInnerData != null ? selectedInnerData.value : ""}}</strong>
+           </h3>
+           <div class="credit-data d-flex flex-column al-center text-start">
+              <p>Total Credit: <span>{{totalCredit}}</span> </p>
+              <p>Balance Credit: <span>{{balanceCredit}}</span></p>
+           </div>
         </div>
-      <div class="card-body">
-          <div class="well well-sm p-0">
+        <div class="card-body">
+           <div class="well well-sm p-0">
               <div class="table-container">
-                  <div class="form-group">
-                      <mat-form-field style="width: 10%; background-color: #777;">
-                          <input matInput type="text" style="font-weight: bold; color: white;" value="End-Point" [disabled]="true">
-                      </mat-form-field>
-                      <mat-form-field style="width: 80% !important;">
-                          <input matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{url}}" readonly>
-                          <!-- <input *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{tempIpvrUrl}}" readonly> -->
-                      </mat-form-field>
-                      <mat-form-field style="width: 10%; background-color: #777;">
-                          <input matInput type="text" style="font-weight: bold; color:white;" value="POST" [disabled]="true">
-                      </mat-form-field>
-                  </div>
+                 <div class="form-group ca-firm-form-group">
+                    <label class="ca-firm-form-group-label">End-Point</label>
+                    <!-- <mat-form-field>
+                       <input matInput type="text" class="text-center font-weight-normal" value="End-Point" [disabled]="true">
+                       </mat-form-field> -->
+                    <mat-form-field class="ca-firm-form-group-url">
+                       <input matInput type="text" value="{{url}}" readonly>
+                       <!-- <input *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" matInput style="font-weight: bold; font-size: 15px;" type="text" value="{{tempIpvrUrl}}" readonly> -->
+                    </mat-form-field>
+                    <label class="ca-firm-form-group-label">POST</label>
+                    <!-- <mat-form-field>
+                       <input matInput type="text" class="text-center font-weight-normal" value="POST" [disabled]="true">
+                       </mat-form-field> -->
+                 </div>
               </div>
-          </div><!---->
-          <mat-tab-group>   
+           </div>
+           <!---->
+           <mat-tab-group class="tab-design">
               <mat-tab label="Tryout / Implement">
-                  <div>
-                    <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG" [menuData]="selectedInnerData"></app-credit-rating>
-                    <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK" [menuData]="selectedInnerData"></app-pan-status-check>
-                    <app-bank-account-verification *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION" [menuData]="selectedInnerData"></app-bank-account-verification>   
-                    <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL" [menuData]="selectedInnerData"></app-udhyam-reg-detail>
-                    <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL" [menuData]="selectedInnerData"></app-ca-individual-detail>
-                    <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL" [menuData]="selectedInnerData"></app-ca-firm-detail>
-                    <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY" [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
-                    <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP" [menuData]="selectedInnerData"></app-esign-and-estamping>
-                    <app-ipvr (updatedUrl)="updateIpvrUrl($event)" *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" [menuData]="selectedInnerData"></app-ipvr>
-                    <app-ipvr-view  *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_RES_VIEW" [menuData]="selectedInnerData"></app-ipvr-view>
-                    <app-gst-generate-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_GENERATE_OTP" [menuData]="selectedInnerData"></app-gst-generate-otp>
-                    <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP" [menuData]="selectedInnerData"></app-gst-verify-otp>
-                    <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS" [menuData]="selectedInnerData"></app-gst-tax-payers-api>
-                    <app-gst-tax-payers-gstr1-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-summary>
-                    <app-gst-tax-payers-gstr2-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-summary>
-                    <app-gst-tax-payers-gstr3-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR3_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr3-summary>
-                    <app-gst-tax-payers-gstr2a-b2b *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_B2B" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-b2b>
-                    <app-gst-tax-payers-gstr2a-cdn *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_CDN" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-cdn>
-                    <app-gst-tax-payers-gstr1-cdnur *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_CDNUR" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-cdnur>
-                    <app-gst-tax-payers-gstr2-cdnur *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_CDNUR" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-cdnur>
-                    <app-gst-tax-payers-gstr1-hsn-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_HSN_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-hsn-summary>
-                    <app-gst-tax-payers-gstr2-hsn-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_HSN_SUMMARY" [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-hsn-summary>
-                  </div>
+                 <div>
+                    <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG"
+                    [menuData]="selectedInnerData"></app-credit-rating>
+                    <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK"
+                    [menuData]="selectedInnerData"></app-pan-status-check>
+                    <app-bank-account-verification
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION"
+                    [menuData]="selectedInnerData"></app-bank-account-verification>
+                    <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL"
+                    [menuData]="selectedInnerData"></app-udhyam-reg-detail>
+                    <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL"
+                    [menuData]="selectedInnerData"></app-ca-individual-detail>
+                    <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL"
+                    [menuData]="selectedInnerData"></app-ca-firm-detail>
+                    <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY"
+                    [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
+                    <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP"
+                    [menuData]="selectedInnerData"></app-esign-and-estamping>
+                    <app-ipvr (updatedUrl)="updateIpvrUrl($event)"
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" [menuData]="selectedInnerData">
+                    </app-ipvr>
+                    <app-ipvr-view *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_RES_VIEW"
+                    [menuData]="selectedInnerData"></app-ipvr-view>
+                    <app-gst-generate-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_GENERATE_OTP"
+                    [menuData]="selectedInnerData"></app-gst-generate-otp>
+                    <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP"
+                    [menuData]="selectedInnerData"></app-gst-verify-otp>
+                    <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-api>
+                    <app-gst-tax-payers-gstr1-summary
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_SUMMARY"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-summary>
+                    <app-gst-tax-payers-gstr2-summary
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_SUMMARY"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-summary>
+                    <app-gst-tax-payers-gstr3-summary
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR3_SUMMARY"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr3-summary>
+                    <app-gst-tax-payers-gstr2a-b2b
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_B2B"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-b2b>
+                    <app-gst-tax-payers-gstr2a-cdn
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2A_CDN"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2a-cdn>
+                    <app-gst-tax-payers-gstr1-cdnur
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_CDNUR"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-cdnur>
+                    <app-gst-tax-payers-gstr2-cdnur
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_CDNUR"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-cdnur>
+                    <app-gst-tax-payers-gstr1-hsn-summary
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_HSN_SUMMARY"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr1-hsn-summary>
+                    <app-gst-tax-payers-gstr2-hsn-summary
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_HSN_SUMMARY"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-gstr2-hsn-summary>
+                 </div>
               </mat-tab>
               <mat-tab label="Request Document">
-                <div class="card-body">
-                  <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"  [jsonData]="apiRequestData"></app-documentation-data>
-                </div>
-              </mat-tab>  
-              <mat-tab label="Response Document">       
-                <div class="card-body">
-                  <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"  [jsonData]="apiResponseData"></app-documentation-data>
-                </div> 
+                 <div class="card-body">
+                    <app-documentation-data *ngIf="apiRequestData != null && apiRequestData.apiSchemaData != null"
+                    [jsonData]="apiRequestData"></app-documentation-data>
+                 </div>
               </mat-tab>
-          </mat-tab-group>
-      </div>
-</div>   
-<style>
-table, th , td {
- border: 1px solid grey;
- border-collapse: collapse;
- padding: 5px;
-}
-table tr:nth-child(odd) {
- background-color: #f2f2f2;
-}
-table tr:nth-child(even) {
- background-color: #ffffff;
-}
-</style>          
+              <mat-tab label="Response Document">
+                 <div class="card-body">
+                    <app-documentation-data *ngIf="apiResponseData != null && apiResponseData.apiSchemaData != null"
+                    [jsonData]="apiResponseData"></app-documentation-data>
+                 </div>
+              </mat-tab>
+           </mat-tab-group>
         </div>
+     </div>
+     <style>
+        table,
+        th,
+        td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+        }
+        table tr:nth-child(odd) {
+        background-color: #f2f2f2;
+        }
+        table tr:nth-child(even) {
+        background-color: #ffffff;
+        }
+     </style>
+  </div>
 </mat-drawer-container>
