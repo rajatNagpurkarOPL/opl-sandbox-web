@@ -1,6 +1,7 @@
 <form>
     <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="taxPayersForm" (ngSubmit)="onFormSubmit()">
+        <form class="example-form form-main-section" [formGroup]="taxPayersForm" (ngSubmit)="onFormSubmit()">
+            <div class="input-fields"> 
             <mat-form-field class="example-full-width">
                 <mat-label>GST IN</mat-label>
                 <input type="text" matInput [formControl]="taxPayersForm.controls.id"
@@ -51,9 +52,9 @@
                 <mat-error>
                     <app-print-error [control]="taxPayersForm.controls.returnPeriod"></app-print-error>
                 </mat-error>
-            </mat-form-field>
-            &nbsp;
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Get GST Data</button>
+            </mat-form-field> 
+            </div>
+            <button type="submit"  class="submit-form-btn" mat-flat-button color="primary">Get GST Data</button>
         </form>
     </mat-card>
 </form>

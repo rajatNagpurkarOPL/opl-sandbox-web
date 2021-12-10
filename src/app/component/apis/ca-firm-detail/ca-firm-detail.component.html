@@ -1,6 +1,6 @@
 <form>
     <mat-card class="d-flex w-100 px-0 py-2">
-        <form class="example-form d-flex flex-column w-100" [formGroup]="caFirmDetailForm" (ngSubmit)="onFormSubmit()">
+        <form class="example-form form-main-section d-flex flex-column w-100" [formGroup]="caFirmDetailForm" (ngSubmit)="onFormSubmit()">
             <div class="input-fields">
                 <mat-form-field class="example-full-width">
                     <mat-label>Membership Number</mat-label>
@@ -33,4 +33,6 @@
         </form>
     </mat-card>
 </form>
-<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
+<!-- <div class="tab-design"> -->
+    <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
+<!-- </div> -->

@@ -333,7 +333,7 @@ export class IpvrComponent implements OnInit {
     if (this.ipvrreqForm.value.State.id == 1 || this.ipvrreqForm.value.BaseDocumentType != '712') {
       this.ipvrreqForm.removeControl('SurveyNo');
     }
-    if (this.ipvrreqForm.value.State.id == 2) {
+    if (!(this.ipvrreqForm.value.State.id == 1 && this.ipvrreqForm.value.BaseDocumentType == '712')) {
       this.ipvrreqForm.removeControl('SurveyGatNo');
     }
     if (this.ipvrreqForm.value.BaseDocumentType != 'PropertyCard') {

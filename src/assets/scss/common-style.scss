@@ -3421,9 +3421,9 @@ header {
 
 .mat-button-base.submit-form-btn {
     // padding: 0 40px;
-    // margin-left: 10px;
     // max-height: 55px;
     margin-top: 3px;
+    margin-left: 10px;
     align-self: end;
     padding: 10px 24px;
     max-width: 210px;
@@ -3432,7 +3432,14 @@ header {
     color: #fff;
 }
 .mat-button-base.send-btn {
+   
     padding: 4px 27px !important;
+}
+
+.form-main-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .input-fields {

@@ -1,6 +1,8 @@
 <form>
     <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="generateOtpForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+        <form class="example-form form-main-section form-main-section" [formGroup]="generateOtpForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+           <div class="input-fields">
+
             <mat-form-field class="example-full-width">
                 <mat-label>GST No.</mat-label>
                 <input type="text" matInput [formControl]="generateOtpForm.controls.id" [errorStateMatcher]="matcher">
@@ -20,6 +22,8 @@
                 </mat-error>
             </mat-form-field>
             &nbsp;
+        </div>
+
             <!-- <mat-form-field class="example-full-width">
                 <mat-label>Request Type</mat-label>
                 <input type="text" matInput [formControl]="generateOtpForm.controls.requestType" [errorStateMatcher]="matcher"
@@ -28,7 +32,7 @@
                     Please Enter Request Type.
                 </mat-error>
             </mat-form-field> -->
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Generate OTP</button>
+            <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Generate OTP</button>
         </form>
     </mat-card>
 </form>

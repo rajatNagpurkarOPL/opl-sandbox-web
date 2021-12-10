@@ -1,6 +1,7 @@
 <form>
     <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="verifyOtpForm" (ngSubmit)="onFormSubmit()">
+        <form class="example-form form-main-section" [formGroup]="verifyOtpForm" (ngSubmit)="onFormSubmit()">
+            <div class="input-fields">
             <mat-form-field class="example-full-width">
                 <mat-label>OTP</mat-label>
                 <input type="text" matInput [formControl]="verifyOtpForm.controls.otp"
@@ -9,7 +10,6 @@
                     <app-print-error [control]="verifyOtpForm.controls.otp"></app-print-error>
                 </mat-error>
             </mat-form-field>
-            &nbsp;
             <mat-form-field class="example-full-width">
                 <mat-label>Session Key</mat-label>
                 <input type="text" matInput [formControl]="verifyOtpForm.controls.sessionKey"
@@ -18,8 +18,8 @@
                     <app-print-error [control]="verifyOtpForm.controls.sessionKey"></app-print-error>
                 </mat-error>
             </mat-form-field>
-            &nbsp;
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Verify OTP</button>
+            </div>
+            <button type="submit"  class="submit-form-btn" mat-flat-button color="primary">Verify OTP</button>
         </form>
     </mat-card>
 </form>
