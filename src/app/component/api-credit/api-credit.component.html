@@ -27,14 +27,13 @@
             <tr *ngFor="let item of apiData | slice: (pagination.page-1) * pagination.size : (pagination.page-1) * pagination.size + pagination.size;  let i=index;" class="row"> 
               <td class="col-sm-1 col-md-1"> {{(pagination.size*(pagination.page-1)) + (i+1)}}</td>
               <td class="col-sm-2 col-md-2 text-left">{{item.name}}</td>
-                <td class="col-sm-2 col-md-2 ml-n5">{{item.total}}</td>
+                <td class="col-sm-2 col-md-2">{{item.total}}</td>
                 <td class="col-sm-2 col-md-2">{{item.balance}}</td>
                 <td class="col-sm-1 col-md-1">{{item.triggerCount}}</td>
-                <td class="col-sm-1 col-md-1 ml-5">
-                  <button class="btn3-b4l"  matTooltip="Set/Update Trigger Alert" style="line-height: 24px;"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item)">
+                <td class="col-sm-1 col-md-1">
+                  <button mat-icon-button class="btn3-b4l"  matTooltip="Set/Update Trigger Alert"  matTooltipPosition="above" aria-label="Set Alert" (click)="setNotification(item)">
                     <mat-icon>notification_important</mat-icon>
                   </button>
-          
                 </td>
                 <td class="col-sm-3 col-md-3">
                   <a  href="javaScript:void(0);" (click)="viewCreditLogsHistory(item)">

@@ -21,13 +21,19 @@ mat-card {
 
   .login-text {
     font-size: 34px;
-    font-weight: 300;
-    text-align: center;
     color: #FFFFFF;
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    p{
+      margin-bottom: 0;
+    }
+    img{
+      margin: 0 22px;
+      width: 160px;
+      margin-bottom: 10px;
+    }
   }
   .w-10  {
     width: 15%;
@@ -36,6 +42,7 @@ mat-card {
     background-color: #FFFFFF;
     padding: 2em 0em 0;
     width: 40%;
+    min-width: 450px;
     display: flex;
     align-items: center;
     margin: 3em auto;
@@ -101,13 +108,12 @@ font-weight: 500;
 margin: 1em 0;
 }
 
-
 #footer {
 
   padding: 2em 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 width: 100%;
   bottom: 0;
 }
