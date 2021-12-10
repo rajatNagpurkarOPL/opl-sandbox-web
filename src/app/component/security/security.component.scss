@@ -1,0 +1,105 @@
+// .profile-main{
+//     width: 100%;
+//     min-height: 72vh;
+//     border-radius: 0px !important;
+// }
+
+// #b4l-content {
+//   min-height: 750px;
+// }
+
+.sidebar {
+    min-height: 100%;
+    width: 250px;
+    float: left;
+    background-color: #fafafa;
+    border-right: 1px solid #e4e4e4;
+    border-radius: 8px 0 0 8px;
+    @media (max-width: 1366px) {
+      width: 200px;
+    }
+    a {
+      padding: 1em 2em;
+      text-decoration: none;
+      font-size: 14px;
+      color: #000000;
+      display: block;
+      border-bottom: 1px solid #e4e4e4;
+      @media (max-width: 1400px) {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  
+  .sidebar a.active {
+    // color: #ffffff;
+    // background-color: #2d3079;
+    // border-right: none;
+    background-color: #2d30791c;
+    color: #2D3079;
+  }
+  
+  .main {
+    margin-left: 25em; /* Same as the width of the sidenav */
+    padding: 0px 2em;
+    @media (max-width: 1366px) {
+      margin-left: 14.5em;
+      padding: 0 1em;
+    }
+  }
+  
+  // @media screen and (max-height: 450px) {
+  //   .sidebar {
+  //     padding-top: 15px;
+  //   }
+  //   .sidebar a {
+  //     font-size: 18px;
+  //   }
+  // }
+  
+  .sidebar-main-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 2em 0;
+    p {
+      color: #000000;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+  
+  
+  .setting-text {
+    border: 1px solid #e4e4e4;
+  }
+  
+  .setting-text-data {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 1.2em 1.5em;
+    justify-content: space-between;
+    border-bottom: 1px solid #e4e4e4;
+  }
+  
+  .setting-text-data:last-of-type {
+    border-bottom: none;
+  }
+  
+  .setting-text-data p {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  
+  .setting-text-data span {
+    opacity: 0.4;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  

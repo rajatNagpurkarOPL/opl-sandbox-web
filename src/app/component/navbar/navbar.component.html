@@ -9,12 +9,12 @@
                 <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
                     routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
                     href="javasript:void(0)">Documentation</a>
-                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
-                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
+                <a  [ngClass]="(router.url == constant.ROUTE_URL.SECURITY ? 'active' : '')"
+                [routerLink]="[constant.ROUTE_URL.SECURITY , constant.SECURITY_PAGE.API_ACCESS_KEY]"
                     href="javasript:void(0)">Security</a>
-                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
-                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
-                    href="javasript:void(0)">Others</a>
+                <a [ngClass]="(router.url == constant.ROUTE_URL.CREDIT ? 'active' : '')"
+                [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]"
+                    href="javasript:void(0)">Credit</a>
             </div>
 
             <div class="header-right">

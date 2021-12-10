@@ -9,6 +9,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { DocumentationComponent } from './component/documentation/documentation.component';
 import { ActivityLogsComponent } from './component/activity-logs/activity-logs.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { SecurityComponent } from './component/security/security.component';
+import { CreditComponent } from './component/credit/credit.component';
 const routes: Routes = [ 
   
   { path: 'login', component: LoginComponent},
@@ -19,12 +21,13 @@ const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },    
     { path: 'documentation/:code', component: DocumentationComponent},
     { path: 'activity', component: ActivityLogsComponent},
-    { path: 'profile/:pageName', component: ProfileComponent}
+    { path: 'profile/:pageName', component: ProfileComponent},
+    {path:'security/:pageName', component:SecurityComponent},
+    {path:'credit/:pageName', component:CreditComponent}
   ]
 },
 { path: '', redirectTo: 'login', pathMatch: 'full' },
 { path: '**', redirectTo : 'dashboard' },
-
 ];
 
 

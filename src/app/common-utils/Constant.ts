@@ -4,9 +4,11 @@ export const Constant = {
         LOGIN: BACK_SLASH + 'login',
         SIGN_UP: BACK_SLASH + 'signup',
         DASHBOARD: BACK_SLASH + 'dashboard',
-        DOCUMENTATION: BACK_SLASH + 'documentation',
+        DOCUMENTATION: BACK_SLASH + 'documentation', 
+        SECURITY: BACK_SLASH + 'security',
         ACTIVITY_LOGS: BACK_SLASH + 'activity',
-        PROFILE : BACK_SLASH + 'profile'
+        PROFILE : BACK_SLASH + 'profile', 
+        CREDIT:BACK_SLASH + 'credit'
     },httpAndCookies: {
         ACTK: 'tk_ac',
         RFTK: 'tk_rc',
@@ -75,6 +77,13 @@ export const Constant = {
         API_ACCESS_KEY : "access-key",
         API_CREDITS : "credits",
         CERTIFICATE : "certificate"
+    }, 
+    SECURITY_PAGE:{
+        API_ACCESS_KEY : "access-key", 
+        CERTIFICATE : "certificate"
+    }, 
+    CREDIT_PAGE: {
+        API_CREDITS : "credits", 
     },
     INTERNAL_STATUS_CODES : {
         SUCCESS : {
