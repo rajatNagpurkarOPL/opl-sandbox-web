@@ -1,6 +1,6 @@
 <form>
     <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="bankAccountVerificationForm" (ngSubmit)="onFormSubmit()">
+        <form class="example-form form-main-section" [formGroup]="bankAccountVerificationForm" (ngSubmit)="onFormSubmit()">
             <mat-form-field class="example-full-width">
                 <mat-label>IFSC Code</mat-label>
                 <input type="text" matInput [formControl]="bankAccountVerificationForm.controls.ifsc"
@@ -25,7 +25,7 @@
                     [errorStateMatcher]="matcher" placeholder="Ex. Y/N">
             </mat-form-field>
 
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Send</button>
+            <button type="submit"  class="submit-form-btn" mat-flat-button color="primary">Send</button>
         </form>
     </mat-card>
 </form>

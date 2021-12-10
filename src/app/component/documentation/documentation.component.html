@@ -18,11 +18,11 @@
   <div class="sidenav-content"
      *ngIf="masterData != null && masterData != undefined && selectedMenuItem != this.constant.MASTER_CODE.DETAILS">
      <div>
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between al-center">
            <h3 class="card-title m-0">
               <strong>{{selectedInnerData != null ? selectedInnerData.value : ""}}</strong>
            </h3>
-           <div class="credit-data d-flex flex-column al-center text-start">
+           <div class="credit-data d-flex al-center text-start">
               <p>Total Credit: <span>{{totalCredit}}</span> </p>
               <p>Balance Credit: <span>{{balanceCredit}}</span></p>
            </div>

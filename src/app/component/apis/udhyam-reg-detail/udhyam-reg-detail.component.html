@@ -1,10 +1,12 @@
 <form>
     <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="udhyamRegDetailForm" (ngSubmit)="onFormSubmit()">
-            <mat-form-field class="example-full-width">
-                <mat-label>Udyam Registration Number</mat-label>
+        <form class="example-form form-main-section form-main-section" [formGroup]="udhyamRegDetailForm" (ngSubmit)="onFormSubmit()">
+           <div class="input-fields">
+
+               <mat-form-field class="example-full-width">
+                   <mat-label>Udyam Registration Number</mat-label>
                 <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.udhyamNo"
-                    [errorStateMatcher]="matcher" placeholder="Ex. UDYAM-MH-19-0000001">
+                [errorStateMatcher]="matcher" placeholder="Ex. UDYAM-MH-19-0000001">
                 <mat-error *ngIf="udhyamRegDetailForm.get('udhyamNo').hasError('required')">
                     Please Enter Udhyam Registration Number
                 </mat-error>
@@ -13,13 +15,14 @@
             <mat-form-field class="example-full-width">
                 <mat-label>Mobile Number</mat-label>
                 <input type="text" matInput [formControl]="udhyamRegDetailForm.controls.mobileNo"
-                    [errorStateMatcher]="matcher" placeholder="Ex. 9819574650">
+                [errorStateMatcher]="matcher" placeholder="Ex. 9819574650">
                 <mat-error *ngIf="udhyamRegDetailForm.get('mobileNo').hasError('required')">
                     Please Enter Mobile Number
                 </mat-error>
             </mat-form-field>
             &nbsp;
-            <button type="submit" style="margin-left: 1em;" mat-flat-button color="primary">Send</button>
+        </div>
+        <button type="submit" class="send-btn submit-form-btn ml-auto" mat-flat-button>Send</button>
         </form>
     </mat-card>
 </form>
