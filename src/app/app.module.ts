@@ -82,6 +82,8 @@ import { GstTaxPayersGstr2SummaryComponent } from './component/apis/gst-tax-paye
 import { GstTaxPayersGstr2CdnurComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2-cdnur/gst-tax-payers-gstr2-cdnur.component';
 import { GstTaxPayersGstr1HsnSummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-hsn-summary/gst-tax-payers-gstr1-hsn-summary.component';
 import { GstTaxPayersGstr2HsnSummaryComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr2-hsn-summary/gst-tax-payers-gstr2-hsn-summary.component';
+import { SecurityComponent } from './component/security/security.component';
+import { CreditComponent } from './component/credit/credit.component';
 
 @NgModule({
   imports: [
@@ -160,7 +162,9 @@ import { GstTaxPayersGstr2HsnSummaryComponent } from './component/apis/gst-tax-p
     GstTaxPayersGstr2SummaryComponent,
     GstTaxPayersGstr2CdnurComponent,
     GstTaxPayersGstr1HsnSummaryComponent,
-    GstTaxPayersGstr2HsnSummaryComponent
+    GstTaxPayersGstr2HsnSummaryComponent,
+    SecurityComponent,
+    CreditComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
