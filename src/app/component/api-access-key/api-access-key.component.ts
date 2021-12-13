@@ -27,6 +27,7 @@ showMoreCID=false;
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
  // pagination
  pagination : any;
+ pageSizeList:any = [5,10,15,20];
 filterKeys : String [] = ["clientId","secretId","stringCreatedDate","stringModifiedDate","isActive","isExpired"];
 valueToFilter : String = ""; 
 

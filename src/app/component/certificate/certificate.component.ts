@@ -28,6 +28,7 @@ export class CertificateComponent implements OnInit {
   generateHideShow:any;
   // pagination
   pagination : any; 
+  pageSizeList:any = [5,10,15,20];
   //filter 
   filterKeys : String [] = ["fileName","stringCreatedDate","referenceId","algorithm","stringcertCreatedDate","stringcertExpiryDate","keySize","organizationName","organizationUnitName","country","state","locality","commonName","emailAddress" ,"isActive"];
 valueToFilter : String = "";  
@@ -78,18 +79,18 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', '
   manuallyCertificate() {
     this.manuallyCertificateForm = this.fb.group({
       //id:new FormControl(11),
-      fileName: new FormControl('', [Validators.required,Validators.pattern('/[^a-zA-Z0-9]/')]),
+      fileName: new FormControl('', [Validators.required]),
       //createdDate: new FormControl('', [Validators.required]),
       algorithm: new FormControl('', [Validators.required]),
       keySize: new FormControl('', [Validators.required]),
-      organizationName: new FormControl('', [Validators.required ,Validators.pattern('/[^a-zA-Z0-9]/')]),
-      organizationUnitName: new FormControl('', [Validators.required,Validators.pattern('/[^a-zA-Z0-9]/')]),
+      organizationName: new FormControl('', [Validators.required]),
+      organizationUnitName: new FormControl('', [Validators.required]),
       country: new FormControl({ value: 'IN', disabled: true }, [Validators.required]),
-      state: new FormControl('', [Validators.required,Validators.pattern('/[^a-zA-Z0-9]/')]),
-      locality: new FormControl('', [Validators.required,Validators.pattern('/[^a-zA-Z0-9]/')]),
+      state: new FormControl('', [Validators.required]),
+      locality: new FormControl('', [Validators.required]),
       //publicKeyName: new FormControl('', [Validators.required]),
       //privateKeyName: new FormControl('', [Validators.required]),
-      commonName: new FormControl('', [Validators.required,Validators.minLength(3),Validators.pattern('/[^a-zA-Z0-9]/')]),
+      commonName: new FormControl('', [Validators.required,Validators.minLength(3)]),
       emailAddress: new FormControl('', [Validators.required,Validators.pattern('^(([^<>()\\[\\]\\.,;:\\s@"]+(\.[^<>()\\[\\]\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]),
       userId: new FormControl(this.getUserId(), [Validators.required]),
       sslUploadType: new FormControl('MANUALLY', [Validators.required]),

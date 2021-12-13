@@ -5,41 +5,25 @@
       <div class="form-row align-items-center">
         <div class="col-mg-4">
           <mat-form-field>
-            <input type="file" matInput accept="application/x-x509-ca-cert, text/plain" [formControl]="fileControl" (change)="onSelectDocument($event)"/>
-          </mat-form-field>
+            <input type="file" matInput accept="application/x-x509-ca-cert, text/plain" [formControl]="fileControl"
+              (change)="onSelectDocument($event)"/>
+           </mat-form-field>
         </div>
         <div class="col-mg-2 d-flex al-center">
-          <button
-            type="button"
-            (click)="uploadDocuments()"
-            mat-flat-button
-            color="primary"
-          >
+          <button type="button" (click)="uploadDocuments()" mat-flat-button color="primary" >
             Upload
           </button>
           &nbsp;&nbsp;&nbsp;
           <h3 class="mb-0">or</h3>
           <div class="col" *ngIf="!formOpen">
-            <button
-              type="button"
-              (click)="manuallyCertificate(); formOpen = true"
-              color="primary"
-              mat-flat-button
-            >
+            <button type="button" (click)="manuallyCertificate(); formOpen = true" color="primary" mat-flat-button>
               Generate New
             </button>
           </div>
         </div>
         <div class="col" style="text-align: -webkit-right">
-          <button
-            type="button"
-            (click)="downloadFile(null, 'OPL_Public_Certificate.crt', true)"
-            color="primary"
-            mat-flat-button
-            style="display: flex; border-radius: 5px"
-            matTooltip="Click here to download OPL public Certificate"
-            matTooltipPosition="above"
-          >
+          <button type="button" (click)="downloadFile(null, 'OPL_Public_Certificate.crt', true)" color="primary"
+               mat-flat-button style="display: flex; border-radius: 5px" matTooltip="Click here to download OPL public Certificate" matTooltipPosition="above">
             <mat-icon>file_download</mat-icon>OPL Certificate
           </button>
         </div>
@@ -48,25 +32,15 @@
   </div>
 
   <!-- form created for ssl -->
-  <form
-    [formGroup]="manuallyCertificateForm"
-    *ngIf="formOpen"
-    class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12"
-  >
+  <form [formGroup]="manuallyCertificateForm" *ngIf="formOpen" class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12">
     <hr />
     <div class="row">
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>File Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter File Name"
-            formControlName="fileName"
-          />
+          <input matInput placeholder="Enter File Name" formControlName="fileName"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.fileName"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.fileName"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -84,20 +58,12 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Algorithm Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-select
-            formControlName="algorithm"
-            placeholder="Select Algorithm Name"
-          >
-            <mat-option
-              *ngFor="let data of algorithmList"
-              [value]="data.value"
-              >{{ data.name }}</mat-option
-            >
+          <mat-select formControlName="algorithm" placeholder="Select Algorithm Name">
+            <mat-option *ngFor="let data of algorithmList" [value]="data.value">{{ data.name }}</mat-option>
           </mat-select>
           <mat-error>
             <app-print-error
-              [control]="manuallyCertificateForm.controls.algorithm"
-            ></app-print-error>
+              [control]="manuallyCertificateForm.controls.algorithm"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -106,14 +72,11 @@
         <label>Key Size</label>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-select formControlName="keySize" placeholder="Select Key Size">
-            <mat-option *ngFor="let data of keySizeList" [value]="data.value">{{
-              data.name
-            }}</mat-option>
+            <mat-option *ngFor="let data of keySizeList" [value]="data.value">
+              {{data.name}}</mat-option>
           </mat-select>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.keySize"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.keySize"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -121,15 +84,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Organization Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Organization Name"
-            formControlName="organizationName"
-          />
+          <input matInput placeholder="Enter Organization Name" formControlName="organizationName"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.organizationName"
-            >
+            <app-print-error [control]="manuallyCertificateForm.controls.organizationName">
             </app-print-error>
           </mat-error>
         </mat-form-field>
@@ -138,15 +95,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Organization Unit Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Organization Unit Name"
-            formControlName="organizationUnitName"
-          />
+          <input matInput placeholder="Enter Organization Unit Name" formControlName="organizationUnitName"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.organizationUnitName"
-            >
+            <app-print-error [control]="manuallyCertificateForm.controls.organizationUnitName">
             </app-print-error>
           </mat-error>
         </mat-form-field>
@@ -172,10 +123,8 @@
         <label>State</label>
         <mat-form-field class="example-full-width" appearance="outline">
           <input matInput placeholder="Enter State" formControlName="state" />
-          <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.state"
-            ></app-print-error>
+          <mat-error> 
+            <app-print-error [control]="manuallyCertificateForm.controls.state"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -183,15 +132,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Locality</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Locality"
-            formControlName="locality"
-          />
+          <input matInput placeholder="Enter Locality" formControlName="locality"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.locality"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.locality"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -219,15 +162,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Common Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Common Name"
-            formControlName="commonName"
-          />
+          <input matInput placeholder="Enter Common Name" formControlName="commonName"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.commonName"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.commonName"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -235,15 +172,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Email Address</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Email Address"
-            formControlName="emailAddress"
-          />
+          <input matInput  placeholder="Enter Email Address" formControlName="emailAddress"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.emailAddress"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.emailAddress"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -255,8 +186,7 @@
             type="button"
             (click)="cancelOrResetForm(); formOpen = false"
             color="basic"
-            mat-flat-button
-          >
+            mat-flat-button>
             Cancel</button
           >&nbsp;&nbsp;
           <button
@@ -429,38 +359,29 @@
   <br /><br />
 
   <!---pagination-->
-  <div
-    class="row pagination-table justify-content-between"
-    *ngIf="documentsList"
-  >
+  <div class="row pagination-table justify-content-between" *ngIf="documentsList">
     <div class="col-sm-12 col-md-4">
-      <div
-        class="dataTables_info mb-2"
-        id="tickets-table_info"
-        role="status"
-        aria-live="polite"
-      >
-        Showing {{ pagination.size * (pagination.page - 1) + 1 }} to
-        {{
-          pagination.size * pagination.page > documentsList.length
-            ? documentsList.length
-            : pagination.size * pagination.page
-        }}
+      <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite" >
+        Showing {{ pagination.size * (pagination.page - 1) + 1 }} to {{pagination.size * pagination.page > documentsList.length ? documentsList.length : pagination.size * pagination.page }}
         of {{ documentsList.length }} entries
       </div>
+    </div>   
+
+    <div class="page-size-data">
+      <mat-form-field class="example-full-width">
+        <mat-label>Page Size</mat-label>
+        <mat-select [(ngModel)]="pagination.size">
+          <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData">
+            {{ pageSizeData }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <div class="col-sm-12 col-md-6">
       <div class="text-md-right float-md-right pagination-rounded">
-        <ngb-pagination
-          [maxSize]="3"
-          [collectionSize]="documentsList.length"
-          [(page)]="pagination.page"
-          [pageSize]="pagination.size"
-          [rotate]="true"
-          [ellipses]="false"
-          [boundaryLinks]="true"
-        >
-        </ngb-pagination>
+        <ngb-pagination [maxSize]="3" [collectionSize]="documentsList.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
+          [boundaryLinks]="true" ></ngb-pagination>
       </div>
     </div>
   </div>
