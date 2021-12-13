@@ -23,6 +23,7 @@ export class ApiCreditComponent implements OnInit {
   apiName : any = '';
   apiData : any;
   pagination : any;
+  pageSizeList:any = [5,10,15,20];
   valueToFilter : String = ""; 
   filterKeys : String [] = ["name","total","balance","triggerCount"];
 
@@ -69,7 +70,7 @@ export class ApiCreditComponent implements OnInit {
   resetPagination(){
     this.pagination = {
       page:1,     //Current Page
-      size:10,    // default page size
+      size:5,    // default page size
       data:[]     // Pagination Data
     };
   }

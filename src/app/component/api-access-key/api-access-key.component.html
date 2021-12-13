@@ -66,12 +66,24 @@
  <!---pagination-->  
  <div class="row pagination-table justify-content-between" *ngIf="keyPairList">
   <div class="col-sm-12 col-md-4">
-    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
+    <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">Showing
       {{((pagination.size*(pagination.page-1))+1)}} to
       {{(pagination.size*pagination.page) > (keyPairList.length) ? (keyPairList.length) : (pagination.size*pagination.page)}} of {{keyPairList.length}}
       entries
     </div>
   </div>  
+      
+  <div class="page-size-data">
+    <mat-form-field class="example-full-width">
+      <mat-label>Page Size</mat-label>
+      <mat-select [(ngModel)]="pagination.size">
+        <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData">
+          {{ pageSizeData }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 
 
   <div class="col-sm-12 col-md-6">
