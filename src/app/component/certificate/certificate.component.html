@@ -11,10 +11,10 @@
         </div>
         <div class="col-mg-2 d-flex al-center">
           <button type="button" (click)="uploadDocuments()" mat-flat-button color="primary" >
-            Upload
+           Upload
           </button>
           &nbsp;&nbsp;&nbsp;
-          <h3 class="mb-0">or</h3>
+          <h3 class="mb-0" *ngIf="!formOpen">or</h3>
           <div class="col" *ngIf="!formOpen">
             <button type="button" (click)="manuallyCertificate(); formOpen = true" color="primary" mat-flat-button>
               Generate New
@@ -62,8 +62,7 @@
             <mat-option *ngFor="let data of algorithmList" [value]="data.value">{{ data.name }}</mat-option>
           </mat-select>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.algorithm"></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.algorithm"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -106,15 +105,9 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Country</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input
-            matInput
-            placeholder="Enter Country"
-            formControlName="country"
-          />
+          <input matInput placeholder="Enter Country" formControlName="country"/>
           <mat-error>
-            <app-print-error
-              [control]="manuallyCertificateForm.controls.country"
-            ></app-print-error>
+            <app-print-error [control]="manuallyCertificateForm.controls.country"></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -181,22 +174,10 @@
 
       <div class="d-flex al-center w-100 js-between filter-txt">
         <div class="sidebar-main-title1 mt-4">
-          <button
-            class="sand-box-cnl"
-            type="button"
-            (click)="cancelOrResetForm(); formOpen = false"
-            color="basic"
-            mat-flat-button>
-            Cancel</button
-          >&nbsp;&nbsp;
-          <button
-            type="button"
-            (click)="saveDocument()"
-            color="primary"
-            mat-flat-button
-          >
-            Save</button
-          >&nbsp;&nbsp;&nbsp;
+          <button class="sand-box-cnl" type="button" (click)="cancelOrResetForm(); formOpen = false" color="basic"
+            mat-flat-button> Cancel</button>&nbsp;&nbsp;
+          <button type="button" (click)="saveDocument()" color="primary" mat-flat-button>
+            Save</button>&nbsp;&nbsp;&nbsp;
         </div>
       </div>
     </div>
@@ -206,22 +187,14 @@
   <!-- <Filter> -->
   <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12 ml-auto p-0">
     <mat-form-field class="input-group" appearance="outline">
-      <input
-        matInput
-        placeholder="Type to search..."
-        [(ngModel)]="valueToFilter"
-        (keyup)="filterApplicationData()"
-      />
+      <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter"
+        (keyup)="filterApplicationData()"/>
     </mat-form-field>
   </div>
   <br />
   <!--table -->
   <div style="overflow-x: auto">
-    <table
-      matSort
-      (matSortChange)="sortData($event)"
-      class="table dash-table-api"
-    >
+    <table matSort (matSortChange)="sortData($event)" class="table dash-table-api">
       <thead>
         <tr>
           <th scope="col">No.</th>
@@ -251,17 +224,8 @@
         </tr>
       </thead>
       <tbody *ngIf="documentsList.length > 0">
-        <tr
-          *ngFor="
-            let document of documentsList
-              | slice
-                : (pagination.page - 1) * pagination.size
-                : (pagination.page - 1) * pagination.size + pagination.size;
-            index as documentIndex
-          "
-        >
-          <td>
-            {{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}
+        <tr *ngFor="let document of documentsList | slice  : (pagination.page - 1) * pagination.size : (pagination.page - 1) * pagination.size + pagination.size; index as documentIndex">
+          <td>{{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}
           </td>
           <td>{{ document.fileName }}</td>
           <td>{{ document.createdDate | date }}</td>
@@ -274,11 +238,7 @@
             {{ document.organizationName ? document.organizationName : "-" }}
           </td>
           <td>
-            {{
-              document.organizationUnitName
-                ? document.organizationUnitName
-                : "-"
-            }}
+            {{document.organizationUnitName ? document.organizationUnitName : "-" }}
           </td>
           <td>{{ document.country ? document.country : "-" }}</td>
           <td>{{ document.state ? document.state : "-" }}</td>
@@ -287,33 +247,18 @@
           <td>{{ document.emailAddress ? document.emailAddress : "-" }}</td>
           <td>
             <p class="d-flex al-center w-100 js-center mb-0">
-              <span
-                [ngClass]="{
-                  dot: document.isActive,
-                  inActive: !document.isActive
-                }"
-                >&#8226; </span
-              >{{ document.isActive ? "Active" : "InActive" }}
+              <span [ngClass]="{ dot: document.isActive, inActive: !document.isActive }">&#8226; </span>{{ document.isActive ? "Active" : "InActive" }}
             </p>
           </td>
           <td style="text-align: center">
             <mat-slide-toggle
               disabled="{{ document.isActive }}"
-              (change)="
-                changeCertificateStatus($event, document.id, document.fileName)
-              "
+              (change)="changeCertificateStatus($event, document.id, document.fileName)"
               color="primary"
               checked="{{ document.isActive }}"
               disabled="{{ document.referenceId == null ? true : false }}"
-              matTooltip="{{
-                document.isActive
-                  ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.'
-                  : '' || document.referenceId == null
-                  ? 'Please Genrate Certificate'
-                  : ''
-              }}"
-              matTooltipPosition="above"
-            ></mat-slide-toggle>
+              matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : '' || document.referenceId == null ? 'Please Genrate Certificate' : '' }}"
+              matTooltipPosition="above"></mat-slide-toggle>
           </td>
 
           <td style="text-align: center" *ngIf="document.referenceId == null">
@@ -335,10 +280,7 @@
               style="line-height: 14px"
               matTooltipPosition="above"
               aria-label="Download File"
-              (click)="
-                downloadFile(document.referenceId, document.fileName, false)
-              "
-            >
+              (click)="downloadFile(document.referenceId, document.fileName, false)">
               <mat-icon>file_download</mat-icon>
             </button>
           </td>
@@ -346,10 +288,7 @@
       </tbody>
       <tbody *ngIf="documentsList.length == 0">
         <tr>
-          <td
-            colspan="18"
-            style="text-align: center; background-color: lightgrey"
-          >
+          <td colspan="18" style="text-align: center; background-color: lightgrey">
             No Certificate Uploaded.
           </td>
         </tr>

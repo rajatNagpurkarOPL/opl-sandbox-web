@@ -300,14 +300,15 @@ export class IpvrComponent implements OnInit {
       
   if(ipvrSaveData.State != null &&  payload != null){
         this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {
-       //if (!Utils.isObjectNullOrEmpty(res.status) && res.status == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
+         console.log("resipvr",res);
+        if (!Utils.isObjectNullOrEmpty(res.status) && res.payload.message == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData);
         this.utils.successSnackBar(res.payload.message);
         this.ipvrForm();
-      //} else {
-       //this.utils.warningSnackBar(res.message);
-      //} 
+       } else {
+       this.utils.warningSnackBar(res.payload.message);
+      } 
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     }); 
