@@ -31,6 +31,7 @@ export class DocumentationComponent implements OnInit {
   apiData: any;
   totalCredit: any; 
   balanceCredit: any;
+  currentInstance: any;
 
   constructor(private sandboxService: SandboxService, public globals: Globals, public utils: Utils, private route: ActivatedRoute, private router: Router) {
     this.constant = Constant;
@@ -64,6 +65,7 @@ export class DocumentationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentInstance = this;
   }
 
   mouseenter() {
@@ -215,7 +217,6 @@ export class DocumentationComponent implements OnInit {
     let requestedData = Utils.jsonStringify({
       "userId": this.user.id
     });
-    console.log("userId in Credit Limit:", this.user.id);
     let headers = Utils.getHeader();
     this.sandboxService.getApiCreditLimit(requestedData, headers).subscribe(res => {
       if (res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE) {
@@ -235,6 +236,5 @@ export class DocumentationComponent implements OnInit {
       this.utils.errorHandle(err);
     });
   }
-
 
 }

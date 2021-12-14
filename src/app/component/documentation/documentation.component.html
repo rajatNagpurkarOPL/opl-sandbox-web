@@ -73,7 +73,7 @@
                     <app-ipvr-view *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_RES_VIEW"
                     [menuData]="selectedInnerData"></app-ipvr-view>
                     <app-gst-generate-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_GENERATE_OTP"
-                    [menuData]="selectedInnerData"></app-gst-generate-otp>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-generate-otp>
                     <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP"
                     [menuData]="selectedInnerData"></app-gst-verify-otp>
                     <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS"
