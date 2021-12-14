@@ -5,22 +5,23 @@
             <div class="header-logo">
                 <img src="https://www.onlinepsbloans.com/img/logo.svg" />
             </div>
-            <div class="topnav">
-                <a [ngClass]="(router.url == constant.DOCUMENTATION ? 'active' : '')"
-                    routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"
-                    href="javasript:void(0)">Documentation</a>
-                <a  [ngClass]="(router.url == constant.ROUTE_URL.SECURITY ? 'active' : '')"
-                [routerLink]="[constant.ROUTE_URL.SECURITY , constant.SECURITY_PAGE.API_ACCESS_KEY]"
-                    href="javasript:void(0)">Security</a>
-                <a [ngClass]="(router.url == constant.ROUTE_URL.CREDIT ? 'active' : '')"
-                [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]"
-                    href="javasript:void(0)">Credit</a>
-            </div>
 
+            <div class="topnav" >
+                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.DOCUMENTATION)? 'active-nav' : '')"  
+                   routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/CRDT_RTNG"  
+                   href="javasript:void(0)">Documentation</a>
+                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.SECURITY) ? 'active-nav' : '')"
+                   [routerLink]="[constant.ROUTE_URL.SECURITY , constant.SECURITY_PAGE.API_ACCESS_KEY]"
+                   href="javasript:void(0)">Security</a>   
+                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.CREDIT) ? 'active-nav' : '')"
+                   [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]"
+                   href="javasript:void(0)">Credit</a>
+            </div>
+          
             <div class="header-right">
 
                 <!-- <a href="#" class="pos">
-                        <span class="notify-badge"></span>
+                        <span class="notify-badge"></span>  
                         <img class="down-arrow" src="assets/img/alert.svg" />
                     </a>
 
