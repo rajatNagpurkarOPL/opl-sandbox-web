@@ -24,6 +24,7 @@ export class EsignAndEstampingComponent implements OnInit {
   @ViewChild('securityAccordion') securityAccordion: MatAccordion;
   @ViewChild('eSignCordinatesAccordion') eSignCordinatesAccordion: MatAccordion;
   @Input() menuData: any;
+  @Input() parentInstance: any;
 
   url : string = null;
 
@@ -314,6 +315,9 @@ export class EsignAndEstampingComponent implements OnInit {
     this.sandboxService.getEsignAndEstamping(this.url, payload, headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
+      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.parentInstance.getApiCreditLimit();
+      }
     }, error => {
       this.utils.errorHandle(error);
     });
