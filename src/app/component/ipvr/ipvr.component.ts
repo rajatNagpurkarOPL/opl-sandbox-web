@@ -17,6 +17,7 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 })
 export class IpvrComponent implements OnInit {
   @Input() menuData: any;
+  @Input() parentInstance: any;
   @Output() updatedUrl = new EventEmitter();
   @Output() ipvrFormResAppId;
   url: string = null;
@@ -306,6 +307,9 @@ export class IpvrComponent implements OnInit {
         this.response = Utils.jsonStringify(decData);
         this.utils.successSnackBar(res.payload.message);
         this.ipvrForm();
+        if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+          this.parentInstance.getApiCreditLimit();
+        }
        } else {
        this.utils.warningSnackBar(res.payload.message);
       } 

@@ -15,7 +15,7 @@ import { Constant } from 'src/app/common-utils/Constant';
 export class BankAccountVerificationComponent implements OnInit {
 
   @Input() menuData: any;
-
+  @Input() parentInstance: any;
   url : string = null;
   bankAccountVerificationForm: FormGroup;
   position = '';
@@ -57,6 +57,9 @@ export class BankAccountVerificationComponent implements OnInit {
     this.sandboxService.bankAccountVerification(this.url,payload,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
+      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.parentInstance.getApiCreditLimit();
+      }
     },err => {
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);

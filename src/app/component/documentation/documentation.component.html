@@ -51,24 +51,24 @@
               <mat-tab label="Tryout / Implement">
                  <div>
                     <app-credit-rating *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CRDT_RTNG"
-                    [menuData]="selectedInnerData"></app-credit-rating>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-credit-rating>
                     <app-pan-status-check *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PAN_STATUS_CHECK"
-                    [menuData]="selectedInnerData"></app-pan-status-check>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-pan-status-check>
                     <app-bank-account-verification
                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BANK_ACCOUNT_VERIFICATION"
-                    [menuData]="selectedInnerData"></app-bank-account-verification>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-bank-account-verification>
                     <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL"
-                    [menuData]="selectedInnerData"></app-udhyam-reg-detail>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-udhyam-reg-detail>
                     <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL"
-                    [menuData]="selectedInnerData"></app-ca-individual-detail>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-ca-individual-detail>
                     <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL"
-                    [menuData]="selectedInnerData"></app-ca-firm-detail>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-ca-firm-detail>
                     <app-nsdl-pan-inquiry *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NSDL_PAN_INQUIRY"
-                    [menuData]="selectedInnerData"></app-nsdl-pan-inquiry>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-nsdl-pan-inquiry>
                     <app-esign-and-estamping *ngIf="selectedMenuItem == this.constant.MASTER_CODE.E_SIGN_E_STMP"
-                    [menuData]="selectedInnerData"></app-esign-and-estamping>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-esign-and-estamping>
                     <app-ipvr (updatedUrl)="updateIpvrUrl($event)"
-                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" [menuData]="selectedInnerData">
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_REQ" [menuData]="selectedInnerData" [parentInstance]="currentInstance">
                     </app-ipvr>
                     <app-ipvr-view *ngIf="selectedMenuItem == this.constant.MASTER_CODE.PROPLEGIT_RES_VIEW"
                     [menuData]="selectedInnerData"></app-ipvr-view>
@@ -76,8 +76,8 @@
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-generate-otp>
                     <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP"
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-verify-otp>
-                    <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS"
-                    [menuData]="selectedInnerData"></app-gst-tax-payers-api>
+                    <!-- <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS"
+                    [menuData]="selectedInnerData"></app-gst-tax-payers-api> -->
                     <app-gst-tax-payers-gstr1-summary
                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_SUMMARY"
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-summary>

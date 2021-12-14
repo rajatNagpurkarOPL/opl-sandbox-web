@@ -14,7 +14,7 @@ import { Constant } from 'src/app/common-utils/Constant';
 export class CreditRatingComponent implements OnInit {
 
   @Input() menuData: any;
-
+  @Input() parentInstance: any;
   url : string = null;
   creditRatingForm: FormGroup;
   position = '';
@@ -57,6 +57,9 @@ export class CreditRatingComponent implements OnInit {
     this.sandboxService.getCreditRating(this.url,payload,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
+      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.parentInstance.getApiCreditLimit();
+      }
     },err => {
       this.utils.errorHandle(err);
     });

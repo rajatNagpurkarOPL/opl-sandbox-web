@@ -15,7 +15,7 @@ import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/ae
 export class PanStatusCheckComponent implements OnInit {
 
   @Input() menuData: any;
-
+  @Input() parentInstance: any;
   url : string = null;
   panStatusCheckForm: FormGroup;
   position = '';
@@ -58,6 +58,9 @@ export class PanStatusCheckComponent implements OnInit {
     this.sandboxService.panStatusCheck(this.url,payload,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
+      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.parentInstance.getApiCreditLimit();
+      }
     },err => {
       this.utils.errorHandle(err);
       // this.utils.errorSnackBar(err);
