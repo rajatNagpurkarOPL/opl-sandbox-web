@@ -13,6 +13,7 @@ import { CustomErrorStateMatcherComponent } from '../../custom-error-state-match
 })
 export class GstVerifyOtpComponent implements OnInit {
   @Input() menuData: any;
+  @Input() parentInstance: any;
   url : string = null;
   verifyOtpForm: FormGroup;
   response : any="Response Will be Rendered Here.";
@@ -44,6 +45,9 @@ export class GstVerifyOtpComponent implements OnInit {
     this.sandboxService.verifyOtpOfGST(this.url ,payload ,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
+      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+        this.parentInstance.getApiCreditLimit();
+      }
     })
   }
 
