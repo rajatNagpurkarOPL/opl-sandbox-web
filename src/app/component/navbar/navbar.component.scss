@@ -24,6 +24,9 @@
       width: 100%;
     }
   }
+  .active-nav{
+    background-color: rgba(255, 255, 255, 0.185);
+  }
   .topnav {
     margin-left: 50px;
     a {
@@ -39,11 +42,15 @@
         background-color: rgba(255, 255, 255, 0.185);
       }
       &:active {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(211, 26, 26, 0.1);
       }
       @media (max-width: 1400px) {
         font-size: 16px;
+      }  
+      &+a{
+        margin-left: 4px;
       }
+      
     }
   }
 
