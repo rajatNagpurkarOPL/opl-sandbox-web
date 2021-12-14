@@ -12,6 +12,7 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 })
 export class GstTaxPayersGstr1SummaryComponent implements OnInit {
   @Input() menuData: any;
+  @Input() parentInstance: any;
   url : string = null;
   taxPayersForm: FormGroup;
   response : any="Response Will be Rendered Here.";
@@ -58,6 +59,9 @@ export class GstTaxPayersGstr1SummaryComponent implements OnInit {
       this.sandboxService.getGstTaxPayersData(this.url ,payload ,headers).subscribe(res => {
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData);
+        if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+          this.parentInstance.getApiCreditLimit();
+        }
       })
     }else{
       this.taxPayersForm.markAllAsTouched();
