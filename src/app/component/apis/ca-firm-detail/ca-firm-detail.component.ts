@@ -59,7 +59,7 @@ export class CAFirmDetailComponent implements OnInit {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
       if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
-        this.parentInstance.getApiCreditLimit();
+        this.parentInstance.getApiCreditLimit(this.menuData.service.id);
       }
     },err => {
       this.utils.errorHandle(err);
