@@ -41,12 +41,13 @@ export class IpvrViewComponent implements OnInit {
         //let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
         //let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
         //let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(applicationId)); 
-      
-        this.sandboxService.ipvrviewresponse(applicationId).subscribe(res => {
-         // let decData = this.aesGcmEncryption.getDecPayload(res);
-          this.response = Utils.jsonStringify(res);
-        if (res != null && res.data != null && res.data.length > 0 && res.data[0].PVRDocumentFile != null) {
-          this.downloadFile = res.data[0].PVRDocumentFile;
+        let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
+        let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+        this.sandboxService.ipvrviewresponse(this.url, applicationId, headers).subscribe(res => {
+        let decData = this.aesGcmEncryption.getDecPayload(res);
+        this.response = Utils.jsonStringify(decData);
+        if (decData != null && decData.payload != null && decData.payload.data != null && decData.payload.data.length > 0 && decData.payload.data[0].PVRDocumentFile != null) {
+          this.downloadFile = decData.payload.data[0].PVRDocumentFile;
         }
       }, (error: any) => {
         this.utils.errorSnackBar(error);

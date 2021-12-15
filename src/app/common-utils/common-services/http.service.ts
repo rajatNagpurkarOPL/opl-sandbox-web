@@ -74,6 +74,41 @@ export class HttpService {
   }
 
   /**
+  * for get method with header call
+  */
+  getRequestWithHeaders(url: any, responseType: any, header: any, ignoreLoader?: boolean) {
+    if (responseType === true) {
+      if (ignoreLoader !== undefined && !ignoreLoader) {
+        this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
+        return this.http.get(url, { responseType: 'arraybuffer', headers: this.header }).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return this.utils.errorHandle(err);
+          }));
+      } else {
+        this.loaderService.show();
+        return this.http.get(url, { responseType: 'arraybuffer' }).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return this.utils.errorHandle(err);
+          }));
+      }
+    } else {
+      if (ignoreLoader !== undefined && !ignoreLoader) {
+        this.header = this.header.append('ignoreLoader', ignoreLoader.toString());
+        return this.http.get(url, { headers: this.header }).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return this.utils.errorHandle(err);
+          }));
+      } else {
+        this.loaderService.show();
+        return this.http.get(url, { headers: header }).pipe(
+          catchError((err: HttpErrorResponse) => {
+            return this.utils.errorHandle(err);
+          }));
+      }
+    }
+  }
+
+  /**
    * for delete method call
    */
   delete(url: any, ignoreLoader?: string | string[]) {
