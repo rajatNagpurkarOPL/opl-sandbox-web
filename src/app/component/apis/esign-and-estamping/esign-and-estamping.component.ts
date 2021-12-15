@@ -315,7 +315,7 @@ export class EsignAndEstampingComponent implements OnInit {
     this.sandboxService.getEsignAndEstamping(this.url, payload, headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
-      if(decData != null && decData.payload != null && decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE){
+      if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
         this.parentInstance.getApiCreditLimit();
       }
     }, error => {
