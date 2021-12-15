@@ -45,16 +45,6 @@
         </mat-form-field>
       </div>
 
-      <!-- <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
-                            <label>Created Date</label>
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <input matInput placeholder="Enter Created Date " formControlName="createdDate">
-                                <mat-error>
-                                    <app-print-error [control]="manuallyCertificateForm.controls.createdDate"></app-print-error>
-                                </mat-error>
-                            </mat-form-field>
-                        </div>    -->
-
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Algorithm Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
@@ -130,28 +120,8 @@
             <app-print-error [control]="manuallyCertificateForm.controls.locality"></app-print-error>
           </mat-error>
         </mat-form-field>
-      </div>
-
-      <!-- <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
-                    <label>Public Key Name</label>
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <input matInput placeholder="Enter public Key Name" formControlName="publicKeyName">
-                        <mat-error>
-                            <app-print-error [control]="manuallyCertificateForm.controls.publicKeyName"></app-print-error>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-        
-                <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
-                    <label>Private Key Name</label>
-                    <mat-form-field class="example-full-width" appearance="outline">
-                        <input matInput placeholder="Enter private Key Name" formControlName="privateKeyName">
-                        <mat-error>
-                            <app-print-error [control]="manuallyCertificateForm.controls.privateKeyName"></app-print-error>
-                        </mat-error>
-                    </mat-form-field>
-                </div> -->
-
+      </div>   
+      
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Common Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
@@ -191,7 +161,8 @@
         (keyup)="filterApplicationData()"/>
     </mat-form-field>
   </div>
-  <br />
+  <br /> 
+
   <!--table -->
   <div style="overflow-x: auto">
     <table matSort (matSortChange)="sortData($event)" class="table dash-table-api">
@@ -199,52 +170,26 @@
         <tr>
           <th scope="col">No.</th>
           <th mat-sort-header="fileName" scope="col">Cert File Name</th>
-          <th mat-sort-header="createdDate" scope="col">Created Date</th>
           <th mat-sort-header="referenceId" scope="col">ReferenceId</th>
           <th mat-sort-header="algorithm" scope="col">Algorithm</th>
-          <th mat-sort-header="certCreatedDate" scope="col">
-            Cert Created Date
-          </th>
-          <th mat-sort-header="certExpiryDate" scope="col">Cert Expity Date</th>
+          <th mat-sort-header="certCreatedDate" scope="col">Cert Created Date</th>
+          <th mat-sort-header="certExpiryDate" scope="col">Cert Expiry Date</th>
           <th mat-sort-header="keySize" scope="col">Key Size</th>
-          <th mat-sort-header="organizationName" scope="col">
-            Organization Name
-          </th>
-          <th mat-sort-header="organizationUnitName" scope="col">
-            Organization Unit Name
-          </th>
-          <th mat-sort-header="country" scope="col">Country</th>
-          <th mat-sort-header="state" scope="col">State</th>
-          <th mat-sort-header="locality" scope="col">Locality</th>
-          <th mat-sort-header="commonName" scope="col">Common Name</th>
-          <th mat-sort-header="emailAddress" scope="col">Email Address</th>
           <th mat-sort-header="isActive" scope="col">Status</th>
           <th scope="col">Active/Inactive</th>
-          <th scope="col">Genrate</th>
+          <th scope="col">Action</th> 
+          <th scope="col"></th>
         </tr>
       </thead>
-      <tbody *ngIf="documentsList.length > 0">
-        <tr *ngFor="let document of documentsList | slice  : (pagination.page - 1) * pagination.size : (pagination.page - 1) * pagination.size + pagination.size; index as documentIndex">
-          <td>{{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}
-          </td>
+      <tbody *ngFor="let document of documentsList | slice  : (pagination.page - 1) * pagination.size : (pagination.page - 1) * pagination.size + pagination.size; index as documentIndex">
+        <tr *ngIf="documentsList.length > 0">
+          <td>{{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}</td>
           <td>{{ document.fileName }}</td>
-          <td>{{ document.createdDate | date }}</td>
           <td>{{ document.referenceId }}</td>
           <td>{{ document.algorithm ? document.algorithm : "-" }}</td>
           <td>{{ document.certCreatedDate | date }}</td>
           <td>{{ document.certExpiryDate | date }}</td>
           <td>{{ document.keySize ? document.keySize : "-" }}</td>
-          <td>
-            {{ document.organizationName ? document.organizationName : "-" }}
-          </td>
-          <td>
-            {{document.organizationUnitName ? document.organizationUnitName : "-" }}
-          </td>
-          <td>{{ document.country ? document.country : "-" }}</td>
-          <td>{{ document.state ? document.state : "-" }}</td>
-          <td>{{ document.locality ? document.locality : "-" }}</td>
-          <td>{{ document.commonName ? document.commonName : "-" }}</td>
-          <td>{{ document.emailAddress ? document.emailAddress : "-" }}</td>
           <td>
             <p class="d-flex al-center w-100 js-center mb-0">
               <span [ngClass]="{ dot: document.isActive, inActive: !document.isActive }">&#8226; </span>{{ document.isActive ? "Active" : "InActive" }}
@@ -262,40 +207,68 @@
           </td>
 
           <td style="text-align: center" *ngIf="document.referenceId == null">
-            <button
-              class="btn3-b4l"
-              matTooltip="{{ document.fileName }}"
-              style="line-height: 14px"
-              matTooltipPosition="above"
-              aria-label="Download File"
-              (click)="generateFile(document)"
-            >
-              Genrate
+            <button class="btn3-b4l" matTooltip="{{ document.fileName }}" style="line-height: 14px" matTooltipPosition="above"
+              aria-label="Download File" (click)="generateFile(document)">Genrate
             </button>
-          </td>
+          </td> 
+
           <td style="text-align: center" *ngIf="document.referenceId != null">
-            <button
-              class="btn3-b4l"
-              matTooltip="{{ document.fileName }}"
-              style="line-height: 14px"
-              matTooltipPosition="above"
-              aria-label="Download File"
-              (click)="downloadFile(document.referenceId, document.fileName, false)">
+            <button class="btn3-b4l" matTooltip="{{ document.fileName }}" style="line-height: 14px" matTooltipPosition="above"
+              aria-label="Download File" (click)="downloadFile(document.referenceId, document.fileName, false)">
               <mat-icon>file_download</mat-icon>
             </button>
+          </td> 
+
+          <td [ngClass]="{'up-arrow': document.showApiDets,'down-arrow' : !document.showApiDets}" class="open-down-table">
+            <a href="javaScript:void(0);"  (click)="document.showApiDets = !document.showApiDets" title="{{document.showApiDets ? 'Less' : 'More'}}">
+              {{!document.showApiDets ? '.....' : '.....'}} 
+            </a>
           </td>
+        </tr> 
+
+        <tr *ngIf="document.showApiDets">
+         <td colspan="12">
+                <table style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th scope="col">Created Date</th>
+                          <th scope="col">Organization Name</th>
+                          <th scope="col">Organization Unit Name</th>
+                          <th scope="col">Country</th>
+                          <th scope="col">State</th>
+                          <th scope="col">Locality</th>
+                          <th scope="col">Common Name</th> 
+                          <th scope="col">Email Address</th>
+                        </tr>
+                      </thead> 
+                      <tbody>
+                        <tr>    
+                           <td>{{ document.createdDate | date }}</td>
+                           <td>{{ document.organizationName ? document.organizationName : "-" }}</td>
+                           <td>{{document.organizationUnitName ? document.organizationUnitName : "-" }}</td>
+                           <td>{{ document.country ? document.country : "-" }}</td>
+                           <td>{{ document.state ? document.state : "-" }}</td>
+                          <td>{{ document.locality ? document.locality : "-" }}</td>
+                          <td>{{ document.commonName ? document.commonName : "-" }}</td>
+                          <td>{{ document.emailAddress ? document.emailAddress : "-" }}</td>    
+                        </tr>
+                      </tbody>
+                </table>
+         </td>
         </tr>
-      </tbody>
+      </tbody>  
+      <br>
       <tbody *ngIf="documentsList.length == 0">
         <tr>
-          <td colspan="18" style="text-align: center; background-color: lightgrey">
+          <td colspan="12" style="text-align: center; background-color: lightgrey">
             No Certificate Uploaded.
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <br /><br />
+  <br /><br />  
+
 
   <!---pagination-->
   <div class="row pagination-table justify-content-between" *ngIf="documentsList">
