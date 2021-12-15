@@ -308,7 +308,7 @@ export class IpvrComponent implements OnInit {
         this.utils.successSnackBar(res.payload.message);
         this.ipvrForm();
         if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
-          this.parentInstance.getApiCreditLimit();
+          this.parentInstance.getApiCreditLimit(this.menuData.service.id);
         }
        } else {
        this.utils.warningSnackBar(res.payload.message);

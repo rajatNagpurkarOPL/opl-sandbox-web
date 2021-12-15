@@ -193,15 +193,12 @@ export class DocumentationComponent implements OnInit {
   }
 
   getApiData() {
-    console.log("MenuData : ", this.selectedInnerData);
     this.url = Utils.prepareApiUrl(this.selectedInnerData, "gateway-service");
     this.updateIpvrUrl(null);
-    console.log("URL : ", this.url);
     this.apiMstrId = this.selectedInnerData.service.id;
-    console.log("API Master Id : ", this.apiMstrId);
     this.getApiRequestSchema();
     this.getApiResponseSchema();
-    this.getApiCreditLimit();
+    this.getApiCreditLimit(this.apiMstrId);
   }
 
   updateIpvrUrl(ipvrStateName: any) {
@@ -210,13 +207,21 @@ export class DocumentationComponent implements OnInit {
     }
   }
 
-  getApiCreditLimit() {
+  getApiCreditLimit(apiId? :any) {
     if (Utils.isObjectIsEmpty(this.user)) {
       this.user = JSON.parse(Utils.getStorage(Constant.STORAGE.USER, true));
     }
-    let requestedData = Utils.jsonStringify({
-      "userId": this.user.id
-    });
+    let requestedData = null;
+    if(!Utils.isObjectNullOrEmpty(apiId)){
+      requestedData = Utils.jsonStringify({
+        "userId": this.user.id,
+        "apiId":apiId
+      });
+    }else{
+      requestedData = Utils.jsonStringify({
+        "userId": this.user.id
+      });
+    }
     let headers = Utils.getHeader();
     this.sandboxService.getApiCreditLimit(requestedData, headers).subscribe(res => {
       if (res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE) {
@@ -236,5 +241,7 @@ export class DocumentationComponent implements OnInit {
       this.utils.errorHandle(err);
     });
   }
+
+  
 
 }
