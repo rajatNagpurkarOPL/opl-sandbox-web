@@ -1,5 +1,6 @@
 <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)" *ngIf="jsonData != undefined && jsonData != null">
     <mat-tab label="Schema">
+        <div class="parent-table-scroll">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="attributeName">
             <th mat-header-cell *matHeaderCellDef> 
@@ -42,6 +43,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        </div>
     </mat-tab>
     <mat-tab label="Body" *ngIf="apiBody != undefined && apiBody != null">
         <pre class="json-pretty body-api-data">

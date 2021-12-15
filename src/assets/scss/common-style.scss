@@ -3491,10 +3491,15 @@ header {
 
 .page-size-data {
   width: 100px;
-  .mat-form-field-appearance-legacy .mat-form-field-infix{
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0 0 8px 0 !important;
   }
   .mat-form-field {
     width: 100%;
   }
+}
+
+.parent-table-scroll {
+  max-height: 450px;
+  overflow-y: scroll;
 }

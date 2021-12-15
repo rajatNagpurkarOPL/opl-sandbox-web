@@ -78,7 +78,8 @@ export const Constant = {
         API_CREDITS : "credits",
         CERTIFICATE : "certificate"
     }, 
-    SECURITY_PAGE:{
+    SECURITY_PAGE:{ 
+        SECURITY_INFO:"security-info",
         API_ACCESS_KEY : "access-key", 
         CERTIFICATE : "certificate"
     }, 

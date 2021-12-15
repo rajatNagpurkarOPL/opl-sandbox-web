@@ -2,15 +2,18 @@
     <div class="row">
         <div id="b4l-content">
             <div class="sidebar">
+                <a [ngClass]="(this.currentPage == constant.SECURITY_PAGE.SECURITY_INFO ? 'active' : '')" (click)="goTo(constant.SECURITY_PAGE.SECURITY_INFO)">Security Information</a>
                 <!-- <a [ngClass]="(this.currentPage == constant.PROFILE_PAGE.SETTING ? 'active' : '')" (click)="goTo(constant.PROFILE_PAGE.SETTING)"> Account Settings</a> -->
                 <a [ngClass]="(this.currentPage == constant.SECURITY_PAGE.API_ACCESS_KEY ? 'active' : '')" (click)="goTo(constant.SECURITY_PAGE.API_ACCESS_KEY)"> API Access Keys</a>
                 <!-- <a [ngClass]="(this.currentPage == constant.PROFILE_PAGE.API_CREDITS ? 'active' : '')"  (click)="goTo(constant.PROFILE_PAGE.API_CREDITS)"> API Credits</a> -->
                 <a [ngClass]="(this.currentPage == constant.SECURITY_PAGE.CERTIFICATE ? 'active' : '')"  (click)="goTo(constant.SECURITY_PAGE.CERTIFICATE)"> Certificate</a>
-            </div>
+            </div> 
+                <app-security-info *ngIf="this.currentPage == constant.SECURITY_PAGE.SECURITY_INFO"></app-security-info>
                 <!-- <app-settings *ngIf="this.currentPage == constant.PROFILE_PAGE.SETTING"></app-settings> -->
                 <app-api-access-key *ngIf="this.currentPage == constant.SECURITY_PAGE.API_ACCESS_KEY"></app-api-access-key>
                 <!-- <app-api-credit *ngIf="this.currentPage == constant.PROFILE_PAGE.API_CREDITS"></app-api-credit> -->
                 <app-certificate *ngIf="this.currentPage == constant.SECURITY_PAGE.CERTIFICATE"></app-certificate>
-        </div>
+        
+            </div>
     </div>
 </div>
