@@ -1,0 +1,34 @@
+
+<!-- <mat-tab label=" Authentication / Security "> -->
+    <div>
+      <br>
+      <br>
+      <ul class="security-info">
+        <li>
+          <p>Authenticate your account when using the API by including your secret Id and Client Id API key pair in
+            the request header.</p>
+        </li>
+        <li>
+          <p> Each registered user is allotted a unique key pair which must be part of each request from.
+            The Key pair is used to authenticate each request and is valid only for the period of contract between you
+            and Online psb Loans Ltd.
+          </p>
+        </li>
+        <li>
+          <p>Your API key pair carry many privileges, so be sure to keep them secret! Do not share your secret API key
+            pair in publicly accessible areas such GitHub, client-side code, and so forth.
+          </p>
+        </li>
+        <li>
+          <p>All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
+            API requests without authentication will also fail.</p>
+        </li>
+      </ul>
+    </div>
+
+    <button type="button" class="ml-4" (click)="downloadFile(null, 'Encryption_Decryption_Specifications.pdf', true)"
+      color="primary" mat-flat-button matTooltip="Click here to Download Encryption Decryption Specifications"
+      matTooltipPosition="above">
+      <mat-icon>file_download</mat-icon>Document
+    </button> 
+  <!-- </mat-tab> -->
