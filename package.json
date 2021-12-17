@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.8",
     "@angular/router": "~11.2.8",
     "@ng-bootstrap/ng-bootstrap": "^9.1.2",
+    "alasql": "^1.7.3",
     "apexcharts": "^3.26.0",
     "bootstrap": "^4.4.1",
     "crypto-js": "^4.1.1",
