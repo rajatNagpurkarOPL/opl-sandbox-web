@@ -4,8 +4,9 @@
       <div class="main">
         <div class="sidebar-main-title">
           <div class="d-flex al-center js-between w-100 pl-4 pt-2">
-            <span class="text-span">Activity Logs</span>
-            <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
+            <span class="text-span">Activity Logs</span> 
+             
+            <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12 input-search-table">
               <mat-form-field class="input-group p-0" appearance="outline">
                 <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter"
                   (keyup)="filterApplicationData()">
@@ -58,7 +59,8 @@
               {{startIndex}} to {{endIndex > collectionSize ? collectionSize : endIndex}} of {{collectionSize}}
               entries
             </div>
-          </div>
+          </div> 
+
           <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
             <div class="text-md-right float-md-right pagination-rounded">
               <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize"

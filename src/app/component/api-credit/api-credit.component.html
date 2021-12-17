@@ -1,8 +1,5 @@
 <div class="main mt-2">
-  <div
-    class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12"
-    style="float: right"
-  >
+  <div class="input-search-table">
     <mat-form-field class="input-group" appearance="outline">
       <input
         matInput
@@ -19,7 +16,6 @@
       matSort
       (matSortChange)="sortData($event)"
       class="table dash-table-api"
-      style="margin-top: 1em"
     >
       <thead>
         <tr class="row">
@@ -87,17 +83,33 @@
 
   <!---pagination-->
   <div class="d-flex justify-content-between" *ngIf="apiData">
-    <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">
-      Showing {{ apiData.length > 0 ? pagination.size * (pagination.page - 1) + 1 : 0 }}
-      to {{pagination.size * pagination.page > apiData.length ? apiData.length : pagination.size * pagination.page}}
+    <div
+      class="dataTables_info"
+      id="tickets-table_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing
+      {{
+        apiData.length > 0 ? pagination.size * (pagination.page - 1) + 1 : 0
+      }}
+      to
+      {{
+        pagination.size * pagination.page > apiData.length
+          ? apiData.length
+          : pagination.size * pagination.page
+      }}
       of {{ apiData.length }} entries
-    </div>  
-    
+    </div>
+
     <div class="page-size-data">
       <mat-form-field class="example-full-width">
         <mat-label>Page Size</mat-label>
         <mat-select [(ngModel)]="pagination.size">
-          <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData">
+          <mat-option
+            *ngFor="let pageSizeData of pageSizeList"
+            [value]="pageSizeData"
+          >
             {{ pageSizeData }}
           </mat-option>
         </mat-select>
@@ -112,7 +124,8 @@
         [pageSize]="pagination.size"
         [rotate]="true"
         [ellipses]="false"
-        [boundaryLinks]="true">
+        [boundaryLinks]="true"
+      >
       </ngb-pagination>
     </div>
   </div>

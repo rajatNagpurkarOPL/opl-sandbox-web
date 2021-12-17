@@ -1,29 +1,51 @@
-<div class="main">
+<div class="main main-cards">
   <div class="sidebar-main-title">
     <div style="width: 100%">
       <h5><b>Note :</b> .cer,.crt.txt formats are allowed.</h5>
       <div class="form-row align-items-center">
         <div class="col-mg-4">
           <mat-form-field>
-            <input type="file" matInput accept="application/x-x509-ca-cert, text/plain" [formControl]="fileControl"
-              (change)="onSelectDocument($event)"/>
-           </mat-form-field>
+            <input
+              type="file"
+              matInput
+              accept="application/x-x509-ca-cert, text/plain"
+              [formControl]="fileControl"
+              (change)="onSelectDocument($event)"
+            />
+          </mat-form-field>
         </div>
         <div class="col-mg-2 d-flex al-center">
-          <button type="button" (click)="uploadDocuments()" mat-flat-button color="primary" >
-           Upload
+          <button
+            type="button"
+            (click)="uploadDocuments()"
+            mat-flat-button
+            color="primary"
+          >
+            Upload
           </button>
           &nbsp;&nbsp;&nbsp;
           <h3 class="mb-0" *ngIf="!formOpen">or</h3>
           <div class="col" *ngIf="!formOpen">
-            <button type="button" (click)="manuallyCertificate(); formOpen = true" color="primary" mat-flat-button>
+            <button
+              type="button"
+              (click)="manuallyCertificate(); formOpen = true"
+              color="primary"
+              mat-flat-button
+            >
               Generate New
             </button>
           </div>
         </div>
         <div class="col" style="text-align: -webkit-right">
-          <button type="button" (click)="downloadFile(null, 'OPL_Public_Certificate.crt', true)" color="primary"
-               mat-flat-button style="display: flex; border-radius: 5px" matTooltip="Click here to download OPL public Certificate" matTooltipPosition="above">
+          <button
+            type="button"
+            (click)="downloadFile(null, 'OPL_Public_Certificate.crt', true)"
+            color="primary"
+            mat-flat-button
+            style="display: flex; border-radius: 5px"
+            matTooltip="Click here to download OPL public Certificate"
+            matTooltipPosition="above"
+          >
             <mat-icon>file_download</mat-icon>OPL Certificate
           </button>
         </div>
@@ -32,15 +54,25 @@
   </div>
 
   <!-- form created for ssl -->
-  <form [formGroup]="manuallyCertificateForm" *ngIf="formOpen" class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12">
+  <form
+    [formGroup]="manuallyCertificateForm"
+    *ngIf="formOpen"
+    class="psb-xl-12 psb-lg-12 psb-md-6 psb-sm-12 psb-xs-12"
+  >
     <hr />
     <div class="row">
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>File Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter File Name" formControlName="fileName"/>
+          <input
+            matInput
+            placeholder="Enter File Name"
+            formControlName="fileName"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.fileName"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.fileName"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -48,11 +80,20 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Algorithm Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-select formControlName="algorithm" placeholder="Select Algorithm Name">
-            <mat-option *ngFor="let data of algorithmList" [value]="data.value">{{ data.name }}</mat-option>
+          <mat-select
+            formControlName="algorithm"
+            placeholder="Select Algorithm Name"
+          >
+            <mat-option
+              *ngFor="let data of algorithmList"
+              [value]="data.value"
+              >{{ data.name }}</mat-option
+            >
           </mat-select>
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.algorithm"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.algorithm"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -62,10 +103,13 @@
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-select formControlName="keySize" placeholder="Select Key Size">
             <mat-option *ngFor="let data of keySizeList" [value]="data.value">
-              {{data.name}}</mat-option>
+              {{ data.name }}</mat-option
+            >
           </mat-select>
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.keySize"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.keySize"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -73,9 +117,15 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Organization Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter Organization Name" formControlName="organizationName"/>
+          <input
+            matInput
+            placeholder="Enter Organization Name"
+            formControlName="organizationName"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.organizationName">
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.organizationName"
+            >
             </app-print-error>
           </mat-error>
         </mat-form-field>
@@ -84,9 +134,15 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Organization Unit Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter Organization Unit Name" formControlName="organizationUnitName"/>
+          <input
+            matInput
+            placeholder="Enter Organization Unit Name"
+            formControlName="organizationUnitName"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.organizationUnitName">
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.organizationUnitName"
+            >
             </app-print-error>
           </mat-error>
         </mat-form-field>
@@ -95,9 +151,15 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Country</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter Country" formControlName="country"/>
+          <input
+            matInput
+            placeholder="Enter Country"
+            formControlName="country"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.country"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.country"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -106,8 +168,10 @@
         <label>State</label>
         <mat-form-field class="example-full-width" appearance="outline">
           <input matInput placeholder="Enter State" formControlName="state" />
-          <mat-error> 
-            <app-print-error [control]="manuallyCertificateForm.controls.state"></app-print-error>
+          <mat-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.state"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -115,19 +179,31 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Locality</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter Locality" formControlName="locality"/>
+          <input
+            matInput
+            placeholder="Enter Locality"
+            formControlName="locality"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.locality"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.locality"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
-      </div>   
-      
+      </div>
+
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Common Name</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Enter Common Name" formControlName="commonName"/>
+          <input
+            matInput
+            placeholder="Enter Common Name"
+            formControlName="commonName"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.commonName"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.commonName"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
@@ -135,55 +211,95 @@
       <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12">
         <label>Email Address</label>
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput  placeholder="Enter Email Address" formControlName="emailAddress"/>
+          <input
+            matInput
+            placeholder="Enter Email Address"
+            formControlName="emailAddress"
+          />
           <mat-error>
-            <app-print-error [control]="manuallyCertificateForm.controls.emailAddress"></app-print-error>
+            <app-print-error
+              [control]="manuallyCertificateForm.controls.emailAddress"
+            ></app-print-error>
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="d-flex al-center w-100 js-between filter-txt">
         <div class="sidebar-main-title1 mt-4">
-          <button class="sand-box-cnl" type="button" (click)="cancelOrResetForm(); formOpen = false" color="basic"
-            mat-flat-button> Cancel</button>&nbsp;&nbsp;
-          <button type="button" (click)="saveDocument()" color="primary" mat-flat-button>
-            Save</button>&nbsp;&nbsp;&nbsp;
+          <button
+            class="sand-box-cnl"
+            type="button"
+            (click)="cancelOrResetForm(); formOpen = false"
+            color="basic"
+            mat-flat-button
+            class="keys-btn"
+          >
+            Cancel</button
+          >&nbsp;&nbsp;
+          <button
+            type="button"
+            (click)="saveDocument()"
+            color="primary"
+            mat-flat-button
+            class="keys-btn"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
   </form>
-  <br />
-
+</div>
+<div class="main main-cards">
   <!-- <Filter> -->
-  <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12 ml-auto p-0">
+  <div class="input-search-table">
     <mat-form-field class="input-group" appearance="outline">
-      <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter"
-        (keyup)="filterApplicationData()"/>
+      <input
+        matInput
+        placeholder="Type to search..."
+        [(ngModel)]="valueToFilter"
+        (keyup)="filterApplicationData()"
+      />
     </mat-form-field>
   </div>
-  <br /> 
 
   <!--table -->
   <div style="overflow-x: auto">
-    <table matSort (matSortChange)="sortData($event)" class="table dash-table-api">
+    <table
+      matSort
+      (matSortChange)="sortData($event)"
+      class="table dash-table-api"
+    >
       <thead>
         <tr>
           <th scope="col">No.</th>
           <th mat-sort-header="fileName" scope="col">Cert File Name</th>
           <th mat-sort-header="referenceId" scope="col">ReferenceId</th>
           <th mat-sort-header="algorithm" scope="col">Algorithm</th>
-          <th mat-sort-header="certCreatedDate" scope="col">Cert Created Date</th>
+          <th mat-sort-header="certCreatedDate" scope="col">
+            Cert Created Date
+          </th>
           <th mat-sort-header="certExpiryDate" scope="col">Cert Expiry Date</th>
           <th mat-sort-header="keySize" scope="col">Key Size</th>
           <th mat-sort-header="isActive" scope="col">Status</th>
           <th scope="col">Active/Inactive</th>
-          <th scope="col">Action</th> 
+          <th scope="col">Action</th>
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody *ngFor="let document of documentsList | slice  : (pagination.page - 1) * pagination.size : (pagination.page - 1) * pagination.size + pagination.size; index as documentIndex">
+      <tbody
+        *ngFor="
+          let document of documentsList
+            | slice
+              : (pagination.page - 1) * pagination.size
+              : (pagination.page - 1) * pagination.size + pagination.size;
+          index as documentIndex
+        "
+      >
         <tr *ngIf="documentsList.length > 0">
-          <td>{{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}</td>
+          <td>
+            {{ pagination.size * (pagination.page - 1) + (documentIndex + 1) }}
+          </td>
           <td>{{ document.fileName }}</td>
           <td>{{ document.referenceId }}</td>
           <td>{{ document.algorithm ? document.algorithm : "-" }}</td>
@@ -192,98 +308,169 @@
           <td>{{ document.keySize ? document.keySize : "-" }}</td>
           <td>
             <p class="d-flex al-center w-100 js-center mb-0">
-              <span [ngClass]="{ dot: document.isActive, inActive: !document.isActive }">&#8226; </span>{{ document.isActive ? "Active" : "InActive" }}
+              <span
+                [ngClass]="{
+                  dot: document.isActive,
+                  inActive: !document.isActive
+                }"
+                >&#8226; </span
+              >{{ document.isActive ? "Active" : "InActive" }}
             </p>
           </td>
           <td style="text-align: center">
             <mat-slide-toggle
               disabled="{{ document.isActive }}"
-              (change)="changeCertificateStatus($event, document.id, document.fileName)"
+              (change)="
+                changeCertificateStatus($event, document.id, document.fileName)
+              "
               color="primary"
               checked="{{ document.isActive }}"
               disabled="{{ document.referenceId == null ? true : false }}"
-              matTooltip="{{document.isActive ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.' : '' || document.referenceId == null ? 'Please Genrate Certificate' : '' }}"
-              matTooltipPosition="above"></mat-slide-toggle>
+              matTooltip="{{
+                document.isActive
+                  ? 'At least one certificate should be active. if you still want to inactive, kindly Active any other certificate, rest will be inactivated automatically.'
+                  : '' || document.referenceId == null
+                  ? 'Please Genrate Certificate'
+                  : ''
+              }}"
+              matTooltipPosition="above"
+            ></mat-slide-toggle>
           </td>
 
           <td style="text-align: center" *ngIf="document.referenceId == null">
-            <button class="btn3-b4l" matTooltip="{{ document.fileName }}" style="line-height: 14px" matTooltipPosition="above"
-              aria-label="Download File" (click)="generateFile(document)">Genrate
+            <button
+              class="btn3-b4l"
+              matTooltip="{{ document.fileName }}"
+              style="line-height: 14px"
+              matTooltipPosition="above"
+              aria-label="Download File"
+              (click)="generateFile(document)"
+            >
+              Genrate
             </button>
-          </td> 
+          </td>
 
           <td style="text-align: center" *ngIf="document.referenceId != null">
-            <button class="btn3-b4l" matTooltip="{{ document.fileName }}" style="line-height: 14px" matTooltipPosition="above"
-              aria-label="Download File" (click)="downloadFile(document.referenceId, document.fileName, false)">
+            <button
+              class="btn3-b4l"
+              matTooltip="{{ document.fileName }}"
+              style="line-height: 14px"
+              matTooltipPosition="above"
+              aria-label="Download File"
+              (click)="
+                downloadFile(document.referenceId, document.fileName, false)
+              "
+            >
               <mat-icon>file_download</mat-icon>
             </button>
-          </td> 
+          </td>
 
-          <td [ngClass]="{'up-arrow': document.showApiDets,'down-arrow' : !document.showApiDets}" class="open-down-table">
-            <a href="javaScript:void(0);"  (click)="document.showApiDets = !document.showApiDets" title="{{document.showApiDets ? 'Less' : 'More'}}">
-              {{!document.showApiDets ? '.....' : '.....'}} 
+          <td
+            [ngClass]="{
+              'up-arrow': document.showApiDets,
+              'down-arrow': !document.showApiDets
+            }"
+            class="open-down-table"
+          >
+            <a
+              href="javaScript:void(0);"
+              (click)="document.showApiDets = !document.showApiDets"
+              title="{{ document.showApiDets ? 'Less' : 'More' }}"
+            >
+              {{ !document.showApiDets ? "....." : "....." }}
             </a>
           </td>
-        </tr> 
+        </tr>
 
         <tr *ngIf="document.showApiDets">
-         <td colspan="12">
-                <table style="width: 100%;">
-                      <thead>
-                        <tr>
-                          <th scope="col">Created Date</th>
-                          <th scope="col">Organization Name</th>
-                          <th scope="col">Organization Unit Name</th>
-                          <th scope="col">Country</th>
-                          <th scope="col">State</th>
-                          <th scope="col">Locality</th>
-                          <th scope="col">Common Name</th> 
-                          <th scope="col">Email Address</th>
-                        </tr>
-                      </thead> 
-                      <tbody>
-                        <tr>    
-                           <td>{{ document.createdDate | date }}</td>
-                           <td>{{ document.organizationName ? document.organizationName : "-" }}</td>
-                           <td>{{document.organizationUnitName ? document.organizationUnitName : "-" }}</td>
-                           <td>{{ document.country ? document.country : "-" }}</td>
-                           <td>{{ document.state ? document.state : "-" }}</td>
-                          <td>{{ document.locality ? document.locality : "-" }}</td>
-                          <td>{{ document.commonName ? document.commonName : "-" }}</td>
-                          <td>{{ document.emailAddress ? document.emailAddress : "-" }}</td>    
-                        </tr>
-                      </tbody>
-                </table>
-         </td>
+          <td class="open-main-td" colspan="12">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Organization Name</th>
+                  <th scope="col">Organization Unit Name</th>
+                  <th scope="col">Country</th>
+                  <th scope="col">State</th>
+                  <th scope="col">Locality</th>
+                  <th scope="col">Common Name</th>
+                  <th scope="col">Email Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ document.createdDate | date }}</td>
+                  <td>
+                    {{
+                      document.organizationName
+                        ? document.organizationName
+                        : "-"
+                    }}
+                  </td>
+                  <td>
+                    {{
+                      document.organizationUnitName
+                        ? document.organizationUnitName
+                        : "-"
+                    }}
+                  </td>
+                  <td>{{ document.country ? document.country : "-" }}</td>
+                  <td>{{ document.state ? document.state : "-" }}</td>
+                  <td>{{ document.locality ? document.locality : "-" }}</td>
+                  <td>{{ document.commonName ? document.commonName : "-" }}</td>
+                  <td>
+                    {{ document.emailAddress ? document.emailAddress : "-" }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
-      </tbody>  
-      <br>
+      </tbody>
+
       <tbody *ngIf="documentsList.length == 0">
         <tr>
-          <td colspan="12" style="text-align: center; background-color: lightgrey">
+          <td
+            colspan="12"
+            style="text-align: center; background-color: lightgrey"
+          >
             No Certificate Uploaded.
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <br /><br />  
-
 
   <!---pagination-->
-  <div class="row pagination-table justify-content-between" *ngIf="documentsList">
+  <div
+    class="row pagination-table justify-content-between"
+    *ngIf="documentsList"
+  >
     <div class="col-sm-12 col-md-4">
-      <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite" >
-        Showing {{ pagination.size * (pagination.page - 1) + 1 }} to {{pagination.size * pagination.page > documentsList.length ? documentsList.length : pagination.size * pagination.page }}
+      <div
+        class="dataTables_info"
+        id="tickets-table_info"
+        role="status"
+        aria-live="polite"
+      >
+        Showing {{ pagination.size * (pagination.page - 1) + 1 }} to
+        {{
+          pagination.size * pagination.page > documentsList.length
+            ? documentsList.length
+            : pagination.size * pagination.page
+        }}
         of {{ documentsList.length }} entries
       </div>
-    </div>   
+    </div>
 
     <div class="page-size-data">
       <mat-form-field class="example-full-width">
         <mat-label>Page Size</mat-label>
         <mat-select [(ngModel)]="pagination.size">
-          <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData">
+          <mat-option
+            *ngFor="let pageSizeData of pageSizeList"
+            [value]="pageSizeData"
+          >
             {{ pageSizeData }}
           </mat-option>
         </mat-select>
@@ -292,8 +479,15 @@
 
     <div class="col-sm-12 col-md-6">
       <div class="text-md-right float-md-right pagination-rounded">
-        <ngb-pagination [maxSize]="3" [collectionSize]="documentsList.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
-          [boundaryLinks]="true" ></ngb-pagination>
+        <ngb-pagination
+          [maxSize]="3"
+          [collectionSize]="documentsList.length"
+          [(page)]="pagination.page"
+          [pageSize]="pagination.size"
+          [rotate]="true"
+          [ellipses]="false"
+          [boundaryLinks]="true"
+        ></ngb-pagination>
       </div>
     </div>
   </div>
