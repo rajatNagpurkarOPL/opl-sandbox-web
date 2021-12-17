@@ -46,7 +46,7 @@
 .main {
   // margin-left: 25em; /* Same as the width of the sidenav */
   padding: 0px 2em;
-  width: calc(100% - 250px);
+  width: calc(100% - 206px);
   margin-left: auto;
   @media (max-width: 1366px) {
     margin-left: 14.5em;
@@ -67,7 +67,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  margin: 2em 0;
+  margin: 1em 0;
 }
 
 .sidebar-main-title p {

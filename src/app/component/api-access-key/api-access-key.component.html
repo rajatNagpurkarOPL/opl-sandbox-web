@@ -1,100 +1,176 @@
-<div class="main">
-    <div class="sidebar-main-title">
-      <div class="d-flex fl-column js-center" style="width: 100%;"> 
-        <mat-form-field class="example-full-width">
-          <mat-label>Client Id</mat-label>
-          <input type="text" style="width: 100%;"  readonly matInput [value]="this.apiKeys.clientId" placeholder="ClientId">
-          <mat-icon matSuffix style="cursor: pointer;" matTooltip = "Copy ClientId"  (click)="copyContent(this.apiKeys.clientId,'Client Key')">content_copy</mat-icon>
-        </mat-form-field>
-        
-        <mat-form-field class="example-full-width" style="margin-top: 1em;">
-          <mat-label>Secret Id</mat-label>
-          <input type="text" style="width: 100%;" readonly matInput [value]="this.apiKeys.secretId" placeholder="SecretId">
-          <mat-icon matSuffix matSuffix style="cursor: pointer;"  (click)="copyContent(this.apiKeys.secretId,'Secret Key')" matTooltip = "Copy SecretId">content_copy</mat-icon>
-        </mat-form-field>
-      </div>
-    </div>
-    <div style="text-align: right;">
-      <button type="button" mat-flat-button color="primary" (click)="generateKey(true)" >Re-Generate Keys</button>
-    </div>
-</div>
-   
-
-<div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12" style="float: right;">
-  <mat-form-field class="input-group" appearance="outline" >
-  <input matInput placeholder="Type to search..."  [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">            
-</mat-form-field>
-</div> 
-
-
-<div class="main">
+<div class="main main-cards">
   <div class="sidebar-main-title">
-    <div class="d-flex fl-column js-center"> 
-     </div>  
+    <div class="d-flex fl-column js-center" style="width: 100%">
+      <mat-form-field class="example-full-width">
+        <mat-label>Client Id</mat-label>
+        <input
+          type="text"
+          style="width: 100%"
+          readonly
+          matInput
+          [value]="this.apiKeys.clientId"
+          placeholder="ClientId"
+        />
+        <mat-icon
+          matSuffix
+          style="cursor: pointer"
+          matTooltip="Copy ClientId"
+          (click)="copyContent(this.apiKeys.clientId, 'Client Key')"
+          >content_copy</mat-icon
+        >
+      </mat-form-field>
 
-    <table matSort (matSortChange)="sortData($event)"  class="table dash-table-org main-table">
-       <thead>
-         <tr>
-          <th scope="col">#</th> 
+      <mat-form-field class="example-full-width" style="margin-top: 1em">
+        <mat-label>Secret Id</mat-label>
+        <input
+          type="text"
+          style="width: 100%"
+          readonly
+          matInput
+          [value]="this.apiKeys.secretId"
+          placeholder="SecretId"
+        />
+        <mat-icon
+          matSuffix
+          matSuffix
+          style="cursor: pointer"
+          (click)="copyContent(this.apiKeys.secretId, 'Secret Key')"
+          matTooltip="Copy SecretId"
+          >content_copy</mat-icon
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="text-align: right">
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      class="keys-btn"
+      (click)="generateKey(true)"
+    >
+      Re-Generate Keys
+    </button>
+  </div>
+</div>
+
+<div class="main main-cards">
+  <div class="input-search-table">
+    <mat-form-field class="input-group" appearance="outline">
+      <input
+        matInput
+        placeholder="Type to search..."
+        [(ngModel)]="valueToFilter"
+        (keyup)="filterApplicationData()"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="sidebar-main-title">
+    <div class="d-flex fl-column js-center"></div>
+    <table
+      matSort
+      (matSortChange)="sortData($event)"
+      class="table dash-table-org main-table"
+    >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
           <th mat-sort-header="clientId" scope="col">Client Id</th>
-          <th mat-sort-header="secretId" scope="col">Secret Id</th> 
+          <th mat-sort-header="secretId" scope="col">Secret Id</th>
           <th mat-sort-header="createdDate" scope="col">Created Date</th>
           <th mat-sort-header="modifiedDate" scope="col">Inactivated On</th>
           <th mat-sort-header="isActive" scope="col">Active</th>
           <th mat-sort-header="isExpired" scope="col">Expire</th>
-         </tr>
-       </thead>
+        </tr>
+      </thead>
 
       <tbody>
-        <tr *ngFor="let item of keyPairList | slice: (pagination.page-1) * pagination.size : (pagination.page-1) * pagination.size + pagination.size; let i=index;"> 
-              <td>{{pagination.size * (pagination.page - 1) + (i+1)}}</td>
-              <td title="{{item.clientId}}">{{(item.showMoreCID) ? item.clientId:item.clientId | slice:0:20}}
-                <span (click)="item.showMoreCID=!item.showMoreCID" style="cursor: pointer;" title="{{item.showMoreCID ? 'Less' : 'More'}}"><b>...</b></span>
-              </td>
-             <td title="{{item.secretId}}">{{(item.showMore) ? item.secretId:item.secretId | slice:0:20}}
-              <span (click)="item.showMore=!item.showMore" style="cursor: pointer;" title="{{item.showMore ? 'Less' : 'More'}}"><b>...</b></span>
-             </td>
-             <td>{{item.stringCreatedDate || '-'}}</td>
-             <td>{{item.stringModifiedDate || '-'}}</td>
-             <td>{{item.isActive}}</td> 
-             <td>{{item.isExpired}}</td>
+        <tr
+          *ngFor="
+            let item of keyPairList
+              | slice
+                : (pagination.page - 1) * pagination.size
+                : (pagination.page - 1) * pagination.size + pagination.size;
+            let i = index
+          "
+        >
+          <td>{{ pagination.size * (pagination.page - 1) + (i + 1) }}</td>
+          <td title="{{ item.clientId }}">
+            {{
+              item.showMoreCID ? item.clientId : (item.clientId | slice: 0:20)
+            }}
+            <span
+              (click)="item.showMoreCID = !item.showMoreCID"
+              style="cursor: pointer"
+              title="{{ item.showMoreCID ? 'Less' : 'More' }}"
+              ><b>...</b></span
+            >
+          </td>
+          <td title="{{ item.secretId }}">
+            {{ item.showMore ? item.secretId : (item.secretId | slice: 0:20) }}
+            <span
+              (click)="item.showMore = !item.showMore"
+              style="cursor: pointer"
+              title="{{ item.showMore ? 'Less' : 'More' }}"
+              ><b>...</b></span
+            >
+          </td>
+          <td>{{ item.stringCreatedDate || "-" }}</td>
+          <td>{{ item.stringModifiedDate || "-" }}</td>
+          <td>{{ item.isActive }}</td>
+          <td>{{ item.isExpired }}</td>
         </tr>
-      </tbody>    
-    </table>  
+      </tbody>
+    </table>
   </div>
-  
- <!---pagination-->  
- <div class="row pagination-table justify-content-between" *ngIf="keyPairList">
-  <div class="col-sm-12 col-md-4">
-    <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">Showing
-      {{((pagination.size*(pagination.page-1))+1)}} to
-      {{(pagination.size*pagination.page) > (keyPairList.length) ? (keyPairList.length) : (pagination.size*pagination.page)}} of {{keyPairList.length}}
-      entries
+
+  <!---pagination-->
+  <div class="row pagination-table justify-content-between" *ngIf="keyPairList">
+    <div class="col-sm-12 col-md-4">
+      <div
+        class="dataTables_info"
+        id="tickets-table_info"
+        role="status"
+        aria-live="polite"
+      >
+        Showing {{ pagination.size * (pagination.page - 1) + 1 }} to
+        {{
+          pagination.size * pagination.page > keyPairList.length
+            ? keyPairList.length
+            : pagination.size * pagination.page
+        }}
+        of {{ keyPairList.length }} entries
+      </div>
     </div>
-  </div>  
-      
-  <div class="page-size-data">
-    <mat-form-field class="example-full-width">
-      <mat-label>Page Size</mat-label>
-      <mat-select [(ngModel)]="pagination.size">
-        <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData">
-          {{ pageSizeData }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
+    <div class="page-size-data">
+      <mat-form-field class="example-full-width">
+        <mat-label>Page Size</mat-label>
+        <mat-select [(ngModel)]="pagination.size">
+          <mat-option
+            *ngFor="let pageSizeData of pageSizeList"
+            [value]="pageSizeData"
+          >
+            {{ pageSizeData }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-
-  <div class="col-sm-12 col-md-6">
-    <div class="text-md-right float-md-right pagination-rounded">
-      <ngb-pagination [maxSize]=3 [collectionSize]="keyPairList.length" [(page)]="pagination.page" [pageSize]="pagination.size" [rotate]="true" [ellipses]="false"
-      [boundaryLinks]="true">
-      </ngb-pagination>
+    <div class="col-sm-12 col-md-6">
+      <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination
+          [maxSize]="3"
+          [collectionSize]="keyPairList.length"
+          [(page)]="pagination.page"
+          [pageSize]="pagination.size"
+          [rotate]="true"
+          [ellipses]="false"
+          [boundaryLinks]="true"
+        >
+        </ngb-pagination>
+      </div>
     </div>
   </div>
-  </div>
-</div>  
-
-
-
+</div>
