@@ -87,19 +87,10 @@
       class="dataTables_info"
       id="tickets-table_info"
       role="status"
-      aria-live="polite"
-    >
-      Showing
-      {{
-        apiData.length > 0 ? pagination.size * (pagination.page - 1) + 1 : 0
-      }}
-      to
-      {{
-        pagination.size * pagination.page > apiData.length
-          ? apiData.length
-          : pagination.size * pagination.page
-      }}
-      of {{ apiData.length }} entries
+      aria-live="polite">
+      Showing{{apiData.length > 0 ? pagination.size * (pagination.page - 1) + 1 : 0}}to
+      {{pagination.size * pagination.page > apiData.length? apiData.length : pagination.size * pagination.page
+      }}of {{ apiData.length }} entries
     </div>
 
     <div class="page-size-data">

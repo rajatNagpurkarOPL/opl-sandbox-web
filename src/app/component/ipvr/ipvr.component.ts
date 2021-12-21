@@ -277,10 +277,12 @@ export class IpvrComponent implements OnInit {
     });
   }
 
-  saveipvrform() {
-    this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value;
-    this.removeIpvrFormControls();
+  saveipvrform() {   
+    if ((this.ipvrreqForm.value.State.id == 1 && this.ipvrreqForm.value.BaseDocumentType == '712')) {
+    this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value; 
+    }
     //if (this.ipvrreqForm.valid) {
+      this.removeIpvrFormControls();
     let ipvrSaveData = this.ipvrreqForm.value;
     //set the  statename
     ipvrSaveData.DistrictName = this.ipvrreqForm.value.DistrictName.name;
@@ -306,6 +308,7 @@ export class IpvrComponent implements OnInit {
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData);
         this.utils.successSnackBar(res.payload.message);
+        ipvrSaveData = {} ;
         this.ipvrForm();
         if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
           this.parentInstance.getApiCreditLimit(this.menuData.service.id);

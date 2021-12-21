@@ -15,7 +15,9 @@
                    href="javasript:void(0)">Security</a>   
                 <a [ngClass]="(router.url.includes(constant.ROUTE_URL.CREDIT) ? 'active-nav' : '')"
                    [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]"
-                   href="javasript:void(0)">Credit</a>
+                   href="javasript:void(0)">Credit</a> 
+                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.ACTIVITY_LOGS)? 'active-nav' : '')" 
+                 [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]"  href="javasript:void(0)">Activity</a>   
             </div>
           
             <div class="header-right">
@@ -50,11 +52,11 @@
                             <mat-icon>person_pin</mat-icon> <strong>Profile</strong>
                         </p>
                     </button>
-                    <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]">
+                    <!-- <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]">
                         <p>
                             <mat-icon>local_activity</mat-icon> <strong>Activity</strong>
                         </p>
-                    </button>
+                    </button> -->
                     <button mat-menu-item (click)="logoutUser()">
                         <p style="color: #E36C6C;">
                             <mat-icon>logout</mat-icon><strong>Logout</strong>
