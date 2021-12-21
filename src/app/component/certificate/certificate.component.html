@@ -432,8 +432,7 @@
         <tr>
           <td
             colspan="12"
-            style="text-align: center; background-color: lightgrey"
-          >
+            style="text-align: center; background-color: lightgrey">
             No Certificate Uploaded.
           </td>
         </tr>
@@ -442,23 +441,11 @@
   </div>
 
   <!---pagination-->
-  <div
-    class="row pagination-table justify-content-between my-2"
-    *ngIf="documentsList"
-  >
+  <div class="row pagination-table justify-content-between my-2" *ngIf="documentsList">
     <div class="col-sm-12 col-md-4">
-      <div
-        class="dataTables_info"
-        id="tickets-table_info"
-        role="status"
-        aria-live="polite"
-      >
+      <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">
         Showing {{ pagination.size * (pagination.page - 1) + 1 }} to
-        {{
-          pagination.size * pagination.page > documentsList.length
-            ? documentsList.length
-            : pagination.size * pagination.page
-        }}
+        {{pagination.size * pagination.page > documentsList.length ? documentsList.length : pagination.size * pagination.page}}
         of {{ documentsList.length }} entries
       </div>
     </div>
@@ -467,11 +454,7 @@
       <mat-form-field class="example-full-width">
         <mat-label>Page Size</mat-label>
         <mat-select [(ngModel)]="pagination.size">
-          <mat-option
-            *ngFor="let pageSizeData of pageSizeList"
-            [value]="pageSizeData"
-          >
-            {{ pageSizeData }}
+          <mat-option *ngFor="let pageSizeData of pageSizeList" [value]="pageSizeData"> {{ pageSizeData }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -479,15 +462,8 @@
 
     <div class="col-sm-12 col-md-6">
       <div class="text-md-right float-md-right pagination-rounded">
-        <ngb-pagination
-          [maxSize]="3"
-          [collectionSize]="documentsList.length"
-          [(page)]="pagination.page"
-          [pageSize]="pagination.size"
-          [rotate]="true"
-          [ellipses]="false"
-          [boundaryLinks]="true"
-        ></ngb-pagination>
+        <ngb-pagination [maxSize]="3" [collectionSize]="documentsList.length" [(page)]="pagination.page"
+           [pageSize]="pagination.size" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
       </div>
     </div>
   </div>
