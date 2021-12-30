@@ -104,8 +104,10 @@
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-hsn-summary>
                     <app-gst-tax-payers-gstr2-hsn-summary
                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_HSN_SUMMARY"
-                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr2-hsn-summary>
-                 </div>
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr2-hsn-summary> 
+                      <app-name-match  *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NM_MATCH"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-name-match>
+                  </div>
               </mat-tab>
               <mat-tab label="Request Document">
                  <div class="card-body">

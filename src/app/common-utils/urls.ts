@@ -75,6 +75,7 @@ let UDHYAM_BASE_URL = '';
 let CAAPI_BASE_URL = '';
 let NSDL_PAN_InQUIRY_BASE_URL = '';  
 let PROPLEGIT_BASE_URL ='';
+let MATCHING_BASE_URL ='';
 
 if(host.includes('localhost')){
     SANDBOX_BASE_URL = SANDBOX.endpointFromLocal + SANDBOX.postFix;
@@ -199,5 +200,8 @@ export const URLS = {
         GET_WARDLIST_BY_DISTRICTID_MASTER:PROPLEGIT_BASE_URL + '/application/wardListByDistrictId',  
         GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view' 
         //GET_PROPLEGIT_REQ_VIEW:GATEWAY_BASE_URL + '/proplegit/application/pvr/view'
+    } ,
+    MATCHING:{
+          GET_NAME_MATCH:MATCHING_BASE_URL +'/matchnames'
     }
 };
