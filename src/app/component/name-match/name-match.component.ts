@@ -35,10 +35,14 @@ export class NameMatchComponent implements OnInit {
       let headerSourceEnc = this.aesGcmEncryption.encryptData(Constant.HEADER.SOURCE)
       let headers = Utils.getAPIHeaderWithSourceKeyValue(headerSourceEnc);
       let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(this.nameMatchForm.value));
-      this.sandboxService.getNameMatchingData(this.url, payload, headers).subscribe(res => {
+      this.sandboxService.getNameMatchingData(this.url, payload, headers).subscribe(res => { 
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData); 
-        this.utils.successSnackBar(res.payload.message);
+        if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
+          this.parentInstance.getApiCreditLimit(this.menuData.service.id);
+        } 
+      },err => {
+        this.utils.errorHandle(err);
       });
     }
     else {
