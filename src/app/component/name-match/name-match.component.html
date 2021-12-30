@@ -1,0 +1,28 @@
+<form>
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form form-main-section form-main-section" [formGroup]="nameMatchForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+           <div class="input-fields">
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Input Name</mat-label>
+                <input type="text" matInput [formControl]="nameMatchForm.controls.inputName" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="nameMatchForm.get('inputName').hasError('required')">
+                    Please Enter Input Name.
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>Match With</mat-label>
+                <input type="text" matInput [formControl]="nameMatchForm.controls.matchWith" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="nameMatchForm.get('matchWith').hasError('required')">
+                    Please Enter Match With.
+                </mat-error> 
+            </mat-form-field>
+            &nbsp;
+        </div>
+
+            <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
+        </form>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

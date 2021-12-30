@@ -57,7 +57,8 @@ export const Constant = {
             GSTR2_CDNUR: "GSTR2_CDNUR",
             GSTR1_HSN_SUMMARY: "GSTR1_HSN_SUMMARY",
             GSTR2_HSN_SUMMARY: "GSTR2_HSN_SUMMARY"
-        }
+        }, 
+        NM_MATCH: "NM_MATCH",
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {

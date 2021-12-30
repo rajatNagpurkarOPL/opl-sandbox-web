@@ -252,4 +252,7 @@ getGstTaxPayersData(url : string, data : any,requestHeader : any): Observable<an
   return this.http.post(url ,data ,requestHeader ,false);
 }
 
+getNameMatchingData(url : string,data : any,requestHeader : any): Observable<any> {
+  return this.http.post(url ,data,requestHeader,false);
+}
 }

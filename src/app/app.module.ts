@@ -85,6 +85,7 @@ import { GstTaxPayersGstr2HsnSummaryComponent } from './component/apis/gst-tax-p
 import { SecurityComponent } from './component/security/security.component';
 import { CreditComponent } from './component/credit/credit.component';
 import { SecurityInfoComponent } from './component/security-info/security-info.component';
+import { NameMatchComponent } from './component/name-match/name-match.component';
 
 @NgModule({
   imports: [
@@ -166,7 +167,8 @@ import { SecurityInfoComponent } from './component/security-info/security-info.c
     GstTaxPayersGstr2HsnSummaryComponent,
     SecurityComponent,
     CreditComponent,
-    SecurityInfoComponent
+    SecurityInfoComponent,
+    NameMatchComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
