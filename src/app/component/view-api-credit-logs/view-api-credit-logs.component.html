@@ -63,9 +63,9 @@
             <td>{{10 *(page-1)+ (audit+1)}}.</td>
             <td>{{creditLog.actionType}}</td>
             <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }} </td>
-            <td>{{creditLog.balanceCredits}}</td>
+            <td>{{creditLog.balanceCredits + 1}}</td>
             <td>{{creditLog.operatedCredits}}</td>
-            <td>{{creditLog.actionType == "DEBIT" ? (creditLog.balanceCredits - creditLog.operatedCredits) : (creditLog.balanceCredits + creditLog.operatedCredits)}}</td>
+            <td>{{creditLog.actionType == "DEBIT" ? ((creditLog.balanceCredits + 1) - creditLog.operatedCredits) : ((creditLog.balanceCredits + 1) + creditLog.operatedCredits)}}</td>
         </tr>
     </ng-container>
     <tr *ngIf="creditLogsList == null || creditLogsList.length == 0">

@@ -71,10 +71,10 @@ export class ViewApiCreditLogsComponent implements OnInit {
     this.creditLogsList.forEach((item, i) => {
       var outstanding;
       if(item.actionType=='DEBIT'){
-         outstanding=item.balanceCredits-item.operatedCredits;
+         outstanding=(item.balanceCredits + 1)-item.operatedCredits;
       }
       if(item.actionType=='CREDIT'){
-         outstanding=item.balanceCredits+item.operatedCredits;
+         outstanding=(item.balanceCredits + 1)+item.operatedCredits;
       }
 
       var index = i + 1;
@@ -82,7 +82,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
         '#': index,
         'Action': item.actionType,
         'DateTime': this.datepipe.transform(item.createdDate, 'dd-MM-yyyy'),
-        'Balance': item.balanceCredits,
+        'Balance': item.balanceCredits + 1, 
         'Operated': item.operatedCredits,
         'Outstanding':outstanding
        
@@ -115,11 +115,11 @@ export class ViewApiCreditLogsComponent implements OnInit {
       }
       const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
       this.lenderService.getAPICreditLogsListDateFilter(req).subscribe(resp=> {
-      this.totalRecords = resp.data.apiCreditLogsCount;
-      this.collectionSize = resp.data.apiCreditLogsCount;
-  
-      this.creditLogsList = resp.data.apiCreditLogs;  
-    })
+        this.totalRecords = resp.data.apiCreditLogsCount;
+        this.collectionSize = resp.data.apiCreditLogsCount;
+        
+        this.creditLogsList = resp.data.apiCreditLogs;  
+      })
   }
 
   close(){
