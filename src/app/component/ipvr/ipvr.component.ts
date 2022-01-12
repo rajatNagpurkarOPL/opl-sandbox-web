@@ -314,7 +314,7 @@ export class IpvrComponent implements OnInit {
           this.parentInstance.getApiCreditLimit(this.menuData.service.id);
         }
        } else {
-       this.utils.warningSnackBar(res.payload.message);
+       this.utils.warningSnackBar("please fill the form data");
       } 
     }, (error: any) => {
       this.utils.errorSnackBar(error);
