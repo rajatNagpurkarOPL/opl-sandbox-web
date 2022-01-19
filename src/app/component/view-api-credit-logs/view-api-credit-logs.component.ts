@@ -54,7 +54,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
     this.fromDate=new Date(this.dateForm.value.fromDate);
   }
 
-  exportToExcel(){
+  exportToExcel(){ 
 
     const req: any = {pageSize: this.pageSize, apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
     this.lenderService.getAPICreditLogsListDateFilterExportToExcel(req).subscribe(resp=> {
@@ -72,20 +72,19 @@ export class ViewApiCreditLogsComponent implements OnInit {
       var outstanding;
       if(item.actionType=='DEBIT'){
          outstanding=(item.balanceCredits + 1)-item.operatedCredits;
-      }
+        }
       if(item.actionType=='CREDIT'){
-         outstanding=(item.balanceCredits + 1)+item.operatedCredits;
-      }
+         outstanding= item.balanceCredits;
+        }
 
       var index = i + 1;
       let creditDetails = [{
         '#': index,
         'Action': item.actionType,
         'DateTime': this.datepipe.transform(item.createdDate, 'dd-MM-yyyy'),
-        'Balance': item.balanceCredits + 1, 
+        'Balance':item.actionType == "DEBIT" ? item.balanceCredits + 1 : ((item.balanceCredits) - item.operatedCredits),
         'Operated': item.operatedCredits,
-        'Outstanding':outstanding
-       
+        'Outstanding':outstanding         
       }];
       creditHistoryDownload = creditHistoryDownload.concat(creditDetails);
     });
@@ -117,8 +116,8 @@ export class ViewApiCreditLogsComponent implements OnInit {
       this.lenderService.getAPICreditLogsListDateFilter(req).subscribe(resp=> {
         this.totalRecords = resp.data.apiCreditLogsCount;
         this.collectionSize = resp.data.apiCreditLogsCount;
-        
-        this.creditLogsList = resp.data.apiCreditLogs;  
+        this.creditLogsList = resp.data.apiCreditLogs;   
+        console.log("creditLogsList::><<<<>",this.creditLogsList);
       })
   }
 
