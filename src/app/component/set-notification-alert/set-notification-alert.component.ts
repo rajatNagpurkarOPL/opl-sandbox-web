@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Options } from 'ng5-slider';
+import { SnackbarService } from 'src/app/common-utils/common-services/SnackbarService';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
 import { Globals } from 'src/app/common-utils/globals';
@@ -21,6 +22,7 @@ export class SetNotificationAlertComponent implements OnInit {
   creditBalance = 0;
   limitBalance = 0;
   usagePercentage = 0;
+  tempResp=0;
 
   constructor(public dialogRef: MatDialogRef<SetNotificationAlertComponent>, public lenderService: SandboxService,
            @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder ,public globals : Globals ,public utils:Utils) {
@@ -52,20 +54,20 @@ export class SetNotificationAlertComponent implements OnInit {
   setCreditBalance(){
     console.log("setCreditBalance");
     let alertData = this.triggerForm.controls.triggers.controls;
-    let limitSum = 0;
-    alertData.forEach(element => {
+    let limitSum = 0;   
+    alertData.forEach(element => { 
         limitSum = element.controls.minMaxLimit.value[1];
-    })
-    if(limitSum <= 100){
+      })    
+  if(limitSum <= 100){
       this.setBalanceLimit();
-    }
+    }   
   }
 
   addTrigger() {
     let alertData = this.triggerForm.controls.triggers.controls;
-    let limitSum = 0;
+    let limitSum = 0; 
     alertData.forEach(element => {
-        limitSum = element.maxValue;
+      limitSum = element.maxValue;
     })
     console.log("limitSum==>",limitSum);
     if(limitSum < 100){
@@ -79,7 +81,7 @@ export class SetNotificationAlertComponent implements OnInit {
       }else{
         this.triggerForm.markAllAsTouched();
       }
-    }else {
+     }else {
       this.utils.errorSnackBar("Usage can be set up to Last 100 in percentage.");
     }
   }
@@ -90,14 +92,24 @@ export class SetNotificationAlertComponent implements OnInit {
 
   setBalanceLimit(){
     let localValue = this.usagePercentage; //this.creditBalance - this.limitBalance;
- 
+     
     let loopIndex = 0;
-    let removeIndex = [];
+    let removeIndex = []; 
+        if(this.tempResp > this.usagePercentage) 
+        { 
+          localValue = this.usagePercentage;
+        } 
+        else {
+           localValue = this.tempResp - 1;
+        }
     this.triggerForm.controls.triggers.controls.forEach(element => {
       if(loopIndex == 0){
         element.minValue = localValue + 1;
+            //  if(element.minValue >this.tempResp) {  
+            //  } 
         element.maxValue = element.controls.minMaxLimit.value[1] != undefined ? element.controls.minMaxLimit.value[1] : 100;
-      }else{
+      }
+      else{
         if(this.triggerForm.controls.triggers.controls[loopIndex-1].controls.minMaxLimit.value[1] == 100){
           removeIndex.push(loopIndex);
         }
@@ -128,6 +140,7 @@ export class SetNotificationAlertComponent implements OnInit {
     this.lenderService.getTriggersList({"apiUserId":this.data.apiUserId}).subscribe(resp =>{
       if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && !Utils.isObjectNullOrEmpty(resp.data)){
         this.removeTrigger(0 ,null);
+        this.tempResp = resp.data[0].minLimit;
         resp.data.forEach(element => {
           element.minMaxLimit = [element.minLimit,element.maxLimit];
           this.trigger.push(this.addAlertForm(element));
@@ -186,12 +199,18 @@ export class SetNotificationAlertComponent implements OnInit {
     let data = this.triggerForm.getRawValue();
     if(data != null && data.triggers.length > 0){
       if(this.triggerForm.valid){
+         
         data.triggers.forEach(element => {
           element.apiUserId = this.data.apiUserId;
           element.balanceCredits = this.data.balance;
           element.minLimit = element.minMaxLimit[0];
-          element.maxLimit = element.minMaxLimit[1];
-        });
+          element.maxLimit = element.minMaxLimit[1]; 
+        });   
+        if(this.minMaxTriggerValidation(data)){
+          this.utils.errorSnackBar("You can use only 100% range. So, please change the range or remove the trigger.");
+          return false;
+        }  
+        //save call
         this.lenderService.saveOrUpdateApiTriggers(data.triggers).subscribe(resp =>{
           if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && resp.data != null){
             this.utils.successSnackBar(resp.message);
@@ -207,5 +226,16 @@ export class SetNotificationAlertComponent implements OnInit {
     }else{
       this.utils.errorSnackBar("Please add atleast 1 Trigger.");
     }
+  } 
+  
+  minMaxTriggerValidation(data: any) {
+    let isValidate = false;
+    data.triggers.forEach(element => {      
+      if(element.minMaxLimit[0] == element.minMaxLimit[1]) {         
+        isValidate = true;
+      } 
+    });
+    return isValidate;
   }
+
 }

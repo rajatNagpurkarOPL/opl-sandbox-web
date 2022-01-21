@@ -34,8 +34,8 @@
             <tr *ngFor="let audit of audits; let i=index;">
               <td> {{(pageSize*(page-1)) + (i+1)}}</td>
               <td>{{audit.requestId}}</td>
-              <td>{{audit.requestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-              <td>{{audit.responseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+              <td>{{audit.stringrequestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+              <td>{{audit.stringresponseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
               <td style="text-align: left;">{{audit.path}}</td>
               <td>{{audit.httpStatus}}</td>
               <td>{{audit.httpStatusDescription}}</td>
