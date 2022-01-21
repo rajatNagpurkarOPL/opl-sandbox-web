@@ -10,9 +10,11 @@
 
 <div class="pop-up-content">
 
-   
     <div class="d-flex w-100 al-center js-between">       
-        <span>Service Name : {{data.name}} <br/> Total Credits : {{data.total}} <br/> Used Credits : {{data.total - data.balance}} <br/> Balance Credits : {{data.balance}}</span> 
+        <span>Service Name : {{data.name}} <br/> 
+            Total Credits : {{data.total}} <br/> 
+            Used Credits : {{data.total - data.balance}}({{this.usagePercentage.toFixed(2)}}%)
+            <br/> Balance Credits : {{data.balance}}</span> 
        
         <form [formGroup]="dateForm" (ngSubmit)="filterByDate(page)">
         <div>            
@@ -39,22 +41,34 @@
         </form>
   
     </div>
- 
-</div>
+  
+</div> 
+<div class="input-search-table">
+    
+  </div>
 <div class="pop-up-content">
-<span>Total <b>{{collectionSize}}</b> Transactions for <b>{{days}} days</b></span>
+<span>Total <b>{{collectionSize}}</b> Transactions for <b>{{days}} days</b></span>  
+<div class="input-search-tablea">
+<mat-form-field class="input-group" appearance="outline">
+    <input
+      matInput
+      placeholder="Type to search..."
+      [(ngModel)]="valueToFilter"
+      (keyup)="filterApplicationData()"
+       />
+  </mat-form-field> 
+  </div> 
 <button type="button" (click)="exportToExcel()" class="btn btn-success py-2 px-3 btn-sm ">Export To Excel</button>
 </div>
-
-<table class="table dash-table-brige11">
+<table class="table dash-table-brige11" matSort (matSortChange)="sortData($event)">
 <thead>
     <tr>    
     <th scope="col">#</th>
-    <th scope="col">Action</th>
-    <th scope="col">DateTime</th>
-    <th scope="col">Balance</th>
-    <th scope="col">Operated</th>
-    <th scope="col">Outstanding</th>
+    <th mat-sort-header="actionType" scope="col">Action</th>
+    <th mat-sort-header="createdDate" scope="col">DateTime</th>
+    <th mat-sort-header="balanceCredits" scope="col">Balance</th>
+    <th mat-sort-header="operatedCredits" scope="col">Operated</th>
+    <th mat-sort-header="operatedCredits" scope="col">Outstanding</th>
     </tr>
 </thead>
 <tbody>

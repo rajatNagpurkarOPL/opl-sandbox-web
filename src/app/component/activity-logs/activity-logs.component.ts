@@ -20,17 +20,15 @@ export class ActivityLogsComponent implements OnInit {
   audits =[];
   paginationData : any;  
   valueToFilter : String = "";
-
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   startIndex = 1;
   endIndex = 10;
-
   collectionSize = 0;
   // page number
   page = 1;
   // default page size
   pageSize = 10;
- 
-  filterKeys : String [] = ["requestId","requestTime","responseTime","path","httpStatus","httpStatusDescription",,"clientIp",,"serverRequestId"];
+  filterKeys : String [] = ["requestId","stringrequestTime","stringresponseTime","path","httpStatus","httpStatusDescription",,"clientIp",,"serverRequestId"];
 
   constructor(private sandboxService : SandboxService,public globals : Globals,private utils : Utils ,public dialog: MatDialog) {
     this.user = globals.USER;
@@ -56,7 +54,18 @@ export class ActivityLogsComponent implements OnInit {
       if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
         this.collectionSize = res.data.auditLogCount;
         this.audits = res.data.auditLogData;
-        this.paginationData = this.audits;
+        this.paginationData = this.audits;   
+        //date and time
+        this.audits.forEach(keypair => { 
+          if (!Utils.isObjectNullOrEmpty(keypair.requestTime)) {
+            var modifiedrequestTime = new Date(keypair.requestTime);
+            keypair.stringrequestTime = this.months[modifiedrequestTime.getMonth()] + ' ' + modifiedrequestTime.getDate() + ', ' + modifiedrequestTime.getFullYear() + " " + modifiedrequestTime.getHours() + ":" + modifiedrequestTime.getMinutes() + ":" + modifiedrequestTime.getSeconds();
+          }
+          if (!Utils.isObjectNullOrEmpty(keypair.responseTime)) {
+            var modifiedresponseTime = new Date(keypair.responseTime);
+            keypair.stringresponseTime = this.months[modifiedresponseTime.getMonth()] + ' ' + modifiedresponseTime.getDate() + ', ' + modifiedresponseTime.getFullYear() + " " + modifiedresponseTime.getHours() + ":" + modifiedresponseTime.getMinutes() + ":" + modifiedresponseTime.getSeconds();
+          }
+        });
       }else{
         this.utils.errorSnackBar(res.message);
         this.collectionSize = 0;

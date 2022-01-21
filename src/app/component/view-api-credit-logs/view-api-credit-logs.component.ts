@@ -8,6 +8,9 @@ import alasql from 'alasql';
 
 import { DatePipe, formatDate } from '@angular/common';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ApplicationFilterMultiPipe } from '../pipes/filter.pipe';
+import { Sort } from '@angular/material/sort';
+import { SortingTableData } from 'src/app/common-utils/sort';
 
 
 @Component({
@@ -26,8 +29,13 @@ export class ViewApiCreditLogsComponent implements OnInit {
   // page number
   page = 1;
   // default page size
-  pageSize = 10;
-
+  pageSize = 10; 
+  paginationData :any;
+  usagePercentage = 0;  
+  creditBalance = 0;
+  limitBalance = 0; 
+  valueToFilter : String = ""; 
+  filterKeys : String [] = ["actionType","createdDate","balanceCredits","operatedCredits"];
   dateForm:FormGroup;
   dates : any;  
   days:any=1;
@@ -47,8 +55,31 @@ export class ViewApiCreditLogsComponent implements OnInit {
       toDate: [this.dates.toDate,Validators.required]
     });
     this.dateChange();
-    this.filterByDate(1);
+    this.filterByDate(1);  
+    this.creditBalance = this.data.total;
+    this.limitBalance = this.data.balance;
+    this.setPercentage(this.creditBalance , this.limitBalance);
   }
+  
+  setPercentage(totalLimit, balanceLimit){
+    this.usagePercentage = (totalLimit-balanceLimit)/totalLimit*100;
+  }  
+ 
+  sortData(sort: Sort) {  
+    this.creditLogsList  = new SortingTableData().sortingTableValue(this.creditLogsList ,sort);
+  }
+
+  filterApplicationData() {
+    if (Utils.isObjectNullOrEmpty(this.valueToFilter)) { 
+        this.creditLogsList =  this.paginationData; 
+        return;
+    }  
+    this.creditLogsList = new ApplicationFilterMultiPipe().transform(this.creditLogsList, this.filterKeys,this.valueToFilter);
+    if (this.creditLogsList === undefined || this.creditLogsList == null) {
+        this.creditLogsList = this.paginationData;
+    }
+  }
+
 
   dateChange(){
     this.fromDate=new Date(this.dateForm.value.fromDate);
@@ -58,8 +89,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
 
     const req: any = {pageSize: this.pageSize, apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
     this.lenderService.getAPICreditLogsListDateFilterExportToExcel(req).subscribe(resp=> {
-
-    this.creditLogsList = resp.data;
+    this.creditLogsList = resp.data; 
     let date = new Date();
     let latest_date = this.datepipe.transform(date, 'dd-MM-yyyy');
     const fileName = "Credit_History_" + latest_date + ".xlsx";
@@ -114,9 +144,11 @@ export class ViewApiCreditLogsComponent implements OnInit {
       }
       const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , apiUserId: this.data.apiUserId, fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
       this.lenderService.getAPICreditLogsListDateFilter(req).subscribe(resp=> {
+         console.log("response",resp);
         this.totalRecords = resp.data.apiCreditLogsCount;
         this.collectionSize = resp.data.apiCreditLogsCount;
         this.creditLogsList = resp.data.apiCreditLogs;   
+        this.paginationData =this.creditLogsList; 
         console.log("creditLogsList::><<<<>",this.creditLogsList);
       })
   }
