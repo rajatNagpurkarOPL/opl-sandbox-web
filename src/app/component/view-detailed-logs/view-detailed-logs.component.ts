@@ -14,16 +14,20 @@ export class ViewDetailedLogsComponent implements OnInit {
   responseData = "No Details Found";
   requestHeaderData = "No Details Found";
   responseHeaderData = "No Details Found";
+  plainRequestData = "No Details Found"; 
+  plainResponseData = "No Details Found"; 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any ,private sandboxService : SandboxService ,private utils : Utils ,public dialogRef: MatDialogRef<ViewDetailedLogsComponent>,) { }
 
   
   ngOnInit(): void {
 
     if(this.data != null && this.data.id != null){
-      this.sandboxService.getUserDetailedLogsByLogId(this.data.id).subscribe(res => {
+      this.sandboxService.getUserDetailedLogsByLogId(this.data.id).subscribe(res => { 
         if(res.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE){
           this.requestData = res.data.requestData != undefined && res.data.requestData != null ? JSON.parse(res.data.requestData) : this.requestData;
-          this.responseData = res.data.responseData != undefined && res.data.responseData != null ? JSON.parse(res.data.responseData) : this.responseData;
+          this.plainRequestData = res.data.plainRequestData != undefined && res.data.plainRequestData != null ? JSON.parse(res.data.plainRequestData) : this.plainRequestData;
+          this.responseData = res.data.responseData != undefined && res.data.responseData != null ? JSON.parse(res.data.responseData) : this.responseData; 
+          this.plainResponseData = res.data.plainResponseData != undefined && res.data.plainResponseData != null ? JSON.parse(res.data.plainResponseData) : this.plainResponseData; 
           this.requestHeaderData = res.data.requestHeaderData != undefined && res.data.requestHeaderData != null ? res.data.requestHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.requestHeaderData;
           this.responseHeaderData = res.data.responseHeaderData != undefined && res.data.responseHeaderData != null ? res.data.responseHeaderData.replace("{","{ \n").replace("}","\n }").replaceAll(",",", \n") : this.responseHeaderData;
         }else{
