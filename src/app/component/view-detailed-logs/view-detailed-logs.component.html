@@ -16,20 +16,38 @@
             </pre>
         </div>
     </mat-tab>
+    <mat-tab label="Request Plain Data">
+        <div style="overflow: auto;"  class="pd-0">
+            <pre class="json-pretty">
+                {{plainRequestData | json}}
+            </pre>
+        </div>
+    </mat-tab>
+
     <mat-tab label="Request Header Data">
         <div style="overflow: auto;"  class="pd-0">
             <pre class="json-pretty">
                 {{requestHeaderData}}
             </pre>
         </div>
-    </mat-tab>
+    </mat-tab> 
+ 
     <mat-tab label="Response Data">
         <div style="overflow: auto;"  class="pd-0">
             <pre class="json-pretty">
                 {{responseData | json}}
             </pre>
         </div>
+    </mat-tab> 
+    
+    <mat-tab label="Response Plain Data">
+        <div style="overflow: auto;"  class="pd-0">
+            <pre class="json-pretty">
+                {{plainResponseData | json}}
+            </pre>
+        </div>
     </mat-tab>
+
     <mat-tab label="Response Header Data">
         <div style="overflow: auto;"  class="pd-0">
             <pre class="json-pretty">
