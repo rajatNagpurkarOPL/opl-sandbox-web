@@ -51,8 +51,9 @@ export class IpvrComponent implements OnInit {
     this.getListByClassMaster();
   }
 
-  ipvrForm() {
-    this.ipvrreqForm = this.fb.group({
+  ipvrForm() { 
+    
+    this.ipvrreqForm = this.fb.group({  
       ApplicationNo: new FormControl('', [Validators.required]),
       BranchCode: new FormControl('', [Validators.required]),
       ApplicantName: new FormControl('', [Validators.required, Validators.maxLength(225)]),
@@ -86,7 +87,7 @@ export class IpvrComponent implements OnInit {
       Region: new FormControl(''),
       SurveyGatNo: new FormControl(''),
       PropertyOwners: this.fb.array([])
-    });
+      });
   }
 
   addNewGroup() {
@@ -277,51 +278,56 @@ export class IpvrComponent implements OnInit {
     });
   }
 
-  saveipvrform() {   
+  saveipvrform() {
     if ((this.ipvrreqForm.value.State.id == 1 && this.ipvrreqForm.value.BaseDocumentType == '712')) {
-    this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value; 
+      this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value;
     }
-    //if (this.ipvrreqForm.valid) {
-      this.removeIpvrFormControls();
-    let ipvrSaveData = this.ipvrreqForm.value;
-    //set the  statename
-    ipvrSaveData.DistrictName = this.ipvrreqForm.value.DistrictName.name;
-    ipvrSaveData.State = this.ipvrreqForm.value.State.name;
-    if (ipvrSaveData.BaseDocumentType === '712') {
-      ipvrSaveData.TalukaName = this.ipvrreqForm.value.TalukaName.name;
-    }
-    if (ipvrSaveData.BaseDocumentType === 'PropertyCard') {
-      ipvrSaveData.CitySurveyOffice = this.ipvrreqForm.value.CitySurveyOffice.name;
-    }
-    if (ipvrSaveData.State != null && this.ipvrreqForm.controls.State.value.id == 1 && ipvrSaveData.BaseDocumentType === 'PropertyCard') {
-      ipvrSaveData.Region = this.ipvrreqForm.value.Region.name;
-    }
+  //console.log("this.ipvrreqForm:::", this.ipvrreqForm);
+  //console.log("this.ipvrreqForm::::", this.ipvrreqForm.valid);
+    //remove with condition controlllers 
+
+    this.removeIpvrFormControls();
+    if (this.ipvrreqForm.valid) {
+      let ipvrSaveData = this.ipvrreqForm.value;
+      //set the  statename
+      ipvrSaveData.DistrictName = this.ipvrreqForm.value.DistrictName.name;
+      ipvrSaveData.State = this.ipvrreqForm.value.State.name;
+      if (ipvrSaveData.BaseDocumentType === '712') {
+        ipvrSaveData.TalukaName = this.ipvrreqForm.value.TalukaName.name;
+      }
+      if (ipvrSaveData.BaseDocumentType === 'PropertyCard') {
+        ipvrSaveData.CitySurveyOffice = this.ipvrreqForm.value.CitySurveyOffice.name;
+      }
+      if (ipvrSaveData.State != null && this.ipvrreqForm.controls.State.value.id == 1 && ipvrSaveData.BaseDocumentType === 'PropertyCard') {
+        ipvrSaveData.Region = this.ipvrreqForm.value.Region.name;
+      }
+      //console.log("299::::this.ipvrreqForm:::", this.ipvrreqForm);
      // gatway 
-        let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE); 
-        let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
-        let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData)); 
-      
-  if(ipvrSaveData.State != null &&  payload != null){
-        this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload,headers).subscribe(res => {
-         console.log("resipvr",res);
-        if (!Utils.isObjectNullOrEmpty(res.status) && res.payload.message == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
+      let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE);
+      let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
+      let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(ipvrSaveData));
+      //if(ipvrSaveData.State != null &&  payload != null){
+      //return;         
+      this.sandboxService.createPropertyLoanApplication(ipvrSaveData.State, payload, headers).subscribe(res => {
+       //console.log("::::::::response::::::::", res);
+        //if(!Utils.isObjectNullOrEmpty(res.status) && res.payload.message == this.constant.INTERNAL_STATUS_CODES.SUCCESS.CODE) {
         let decData = this.aesGcmEncryption.getDecPayload(res);
         this.response = Utils.jsonStringify(decData);
         this.utils.successSnackBar(res.payload.message);
-        ipvrSaveData = {} ;
+        ipvrSaveData = {};
         this.ipvrForm();
-        if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)){
+        if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)) {
           this.parentInstance.getApiCreditLimit(this.menuData.service.id);
         }
-       } else {
-       this.utils.warningSnackBar("please fill the form data");
-      } 
-    }, (error: any) => {
-      this.utils.errorSnackBar(error);
-    }); 
-  } else {
-    this.utils.errorSnackBar("please fill the form data");
-  }
+        // } else {
+        // this.utils.warningSnackBar("please fill the form data");
+        // }sss 
+      }, (error: any) => {
+        this.utils.errorSnackBar(error);
+      });
+    } else {
+      this.utils.errorSnackBar("Please Enter Required Or Valid Details.");
+    }
 
   }
 
