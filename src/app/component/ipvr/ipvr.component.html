@@ -65,10 +65,6 @@
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Base Document Type</mat-label>
             <mat-select formControlName="BaseDocumentType" (valueChange)="baseDocumentTypeValidation($event)">
-                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value, baseDocumentType, 'baseDocument','value',null)">
-                                </mat-select-filter>
-                 -->
                 <mat-option *ngFor="let data of baseDocument" [value]="data.value">
                     {{data.value}}
                 </mat-option>
@@ -81,13 +77,7 @@
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Land Property Type</mat-label>
             <mat-select formControlName="LandPropertyType">
-                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value,landPropertyType, landPropertyType.value,'landPropertyType',null)">
-                                </mat-select-filter> -->
-                                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value, landPropertyType, 'landProperty','value',null)">
-                                </mat-select-filter> -->
-                                <mat-option *ngFor="let data of landProperty" [value]="data.value">
+                <mat-option *ngFor="let data of landProperty" [value]="data.value">
                     {{data.value}}
                 </mat-option>
             </mat-select>
@@ -102,7 +92,8 @@
             class="example-full-width mr-all">
             <mat-label>Region</mat-label>
             <mat-select formControlName="Region" (valueChange)="getdistrictListByRegionIdMaster($event)">
-                <mat-option *ngFor="let data of regionMasterList" [value]="data">
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="regionMasterList" (filteredReturn)="regionList1 =$event"></mat-select-filter>  
+                <mat-option *ngFor="let data of regionList1" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -112,14 +103,11 @@
         </mat-form-field>
 
         <!--DistrictName-->
-        <mat-form-field class="example-full-width mr-all">
+        <mat-form-field class="example-full-width">
             <mat-label>District Name</mat-label>
             <mat-select formControlName="DistrictName" (valueChange)="getTalukaListByDistrictIdMaster($event)">
-                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value,districtNameList,'districtName','value',null)">
-                                </mat-select-filter>
-                 -->
-                <mat-option *ngFor="let data of districtName" [value]="data">
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
+                <mat-option *ngFor="let data of districtList1" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -131,11 +119,9 @@
         <!--TalukaName-->
         <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
             <mat-label>Taluka Name</mat-label>
-            <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">         
-                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value, talukaNameList, 'talukaName','value',null)">
-                                </mat-select-filter> -->
-                <mat-option *ngFor="let data of talukaName" [value]="data">
+            <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">
+                                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="talukaNameList" (filteredReturn)="talukaList1 =$event"></mat-select-filter>
+                                <mat-option *ngFor="let data of talukaList1" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -150,7 +136,9 @@
             <mat-label>City Survey Office</mat-label>
             <mat-select formControlName="CitySurveyOffice"
                 (valueChange)="getVilageListBySurveyOfficeNameMaster($event)">
-                <mat-option *ngFor="let data of getCitySurveyOfficeList" [value]="data">
+                
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="getCitySurveyOfficeList" (filteredReturn)="citySurveyOfficeList1 =$event"></mat-select-filter>  
+                <mat-option *ngFor="let data of this.citySurveyOfficeList1" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -165,11 +153,8 @@
             class="example-full-width mr-all">
             <mat-label>Village Name</mat-label>
             <mat-select formControlName="VillageName">
-                <!-- <mat-select-filter aria-label="search User"
-                                    (keyup)="searchValue($event.target.value, villageNameList, 'villageName','value',null)">
-                                </mat-select-filter> -->
-               
-                <mat-option *ngFor="let data of villageName" [value]="data.name">
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="villageNameList" (filteredReturn)="villageList1 =$event"></mat-select-filter>  
+                <mat-option *ngFor="let data of villageList1" [value]="data.name">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -225,7 +210,8 @@
             class="example-full-width mr-all">
             <mat-label>Ward</mat-label>
             <mat-select formControlName="Ward">
-                <mat-option *ngFor="let data of wardList" [value]="data.name">
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="wardList" (filteredReturn)="wardList1 =$event"></mat-select-filter>               
+                <mat-option *ngFor="let data of wardList1" [value]="data.name">
                     {{data.name}}
                 </mat-option>
             </mat-select>

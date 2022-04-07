@@ -32,16 +32,19 @@ export class IpvrComponent implements OnInit {
   baseDocumentType: any;
   baseDocument: any =[];
   districtNameList: any;
-  districtName: any;
+  districtList1 :any; 
   villageNameList: any;
-  villageName: any;
+  villageList1 :any; 
   talukaNameList: any;
-  talukaName: any;
-  regionMasterList: any;
-  getCitySurveyOfficeList: any;
-  wardList: any;
+  talukaList1 :any; 
+  regionMasterList: any; 
+  regionList1 :any;
+  getCitySurveyOfficeList: any; 
+  citySurveyOfficeList1: any; 
+  wardList: any; 
+  wardList1: any;
   ipvrUrl: any = null;
-  filteredList1 :any;
+  
 
   constructor(private fb: FormBuilder, private sandboxService: SandboxService, public utils: Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.constant = Constant
@@ -221,14 +224,17 @@ export class IpvrComponent implements OnInit {
     this.updatedUrl.emit(event.url);
     //getREgionMaster
     this.sandboxService.getRegionMaster(event.id).subscribe(res => {
-      this.regionMasterList = res.data;
+      this.regionMasterList = res.data; 
+       if(this.regionMasterList !=undefined || this.regionMasterList != null) {
+        this.regionList1 =  this.regionMasterList.slice();
+       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
     //district  
     this.sandboxService.getdistrictListByStateId(event.id).subscribe(res => {
       this.districtNameList = res.data;
-      this.districtName = res.data;
+       this.districtList1 =  this.districtNameList.slice();
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -238,7 +244,7 @@ export class IpvrComponent implements OnInit {
   getdistrictListByRegionIdMaster(event: any) {
     this.sandboxService.getdistrictListByRegionId(this.ipvrreqForm.value.State.id, event.id).subscribe(res => {
       this.districtNameList = res.data; 
-      this.districtName = res.data;
+      this.districtList1 =  this.districtNameList.slice();
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -248,19 +254,24 @@ export class IpvrComponent implements OnInit {
   getTalukaListByDistrictIdMaster(event: any) {
     this.sandboxService.getTalukaListByDistrictIdMaster(event.id).subscribe(res => {
       this.talukaNameList = res.data; 
-      this.talukaName = res.data;
+      this.talukaList1 =  this.talukaNameList.slice(); 
+      
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
     // CitySurveyOfficeList 
     this.sandboxService.getCitySurveyOfficeMaster(event.id).subscribe(res => {
       this.getCitySurveyOfficeList = res.data;
+      this.citySurveyOfficeList1 =this.getCitySurveyOfficeList.slice();
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
     //WardMaster
     this.sandboxService.getWardListByDistrictIdMaster(event.id).subscribe(res => {
-      this.wardList = res.data;
+      this.wardList = res.data; 
+      if(this.wardList != null || this.wardList != undefined){
+        this.wardList1 = this.wardList.slice();
+       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -268,9 +279,10 @@ export class IpvrComponent implements OnInit {
 
   getVilageListMaster(event: any) {
     this.sandboxService.getvilageListByDistrictIdAndTalukaId(this.ipvrreqForm.value.DistrictName.id, event.id).subscribe(res => {
-      this.villageNameList = res.data;
-      this.villageName = res.data; 
-
+      this.villageNameList = res.data; 
+     // if(this.wardList != null || this.wardList != undefined){
+       this.villageList1 =this.villageNameList.slice(); 
+     //}
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -279,12 +291,18 @@ export class IpvrComponent implements OnInit {
   getVilageListBySurveyOfficeNameMaster(event: any) {
     this.sandboxService.getvilageListByDistrictIdAndCofficeId(this.ipvrreqForm.value.DistrictName.id, event.id).subscribe(res => {
       this.villageNameList = res.data;
+         if(this.villageNameList != undefined) {
+           this.villageList1 =this.villageNameList.slice(); 
+         }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
     //wardlist by Coffice
     this.sandboxService.getWardListByDidAndCofficeId(this.ipvrreqForm.value.DistrictName.id, event.id).subscribe(res => {
       this.wardList = res.data;
+       if(this.wardList !=null  || this.wardList != undefined){
+        this.wardList1 = this.wardList.slice(); 
+       }
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -369,22 +387,6 @@ export class IpvrComponent implements OnInit {
       this.ipvrreqForm.removeControl('Ward');
     }
   }
- 
-  
-  searchValue(value, mainList, filterList,key,obj) {
-    console.log("value::::",value);
-    console.log("filtrLIst::::",this[filterList]);
-    if (!Utils.isObjectNullOrEmpty(value)) { 
-      if(Utils.isObjectNullOrEmpty(obj)){
-        this[filterList] = this[filterList].filter(option => 
-          option[key].toLowerCase().startsWith(value.toLowerCase()));
-        console.log("filtrLIst::::::380::::::::",this[filterList]);
-      }else{
-        this[filterList] = this[filterList].filter(option => option[obj][key].toLowerCase().startsWith(value.toLowerCase()));
-      }
-    } else {
-      this[filterList] = mainList;
-    }
-  }
+
 
 }
