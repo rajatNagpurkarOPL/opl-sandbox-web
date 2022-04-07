@@ -42,6 +42,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatFormFieldModule, MatError } from '@angular/material/form-field';
 import { from } from 'rxjs';
+import { MatSelectFilterModule } from 'mat-select-filter';  
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { from } from 'rxjs';
     MatCheckboxModule,
     MatRadioModule,
     MatProgressBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectFilterModule
   ],
   exports: [
     A11yModule,
@@ -105,7 +107,8 @@ import { from } from 'rxjs';
     MatOptionModule,
     MatExpansionModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule, 
+    MatSelectFilterModule,
     MatError
   ],
   declarations: []
