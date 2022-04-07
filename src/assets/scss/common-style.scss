@@ -2677,7 +2677,7 @@ hr {
   max-height: initial !important;
   min-width: 100%;
   border-radius: 4px;
-  margin-top: 4em !important;
+  margin-top: 3em !important;
 }
 .eblr-approval-by-checker-green {
   border: 1px solid #0fac37;
@@ -3566,3 +3566,13 @@ header {
 
   }
 }
+
+
+   .mat-select-panel{
+    height: 200px;
+    width: 100%;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    overflow-y: scroll !important;
+  }
+ 

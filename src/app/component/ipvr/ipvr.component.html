@@ -65,7 +65,11 @@
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Base Document Type</mat-label>
             <mat-select formControlName="BaseDocumentType" (valueChange)="baseDocumentTypeValidation($event)">
-                <mat-option *ngFor="let data of baseDocumentType" [value]="data.value">
+                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value, baseDocumentType, 'baseDocument','value',null)">
+                                </mat-select-filter>
+                 -->
+                <mat-option *ngFor="let data of baseDocument" [value]="data.value">
                     {{data.value}}
                 </mat-option>
             </mat-select>
@@ -77,7 +81,13 @@
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Land Property Type</mat-label>
             <mat-select formControlName="LandPropertyType">
-                <mat-option *ngFor="let data of landPropertyType" [value]="data.value">
+                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value,landPropertyType, landPropertyType.value,'landPropertyType',null)">
+                                </mat-select-filter> -->
+                                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value, landPropertyType, 'landProperty','value',null)">
+                                </mat-select-filter> -->
+                                <mat-option *ngFor="let data of landProperty" [value]="data.value">
                     {{data.value}}
                 </mat-option>
             </mat-select>
@@ -105,7 +115,11 @@
         <mat-form-field class="example-full-width mr-all">
             <mat-label>District Name</mat-label>
             <mat-select formControlName="DistrictName" (valueChange)="getTalukaListByDistrictIdMaster($event)">
-                <mat-option *ngFor="let data of districtNameList" [value]="data">
+                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value,districtNameList,'districtName','value',null)">
+                                </mat-select-filter>
+                 -->
+                <mat-option *ngFor="let data of districtName" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -117,8 +131,11 @@
         <!--TalukaName-->
         <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
             <mat-label>Taluka Name</mat-label>
-            <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">
-                <mat-option *ngFor="let data of talukaNameList" [value]="data">
+            <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">         
+                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value, talukaNameList, 'talukaName','value',null)">
+                                </mat-select-filter> -->
+                <mat-option *ngFor="let data of talukaName" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -148,7 +165,11 @@
             class="example-full-width mr-all">
             <mat-label>Village Name</mat-label>
             <mat-select formControlName="VillageName">
-                <mat-option *ngFor="let data of villageNameList" [value]="data.name">
+                <!-- <mat-select-filter aria-label="search User"
+                                    (keyup)="searchValue($event.target.value, villageNameList, 'villageName','value',null)">
+                                </mat-select-filter> -->
+               
+                <mat-option *ngFor="let data of villageName" [value]="data.name">
                     {{data.name}}
                 </mat-option>
             </mat-select>

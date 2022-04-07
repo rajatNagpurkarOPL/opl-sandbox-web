@@ -6,8 +6,7 @@ import { FormControl, FormBuilder, FormGroup, Validators, FormControlName } from
 import { AesGcmEncryptionService } from 'src/app/common-utils/common-services/aes-gcm-encryption.service';
 import { Utils } from 'src/app/common-utils/common-services/utils.service';
 import { Constant } from 'src/app/common-utils/Constant';
-import { SandboxService } from 'src/app/service/sandbox.service';
-
+import { SandboxService } from 'src/app/service/sandbox.service'; 
 
 
 @Component({
@@ -28,15 +27,21 @@ export class IpvrComponent implements OnInit {
   classMasterRequest: any = ["BASE_DOCUMENT_TYPE", "LOAN_TYPE", "LAND_PROPERTY_TYPE"];
   stateMasterList = [];
   landPropertyType: any;
+  landProperty: any =[];
   typeofLoans: any;
   baseDocumentType: any;
+  baseDocument: any =[];
   districtNameList: any;
+  districtName: any;
   villageNameList: any;
+  villageName: any;
   talukaNameList: any;
+  talukaName: any;
   regionMasterList: any;
   getCitySurveyOfficeList: any;
   wardList: any;
   ipvrUrl: any = null;
+  filteredList1 :any;
 
   constructor(private fb: FormBuilder, private sandboxService: SandboxService, public utils: Utils, private aesGcmEncryption: AesGcmEncryptionService) {
     this.constant = Constant
@@ -176,8 +181,10 @@ export class IpvrComponent implements OnInit {
   getListByClassMaster() {
     this.sandboxService.getListByClassesMaster(this.classMasterRequest).subscribe(res => {
       this.baseDocumentType = res.data.BASE_DOCUMENT_TYPE;
+      this.baseDocument = res.data.BASE_DOCUMENT_TYPE;
       this.typeofLoans = res.data.LOAN_TYPE;
-      this.landPropertyType = res.data.LAND_PROPERTY_TYPE;
+      this.landPropertyType = res.data.LAND_PROPERTY_TYPE; 
+      this.landProperty = res.data.LAND_PROPERTY_TYPE; 
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -221,6 +228,7 @@ export class IpvrComponent implements OnInit {
     //district  
     this.sandboxService.getdistrictListByStateId(event.id).subscribe(res => {
       this.districtNameList = res.data;
+      this.districtName = res.data;
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -229,7 +237,8 @@ export class IpvrComponent implements OnInit {
   //district by region and stateid 
   getdistrictListByRegionIdMaster(event: any) {
     this.sandboxService.getdistrictListByRegionId(this.ipvrreqForm.value.State.id, event.id).subscribe(res => {
-      this.districtNameList = res.data;
+      this.districtNameList = res.data; 
+      this.districtName = res.data;
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -238,7 +247,8 @@ export class IpvrComponent implements OnInit {
   //talukaListMaster  
   getTalukaListByDistrictIdMaster(event: any) {
     this.sandboxService.getTalukaListByDistrictIdMaster(event.id).subscribe(res => {
-      this.talukaNameList = res.data;
+      this.talukaNameList = res.data; 
+      this.talukaName = res.data;
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -259,6 +269,8 @@ export class IpvrComponent implements OnInit {
   getVilageListMaster(event: any) {
     this.sandboxService.getvilageListByDistrictIdAndTalukaId(this.ipvrreqForm.value.DistrictName.id, event.id).subscribe(res => {
       this.villageNameList = res.data;
+      this.villageName = res.data; 
+
     }, (error: any) => {
       this.utils.errorSnackBar(error);
     });
@@ -355,6 +367,23 @@ export class IpvrComponent implements OnInit {
     }
     if (!(this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard')) {
       this.ipvrreqForm.removeControl('Ward');
+    }
+  }
+ 
+  
+  searchValue(value, mainList, filterList,key,obj) {
+    console.log("value::::",value);
+    console.log("filtrLIst::::",this[filterList]);
+    if (!Utils.isObjectNullOrEmpty(value)) { 
+      if(Utils.isObjectNullOrEmpty(obj)){
+        this[filterList] = this[filterList].filter(option => 
+          option[key].toLowerCase().startsWith(value.toLowerCase()));
+        console.log("filtrLIst::::::380::::::::",this[filterList]);
+      }else{
+        this[filterList] = this[filterList].filter(option => option[obj][key].toLowerCase().startsWith(value.toLowerCase()));
+      }
+    } else {
+      this[filterList] = mainList;
     }
   }
 
