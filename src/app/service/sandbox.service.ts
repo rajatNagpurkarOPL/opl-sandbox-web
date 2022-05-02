@@ -78,7 +78,12 @@ export class SandboxService {
   udhyamRegDetail(url : string,data : any,requestHeader : any): Observable<any>{
     return this.http.post(url,data,requestHeader);
   }
-
+  udhyamRegDetailUsingOTP(url : string,data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
+  }
+  verifyUdhyamRegDetailUsingOTP(url : string,data : any,requestHeader : any): Observable<any>{
+    return this.http.post(url,data,requestHeader);
+  }
   caIndividualDetail(url : string,data : any,requestHeader : any): Observable<any>{
     return this.http.post(url,data,requestHeader);
   }

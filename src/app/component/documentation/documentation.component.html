@@ -59,6 +59,10 @@
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-bank-account-verification>
                     <app-udhyam-reg-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL"
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-udhyam-reg-detail>
+                    <app-udhyam-reg-detail-using-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.UDHYAM_DETAIL_USING_OTP"
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-udhyam-reg-detail-using-otp>
+                    <app-verify-udhyam-reg-detail-using-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.VERIFY_UDHYAM_DETAIL_USING_OTP"
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-verify-udhyam-reg-detail-using-otp>
                     <app-ca-individual-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAINDIVIDUAL_DETAIL"
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-ca-individual-detail>
                     <app-ca-firm-detail *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CAFIRM_DETAIL"
