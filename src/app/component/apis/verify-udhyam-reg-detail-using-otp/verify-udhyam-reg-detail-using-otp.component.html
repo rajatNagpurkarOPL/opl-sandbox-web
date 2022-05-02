@@ -1,0 +1,28 @@
+<form>
+    <mat-card style="display: flex; width: 100%;">
+        <form class="example-form form-main-section form-main-section" [formGroup]="verifyUdhyamRegDetailUsingOTPForm" (ngSubmit)="onFormSubmit()">
+           <div class="input-fields">
+            <mat-form-field class="example-full-width">
+                <mat-label>Session ID</mat-label>
+                <input type="text" matInput [formControl]="verifyUdhyamRegDetailUsingOTPForm.controls.sessionid"
+                [errorStateMatcher]="matcher" placeholder="Ex. AA543543">
+                <mat-error *ngIf="verifyUdhyamRegDetailUsingOTPForm.get('sessionid').hasError('required')">
+                    Please Enter Session ID
+                </mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <mat-label>OTP</mat-label>
+             <input type="text" matInput [formControl]="verifyUdhyamRegDetailUsingOTPForm.controls.otp"
+             [errorStateMatcher]="matcher" placeholder="Ex. 643242">
+             <mat-error *ngIf="verifyUdhyamRegDetailUsingOTPForm.get('otp').hasError('required')">
+                 Please Enter OTP
+             </mat-error>   
+         </mat-form-field>
+         &nbsp;
+        </div>
+        <button type="submit" class="send-btn submit-form-btn ml-auto" mat-flat-button>Send</button>
+        </form>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
