@@ -30,7 +30,8 @@ export class VerifyUdhyamRegDetailUsingOtpComponent implements OnInit {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.verifyUdhyamRegDetailUsingOTPForm = this.formBuilder.group({
       otp: ['', Validators.required],
-      sessionid: ['', Validators.required]
+      sessionid: ['', Validators.required],
+      token: ['', Validators.required]
     });
   }
   
