@@ -1,12 +1,15 @@
- //const SERVER_URL = "http://localhost:";
+ //export const SERVER_URL = "http://localhost:";
  //const SERVER_URL = "https://sit-opl.instantmseloans.in"; 
- //const SERVER_URL = "https://oam.instantmseloans.in";
+//  const SERVER_URL = "https://oam.instantmseloans.in";
+ //const SERVER_URL = "https://uat-oam.instantmseloans.in"; 
+
  //const SERVER_URL = "http://10.10.5.66:";
 const SERVER_URL = window.location.protocol + '//' + window.location.host;
 
 const SANDBOX  =  { 
-    //endpointFromLocal : 'http://localhost:1104',
-    endpointFromLocal : SERVER_URL,
+    //endpointFromLocal : 'https://oam.instantmseloans.in:1104',
+    
+   endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/usermgmt'
 };
 
@@ -43,13 +46,14 @@ const NSDL_PAN_INQUIRY = {
 };
 
 const SANDBOX_DMS = {
-  // endpointFromLocal : SERVER_URL + '1110',
+//   endpointFromLocal : SERVER_URL + '1110',
     endpointFromLocal : SERVER_URL,
     postFix : '/sandbox/dms'
 };
  
 const PROPLEGIT = {
-    //endpointFromLocal : SERVER_URL + '1114',
+      //endpointFromLocal:  'http://localhost:1114',
+    //  endpointFromLocal : SERVER_URL + '1114',
     endpointFromLocal : SERVER_URL,
     postFix : '/proplegit'
 };
@@ -190,7 +194,7 @@ export const URLS = {
        CREATE_LOAN_APPLICATION : GATEWAY_BASE_URL + '/proplegit/application/create',
         //CREATE_LOAN_APPLICATION : PROPLEGIT_BASE_URL + '/application/create',
         GET_LIST_BY_CLASSES:PROPLEGIT_BASE_URL + '/application/getListByClasses',
-        GET_STATE_MASTER : PROPLEGIT_BASE_URL + '/application/stateList', 
+        GET_STATE_MASTER : PROPLEGIT_BASE_URL + '/application/stateListProp', 
         GET_REGION_MASTER: PROPLEGIT_BASE_URL + '/application/regionListByStateId', 
         GET_CITYSURVEY_OFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/citySurveyOfcNameMasterListByDistrictId', 
         GET_DISTRICTLIST_BY_STATEID_MASTER: PROPLEGIT_BASE_URL + '/application/districtListByStateId',
@@ -198,7 +202,11 @@ export const URLS = {
         GET_VILAGELIST_BY_DId_And_TId:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndTalukaId',
         GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER:PROPLEGIT_BASE_URL + '/application/vilageListByDistrictIdAndCitySurveyOfcNameId', 
         GET_WARDLIST_BY_DISTRICTID_MASTER:PROPLEGIT_BASE_URL + '/application/wardListByDistrictId',  
-        GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view' 
+        GET_PROPLEGIT_REQ_VIEW:PROPLEGIT_BASE_URL + '/application/pvr/view', 
+
+        
+        GET_HEADER_OF_STATE : PROPLEGIT_BASE_URL + '/application/getHeaderOfState',
+        GET_LIST_OF_LOCATIONS : PROPLEGIT_BASE_URL + '/application/getListOfLocations',
         //GET_PROPLEGIT_REQ_VIEW:GATEWAY_BASE_URL + '/proplegit/application/pvr/view'
     } ,
     MATCHING:{

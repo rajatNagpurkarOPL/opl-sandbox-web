@@ -5,8 +5,8 @@
         <!-- stateName-->
         <mat-form-field class="example-full-width mr-all">
             <mat-label>State Name</mat-label>
-            <mat-select formControlName="State" (valueChange)="getRegionMaster($event)">
-                <mat-option *ngFor="let data of stateMasterList" [value]="data">
+            <mat-select formControlName="State" (valueChange)="getRegionMaster($event);" >                 
+                <mat-option *ngFor="let data of stateMasterList" [value]="data"  >
                     {{data.name}}
                 </mat-option>
             </mat-select>
@@ -14,6 +14,188 @@
                 <app-print-error [control]="ipvrreqForm.controls.State"></app-print-error>
             </mat-error>
         </mat-form-field>
+
+
+     
+    <!-- Add For Loop Here-->
+    <ng-container *ngIf="selectedStateObj && selectedStateObj['FIELDS']">
+    <ng-container *ngFor="let data1 of selectedStateObj['FIELDS'];index as f" >
+        <mat-form-field    class="example-full-width mr-all">
+            <mat-label>{{data1.label}}</mat-label>
+            <mat-select formControlName="{{data1.id}}" (ngModelChange)="getDetailMaster($event,f, data1.id)">
+                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'"></mat-select-filter>
+                <mat-option  *ngFor="let data of updateDistrict[data1.id] " [value]="data">
+                    {{data}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls[data1.id]"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+    </ng-container>
+    </ng-container> 
+
+
+    <ng-container *ngIf="selectedStateObj1 && selectedStateObj1['LOCATION_POINT_FIELDS']">
+        <ng-container *ngFor="let data2 of selectedStateObj1['LOCATION_POINT_FIELDS']" >
+            <mat-form-field    class="example-full-width mr-all">
+                <mat-label>{{data2.label}}</mat-label>
+                <input type="text" matInput placeholder="{{data2.label}}" formControlName="{{data2.id}}" >
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls[data2.id]"></app-print-error>
+            </mat-error>
+            </mat-form-field>
+    
+        </ng-container>
+        </ng-container> 
+    
+
+
+
+        
+        <!-- <mat-form-field  *ngIf="data1.id=='DistrictName' || data1.id=='TalukaName' ||  data1.id=='VillageName' || data1.id=='Mouza' || data1.id=='Halka' || data1.id=='Anchal'" class="example-full-width mr-all">
+            <mat-label>{{data1.label}}</mat-label>
+            <div *ngIf="data1.id=='DistrictName'"> 
+                <mat-select formControlName="{{data1.id}}" (valueChange)="getDetailMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'"></mat-select-filter>
+                    <mat-option  *ngFor="let data of districtNameList" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+                    <div *ngIf="data1.id=='TalukaName'"> 
+                        <mat-select formControlName="{{data1.id}}" (valueChange)="getVilageListMaster($event)">
+                            <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'"></mat-select-filter>
+                        <mat-option  *ngFor="let data of talukaNameList" [value]="data">
+                            {{data.name}}
+                        </mat-option>
+                        </mat-select>
+                    </div>
+
+                    <div *ngIf="data1.id=='VillageName'"> 
+                    <mat-select formControlName="{{data1.id}}">
+                        <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'"></mat-select-filter>
+                        <mat-option  *ngFor="let data of villageNameList" [value]="data">
+                            {{data.name}}
+                        </mat-option>
+                    </mat-select>
+                </div>    
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+                </mat-error>
+        </mat-form-field> -->
+
+
+
+
+        <!-- DistrictName   
+        <mat-form-field *ngIf="data1.id=='DistrictName'"  class="example-full-width mr-all">
+            <mat-label>DistrictName</mat-label>
+                <mat-select formControlName="DistrictName" (valueChange)="getTalukaListByDistrictIdMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
+                    <mat-option *ngFor="let data of districtList1" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+                </mat-error>
+        </mat-form-field>
+
+        TalukaName
+        <mat-form-field *ngIf="data1.id=='TalukaName'" class="example-full-width mr-all">
+            <mat-label>Taluka Name</mat-label>
+                <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="talukaNameList" (filteredReturn)="talukaList1 =$event"></mat-select-filter>
+                    <mat-option *ngFor="let data of talukaList1" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.TalukaName"></app-print-error>
+                </mat-error>
+
+        </mat-form-field>
+
+        VillageName
+        <mat-form-field *ngIf="data1.id=='VillageName'&&this.ipvrreqForm.value.State != null  && !(this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType == 'PropertyCard')" class="example-full-width mr-all">
+            <mat-label>Village Name</mat-label>
+                <mat-select formControlName="VillageName">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="villageNameList" (filteredReturn)="villageList1 =$event"></mat-select-filter>  
+                    <mat-option *ngFor="let data of villageList1" [value]="data.name">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.VillageName"></app-print-error>
+                </mat-error>
+        </mat-form-field>
+
+        Mouza
+        <mat-form-field *ngIf="data1.id=='Mouza'"  class="example-full-width mr-all">
+            <mat-label>Mouza</mat-label>
+                <mat-select formControlName="Mouza" (valueChange)="getTalukaListByDistrictIdMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
+                    <mat-option *ngFor="let data of districtList1" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+                </mat-error>
+        </mat-form-field>
+
+        halka
+        <mat-form-field *ngIf="data1.id=='Halka'"  class="example-full-width mr-all">
+            <mat-label>Halka</mat-label>
+                <mat-select formControlName="Halka" (valueChange)="getTalukaListByDistrictIdMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
+                    <mat-option *ngFor="let data of districtList1" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+                </mat-error>
+        </mat-form-field>
+
+        Anchal
+        <mat-form-field *ngIf="data1.id=='Anchal'"  class="example-full-width mr-all">
+            <mat-label>Anchal</mat-label>
+                <mat-select formControlName="Anchal" (valueChange)="getTalukaListByDistrictIdMaster($event)">
+                    <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
+                    <mat-option *ngFor="let data of districtList1" [value]="data">
+                        {{data.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
+                </mat-error>
+        </mat-form-field> -->
+
+
+        <!-- <mat-form-field  *ngIf="data1.id!=='DistrictName'&& data1.id!=='TalukaName'&&  data1.id!=='VillageName'&& data1.id!=='Mouza'&& data1.id!=='Halka'&& data1.id!=='Anchal'"  class="example-full-width mr-all">
+            <mat-label>{{data1.label}}</mat-label>
+                <input type="text" matInput placeholder="{{data1.label}}" formControlName="{{data1.id}}" >
+            <mat-error>
+                <app-print-error [control]="ipvrreqForm.controls[data1.id]"></app-print-error>
+            </mat-error>
+        </mat-form-field>
+
+    </ng-container>
+    </ng-container>  -->
+
+<!-- create Dynamic Input Field Here -->
+
+<!-- End of For Loop-->
+
+<!-- <div *ngFor="let data1 of stateMaster['Gujarat'].Fields" formGroupName="statedata1">
+    {{data1}}
+    <<input type="text" formControlName={{data1.label}} name={{data1.label}} [value]="data1.inputValue"/> 
+</div> -->
+
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Application No</mat-label>
             <input type="text" matInput placeholder="Enter Application No" formControlName="ApplicationNo">
@@ -54,13 +236,13 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Property Address</mat-label>
             <input type="text" matInput placeholder="Enter Property Address" formControlName="PropertyAddress">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.PropertyAddress"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Base Document Type</mat-label>
@@ -87,8 +269,8 @@
         </mat-form-field>
 
         <!--Region-->
-        <mat-form-field
-            *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.State.id === 1 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
+        <!-- <mat-form-field
+            *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.stateId === 53 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
             class="example-full-width mr-all">
             <mat-label>Region</mat-label>
             <mat-select formControlName="Region" (valueChange)="getdistrictListByRegionIdMaster($event)">
@@ -100,10 +282,10 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.Region"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <!--DistrictName-->
-        <mat-form-field class="example-full-width">
+         <!-- <mat-form-field class="example-full-width">
             <mat-label>District Name</mat-label>
             <mat-select formControlName="DistrictName" (valueChange)="getTalukaListByDistrictIdMaster($event)">
                 <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="districtNameList" (filteredReturn)="districtList1 =$event"></mat-select-filter>
@@ -114,10 +296,10 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.DistrictName"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field>  -->
 
         <!--TalukaName-->
-        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
+         <!-- <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
             <mat-label>Taluka Name</mat-label>
             <mat-select formControlName="TalukaName" (valueChange)="getVilageListMaster($event)">
                                 <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'" [array]="talukaNameList" (filteredReturn)="talukaList1 =$event"></mat-select-filter>
@@ -128,10 +310,10 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.TalukaName"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field>  -->
 
         <!--CitySurveyOffice-->
-        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
+        <!-- <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
             class="example-full-width mr-all">
             <mat-label>City Survey Office</mat-label>
             <mat-select formControlName="CitySurveyOffice"
@@ -145,10 +327,10 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.CitySurveyOffice"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <!--VillageName-->
-        <mat-form-field
+         <!-- <mat-form-field
             *ngIf="this.ipvrreqForm.value.State != null  && !(this.ipvrreqForm.value.State.id == 2 && this.ipvrreqForm.value.BaseDocumentType == 'PropertyCard')"
             class="example-full-width mr-all">
             <mat-label>Village Name</mat-label>
@@ -161,52 +343,52 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.VillageName"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field>  -->
 
-        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
+        <!-- <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === '712'" class="example-full-width mr-all">
             <mat-label>Survey No</mat-label>
             <input type="text" matInput placeholder="Enter Survey No" formControlName="SurveyNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.SurveyNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>TP No</mat-label>
             <input type="text" matInput placeholder="Enter TP No" formControlName="TpNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.TpNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>FP No</mat-label>
             <input type="text" matInput placeholder="Enter FP No" formControlName="FpNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.FpNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Khata No</mat-label>
             <input type="text" matInput placeholder="Enter Khata No" formControlName="KhataNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.KhataNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
+        <!-- <mat-form-field *ngIf="this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
             class="example-full-width mr-all">
             <mat-label>City Survey Number</mat-label>
             <input type="text" matInput placeholder="Enter City Survey Number" formControlName="CitySurveyNumber">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.CitySurveyNumber"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <!--Ward-->
-        <mat-form-field
-            *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.State.id === 2 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
+        <!-- <mat-form-field
+            *ngIf="this.ipvrreqForm.value.State != null && this.ipvrreqForm.value.State.id === 44 && this.ipvrreqForm.value.BaseDocumentType === 'PropertyCard'"
             class="example-full-width mr-all">
             <mat-label>Ward</mat-label>
             <mat-select formControlName="Ward">
@@ -218,17 +400,17 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.Ward"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Sheet No</mat-label>
             <input type="text" matInput placeholder="Enter Sheet No" formControlName="SheetNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.SheetNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Flat Society Scheme Name</mat-label>
             <input type="text" matInput placeholder="Enter Flat Society Scheme Name"
                 formControlName="FlatSocietySchemeName">
@@ -236,16 +418,16 @@
                 <app-print-error [control]="ipvrreqForm.controls.FlatSocietySchemeName"></app-print-error>
             </mat-error>
         </mat-form-field>
+ -->
 
-
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Flat Building Plot Shop No</mat-label>
             <input type="text" matInput placeholder="Enter Flat Building Plot Shop No"
                 formControlName="FlatBuildingPlotShopNo">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.FlatBuildingPlotShopNo"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Loan Amount</mat-label>
@@ -272,15 +454,15 @@
         <mat-slide-toggle formControlName="IsLien" color="primary" (change)="islienValidation()">Is Lien
         </mat-slide-toggle>
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Lien Amount</mat-label>
             <input type="text" matInput placeholder="Enter Lien Amount" formControlName="LienAmount">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.LienAmount"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Lien Date</mat-label>
             <input matInput formControlName="LienDate" [matDatepicker]="picker" placeholder="Ex.1991/12/03"
                 (dateChange)="onDateChange($event.value, ipvrreqForm, 'LienDate', 'en_IN', 'yyyy-MM-dd')">
@@ -289,23 +471,23 @@
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.LienDate"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Lien Person Name</mat-label>
             <input type="text" matInput placeholder="Enter Lien Person Name" formControlName="LienPersonName">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.LienPersonName"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="example-full-width mr-all">
+        <!-- <mat-form-field class="example-full-width mr-all">
             <mat-label>Lien From</mat-label>
             <input type="text" matInput placeholder="Enter Lien From" formControlName="LienFrom">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.LienFrom"></app-print-error>
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <!--IsOwnerSame-->
         <mat-slide-toggle formControlName="IsOwnerSame" color="primary">Is Owner Same
@@ -369,6 +551,7 @@
 
         <button type="submit"  class="submit-form-btn"class="create-application-btn" mat-flat-button color="primary"
             (click)="saveipvrform()">Create Loan Application</button>
+
     </div>
 </mat-card>
 <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
