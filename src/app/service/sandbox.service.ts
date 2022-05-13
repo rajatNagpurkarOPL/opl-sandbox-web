@@ -184,6 +184,18 @@ manualSslCertificate(data : any):Observable<any>{
 getState(): Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_STATE_MASTER, false);
  }      
+
+ getHeaderOfState(data:any):Observable<any> {
+  return this.http.post(URLS.PROPLEGIT. GET_HEADER_OF_STATE,data,false);
+ }
+ 
+ getListOfLocations(data:any):Observable<any> {
+  return this.http.post(URLS.PROPLEGIT. GET_LIST_OF_LOCATIONS,data,false);
+ }
+
+//  getListOfLocations(data:any):Observable<any> {
+//   return this.http.post('http://localhost:1114/proplegit/application/getListOfLocations',data,false);
+//  }
  
  getListByClassesMaster(data:any):Observable<any> {
   return this.http.post(URLS.PROPLEGIT.GET_LIST_BY_CLASSES,data,false);
