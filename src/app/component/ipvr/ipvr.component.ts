@@ -160,6 +160,7 @@ export class IpvrComponent implements OnInit {
 
     if(this.lastStateName1 != undefined){
     this.lastStateName1['LOCATION_POINT_FIELDS'].forEach(e =>{      
+      // this.ipvrreqForm.controls(e.id).patchValue(null);
       this.ipvrreqForm.removeControl(e.id);
     })
   }
@@ -546,12 +547,16 @@ export class IpvrComponent implements OnInit {
       ipvrSaveData = {};
       // this.ipvrreqForm.reset();
       
-      this.selectedStateObj['FIELDS'] = [];
-      this.lastStateName['FIELDS'] = [];
-      this.selectedStateObj1['LOCATION_POINT_FIELDS'] = [];
-      this.lastStateName1['LOCATION_POINT_FIELDS'] = [];
+      // this.selectedStateObj['FIELDS'] = [];
+      // this.selectedStateObj['FIELDS'].forEach(element => {
+      //   this.ipvrreqForm.removeControl(element.id);
+      // })
+      // // this.lastStateName['FIELDS'] = [];
+      // this.selectedStateObj1['LOCATION_POINT_FIELDS'] = [];
+      // this.lastStateName1['LOCATION_POINT_FIELDS'] = [];
       this.ipvrForm();
       // this.getStateScheme(ipvrSaveData.State);
+      // this.getStateScheme1(ipvrSaveData.State);
 
       if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)) {
         this.parentInstance.getApiCreditLimit(this.menuData.service.id);
@@ -559,7 +564,7 @@ export class IpvrComponent implements OnInit {
 
         // } else {
         // this.utils.warningSnackBar("please fill the form data");
-        // }sss 
+        // }sss
       }, (error: any) => {
         this.utils.errorSnackBar(error);
       });
@@ -567,6 +572,14 @@ export class IpvrComponent implements OnInit {
       this.ipvrreqForm.markAllAsTouched();
       this.utils.errorSnackBar("Please Enter Required Or Valid Details.");
     }
+
+
+    // this.selectedStateObj['LOCATION_POINT_FIELDS'].forEach(element => {
+    //   //   this.ipvrreqForm.removeControl(element.id);
+    //   this.ipvrreqForm.reset();
+    //   })
+
+
   }
   
 
