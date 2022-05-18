@@ -23,8 +23,8 @@
         <mat-form-field    class="example-full-width mr-all">
             <mat-label>{{data1.label}}</mat-label>
             <mat-select formControlName="{{data1.id}}" (ngModelChange)="getDetailMaster($event,f, data1.id)">
-                <mat-select-filter [placeholder]="'search...'" [displayMember]="'name'"></mat-select-filter>
-                <mat-option  *ngFor="let data of updateDistrict[data1.id] " [value]="data">
+                <mat-select-filter [array] = "updateDistrict[data1.id]"   (filteredReturn)="updateDistrictMstr[data1.id] = $event"></mat-select-filter>
+                <mat-option  *ngFor="let data of updateDistrictMstr[data1.id]" [value]="data">
                     {{data}}
                 </mat-option>
             </mat-select>

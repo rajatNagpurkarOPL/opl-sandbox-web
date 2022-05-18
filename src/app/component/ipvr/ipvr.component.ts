@@ -41,6 +41,7 @@ export class IpvrComponent implements OnInit {
   districtNameList: any;
   districtList1 :any; 
   updateDistrict : any = {};
+  updateDistrictMstr : any = {};
   villageNameList: any;
   villageList1 :any; 
   talukaNameList: any;
@@ -131,10 +132,7 @@ export class IpvrComponent implements OnInit {
       });
   }
 
-
-
-  getStateScheme(state){
-
+    getStateScheme(state, isReset){
     if(this.lastStateName != undefined){
     this.lastStateName['FIELDS'].forEach(e =>{      
       this.ipvrreqForm.removeControl(e.id);
@@ -142,22 +140,23 @@ export class IpvrComponent implements OnInit {
     })
   }    
     this.selectedStateObj = {};
-    console.log("[[[[[[[[[[[[[[[[[[[[[[[[[  state name",state.name);
-    
+    if(isReset){
+      this.selectedStateObj = this.stateMaster[state];
+    }else{ 
     this.selectedStateObj = this.stateMaster[state.name];
+    }
     console.log("selectedObj :: ", this.selectedStateObj);
-    if(this.selectedStateObj['FIELDS']!=undefined && this.selectedStateObj['FIELDS']!=null && this.ipvrreqForm!=undefined){
+    if(this.selectedStateObj != undefined && this.selectedStateObj['FIELDS']!=undefined && this.selectedStateObj['FIELDS']!=null && this.ipvrreqForm!=undefined){
       this.selectedStateObj['FIELDS'].forEach(element => {
           this.ipvrreqForm.addControl(element.id , new FormControl('', [Validators.required]));
       }); 
     }
       this.lastStateName = this.selectedStateObj;      
-      this.getStateScheme1(state);
+      this.getStateScheme1(state, isReset);
+
   }
 
-
-
-  getStateScheme1(state){
+  getStateScheme1(state,isReset ){
 
     if(this.lastStateName1 != undefined){
     this.lastStateName1['LOCATION_POINT_FIELDS'].forEach(e =>{      
@@ -166,8 +165,12 @@ export class IpvrComponent implements OnInit {
     })
   }
     this.selectedStateObj1 = {};
+    if(isReset){
+      this.selectedStateObj1 = this.stateMaster[state];
+    }else{  
     this.selectedStateObj1 = this.stateMaster[state.name];
-    if(this.selectedStateObj1['LOCATION_POINT_FIELDS']!=undefined && this.selectedStateObj1['LOCATION_POINT_FIELDS']!=null && this.ipvrreqForm!=undefined){
+    }
+    if(this.selectedStateObj1 != undefined && this.selectedStateObj1['LOCATION_POINT_FIELDS']!=undefined && this.selectedStateObj1['LOCATION_POINT_FIELDS']!=null && this.ipvrreqForm!=undefined){
       this.selectedStateObj1['LOCATION_POINT_FIELDS'].forEach(element => {
           this.ipvrreqForm.addControl(element.id , new FormControl('', [Validators.required]));
       }); 
@@ -210,6 +213,8 @@ export class IpvrComponent implements OnInit {
     let req = { "stateId": this.stateId,"fliedValues": fliedValues, "fliedsCount": this.stateMasternew};
     this.sandboxService.getListOfLocations(req).subscribe(res => {
     this.updateDistrict[this.selectedStateObj['FIELDS'][fliedValues.length].id] = res.data.locationList;
+    this.updateDistrictMstr[this.selectedStateObj['FIELDS'][fliedValues.length].id] = this.updateDistrict[this.selectedStateObj['FIELDS'][fliedValues.length].id].slice();
+
       spliceArray1.forEach(e=>{
         this.updateDistrict[e.id] = []
       })
@@ -357,7 +362,8 @@ export class IpvrComponent implements OnInit {
     event.url = this.changeURL(event.name)
     this.ipvrUrl = event.url;
     this.updatedUrl.emit(event.url);
-    this.getStateScheme(event);
+    this.getStateScheme(event, false);
+
 
 
     // //getREgionMaster
@@ -392,6 +398,7 @@ export class IpvrComponent implements OnInit {
     // console.log("district:::::::::::::::::::::::::::::::", res.data.locationList);
         
      this.updateDistrict[this.selectedStateObj['FIELDS'][0].id] = res.data.locationList;
+     this.updateDistrictMstr[this.selectedStateObj['FIELDS'][0].id] =  this.updateDistrict[this.selectedStateObj['FIELDS'][0].id].slice()
       })
     }
      
@@ -590,8 +597,8 @@ export class IpvrComponent implements OnInit {
       // this.selectedStateObj1['LOCATION_POINT_FIELDS'] = [];
       // this.lastStateName1['LOCATION_POINT_FIELDS'] = [];
       this.ipvrForm();
-      // this.getStateScheme(ipvrSaveData.State);
-      // this.getStateScheme1(ipvrSaveData.State);
+      this.getStateScheme(ipvrSaveData.State, true);
+      this.getStateScheme1(ipvrSaveData.State, true);
 
       if(decData != null && decData.payload != null && (decData.payload.status === Constant.INTERNAL_STATUS_CODES.SUCCESS.CODE || decData.payload.status === Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE)) {
         this.parentInstance.getApiCreditLimit(this.menuData.service.id);
