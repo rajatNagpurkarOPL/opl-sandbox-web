@@ -44,7 +44,7 @@ export class SetNotificationAlertComponent implements OnInit {
     this.alertForm = this.formBuilder.group({
       id: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.id) ? alertData.id :null],
       minMaxLimit: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.minMaxLimit) ? alertData.minMaxLimit :[0,100]],
-      toEmail: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.toEmail) ? alertData.toEmail :'',[Validators.required]],
+      toEmail: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.toEmail) ? alertData.toEmail :'',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       noOfIntimation: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.noOfIntimation) ? alertData.noOfIntimation : 1],
       isActive: [!Utils.isObjectNullOrEmpty(alertData) && !Utils.isObjectNullOrEmpty(alertData.isActive) ? alertData.isActive :'true',[Validators.required]]
     });
@@ -87,12 +87,16 @@ export class SetNotificationAlertComponent implements OnInit {
   }
 
   setPercentage(totalLimit, balanceLimit){
-    this.usagePercentage = (totalLimit-balanceLimit)/totalLimit*100;
+    this.usagePercentage = (totalLimit-balanceLimit)/totalLimit*100; 
+     let  usagePercentageTemp = this.usagePercentage.toFixed(2);  
+     this.usagePercentage =Number(usagePercentageTemp);
+      console.log(" this.usagePercentage:::::<><><><:::93:::::><",this.usagePercentage);
   }
 
-  setBalanceLimit(){
-    let localValue = this.usagePercentage; //this.creditBalance - this.limitBalance;
-     
+  setBalanceLimit(){ 
+       console.log("this.usagePercentage::::94:::",this.usagePercentage.toFixed(2));
+       let localValue  = Number(this.usagePercentage.toFixed(2)); //this.creditBalance - this.limitBalance;
+      console.log("localvalue:::95:::",localValue);
     let loopIndex = 0;
     let removeIndex = []; 
         if(this.tempResp > this.usagePercentage) 
@@ -141,8 +145,10 @@ export class SetNotificationAlertComponent implements OnInit {
       if(resp.status == Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE && !Utils.isObjectNullOrEmpty(resp.data)){
         this.removeTrigger(0 ,null);
         this.tempResp = resp.data[0].minLimit;
-        resp.data.forEach(element => {
+        resp.data.forEach(element => { 
+            console.log(":::::::element::::146::::",element);
           element.minMaxLimit = [element.minLimit,element.maxLimit];
+           console.log("element.minMaxLimit::::148:::",element.minMaxLimit);
           this.trigger.push(this.addAlertForm(element));
         });
         this.setBalanceLimit();

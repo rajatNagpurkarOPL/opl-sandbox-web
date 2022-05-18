@@ -1,8 +1,14 @@
 <div id="b4l-pop-up" *ngIf="data != undefined && data != null">
+    
+    <a class="float-right" (click)="close()"><img src="assets/img/close-red.svg"/></a>
     <div class="pop-up-content">
  <div class="fl-column">  
     <h4>Set Notification Trigger</h4>
- 
+   
+    <!--close button -->  
+   
+    <!--close button End -->
+
     <span>API name : {{data.name}} <br/> 
         Total Credits : {{creditBalance}} <br/>
          Used Credits : {{creditBalance - limitBalance}}({{this.usagePercentage.toFixed(2)}}%) <br/> 
@@ -35,8 +41,9 @@
                         </td> -->
                         <td>
                             <ng5-slider [formControl]="triggerControls.controls.minMaxLimit" [options]="triggerControls.options" (valueChange)="setCreditBalance()" (click)="setCreditBalance()"></ng5-slider>
-                            <mat-hint style="color: midnightblue;">Credit usage range between {{triggerControls.controls.minMaxLimit.value[0]}} to {{triggerControls.controls.minMaxLimit.value[1]}}</mat-hint>
-                        </td>
+                            <mat-hint style="color: midnightblue;">Credit usage range between {{triggerControls.controls.minMaxLimit.value[0].toFixed(2)}} to {{triggerControls.controls.minMaxLimit.value[1].toFixed(2)}}</mat-hint>
+                        </td>{{triggerControls.controls.minMaxLimit.value[0]}} 
+
                         <td>
                             <mat-form-field class="example-full-width" appearance="outline" style="display: contents;">
                                 <input placeholder="Ex. abc@gmail.com,cde@gmail.com" matInput formControlName="toEmail" required>

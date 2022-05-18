@@ -111,7 +111,7 @@ export class ViewApiCreditLogsComponent implements OnInit {
       let creditDetails = [{
         '#': index,
         'Action': item.actionType,
-        'DateTime': this.datepipe.transform(item.createdDate, 'dd-MM-yyyy'),
+        'DateTime': this.datepipe.transform(item.createdDate, 'dd-MM-yyyy h:mm a'),
         'Balance':item.actionType == "DEBIT" ? item.balanceCredits + 1 : ((item.balanceCredits) - item.operatedCredits),
         'Operated': item.operatedCredits,
         'Outstanding':outstanding         
