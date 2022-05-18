@@ -480,20 +480,46 @@ export class IpvrComponent implements OnInit {
   //   }, (error: any) => {
   //     this.utils.errorSnackBar(error);
   //   });
-  // }
+  // } 
+
+
+  setdatabasePropertyType(data ? : any) {
+   //console.log("data::: base property type:::::487:::",data);
+  //console.log("::::form:::::", this.ipvrreqForm);
+  //console.log("::::form:::value::", this.ipvrreqForm.value); 
+    if(data.id == 44 || data.id == 53 || data.id == 64 || data.id ==65) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('712');
+     } else if(data.id == 40 || data.id == 45  || data.id ==  48  || data.id == 59 || data.id == 60) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('Jamabandi');
+     } else if (data.id ==49) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('RTC');
+     } else if (data.id ==52) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('Khasra-P2');
+     } else if(data.id == 62) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('Patta/Chittha');
+     }else if (data.id ==63) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('ROR1B');
+     }else  if(data.id ==66) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('Khata Vivran');
+     }else if(data.id ==67) {
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('Khatian');
+     }else {} 
+  //console.log("::::form::::::493 new::", this.ipvrreqForm)
+  }
+
 
   saveipvrform() {
 
     // console.log("<<<<<<<<<<<<<ipvrSaveData>>>>>>>>>>>>>>>  ::::::", this.ipvrreqForm.value)
-
     // if ((this.ipvrreqForm.value.State.id == 53 && this.ipvrreqForm.value.BaseDocumentType == '712')) {
     //   this.ipvrreqForm.controls.SurveyGatNo.value = this.ipvrreqForm.controls.SurveyNo.value;
     // }
-  //console.log("this.ipvrreqForm:::", this.ipvrreqForm);
-  //console.log("this.ipvrreqForm::::", this.ipvrreqForm.valid);
+    console.log("this.ipvrreqForm:::", this.ipvrreqForm);
+    console.log("this.ipvrreqForm::::", this.ipvrreqForm.value);
     //remove with condition controlllers 
-
-    // this.removeIpvrFormControls();
+ 
+    // this.removeIpvrFormControls(); 
+    return;
     if (this.ipvrreqForm.valid) {
       let ipvrSaveData = this.ipvrreqForm.value;
 

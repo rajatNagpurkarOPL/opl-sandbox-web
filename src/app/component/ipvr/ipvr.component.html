@@ -5,8 +5,8 @@
         <!-- stateName-->
         <mat-form-field class="example-full-width mr-all">
             <mat-label>State Name</mat-label>
-            <mat-select formControlName="State" (valueChange)="getRegionMaster($event);" >                 
-                <mat-option *ngFor="let data of stateMasterList" [value]="data"  >
+            <mat-select formControlName="State"  (ngModelChange)="setdatabasePropertyType($event)"   (valueChange)="getRegionMaster($event);" >                 
+                <mat-option *ngFor="let data of stateMasterList" [value]="data">
                     {{data.name}}
                 </mat-option>
             </mat-select>
