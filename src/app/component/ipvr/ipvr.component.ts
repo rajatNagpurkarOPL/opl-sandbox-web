@@ -87,6 +87,7 @@ export class IpvrComponent implements OnInit {
     this.ipvrForm();
     this.getStateMaster();
     this.getListByClassMaster();
+    this.addNewGroup();
   }  
 
 
@@ -230,6 +231,12 @@ export class IpvrComponent implements OnInit {
     const add = this.ipvrreqForm.get('PropertyOwners') as FormArray;
     add.removeAt(index);
   }
+
+
+  // deleteAddGroup1(index: number) {
+  //   const add = this.ipvrreqForm.get('PropertyOwners') as FormArray;
+  //   add.removeAt(index);
+  // }
 
   onDateChange(value: any, group: any, control: any, locale: any, format: any) {
     if (value) {

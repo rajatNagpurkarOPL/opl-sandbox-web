@@ -206,7 +206,7 @@
 
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Branch Code</mat-label>
-            <input type="text" matInput placeholder="Enter Branch Code" formControlName="BranchCode">
+            <input type="text" matInput placeholder="Enter Branch Code" formControlName="BranchCode" [errorStateMatcher]="false">
             <mat-error>
                 <app-print-error [control]="ipvrreqForm.controls.BranchCode"></app-print-error>
             </mat-error>
@@ -246,7 +246,7 @@
 
         <mat-form-field class="example-full-width mr-all">
             <mat-label>Base Document Type</mat-label>
-            <mat-select formControlName="BaseDocumentType" (valueChange)="baseDocumentTypeValidation($event)">
+            <mat-select formControlName="BaseDocumentType" (ngModelChange)="baseDocumentTypeValidation($event)">
                 <mat-option *ngFor="let data of baseDocument" [value]="data.value">
                     {{data.value}}
                 </mat-option>
@@ -523,7 +523,7 @@
 
         <mat-card class="w-100 px-1">
             <div class="add-owner-btn">
-                <button type="submit"  class="submit-form-btn"class="create-application-btn" mat-flat-button color="primary"
+                <button type="button" class="submit-form-btn" class="create-application-btn" mat-flat-button color="primary"
                     (click)="addNewGroup()">Add owner name</button>
             </div>
 
@@ -538,7 +538,7 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <button mat-icon-button color="gray" (click)="deleteAddGroup(i)">
+                        <button type="button" mat-icon-button color="gray" (click)="deleteAddGroup(i)">
                             <mat-icon>close</mat-icon>
                         </button>
                     </div>
