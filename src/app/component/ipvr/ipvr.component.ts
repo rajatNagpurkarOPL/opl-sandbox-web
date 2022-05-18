@@ -503,7 +503,9 @@ export class IpvrComponent implements OnInit {
       this.ipvrreqForm.controls['BaseDocumentType'].setValue('Khata Vivran');
      }else if(data.id ==67) {
       this.ipvrreqForm.controls['BaseDocumentType'].setValue('Khatian');
-     }else {} 
+     }else { 
+      this.ipvrreqForm.controls['BaseDocumentType'].setValue('');
+     } 
   //console.log("::::form::::::493 new::", this.ipvrreqForm)
   }
 
@@ -519,7 +521,7 @@ export class IpvrComponent implements OnInit {
     //remove with condition controlllers 
  
     // this.removeIpvrFormControls(); 
-    return;
+   //return;
     if (this.ipvrreqForm.valid) {
       let ipvrSaveData = this.ipvrreqForm.value;
 
