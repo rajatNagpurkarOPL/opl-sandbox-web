@@ -3576,3 +3576,8 @@ header {
     overflow-y: scroll !important;
   }
  
+  .cdk-global-overlay-wrapper{
+    .cdk-overlay-pane{
+      max-height: 80vh !important;
+    }
+  }
