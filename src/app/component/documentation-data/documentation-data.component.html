@@ -1,4 +1,4 @@
-<mat-tab-group animationDuration="0ms" (selectedTabChange)="tabClick($event)" *ngIf="jsonData != undefined && jsonData != null">
+<mat-tab-group class="doc-data-main" animationDuration="0ms" (selectedTabChange)="tabClick($event)" *ngIf="jsonData != undefined && jsonData != null">
     <mat-tab label="Schema">
         <div class="parent-table-scroll">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
