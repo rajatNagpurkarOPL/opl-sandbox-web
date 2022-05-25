@@ -168,7 +168,7 @@ export const Constant = {
         "Karnataka":{ STATE_ID:49, STATE_LABEL:"Karnataka", FIELDS:[{id:"District",label:"DistrictName"},{id:"Taluka",label:"TalukaName"},{id:"Hobli",label:"Hobli"},{id:"Village",label:"VillageName"}] , COUNT:4 ,
          LOCATION_POINT_FIELDS:[{id:"SurveyNo",label:"Survey No"}], LOCATION_POINT_COUNT:1},
 
-        "Madhya Pradesh":{ STATE_ID:52, STATE_LABEL:"MadhyaPradesh", FIELDS:[{id:"Jilla",label:"Jilla"},{id:"Tehsil",label:"Tehsil"},{id:"Gaon",label:"Gaon"}] , COUNT:3, 
+        "Madhya Pradesh":{ STATE_ID:52, STATE_LABEL:"Madhya Pradesh", FIELDS:[{id:"Jilla",label:"Jilla"},{id:"Tehsil",label:"Tehsil"},{id:"Gaon",label:"Gaon"}] , COUNT:3, 
         LOCATION_POINT_FIELDS:[{id:"KhasraNo",label:"Khasra No"}], LOCATION_POINT_COUNT:1},
 
         "Maharashtra":{ STATE_ID:53, STATE_LABEL:"Maharashtra", FIELDS:[{id:"DistrictName",label:"DistrictName"},{id:"TalukaName",label:"TalukaName"},{id:"VillageName",label:"VillageName"}] , COUNT:3,
