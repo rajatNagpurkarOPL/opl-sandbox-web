@@ -1,76 +1,86 @@
 <div class="container-fluid">
-  <div class="row">
-    <div id="b4l-content">
-      <div class="main">
-        <div class="sidebar-main-title">
-          <div class="d-flex al-center js-between w-100 pl-4 pt-2">
-            <span class="text-span">Activity Logs</span> 
-             
-            <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12 input-search-table">
-              <mat-form-field class="input-group p-0" appearance="outline">
-                <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter"
-                  (keyup)="filterApplicationData()">
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <table matSort (matSortChange)="sortData($event)"
-          class="table activity-log-table dash-table-brige-new table-responsive">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th mat-sort-header="requestId" scope="col">Request ID</th>
-              <th mat-sort-header="requestTime" scope="col">Request Timestamp</th>
-              <th mat-sort-header="responseTime" scope="col">Response Timestamp</th>
-              <th mat-sort-header="path" scope="col" style="text-align: left;">Path</th>
-              <th mat-sort-header="httpStatus" scope="col">Http Status</th>
-              <th mat-sort-header="httpStatusDescription" scope="col">Http Status Description</th>
-              <th mat-sort-header="clientIp" scope="col">Client IP</th>
-              <th mat-sort-header="serverRequestId" scope="col">Server Request Id</th>
-              <th mat-sort-header="serverRequestId" scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let audit of audits; let i=index;">
-              <td> {{(pageSize*(page-1)) + (i+1)}}</td>
-              <td>{{audit.requestId}}</td>
-              <td>{{audit.stringrequestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-              <td>{{audit.stringresponseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-              <td style="text-align: left;">{{audit.path}}</td>
-              <td>{{audit.httpStatus}}</td>
-              <td>{{audit.httpStatusDescription}}</td>
-              <td>{{audit.clientIp}}</td>
-              <td>{{audit.serverRequestId}}</td>
-              <td>
-                <button class="btn3-b4l" *ngIf="audit.auditDataLogProxy != null" matTooltip="View Detailed Logs"
-                  style="line-height: 24px;" matTooltipPosition="above" aria-label="View Detailed logs"
-                  (click)="openDialog(audit.auditDataLogProxy)">
+    <div class="row">
+        <div id="b4l-content">
+            <div class="main">
+                <div class="sidebar-main-title">
+                    <div class="d-flex al-center js-between w-100 pl-4 py-2">
+                        <span class="text-span">Activity Logs</span>
+                        <!-- form for   serach dates-->
+                        <form [formGroup]="dateForm" (ngSubmit)="getUserLogs(page)" class="d-flex align-items-center">
+                            <div class="form-outline tx-right">
+                                <label class="mr-2 mb-0">From Date</label>
+                                <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}" formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}" />
+                            </div>
+                            <div class="form-outline tx-right ml-3">
+                                <label class="mr-2  mb-0">To Date</label>
+                                <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{fromDate | date:'yyyy-MM-dd'}}" value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}" />
+                            </div>
+                            <button type="submit" class="submit-form-btn" class="btn btn-primary btn-sm ml-2 float-right">
+                                  Search
+                              </button>
+                            <button type="button" (click)="exportToExcel()" class="btn btn-success btn-sm ml-2 float-right">Export To Excel</button>
+                        </form>
+                        <!-- button added-->
+                        <div class="psb-xl-4 psb-lg-4 psb-md-6 psb-sm-12 psb-xs-12 input-search-table">
+                            <mat-form-field class="input-group mr-2 p-0" appearance="outline">
+                                <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">
+                            </mat-form-field>
+                        </div>
+                        <!--button close-->
+
+                    </div>
+                </div>
+                <table matSort (matSortChange)="sortData($event)" class="table activity-log-table dash-table-brige-new table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th mat-sort-header="requestId" scope="col">Request ID</th>
+                            <th mat-sort-header="requestTime" scope="col">Request Timestamp</th>
+                            <th mat-sort-header="responseTime" scope="col">Response Timestamp</th>
+                            <th mat-sort-header="path" scope="col" style="text-align: left;">Path</th>
+                            <th mat-sort-header="httpStatus" scope="col">Http Status</th>
+                            <th mat-sort-header="httpStatusDescription" scope="col">Http Status Description</th>
+                            <th mat-sort-header="clientIp" scope="col">Client IP</th>
+                            <th mat-sort-header="serverRequestId" scope="col">Server Request Id</th>
+                            <th mat-sort-header="serverRequestId" scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let audit of audits; let i=index;">
+                            <td> {{(pageSize*(page-1)) + (i+1)}}</td>
+                            <td>{{audit.requestId}}</td>
+                            <td>{{audit.stringrequestTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                            <td>{{audit.stringresponseTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                            <td style="text-align: left;">{{audit.path}}</td>
+                            <td>{{audit.httpStatus}}</td>
+                            <td>{{audit.httpStatusDescription}}</td>
+                            <td>{{audit.clientIp}}</td>
+                            <td>{{audit.serverRequestId}}</td>
+                            <td>
+                                <button class="btn3-b4l" *ngIf="audit.auditDataLogProxy != null" matTooltip="View Detailed Logs" style="line-height: 24px;" matTooltipPosition="above" aria-label="View Detailed logs" (click)="openDialog(audit.auditDataLogProxy)">
                   <mat-icon>visibility</mat-icon>
                 </button>
-              </td>
-            </tr>
-          </tbody>
+                            </td>
+                        </tr>
+                    </tbody>
 
-        </table>
-        <div class="row justify-content-between pagination-table mx-4" *ngIf="audits">
-          <div class="col-sm-12 col-md-4 ">
-            <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">
-              Showing
-              {{startIndex}} to {{endIndex > collectionSize ? collectionSize : endIndex}} of {{collectionSize}}
-              entries
-            </div>
-          </div> 
+                </table>
+                <div class="row justify-content-between pagination-table mx-4" *ngIf="audits">
+                    <div class="col-sm-12 col-md-4 ">
+                        <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">
+                            Showing {{startIndex}} to {{endIndex > collectionSize ? collectionSize : endIndex}} of {{collectionSize}} entries
+                        </div>
+                    </div>
 
-          <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
-            <div class="text-md-right float-md-right pagination-rounded">
-              <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize"
-                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="getUserLogs(page)">
-              </ngb-pagination>
+                    <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
+                        <div class="text-md-right float-md-right pagination-rounded">
+                            <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="getUserLogs(page)">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-      </div>
-
     </div>
-  </div>
 </div>

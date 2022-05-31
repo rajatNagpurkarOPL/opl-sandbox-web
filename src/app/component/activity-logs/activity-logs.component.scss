@@ -3,3 +3,19 @@
     min-height: 72vh;
     border-radius: 0px !important;
 }
+
+.input-group {
+    max-width: 150px;
+    &:hover {
+        max-width: 300px;
+        transition: all 0.2s;
+    }
+     ::ng-deep.mat-form-field-wrapper {
+        padding: 0;
+        margin: 0;
+        .mat-form-field-infix {
+            border: none;
+            padding: 1.2em 1em 0.8em 0.1em !important;
+        }
+    }
+}
