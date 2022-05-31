@@ -27,6 +27,7 @@ export class ApiAccessKeyComponent implements OnInit {
   months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   // pagination
   pagination: any;
+  pagginationData:any[]; 
   pageSizeList: any = [5, 10, 15, 20];
   filterKeys: String[] = ["clientId", "secretId", "stringCreatedDate", "stringModifiedDate", "isActive", "isExpired"];
   valueToFilter: String = "";
@@ -48,12 +49,13 @@ export class ApiAccessKeyComponent implements OnInit {
 
   filterApplicationData() {
     if (Utils.isObjectNullOrEmpty(this.valueToFilter)) {
-      this.keyPairList = this.pagination.data;
+      // this.keyPairList = this.pagination.data;
+      this.keyPairList = this.pagginationData;
       return;
     }
-    this.keyPairList = new ApplicationFilterMultiPipe().transform(this.keyPairList, this.filterKeys, this.valueToFilter);
+    this.keyPairList = new ApplicationFilterMultiPipe().transform(this.pagginationData, this.filterKeys, this.valueToFilter);
     if (this.keyPairList === undefined || this.keyPairList == null) {
-      this.keyPairList = this.pagination.data;
+      this.keyPairList = this.pagginationData;
     }
   }
 
@@ -131,6 +133,7 @@ export class ApiAccessKeyComponent implements OnInit {
       this.keyPairList = [];
       if (res.status = Constant.INTERNAL_STATUS_CODES.DETAILS_FOUND.CODE) {
         this.keyPairList = res.data;
+        this.pagginationData = this.keyPairList   
         this.keyPairList.forEach(keypair => {
           if (!Utils.isObjectNullOrEmpty(keypair.createdDate)) {
             var createDate = new Date(keypair.createdDate);
