@@ -45,12 +45,13 @@ export class ActivityLogsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   //this.getUserLogs(1);
     this.dates = {fromDate : formatDate(Date.now(), 'yyyy-MM-dd', 'en') ,toDate : formatDate(Date.now(), 'yyyy-MM-dd', 'en')}
+    //console.log("::::::::::this.dates:::::::50:::",this.dates);
     this.dateForm = this.formBuilder.group({
       fromDate: [this.dates.fromDate,Validators.required],
       toDate: [this.dates.toDate,Validators.required]
     });
+    this.getUserLogs(1);
   }
 
   sortData(sort: Sort) {
@@ -161,28 +162,6 @@ export class ActivityLogsComponent implements OnInit {
   dateChange(){
      this.fromDate=new Date(this.dateForm.value.fromDate);
   }
-
-//   filterByDate(pageNo : any){
-//    console.log("page NO::::::",pageNo);
-//    this.fromDate = new Date(this.dateForm.value.fromDate);
-//    this.toDate = new Date(this.dateForm.value.toDate);
-//    const ONE_DAY = 1000 * 60 * 60 * 24;
-//    const differenceMs = Math.abs(this.toDate - this.fromDate);
-
-//    if( Math.abs(this.toDate - this.fromDate)==0){
-//     this.days=1;
-//   }
-//   if( Math.abs(this.toDate - this.fromDate)!=0){
-//     this.days= Math.round(differenceMs / ONE_DAY);
-//   }
-//   if(this.dateForm.value.toDate<this.dateForm.value.fromDate){
-//     this.utils.errorSnackBar("From date should be less than to date!");
-//  }
-//  if(this.dateForm.value.toDate==''||this.dateForm.value.fromDate==''){
-//    this.utils.errorSnackBar("Dates can not be blank!");
-//   }
-//   const req: any = {pageSize: this.pageSize, pageNo : pageNo - 1 , fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
-//   }
 
 
 }
