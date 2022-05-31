@@ -1,108 +1,100 @@
-<div class="pop-up-content-pop">   
-        <h4>View Credit History</h4>
+<div class="pop-up-content-pop">
+    <h4>View Credit History</h4>
 
-    
-    <a (click)="close()"><img src="assets/img/close-red.svg"/></a>
-      
+
+    <a (click)="close()"><img src="assets/img/close-red.svg" /></a>
+
 </div>
 
 
 
 <div class="pop-up-content">
 
-    <div class="d-flex w-100 al-center js-between">       
-        <span>Service Name : {{data.name}} <br/> 
-            Total Credits : {{data.total}} <br/> 
+    <div class="d-flex w-100 al-center js-between">
+        <span>Service Name : {{data.name}} <br/>
+            Total Credits : {{data.total}} <br/>
             Used Credits : {{data.total - data.balance}}({{this.usagePercentage.toFixed(2)}}%)
-            <br/> Balance Credits : {{data.balance}}</span> 
-       
+            <br/> Balance Credits : {{data.balance}}</span>
+
         <form [formGroup]="dateForm" (ngSubmit)="filterByDate(page)">
-        <div>            
-            <div class="form-outline tx-right">
-                
-                <label class="mr-2">From Date</label>
-              <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}"  formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}"/>
-             
-         
+            <div>
+                <div class="form-outline tx-right">
 
-            </div>
-            <div class="form-outline tx-right">
-                <label class="mr-2">To Date</label>
-                <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{fromDate | date:'yyyy-MM-dd'}}"  value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}"/>
-            
-                <!-- <span class="text-danger" *ngIf="submitted==true">From date should be less than to date!</span><br> -->
+                    <label class="mr-2">From Date</label>
+                    <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}" formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}" />
 
-              </div>
-            <button type="submit"  class="submit-form-btn"class="btn btn-primary btn-sm mt-2 float-right">
+
+
+                </div>
+                <div class="form-outline tx-right">
+                    <label class="mr-2">To Date</label>
+                    <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{fromDate | date:'yyyy-MM-dd'}}" value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}" />
+
+                    <!-- <span class="text-danger" *ngIf="submitted==true">From date should be less than to date!</span><br> -->
+
+                </div>
+                <button type="submit" class="submit-form-btn" class="btn btn-primary btn-sm mt-2 float-right">
          Search
             </button>
-          </div>
-          
+            </div>
+
         </form>
-  
+
     </div>
-  
-</div> 
+
+</div>
 <div class="input-search-table">
-    
-  </div>
+
+</div>
 <div class="pop-up-content">
-<span>Total <b>{{collectionSize}}</b> Transactions for <b>{{days}} days</b></span>  
-<div class="input-search-tablea">
-<mat-form-field class="input-group" appearance="outline">
-    <input
-      matInput
-      placeholder="Type to search..."
-      [(ngModel)]="valueToFilter"
-      (keyup)="filterApplicationData()"
-       />
-  </mat-form-field> 
-  </div> 
-<button type="button" (click)="exportToExcel()" class="btn btn-success py-2 px-3 btn-sm ">Export To Excel</button>
+    <span>Total <b>{{collectionSize}}</b> Transactions for <b>{{days}} days</b></span>
+    <div class="input-search-tablea">
+        <mat-form-field class="input-group" appearance="outline">
+            <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()" />
+        </mat-form-field>
+    </div>
+    <button type="button" (click)="exportToExcel()" class="btn btn-success py-2 px-3 btn-sm ">Export To Excel</button>
 </div>
 <table class="table dash-table-brige11" matSort (matSortChange)="sortData($event)">
-<thead>
-    <tr>    
-    <th scope="col">#</th>
-    <th mat-sort-header="actionType" scope="col">Action</th>
-    <th mat-sort-header="createdDate" scope="col">DateTime</th>
-    <th mat-sort-header="balanceCredits" scope="col">Balance</th>
-    <th mat-sort-header="operatedCredits" scope="col">Operated</th>
-    <th mat-sort-header="operatedCredits" scope="col">Outstanding</th>
-    </tr>
-</thead>
-<tbody>
-    <ng-container *ngIf="creditLogsList != null && creditLogsList.length > 0">
-        <tr *ngFor="let creditLog of creditLogsList; index as audit">
-            <td>{{10 *(page-1)+ (audit+1)}}.</td>
-            <td>{{creditLog.actionType}}</td>
-            <td>{{creditLog.createdDate  | date:'dd MMM yyyy' }} {{creditLog.createdDate  | date:'shortTime' }} </td>
-            <td>{{creditLog.actionType == "DEBIT" ? creditLog.balanceCredits + 1 : ((creditLog.balanceCredits) - creditLog.operatedCredits)}}</td>
-            <td>{{creditLog.operatedCredits}}</td>
-            <td>{{creditLog.actionType == "DEBIT" ? ((creditLog.balanceCredits + 1) - creditLog.operatedCredits) : (creditLog.balanceCredits)}}</td>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th mat-sort-header="actionType" scope="col">Action</th>
+            <th mat-sort-header="createdDate" scope="col">DateTime</th>
+            <th mat-sort-header="balanceCredits" scope="col">Balance</th>
+            <th mat-sort-header="operatedCredits" scope="col">Operated</th>
+            <th mat-sort-header="operatedCredits" scope="col">Outstanding</th>
         </tr>
-    </ng-container>
-    <tr *ngIf="creditLogsList == null || creditLogsList.length == 0">
-        <td colspan="5" style="text-align: center;">No Record Found</td>
-    </tr>
-</tbody>
+    </thead>
+    <tbody>
+        <ng-container *ngIf="creditLogsList != null && creditLogsList.length > 0">
+            <tr *ngFor="let creditLog of creditLogsList; index as audit">
+                <td>{{10 *(page-1)+ (audit+1)}}.</td>
+                <td>{{creditLog.actionType}}</td>
+                <td>{{creditLog.createdDate | date:'dd MMM yyyy' }} {{creditLog.createdDate | date:'shortTime' }} </td>
+                <td>{{creditLog.actionType == "DEBIT" ? creditLog.balanceCredits + 1 : ((creditLog.balanceCredits) - creditLog.operatedCredits)}}</td>
+                <td>{{creditLog.operatedCredits}}</td>
+                <td>{{creditLog.actionType == "DEBIT" ? ((creditLog.balanceCredits + 1) - creditLog.operatedCredits) : (creditLog.balanceCredits)}}</td>
+            </tr>
+        </ng-container>
+        <tr *ngIf="creditLogsList == null || creditLogsList.length == 0">
+            <td colspan="5" style="text-align: center;">No Record Found</td>
+        </tr>
+    </tbody>
 </table>
 
 <div class="row pagination-table ml-2 mr-2" *ngIf="creditLogsList != null && creditLogsList.length > 0">
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12  d-flex al-center">
         <div class="dataTables_info" id="tickets-table_info" role="status" aria-live="polite">
-        Showing
-        {{10 *(page-1) + startIndex}} to 
-         <span *ngIf="creditLogsList.length == 10">{{10 *(page-1) + endIndex}}</span>
-         <span *ngIf="creditLogsList.length != 10">{{totalRecords}}</span> 
-         of {{totalRecords}}
-        entries
+            Showing {{10 *(page-1) + startIndex}} to
+            <span *ngIf="creditLogsList.length == 10">{{10 *(page-1) + endIndex}}</span>
+            <span *ngIf="creditLogsList.length != 10">{{totalRecords}}</span> of {{totalRecords}} entries
         </div>
     </div>
     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
         <div class="text-md-right float-md-right pagination-rounded">
-         <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="filterByDate(page)">
-        </ngb-pagination>
+            <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" (pageChange)="filterByDate(page)">
+            </ngb-pagination>
         </div>
     </div>
 </div>
