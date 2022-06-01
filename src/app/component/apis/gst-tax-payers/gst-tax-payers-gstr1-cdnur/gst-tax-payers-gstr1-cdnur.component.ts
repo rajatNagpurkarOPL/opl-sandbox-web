@@ -18,6 +18,7 @@ export class GstTaxPayersGstr1CdnurComponent implements OnInit {
   response : any="Response Will be Rendered Here.";
   type: any = ["MONTH", "MONTH_RANGE"];
   apiType = "GSTR1_CDNUR";
+  todayDate:Date = new Date();
 
   constructor(private fb : FormBuilder, public sandboxService : SandboxService,private utils : Utils , private aesGcmEncryption: AesGcmEncryptionService) { }
 
@@ -53,7 +54,7 @@ export class GstTaxPayersGstr1CdnurComponent implements OnInit {
         requestedData.fromDate = requestedData.fromDate.getDate()  + "/" + (requestedData.fromDate.getMonth()+1) + "/" + requestedData.fromDate.getFullYear();
         requestedData.toDate = requestedData.toDate.getDate()  + "/" + (requestedData.toDate.getMonth()+1) + "/" + requestedData.toDate.getFullYear();
       }
-      let headerSourceEnc = this.aesGcmEncryption.encryptData(Constant.HEADER.SOURCE); 
+      let headerSourceEnc = this.aesGcmEncryption.encryptData(Constant.HEADER.SOURCE);
       let headers = Utils.getAPIHeaderWithSourceKeyValue(headerSourceEnc);
       let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
       this.sandboxService.getGstTaxPayersData(this.url ,payload ,headers).subscribe(res => {
