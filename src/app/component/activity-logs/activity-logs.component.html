@@ -13,7 +13,7 @@
                             </div>
                             <div class="form-outline tx-right ml-3">
                                 <label class="mr-2  mb-0">To Date</label>
-                                <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{fromDate | date:'yyyy-MM-dd'}}" value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}" />
+                                <input type="date" id="todate" class="" formControlName="toDate" max="{{todayDate | date:'yyyy-MM-dd'}}" min="{{dateForm.value.fromDate | date:'yyyy-MM-dd'}}" value="{{ dateForm.value.toDate | date:'yyyy-MM-dd' }}" />
                             </div>
                             <button type="submit" class="submit-form-btn" class="btn btn-primary btn-sm ml-2 float-right">
                                   Search
