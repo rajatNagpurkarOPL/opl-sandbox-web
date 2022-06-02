@@ -21,13 +21,18 @@
                             <button type="button" (click)="exportToExcel()" class="btn btn-success btn-sm ml-2 float-right">Export To Excel</button>
                         </form>
                         <!-- button added-->
-                        <div class="input-search-table">
+                        <!-- <div class="input-search-table">
                             <mat-form-field class="input-group mr-2 p-0" appearance="outline">
                                 <input matInput placeholder="Type to search..." [(ngModel)]="valueToFilter" (keyup)="filterApplicationData()">
                             </mat-form-field>
+                        </div> -->
+
+                        <div class="input-search-table">
+                            <mat-form-field class="input-group mr-2 p-0" appearance="outline">
+                                <input matInput placeholder="Type to path search..." [(ngModel)]="valueToFilter" (focusout)="SerchFilter()">
+                            </mat-form-field>
                         </div>
                         <!--button close-->
-
                     </div>
                 </div>
                 <table matSort (matSortChange)="sortData($event)" class="table activity-log-table dash-table-brige-new table-responsive">
@@ -74,7 +79,7 @@
 
                     <div class="psb-sm-12 psb-md-5 psb-lg-6 psb-xl-6 psb-xs-12">
                         <div class="text-md-right float-md-right pagination-rounded">
-                            <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="getUserLogs(page)">
+                            <ngb-pagination [collectionSize]="collectionSize" [maxSize]="7" [(page)]="page" [pageSize]="pageSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="getUserLogs(page,valueToFilter)">
                             </ngb-pagination>
                         </div>
                     </div>
