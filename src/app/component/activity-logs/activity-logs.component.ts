@@ -59,13 +59,16 @@ export class ActivityLogsComponent implements OnInit {
   }
 
 
-  getUserLogs(pageNo){
-    this.startIndex = (pageNo - 1) * this.pageSize;
+  getUserLogs(pageNo ,searchKey ? : any){
+     console.log("serchValue::getuser:::Logs::",searchKey);
+
+     this.startIndex = (pageNo - 1) * this.pageSize +1;
     this.endIndex = (pageNo - 1) * this.pageSize + this.pageSize;
     if(Utils.isObjectIsEmpty(this.user)){
       this.user = JSON.parse(Utils.getStorage(Constant.STORAGE.USER, true));
     }
-    const data: any = {userId :this.user.id ,pageSize: this.pageSize, pageNo : pageNo - 1 ,fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate};
+     let  searchReq = (searchKey != null || searchKey != undefined ? searchKey : '');
+    const data: any = {userId :this.user.id ,pageSize: this.pageSize, pageNo : pageNo - 1 ,fromDate:this.dateForm.value.fromDate,toDate:this.dateForm.value.toDate,searchValue : searchReq};
       console.log("data::::",data);
     this.sandboxService.getUserLogs(data).subscribe(res => {
        console.log("response:: audit::::::",res);
@@ -107,6 +110,12 @@ export class ActivityLogsComponent implements OnInit {
     if (this.audits === undefined || this.audits == null) {
         this.audits = this.paginationData;
     }
+  }
+
+
+  SerchFilter() {
+        console.log("valueToFilter::::::114::::",this.valueToFilter);
+       this.getUserLogs(1,this.valueToFilter);
   }
 
 
