@@ -5,14 +5,13 @@
                 <div class="sidebar-main-title">
                     <div class="d-flex al-center js-between w-100 pl-4 py-2">
                         <span class="text-span">Activity Logs</span>
-
                         <div class="input-search-table ml-auto mr-3">
                             <mat-form-field class="input-group mr-2 p-0" appearance="outline">
-                                <input matInput placeholder="Type to path search..." [(ngModel)]="valueToFilter" (focusout)="SerchFilter()">
+                                <input matInput placeholder="Type to path search..." [(ngModel)]="valueToFilter">
                             </mat-form-field>
                         </div>
                         <!-- form for   serach dates-->
-                        <form [formGroup]="dateForm" (ngSubmit)="getUserLogs(page)" class="d-flex align-items-center mr-2">
+                        <form [formGroup]="dateForm" (ngSubmit)="getUserLogs(page,valueToFilter)" class="d-flex align-items-center mr-2">
                             <div class="form-outline tx-right">
                                 <label class="mr-2 mb-0">From Date</label>
                                 <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}" formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}" />
