@@ -60,7 +60,7 @@ export class ActivityLogsComponent implements OnInit {
 
 
   getUserLogs(pageNo ,searchKey ? : any){
-     console.log("serchValue::getuser:::Logs::",searchKey);
+     console.log("serchValue::getuserLogs:::",searchKey);
      this.startIndex = (pageNo - 1) * this.pageSize +1;
      this.endIndex = (pageNo - 1) * this.pageSize + this.pageSize;
      this.fromDate = new Date(this.dateForm.value.fromDate);
@@ -124,7 +124,6 @@ export class ActivityLogsComponent implements OnInit {
 
 
   SerchFilter() {
-        console.log("valueToFilter::::::114::::",this.valueToFilter);
        this.getUserLogs(1,this.valueToFilter);
   }
 
