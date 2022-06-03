@@ -5,8 +5,14 @@
                 <div class="sidebar-main-title">
                     <div class="d-flex al-center js-between w-100 pl-4 py-2">
                         <span class="text-span">Activity Logs</span>
+
+                        <div class="input-search-table ml-auto mr-3">
+                            <mat-form-field class="input-group mr-2 p-0" appearance="outline">
+                                <input matInput placeholder="Type to path search..." [(ngModel)]="valueToFilter" (focusout)="SerchFilter()">
+                            </mat-form-field>
+                        </div>
                         <!-- form for   serach dates-->
-                        <form [formGroup]="dateForm" (ngSubmit)="getUserLogs(page)" class="d-flex align-items-center">
+                        <form [formGroup]="dateForm" (ngSubmit)="getUserLogs(page)" class="d-flex align-items-center mr-2">
                             <div class="form-outline tx-right">
                                 <label class="mr-2 mb-0">From Date</label>
                                 <input type="date" id="fromdate" class="" (change)="dateChange()" max="{{todayDate | date:'yyyy-MM-dd'}}" formControlName="fromDate" value="{{ dateForm.value.fromDate | date:'yyyy-MM-dd' }}" />
@@ -27,15 +33,13 @@
                             </mat-form-field>
                         </div> -->
 
-                        <div class="input-search-table">
-                            <mat-form-field class="input-group mr-2 p-0" appearance="outline">
-                                <input matInput placeholder="Type to path search..." [(ngModel)]="valueToFilter" (focusout)="SerchFilter()">
-                            </mat-form-field>
-                        </div>
                         <!--button close-->
                     </div>
                 </div>
-                <table matSort (matSortChange)="sortData($event)" class="table activity-log-table dash-table-brige-new table-responsive">
+                <span class="mb-3 ml-4">Total <b>{{collectionSize}}</b> Transactions for <b>{{days}} days</b></span>
+
+
+                <table matSort (matSortChange)="sortData($event)" class="table mt-2 activity-log-table dash-table-brige-new table-responsive">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
