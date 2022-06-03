@@ -61,9 +61,19 @@ export class ActivityLogsComponent implements OnInit {
 
   getUserLogs(pageNo ,searchKey ? : any){
      console.log("serchValue::getuser:::Logs::",searchKey);
-
      this.startIndex = (pageNo - 1) * this.pageSize +1;
-    this.endIndex = (pageNo - 1) * this.pageSize + this.pageSize;
+     this.endIndex = (pageNo - 1) * this.pageSize + this.pageSize;
+     this.fromDate = new Date(this.dateForm.value.fromDate);
+     this.toDate = new Date(this.dateForm.value.toDate);
+     const ONE_DAY = 1000 * 60 * 60 * 24;
+    const differenceMs = Math.abs(this.toDate - this.fromDate);
+
+    if( Math.abs(this.toDate - this.fromDate)==0){
+      this.days=1;
+    }
+    if( Math.abs(this.toDate - this.fromDate)!=0){
+      this.days= Math.round(differenceMs / ONE_DAY);
+    }
     if(Utils.isObjectIsEmpty(this.user)){
       this.user = JSON.parse(Utils.getStorage(Constant.STORAGE.USER, true));
     }
