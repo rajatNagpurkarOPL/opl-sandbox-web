@@ -51,7 +51,7 @@ export class ActivityLogsComponent implements OnInit {
       fromDate: [this.dates.fromDate,Validators.required],
       toDate: [this.dates.toDate,Validators.required]
     });
-    this.getUserLogs(1);
+    // this.getUserLogs(1);
   }
 
   sortData(sort: Sort) {
@@ -151,6 +151,8 @@ export class ActivityLogsComponent implements OnInit {
         'Path': item.path,
         'Http Status': item.httpStatus,
         'Http Status Description': item.httpStatusDescription,
+        'OPL Status Code': item.oplStatus,
+        'OPL Status Description': item.oplStatusDescription,
         'Client IP': item.clientIp,
         'Server Request Id': item.serverRequestId,
       }];
