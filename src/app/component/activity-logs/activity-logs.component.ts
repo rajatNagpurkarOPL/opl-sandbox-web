@@ -51,7 +51,7 @@ export class ActivityLogsComponent implements OnInit {
       fromDate: [this.dates.fromDate,Validators.required],
       toDate: [this.dates.toDate,Validators.required]
     });
-    // this.getUserLogs(1);
+    this.getUserLogs(1);
   }
 
   sortData(sort: Sort) {
