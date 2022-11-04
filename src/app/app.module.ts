@@ -88,6 +88,8 @@ import { SecurityInfoComponent } from './component/security-info/security-info.c
 import { NameMatchComponent } from './component/name-match/name-match.component';
 import { UdhyamRegDetailUsingOtpComponent } from './component/apis/udhyam-reg-detail-using-otp/udhyam-reg-detail-using-otp/udhyam-reg-detail-using-otp.component';
 import { VerifyUdhyamRegDetailUsingOtpComponent } from './component/apis/verify-udhyam-reg-detail-using-otp/verify-udhyam-reg-detail-using-otp.component';
+import { SingleGstScoreComponent } from './component/single-gst-score/single-gst-score.component';
+import { MultipleGstScoreComponent } from './component/multiple-gst-score/multiple-gst-score.component';
 
 @NgModule({
   imports: [
@@ -172,7 +174,9 @@ import { VerifyUdhyamRegDetailUsingOtpComponent } from './component/apis/verify-
     SecurityInfoComponent,
     NameMatchComponent,
     UdhyamRegDetailUsingOtpComponent,
-    VerifyUdhyamRegDetailUsingOtpComponent
+    VerifyUdhyamRegDetailUsingOtpComponent,
+    SingleGstScoreComponent,
+    MultipleGstScoreComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

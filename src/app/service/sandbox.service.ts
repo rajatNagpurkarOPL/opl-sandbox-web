@@ -57,7 +57,7 @@ export class SandboxService {
   getApiCreditLimit(data : any,requestHeader : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GET_API_CREDIT_LIMIT,data,requestHeader);
   }
-  
+
   getApiSchema(data): Observable<any>{
     return this.http.get(URLS.SANDBOX_USER.SCHEMA_DETAIL+ '/' + data, false);
   }
@@ -149,11 +149,11 @@ export class SandboxService {
 
   activateCertificate(userId : any, documentId: any): Observable<any>{
     return this.http.put(URLS.SANDBOX_USER.ACTIVATE_CERTIFICATE + '/' + userId + '/' + documentId, false);
-  } 
-  
+  }
+
   getKeyPairList(data : any): Observable<any>{
     return this.http.post(URLS.SANDBOX_USER.GET_KEYPAIR_LIST,data);
- } 
+ }
 
  downloadFile(referenceId: any, fileName: any,isOplCertificate: any): Observable<any>{
     if(isOplCertificate){
@@ -161,8 +161,8 @@ export class SandboxService {
     }else{
       return this.http.get(URLS.SANDBOX_DMS.DOWNLOAD_FILE + '/' + referenceId, true, false);
     }
- }  
-  
+ }
+
  generateFile(data:any): Observable<any>{
   return this.http.post(URLS.SANDBOX_USER.GET_Generate_Certificate,data);
 }
@@ -173,22 +173,22 @@ export class SandboxService {
 
  getOplPrivateKey(): Observable<any>{
   return this.http.get(URLS.SANDBOX_DMS.GET_OPL_PRIVATE_KEY, false);
- }  
+ }
 
 manualSslCertificate(data : any):Observable<any>{
- return this.http.post(URLS.SANDBOX_USER.GET_Manual_Certificate,data); 
-}  
+ return this.http.post(URLS.SANDBOX_USER.GET_Manual_Certificate,data);
+}
 
 
-//ipvr service  
+//ipvr service
 getState(): Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_STATE_MASTER, false);
- }      
+ }
 
  getHeaderOfState(data:any):Observable<any> {
   return this.http.post(URLS.PROPLEGIT. GET_HEADER_OF_STATE,data,false);
  }
- 
+
  getListOfLocations(data:any):Observable<any> {
   return this.http.post(URLS.PROPLEGIT. GET_LIST_OF_LOCATIONS,data,false);
  }
@@ -196,44 +196,44 @@ getState(): Observable<any>{
 //  getListOfLocations(data:any):Observable<any> {
 //   return this.http.post('http://localhost:1114/proplegit/application/getListOfLocations',data,false);
 //  }
- 
+
  getListByClassesMaster(data:any):Observable<any> {
   return this.http.post(URLS.PROPLEGIT.GET_LIST_BY_CLASSES,data,false);
  }
 
- getRegionMaster(data:any):Observable<any>{  
+ getRegionMaster(data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_REGION_MASTER + '/' + data,false);
-}  
+}
 
-getCitySurveyOfficeMaster(data:any):Observable<any>{  
+getCitySurveyOfficeMaster(data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_CITYSURVEY_OFFICE_MASTER + '/' + data,false);
-}  
+}
 
-getdistrictListByStateId(data:any):Observable<any>{  
+getdistrictListByStateId(data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_DISTRICTLIST_BY_STATEID_MASTER + '/' + data,false);
-} 
+}
 
-getdistrictListByRegionId(data:any,regionid:any):Observable<any>{  
+getdistrictListByRegionId(data:any,regionid:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_DISTRICTLIST_BY_STATEID_MASTER + '/' + data + '/' + regionid,false);
 }
 
-getTalukaListByDistrictIdMaster(data:any):Observable<any>{  
+getTalukaListByDistrictIdMaster(data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_TALUKALIST_BY_DISTRICTD_MASTER + '/' + data,false);
 }
- 
-getvilageListByDistrictIdAndTalukaId(districtid:any,data:any):Observable<any>{  
+
+getvilageListByDistrictIdAndTalukaId(districtid:any,data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_VILAGELIST_BY_DId_And_TId  + '/' + districtid + '/' + data ,false);
-} 
+}
 
-getvilageListByDistrictIdAndCofficeId(districtid:any,data:any):Observable<any>{  
+getvilageListByDistrictIdAndCofficeId(districtid:any,data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_VILAGELIST_BY_DID_AND_CITYOFFICE_MASTER  + '/' + districtid + '/' + data ,false);
-} 
+}
 
-getWardListByDistrictIdMaster(data:any):Observable<any>{  
+getWardListByDistrictIdMaster(data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + data,false);
 }
 
-getWardListByDidAndCofficeId(districtId:any,data:any):Observable<any>{  
+getWardListByDidAndCofficeId(districtId:any,data:any):Observable<any>{
   return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + districtId + '/' + data,false);
 }
 
@@ -248,14 +248,14 @@ createPropertyLoanApplication(stateName:any ,data: any,requestHeader : any): Obs
 
 ivprSaveForm(ipvrUrl: any, data: any): Observable<any> {
   return this.http.post(ipvrUrl, data, false);
-}  
+}
 
 // ipvrviewresponse(applicationId: any): Observable<any> {
 //   return this.http.get(URLS.PROPLEGIT.GET_PROPLEGIT_REQ_VIEW +'/' + applicationId, false);
-// } 
+// }
 ipvrviewresponse(url: any, applicationId: any, requestHeader : any) : Observable<any> {
   return this.http.getRequestWithHeaders(url +'/' + applicationId, false, requestHeader);
-} 
+}
 
 getGeneratedOtpOfGST(url : string, data : any,requestHeader : any): Observable<any> {
   return this.http.post(url ,data ,requestHeader ,false);
@@ -272,4 +272,23 @@ getGstTaxPayersData(url : string, data : any,requestHeader : any): Observable<an
 getNameMatchingData(url : string,data : any,requestHeader : any): Observable<any> {
   return this.http.post(url ,data,requestHeader,false);
 }
+
+
+// getWardListByDidAndCofficeId(districtId:any,data:any):Observable<any>{
+//   return this.http.get(URLS.PROPLEGIT.GET_WARDLIST_BY_DISTRICTID_MASTER + '/' + districtId + '/' + data,false);
+// }
+
+// getsingleGCS(url : string,data:any,requestHeader : any):Observable<any>
+//   return this.http.getRequestWithHeaders(url + '/' + data,requestHeader,false);
+// }
+
+getsingleGCS(url: any, data:any, requestHeader : any) : Observable<any> {
+  return this.http.getRequestWithHeaders(url +'/' + data, false, requestHeader);
+}
+
+
+getmultipleGCSData(url : string,data : any,requestHeader : any): Observable<any> {
+return this.http.post(url ,data,requestHeader,false);
+}
+
 }

@@ -108,9 +108,14 @@
                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-hsn-summary>
                     <app-gst-tax-payers-gstr2-hsn-summary
                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_HSN_SUMMARY"
-                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr2-hsn-summary> 
-                      <app-name-match  *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NM_MATCH"
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr2-hsn-summary>
+                    <app-name-match  *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NM_MATCH"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-name-match>
+
+                     <app-single-gst-score *ngIf="selectedMenuItem == this.constant.MASTER_CODE.SINGLE_GRC"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-single-gst-score>
+                     <app-multiple-gst-score *ngIf="selectedMenuItem == this.constant.MASTER_CODE.MULTIPLE_GRC"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-multiple-gst-score>
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">

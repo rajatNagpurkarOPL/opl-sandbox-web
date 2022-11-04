@@ -1,0 +1,22 @@
+<!-- <p>single-gst-score works!</p> -->
+
+<form>
+  <mat-card style="display: flex; width: 100%;">
+      <form class="example-form form-main-section form-main-section" [formGroup]="singlegcsForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+         <div class="input-fields">
+
+          <mat-form-field class="example-full-width">
+              <mat-label>gstin</mat-label>
+              <input type="text" matInput [formControl]="singlegcsForm.controls.gstin" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="singlegcsForm.get('gstin').hasError('required')">
+                  Please Enter gstin.
+              </mat-error>
+          </mat-form-field>
+          &nbsp;
+
+      </div>
+          <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
+      </form>
+  </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

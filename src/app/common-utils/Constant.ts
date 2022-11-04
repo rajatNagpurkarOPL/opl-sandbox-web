@@ -4,10 +4,10 @@ export const Constant = {
         LOGIN: BACK_SLASH + 'login',
         SIGN_UP: BACK_SLASH + 'signup',
         DASHBOARD: BACK_SLASH + 'dashboard',
-        DOCUMENTATION: BACK_SLASH + 'documentation', 
+        DOCUMENTATION: BACK_SLASH + 'documentation',
         SECURITY: BACK_SLASH + 'security',
         ACTIVITY_LOGS: BACK_SLASH + 'activity',
-        PROFILE : BACK_SLASH + 'profile', 
+        PROFILE : BACK_SLASH + 'profile',
         CREDIT:BACK_SLASH + 'credit'
     },httpAndCookies: {
         ACTK: 'tk_ac',
@@ -40,9 +40,9 @@ export const Constant = {
         CAINDIVIDUAL_DETAIL : "CAINDIVIDUAL_DETAIL",
         CAFIRM_DETAIL : "CAFIRM_DETAIL",
         NSDL_PAN_INQUIRY : "PAN_INQ",
-        DATA_TYPE : "DATA_TYPE", 
+        DATA_TYPE : "DATA_TYPE",
         ATM : "ATM",
-        E_SIGN_E_STMP : "E_SIGN_E_STMP", 
+        E_SIGN_E_STMP : "E_SIGN_E_STMP",
         DETAILS:"DETAILS",
         PROPLEGIT_REQ:"PROPLEGIT_REQ",
         PROPLEGIT_RES_VIEW:"PROPLEGIT_RES_VIEW",
@@ -59,8 +59,10 @@ export const Constant = {
             GSTR2_CDNUR: "GSTR2_CDNUR",
             GSTR1_HSN_SUMMARY: "GSTR1_HSN_SUMMARY",
             GSTR2_HSN_SUMMARY: "GSTR2_HSN_SUMMARY"
-        }, 
+        },
         NM_MATCH: "NM_MATCH",
+        SINGLE_GRC : "S_GSTIN_S",
+        MULTIPLE_GRC : "M_GSTIN_S",
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {
@@ -80,14 +82,14 @@ export const Constant = {
         API_ACCESS_KEY : "access-key",
         API_CREDITS : "credits",
         CERTIFICATE : "certificate"
-    }, 
-    SECURITY_PAGE:{ 
+    },
+    SECURITY_PAGE:{
         SECURITY_INFO:"security-info",
-        API_ACCESS_KEY : "access-key", 
+        API_ACCESS_KEY : "access-key",
         CERTIFICATE : "certificate"
-    }, 
+    },
     CREDIT_PAGE: {
-        API_CREDITS : "credits", 
+        API_CREDITS : "credits",
     },
     INTERNAL_STATUS_CODES : {
         SUCCESS : {
@@ -156,19 +158,19 @@ export const Constant = {
 
         // "Goa":{ STATE_ID:43 , STATE_LABEL:"Goa", FIELDS:[{id:"Taluka",label:"TalukaName"},{id:"Village",label:"VillageName"}] , COUNT:2 },
 
-        "Gujarat":{ STATE_ID:44, STATE_LABEL:"Gujarat", FIELDS:[{id:"DistrictName",label:"DistrictName"},{id:"TalukaName",label:"TalukaName"},{id:"VillageName",label:"VillageName"}] , COUNT:3, 
+        "Gujarat":{ STATE_ID:44, STATE_LABEL:"Gujarat", FIELDS:[{id:"DistrictName",label:"DistrictName"},{id:"TalukaName",label:"TalukaName"},{id:"VillageName",label:"VillageName"}] , COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"SurveyNo",label:"Survey No"}], LOCATION_POINT_COUNT:1},
 
         "Haryana":{ STATE_ID:45, STATE_LABEL:"Haryana", FIELDS:[{id:"District",label:"DistrictName"},{id:"TehsilSubTehsil",label:"Tehsil/Sub-Tehsil"},{id:"Village",label:"VillageName"}] , COUNT:3 ,
          LOCATION_POINT_FIELDS:[{id:"KhasraSurveyNo",label:"Khasra No/ Survey No"}], LOCATION_POINT_COUNT:1},
 
-        "Jharkhand":{ STATE_ID:48, STATE_LABEL:"Jharkhand", FIELDS:[{id:"District",label:"DistrictName"},{id:"Anchal",label:"Anchal"},{id:"Halka",label:"Halka"},{id:"Mouza",label:"Mouza"}] , COUNT:4 , 
+        "Jharkhand":{ STATE_ID:48, STATE_LABEL:"Jharkhand", FIELDS:[{id:"District",label:"DistrictName"},{id:"Anchal",label:"Anchal"},{id:"Halka",label:"Halka"},{id:"Mouza",label:"Mouza"}] , COUNT:4 ,
         LOCATION_POINT_FIELDS:[{id:"PlotNo",label:"Plot Number"}], LOCATION_POINT_COUNT:1},
 
         "Karnataka":{ STATE_ID:49, STATE_LABEL:"Karnataka", FIELDS:[{id:"District",label:"DistrictName"},{id:"Taluka",label:"TalukaName"},{id:"Hobli",label:"Hobli"},{id:"Village",label:"VillageName"}] , COUNT:4 ,
          LOCATION_POINT_FIELDS:[{id:"SurveyNo",label:"Survey No"}], LOCATION_POINT_COUNT:1},
 
-        "Madhya Pradesh":{ STATE_ID:52, STATE_LABEL:"Madhya Pradesh", FIELDS:[{id:"Jilla",label:"Jilla"},{id:"Tehsil",label:"Tehsil"},{id:"Gaon",label:"Gaon"}] , COUNT:3, 
+        "Madhya Pradesh":{ STATE_ID:52, STATE_LABEL:"Madhya Pradesh", FIELDS:[{id:"Jilla",label:"Jilla"},{id:"Tehsil",label:"Tehsil"},{id:"Gaon",label:"Gaon"}] , COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"KhasraNo",label:"Khasra No"}], LOCATION_POINT_COUNT:1},
 
         "Maharashtra":{ STATE_ID:53, STATE_LABEL:"Maharashtra", FIELDS:[{id:"DistrictName",label:"DistrictName"},{id:"TalukaName",label:"TalukaName"},{id:"VillageName",label:"VillageName"}] , COUNT:3,
@@ -177,25 +179,25 @@ export const Constant = {
         "Punjab":{ STATE_ID:59, STATE_LABEL:"Punjab", FIELDS:[{id:"District",label:"DistrictName"},{id:"Tehsil",label:"Tehsil"},{id:"Village",label:"VillageName"}] ,COUNT:3,
          LOCATION_POINT_FIELDS:[{id:"KhasraNo",label:"Khasra No"}], LOCATION_POINT_COUNT:1},
 
-        "Rajasthan":{ STATE_ID:60, STATE_LABEL:"Rajasthan", FIELDS:[{id:"District",label:"DistrictName"},{id:"Tehsil",label:"Tehsil"},{id:"Village",label:"VillageName"}] , COUNT:3, 
+        "Rajasthan":{ STATE_ID:60, STATE_LABEL:"Rajasthan", FIELDS:[{id:"District",label:"DistrictName"},{id:"Tehsil",label:"Tehsil"},{id:"Village",label:"VillageName"}] , COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"SurveyNo",label:"SurveyNo"},{id:"KhataNo",label:"KhataNo"}], LOCATION_POINT_COUNT:1 },
 
-        "Tamil Nadu":{ STATE_ID:62, STATE_LABEL:"Tamil Nadu", FIELDS:[{id:"District",label:"DistrictName"},{id:"Taluk",label:"TalukaName"},{id:"Village",label:"VillageName"}],COUNT:3, 
+        "Tamil Nadu":{ STATE_ID:62, STATE_LABEL:"Tamil Nadu", FIELDS:[{id:"District",label:"DistrictName"},{id:"Taluk",label:"TalukaName"},{id:"Village",label:"VillageName"}],COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"SurveyNo",label:"SurveyNo"},{id:"SubDivisionNo",label:"Sub Division No"}], LOCATION_POINT_COUNT:2 },
 
         "Telangana":{ STATE_ID:63, STATE_LABEL:"Telangana", FIELDS:[{id:"District",label:"DistrictName"},{id:"Mandal",label:"Mandal/TalukaName"},{id:"Village",label:"VillageName"}] , COUNT:3,
          LOCATION_POINT_FIELDS:[{id:"SurveyNoSubDivisionNo",label:"Survey No./Sub Division No"},{id:"KhataNo",label:"Khata No"}], LOCATION_POINT_COUNT:2  },
 
-        "Tripura":{ STATE_ID:64, STATE_LABEL:"Tripura", FIELDS:[{id:"District",label:"DistrictName"},{id:"Subdivision",label:"Sub-Division"},{id:"RevenueCircle",label:"Revenue Circle"},{id:"Tehsil",label:"Tehsil"},{id:"Mouza",label:"Mouza"}], COUNT:5, 
+        "Tripura":{ STATE_ID:64, STATE_LABEL:"Tripura", FIELDS:[{id:"District",label:"DistrictName"},{id:"Subdivision",label:"Sub-Division"},{id:"RevenueCircle",label:"Revenue Circle"},{id:"Tehsil",label:"Tehsil"},{id:"Mouza",label:"Mouza"}], COUNT:5,
         LOCATION_POINT_FIELDS:[{id:"KhatianNo",label:"Khatian No"}], LOCATION_POINT_COUNT:1 },
 
         "Uttar Pradesh":{ STATE_ID:65, STATE_LABEL:"Uttar Pradesh", FIELDS:[{id:"Janpad",label:"Janpad"},{id:"Tehsil",label:"Tehsil"},{id:"Gram",label:"Gram"}] ,COUNT:3,
          LOCATION_POINT_FIELDS:[{id:"KhasraNoGataNo",label:"Khasra/ Gata No"}], LOCATION_POINT_COUNT:1 },
 
-        "Uttarakhand":{ STATE_ID:66, STATE_LABEL:"Uttarakhand", FIELDS:[{id:"Janpad",label:"Janpad"},{id:"Tehsil",label:"Tehsil"},{id:"Gram",label:"Gram"}] ,COUNT:3, 
+        "Uttarakhand":{ STATE_ID:66, STATE_LABEL:"Uttarakhand", FIELDS:[{id:"Janpad",label:"Janpad"},{id:"Tehsil",label:"Tehsil"},{id:"Gram",label:"Gram"}] ,COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"KhashraGataNo",label:"Khasra No/ Gata No"}], LOCATION_POINT_COUNT:1 },
 
-        "West Bengal":{ STATE_ID:67, STATE_LABEL:"West Bengal", FIELDS:[{id:"District",label:"DistrictName"},{id:"Block",label:"Block"},{id:"Mouza",label:"Mouza"}] ,COUNT:3, 
+        "West Bengal":{ STATE_ID:67, STATE_LABEL:"West Bengal", FIELDS:[{id:"District",label:"DistrictName"},{id:"Block",label:"Block"},{id:"Mouza",label:"Mouza"}] ,COUNT:3,
         LOCATION_POINT_FIELDS:[{id:"KhatiyanNo",label:"Khatiyan No"}], LOCATION_POINT_COUNT:1 },
      }
 
