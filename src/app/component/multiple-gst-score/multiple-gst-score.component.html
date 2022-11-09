@@ -1,5 +1,5 @@
 <!-- <p>multiple-gst-score works!</p> -->
-<form>
+<!-- <form>
   <mat-card style="display: flex; width: 100%;">
       <form class="example-form form-main-section form-main-section" [formGroup]="multiplegcsForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
          <div formArrayName="items">
@@ -22,6 +22,38 @@
         <button type="button" class="submit-form-btn" class="create-application-btn" mat-flat-button color="primary"
             (click)="addNewGroup()">Add GSTIN</button>
     </div>
+
+          <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
+      </form>
+  </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response> -->
+
+
+
+<form>
+  <mat-card style="display: flex; width: 100%;">
+      <form class="example-form form-main-section form-main-section" [formGroup]="multiplegcsForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+        <div class="input-fields">
+          <mat-form-field class="example-full-width">
+              <mat-label>gstin</mat-label>
+              <!-- <input type="text" matInput formControlName="gstin" [errorStateMatcher]="matcher"> -->
+              <textarea type="text"  rows="5" style="width: 100%;" formControlName="gstin" matInput  [errorStateMatcher]="matcher">
+              </textarea>
+                <mat-error *ngIf="multiplegcsForm.get('gstin').hasError('required')">
+                  Please Enter gstin.
+              </mat-error>
+          </mat-form-field>
+          &nbsp;
+          <!-- <button type="button" mat-icon-button color="gray" (click)="deleteAddGroup(i)" *ngIf="this.multiplegcsForm.controls.items.value.length > 1">
+            <mat-icon>close</mat-icon>
+        </button> -->
+      </div>
+
+      <!-- <div class="add-owner-btn">
+        <button type="button" class="submit-form-btn" class="create-application-btn" mat-flat-button color="primary"
+            (click)="addNewGroup()">Add GSTIN</button>
+    </div> -->
 
           <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
       </form>

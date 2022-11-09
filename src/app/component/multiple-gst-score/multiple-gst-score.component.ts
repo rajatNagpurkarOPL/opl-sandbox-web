@@ -25,42 +25,45 @@ export class MultipleGstScoreComponent implements OnInit {
   ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.multiplegcsForm = this.fb.group({
-      items : this.fb.array([
-      ])
+      // items : this.fb.array([])
+      gstin : ['', [Validators.required]],
     })
-    this.addNewGroup();
+   // this.addNewGroup();
   }
 
-  addNewGroup() {
-    const add = this.multiplegcsForm.get('items') as FormArray;
-    add.push(this.fb.group({
-       gstin : ['', [Validators.required]],
-    }))
-  }
+  // addNewGroup() {
+  //   const add = this.multiplegcsForm.get('items') as FormArray;
+  //   add.push(this.fb.group({
+  //      gstin : ['', [Validators.required]],
+  //   }))
+  // }
 
 
-  deleteAddGroup(index: number) {
-    const add = this.multiplegcsForm.get('items') as FormArray;
-    add.removeAt(index);
-  }
+  // deleteAddGroup(index: number) {
+  //   const add = this.multiplegcsForm.get('items') as FormArray;
+  //   add.removeAt(index);
+  // }
 
 
 
   onFormSubmit() {
-    console.log("this.singlegcsForm",this.multiplegcsForm);
-    console.log("this.singlegcsForm.value",this.multiplegcsForm.value);
-   //const add = this.multiplegcsForm.get('items') as FormArray;
-    if(!this.multiplegcsForm.valid)  {
-           return  this.utils.warningSnackBar("Please Enter Valid Details.");
-    }
+    console.log("this.multiplegcsForm",this.multiplegcsForm);
+    console.log("this.multiplegcsForm.value",this.multiplegcsForm.value);
+    //const add = this.multiplegcsForm.get('items') as FormArray;
 
-    //if(this.multiplegcsForm.valid) {
+    if(!this.multiplegcsForm.valid)  {
+      return  this.utils.warningSnackBar("Please Enter Valid Details.");
+}
+
+   let names =this.multiplegcsForm.value.gstin;
+    console.log(":::::names::55:::",names);
+    let nameArr = names.split(',');
+   console.log("nameArr:::",nameArr);
+       //if(this.multiplegcsForm.valid) {
        let req :any = {};
         req.gstin=[];
-      this.multiplegcsForm.value.items?.forEach(element => {
-         console.log("element::",element);
-         req.gstin.push(element.gstin);
-      });
+        req.gstin = nameArr;
+
       console.log("req:: 54:::",req);
       //if(this.multiplegcsForm.valid) {
       let headerSourceEnc = this.aesGcmEncryption.encryptData(Constant.HEADER.SOURCE)
