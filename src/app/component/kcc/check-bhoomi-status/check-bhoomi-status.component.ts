@@ -31,8 +31,8 @@ export class CheckBhoomiStatusComponent implements OnInit {
    ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.checkBhoomiStatusForm = this.formBuilder.group({
-      applicationId: ['', Validators.required],
-      proposalId: ['', Validators.required],
+      // applicationId: ['', Validators.required],
+      // proposalId: ['', Validators.required],
       districtCode: ['', Validators.required],
       talukCode: ['', Validators.required],
       hobliCode: ['', Validators.required],

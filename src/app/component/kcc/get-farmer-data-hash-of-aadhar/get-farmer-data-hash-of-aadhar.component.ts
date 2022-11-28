@@ -31,8 +31,8 @@ export class GetFarmerDataHashOfAadharComponent implements OnInit {
    ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.farmerHashOfAadharDetailForm = this.formBuilder.group({
-      applicationId: ['', Validators.required],
-      proposalId: ['', Validators.required],
+      // applicationId: ['', Validators.required],
+      // proposalId: ['', Validators.required],
       hashofAadhaar: ['', Validators.required]
     });
   }

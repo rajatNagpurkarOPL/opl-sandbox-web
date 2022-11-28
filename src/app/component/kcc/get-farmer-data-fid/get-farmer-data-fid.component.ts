@@ -35,8 +35,8 @@ export class GetFarmerDataFidComponent implements OnInit {
   ngOnInit(): void {
     this.url = Utils.prepareApiUrl(this.menuData, 'gateway-service');
     this.farmerFIDDetailForm = this.formBuilder.group({
-      applicationId: ['', Validators.required],
-      proposalId: ['', Validators.required],
+      // applicationId: ['', Validators.required],
+      // proposalId: ['', Validators.required],
       farmerRegNo: ['', Validators.required],
     });
   }
