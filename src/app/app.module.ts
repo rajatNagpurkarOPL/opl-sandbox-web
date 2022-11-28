@@ -91,6 +91,9 @@ import { VerifyUdhyamRegDetailUsingOtpComponent } from './component/apis/verify-
 import { SingleGstScoreComponent } from './component/single-gst-score/single-gst-score.component';
 import { MultipleGstScoreComponent } from './component/multiple-gst-score/multiple-gst-score.component';
 import { GstTaxPayersGstr1B2baComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-b2ba/gst-tax-payers-gstr1-b2ba.component';
+import { GetFarmerDataFidComponent } from './component/kcc/get-farmer-data-fid/get-farmer-data-fid.component';
+import { GetFarmerDataHashOfAadharComponent } from './component/kcc/get-farmer-data-hash-of-aadhar/get-farmer-data-hash-of-aadhar.component';
+import { CheckBhoomiStatusComponent } from './component/kcc/check-bhoomi-status/check-bhoomi-status.component';
 
 @NgModule({
   imports: [
@@ -178,7 +181,10 @@ import { GstTaxPayersGstr1B2baComponent } from './component/apis/gst-tax-payers/
     VerifyUdhyamRegDetailUsingOtpComponent,
     SingleGstScoreComponent,
     MultipleGstScoreComponent,
-    GstTaxPayersGstr1B2baComponent
+    GstTaxPayersGstr1B2baComponent,
+    GetFarmerDataFidComponent,
+    GetFarmerDataHashOfAadharComponent,
+    CheckBhoomiStatusComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

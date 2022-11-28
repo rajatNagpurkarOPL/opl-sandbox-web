@@ -120,6 +120,20 @@
                      <app-gst-tax-payers-gstr1-b2ba
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_B2BA"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-b2ba>
+
+                    <!-- Kcc Vendor Component -->
+                    <app-get-farmer-data-fid
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GET_FARMER_DATA_BY_FID"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-get-farmer-data-fid>
+
+                    <app-get-farmer-data-hash-of-aadhar
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GET_FARMER_DATA_BY_HASH_OF_AADHAR"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-get-farmer-data-hash-of-aadhar>
+
+                     <app-check-bhoomi-status
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CHECK_BHOOMI_STATUS"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-check-bhoomi-status>
+
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
