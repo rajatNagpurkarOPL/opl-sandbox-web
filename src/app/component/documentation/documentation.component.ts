@@ -29,7 +29,7 @@ export class DocumentationComponent implements OnInit {
   apiRequestData: any = {};
   apiResponseData: any = {};
   apiData: any;
-  totalCredit: any; 
+  totalCredit: any;
   balanceCredit: any;
   currentInstance: any;
 
@@ -156,7 +156,7 @@ export class DocumentationComponent implements OnInit {
     })
   }
 
-  getApiRequestSchema() { 
+  getApiRequestSchema() {
     this.apiRequestData = {};
     this.sandboxService.getDocumentationAPIDetails(this.apiMstrId, 'REQUEST').subscribe(res => {
       if (!Utils.isObjectNullOrEmpty(res.status) && res.status === 200) {
@@ -242,6 +242,6 @@ export class DocumentationComponent implements OnInit {
     });
   }
 
-  
+
 
 }

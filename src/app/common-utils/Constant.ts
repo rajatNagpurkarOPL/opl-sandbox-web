@@ -58,7 +58,8 @@ export const Constant = {
             GSTR1_CDNUR: "GSTR1_CDNUR",
             GSTR2_CDNUR: "GSTR2_CDNUR",
             GSTR1_HSN_SUMMARY: "GSTR1_HSN_SUMMARY",
-            GSTR2_HSN_SUMMARY: "GSTR2_HSN_SUMMARY"
+            GSTR2_HSN_SUMMARY: "GSTR2_HSN_SUMMARY",
+            GSTR1_B2BA : "GSTR1_B2BA"
         },
         NM_MATCH: "NM_MATCH",
         SINGLE_GRC : "S_GSTIN_S",

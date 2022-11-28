@@ -90,6 +90,7 @@ import { UdhyamRegDetailUsingOtpComponent } from './component/apis/udhyam-reg-de
 import { VerifyUdhyamRegDetailUsingOtpComponent } from './component/apis/verify-udhyam-reg-detail-using-otp/verify-udhyam-reg-detail-using-otp.component';
 import { SingleGstScoreComponent } from './component/single-gst-score/single-gst-score.component';
 import { MultipleGstScoreComponent } from './component/multiple-gst-score/multiple-gst-score.component';
+import { GstTaxPayersGstr1B2baComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-b2ba/gst-tax-payers-gstr1-b2ba.component';
 
 @NgModule({
   imports: [
@@ -176,7 +177,8 @@ import { MultipleGstScoreComponent } from './component/multiple-gst-score/multip
     UdhyamRegDetailUsingOtpComponent,
     VerifyUdhyamRegDetailUsingOtpComponent,
     SingleGstScoreComponent,
-    MultipleGstScoreComponent
+    MultipleGstScoreComponent,
+    GstTaxPayersGstr1B2baComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

@@ -116,6 +116,10 @@
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-single-gst-score>
                      <app-multiple-gst-score *ngIf="selectedMenuItem == this.constant.MASTER_CODE.MULTIPLE_GRC"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-multiple-gst-score>
+
+                     <app-gst-tax-payers-gstr1-b2ba
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_B2BA"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-b2ba>
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
