@@ -121,6 +121,11 @@
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_B2BA"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-b2ba>
 
+                     <app-gst-tax-payers-gstr1-b2b
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_B2B"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-b2b>
+
+
                     <!-- Kcc Vendor Component -->
                     <app-get-farmer-data-fid
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GET_FARMER_DATA_BY_FID"

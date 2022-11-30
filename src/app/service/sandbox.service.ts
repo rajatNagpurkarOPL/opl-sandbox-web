@@ -295,6 +295,10 @@ getGstTaxPayersGSTR1B2BAData(url : string, data : any,requestHeader : any): Obse
   return this.http.post(url ,data ,requestHeader ,false);
 }
 
+getGstTaxPayersGSTR1B2BData(url : string, data : any,requestHeader : any): Observable<any> {
+  return this.http.post(url ,data ,requestHeader ,false);
+}
+
 /**
  * KCC Vendor Apis
  */
