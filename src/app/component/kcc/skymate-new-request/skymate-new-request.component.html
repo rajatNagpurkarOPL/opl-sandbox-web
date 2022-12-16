@@ -1,0 +1,108 @@
+<form autocomplete="off">
+    <mat-card class="d-flex w-100 px-0 py-2" *ngIf="apiForm != null && apiForm != undefined">
+        <form class="example-form form-main-section d-flex flex-column w-100" [formGroup]="apiForm" (ngSubmit)="onFormSubmit()">
+            <div class="input-fields">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Refrence Id</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.uuid"
+                         placeholder="Ex. 1">
+                    <!-- <mat-error *ngIf="apiForm.get('refrenceId').hasError('required')">
+                        Please Enter District Code
+                    </mat-error> -->
+                </mat-form-field>
+  
+                &nbsp;
+                <mat-form-field class="example-full-width">
+                    <mat-label>Loan Ref No</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.loanRefNo"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 15">
+                    <mat-error *ngIf="apiForm.get('loanRefNo').hasError('required')">
+                        Please Enter loan ref no
+                    </mat-error>
+                </mat-form-field>
+  
+                &nbsp;
+                <mat-form-field class="example-full-width">
+                    <mat-label>Farmer Name</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.farmerName"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('farmerName').hasError('required')">
+                        Please Enter farmer name
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Farmer Mobile</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.farmerMobile"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('farmerMobile').hasError('required')">
+                        Please Enter farmer mobile
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Farmer Address</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.farmerAddress"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('farmerAddress').hasError('required')">
+                        Please Enter farmer address
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Comments</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.comments"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <!-- <mat-error *ngIf="apiForm.get('comments').hasError('required')">
+                        Please Enter Comments
+                    </mat-error> -->
+                </mat-form-field>                
+            </div>
+            <!-- <mat-label>Khasra Details</mat-label> -->
+            <mat-card class="w-100 px-6" *ngIf="khasraNosControls != null && khasraNosControls != undefined">
+                <div formArrayName="khasraNos">
+                    <div *ngFor="let data of khasraNosControls.controls;let i = index;" [formGroupName]="i">
+                    <div class=" input-fields">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Khasra No</mat-label>
+                                <input type="text" matInput placeholder="Enter khasraNo" formControlName="khasraNo">
+                               
+                                <mat-error *ngIf="data.controls.khasraNo.hasError('required')">
+                                    Please Enter khasra No
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Khaata No</mat-label>
+                                <input type="text" matInput placeholder="Enter khaataNo" formControlName="khaataNo">
+                            </mat-form-field>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Village Code</mat-label>
+                                <input type="text" matInput placeholder="Enter villageCode" formControlName="villageCode">
+                                
+                                <mat-error *ngIf="data.controls.villageCode.hasError('required')">
+                                    Please Enter village code
+                                </mat-error>
+                            </mat-form-field>
+                            <ng-container *ngIf="i!=0">
+                                <button type="button" mat-icon-button color="gray" (click)="deleteAddGroup(i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-owner-btn">
+                    <button type="button" class="submit-form-btn" class="create-application-btn" mat-flat-button color="primary"
+                        (click)="addNewGroup()">Add Khasra Details</button>
+                </div>    
+            </mat-card>
+            <button type="submit" class="submit-form-btn send-btn" mat-flat-button color="primary">Send</button>
+        </form>
+    </mat-card>
+  </form>
+  <!-- <div class="tab-design"> -->
+    <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
+  <!-- </div> -->
+  

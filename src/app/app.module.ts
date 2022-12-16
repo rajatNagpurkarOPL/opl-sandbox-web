@@ -95,6 +95,9 @@ import { GetFarmerDataFidComponent } from './component/kcc/get-farmer-data-fid/g
 import { GetFarmerDataHashOfAadharComponent } from './component/kcc/get-farmer-data-hash-of-aadhar/get-farmer-data-hash-of-aadhar.component';
 import { CheckBhoomiStatusComponent } from './component/kcc/check-bhoomi-status/check-bhoomi-status.component';
 import { GstTaxPayersGstr1B2bComponent } from './component/apis/gst-tax-payers/gst-tax-payers-gstr1-b2b/gst-tax-payers-gstr1-b2b.component';
+import { MantlelabAgriLatLngApiComponent } from './component/kcc/mantlelab-agri-lat-lng-api/mantlelab-agri-lat-lng-api.component';
+import { SkymateNewRequestComponent } from './component/kcc/skymate-new-request/skymate-new-request.component';
+import { SkymateReportApiComponent } from './component/kcc/skymate-report-api/skymate-report-api.component';
 
 @NgModule({
   imports: [
@@ -186,7 +189,10 @@ import { GstTaxPayersGstr1B2bComponent } from './component/apis/gst-tax-payers/g
     GetFarmerDataFidComponent,
     GetFarmerDataHashOfAadharComponent,
     CheckBhoomiStatusComponent,
-    GstTaxPayersGstr1B2bComponent
+    GstTaxPayersGstr1B2bComponent,
+    MantlelabAgriLatLngApiComponent,
+    SkymateNewRequestComponent,
+    SkymateReportApiComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,
