@@ -139,6 +139,20 @@
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.CHECK_BHOOMI_STATUS"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-check-bhoomi-status>
 
+                     <app-mantlelab-agri-lat-lng-api
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_MANTELAB"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-mantlelab-agri-lat-lng-api>
+
+                     
+                     <app-skymate-new-request
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_SKYMAT_REQUEST"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-skymate-new-request>
+
+                     
+                     <app-skymate-report-api
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_SKYMAT_REPORT"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-skymate-report-api>
+
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
