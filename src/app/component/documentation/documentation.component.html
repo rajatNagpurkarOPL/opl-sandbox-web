@@ -153,6 +153,14 @@
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_SKYMAT_REPORT"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-skymate-report-api>
 
+                     <app-geo-coordinates-fhc-api
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_GEO_CO_FHC"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-geo-coordinates-fhc-api>
+
+                     <app-geo-coordinates-survey-api
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_GEO_CO_SURVEY"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-geo-coordinates-survey-api>
+
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">

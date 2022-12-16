@@ -7,11 +7,12 @@ import { SandboxService } from 'src/app/service/sandbox.service';
 import { CustomErrorStateMatcherComponent } from '../../custom-error-state-matcher/custom-error-state-matcher.component';
 
 @Component({
-  selector: 'app-skymate-report-api',
-  templateUrl: './skymate-report-api.component.html',
-  styleUrls: ['./skymate-report-api.component.scss']
+  selector: 'app-geo-coordinates-fhc-api',
+  templateUrl: './geo-coordinates-fhc-api.component.html',
+  styleUrls: ['./geo-coordinates-fhc-api.component.scss']
 })
-export class SkymateReportApiComponent implements OnInit {
+export class GeoCoordinatesFhcApiComponent implements OnInit {
+
   @Input() menuData: any;
   @Input() parentInstance: any;
   url: string = null;
@@ -31,7 +32,11 @@ export class SkymateReportApiComponent implements OnInit {
     this.url = Utils.prepareApiUrl(this.menuData, "gateway-service");
     this.apiForm = this.formBuilder.group({
       uuid: [''],
-      requestId: ['', Validators.required]
+      proposalNo: ['', Validators.required],
+      state: ['', Validators.required],
+      district: ['', Validators.required],
+      taluka: ['', Validators.required],
+      village: ['', Validators.required],
     });
   }
 
@@ -46,7 +51,7 @@ export class SkymateReportApiComponent implements OnInit {
   checkApi(requestedData : any){
     let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE);
     let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
-    // console.log(headers)
+    // console.log(headers);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
     // console.log(payload)
     this.sandboxService.kccVendorApi(this.url,payload,headers).subscribe(res => {
@@ -61,4 +66,5 @@ export class SkymateReportApiComponent implements OnInit {
     });
   }
   
+
 }

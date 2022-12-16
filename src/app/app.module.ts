@@ -98,6 +98,8 @@ import { GstTaxPayersGstr1B2bComponent } from './component/apis/gst-tax-payers/g
 import { MantlelabAgriLatLngApiComponent } from './component/kcc/mantlelab-agri-lat-lng-api/mantlelab-agri-lat-lng-api.component';
 import { SkymateNewRequestComponent } from './component/kcc/skymate-new-request/skymate-new-request.component';
 import { SkymateReportApiComponent } from './component/kcc/skymate-report-api/skymate-report-api.component';
+import { GeoCoordinatesFhcApiComponent } from './component/kcc/geo-coordinates-fhc-api/geo-coordinates-fhc-api.component';
+import { GeoCoordinatesSurveyApiComponent } from './component/kcc/geo-coordinates-survey-api/geo-coordinates-survey-api.component';
 
 @NgModule({
   imports: [
@@ -192,7 +194,9 @@ import { SkymateReportApiComponent } from './component/kcc/skymate-report-api/sk
     GstTaxPayersGstr1B2bComponent,
     MantlelabAgriLatLngApiComponent,
     SkymateNewRequestComponent,
-    SkymateReportApiComponent
+    SkymateReportApiComponent,
+    GeoCoordinatesFhcApiComponent,
+    GeoCoordinatesSurveyApiComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

@@ -1,0 +1,59 @@
+<form autocomplete="off">
+    <mat-card class="d-flex w-100 px-0 py-2" *ngIf="apiForm != null && apiForm != undefined">
+        <form class="example-form form-main-section d-flex flex-column w-100" [formGroup]="apiForm" (ngSubmit)="onFormSubmit()">
+            <div class="input-fields">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Refrence Id</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.uuid"
+                         placeholder="Ex. 1">
+                    <!-- <mat-error *ngIf="apiForm.get('refrenceId').hasError('required')">
+                        Please Enter District Code
+                    </mat-error> -->
+                </mat-form-field>
+
+                &nbsp;
+                <mat-form-field class="example-full-width">
+                    <mat-label>State</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.state"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('state').hasError('required')">
+                        Please Enter state
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>District</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.district"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('district').hasError('required')">
+                        Please Enter district
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Taluka</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.taluka"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('taluka').hasError('required')">
+                        Please Enter taluka
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Village</mat-label>
+                    <input type="text" matInput [formControl]="apiForm.controls.village"
+                        [errorStateMatcher]="matcher" placeholder="Ex. 3">
+                    <mat-error *ngIf="apiForm.get('village').hasError('required')">
+                        Please Enter village
+                    </mat-error>
+                </mat-form-field>                
+            </div>
+          
+            <button type="submit" class="submit-form-btn send-btn" mat-flat-button color="primary">Send</button>
+        </form>
+    </mat-card>
+  </form>
+  <!-- <div class="tab-design"> -->
+    <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
+  <!-- </div> -->
+  
