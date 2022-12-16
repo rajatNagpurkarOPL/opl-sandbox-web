@@ -55,6 +55,8 @@ export const Constant = {
         KCC_VENDOR_MANTELAB : "KCC_VENDOR_MANTELAB",
         KCC_VENDOR_SKYMAT_REQUEST : "Kcc-Vendor-Skymate-New-request",
         KCC_VENDOR_SKYMAT_REPORT : "Kcc-Vendor-Skymate-Report",
+        KCC_VENDOR_GEO_CO_FHC : "Kcc-Vendor-Geo-Coordinates-FHC",
+        KCC_VENDOR_GEO_CO_SURVEY : "Kcc-Vendor-Geo-Coordinates-Survey",
         TAX_PAYERS_GST: {
             GSTR1_SUMMARY: "GSTR1_SUMMARY",
             GSTR2_SUMMARY: "GSTR2_SUMMARY",

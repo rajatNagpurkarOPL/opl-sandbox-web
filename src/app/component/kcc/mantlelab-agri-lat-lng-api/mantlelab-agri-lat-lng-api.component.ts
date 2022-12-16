@@ -47,9 +47,9 @@ export class MantlelabAgriLatLngApiComponent implements OnInit {
   checkApi(requestedData : any){
     let HeaderSourceEnc = this.aesGcmEncryption.encryptData(this.constant.HEADER.SOURCE);
     let headers = Utils.getAPIHeaderWithSourceKeyValue(HeaderSourceEnc);
-    console.log(headers);
+    // console.log(headers);
     let payload = this.aesGcmEncryption.getEncPayload(JSON.stringify(requestedData));
-    console.log(payload)
+    // console.log(payload)
     this.sandboxService.kccVendorApi(this.url,payload,headers).subscribe(res => {
       let decData = this.aesGcmEncryption.getDecPayload(res);
       this.response = Utils.jsonStringify(decData);
