@@ -307,4 +307,11 @@ getGstTaxPayersGSTR1B2BData(url : string, data : any,requestHeader : any): Obser
   return this.http.post(url,data,requestHeader);
 }
 
+/**
+ * Name match API Karza
+ */
+nameMatchApiKarza(url : string,data : any,requestHeader : any): Observable<any>{
+  return this.http.post(url,data,requestHeader);
+}
+
 }

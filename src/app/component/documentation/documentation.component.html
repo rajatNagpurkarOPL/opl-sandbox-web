@@ -161,6 +161,10 @@
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.KCC_VENDOR_GEO_CO_SURVEY"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-geo-coordinates-survey-api>
 
+                     <app-name-match-karza
+                     *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NAME_MATCH_KARZA"
+                     [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-name-match-karza>
+
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
