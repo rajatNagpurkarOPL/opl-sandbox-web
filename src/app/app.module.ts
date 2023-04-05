@@ -100,6 +100,7 @@ import { SkymateNewRequestComponent } from './component/kcc/skymate-new-request/
 import { SkymateReportApiComponent } from './component/kcc/skymate-report-api/skymate-report-api.component';
 import { GeoCoordinatesFhcApiComponent } from './component/kcc/geo-coordinates-fhc-api/geo-coordinates-fhc-api.component';
 import { GeoCoordinatesSurveyApiComponent } from './component/kcc/geo-coordinates-survey-api/geo-coordinates-survey-api.component';
+import { NameMatchKarzaComponent } from './component/name-match-karza/name-match-karza.component';
 
 @NgModule({
   imports: [
@@ -196,7 +197,8 @@ import { GeoCoordinatesSurveyApiComponent } from './component/kcc/geo-coordinate
     SkymateNewRequestComponent,
     SkymateReportApiComponent,
     GeoCoordinatesFhcApiComponent,
-    GeoCoordinatesSurveyApiComponent
+    GeoCoordinatesSurveyApiComponent,
+    NameMatchKarzaComponent
   ] ,
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
               LoaderService,

@@ -73,6 +73,7 @@ export const Constant = {
         NM_MATCH: "NM_MATCH",
         SINGLE_GRC : "S_GSTIN_S",
         MULTIPLE_GRC : "M_GSTIN_S",
+        NAME_MATCH_KARZA : "NAME_MATCH_KARZA",
     },
     PAGE_SIZE : 10,
     HTTP_ERROR : {
