@@ -1,7 +1,7 @@
-<mat-card style="display: flex; width: 100%;">
-    <form class="example-form form-main-section" [formGroup]="ipvrResponseForm">
-        <div class="input-fields">
-            <mat-form-field class="example-full-width mr-all">
+<mat-card class="common_form_wrap">
+    <form [formGroup]="ipvrResponseForm">
+        <div class="form_wrap">
+            <mat-form-field class="form-group">
                 <mat-label>Application Id</mat-label>
                 <input type="text" matInput placeholder="Enter Application Id" formControlName="ApplicationId">
                 <mat-error>
@@ -16,7 +16,6 @@
 </mat-card>
 
 <app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>
-<button *ngIf="downloadFile != null" type="submit" style="margin-left: 1em;" mat-flat-button color="primary"
-    (click)="convertBase64ToFile()">
+<button *ngIf="downloadFile != null" type="submit" style="margin-left: 1em;" mat-flat-button color="primary" (click)="convertBase64ToFile()">
     <mat-icon>file_download</mat-icon>Download Report
 </button>

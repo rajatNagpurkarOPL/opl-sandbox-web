@@ -1,1 +1,182 @@
-<p>bureau-commercial-call works!</p>
+<form>
+    <mat-card class="common_form_wrap">
+        <div class="form-fields">
+            <h2 class="title">Profile Section</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Type Id</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            1
+                        </mat-option>
+                        <mat-option value="2">
+                            2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-fields">
+            <h2 class="title">Business Details</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Value</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Company Name</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Class of activity</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Activity 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Activity 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Type of entity</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Entity 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Entity 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Date of Registration</mat-label>
+                    <input matInput readonly [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>
+
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Enquiry type</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Enquiry 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Enquiry 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Enquiry Amount</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>CMR Flag</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Flag 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Flag 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Enquiry Purpose</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Enquiry 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Enquiry 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-fields">
+            <h2 class="title">Business Address</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Pincode</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>State</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Gujarat
+                        </mat-option>
+                        <mat-option value="2">
+                            Maharashtra
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Address Type</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Address 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Address 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Address Line1</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>City</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Telephone num</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Contact Area</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Contact Prefix</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Telephone Type</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Landline
+                        </mat-option>
+                        <mat-option value="2">
+                            Mobile
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
+    </mat-card>
+</form>

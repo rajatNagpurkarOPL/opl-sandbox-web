@@ -1,30 +1,27 @@
 <form>
-    <mat-card style="display: flex; width: 100%;">
-        <form class="example-form form-main-section form-main-section" [formGroup]="generateOtpForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
-           <div class="input-fields">
+    <mat-card class="common_form_wrap">
+        <form [formGroup]="generateOtpForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>GST No.</mat-label>
+                    <input type="text" matInput [formControl]="generateOtpForm.controls.id" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="generateOtpForm.get('id').hasError('required')">
+                        Please Enter GST Number.
+                    </mat-error>
+                    <mat-error *ngIf="generateOtpForm.get('id').hasError('pattern')">
+                        Please Enter Valid GST Number.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>User Name</mat-label>
+                    <input type="text" matInput [formControl]="generateOtpForm.controls.userName" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="generateOtpForm.get('userName').hasError('required')">
+                        Please Enter User Name.
+                    </mat-error>
+                </mat-form-field>
+            </div>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>GST No.</mat-label>
-                <input type="text" matInput [formControl]="generateOtpForm.controls.id" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="generateOtpForm.get('id').hasError('required')">
-                    Please Enter GST Number.
-                </mat-error>
-                <mat-error *ngIf="generateOtpForm.get('id').hasError('pattern')">
-                    Please Enter Valid GST Number.
-                </mat-error>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field class="example-full-width">
-                <mat-label>User Name</mat-label>
-                <input type="text" matInput [formControl]="generateOtpForm.controls.userName" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="generateOtpForm.get('userName').hasError('required')">
-                    Please Enter User Name.
-                </mat-error>
-            </mat-form-field>
-            &nbsp;
-        </div>
-
-            <!-- <mat-form-field class="example-full-width">
+            <!-- <mat-form-field class="form-group">
                 <mat-label>Request Type</mat-label>
                 <input type="text" matInput [formControl]="generateOtpForm.controls.requestType" [errorStateMatcher]="matcher"
                     placeholder="Ex. OTPREQUEST">
