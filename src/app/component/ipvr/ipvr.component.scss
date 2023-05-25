@@ -13,9 +13,6 @@
 .ipvr-page-form {
     display: flex;
     flex-wrap: wrap;
-    .mat-form-field {
-        max-width: 210px;
-    }
     .mat-expansion-panel {
         width: 100%;
         padding: 30px 10px;
@@ -32,11 +29,11 @@
         }
     }
     .mat-slide-toggle {
-        min-width: 210px;
-        margin: 0.6rem 0.4rem;
-        min-height: 56px;
+        min-width: 25%;
+        padding: 10px;
+        height: 75px;
         color: rgba(0, 0, 0, 0.87);
-        ::ng-deep .mat-slide-toggle-label {
+         ::ng-deep .mat-slide-toggle-label {
             height: 100%;
             border: 2px solid #dedede;
             border-radius: 4px;
@@ -47,7 +44,7 @@
 }
 
 .create-application-btn {
-    margin: 20px 0 0 0;
+    margin: 20px 0 0 10px;
     padding: 12px 20px;
     // max-height: 50px;
 }

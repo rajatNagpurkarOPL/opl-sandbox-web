@@ -27,6 +27,10 @@
     }
 }
 
+button {
+    outline: none !important;
+}
+
 .page-link {
     color: #2d3079 !important;
     box-shadow: none !important;
@@ -3483,11 +3487,11 @@ header {
 }
 
 .mat-select-panel {
-    height: 200px;
+    max-height: 200px !important;
     width: 100%;
     min-width: 100% !important;
     max-width: 100% !important;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
 }
 
 .cdk-global-overlay-wrapper {
@@ -3504,3 +3508,24 @@ header {
         }
     }
 }
+
+// Comercial page css S
+.common_form_wrap {
+    width: 100%;
+    .form-fields {
+        margin-bottom: 30px;
+        .title {
+            padding-left: 10px;
+        }
+    }
+    .form_wrap {
+        display: flex;
+        flex-wrap: wrap;
+        .mat-form-field {
+            width: 25%;
+            padding: 10px;
+        }
+    }
+}
+
+// Comercial page css E

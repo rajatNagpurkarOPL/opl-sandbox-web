@@ -1,24 +1,22 @@
 <form>
-    <mat-card style="display: flex; width: 100%;">
-        <form class="example-form form-main-section" [formGroup]="taxPayersForm" (ngSubmit)="onFormSubmit()">
-            <div class="input-fields">
-                <mat-form-field class="example-full-width">
+    <mat-card class="common_form_wrap">
+        <form [formGroup]="taxPayersForm" (ngSubmit)="onFormSubmit()">
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
                     <mat-label>GST IN</mat-label>
                     <input type="text" matInput [formControl]="taxPayersForm.controls.id" placeholder="Enter GST Number">
                     <mat-error>
                         <app-print-error [control]="taxPayersForm.controls.id"></app-print-error>
                     </mat-error>
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="form-group">
                     <mat-label>Session Key</mat-label>
                     <input type="text" matInput [formControl]="taxPayersForm.controls.sessionKey" placeholder="Enter Session Key">
                     <mat-error>
                         <app-print-error [control]="taxPayersForm.controls.sessionKey"></app-print-error>
                     </mat-error>
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="form-group">
                     <mat-label>Type</mat-label>
                     <mat-select [formControl]="taxPayersForm.controls.type" (valueChange)="typeChange($event)">
                         <mat-option *ngFor="let data of type" [value]="data">
@@ -29,21 +27,19 @@
                         <app-print-error [control]="taxPayersForm.controls.type"></app-print-error>
                     </mat-error>
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width" *ngIf="taxPayersForm.controls.type.value === 'MONTH_RANGE'">
+                <mat-form-field class="form-group" *ngIf="taxPayersForm.controls.type.value === 'MONTH_RANGE'">
                     <mat-label>From Date</mat-label>
                     <input matInput [matDatepicker]="fd" [max]="todayDate" datePickerFormat="DD/MM/YYYY" [formControl]="taxPayersForm.controls.fromDate">
                     <mat-datepicker-toggle matSuffix [for]="fd"></mat-datepicker-toggle>
                     <mat-datepicker #fd></mat-datepicker>
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width" *ngIf="taxPayersForm.controls.type.value === 'MONTH_RANGE'">
+                <mat-form-field class="form-group" *ngIf="taxPayersForm.controls.type.value === 'MONTH_RANGE'">
                     <mat-label>To Date</mat-label>
                     <input [min]="taxPayersForm.controls.fromDate.value" [max]="todayDate" matInput [matDatepicker]="td" datePickerFormat="DD/MM/YYYY" [formControl]="taxPayersForm.controls.toDate">
                     <mat-datepicker-toggle matSuffix [for]="td"></mat-datepicker-toggle>
                     <mat-datepicker #td></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field class="example-full-width" *ngIf="taxPayersForm.controls.type.value === 'MONTH'">
+                <mat-form-field class="form-group" *ngIf="taxPayersForm.controls.type.value === 'MONTH'">
                     <mat-label>Return Period</mat-label>
                     <input type="text" matInput [formControl]="taxPayersForm.controls.returnPeriod" placeholder="Ex. mmyyyy">
                     <mat-error>

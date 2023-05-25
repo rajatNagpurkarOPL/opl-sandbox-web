@@ -1,25 +1,23 @@
 <form>
-    <mat-card style="display: flex; width: 100%;">
-        <form class="example-form form-main-section" [formGroup]="verifyOtpForm" (ngSubmit)="onFormSubmit()">
-            <div class="input-fields">
-            <mat-form-field class="example-full-width">
-                <mat-label>OTP</mat-label>
-                <input type="text" matInput [formControl]="verifyOtpForm.controls.otp"
-                    placeholder="Enter OTP">
-                <mat-error>
-                    <app-print-error [control]="verifyOtpForm.controls.otp"></app-print-error>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Session Key</mat-label>
-                <input type="text" matInput [formControl]="verifyOtpForm.controls.sessionKey"
-                    placeholder="Enter Session Key">
-                <mat-error>
-                    <app-print-error [control]="verifyOtpForm.controls.sessionKey"></app-print-error>
-                </mat-error>
-            </mat-form-field>
+    <mat-card class="common_form_wrap">
+        <form [formGroup]="verifyOtpForm" (ngSubmit)="onFormSubmit()">
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>OTP</mat-label>
+                    <input type="text" matInput [formControl]="verifyOtpForm.controls.otp" placeholder="Enter OTP">
+                    <mat-error>
+                        <app-print-error [control]="verifyOtpForm.controls.otp"></app-print-error>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Session Key</mat-label>
+                    <input type="text" matInput [formControl]="verifyOtpForm.controls.sessionKey" placeholder="Enter Session Key">
+                    <mat-error>
+                        <app-print-error [control]="verifyOtpForm.controls.sessionKey"></app-print-error>
+                    </mat-error>
+                </mat-form-field>
             </div>
-            <button type="submit"  class="submit-form-btn" mat-flat-button color="primary">Verify OTP</button>
+            <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Verify OTP</button>
         </form>
     </mat-card>
 </form>

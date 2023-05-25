@@ -1,16 +1,19 @@
 <form>
-    <mat-card style="display: flex; width: 100%;">
-        <form class="example-form" [formGroup]="panInquiryForm" (ngSubmit)="onFormSubmit()">
-            <mat-form-field class="example-full-width">
-                <mat-label>Pan</mat-label>
-                <input type="text" matInput [formControl]="panInquiryForm.controls.pan" [errorStateMatcher]="matcher"
-                    placeholder="Ex. AAAAA1212A">
-                <mat-error *ngIf="panInquiryForm.get('pan').hasError('required')">
-                    Please enter PAN.
-                </mat-error>
-            </mat-form-field>
-            &nbsp;
-            <button type="submit" class="submit-form-btn" mat-flat-button>Get Pan Details</button>
+    <mat-card class="common_form_wrap">
+        <form [formGroup]="panInquiryForm" (ngSubmit)="onFormSubmit()">
+            <div class="form-fields">
+                <h2 class="title">Profile Section</h2>
+                <div class="form_wrap">
+                    <mat-form-field class="form-group pd-0 mb-0">
+                        <mat-label>Pan</mat-label>
+                        <input type="text" matInput [formControl]="panInquiryForm.controls.pan" [errorStateMatcher]="matcher" placeholder="Ex. AAAAA1212A">
+                        <mat-error *ngIf="panInquiryForm.get('pan').hasError('required')">
+                            Please enter PAN.
+                        </mat-error>
+                    </mat-form-field>
+                    <button type="submit" class="submit-form-btn mt-0" mat-flat-button>Get Pan Details</button>
+                </div>
+            </div>
         </form>
     </mat-card>
 </form>
