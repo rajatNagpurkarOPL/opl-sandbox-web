@@ -165,6 +165,17 @@
                      *ngIf="selectedMenuItem == this.constant.MASTER_CODE.NAME_MATCH_KARZA"
                      [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-name-match-karza>
 
+                    <!--bureau-->
+                    <app-bureau-commercial-call
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BUREAU.COMMERCIAL_CALL"
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-bureau-commercial-call>
+                    
+                    <app-bureau-consumer-call
+                    *ngIf="selectedMenuItem == this.constant.MASTER_CODE.BUREAU.CONSUMER_CALL"
+                    [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-bureau-consumer-call>
+
+
+                 
                   </div>
               </mat-tab>
               <mat-tab label="Request Document">
