@@ -31,6 +31,14 @@ button {
     outline: none !important;
 }
 
+.mat-form-field-suffix .mat-icon-button {
+    vertical-align: 4px !important;
+}
+
+input.mat-input-element {
+    margin-top: -0.35em !important;
+}
+
 .page-link {
     color: #2d3079 !important;
     box-shadow: none !important;
@@ -2372,7 +2380,7 @@ th.mat-header-cell:first-of-type {
     text-align: left !important;
 }
 
-th.mat-header-cell {
+.mat-header-cell {
     // text-align: right !important;
 }
 
@@ -2410,10 +2418,10 @@ th.mat-header-cell {
 }
 
 .reset-pswd a {
+    position: absolute;
     font-size: 18px;
     font-weight: bold;
     color: #2d3079;
-    margin-right: 3em;
 }
 
 .btn-rest-pswd {
@@ -2421,6 +2429,7 @@ th.mat-header-cell {
 }
 
 .reset-pswd {
+    position: relative;
     display: flex;
     align-items: center;
     width: 100%;
@@ -2630,7 +2639,8 @@ hr {
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-infix {
-    padding: 0.6em 0 1.3em 0 !important;
+    padding: 10px 0 12px !important;
+    line-height: 100%;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-wrapper {
@@ -3253,6 +3263,27 @@ header {
         //             padding: 10px 20px;
         //         }
         // }
+    }
+}
+
+.sidebar_main {
+    .mat-drawer-inner-container {
+        padding: 0 15px;
+    }
+    .mat-list-item-content {
+        padding: 0 25px !important;
+        .side-nav-icons {
+            height: auto !important;
+            width: auto !important;
+            padding: 0 !important;
+        }
+        .side-nav-text {
+            margin-left: 10px;
+        }
+        .menu-button {
+            position: absolute;
+            right: 0;
+        }
     }
 }
 

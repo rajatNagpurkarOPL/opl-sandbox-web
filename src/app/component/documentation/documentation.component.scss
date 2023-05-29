@@ -1,75 +1,79 @@
 .main-mat-drawer {
-  max-width: 275px;
-  button {
-    color: #ffffff;
-    background-color: #2d3079;
-    margin: 10px 0 0 10px;
-    outline: none;
-  }
+    max-width: 280px;
+    button {
+        color: #ffffff;
+        background-color: #2d3079;
+        margin: 10px 0 0 10px;
+        outline: none;
+    }
 }
 
 ::ng-deep .mat-input-wrapper {
-  width: 400px !important;
+    width: 400px !important;
 }
 
 .sidenav-content {
-  height: 100%;
-  min-height: 85.2vh;
-  overflow: auto;
-  align-items: center;
-  justify-content: center;
-  // padding-left: 0.5em;
+    height: 100%;
+    min-height: 85.2vh;
+    overflow: auto;
+    align-items: center;
+    justify-content: center;
+    // padding-left: 0.5em;
 }
 
 .tab-design {
-  background: #ffffff;
-  padding: 10px;
-  box-shadow: 0px 0px 5px #00000026;
-  border-radius: 8px;
+    background: #ffffff;
+    padding: 10px;
+    box-shadow: 0px 0px 5px #00000026;
+    border-radius: 8px;
 }
 
 .ca-firm-form-group {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  .ca-firm-form-group-label {
-    color: #fff;
-    background-color: #2d3079;
-    min-width: 120px;
-    text-align: center;
-    margin-bottom: 0;
-    padding: 18px 0;
-    &:nth-child(1) {
-      border-radius: 8px 0 0 8px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    .ca-firm-form-group-label {
+        color: #fff;
+        background-color: #2d3079;
+        min-width: 120px;
+        text-align: center;
+        margin-bottom: 0;
+        padding: 15px 0;
+        margin: 0 -2px;
+        position: relative;
+        z-index: 1;
+        &:nth-child(1) {
+            border-radius: 8px 0 0 8px;
+        }
+        &:last-child {
+            border-radius: 0 8px 8px 0;
+        }
     }
-    &:last-child {
-      border-radius: 0 8px 8px 0;
+    .ca-firm-form-group-url {
+        flex: auto;
+        font-weight: 500;
+        font-size: 14px;
+        // min-width: 100% !important;
     }
-  }
-  .ca-firm-form-group-url {
-    flex: auto;
-    font-weight: 500;
-    font-size: 14px;
-    // min-width: 100% !important;
-  }
 }
+
 .card-header {
-  h3 {
-    font-size: 18px;
-    font-weight: 500;
-  }
+    h3 {
+        font-size: 18px;
+        font-weight: 500;
+    }
 }
 
 .credit-data {
-  p {
-    font-weight: 500;
-    font-size: 16px;
-    margin-bottom: 0;
-    &:nth-child(2n){
-      margin-left: 50px;
+    p {
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 0;
+        &:nth-child(2n) {
+            margin-left: 50px;
+        }
+        span {
+            font-weight: 400;
+        }
     }
-    span {
-      font-weight: 400;
-    }
-  }
 }

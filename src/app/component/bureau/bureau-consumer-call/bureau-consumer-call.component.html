@@ -1,1 +1,146 @@
-<p>bureau-consumer-call works!</p>
+<form>
+    <mat-card class="common_form_wrap">
+        <div class="form-fields">
+            <h2 class="title">Consumer Name</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput required>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Middle Name</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput required>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Birth Date</mat-label>
+                    <input matInput readonly [matDatepicker]="picker" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>
+
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Gender</mat-label>
+                    <mat-select required>
+                        <mat-option value="1">
+                            Male
+                        </mat-option>
+                        <mat-option value="2">
+                            Female
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-fields">
+            <h2 class="title">Consumer Identity Details</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Type Id</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            1
+                        </mat-option>
+                        <mat-option value="2">
+                            2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Id Number</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-fields">
+            <h2 class="title">Consumer Contact Information</h2>
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Telephone Type</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Landline
+                        </mat-option>
+                        <mat-option value="2">
+                            Mobile
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Telephone Number</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Email ID</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Line1</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Line2</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>State</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Gujarat
+                        </mat-option>
+                        <mat-option value="2">
+                            Maharashtra
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Pincode</mat-label>
+                    <input type="text" matInput>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Residence Code</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Address 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Address 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>Address Category</mat-label>
+                    <mat-select>
+                        <mat-option value="1">
+                            Address 1
+                        </mat-option>
+                        <mat-option value="2">
+                            Address 2
+                        </mat-option>
+                    </mat-select>
+                    <mat-error></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
+    </mat-card>
+</form>

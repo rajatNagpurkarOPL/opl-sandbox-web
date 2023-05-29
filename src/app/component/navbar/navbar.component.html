@@ -1,28 +1,21 @@
 <!-- Header -->
 <header id="header">
     <!-- <div class="container"> -->
-        <div class="header">
-            <div class="header-logo">
-                <img src="https://www.onlinepsbloans.com/img/logo.svg" />
-            </div>
+    <div class="header">
+        <div class="header-logo">
+            <img src="https://www.onlinepsbloans.com/img/logo.svg" />
+        </div>
 
-            <div class="topnav" >
-                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.DOCUMENTATION)? 'active-nav' : '')"  
-                   routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/DETAILS"  
-                   href="javasript:void(0)">Documentation</a>
-                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.SECURITY) ? 'active-nav' : '')"
-                   [routerLink]="[constant.ROUTE_URL.SECURITY , constant.SECURITY_PAGE.SECURITY_INFO]"
-                   href="javasript:void(0)">Security</a>   
-                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.CREDIT) ? 'active-nav' : '')"
-                   [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]"
-                   href="javasript:void(0)">Credit</a> 
-                <a [ngClass]="(router.url.includes(constant.ROUTE_URL.ACTIVITY_LOGS)? 'active-nav' : '')" 
-                 [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]"  href="javasript:void(0)">Activity</a>   
-            </div>
-          
-            <div class="header-right">
+        <div class="topnav">
+            <a [ngClass]="(router.url.includes(constant.ROUTE_URL.DOCUMENTATION)? 'active-nav' : '')" routerLink="{{constant.ROUTE_URL.DOCUMENTATION}}/DETAILS" href="javasript:void(0)">Documentation</a>
+            <a [ngClass]="(router.url.includes(constant.ROUTE_URL.SECURITY) ? 'active-nav' : '')" [routerLink]="[constant.ROUTE_URL.SECURITY , constant.SECURITY_PAGE.SECURITY_INFO]" href="javasript:void(0)">Security</a>
+            <a [ngClass]="(router.url.includes(constant.ROUTE_URL.CREDIT) ? 'active-nav' : '')" [routerLink]="[constant.ROUTE_URL.CREDIT , constant.CREDIT_PAGE.API_CREDITS]" href="javasript:void(0)">Credit</a>
+            <a [ngClass]="(router.url.includes(constant.ROUTE_URL.ACTIVITY_LOGS)? 'active-nav' : '')" [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]" href="javasript:void(0)">Activity</a>
+        </div>
 
-                <!-- <a href="#" class="pos">
+        <div class="header-right">
+
+            <!-- <a href="#" class="pos">
                         <span class="notify-badge"></span>  
                         <img class="down-arrow" src="assets/img/alert.svg" />
                     </a>
@@ -31,42 +24,41 @@
                     <img class="down-arrow" src="assets/img/down-arrow.svg" />
                     <a href="javascript:void(0)" (click)="logoutUser()" style="color: aliceblue;">Logout </a> -->
 
-                <a href="#" class="pos">
-                    <span class="notify-badge"></span>
-                    <img class="down-arrow" src="assets/img/alert.svg" alt="" />
-                </a>
+            <a href="#" class="pos">
+                <span class="notify-badge"></span>
+                <img class="down-arrow" src="assets/img/alert.svg" alt="" />
+            </a>
 
-                <button mat-button [matMenuTriggerFor]="menu">
+            <button mat-button [matMenuTriggerFor]="menu">
                     <p>
-                        <img src="assets/img/b4lDefault.png" alt="" /> Hi, <span>
-                            {{globals.USER.userName}}</span>
+                        <img src="assets/img/b4lDefault.png" alt="" />Hi, &nbsp;<span>{{globals.USER.userName}}</span>
                         <img class="down-arrow" src="assets/img/down-arrow.svg" />
                     </p>
                 </button>
 
 
 
-                <mat-menu class="profile-details-menu" #menu="matMenu">
-                    <button mat-menu-item [routerLink]="[constant.ROUTE_URL.PROFILE , constant.PROFILE_PAGE.SETTING]">
+            <mat-menu class="profile-details-menu" #menu="matMenu">
+                <button mat-menu-item [routerLink]="[constant.ROUTE_URL.PROFILE , constant.PROFILE_PAGE.SETTING]">
                         <p>
                             <mat-icon>person_pin</mat-icon> <strong>Profile</strong>
                         </p>
                     </button>
-                    <!-- <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]">
+                <!-- <button mat-menu-item [routerLink]="[constant.ROUTE_URL.ACTIVITY_LOGS]">
                         <p>
                             <mat-icon>local_activity</mat-icon> <strong>Activity</strong>
                         </p>
                     </button> -->
-                    <button mat-menu-item (click)="logoutUser()">
+                <button mat-menu-item (click)="logoutUser()">
                         <p style="color: #E36C6C;">
                             <mat-icon>logout</mat-icon><strong>Logout</strong>
                         </p>
                     </button>
-                </mat-menu>
+            </mat-menu>
 
-                <!-- <img src="assets/img/psb-logo.svg" alt=""/> -->
-            </div>
+            <!-- <img src="assets/img/psb-logo.svg" alt=""/> -->
         </div>
+    </div>
     <!-- </div> -->
 </header>
 
@@ -76,17 +68,17 @@
 
 <footer id="footer">
     <!-- <div class="container"> -->
-        <div class="footer">
-            <div class="footer-left">
-                <p>Copyright © 2020 All rights reserved. Powred by psbloansin59minutes.com</p>
-            </div>
-            <div class="footer-right">
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Help & Support</a></li>
-                </ul>
-            </div>
+    <div class="footer">
+        <div class="footer-left">
+            <p>Copyright © 2020 All rights reserved. Powred by psbloansin59minutes.com</p>
         </div>
+        <div class="footer-right">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Help & Support</a></li>
+            </ul>
+        </div>
+    </div>
     <!-- </div> -->
 </footer>

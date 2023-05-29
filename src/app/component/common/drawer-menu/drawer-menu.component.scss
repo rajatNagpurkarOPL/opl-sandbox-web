@@ -3,39 +3,38 @@
     transition: transform 300ms ease;
     transform: scaleY(0);
     transform-origin: top;
-    padding: 0 4px 0 12px;
-  }
-  .submenu.expanded {
-    transform: scaleY(1);
-  }
+}
 
-  .menu-button {
+.submenu.expanded {
+    transform: scaleY(1);
+}
+
+.menu-button {
     transition: 300ms ease-in-out;
     transform: rotate(0deg);
-  } 
+}
 
-  .menu-button.rotated {
+.menu-button.rotated {
     transform: rotate(180deg);
-  }
-   .sidenav-content {
+}
+
+.sidenav-content {
     height: 100%;
     align-items: center;
     justify-content: center;
     // padding-left: 0.5em;
-  }
+}
 
-  .current-active{
+.current-active {
     background-color: #2d30791c !important;
     color: #2D3079 !important;
     min-width: 220px;
-  }
+}
 
-
-  .mat-list-item{
+.mat-list-item {
     padding: 0 !important;
     border-radius: 8px;
-    .mat-list-item-content{
-      padding: 0 !important;
+    .mat-list-item-content {
+        padding: 0 !important;
     }
-
-  }
+}

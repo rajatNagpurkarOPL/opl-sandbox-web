@@ -1,9 +1,9 @@
 <div class="opl-sandbox-login" style="background-color: #2e3079 !important">
-  <div id="opl-sandbox-login">
-    <div class="container">
-      <div class="row">
-        <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
-          <!-- <div class="login-text">
+    <div id="opl-sandbox-login">
+        <div class="container">
+            <div class="row">
+                <div class="psb-xl-12 psb-lg-12 psb-md-12 psb-sm-12 psb-xs-12">
+                    <!-- <div class="login-text">
             <div>Welcome to</div> 
             <div class="w-10 ml-2">
               <img src="https://www.onlinepsbloans.com/img/logo.svg" />
@@ -11,133 +11,82 @@
             <div class="ml-2">Sandbox </div>
           </div> -->
 
-          <div class="login-text">
-            <p>Welcome to</p>
-            <div>&nbsp;OAM&nbsp;</div>
-            <!-- <img src="https://www.onlinepsbloans.com/img/logo.svg"/> -->
-            <p>Sandbox</p>
-          </div>
+                    <div class="login-text">
+                        <h2 class="title">Welcome to OAM
+                            <!-- <img src="https://www.onlinepsbloans.com/img/logo.svg"/> -->
+                            Sandbox</h2>
+                    </div>
 
-          <div
-            class="login-box"
-            *ngIf="!isForgotPasss && !isSentSuccess"
-            id="1"
-          >
-            <p>Login to your Sandbox Account</p>
-            <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
-              <fieldset>
-                <input
-                  placeholder="Username"
-                  type="text"
-                  tabindex="1"
-                  required=""
-                  [(ngModel)]="user.userName"
-                  name="userName"
-                  #name
-                />
-              </fieldset>
-              <fieldset>
-                <input
-                  placeholder="Password"
-                  type="password"
-                  tabindex="2"
-                  required=""
-                  [(ngModel)]="user.password"
-                  name="password"
-                />
-              </fieldset>
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                (click)="onSubmit()"
-              >
+                    <div class="login-box" *ngIf="!isForgotPasss && !isSentSuccess" id="1">
+                        <p>Login to your Sandbox Account</p>
+                        <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
+                            <fieldset>
+                                <input placeholder="Username" type="text" tabindex="1" required="" [(ngModel)]="user.userName" name="userName" #name />
+                            </fieldset>
+                            <fieldset>
+                                <input placeholder="Password" type="password" tabindex="2" required="" [(ngModel)]="user.password" name="password" />
+                            </fieldset>
+                            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">
                 Login
               </button>
-            </form>
-            <a
-              href="javascrip:void(0)"
-              class="login-forgot-psd"
-              (click)="showResetPassDiv(true)"
-              >Forgot Password ?</a
+                        </form>
+                        <a href="javascrip:void(0)" class="login-forgot-psd" (click)="showResetPassDiv(true)">Forgot Password ?</a
             >
             <!-- <a href="#" class="login-forgot-psd" routerLink="/signup">Sign up </a> -->
-          </div>
+                    </div>
 
-          <!-- Reset password start -->
-          <div class="login-box" *ngIf="isForgotPasss" id="2">
-            <img src="assets/img/sbi.png" />
-            <div class="reset-pswd">
-              <a href="javascript:void(0)" (click)="showResetPassDiv(false)"
-                ><img src="assets/img/arrow-right.svg" /> Back</a
-              >
-              <p>Reset Your password</p>
-            </div>
+                    <!-- Reset password start -->
+                    <div class="login-box" *ngIf="isForgotPasss" id="2">
+                        <img src="assets/img/sbi.png" />
+                        <div class="reset-pswd">
+                            <a href="javascript:void(0)" (click)="showResetPassDiv(false)"><img src="assets/img/arrow-right.svg" /> Back</a>
+                            <p>Reset Your password</p>
+                        </div>
 
-            <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
-              <fieldset>
-                <input
-                  placeholder="Email Id"
-                  type="email"
-                  tabindex="1"
-                  required=""
-                  [(ngModel)]="user.userName"
-                  name="userName"
-                  #email
-                />
-              </fieldset>
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                tabindex="2"
-                (click)="forgorPassword()"
-                class="btn-rest-pswd"
-              >
+                        <form name="loginForm" #fs="ngForm" autocomplete="off" novalidate>
+                            <fieldset>
+                                <input placeholder="Email Id" type="email" tabindex="1" required="" [(ngModel)]="user.userName" name="userName" #email />
+                            </fieldset>
+                            <button mat-raised-button color="primary" type="submit" tabindex="2" (click)="forgorPassword()" class="btn-rest-pswd">
                 Email Reset Link
               </button>
-            </form>
-            <p class="reset-psd-text">
-              We will send you a link to reset your password on your email ID.
-            </p>
-          </div>
-          <div class="login-box" *ngIf="isSentSuccess">
-            <img src="assets/img/sbi.png" />
-            <div class="reset-pswd">
-              <a href="javascript:void(0)" (click)="showResetPassDiv(true)"
-                ><img src="assets/img/arrow-right.svg" /> Back</a
-              >
-              <p>Reset Your password</p>
+                        </form>
+                        <p class="reset-psd-text">
+                            We will send you a link to reset your password on your email ID.
+                        </p>
+                    </div>
+                    <div class="login-box" *ngIf="isSentSuccess">
+                        <img src="assets/img/sbi.png" />
+                        <div class="reset-pswd">
+                            <a href="javascript:void(0)" (click)="showResetPassDiv(true)"><img src="assets/img/arrow-right.svg" /> Back</a>
+                            <p>Reset Your password</p>
+                        </div>
+                        <img src="assets/img/reset-pwd.svg" />
+                        <p class="reset-psd-text">
+                            We have send you a link to reset your password on your email ID “{{ user.userName }}”.
+                        </p>
+                    </div>
+                    <!-- Reset password end-->
+                </div>
             </div>
-            <img src="assets/img/reset-pwd.svg" />
-            <p class="reset-psd-text">
-              We have send you a link to reset your password on your email ID
-              “{{ user.userName }}”.
-            </p>
-          </div>
-          <!-- Reset password end-->
         </div>
-      </div>
     </div>
-  </div>
-
-  <footer>
-    <div class="container">
-      <div id="footer">
-        <div class="footer-left-login">
-          <p>
-            Copyright © 2020 All rights reserved. Powered by
-            Online PSB Loans Limited.
-          </p>
+    <footer>
+        <div class="container">
+            <div id="footer">
+                <div class="footer-left-login">
+                    <p>
+                        Copyright © 2020 All rights reserved. Powered by Online PSB Loans Limited.
+                    </p>
+                </div>
+                <div class="footer-right-login">
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Help & Support</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="footer-right-login">
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
-            <li><a href="#">Help & Support</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </div>
