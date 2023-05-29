@@ -31,10 +31,10 @@
         a {
             color: #ffffff;
             text-decoration: none;
-            font-size: 18px;
-            padding: 13px 18px;
+            font-size: 16px;
+            padding: 12px 20px;
             border-radius: 8px;
-            font-weight: 500;
+            font-weight: 400;
             transition: all 0.2s;
             // box-shadow: 3px 2px 11px #424242;
             &:hover {
@@ -47,7 +47,7 @@
                 font-size: 16px;
             }
             &+a {
-                margin-left: 4px;
+                margin-left: 10px;
             }
         }
     }

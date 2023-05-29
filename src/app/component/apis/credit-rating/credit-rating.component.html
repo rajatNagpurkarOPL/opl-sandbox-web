@@ -1,24 +1,19 @@
 <form>
-    <mat-card style="width: 100%;">
-        <form class="example-form form-main-section d-flex flex-column flex-wrap" [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
-            <div class="input-fields">
-
-                <mat-form-field class="example-full-width">
+    <mat-card class="common_form_wrap">
+        <form [formGroup]="creditRatingForm" (ngSubmit)="onFormSubmit()">
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
                     <mat-label>CIN/PAN/KID</mat-label>
-                    <input type="text" matInput [formControl]="creditRatingForm.controls.id"
-                        [errorStateMatcher]="matcher" placeholder="Ex. L23201MH1959GOI011388">
+                    <input type="text" matInput [formControl]="creditRatingForm.controls.id" [errorStateMatcher]="matcher" placeholder="Ex. L23201MH1959GOI011388">
                     <mat-error *ngIf="creditRatingForm.get('id').hasError('required')">
                         Please Enter CIN/PAN/KID.
                     </mat-error>
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="form-group">
                     <mat-label>Name (Optional)</mat-label>
-                    <input type="text" matInput [formControl]="creditRatingForm.controls.name"
-                        [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
+                    <input type="text" matInput [formControl]="creditRatingForm.controls.name" [errorStateMatcher]="matcher" placeholder="Ex. Abc Pvt Ltd">
                 </mat-form-field>
-                &nbsp;
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="form-group">
                     <mat-label>Rating Agency</mat-label>
                     <mat-select [formControl]="creditRatingForm.controls.ratingAgency" [errorStateMatcher]="matcher">
                         <mat-option *ngFor="let agency of ratingAgencies" [value]="agency">
