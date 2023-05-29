@@ -1,0 +1,18 @@
+[
+  {
+    "value": "00",
+    "Description": "NOT CLASSIFIED"
+  },
+  {
+    "value": "01",
+    "Description": "MOBILE"
+  },
+  {
+    "value": "02",
+    "Description": "RESIDENCE"
+  },
+  {
+    "value": "03",
+    "Description": "OFFICE"
+  }
+]

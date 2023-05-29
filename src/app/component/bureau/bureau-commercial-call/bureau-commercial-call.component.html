@@ -1,108 +1,118 @@
-<form>
+<form [formGroup]="cibilCommercialForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
     <mat-card class="common_form_wrap">
         <div class="form-fields">
             <h2 class="title">Profile Section</h2>
             <div class="form_wrap">
                 <mat-form-field class="form-group">
                     <mat-label>Type Id</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            1
-                        </mat-option>
-                        <mat-option value="2">
-                            2
+                    <mat-select [formControl]="cibilCommercialForm.controls.typeId" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of typeIdData" [value]="type.value">
+                              {{type.name}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
                 </mat-form-field>
+
+                <mat-form-field class="form-group">
+                    <mat-label>Value</mat-label>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.pan"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('pan').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
+                </mat-form-field>
+
             </div>
         </div>
         <div class="form-fields">
             <h2 class="title">Business Details</h2>
             <div class="form_wrap">
                 <mat-form-field class="form-group">
-                    <mat-label>Value</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
-                </mat-form-field>
-                <mat-form-field class="form-group">
                     <mat-label>Company Name</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.organisationName"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('organisationName').hasError('required')">
+                        Please Enter Company Name.
+                    </mat-error>
+
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Class of activity</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Activity 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Activity 2
+                    <mat-select [formControl]="cibilCommercialForm.controls.classOfActivity"
+                        [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of classofActivityData" [value]="type.value">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('classOfActivity').hasError('required')">
+                        Please select Class of Activity.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Type of entity</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Entity 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Entity 2
+                    <mat-select [formControl]="cibilCommercialForm.controls.constitutionName"
+                        [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of typeOfEntity" [value]="type.value">
+                            {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('constitutionName').hasError('required')">
+                        Please Select Type of Entity.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Date of Registration</mat-label>
-                    <input matInput readonly [matDatepicker]="picker">
+                    <input matInput readonly [matDatepicker]="picker"
+                        [formControl]="cibilCommercialForm.controls.dateOfRegistration" [errorStateMatcher]="matcher">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error>
-
+                    <mat-error *ngIf="cibilCommercialForm.get('dateOfRegistration').hasError('required')">
+                        Please Select Date of Registration.
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Enquiry type</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Enquiry 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Enquiry 2
+                    <mat-select [formControl]="cibilCommercialForm.controls.enquiryType" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of enqiryTypeData" [value]="type.value">
+                            {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('enquiryType').hasError('required')">
+                        Please Select Enquiry type.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Enquiry Amount</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.enquiryAmount"
+                        [errorStateMatcher]="matcher" value="1000" numberOnly>
+                    <mat-error *ngIf="cibilCommercialForm.get('enquiryAmount').hasError('required')">
+                        Please Enter Enquiry Amount.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>CMR Flag</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Flag 1
+                    <mat-select [formControl]="cibilCommercialForm.controls.cmrFlag" [errorStateMatcher]="matcher">
+                        <mat-option value="0">
+                            FLAG 1
                         </mat-option>
-                        <mat-option value="2">
-                            Flag 2
+                        <mat-option value="1">
+                            FLAG 2
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('cmrFlag').hasError('required')">
+                        Please Select CMR Flag.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Enquiry Purpose</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Enquiry 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Enquiry 2
+                    <mat-select [formControl]="cibilCommercialForm.controls.enquiryPurpose"
+                        [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of enquiryPurposeData" [value]="type.value">
+                            {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('enquiryPurpose').hasError('required')">
+                        Please Select Enquiry Purpose.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -111,72 +121,88 @@
             <div class="form_wrap">
                 <mat-form-field class="form-group">
                     <mat-label>Pincode</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.pinCode"
+                        [errorStateMatcher]="matcher" numberOnly>
+                    <mat-error *ngIf="cibilCommercialForm.get('pinCode').hasError('required')">
+                        Please Enter Pincode.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>State</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Gujarat
-                        </mat-option>
-                        <mat-option value="2">
-                            Maharashtra
+                    <mat-select [formControl]="cibilCommercialForm.controls.stateCode" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of listofStates" [value]="type.code">
+                            {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('stateCode').hasError('required')">
+                        Please Select State.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Address Type</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Address 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Address 2
+                    <mat-select [formControl]="cibilCommercialForm.controls.addressType" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of addressTypeData" [value]="type.value">
+                            {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('addressType').hasError('required')">
+                        Please Select Address Type.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
-                    <mat-label>Address Line1</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <mat-label>AddressLine 1</mat-label>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.addressLine1"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('addressLine1').hasError('required')">
+                        Please Enter Premise No.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>City</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.city"
+                        [errorStateMatcher]="matcher" alphabetOnly>
+                    <mat-error *ngIf="cibilCommercialForm.get('city').hasError('required')">
+                        Please Enter City.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
-                    <mat-label>Telephone num</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <mat-label>Telephone Number</mat-label>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.telephoneNo"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('telephoneNo').hasError('required')">
+                        Please Enter Telephone Number.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Contact Area</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.contactArea"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('contactArea').hasError('required')">
+                        Please Enter Contact Area.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Contact Prefix</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilCommercialForm.controls.contactPrefix" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilCommercialForm.get('contactPrefix').hasError('required')">
+                        Please Enter Contact Prefix.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Telephone Type</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Landline
-                        </mat-option>
-                        <mat-option value="2">
-                            Mobile
+                    <mat-select [formControl]="cibilCommercialForm.controls.telephoneType" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of mobileTypeData" [value]="type.Description">
+                            {{type.Description}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilCommercialForm.get('telephoneType').hasError('required')">
+                        Please Select Telephone Type.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
         <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Submit</button>
     </mat-card>
 </form>
+
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

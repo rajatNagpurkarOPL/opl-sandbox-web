@@ -103,7 +103,8 @@ import { GeoCoordinatesSurveyApiComponent } from './component/kcc/geo-coordinate
 import { NameMatchKarzaComponent } from './component/name-match-karza/name-match-karza.component';
 import { BureauCommercialCallComponent } from './component/bureau/bureau-commercial-call/bureau-commercial-call.component';
 import { BureauConsumerCallComponent } from './component/bureau/bureau-consumer-call/bureau-consumer-call.component';
-
+import { AlphabetOnlyDirective } from './component/bureau/utils/alphabet-only.directive';
+import { NumberOnlyDirective } from './component/bureau/utils/number-only.directive';
 @NgModule({
   imports: [
     CommonModule,
@@ -121,6 +122,8 @@ import { BureauConsumerCallComponent } from './component/bureau/bureau-consumer-
     NgbModule
   ],
   declarations: [
+    AlphabetOnlyDirective,
+    NumberOnlyDirective,
     AppComponent,
     LoginComponent,
     DashboardComponent,

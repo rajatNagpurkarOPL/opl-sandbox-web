@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "value": "NEW LOAN"
+    },
+    {
+        "id": 2,
+        "value": "RENEWAL/ENHANCEMENT"
+    },
+    {
+        "id": 3,
+        "value": "COLLECTIONS"
+    },
+    {
+        "id": 4,
+        "value": "CURRENT ACCOUNT OPENING"
+    }
+]

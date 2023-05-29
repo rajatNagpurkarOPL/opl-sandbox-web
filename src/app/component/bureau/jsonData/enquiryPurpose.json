@@ -1,0 +1,167 @@
+[
+  {
+    "value": "CASH CREDIT"
+  },
+  {
+    "value": "OVERDRAFT"
+  },
+  {
+    "value": "DEMAND LOAN"
+  },
+  {
+    "value": "LOAN EXTENDED THROUGH CREDIT CARDS"
+  },
+  {
+    "value": "MEDIUM TERM LOAN (PERIOD ABOVE 1 YEAR AND UP TO 3 YEARS)"
+  },
+  {
+    "value": "LONG TERM LOAN (PERIOD ABOVE 3 YEARS)"
+  },
+  {
+    "value": "PACKING CREDIT (ALL EXPORT PRE-SHIPMENT FINANCE)"
+  },
+  {
+    "value": "EXPORT BILLS PURCHASED"
+  },
+  {
+    "value": "EXPORT BILLS DISCOUNTED"
+  },
+  {
+    "value": "EXPORT BILLS ADVANCED AGAINST"
+  },
+  {
+    "value": "ADVANCES AGAINST EXPORT CASH INCENTIVES AND DUTY DRAW-BACK CLAIMS"
+  },
+  {
+    "value": "INLAND BILLS PURCHASED"
+  },
+  {
+    "value": "INLAND BILLS DISCOUNTED"
+  },
+  {
+    "value": "ADVANCES AGAINST IMPORT BILLS"
+  },
+  {
+    "value": "FOREIGN CURRENCY CHEQUES TCS/DDS/TTS/MTS PURCHASED"
+  },
+  {
+    "value": "LEASE FINANCE"
+  },
+  {
+    "value": "HIRE PURCHASE"
+  },
+  {
+    "value": "BANK GUARANTEE"
+  },
+  {
+    "value": "DEFERRED PAYMENT GUARANTEE"
+  },
+  {
+    "value": "LETTERS OF CREDIT"
+  },
+  {
+    "value": "CORPORATE CREDIT CARD"
+  },
+  {
+    "value": "COMMERCIAL VEHICLE LOAN"
+  },
+  {
+    "value": "EQUIPMENT FINANCING (CONSTRUCTION OFFICE MEDICAL)"
+  },
+  {
+    "value": "UNSECURED BUSINESS LOAN"
+  },
+  {
+    "value": "SHORT TERM LOAN (LESS THAN 1 YEAR)"
+  },
+  {
+    "value": "AGGREGATION OF ALL FUND BASED FACILITIES"
+  },
+  {
+    "value": "AGGREGATION OF ALL NON FUND BASED FACILITIES"
+  },
+  {
+    "value": "FACILITIES INTERCHANGE BETWEEN FUND & NON FUND BASED"
+  },
+  {
+    "value": "DERIVATIVES"
+  },
+  {
+    "value": "PLAIN VANILLA FOREX FORWARD CONTRACTS"
+  },
+  {
+    "value": "PLAIN VANILA INT RATE SWAP(ALL INCLUDING INR AS COUPON)"
+  },
+  {
+    "value": "PLAIN VANILA FOREIGN CURRENCY OPTION (INCLUDING INR CROSS CURRENCY)"
+  },
+  {
+    "value": "COMPLEX INT RATE DERV WITH OPTIONALITIES"
+  },
+  {
+    "value": "ANY COMPLEX DERIVATIVE LOAN INVOLVING FOREIGN CURRENCY WITH OPTION"
+  },
+  {
+    "value": "CONTRACTS ON PAST PERFORMANCE - IMPORTS"
+  },
+  {
+    "value": "CONTRACTS ON PAST PERFORMANCE - EXPORTS"
+  },
+  {
+    "value": "AGGREGATE OF ALL BORROWINGS DUE TO FILING OF SUIT"
+  },
+  {
+    "value": "AUTO LOAN"
+  },
+  {
+    "value": "PROPERTY LOAN"
+  },
+  {
+    "value": "GOLD LOAN"
+  },
+  {
+    "value": "LOAN AGAINST SHARES/SECURITIES"
+  },
+  {
+    "value": "HEALTHCARE FINANCE"
+  },
+  {
+    "value": "INFRASTRUCTURE FINANCE"
+  },
+  {
+    "value": "FACTORING"
+  },
+  {
+    "value": "COMMERCIAL PAPER"
+  },
+  {
+    "value": "NON CONVERTIBLE DEBENTURES"
+  },
+  {
+    "value": "UNHEDGED FOREIGN CURRENCY EXPOSURE"
+  },
+  {
+    "value": "PAYMENT ACCOUNT"
+  },
+  {
+    "value": "CURRENT ACCOUNT"
+  },
+  {
+    "value": "ARC SECURED LOAN"
+  },
+  {
+    "value": "ARC UNSECURED LOAN"
+  },
+  {
+    "value": "SELLER FINANCING SOFT"
+  },
+  {
+    "value": "SELLER FINANCING"
+  },
+  {
+    "value": "GECL LOAN"
+  },
+  {
+    "value": "OTHERS"
+  }
+]

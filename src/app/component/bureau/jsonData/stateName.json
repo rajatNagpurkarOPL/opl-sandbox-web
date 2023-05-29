@@ -1,0 +1,146 @@
+[
+    {
+        "code": "AN",
+        "value": "ANDAMAN AND NICOBAR ISLANDS"
+    },
+    {
+        "code": "AP",
+        "value": "ANDHRA PRADESH"
+    },
+    {
+        "code": "AR",
+        "value": "ARUNACHAL PRADESH"
+    },
+    {
+        "code": "AS",
+        "value": "ASSAM"
+    },
+    {
+        "code": "BR",
+        "value": "BIHAR"
+    },
+    {
+        "code": "CG",
+        "value": "CHANDIGARH"
+    },
+    {
+        "code": "CH",
+        "value": "CHHATTISGARH"
+    },
+    {
+        "code": "DH",
+        "value": "DADRA AND NAGAR HAVELI"
+    },
+    {
+        "code": "DD",
+        "value": "DAMAN AND DIU"
+    },
+    {
+        "code": "DL",
+        "value": "DELHI"
+    },
+    {
+        "code": "GA",
+        "value": "GOA"
+    },
+    {
+        "code": "GJ",
+        "value": "GUJARAT"
+    },
+    {
+        "code": "HR",
+        "value": "HARYANA"
+    },
+    {
+        "code": "HP",
+        "value": "HIMACHAL PRADESH"
+    },
+    {
+        "code": "JK",
+        "value": "JAMMU AND KASHMIR"
+    },
+    {
+        "code": "JH",
+        "value": "JHARKHAND"
+    },
+    {
+        "code": "KA",
+        "value": "KARNATAKA"
+    },
+    {
+        "code": "KL",
+        "value": "KERALA"
+    },
+    {
+        "code": "LD",
+        "value": "LAKSHADWEEP"
+    },
+    {
+        "code": "MP",
+        "value": "MADHYA PRADESH"
+    },
+    {
+        "code": "MH",
+        "value": "MAHARASHTRA"
+    },
+    {
+        "code": "MN",
+        "value": "MANIPUR"
+    },
+    {
+        "code": "ML",
+        "value": "MEGHALAYA"
+    },
+    {
+        "code": "MZ",
+        "value": "MIZORAM"
+    },
+    {
+        "code": "NL",
+        "value": "NAGALAND"
+    },
+    {
+        "code": "OR",
+        "value": "ODISHA"
+    },
+    {
+        "code": "PY",
+        "value": "PUDUCHERRY"
+    },
+    {
+        "code": "PB",
+        "value": "PUNJAB"
+    },
+    {
+        "code": "RJ",
+        "value": "RAJASTHAN"
+    },
+    {
+        "code": "SK",
+        "value": "SIKKIM"
+    },
+    {
+        "code": "TN",
+        "value": "TAMIL NADU"
+    },
+    {
+        "code": "TS",
+        "value": "TELANGANA"
+    },
+    {
+        "code": "TR",
+        "value": "TRIPURA"
+    },
+    {
+        "code": "UK",
+        "value": "UTTARAKHAND"
+    },
+    {
+        "code": "UP",
+        "value": "UTTAR PRADESH"
+    },
+    {
+        "code": "WB",
+        "value": "WEST BENGAL"
+    }
+]
