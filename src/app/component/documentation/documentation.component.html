@@ -63,6 +63,7 @@
                             <app-gst-verify-otp *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_VERIFY_OTP" [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-verify-otp>
                             <!-- <app-gst-tax-payers-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS"
                     [menuData]="selectedInnerData"></app-gst-tax-payers-api> -->
+                            <app-call-gst-data-api *ngIf="selectedMenuItem == this.constant.MASTER_CODE.GST_TAX_PAYERS" [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-call-gst-data-api>
                             <app-gst-tax-payers-gstr1-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR1_SUMMARY" [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr1-summary>
                             <app-gst-tax-payers-gstr2-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR2_SUMMARY" [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr2-summary>
                             <app-gst-tax-payers-gstr3-summary *ngIf="selectedMenuItem == this.constant.MASTER_CODE.TAX_PAYERS_GST.GSTR3_SUMMARY" [menuData]="selectedInnerData" [parentInstance]="currentInstance"></app-gst-tax-payers-gstr3-summary>

@@ -1,5 +1,6 @@
 
 export interface AddressType {
+    id: string;
     value: string;  // name of key should be same as name of key in json
 }
 export interface ClassofActivity {
@@ -21,10 +22,17 @@ export interface TelType {
     Description: string;  // name of key should be same as name of key in json
 }
 export interface TypeId {
-    name: string;
+    id: string;
     value: string;  // name of key should be same as name of key in json
 }
 export interface TypeOfEntity {
     value: string;
 }
-
+export interface GenderType {
+    id: string;
+    value: string;  // name of key should be same as name of key in json
+}
+export interface ResidenceType {
+    id: string;
+    value: string;  // name of key should be same as name of key in json
+}

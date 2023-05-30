@@ -44,7 +44,6 @@ export class BureauCommercialCallComponent implements OnInit {
   public readonly constant: any = null;
 
 
-
   defaultSelect: any = "01"
 
   constructor(private fb: FormBuilder, public sandboxService: SandboxService, private utils: Utils, private aesGcmEncryption: AesGcmEncryptionService) {
@@ -81,7 +80,7 @@ export class BureauCommercialCallComponent implements OnInit {
       platFormId: ['1', [Validators.required]], //HC
       orgId: ['123', [Validators.required]], //HC
 
-      typeId: ['1', [Validators.required]],
+      typeId: [this.defaultSelect, [Validators.required]],
       userId: [123],
       applicationId: [588],
       isBankSpecificRequest: [true],

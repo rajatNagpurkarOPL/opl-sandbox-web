@@ -105,6 +105,7 @@ import { BureauCommercialCallComponent } from './component/bureau/bureau-commerc
 import { BureauConsumerCallComponent } from './component/bureau/bureau-consumer-call/bureau-consumer-call.component';
 import { AlphabetOnlyDirective } from './component/bureau/utils/alphabet-only.directive';
 import { NumberOnlyDirective } from './component/bureau/utils/number-only.directive';
+import { CallGstDataApiComponent } from './component/apis/call-gst-data-api/call-gst-data-api.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -205,7 +206,8 @@ import { NumberOnlyDirective } from './component/bureau/utils/number-only.direct
     GeoCoordinatesSurveyApiComponent,
     NameMatchKarzaComponent,
     BureauCommercialCallComponent,
-    BureauConsumerCallComponent
+    BureauConsumerCallComponent,
+    CallGstDataApiComponent
 	
 	
   ] ,

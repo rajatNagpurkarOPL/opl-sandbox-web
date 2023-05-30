@@ -1,43 +1,53 @@
-<form>
+<form [formGroup]="cibilConsumerForm" autocomplete="off" (ngSubmit)="onFormSubmit()">
     <mat-card class="common_form_wrap">
         <div class="form-fields">
             <h2 class="title">Consumer Name</h2>
             <div class="form_wrap">
                 <mat-form-field class="form-group">
                     <mat-label>First Name</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput required matInput [formControl]="cibilConsumerForm.controls.forName"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('forName').hasError('required')">
+                        Please Enter First Name.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Middle Name</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput matInput [formControl]="cibilConsumerForm.controls.middleName"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('middleName').hasError('required')">
+                        Please Enter Midlle Name.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Last Name</mat-label>
-                    <input type="text" matInput required>
-                    <mat-error></mat-error>
+                    <input type="text" matInput required matInput [formControl]="cibilConsumerForm.controls.surName"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('surName').hasError('required')">
+                        Please Enter Last Name.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Birth Date</mat-label>
-                    <input matInput readonly [matDatepicker]="picker" required>
+                    <input matInput readonly [matDatepicker]="picker"
+                        [formControl]="cibilConsumerForm.controls.dateOfBirth" [errorStateMatcher]="matcher" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error>
-
+                    <mat-error *ngIf="cibilConsumerForm.get('dateOfBirth').hasError('required')">
+                        Please Select Date of Birth.
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Gender</mat-label>
-                    <mat-select required>
-                        <mat-option value="1">
-                            Male
-                        </mat-option>
-                        <mat-option value="2">
-                            Female
+                    <mat-select required [formControl]="cibilConsumerForm.controls.gender"
+                        [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of typeOfGender" [value]="type.id">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('gender').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -46,20 +56,22 @@
             <div class="form_wrap">
                 <mat-form-field class="form-group">
                     <mat-label>Type Id</mat-label>
-                    <mat-select>
-                        <mat-option value="1">
-                            1
-                        </mat-option>
-                        <mat-option value="2">
-                            2
+                    <mat-select [formControl]="cibilConsumerForm.controls.typeId" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of typeIdData" [value]="type.id">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('typeId').hasError('required')">
+                        Please Select ID Type.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Id Number</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.pan"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('pan').hasError('required')">
+                        Please Enter Id Number.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -68,76 +80,87 @@
             <div class="form_wrap">
                 <mat-form-field class="form-group">
                     <mat-label>Telephone Type</mat-label>
-                    <mat-select>
-                        <mat-option value="1">
-                            Landline
-                        </mat-option>
-                        <mat-option value="2">
-                            Mobile
+                    <mat-select [formControl]="cibilConsumerForm.controls.telephoneType" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of mobileTypeData" [value]="type.Description">
+                              {{type.Description}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('telephoneType').hasError('required')">
+                        Please Select Telephone Type.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Telephone Number</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.phoneNumber"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('phoneNumber').hasError('required')">
+                        Please Enter Phone Number.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Email ID</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.email"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('email').hasError('required')">
+                        Please Enter Email ID.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Line1</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.addressLine1"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('addressLine1').hasError('required')">
+                        Please Enter Address Line 1.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Line2</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.addressLine2"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('addressLine2').hasError('required')">
+                        Please Enter Address Line 2.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>State</mat-label>
-                    <mat-select>
-                        <mat-option value="1">
-                            Gujarat
-                        </mat-option>
-                        <mat-option value="2">
-                            Maharashtra
+                    <mat-select [formControl]="cibilConsumerForm.controls.stateCode" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of listofStates" [value]="type.code">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('stateCode').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Pincode</mat-label>
-                    <input type="text" matInput>
-                    <mat-error></mat-error>
+                    <input type="text" matInput [formControl]="cibilConsumerForm.controls.pinCode"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="cibilConsumerForm.get('pinCode').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Residence Code</mat-label>
-                    <mat-select>
-                        <mat-option value="1">
-                            Address 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Address 2
+                    <mat-select [formControl]="cibilConsumerForm.controls.residenceCode" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of typeOfResidence" [value]="type.id">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('residenceCode').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form-group">
                     <mat-label>Address Category</mat-label>
-                    <mat-select>
-                        <mat-option value="1">
-                            Address 1
-                        </mat-option>
-                        <mat-option value="2">
-                            Address 2
+                    <mat-select [formControl]="cibilConsumerForm.controls.addressType" [errorStateMatcher]="matcher">
+                        <mat-option *ngFor="let type of addressTypeData" [value]="type.id">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
-                    <mat-error></mat-error>
+                    <mat-error *ngIf="cibilConsumerForm.get('addressType').hasError('required')">
+                        Please Enter Value.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>

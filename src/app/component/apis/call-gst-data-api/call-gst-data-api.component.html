@@ -1,0 +1,33 @@
+<form [formGroup]="gstTaxPayersForm" (ngSubmit)="onFormSubmit()">
+    <mat-card class="common_form_wrap">
+            <div class="form_wrap">
+                <mat-form-field class="form-group">
+                    <mat-label>Enter PAN No.</mat-label>
+                    <input type="text" matInput required matInput [formControl]="gstTaxPayersForm.controls.id"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="gstTaxPayersForm.get('id').hasError('required')">
+                        Please Enter PAN No.
+                    </mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field class="form-group">
+                    <mat-label>Enter Request Type</mat-label>
+                    <input type="text" matInput matInput [formControl]="gstTaxPayersForm.controls.requestType"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="gstTaxPayersForm.get('requestType').hasError('required')">
+                        Please Enter Request type.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-group">
+                    <mat-label>API Type</mat-label>
+                    <input type="text" matInput required matInput [formControl]="gstTaxPayersForm.controls.apiType"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="gstTaxPayersForm.get('apiType').hasError('required')">
+                        Please Enter API type.
+                    </mat-error>
+                </mat-form-field> -->
+            </div>
+
+        <button type="submit" class="submit-form-btn" mat-flat-button color="primary">Get GST Data</button>
+    </mat-card>
+</form>
+<app-tryout-response *ngIf="response != null" [jsonData]="response"></app-tryout-response>

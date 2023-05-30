@@ -6,8 +6,8 @@
                 <mat-form-field class="form-group">
                     <mat-label>Type Id</mat-label>
                     <mat-select [formControl]="cibilCommercialForm.controls.typeId" [errorStateMatcher]="matcher">
-                        <mat-option *ngFor="let type of typeIdData" [value]="type.value">
-                              {{type.name}}
+                        <mat-option *ngFor="let type of typeIdData" [value]="type.id">
+                              {{type.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -141,7 +141,7 @@
                 <mat-form-field class="form-group">
                     <mat-label>Address Type</mat-label>
                     <mat-select [formControl]="cibilCommercialForm.controls.addressType" [errorStateMatcher]="matcher">
-                        <mat-option *ngFor="let type of addressTypeData" [value]="type.value">
+                        <mat-option *ngFor="let type of addressTypeData" [value]="type.id">
                             {{type.value}}
                         </mat-option>
                     </mat-select>

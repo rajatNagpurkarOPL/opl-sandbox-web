@@ -318,5 +318,15 @@ nameMatchApiKarza(url : string,data : any,requestHeader : any): Observable<any>{
   return this.http.post(url, data, requestHeader);
 }
 
+ // get Cibil Commercial Score
+ getCibilConsumerScore(url: string, data: any, requestHeader: any): Observable<any> {
+  return this.http.post(url, data, requestHeader);
+}
+
+ // get Cibil Commercial Score
+ getGSTData(url: string, data: any, requestHeader: any): Observable<any> {
+  return this.http.post(url, data, requestHeader);
+}
+
 
 }

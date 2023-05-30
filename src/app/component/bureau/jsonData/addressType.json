@@ -1,17 +1,38 @@
 [
     {
+        "id": "01",
+        "value": "PERMANENT ADDRESS"
+    },
+    {
+        "id": "02",
+        "value": "RESIDENCE ADDRESS"
+    },
+    {
+        "id": "03",
+        "value": "OFFICE ADDRESS"
+    },
+    {
+        "id": "04",
+        "value": "NOT CATEGORIZED"
+    },
+    {
+        "id": "05",
         "value": "REGISTERED OFFICE"
     },
     {
+        "id": "06",
         "value": "BRANCH / REGIONAL OFFICE"
     },
     {
+        "id": "07",
         "value": "WAREHOUSE"
     },
     {
+        "id": "08",
         "value": "PLANT / FACTORY ADDRESS"
     },
     {
+        "id": "09",
         "value": "OTHERS"
     }
 ]

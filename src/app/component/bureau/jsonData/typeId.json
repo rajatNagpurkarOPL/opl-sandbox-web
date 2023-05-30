@@ -1,18 +1,26 @@
 [
     {
-        "name": "PAN",
-        "value": "01"
+        "id": "01",
+        "value": "PAN CARD"
     },
     {
-        "name": "CRN",
-        "value": "02"
+        "id": "02",
+        "value": "PASSPORT"
     },
     {
-        "name": "TIN",
-        "value": "03"
+        "id": "03",
+        "value": "VOTER ID"
     },
     {
-        "name": "CIN",
-        "value": "04"
+        "id": "04",
+        "value": "DRIVING LICENSE"
+    },
+    {
+        "id": "05",
+        "value": "RATION CARD"
+    },
+    {
+        "id": "06",
+        "value": "UID"
     }
 ]
